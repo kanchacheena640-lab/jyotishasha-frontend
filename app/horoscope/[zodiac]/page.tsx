@@ -1,11 +1,14 @@
 import HoroscopeTabs from "@/app/horoscope/[zodiac]/HoroscopeTabs";
 import HoroscopeComparison from "@/components/HoroscopeComparison";
+import { Metadata } from "next";
 
-interface HoroscopeDetailProps {
-  params: { zodiac: string };
-}
+type PageProps = {
+  params: {
+    zodiac: string;
+  };
+};
 
-export function generateMetadata({ params }: HoroscopeDetailProps) {
+export function generateMetadata({ params }: PageProps): Metadata {
   const zodiacName = params.zodiac.charAt(0).toUpperCase() + params.zodiac.slice(1);
   return {
     title: `${zodiacName} Horoscope | Jyotishasha`,
@@ -13,7 +16,7 @@ export function generateMetadata({ params }: HoroscopeDetailProps) {
   };
 }
 
-export default function HoroscopeDetail({ params }: HoroscopeDetailProps) {
+export default function HoroscopeDetailPage({ params }: PageProps) {
   const { zodiac } = params;
   const zodiacName = zodiac.charAt(0).toUpperCase() + zodiac.slice(1);
 
