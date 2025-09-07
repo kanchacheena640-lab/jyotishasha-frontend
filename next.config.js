@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
-import { i18n } from './next-i18next.config';
+const { i18n } = require('./next-i18next.config');
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   i18n,
   async rewrites() {
     return [
@@ -13,4 +13,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

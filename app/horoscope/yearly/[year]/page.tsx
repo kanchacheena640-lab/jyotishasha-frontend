@@ -1,21 +1,24 @@
-// ✅ Import type and function properly
+// ✅ Imports
 import { Metadata } from "next";
 import YearlySignSection from "@/components/YearlySignSection";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
-// ✅ Add correct type to params
-interface PageProps {
+// ✅ Correct type for route param
+type PageProps = {
   params: { year: string };
-}
+};
 
-// ✅ (optional) Metadata dynamic title
-export function generateMetadata({ params }: PageProps): Metadata {
+// ✅ Fix for Next.js 15 — must be async
+export async function generateMetadata(
+  { params }: PageProps
+): Promise<Metadata> {
   return {
     title: `Yearly Horoscope ${params.year} | Jyotishasha`,
     description: `Explore detailed yearly horoscopes for all 12 zodiac signs for the year ${params.year}.`,
   };
 }
 
+// ✅ Main page function
 export default async function YearlyHoroscopePage({ params }: PageProps) {
   const { year } = params;
   const data = await getYearlyHoroscope(year);
