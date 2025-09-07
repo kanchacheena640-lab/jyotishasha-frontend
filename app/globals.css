@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] text-white;
+  font-family: 'Arial', sans-serif;
+}
+
+/* 🔁 Blink animation for Transit Chart */
+@keyframes blinkPulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-blink-once {
+  animation: blinkPulse 1.2s ease-out;
+}

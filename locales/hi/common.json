@@ -1,0 +1,58 @@
+{
+  "home": {
+    "cosmic_path": "आपका राशिफल",
+    "explore_tools": "FREE कुंडली विश्‍लेषण",
+    "personalized_reports": "मार्गदर्शक रिपोर्टस: आपकी कुंडली पर आधारित",
+    "stay_connected": "जुड़ें ज्‍योतिषआशा परिवार से",
+    "newsletter_text": "रोज़ाना राशिफल, टिप्स और ऑफर के लिए सब्सक्राइब करें।",
+    "more_about_you": "और अधिक जानें",
+    "view_all_reports": "सभी रिपोर्ट देखें",
+    "subscribe_btn": "सब्सक्राइब करें"
+  },
+  "zodiac": {
+    "aries": "मेष",
+    "taurus": "वृषभ",
+    "gemini": "मिथुन",
+    "cancer": "कर्क",
+    "leo": "सिंह",
+    "virgo": "कन्या",
+    "libra": "तुला",
+    "scorpio": "वृश्चिक",
+    "sagittarius": "धनु",
+    "capricorn": "मकर",
+    "aquarius": "कुंभ",
+    "pisces": "मीन"
+  },
+  "tools": {
+    "rashi_finder": "राशि जानें",
+    "lagna_finder": "लग्न पता करें",
+    "planet_overview": "ग्रह स्थिति",
+    "grah_dasha": "ग्रह दशा",
+    "live_transit": "चालू गोचर",
+    "yog-dosh_finder": "योग-दोष विश्लेषण",
+    "your_love_life": "आपका प्रेम जीवन",
+    "your_career": "आपका करियर",
+    "foreign_travel": "विदेश यात्रा योग",
+    "sadhesati_report": "साढ़ेसाती रिपोर्ट",
+    "business_report": "बिज़नेस रिपोर्ट",
+    "extramarital_&_you": "विवाहेतर और आप"
+  },
+  "reports": {
+    "sadhesati": {
+      "title": "साढ़ेसाती रिपोर्ट",
+      "desc": "शनि की साढ़ेसाती का विस्तृत विश्लेषण और उपाय।"
+    },
+    "financial": {
+      "title": "वित्तीय रिपोर्ट",
+      "desc": "भविष्य की धन संबंधित स्थितियों का विश्लेषण।"
+    },
+    "love": {
+      "title": "प्रेम जीवन रिपोर्ट",
+      "desc": "आपके प्रेम संबंधों और अनुकूलता का आकलन।"
+    },
+    "marriage": {
+      "title": "विवाह रिपोर्ट",
+      "desc": "आपके वैवाहिक जीवन की संभावनाएं और साथी का दृष्टिकोण।"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "rashi-finder": {
+    "title": "Rashi Finder",
+    "desc": "Know your Moon sign",
+    "badge": "🔥 Trending"
+  },
+  "lagna-finder": {
+    "title": "Lagna Finder",
+    "desc": "Find your Ascendant (Lagna)"
+  },
+  "planet-overview": {
+    "title": "Planet Overview",
+    "desc": "See all planet positions in your chart"
+  },
+  "grah-dasha-finder": {
+    "title": "Grah Dasha finder",
+    "desc": "Your planetary periods"
+  },
+  "live-transit": {
+    "title": "Live Transit",
+    "desc": "Track live planetary movements"
+  },
+  "yog-dosh-finder": {
+    "title": "Yog-Dosh Finder",
+    "desc": "Check yogas and doshas in your chart"
+  },
+  "your-love-life": {
+    "title": "Your Love Life",
+    "desc": "Understand love and relationships"
+  },
+  "your-career": {
+    "title": "Your Career",
+    "desc": "Find your career path"
+  },
+  "foreign-travel": {
+    "title": "Foreign Travel",
+    "desc": "Chances of traveling abroad"
+  },
+  "mangal-dosh": {
+    "title": "Mangal Dosh",
+    "desc": "Is Mangal Dosh in your Kundali"
+  },
+  "tools_page": {
+  "categories": {
+    "all": "All",
+    "basic": "Basic Astrology Tools",
+    "dosha": "Dosha Calculators",
+    "yog": "Yog & Combinations",
+    "life": "Life Aspects"
+  }
+    }
+}

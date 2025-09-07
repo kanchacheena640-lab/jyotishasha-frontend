@@ -1,0 +1,61 @@
+{
+  "home": {
+    "cosmic_path": "Discover Your Cosmic Path",
+    "explore_tools": "Explore Astrology Tools",
+    "personalized_reports": "Personalized Reports",
+    "stay_connected": "Stay Connected with Jyotishasha",
+    "newsletter_text": "Subscribe to our newsletter for daily astrology tips and premium offers.",
+    "more_about_you": "More About You",
+    "view_all_reports": "View All Reports",
+    "subscribe_btn": "Subscribe"
+  },
+  "zodiac": {
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  },
+  "tools": {
+    "rashi_finder": "Rashi Finder",
+    "title": "Rashi Finder",
+    "lagna_finder": "Lagna Finder",
+    "desc": "Know your Moon sign",
+    "planet_overview": "Planet Overview",
+    "grah_dasha": "Grah Dasha",
+    "live_transit": "Live Transit",
+    "yog-dosh_finder": "Yog-Dosh Finder",
+    "badge": "🔥 Trending",
+    "your_love_life": "Your Love Life",
+    "your_career": "Your Career",
+    "foreign_travel": "Foreign Travel",
+    "sadhesati_report": "Sadhesati Report",
+    "business_report": "Business Report",
+    "extramarital_&_you": "Extramarital & You"
+  },
+  "reports": {
+    "sadhesati": {
+      "title": "Sadhesati Report",
+      "desc": "Detailed Saturn Sadesati analysis with remedies."
+    },
+    "financial": {
+      "title": "Financial Report",
+      "desc": "Financial insights & wealth prediction for your future."
+    },
+    "love": {
+      "title": "Love Life Report",
+      "desc": "Analyze your love life, compatibility and challenges."
+    },
+    "marriage": {
+      "title": "Marriage Report",
+      "desc": "Get predictions about your married life & partner."
+    }
+  }
+}

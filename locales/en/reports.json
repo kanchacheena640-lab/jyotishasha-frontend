@@ -1,0 +1,41 @@
+{
+  "sadhesati-report": {
+    "title": "Sadhesati Report",
+    "desc": "Detailed Saturn Sadesati analysis with remedies."
+  },
+  "business-report": {
+    "title": "Business Report",
+    "desc": "Insights about your business prospects and growth."
+  },
+  "extramarital": {
+    "title": "Extramarital & You",
+    "desc": "Risk of infidelity and external attractions in life."
+  },
+  "financial-report": {
+    "title": "Financial Report",
+    "desc": "Financial insights & wealth prediction for your future."
+  },
+  "love-life-report": {
+    "title": "Love Life Report",
+    "desc": "Analyze your love life, compatibility and challenges."
+  },
+  "marriage-report": {
+    "title": "Marriage Report",
+    "desc": "Get predictions about your married life & partner."
+  },
+  "reports_page": {
+  "heading": "Personalized Reports",
+  "categories": {
+    "all": "All",
+    "transit": "Transit",
+    "love": "Love",
+    "finance": "Finance",
+    "career": "Career",
+    "marriage": "Marriage"
+  }
+},
+"common": {
+  "know_more": "Know More",
+  "buy_now": "Buy Now"
+}
+}
