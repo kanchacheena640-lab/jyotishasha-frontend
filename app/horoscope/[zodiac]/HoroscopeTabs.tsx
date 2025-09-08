@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 async function fetchHoroscope(sign: string, type: string = "daily") {
-  const res = await fetch(`/api/${type}-horoscope?sign=${sign}`);
-  const data = await res.json();
-  return data;
-}
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE || "https://jyotishasha-backend.onrender.com";
+  const url = `${apiBase}/api/${type}-horoscope?sign=${sign}`;
+  const res = await fetch(url);
 
+  if (!res.ok) throw new Error("Failed to fetch horoscope");
+
+  return await res.json();
+}
 export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
   const searchParams = useSearchParams();
   const year = searchParams.get("year") || new Date().getFullYear().toString();
