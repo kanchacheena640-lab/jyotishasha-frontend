@@ -16,7 +16,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-papLF++bY/3eM1sFW0a3UcGp6zRfiKvQm0gOZq+L0Kj7X8ob90Pazs9o9bbi7DjSVFb4WSDczvHsNEfnHZ8eqg=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />

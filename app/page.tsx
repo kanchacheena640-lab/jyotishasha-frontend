@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useTranslation } from 'react-i18next';
 import '../i18n'; // import i18n config
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { useEffect } from "react";
+import { apiGet } from "@/lib/api";
 
 
 export default function Home() {
@@ -36,7 +38,14 @@ export default function Home() {
     { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-report" },
     { name: "Business Report", emoji: "💼", link: "/reports/business-report" },
     { name: "Extramarital & You", emoji: "❓", link: "/reports/extramarital" }
-    ];
+  ];
+
+  useEffect(() => {
+    apiGet("/api/health")
+      .then((res) => console.log("✅ Backend OK:", res))
+      .catch((err) => console.error("❌ Backend Error:", err));
+  }, []);
+
 
   return (
     <div className="text-center pt-24 bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] min-h-screen">
@@ -69,7 +78,8 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {tools.map((tool, index) => (
+        {tools.map((tool, index) => {
+          return (
             <Link
               key={index}
               href={tool.link}
@@ -80,8 +90,9 @@ export default function Home() {
                 {t(`tools.${tool.name.replace(/\s+/g, '_').toLowerCase()}`)}
               </span>
             </Link>
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
         {/* CTA */}
         <div className="text-center mt-8">
