@@ -51,7 +51,7 @@ export default function ReportCheckout() {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/razorpay-order", {
+      const res = await fetch("https://jyotishasha-backend.onrender.com/api/razorpay-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product: productId, amount: price }),
@@ -72,7 +72,7 @@ export default function ReportCheckout() {
         description: `Payment for ${productId}`,
         order_id: orderData.order_id,
         handler: async function (response: any) {
-          await fetch("http://localhost:5000/webhook", {
+          await fetch("https://jyotishasha-backend.onrender.com/webhook", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
