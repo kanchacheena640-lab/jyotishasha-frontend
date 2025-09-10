@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import PlaceAutocompleteInput from './PlaceAutocompleteInput';
 import { useRouter } from 'next/navigation';
 import DatePicker from 'react-datepicker';
-import TimePicker from 'react-time-picker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
@@ -18,6 +17,12 @@ const toISODate = (d: Date) =>
   new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
     .toISOString()
     .slice(0, 10);
+
+const toHHmm = (d: Date) => {
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  return `${hh}:${mm}`; // HH:mm format
+};
 
 const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps) => {
   const [name, setName] = useState('');
@@ -100,13 +105,18 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
 
       <div>
         <label className="block mb-1 font-medium">Time of Birth</label>
-        <TimePicker
-          onChange={(value) => setTob(value || '')}
-          value={tob}
-          disableClock={false}
-          clearIcon={null}
-          format="hh:mm a"
-          className="w-full react-time-picker"
+        <DatePicker
+          selected={tob ? new Date(`1970-01-01T${tob}`) : null}
+          onChange={(date: Date | null) => setTob(date ? toHHmm(date) : '')}
+          showTimeSelect
+          showTimeSelectOnly
+          timeIntervals={5}
+          timeCaption="Time"
+          dateFormat="HH:mm"
+          placeholderText="Select your time of birth"
+          isClearable
+          withPortal
+          className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
         />
       </div>
 
