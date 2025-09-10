@@ -103,20 +103,16 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
         />
       </div>
 
+      {/* Time of Birth */}
       <div>
         <label className="block mb-1 font-medium">Time of Birth</label>
-        <DatePicker
-          selected={tob ? new Date(`1970-01-01T${tob}`) : null}
-          onChange={(date: Date | null) => setTob(date ? toHHmm(date) : '')}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={5}
-          timeCaption="Time"
-          dateFormat="HH:mm"
-          placeholderText="Select your time of birth"
-          isClearable
-          withPortal
+        <input
+          type="time"
+          value={tob}
+          onChange={(e) => setTob(e.target.value)}
+          placeholder="Enter time"
           className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+          required
         />
       </div>
 
