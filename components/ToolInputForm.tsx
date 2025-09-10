@@ -4,24 +4,20 @@ import React, { useState } from 'react';
 import PlaceAutocompleteInput from './PlaceAutocompleteInput';
 import { useRouter } from 'next/navigation';
 import DatePicker from 'react-datepicker';
+import TimePicker from 'react-time-picker';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 type ToolInputFormProps = {
   toolId?: string;
   onSubmit?: (data: any) => void;
 };
 
-// Helpers
 const toISODate = (d: Date) =>
   new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
     .toISOString()
-    .slice(0, 10); // YYYY-MM-DD
-
-const toHHmm = (d: Date) => {
-  const hh = String(d.getHours()).padStart(2, '0');
-  const mm = String(d.getMinutes()).padStart(2, '0');
-  return `${hh}:${mm}`; // HH:mm
-};
+    .slice(0, 10);
 
 const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps) => {
   const [name, setName] = useState('');
@@ -75,7 +71,6 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
       onSubmit={handleSubmit}
       className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
     >
-      {/* Name */}
       <div>
         <label className="block mb-1 font-medium">Name</label>
         <input
@@ -87,7 +82,6 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
         />
       </div>
 
-      {/* DOB */}
       <div>
         <label className="block mb-1 font-medium">Date of Birth</label>
         <DatePicker
@@ -97,29 +91,25 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
           dateFormat="dd-MM-yyyy"
           isClearable
           withPortal
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
           className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
         />
       </div>
 
-      {/* TOB */}
       <div>
         <label className="block mb-1 font-medium">Time of Birth</label>
-        <DatePicker
-          selected={tob ? new Date(`1970-01-01T${tob}`) : null}
-          onChange={(date: Date | null) => setTob(date ? toHHmm(date) : '')}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={5}
-          timeCaption="Time"
-          dateFormat="HH:mm"
-          placeholderText="Select your time of birth"
-          isClearable
-          withPortal
-          className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+        <TimePicker
+          onChange={(value) => setTob(value || '')}
+          value={tob}
+          disableClock={false}
+          clearIcon={null}
+          format="hh:mm a"
+          className="w-full react-time-picker"
         />
       </div>
 
-      {/* Place */}
       <div>
         <label className="block mb-1 font-medium">Place of Birth</label>
         <PlaceAutocompleteInput
@@ -129,7 +119,6 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
         />
       </div>
 
-      {/* Gender + Language */}
       <div className="flex space-x-4">
         <div className="w-1/2">
           <label className="block mb-1 font-medium">Gender</label>
@@ -157,7 +146,6 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
         </div>
       </div>
 
-      {/* Submit */}
       <div className="pt-4">
         <button
           type="submit"
