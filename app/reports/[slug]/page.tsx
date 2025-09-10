@@ -65,7 +65,7 @@ export default function ReportCheckout() {
       }
 
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // ✅ env key only
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
         amount: orderData.amount,
         currency: orderData.currency,
         name: "Jyotishasha",
