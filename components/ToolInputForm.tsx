@@ -106,14 +106,21 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
       {/* Time of Birth */}
       <div>
         <label className="block mb-1 font-medium">Time of Birth</label>
-        <input
-          type="time"
-          value={tob}
-          onChange={(e) => setTob(e.target.value)}
-          placeholder="Enter time"
-          className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
-          required
-        />
+        <div className="relative">
+          {/* Left side static text like placeholder */}
+          {!tob && (
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">
+              Time of Birth
+            </span>
+          )}
+          <input
+            type="time"
+            value={tob}
+            onChange={(e) => setTob(e.target.value)}
+            className="w-full pl-28 pr-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+            required
+          />
+        </div>
       </div>
 
       <div>
