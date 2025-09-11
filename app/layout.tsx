@@ -1,28 +1,20 @@
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Script from "next/script";
-import Layout from "../components/Layout";
 import AdminAwareLayout from "../components/AdminAwareLayout";
 import "react-datepicker/dist/react-datepicker.css";
-
 
 export const metadata = {
   title: "Jyotishasha",
   description: "Astrology Reports and Tools",
+  icons: {
+    icon: "/favicon.ico", // 👈 yahan tumhara favicon add ho gaya
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-      </head>
-
       <body>
         {/* Load Google Maps once for the whole app */}
         <Script
