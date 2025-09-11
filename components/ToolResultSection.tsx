@@ -242,8 +242,8 @@ type PhaseKey = typeof keys[number];
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         <a href="/tools/rashi-finder" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Rashi Finder</a>
         <a href="/tools/lagna-finder" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Lagna Finder</a>
-        <a href="/tools/numerology" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Numerology Tools</a>
-        <a href="/tools/kundali-generator" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Kundali Generator</a>
+        <a href="/tools/Grahdashagrah-dasha-finder" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Grah-Dasha</a>
+        <a href="/tools/planet-overview" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">All Planets</a>
       </div>
 
       {/* 🧩 Result Main Grid */}
