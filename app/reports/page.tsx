@@ -76,21 +76,15 @@ export default function ReportsPage() {
                   onClick={() => handleBuyNow(report.slug)}
                   className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
                 >
-                  {t("common.buy_now", { defaultValue: "Buy Now" })} 
-                  <button
-                    onClick={() => handleBuyNow(report.slug)}
-                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-                  >
-                    {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-                    {report.offer ? (
-                      <>
-                        ₹{report.final_price}{" "}
-                        <span className="line-through text-sm text-gray-300">₹{report.price}</span>{" "}
-                      </>
-                    ) : (
-                      <>₹{report.price}</>
-                    )}
-                  </button>
+                  {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
+                  {report.offer ? (
+                    <>
+                      ₹{report.final_price}{" "}
+                      <span className="line-through text-sm text-gray-300">₹{report.price}</span>
+                    </>
+                  ) : (
+                    <>₹{report.price}</>
+                  )}
                 </button>
               </div>
             </div>
@@ -118,22 +112,17 @@ export default function ReportsPage() {
               onClick={() => handleBuyNow(modalReport.slug)}
               className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full"
             >
-              {t("common.buy_now", { defaultValue: "Buy Now" })} 
-              <button
-                onClick={() => handleBuyNow(modalReport.slug)}
-                className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full"
-              >
-                {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-                {modalReport.offer ? (
-                  <>
-                    ₹{modalReport.final_price}{" "}
-                    <span className="line-through text-sm text-gray-300">₹{modalReport.price}</span>{" "}
-                  </>
-                ) : (
-                  <>₹{modalReport.price}</>
-                )}
-              </button>
+              {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
+              {modalReport.offer ? (
+                <>
+                  ₹{modalReport.final_price}{" "}
+                  <span className="line-through text-sm text-gray-300">₹{modalReport.price}</span>
+                </>
+              ) : (
+                <>₹{modalReport.price}</>
+              )}
             </button>
+
           </div>
         </div>
       )}
