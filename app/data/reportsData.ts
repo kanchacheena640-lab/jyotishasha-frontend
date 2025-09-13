@@ -6,6 +6,8 @@ export interface Report {
   category: string;
   description: string;
   fullDescription: string
+  offer?: string;
+  final_price?: number;
 }
 
 export const reportsData: Report[] = [

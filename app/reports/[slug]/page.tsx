@@ -54,7 +54,7 @@ export default function ReportCheckout() {
       const res = await fetch("https://jyotishasha-backend.onrender.com/api/razorpay-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: productId, amount: price }),
+        body: JSON.stringify({ product: productId }),
       });
 
       const orderData = await res.json();
@@ -63,6 +63,17 @@ export default function ReportCheckout() {
         alert("❌ Failed to create Razorpay order");
         return;
       }
+
+      // ✅ Store offer info temporarily for UI
+      setPriceDetails({
+        base: orderData.base_price,
+        final: orderData.final_price,
+        offer: orderData.offer,
+      });
+
+      // Optional: for future use like thank-you page
+      setOrder(orderData);
+
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
@@ -108,6 +119,13 @@ export default function ReportCheckout() {
   const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
   const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
   const price = currentReport?.price || 0;
+  const [priceDetails, setPriceDetails] = useState({
+    base: price,
+    final: price,
+    offer: null,
+  });
+
+  const [order, setOrder] = useState(null);
   const displaySlug = Array.isArray(rawSlug)
     ? rawSlug.join(" ")
     : rawSlug?.replace(/-/g, " ") ?? "your report";
@@ -180,7 +198,25 @@ export default function ReportCheckout() {
         onClick={handleSubmit}
         className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
       >
-        Proceed to Pay ₹{price}
+        <div className="text-center mt-5">
+          <button
+            onClick={handleSubmit}
+            className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+          >
+            Proceed to Pay ₹{priceDetails.final}
+            {priceDetails.offer && (
+              <span className="ml-2 text-sm text-gray-300 line-through">
+                ₹{priceDetails.base}
+              </span>
+            )}
+          </button>
+
+          {priceDetails.offer && (
+            <div className="text-xs text-pink-600 font-semibold mt-2">
+              {priceDetails.offer} 🎉
+            </div>
+          )}
+        </div>
       </button>
 
       <style jsx>{`
