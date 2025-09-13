@@ -27,11 +27,11 @@ export default function ReportCheckout() {
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         setForm((prev) => ({
-            ...prev,
-            pob: place.name || "",
-            latitude: place.geometry?.location?.lat()?.toString() || "",
-            longitude: place.geometry?.location?.lng()?.toString() || "",
-          }));
+          ...prev,
+          pob: place.name || "",
+          latitude: place.geometry?.location?.lat()?.toString() || "",
+          longitude: place.geometry?.location?.lng()?.toString() || "",
+        }));
       });
     }
   }, []);
@@ -39,6 +39,12 @@ export default function ReportCheckout() {
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const params = useParams();
+  const rawSlug = params?.slug;
+  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
+  const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
+  const price = currentReport?.price || 0;
 
   const handleSubmit = async () => {
     try {
@@ -64,19 +70,8 @@ export default function ReportCheckout() {
         return;
       }
 
-      // ✅ Store offer info temporarily for UI
-      setPriceDetails({
-        base: orderData.base_price,
-        final: orderData.final_price,
-        offer: orderData.offer,
-      });
-
-      // Optional: for future use like thank-you page
-      setOrder(orderData);
-
-
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: orderData.amount,
         currency: orderData.currency,
         name: "Jyotishasha",
@@ -114,18 +109,6 @@ export default function ReportCheckout() {
     }
   };
 
-  const params = useParams();
-  const rawSlug = params?.slug;
-  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-  const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
-  const price = currentReport?.price || 0;
-  const [priceDetails, setPriceDetails] = useState({
-    base: price,
-    final: price,
-    offer: null,
-  });
-
-  const [order, setOrder] = useState(null);
   const displaySlug = Array.isArray(rawSlug)
     ? rawSlug.join(" ")
     : rawSlug?.replace(/-/g, " ") ?? "your report";
@@ -180,44 +163,31 @@ export default function ReportCheckout() {
           🔄 Change details if you're looking for other birth info
         </p>
       </div>
-      {/* 🌐 Language Preference */}
-        <div className="bg-white p-5 rounded-xl shadow mb-5">
-          <h3 className="text-lg font-semibold mb-3 text-purple-700">🌐 Language</h3>
-          <select
-            name="language"
-            value={form.language}
-            onChange={handleChange}
-            className="inputStyle"
-            required
-          >
-            <option value="en">English</option>
-            <option value="hi">हिंदी</option>
-          </select>
-        </div>
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
-      >
-        <div className="text-center mt-5">
-          <button
-            onClick={handleSubmit}
-            className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
-          >
-            Proceed to Pay ₹{priceDetails.final}
-            {priceDetails.offer && (
-              <span className="ml-2 text-sm text-gray-300 line-through">
-                ₹{priceDetails.base}
-              </span>
-            )}
-          </button>
 
-          {priceDetails.offer && (
-            <div className="text-xs text-pink-600 font-semibold mt-2">
-              {priceDetails.offer} 🎉
-            </div>
-          )}
-        </div>
-      </button>
+      {/* 🌐 Language Preference */}
+      <div className="bg-white p-5 rounded-xl shadow mb-5">
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">🌐 Language</h3>
+        <select
+          name="language"
+          value={form.language}
+          onChange={handleChange}
+          className="inputStyle"
+          required
+        >
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
+        </select>
+      </div>
+
+      {/* 💰 Pay Button */}
+      <div className="text-center mt-5">
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+        >
+          Proceed to Pay ₹{price}
+        </button>
+      </div>
 
       <style jsx>{`
         .inputStyle {
