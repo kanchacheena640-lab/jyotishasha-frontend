@@ -98,5 +98,14 @@ export const reportsData: Report[] = [
     category: "Self",
     description: "Understand your career path and growth through astrology.",
     fullDescription: "The Career Report analyzes your professional strengths, challenges, and opportunities using your birth chart and planetary periods (Mahadasha/Antardasha). It also highlights favorable fields of work and timings for career advancement."
+  },
+  {
+    title: "Legal Disputes Report",
+    slug: "legal_disputes_report",
+    price: 1,
+    image: "/reports/legal-disputes-report.webp",
+    category: "Life",
+    description: "Know the chances of court cases, conflicts, or disputes in your life.",
+    fullDescription: "The Legal Disputes Report studies the 6th, 7th, 8th, and 12th houses of your kundali along with Mars, Saturn, and Rahu–Ketu placements. It reveals tendencies for legal issues, conflicts, and possible resolutions. The report also guides on remedies, favorable periods, and strategies to overcome disputes as per Mahadasha–Antardasha and transit influences."
   }
 ];
