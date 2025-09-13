@@ -72,7 +72,7 @@ export default function ReportsPage() {
                   {t("common.know_more", { defaultValue: "Know More" })}
                 </button>
 
-                <button
+               <button
                   onClick={() => handleBuyNow(report.slug)}
                   className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
                 >
