@@ -1,47 +1,21 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { reportsData } from "../data/reportsData";
 import { useTranslation } from "react-i18next";
 
 export default function ReportsPage() {
   const { t } = useTranslation("reports");
   const router = useRouter();
-
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [modalReport, setModalReport] = useState<any>(null);
-  const [reports, setReports] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [modalReport, setModalReport] = useState<null | typeof reportsData[0]>(null);
 
-  // 🔥 fetch reports from backend
-  useEffect(() => {
-    async function fetchReports() {
-      try {
-        const res = await fetch("https://jyotishasha-backend.onrender.com/api/reports");
-        const data = await res.json();
-        setReports(data);
-      } catch (err) {
-        console.error("Failed to fetch reports:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchReports();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="max-w-6xl mx-auto px-6 py-20 text-center text-white">
-        Loading reports...
-      </div>
-    );
-  }
-
-  const categories = ["All", ...new Set(reports.map((r) => r.category))];
+  const categories = ["All", ...new Set(reportsData.map((r) => r.category))];
 
   const filteredReports =
     selectedCategory === "All"
-      ? reports
-      : reports.filter((r) => r.category === selectedCategory);
+      ? reportsData
+      : reportsData.filter((r) => r.category === selectedCategory);
 
   const handleBuyNow = (slug: string) => {
     router.push(`/reports/${slug}`);
@@ -106,9 +80,7 @@ export default function ReportsPage() {
                   {report.offer ? (
                     <>
                       ₹{report.final_price}{" "}
-                      <span className="line-through text-sm text-gray-300">
-                        ₹{report.price}
-                      </span>
+                      <span className="line-through text-sm text-gray-300">₹{report.price}</span>
                     </>
                   ) : (
                     <>₹{report.price}</>
@@ -134,9 +106,7 @@ export default function ReportsPage() {
               {t(`${modalReport.slug}.title`, { defaultValue: modalReport.title })}
             </h2>
             <p className="text-gray-700 mb-4">
-              {t(`${modalReport.slug}.fullDescription`, {
-                defaultValue: modalReport.fullDescription,
-              })}
+              {t(`${modalReport.slug}.fullDescription`, { defaultValue: modalReport.fullDescription })}
             </p>
             <button
               onClick={() => handleBuyNow(modalReport.slug)}
@@ -146,9 +116,7 @@ export default function ReportsPage() {
               {modalReport.offer ? (
                 <>
                   ₹{modalReport.final_price}{" "}
-                  <span className="line-through text-sm text-gray-300">
-                    ₹{modalReport.price}
-                  </span>
+                  <span className="line-through text-sm text-gray-300">₹{modalReport.price}</span>
                 </>
               ) : (
                 <>₹{modalReport.price}</>
