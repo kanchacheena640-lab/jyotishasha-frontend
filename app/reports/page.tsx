@@ -72,12 +72,12 @@ export default function ReportsPage() {
                   {t("common.know_more", { defaultValue: "Know More" })}
                 </button>
 
-               <button
+                <button
                   onClick={() => handleBuyNow(report.slug)}
                   className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
                 >
                   {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-                  {report.offer ? (
+                  {Boolean(report.offer) ? (
                     <>
                       ₹{report.final_price}{" "}
                       <span className="line-through text-sm text-gray-300">₹{report.price}</span>
@@ -113,7 +113,7 @@ export default function ReportsPage() {
               className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full"
             >
               {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-              {modalReport.offer ? (
+              {Boolean(modalReport.offer) ? (
                 <>
                   ₹{modalReport.final_price}{" "}
                   <span className="line-through text-sm text-gray-300">₹{modalReport.price}</span>
@@ -122,7 +122,6 @@ export default function ReportsPage() {
                 <>₹{modalReport.price}</>
               )}
             </button>
-
           </div>
         </div>
       )}
