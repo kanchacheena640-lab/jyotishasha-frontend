@@ -1,19 +1,36 @@
-// HoroscopeTabs.tsx
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useTranslation } from "react-i18next";  // ✅ ADD
-import BilingualHoroscope from "@/components/horoscope/BilingualHoroscope";
 
+async function fetchHoroscope(sign: string, type: string = "daily") {
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE || "https://jyotishasha-backend.onrender.com";
+  const url = `${apiBase}/api/${type}-horoscope?sign=${sign}`;
+  const res = await fetch(url);
+
+  if (!res.ok) throw new Error("Failed to fetch horoscope");
+
+  return await res.json();
+}
 export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
   const searchParams = useSearchParams();
-  const { i18n } = useTranslation(); // ✅ Current lang from LanguageSwitcher
-
   const year = searchParams.get("year") || new Date().getFullYear().toString();
   const initialTab = searchParams.get("year") ? "yearly" : "daily";
 
   const [activeTab, setActiveTab] = useState(initialTab);
+  const [horoscope, setHoroscope] = useState<any>(null);
   const [yearlyData, setYearlyData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Load Daily or Monthly Horoscope
+  useEffect(() => {
+    if (activeTab === "daily" || activeTab === "monthly") {
+      setLoading(true);
+      fetchHoroscope(zodiacName.toLowerCase(), activeTab).then((data) => {
+        setHoroscope(data);
+        setLoading(false);
+      });
+    }
+  }, [zodiacName, activeTab]);
 
   // Load Yearly Horoscope
   useEffect(() => {
@@ -22,9 +39,7 @@ export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
         const res = await fetch(`/data/horoscopes/yearly_${year}.json`);
         const json = await res.json();
         const matched = json.horoscopes.find(
-          (h: any) =>
-            typeof h.sign === "string" &&
-            h.sign.toLowerCase() === zodiacName.toLowerCase()
+          (h: any) => h.sign.toLowerCase() === zodiacName.toLowerCase()
         );
         setYearlyData(matched);
       } catch (err) {
@@ -59,17 +74,50 @@ export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
 
       {/* Tab Content */}
       <div className="bg-[#1e1b4b] text-white rounded-xl p-6 shadow-md transition-all duration-300 text-left">
-        {/* Daily */}
         {activeTab === "daily" && (
-          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} />
+          <>
+            {loading ? (
+              <p>Loading...</p>
+            ) : horoscope ? (
+              <div className="space-y-2">
+                <p>
+                  <strong>Career:</strong> {horoscope.career}
+                </p>
+                <p>
+                  <strong>Love:</strong> {horoscope.love}
+                </p>
+                <p>
+                  <strong>Health:</strong> {horoscope.health}
+                </p>
+                <p>
+                  <strong>Tips:</strong> {horoscope.tips}
+                </p>
+              </div>
+            ) : (
+              <p>No horoscope found for {zodiacName}.</p>
+            )}
+          </>
         )}
 
-        {/* Monthly */}
         {activeTab === "monthly" && (
-          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} />
+          <>
+            {loading ? (
+              <p>Loading...</p>
+            ) : horoscope ? (
+              <div className="space-y-3">
+                <p>{horoscope.paragraph1}</p>
+                <p>{horoscope.paragraph2}</p>
+                <p>{horoscope.paragraph3}</p>
+                <p>
+                  <strong>Tip of the Month:</strong> {horoscope.tip}
+                </p>
+              </div>
+            ) : (
+              <p>No monthly horoscope found for {zodiacName}.</p>
+            )}
+          </>
         )}
 
-        {/* Yearly */}
         {activeTab === "yearly" && (
           <>
             {!yearlyData ? (
@@ -93,21 +141,15 @@ export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
                   ))}
                 </div>
 
-                <h2 className="text-2xl font-bold text-purple-200">
-                  {yearlyData.title}
-                </h2>
+                <h2 className="text-2xl font-bold text-purple-200">{yearlyData.title}</h2>
                 <p className="text-gray-300">{yearlyData.overview}</p>
 
-                {Object.values(yearlyData.sections).map(
-                  (section: any, idx: number) => (
-                    <div key={idx}>
-                      <h3 className="text-lg font-semibold text-purple-100">
-                        {section.title}
-                      </h3>
-                      <p>{section.content}</p>
-                    </div>
-                  )
-                )}
+                {Object.values(yearlyData.sections).map((section: any, idx: number) => (
+                  <div key={idx}>
+                    <h3 className="text-lg font-semibold text-purple-100">{section.title}</h3>
+                    <p>{section.content}</p>
+                  </div>
+                ))}
 
                 {yearlyData.tips?.general?.length > 0 && (
                   <div>
