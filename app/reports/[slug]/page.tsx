@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { reportsData, Report } from "../../data/reportsData";
+import { updateReportsData } from "../../data/updateReportsData";
+
 
 export default function ReportCheckout() {
   const [form, setForm] = useState({
@@ -16,6 +18,8 @@ export default function ReportCheckout() {
     longitude: "",
   });
 
+  const [price, setPrice] = useState<number | null>(null);
+  const [priceLoading, setPriceLoading] = useState<boolean>(true);
   const placeRef = useRef<HTMLInputElement | null>(null);
 
   // ✅ Google Places init with guard
@@ -49,11 +53,34 @@ export default function ReportCheckout() {
   // ✅ Safe slug + current report
   const params = useParams();
   const rawSlug = params?.slug;
-  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
-  const currentReport = reportsData.find(
-    (r: Report) => r.slug === currentSlug
-  );
-  const price = currentReport?.price ?? 0;
+  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
+
+  useEffect(() => {
+    async function fetchPrice() {
+      try {
+        setPriceLoading(true);
+        const res = await fetch("https://jyotishasha-backend.onrender.com/api/razorpay-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ product: currentSlug }),
+        });
+        const data = await res.json();
+        if (res.ok && !data.error) {
+          setPrice(data.final_price);
+        } else {
+          setPrice(null);
+          console.warn("⚠️ Price fetch failed:", data.error);
+        }
+      } catch (e) {
+        console.error("❌ Price fetch exception:", e);
+        setPrice(null);
+      } finally {
+        setPriceLoading(false);
+      }
+    }
+
+    if (currentSlug) fetchPrice();
+  }, [currentSlug]);
 
   const handleSubmit = async () => {
     try {
@@ -66,14 +93,17 @@ export default function ReportCheckout() {
         return;
       }
 
-      const res = await fetch(
-        "https://jyotishasha-backend.onrender.com/api/razorpay-order",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product: productId }),
-        }
-      );
+      // 🔑 Price check pehle se hi load ho chuka hai state me
+      if (price === null) {
+        alert("❌ Price not available right now. Please refresh the page.");
+        return;
+      }
+
+      const res = await fetch("https://jyotishasha-backend.onrender.com/api/razorpay-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product: productId }),
+      });
 
       const orderData = await res.json();
 
@@ -84,7 +114,7 @@ export default function ReportCheckout() {
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: orderData.amount,
+        amount: orderData.amount, // ✅ backend final price in paise
         currency: orderData.currency,
         name: "Jyotishasha",
         description: `Payment for ${productId}`,
@@ -98,6 +128,7 @@ export default function ReportCheckout() {
               product: productId,
               payment_id: response.razorpay_payment_id,
               order_id: response.razorpay_order_id,
+              paid_price: orderData.final_price, // ✅ save exact paid price
             }),
           });
 
@@ -108,7 +139,9 @@ export default function ReportCheckout() {
           email: form.email,
           contact: form.phone,
         },
-        theme: { color: "#7c3aed" },
+        theme: {
+          color: "#7c3aed",
+        },
       };
 
       const razorpay = new (window as any).Razorpay(options);
@@ -118,6 +151,7 @@ export default function ReportCheckout() {
       alert("Something went wrong while processing payment.");
     }
   };
+
 
   const displaySlug = Array.isArray(rawSlug)
     ? rawSlug.join(" ")
@@ -218,9 +252,18 @@ export default function ReportCheckout() {
       <div className="text-center mt-5">
         <button
           onClick={handleSubmit}
-          className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+          disabled={priceLoading || price === null}
+          className={`w-full py-3 rounded-lg font-medium transition ${
+            priceLoading || price === null
+              ? "bg-gray-400 text-white cursor-not-allowed"
+              : "bg-purple-700 text-white hover:bg-purple-800"
+          }`}
         >
-          Proceed to Pay ₹{price}
+          {priceLoading
+            ? "Fetching price..."
+            : price === null
+            ? "Price not available"
+            : `Proceed to Pay ₹${price}`}
         </button>
       </div>
 
