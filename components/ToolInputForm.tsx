@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+import { useUserCache } from "@/lib/useUserCache";
 
 type ToolInputFormProps = {
   toolId?: string;
@@ -25,18 +26,20 @@ const toHHmm = (d: Date) => {
 };
 
 const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps) => {
-  const [name, setName] = useState('');
-  const [dob, setDob] = useState('');
-  const [tob, setTob] = useState('');
-  const [place, setPlace] = useState<{ lat: number; lng: number; name: string }>({
-    lat: 0,
-    lng: 0,
-    name: '',
-  });
-  const [gender, setGender] = useState('Male');
-  const [language, setLanguage] = useState<'en' | 'hi'>('en');
+  const { userData, saveUserData } = useUserCache();
 
-  const router = useRouter();
+  const [name, setName] = useState(userData.name || '');
+  const [dob, setDob] = useState(userData.dob || '');
+  const [tob, setTob] = useState(userData.tob || '');
+  const [place, setPlace] = useState<{ lat: number; lng: number; name: string }>(
+    userData.coords && userData.place
+      ? { lat: userData.coords.lat, lng: userData.coords.lng, name: userData.place }
+      : { lat: 0, lng: 0, name: '' }
+  );
+  const [gender, setGender] = useState(userData.gender || 'Male');
+  const [language, setLanguage] = useState<'en' | 'hi'>(userData.language || 'en');
+
+    const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +60,16 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
       longitude: place.lng,
       toolId,
     };
+
+    saveUserData({
+      name,
+      dob,
+      tob,
+      gender,
+      language,
+      place: place.name,
+      coords: { lat: place.lat, lng: place.lng },
+    });
 
     if (onSubmit) {
       onSubmit(formData);
