@@ -15,6 +15,7 @@ export async function updateReportsData(): Promise<Report[]> {
         );
 
         const data = await res.json();
+        console.log("🔎 API response for", report.slug, data);
 
         if (!res.ok || data.error) {
           throw new Error(data.error || "API error");
