@@ -30,14 +30,14 @@ export default function Home() {
     { name: "Lagna Finder", emoji: "📜", link: "/tools/lagna-finder" },
     { name: "Planet Overview", emoji: "🪐", link: "/tools/planet-overview" },
     { name: "Grah Dasha", emoji: "🌀", link: "/tools/grah-dasha-finder" },
-    { name: "Mangal Dosh", emoji: "🌠", link: "/tools/mangal-dosh" },
-    { name: "Chandra Mangal", emoji: "👍👎", link: "/tools/chandra-mangal" },
+    { name: "Mangalik Check", emoji: "🌠", link: "/tools/mangal-dosh" },
+    { name: "ChandraMangal", emoji: "👍👎", link: "/tools/chandra-mangal" },
     { name: "Your Love Life", emoji: "❤️", link: "/tools/love-life" },
     { name: "Your Career", emoji: "📖", link: "/tools/career-path" },
     { name: "Foreign Travel", emoji: "✈️", link: "/tools/foreign-travel" },
     { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-calculator" },
     { name: "Business Report", emoji: "💼", link: "/reports/business-path" },
-    { name: "Government Job", emoji: "👍", link: "/reports/government-job" }
+    { name: "Sarkaari Naukari", emoji: "👍", link: "/reports/government-job" }
   ];
 
   useEffect(() => {
