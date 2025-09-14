@@ -22,7 +22,9 @@ export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
         const res = await fetch(`/data/horoscopes/yearly_${year}.json`);
         const json = await res.json();
         const matched = json.horoscopes.find(
-          (h: any) => h.sign.toLowerCase() === zodiacName.toLowerCase()
+          (h: any) =>
+            typeof h.sign === "string" &&
+            h.sign.toLowerCase() === zodiacName.toLowerCase()
         );
         setYearlyData(matched);
       } catch (err) {
