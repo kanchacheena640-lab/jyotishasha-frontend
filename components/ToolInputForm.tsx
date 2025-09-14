@@ -8,6 +8,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import { useUserCache } from "@/lib/useUserCache";
+import { useEffect } from "react"; // 🆕 add this
+
 
 type ToolInputFormProps = {
   toolId?: string;
@@ -38,6 +40,20 @@ const ToolInputForm = ({ toolId = 'rashi-finder', onSubmit }: ToolInputFormProps
   );
   const [gender, setGender] = useState(userData.gender || 'Male');
   const [language, setLanguage] = useState<'en' | 'hi'>(userData.language || 'en');
+
+  useEffect(() => {
+    if (userData) {
+      if (userData.name) setName(userData.name);
+      if (userData.dob) setDob(userData.dob);
+      if (userData.tob) setTob(userData.tob);
+      if (userData.gender) setGender(userData.gender);
+      if (userData.language) setLanguage(userData.language);
+
+      if (userData.coords && userData.place) {
+        setPlace({ lat: userData.coords.lat, lng: userData.coords.lng, name: userData.place });
+      }
+    }
+  }, [userData]);
 
     const router = useRouter();
 
