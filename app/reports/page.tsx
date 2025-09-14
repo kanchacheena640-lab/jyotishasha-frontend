@@ -60,11 +60,11 @@ export default function ReportsPage() {
         {filteredReports.map((report, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transform transition duration-300 overflow-hidden border border-gray-200 relative"
+            className="relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transform transition duration-300 overflow-hidden border border-gray-200"
           >
-            {/* 👇 Badge */}
+            {/* 🏷️ Badge */}
             {report.badge && (
-              <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+              <span className="absolute top-3 left-3 bg-pink-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
                 {report.badge}
               </span>
             )}
@@ -74,6 +74,7 @@ export default function ReportsPage() {
               alt={t(`${report.slug}.title`, { defaultValue: report.title })}
               className="w-full h-44 object-cover"
             />
+
             <div className="p-4 text-center">
               <h3 className="text-lg font-bold text-blue-800 mb-2">
                 {t(`${report.slug}.title`, { defaultValue: report.title })}
