@@ -60,8 +60,15 @@ export default function ReportsPage() {
         {filteredReports.map((report, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transform transition duration-300 overflow-hidden border border-gray-200"
+            className="bg-white rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transform transition duration-300 overflow-hidden border border-gray-200 relative"
           >
+            {/* 👇 Badge */}
+            {report.badge && (
+              <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                {report.badge}
+              </span>
+            )}
+
             <img
               src={report.image}
               alt={t(`${report.slug}.title`, { defaultValue: report.title })}
@@ -91,7 +98,9 @@ export default function ReportsPage() {
                   {report.offer ? (
                     <>
                       ₹{report.price ?? "—"}{" "}
-                      <span className="line-through text-sm text-gray-300">₹{report.basePrice ?? ""}</span>
+                      <span className="line-through text-sm text-gray-300">
+                        ₹{report.basePrice ?? ""}
+                      </span>
                     </>
                   ) : (
                     <>₹{report.price ?? "—"}</>

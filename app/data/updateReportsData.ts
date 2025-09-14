@@ -13,7 +13,7 @@ export async function updateReportsData(): Promise<Report[]> {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ product: report.slug }),
-            cache: "no-store", // 🛑 fresh fetch har baar
+            cache: "no-store",
           }
         );
 
@@ -22,7 +22,7 @@ export async function updateReportsData(): Promise<Report[]> {
 
         if (!res.ok || data.error) {
           console.warn(`⚠️ API failed for ${report.slug}:`, data.error);
-          return { ...report, price: null, basePrice: null, offer: null };
+          return { ...report, price: null, basePrice: null, offer: null, badge: null };
         }
 
         return {
@@ -30,10 +30,11 @@ export async function updateReportsData(): Promise<Report[]> {
           price: data.final_price ?? report.price,
           basePrice: data.base_price ?? null,
           offer: data.offer ?? null,
+          badge: data.offer ?? null,   // 👈 yahi se badge set hoga
         };
       } catch (e) {
         console.error(`❌ Exception for ${report.slug}:`, e);
-        return { ...report, price: null, basePrice: null, offer: null };
+        return { ...report, price: null, basePrice: null, offer: null, badge: null };
       }
     })
   );
