@@ -40,6 +40,10 @@
     "title": "Mangal Dosh",
     "desc": "Is Mangal Dosh in your Kundali"
   },
+  "government-job": {
+    "title": "Sarkari Naukari",
+    "desc": "How fevorable your Kundali for Sarkari Naukari"
+  },
   "tools_page": {
   "categories": {
     "all": "All",
