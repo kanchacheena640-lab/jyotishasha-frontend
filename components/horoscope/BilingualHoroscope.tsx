@@ -68,7 +68,7 @@ export default function BilingualHoroscope({ lang }: { lang: "en" | "hi" }) {
   if (!horoscope) return <p>No horoscope found for {sign}.</p>;
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md text-left">
+    <div className="p-4 bg-[#1e1b4b] text-white rounded-lg shadow-md text-left">
       <h2 className="text-xl font-bold mb-4 capitalize">
         {sign} – {type} Horoscope ({lang === "en" ? "English" : "हिन्दी"})
       </h2>
