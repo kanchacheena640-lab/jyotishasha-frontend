@@ -1,5 +1,7 @@
-import type { Report } from "./reportsData";  // 👈 only type import
-import { reportsData } from "./reportsData";  // 👈 data import
+// app/data/updateReportsData.ts
+
+import type { Report } from "./reportsData";
+import { reportsData } from "./reportsData";
 
 export async function updateReportsData(): Promise<Report[]> {
   const updatedReports = await Promise.all(
@@ -11,25 +13,27 @@ export async function updateReportsData(): Promise<Report[]> {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ product: report.slug }),
+            cache: "no-store", // 🛑 fresh fetch har baar
           }
         );
 
         const data = await res.json();
-        console.log("🔎 API response for", report.slug, data);
+        console.log("🔎 API response for:", report.slug, data);
 
         if (!res.ok || data.error) {
-          throw new Error(data.error || "API error");
+          console.warn(`⚠️ API failed for ${report.slug}:`, data.error);
+          return { ...report, price: null, basePrice: null, offer: null };
         }
 
         return {
           ...report,
-          price: data.final_price,
-          basePrice: data.base_price,
-          offer: data.offer || null,
+          price: data.final_price ?? report.price,
+          basePrice: data.base_price ?? null,
+          offer: data.offer ?? null,
         };
       } catch (e) {
-        console.error(`❌ Failed to fetch for ${report.slug}`, e);
-        return report;
+        console.error(`❌ Exception for ${report.slug}:`, e);
+        return { ...report, price: null, basePrice: null, offer: null };
       }
     })
   );
