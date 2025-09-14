@@ -61,12 +61,12 @@ export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
       <div className="bg-[#1e1b4b] text-white rounded-xl p-6 shadow-md transition-all duration-300 text-left">
         {/* Daily */}
         {activeTab === "daily" && (
-          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} type="daily" />
+          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} />
         )}
 
         {/* Monthly */}
         {activeTab === "monthly" && (
-          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} type="monthly" />
+          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} />
         )}
 
         {/* Yearly */}
