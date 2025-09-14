@@ -1,32 +1,37 @@
-import { reportsData, Report } from "./reportsData";
+// app/data/updateReportsData.ts
+import { reportsData, Report } from "./reportsData"; // 👈 fixed path
 
 export async function updateReportsData(): Promise<Report[]> {
-  const updated = await Promise.all(
-    reportsData.map(async (report) => {
+  const updatedReports = await Promise.all(
+    reportsData.map(async (report: Report) => {  // 👈 added type
       try {
-        const res = await fetch("https://jyotishasha-backend.onrender.com/api/razorpay-order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product: report.slug }),
-        });
-
-        if (!res.ok) throw new Error(`API failed for ${report.slug}`);
+        const res = await fetch(
+          "https://jyotishasha-backend.onrender.com/api/razorpay-order",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ product: report.slug }), // ✅ correct payload
+          }
+        );
 
         const data = await res.json();
 
+        if (!res.ok || data.error) {
+          throw new Error(data.error || "API error");
+        }
+
         return {
           ...report,
-          price: data.final_price ?? report.price,   // 👈 hamesha final price show hoga
-          basePrice: data.base_price ?? null,        // 👈 old price for cut
-          offer: data.offer || null,                 // 👈 same naam rakh diya offer
+          price: data.final_price,
+          basePrice: data.base_price,
+          offer: data.offer || null,
         };
-      } catch (error) {
-        console.error("❌ Failed to fetch for", report.slug, error);
-        return report; // fallback
+      } catch (e) {
+        console.error(`❌ Failed to fetch for ${report.slug}`, e);
+        return report;
       }
     })
   );
 
-  reportsData.splice(0, reportsData.length, ...updated); // overwrite
-  return reportsData;
+  return updatedReports;
 }
