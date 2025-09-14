@@ -49,10 +49,12 @@ const zodiacOrder = [
         const today = new Date();
         const start = (today.getDate() - 1) % Math.floor(enBlocks.length / 12) * 12;
         const todaysBlocks = enBlocks.slice(start, start + 12);
+        console.log("Todays Blocks:", todaysBlocks);
+
 
         // Sort according to zodiac order
         const sortedBlocks = zodiacOrder.map((sign) =>
-          todaysBlocks.find((b) => b.sign.toLowerCase() === sign)
+          todaysBlocks.find((b) => b.sign && b.sign.toLowerCase() === sign)
         ).filter(Boolean) as PoolItem[];
 
         const finalData = sortedBlocks.map((block) => {
