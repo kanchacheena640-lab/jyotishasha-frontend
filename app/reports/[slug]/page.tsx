@@ -22,7 +22,7 @@ export default function ReportCheckout() {
 
   const placeRef = useRef<HTMLInputElement | null>(null);
 
-  // 🔍 Place autocomplete
+  // ✅ Google Autocomplete untouched
   useEffect(() => {
     if (window.google && placeRef.current) {
       const autocomplete = new window.google.maps.places.Autocomplete(
@@ -51,7 +51,7 @@ export default function ReportCheckout() {
   const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
   const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
 
-  // 🟣 Fetch price dynamically
+  // ✅ Price fetch alag effect me
   useEffect(() => {
     async function fetchPrice() {
       if (!currentSlug) return;
@@ -82,7 +82,7 @@ export default function ReportCheckout() {
     fetchPrice();
   }, [currentSlug]);
 
-  // 🟣 Razorpay order create
+  // 🟣 Razorpay handler same
   const handleSubmit = async () => {
     try {
       const productId = Array.isArray(rawSlug)
@@ -148,10 +148,6 @@ export default function ReportCheckout() {
       alert("Something went wrong while processing payment.");
     }
   };
-
-  const displaySlug = Array.isArray(rawSlug)
-    ? rawSlug.join(" ")
-    : rawSlug?.replace(/-/g, " ") ?? "your report";
 
   return (
     <div className="max-w-xl mx-auto px-4 py-10">
@@ -265,29 +261,6 @@ export default function ReportCheckout() {
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        .inputStyle {
-          width: 100%;
-          padding: 10px 12px;
-          font-size: 15px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          outline: none;
-          background-color: #fff;
-          color: #333;
-        }
-
-        .inputStyle:focus {
-          border-color: #a855f7;
-          box-shadow: 0 0 0 2px #ddd6fe;
-        }
-
-        .placeholderStyle::placeholder {
-          color: #7c4a27 !important;
-          opacity: 1;
-        }
-      `}</style>
     </div>
   );
 }
