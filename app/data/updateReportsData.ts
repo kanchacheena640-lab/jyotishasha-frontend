@@ -16,18 +16,17 @@ export async function updateReportsData(): Promise<Report[]> {
 
         return {
           ...report,
-          price: data.final_price ?? report.price,
-          badge: data.offer || null,
+          price: data.final_price ?? report.price,   // 👈 hamesha final price show hoga
+          basePrice: data.base_price ?? null,        // 👈 old price for cut
+          offer: data.offer || null,                 // 👈 same naam rakh diya offer
         };
       } catch (error) {
         console.error("❌ Failed to fetch for", report.slug, error);
-        return report; // fallback: keep old data
+        return report; // fallback
       }
     })
   );
 
-  // ✅ overwrite array inplace (har jagah updated mile)
-  reportsData.splice(0, reportsData.length, ...updated);
-
+  reportsData.splice(0, reportsData.length, ...updated); // overwrite
   return reportsData;
 }

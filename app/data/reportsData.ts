@@ -2,6 +2,7 @@ export interface Report {
   title: string;
   slug: string;
   price: number | null;
+  basePrice?: number;
   badge: string | null;
   image: string;
   category: string;

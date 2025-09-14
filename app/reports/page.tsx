@@ -25,8 +25,8 @@ export default function ReportsPage() {
 
   const filteredReports =
     selectedCategory === "All"
-      ? reportsData
-      : reportsData.filter((r) => r.category === selectedCategory);
+      ? reports
+      : reports.filter((r) => r.category === selectedCategory);
 
   const handleBuyNow = (slug: string) => {
     router.push(`/reports/${slug}`);
@@ -90,8 +90,8 @@ export default function ReportsPage() {
                   {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
                   {report.offer ? (
                     <>
-                      ₹{report.final_price}{" "}
-                      <span className="line-through text-sm text-gray-300">₹{report.price}</span>
+                      ₹{report.price}{" "}
+                      <span className="line-through text-sm text-gray-300">₹{report.basePrice}</span>
                     </>
                   ) : (
                     <>₹{report.price}</>
@@ -126,8 +126,8 @@ export default function ReportsPage() {
               {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
               {modalReport.offer ? (
                 <>
-                  ₹{modalReport.final_price}{" "}
-                  <span className="line-through text-sm text-gray-300">₹{modalReport.price}</span>
+                  ₹{modalReport.price}{" "}
+                  <span className="line-through text-sm text-gray-300">₹{modalReport.basePrice}</span>
                 </>
               ) : (
                 <>₹{modalReport.price}</>
