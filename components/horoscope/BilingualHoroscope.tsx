@@ -22,9 +22,13 @@ const zodiacOrder = [
   "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
 ];
 
-export default function BilingualHoroscope({ lang }: { lang: "en" | "hi" }) {
-  const pathname = usePathname();
-  const type: "daily" | "monthly" = pathname.includes("monthly") ? "monthly" : "daily";
+  export default function BilingualHoroscope({
+    lang,
+    type,
+  }: {
+    lang: "en" | "hi";
+    type: "daily" | "monthly";
+  }) {
 
   const [dataBlock, setDataBlock] = useState<
     { sign: string; en: HoroscopeEntry; hi: HoroscopeEntry | null }[]
