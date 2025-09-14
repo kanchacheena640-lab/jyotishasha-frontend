@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { reportsData } from "../data/reportsData";
+import { updateReportsData } from "../data/updateReportsData";  // 👈 import price
 import { useTranslation } from "react-i18next";
 
 export default function ReportsPage() {
@@ -9,6 +10,16 @@ export default function ReportsPage() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [modalReport, setModalReport] = useState<null | typeof reportsData[0]>(null);
+  const [reports, setReports] = useState(reportsData);
+
+  // 👇 Add this useEffect
+  useEffect(() => {
+    async function load() {
+      const updated = await updateReportsData();
+      setReports([...updated]);
+    }
+    load();
+  }, []);
 
   const categories = ["All", ...new Set(reportsData.map((r) => r.category))];
 
