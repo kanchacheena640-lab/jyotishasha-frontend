@@ -16,13 +16,19 @@ export default function ReportCheckout() {
     longitude: "",
   });
 
+  const [price, setPrice] = useState<number | null>(null);
+  const [basePrice, setBasePrice] = useState<number | null>(null);
+  const [offer, setOffer] = useState<string | null>(null);
+
   const placeRef = useRef<HTMLInputElement | null>(null);
 
+  // 🔍 Place autocomplete
   useEffect(() => {
     if (window.google && placeRef.current) {
-      const autocomplete = new window.google.maps.places.Autocomplete(placeRef.current, {
-        types: ["(cities)"],
-      });
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        placeRef.current,
+        { types: ["(cities)"] }
+      );
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
@@ -44,8 +50,39 @@ export default function ReportCheckout() {
   const rawSlug = params?.slug;
   const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
   const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
-  const price = currentReport?.price || 0;
 
+  // 🟣 Fetch price dynamically
+  useEffect(() => {
+    async function fetchPrice() {
+      if (!currentSlug) return;
+      try {
+        const res = await fetch(
+          "https://jyotishasha-backend.onrender.com/api/razorpay-order",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ product: currentSlug }),
+          }
+        );
+
+        const data = await res.json();
+        if (res.ok && !data.error) {
+          setPrice(data.final_price);
+          setBasePrice(data.base_price);
+          setOffer(data.offer);
+        } else {
+          setPrice(currentReport?.price || 0);
+        }
+      } catch (e) {
+        console.error("❌ Price fetch error:", e);
+        setPrice(currentReport?.price || 0);
+      }
+    }
+
+    fetchPrice();
+  }, [currentSlug]);
+
+  // 🟣 Razorpay order create
   const handleSubmit = async () => {
     try {
       const productId = Array.isArray(rawSlug)
@@ -57,11 +94,14 @@ export default function ReportCheckout() {
         return;
       }
 
-      const res = await fetch("https://jyotishasha-backend.onrender.com/api/razorpay-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: productId }),
-      });
+      const res = await fetch(
+        "https://jyotishasha-backend.onrender.com/api/razorpay-order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ product: productId }),
+        }
+      );
 
       const orderData = await res.json();
 
@@ -121,17 +161,42 @@ export default function ReportCheckout() {
 
       {/* 👤 Personal Info */}
       <div className="bg-white p-5 rounded-xl shadow mb-4">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">👤 Personal Details</h3>
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          👤 Personal Details
+        </h3>
         <div className="space-y-3">
-          <input name="name" type="text" value={form.name} onChange={handleChange} placeholder="Full Name" className="inputStyle placeholderStyle" />
-          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email Address" className="inputStyle placeholderStyle" />
-          <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="Phone Number" className="inputStyle placeholderStyle" />
+          <input
+            name="name"
+            type="text"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Full Name"
+            className="inputStyle placeholderStyle"
+          />
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Email Address"
+            className="inputStyle placeholderStyle"
+          />
+          <input
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="inputStyle placeholderStyle"
+          />
         </div>
       </div>
 
       {/* 🔮 Birth Info */}
       <div className="bg-white p-5 rounded-xl shadow mb-5">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">🔮 Birth Details</h3>
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          🔮 Birth Details
+        </h3>
         <div className="space-y-3">
           <input
             name="dob"
@@ -166,7 +231,9 @@ export default function ReportCheckout() {
 
       {/* 🌐 Language Preference */}
       <div className="bg-white p-5 rounded-xl shadow mb-5">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">🌐 Language</h3>
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          🌐 Language
+        </h3>
         <select
           name="language"
           value={form.language}
@@ -185,8 +252,18 @@ export default function ReportCheckout() {
           onClick={handleSubmit}
           className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
         >
-          Proceed to Pay ₹{price}
+          Proceed to Pay ₹{price ?? "—"}
+          {offer && (
+            <span className="ml-2 text-sm text-gray-300 line-through">
+              ₹{basePrice}
+            </span>
+          )}
         </button>
+        {offer && (
+          <div className="text-xs text-pink-600 font-semibold mt-2">
+            {offer} 🎉
+          </div>
+        )}
       </div>
 
       <style jsx>{`
