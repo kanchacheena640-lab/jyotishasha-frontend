@@ -63,16 +63,17 @@ export default function BilingualHoroscope() {
         const pool: any[] = await poolRes.json();
 
         // 3. Load fixed English from backend
-        const fixedRes = await fetch(
-          `https://jyotishasha-backend.onrender.com/${type}_fixed.json`
-        );
-        const fixedData: any[] = await fixedRes.json();
+        const apiBase =
+          process.env.NEXT_PUBLIC_API_BASE || "https://jyotishasha-backend.onrender.com";
+
+        const fixedRes = await fetch(`${apiBase}/api/${type}-horoscope`);
+        if (!fixedRes.ok) throw new Error("Failed to fetch horoscope");
+
+        const fixedData: Record<string, HoroscopeEntry> = await fixedRes.json();
 
         // 4. Prepare mapping
         const map: HoroscopeMap = {};
-        fixedData.forEach((item, index) => {
-          const enText = item.daily_horoscope || item.monthly_horoscope;
-
+        Object.entries(fixedData).forEach(([sign, enText]) => {
           // find English twin in pool
           const poolEn = pool.find(
             (p) =>
@@ -85,14 +86,14 @@ export default function BilingualHoroscope() {
           // find Hindi twin
           const poolHi = pool.find((p) => p.id === poolEn.id.replace("e", "h"));
 
-          const sign = Object.keys(fixedData)[index] || `sign_${index + 1}`;
           map[sign] = {
-            en: enText,
+            en: enText as HoroscopeEntry,
             hi: poolHi
-              ? poolHi.daily_horoscope || poolHi.monthly_horoscope
-              : enText,
+              ? (poolHi.daily_horoscope || poolHi.monthly_horoscope) as HoroscopeEntry
+              : (enText as HoroscopeEntry),
           };
         });
+
 
         // 5. Save in LocalStorage with date/month
         const payload =
