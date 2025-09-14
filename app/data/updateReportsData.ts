@@ -1,16 +1,16 @@
-// app/data/updateReportsData.ts
-import { reportsData, Report } from "./reportsData"; // 👈 fixed path
+import type { Report } from "./reportsData";  // 👈 only type import
+import { reportsData } from "./reportsData";  // 👈 data import
 
 export async function updateReportsData(): Promise<Report[]> {
   const updatedReports = await Promise.all(
-    reportsData.map(async (report: Report) => {  // 👈 added type
+    reportsData.map(async (report: Report) => {
       try {
         const res = await fetch(
           "https://jyotishasha-backend.onrender.com/api/razorpay-order",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ product: report.slug }), // ✅ correct payload
+            body: JSON.stringify({ product: report.slug }),
           }
         );
 

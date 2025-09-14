@@ -7,7 +7,7 @@ export interface Report {
   image: string;
   category: string;
   description: string;
-  fullDescription: string
+  fullDescription: string;
   offer?: string;
   final_price?: number;
 }
