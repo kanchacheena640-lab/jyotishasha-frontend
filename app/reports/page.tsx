@@ -21,7 +21,7 @@ export default function ReportsPage() {
     load();
   }, []);
 
-  const categories = ["All", ...new Set(reportsData.map((r) => r.category))];
+  const categories = ["All", ...new Set(reports.map((r) => r.category))];
 
   const filteredReports =
     selectedCategory === "All"
@@ -90,11 +90,11 @@ export default function ReportsPage() {
                   {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
                   {report.offer ? (
                     <>
-                      ₹{report.price}{" "}
-                      <span className="line-through text-sm text-gray-300">₹{report.basePrice}</span>
+                      ₹{report.price ?? "—"}{" "}
+                      <span className="line-through text-sm text-gray-300">₹{report.basePrice ?? ""}</span>
                     </>
                   ) : (
-                    <>₹{report.price}</>
+                    <>₹{report.price ?? "—"}</>
                   )}
                 </button>
               </div>
