@@ -16,15 +16,15 @@ export default function ReportCheckout() {
     longitude: "",
   });
 
-  const [price, setPrice] = useState<number | null>(null);
-  const [basePrice, setBasePrice] = useState<number | null>(null);
-  const [offer, setOffer] = useState<string | null>(null);
-
   const placeRef = useRef<HTMLInputElement | null>(null);
 
-  // ✅ Google Autocomplete untouched
+  // ✅ Google Places init with guard
   useEffect(() => {
-    if (window.google && placeRef.current) {
+    if (
+      typeof window !== "undefined" &&
+      (window as any).google &&
+      placeRef.current
+    ) {
       const autocomplete = new window.google.maps.places.Autocomplete(
         placeRef.current,
         { types: ["(cities)"] }
@@ -46,43 +46,15 @@ export default function ReportCheckout() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // ✅ Safe slug + current report
   const params = useParams();
   const rawSlug = params?.slug;
-  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-  const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
+  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
+  const currentReport = reportsData.find(
+    (r: Report) => r.slug === currentSlug
+  );
+  const price = currentReport?.price ?? 0;
 
-  // ✅ Price fetch alag effect me
-  useEffect(() => {
-    async function fetchPrice() {
-      if (!currentSlug) return;
-      try {
-        const res = await fetch(
-          "https://jyotishasha-backend.onrender.com/api/razorpay-order",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ product: currentSlug }),
-          }
-        );
-
-        const data = await res.json();
-        if (res.ok && !data.error) {
-          setPrice(data.final_price);
-          setBasePrice(data.base_price);
-          setOffer(data.offer);
-        } else {
-          setPrice(currentReport?.price || 0);
-        }
-      } catch (e) {
-        console.error("❌ Price fetch error:", e);
-        setPrice(currentReport?.price || 0);
-      }
-    }
-
-    fetchPrice();
-  }, [currentSlug]);
-
-  // 🟣 Razorpay handler same
   const handleSubmit = async () => {
     try {
       const productId = Array.isArray(rawSlug)
@@ -136,9 +108,7 @@ export default function ReportCheckout() {
           email: form.email,
           contact: form.phone,
         },
-        theme: {
-          color: "#7c3aed",
-        },
+        theme: { color: "#7c3aed" },
       };
 
       const razorpay = new (window as any).Razorpay(options);
@@ -148,6 +118,10 @@ export default function ReportCheckout() {
       alert("Something went wrong while processing payment.");
     }
   };
+
+  const displaySlug = Array.isArray(rawSlug)
+    ? rawSlug.join(" ")
+    : rawSlug?.replace(/-/g, " ") ?? "your report";
 
   return (
     <div className="max-w-xl mx-auto px-4 py-10">
@@ -199,7 +173,6 @@ export default function ReportCheckout() {
             type="date"
             value={form.dob}
             onChange={handleChange}
-            placeholder="Date of Birth"
             className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
           />
           <input
@@ -207,7 +180,6 @@ export default function ReportCheckout() {
             type="time"
             value={form.tob}
             onChange={handleChange}
-            placeholder="Time of Birth"
             className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
           />
           <input
@@ -248,19 +220,30 @@ export default function ReportCheckout() {
           onClick={handleSubmit}
           className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
         >
-          Proceed to Pay ₹{price ?? "—"}
-          {offer && (
-            <span className="ml-2 text-sm text-gray-300 line-through">
-              ₹{basePrice}
-            </span>
-          )}
+          Proceed to Pay ₹{price}
         </button>
-        {offer && (
-          <div className="text-xs text-pink-600 font-semibold mt-2">
-            {offer} 🎉
-          </div>
-        )}
       </div>
+
+      <style jsx>{`
+        .inputStyle {
+          width: 100%;
+          padding: 10px 12px;
+          font-size: 15px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          outline: none;
+          background-color: #fff;
+          color: #333;
+        }
+        .inputStyle:focus {
+          border-color: #a855f7;
+          box-shadow: 0 0 0 2px #ddd6fe;
+        }
+        .placeholderStyle::placeholder {
+          color: #7c4a27 !important;
+          opacity: 1;
+        }
+      `}</style>
     </div>
   );
 }
