@@ -2,18 +2,24 @@
 
 import { useEffect, useState } from "react";
 
-interface HoroscopeEntry {
+interface DailyHoroscopeEntry {
   career: string;
   love: string;
   health: string;
   tips: string;
 }
 
+interface MonthlyHoroscopeEntry {
+  paragraph1: string;
+  paragraph2: string;
+  paragraph3: string;
+  tip: string;
+}
+
 interface PoolItem {
   id: string;
-  sign: string;
-  daily_horoscope?: HoroscopeEntry;
-  monthly_horoscope?: HoroscopeEntry;
+  daily_horoscope?: DailyHoroscopeEntry;
+  monthly_horoscope?: MonthlyHoroscopeEntry;
 }
 
 const zodiacOrder = [
@@ -29,7 +35,7 @@ export default function BilingualHoroscope({
   type: "daily" | "monthly";
 }) {
   const [dataBlock, setDataBlock] = useState<
-    { sign: string; en: HoroscopeEntry; hi: HoroscopeEntry | null }[]
+    { sign: string; en: any; hi: any }[]
   >([]);
   const [loading, setLoading] = useState(true);
 
@@ -40,18 +46,15 @@ export default function BilingualHoroscope({
         const res = await fetch(`/data/horoscopes/${type}_pool_bilingual.json`);
         const pool: PoolItem[] = await res.json();
 
-        // ✅ fix: group English + Hindi directly
-        const finalData = zodiacOrder.map((sign) => {
-          const enBlock = pool.find(
-            (p) => p.sign?.toLowerCase() === sign && p.id.endsWith("e")
-          );
-          const hiBlock = pool.find(
-            (p) => p.sign?.toLowerCase() === sign && p.id.endsWith("h")
-          );
+        // ✅ Map id → zodiac directly (1e → aries, 2e → taurus …)
+        const finalData = zodiacOrder.map((sign, idx) => {
+          const num = (idx + 1).toString();
+          const enBlock = pool.find((p) => p.id === num + "e");
+          const hiBlock = pool.find((p) => p.id === num + "h");
 
           return {
             sign,
-            en: enBlock ? enBlock[`${type}_horoscope`]! : { career:"", love:"", health:"", tips:"" },
+            en: enBlock ? enBlock[`${type}_horoscope`]! : null,
             hi: hiBlock ? hiBlock[`${type}_horoscope`]! : null,
           };
         });
@@ -72,16 +75,30 @@ export default function BilingualHoroscope({
   return (
     <div className="bg-[#1e1b4b] text-white rounded-xl p-6 shadow-md space-y-6">
       {dataBlock.map(({ sign, en, hi }, idx) => {
+        if (!en) return null;
         const h = lang === "hi" && hi ? hi : en;
+
         return (
           <div key={idx}>
             <h2 className="text-2xl font-bold capitalize mb-2">
               {idx + 1}. {sign}
             </h2>
-            <p><strong>Career:</strong> {h.career}</p>
-            <p><strong>Love:</strong> {h.love}</p>
-            <p><strong>Health:</strong> {h.health}</p>
-            <p><strong>Tips:</strong> {h.tips}</p>
+
+            {type === "daily" ? (
+              <>
+                <p><strong>Career:</strong> {h.career}</p>
+                <p><strong>Love:</strong> {h.love}</p>
+                <p><strong>Health:</strong> {h.health}</p>
+                <p><strong>Tips:</strong> {h.tips}</p>
+              </>
+            ) : (
+              <>
+                <p>{h.paragraph1}</p>
+                <p>{h.paragraph2}</p>
+                <p>{h.paragraph3}</p>
+                <p><strong>Tip:</strong> {h.tip}</p>
+              </>
+            )}
           </div>
         );
       })}
