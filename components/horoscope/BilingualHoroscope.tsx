@@ -17,27 +17,40 @@ interface HoroscopeMap {
   };
 }
 
+const signs = [
+  "aries",
+  "taurus",
+  "gemini",
+  "cancer",
+  "leo",
+  "virgo",
+  "libra",
+  "scorpio",
+  "sagittarius",
+  "capricorn",
+  "aquarius",
+  "pisces",
+];
+
 export default function BilingualHoroscope() {
   const pathname = usePathname();
   const [horoscopeMap, setHoroscopeMap] = useState<HoroscopeMap>({});
   const [lang, setLang] = useState<"en" | "hi">("en");
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Automatically detect type
+  // 🔹 Detect type automatically
   const type: "daily" | "monthly" =
     pathname.includes("monthly") ? "monthly" : "daily";
 
   useEffect(() => {
     async function loadData() {
       try {
-        // 1. Check LocalStorage cache
         const cacheKey = `${type}_horoscope_map`;
         const cacheRaw = localStorage.getItem(cacheKey);
 
+        // ✅ Daily expiry check
         if (cacheRaw) {
           const cache = JSON.parse(cacheRaw);
-
-          // Daily cache expiry check
           if (
             type === "daily" &&
             cache.date === new Date().toISOString().slice(0, 10)
@@ -46,8 +59,7 @@ export default function BilingualHoroscope() {
             setLoading(false);
             return;
           }
-
-          // Monthly cache expiry check
+          // ✅ Monthly expiry check
           if (
             type === "monthly" &&
             cache.month === new Date().toISOString().slice(0, 7)
@@ -58,44 +70,53 @@ export default function BilingualHoroscope() {
           }
         }
 
-        // 2. Load bilingual pool
-        const poolRes = await fetch(`/data/horoscopes/${type}_pool_bilingual.json`);
+        // 1. Load bilingual pool
+        const poolRes = await fetch(
+          `/data/horoscopes/${type}_pool_bilingual.json`
+        );
         const pool: any[] = await poolRes.json();
 
-        // 3. Load fixed English from backend
+        // 2. Fetch all 12 signs in parallel
         const apiBase =
-          process.env.NEXT_PUBLIC_API_BASE || "https://jyotishasha-backend.onrender.com";
+          process.env.NEXT_PUBLIC_API_BASE ||
+          "https://jyotishasha-backend.onrender.com";
 
-        const fixedRes = await fetch(`${apiBase}/api/${type}-horoscope`);
-        if (!fixedRes.ok) throw new Error("Failed to fetch horoscope");
+        const results: [string, HoroscopeEntry][] = await Promise.all(
+          signs.map(async (sign) => {
+            const res = await fetch(
+              `${apiBase}/api/${type}-horoscope?sign=${sign}`
+            );
+            if (!res.ok) throw new Error(`Failed to fetch ${sign}`);
+            const data: HoroscopeEntry = await res.json();
+            return [sign, data];
+          })
+        );
 
-        const fixedData: Record<string, HoroscopeEntry> = await fixedRes.json();
-
-        // 4. Prepare mapping
+        // 3. Prepare bilingual map
         const map: HoroscopeMap = {};
-        Object.entries(fixedData).forEach(([sign, enText]) => {
+        results.forEach(([sign, enData]) => {
           // find English twin in pool
           const poolEn = pool.find(
             (p) =>
               p.id.endsWith("e") &&
               JSON.stringify(p.daily_horoscope || p.monthly_horoscope) ===
-                JSON.stringify(enText)
+                JSON.stringify(enData)
           );
-          if (!poolEn) return;
 
-          // find Hindi twin
-          const poolHi = pool.find((p) => p.id === poolEn.id.replace("e", "h"));
+          const poolHi = poolEn
+            ? pool.find((p) => p.id === poolEn.id.replace("e", "h"))
+            : null;
 
           map[sign] = {
-            en: enText as HoroscopeEntry,
+            en: enData,
             hi: poolHi
-              ? (poolHi.daily_horoscope || poolHi.monthly_horoscope) as HoroscopeEntry
-              : (enText as HoroscopeEntry),
+              ? (poolHi.daily_horoscope ||
+                  poolHi.monthly_horoscope) as HoroscopeEntry
+              : enData,
           };
         });
 
-
-        // 5. Save in LocalStorage with date/month
+        // 4. Save in LocalStorage
         const payload =
           type === "daily"
             ? { date: new Date().toISOString().slice(0, 10), data: map }
@@ -103,7 +124,6 @@ export default function BilingualHoroscope() {
 
         localStorage.setItem(cacheKey, JSON.stringify(payload));
 
-        // 6. Update state
         setHoroscopeMap(map);
         setLoading(false);
       } catch (err) {
@@ -129,7 +149,7 @@ export default function BilingualHoroscope() {
       </div>
 
       <div className="space-y-4">
-        {Object.keys(horoscopeMap).map((sign) => (
+        {signs.map((sign) => (
           <div key={sign} className="border-b pb-2">
             <h3 className="font-semibold text-lg">{sign.toUpperCase()}</h3>
             <p>
