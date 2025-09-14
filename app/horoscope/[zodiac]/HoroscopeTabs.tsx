@@ -1,10 +1,14 @@
+// HoroscopeTabs.tsx
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";  // ✅ ADD
 import BilingualHoroscope from "@/components/horoscope/BilingualHoroscope";
 
 export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
   const searchParams = useSearchParams();
+  const { i18n } = useTranslation(); // ✅ Current lang from LanguageSwitcher
+
   const year = searchParams.get("year") || new Date().getFullYear().toString();
   const initialTab = searchParams.get("year") ? "yearly" : "daily";
 
@@ -54,10 +58,14 @@ export default function HoroscopeTabs({ zodiacName }: { zodiacName: string }) {
       {/* Tab Content */}
       <div className="bg-[#1e1b4b] text-white rounded-xl p-6 shadow-md transition-all duration-300 text-left">
         {/* Daily */}
-        {activeTab === "daily" && <BilingualHoroscope />}
+        {activeTab === "daily" && (
+          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} />
+        )}
 
         {/* Monthly */}
-        {activeTab === "monthly" && <BilingualHoroscope />}
+        {activeTab === "monthly" && (
+          <BilingualHoroscope lang={i18n.language === "hi" ? "hi" : "en"} />
+        )}
 
         {/* Yearly */}
         {activeTab === "yearly" && (
