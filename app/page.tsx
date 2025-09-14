@@ -29,15 +29,15 @@ export default function Home() {
     { name: "Rashi Finder", emoji: "🔱", link: "/tools/rashi-finder" },
     { name: "Lagna Finder", emoji: "📜", link: "/tools/lagna-finder" },
     { name: "Planet Overview", emoji: "🪐", link: "/tools/planet-overview" },
-    { name: "Grah Dasha", emoji: "🌀", link: "/tools/grah-dasha" },
-    { name: "Live Transit", emoji: "🌠", link: "/tools/live-transit" },
-    { name: "Yog-Dosh Finder", emoji: "👍👎", link: "/tools/yog-dosh-finder" },
-    { name: "Your Love Life", emoji: "❤️", link: "/tools/your-love-life" },
-    { name: "Your Career", emoji: "📖", link: "/tools/your-career" },
+    { name: "Grah Dasha", emoji: "🌀", link: "/tools/grah-dasha-finder" },
+    { name: "Mangal Dosh", emoji: "🌠", link: "/tools/mangal-dosh" },
+    { name: "Chandra Mangal", emoji: "👍👎", link: "/tools/chandra-mangal" },
+    { name: "Your Love Life", emoji: "❤️", link: "/tools/love-life" },
+    { name: "Your Career", emoji: "📖", link: "/tools/career-path" },
     { name: "Foreign Travel", emoji: "✈️", link: "/tools/foreign-travel" },
-    { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-report" },
-    { name: "Business Report", emoji: "💼", link: "/reports/business-report" },
-    { name: "Extramarital & You", emoji: "❓", link: "/reports/extramarital" }
+    { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-calculator" },
+    { name: "Business Report", emoji: "💼", link: "/reports/business-path" },
+    { name: "Government Job", emoji: "❓", link: "/reports/government-job" }
   ];
 
   useEffect(() => {
