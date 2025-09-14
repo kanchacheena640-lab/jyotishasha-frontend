@@ -1,0 +1,560 @@
+[
+  {
+    "id": "1e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "1h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "2e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "2h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "3e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "3h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "4e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "4h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "5e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "5h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "6e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "6h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "7e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "7h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "8e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "8h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "9e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "9h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "10e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "10h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "11e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "11h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "12e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "12h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "13e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "13h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "14e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "14h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "15e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "15h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "16e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "16h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "17e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "17h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "18e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "18h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "19e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "19h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "20e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "20h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "21e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "21h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "22e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "22h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "23e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "23h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "24e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "24h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "25e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "25h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "26e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "26h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "27e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "27h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "28e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "28h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  },
+  {
+    "id": "29e",
+    "daily_horoscope": {
+      "career": "Minor obstacles may arise at work, but patience and a balanced approach will help you overcome them. Support from colleagues will be helpful.",
+      "love": "There could be small misunderstandings in relationships, but if you stay calm and communicate openly, things will improve.",
+      "health": "Headache or fatigue may bother you. Stay hydrated and get enough rest.",
+      "tips": "Include red or pink in your attire today — it will boost your confidence."
+    }
+  },
+  {
+    "id": "29h",
+    "daily_horoscope": {
+      "career": "काम के दौरान छोटी रुकावटें आ सकती हैं, लेकिन धैर्य और संतुलित दृष्टिकोण से आप उन्हें पार कर लेंगे। सहकर्मियों का सहयोग मिलेगा।",
+      "love": "रिश्तों में छोटी गलतफहमियां हो सकती हैं, लेकिन शांत रहकर और खुलकर बात करने से सब ठीक हो जाएगा।",
+      "health": "सिरदर्द या थकान परेशान कर सकती है। पर्याप्त पानी पिएं और पर्याप्त आराम करें।",
+      "tips": "आज के परिधान में लाल या गुलाबी रंग शामिल करें — यह आपके आत्मविश्वास को बढ़ाएगा।"
+    }
+  },
+  {
+    "id": "30e",
+    "daily_horoscope": {
+      "career": "Work momentum will increase, and new opportunities will come your way. Your confidence and work style will impress others.",
+      "love": "Romantic bonds will grow stronger. Time spent with your partner or spouse will be comforting.",
+      "health": "Health will be normal, but avoid careless eating. Stay away from spicy foods.",
+      "tips": "Light a lamp at a temple or your home shrine to make your day more auspicious."
+    }
+  },
+  {
+    "id": "30h",
+    "daily_horoscope": {
+      "career": "काम की गति बढ़ेगी, और नए अवसर आपके सामने आएंगे। आपका आत्मविश्वास और कार्यशैली दूसरों को प्रभावित करेगी।",
+      "love": "रोमांटिक संबंध और मजबूत होंगे। साथी या जीवनसाथी के साथ बिताया समय सुकून देगा।",
+      "health": "स्वास्थ्य सामान्य रहेगा, लेकिन लापरवाह भोजन से बचें। मसालेदार भोजन से दूर रहें।",
+      "tips": "मंदिर या घर के पूजा स्थान पर दीप जलाएं, यह आपका दिन शुभ बनाएगा।"
+    }
+  },
+  {
+    "id": "31e",
+    "daily_horoscope": {
+      "career": "You will work on new plans with enthusiasm, and your seniors will openly appreciate your efforts.",
+      "love": "A sense of freshness will be felt in relationships. Spending pleasant moments with your partner will deepen understanding and love. Good proposals may come for singles.",
+      "health": "Your health will remain good today. Start the day with exercise and nutritious food to stay energetic throughout.",
+      "tips": "Begin your day with positive thinking and prayer — it will create a good vibe around you."
+    }
+  },
+  {
+    "id": "31h",
+    "daily_horoscope": {
+      "career": "आप नए योजनाओं पर उत्साह से काम करेंगे, और आपके वरिष्ठ आपकी खुलकर प्रशंसा करेंगे।",
+      "love": "रिश्तों में नई ताजगी महसूस होगी। साथी के साथ अच्छे पल बिताने से समझ और प्यार गहरा होगा। अविवाहित लोगों को अच्छे प्रस्ताव मिल सकते हैं।",
+      "health": "आज आपकी सेहत अच्छी रहेगी। दिन की शुरुआत व्यायाम और पौष्टिक भोजन से करें, पूरा दिन ऊर्जावान रहेंगे।",
+      "tips": "दिन की शुरुआत सकारात्मक सोच और प्रार्थना से करें — यह आपके आसपास अच्छा माहौल बनाएगा।"
+    }
+  }
+]
