@@ -280,11 +280,7 @@ type PhaseKey = typeof keys[number];
           {result.toolId === 'rashi-finder' && kundaliData.moon_traits && (
             <div className="p-4 bg-pink-50 border border-pink-200 rounded shadow-sm">
               <p className="text-base text-pink-900 font-medium mb-2">{kundaliData.moon_traits.title}</p>
-              {kundaliData.moon_traits.image && (
-                <div className="flex justify-center mb-2">
-                  <Image src={kundaliData.moon_traits.image} alt="Moon Sign" width={80} height={80} />
-                </div>
-              )}
+              
               <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">{kundaliData.moon_traits.personality}</p>
             </div>
           )}
