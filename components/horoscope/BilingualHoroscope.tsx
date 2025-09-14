@@ -31,65 +31,58 @@ const zodiacSigns = [
   "Pisces",
 ];
 
-// 🔹 Rotation function → picks 12 entries for given day/month
-function getRotationSet(pool: PoolEntry[], blockSize: number, cycle: number) {
-  const startIndex = cycle * 12;
-  const set: PoolEntry[] = [];
-
-  for (let i = 0; i < 12; i++) {
-    const index = (startIndex + i) % pool.length;
-    set.push(pool[index]);
-  }
-
-  return set;
-}
-
 export default function BilingualHoroscope({ lang }: { lang: "en" | "hi" }) {
   const pathname = usePathname();
-  const [horoscopeSet, setHoroscopeSet] = useState<HoroscopeEntry[]>([]);
+  const [horoscopeMap, setHoroscopeMap] = useState<Record<string, HoroscopeEntry>>({});
   const [loading, setLoading] = useState(true);
 
-  // Detect daily/monthly
-  const type: "daily" | "monthly" = pathname.includes("monthly")
-    ? "monthly"
-    : "daily";
+  const type: "daily" | "monthly" = pathname.includes("monthly") ? "monthly" : "daily";
 
   useEffect(() => {
     async function loadData() {
       try {
         setLoading(true);
 
-        // Load bilingual pool
+        // Load pool
         const poolRes = await fetch(`/data/horoscopes/${type}_pool_bilingual.json`);
         const pool: PoolEntry[] = await poolRes.json();
 
-        // Pick cycle (day → daily, month → monthly)
+        // Which block (day → daily, month → monthly)
         const today = new Date();
-        const cycle =
-          type === "daily"
-            ? today.getDate() - 1 // 0..30
-            : today.getMonth(); // 0..11
+        const cycle = type === "daily" ? today.getDate() - 1 : today.getMonth();
 
-        // Get 12 entries (EN or HI)
-        const block = getRotationSet(pool, 12, cycle);
-
-        const finalSet: HoroscopeEntry[] = [];
-        for (let i = 0; i < block.length; i++) {
-          const baseId = block[i].id.replace(/[eh]$/, ""); // "1e" -> "1"
-          const targetId = `${baseId}${lang === "hi" ? "h" : "e"}`;
-          const twin = pool.find((p) => p.id === targetId);
-          if (twin) {
-            finalSet.push(
-              type === "daily"
-                ? (twin.daily_horoscope as HoroscopeEntry)
-                : (twin.monthly_horoscope as HoroscopeEntry)
-            );
+        // Pick 12 EN ids for this cycle
+        const startIndex = cycle * 12;
+        const blockEn: PoolEntry[] = [];   // ✅ type added
+        for (let i = 0; i < 12; i++) {
+          const index = (startIndex + i * 2) % pool.length; // jump by 2 (because e+h pairs)
+          const entry = pool[index];
+          if (entry && entry.id.endsWith("e")) {
+            blockEn.push(entry);
           }
         }
 
-        setHoroscopeSet(finalSet);
+        // Map zodiac → entry (EN/HI based on lang)
+        const map: Record<string, HoroscopeEntry> = {};
+        zodiacSigns.forEach((sign, idx) => {
+          const enEntry = blockEn[idx];
+          if (!enEntry) return;
+
+          const baseId = enEntry.id.replace("e", "");
+          const targetId = `${baseId}${lang === "hi" ? "h" : "e"}`;
+          const twin = pool.find((p) => p.id === targetId);
+
+          if (twin) {
+            map[sign] =
+              type === "daily"
+                ? (twin.daily_horoscope as HoroscopeEntry)
+                : (twin.monthly_horoscope as HoroscopeEntry);
+          }
+        });
+
+        setHoroscopeMap(map);
       } catch (err) {
-        console.error("Error loading pool:", err);
+        console.error("Error loading horoscope:", err);
       } finally {
         setLoading(false);
       }
@@ -107,8 +100,8 @@ export default function BilingualHoroscope({ lang }: { lang: "en" | "hi" }) {
       </h2>
 
       <div className="space-y-6">
-        {zodiacSigns.map((sign, idx) => {
-          const entry = horoscopeSet[idx];
+        {zodiacSigns.map((sign) => {
+          const entry = horoscopeMap[sign];
           if (!entry) return null;
 
           return (
