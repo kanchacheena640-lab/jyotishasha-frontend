@@ -1,9 +1,29 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { reportsData } from "../data/reportsData";
 import { updateReportsData } from "../data/updateReportsData";  // 👈 import price
 import { useTranslation } from "react-i18next";
+
+
+function sanitizeReports(data: any): typeof reportsData {
+  if (!Array.isArray(data)) return [];
+  return data
+    .filter(r => r && (r.slug || r.title)) // must have identity
+    .map(r => ({
+      slug: r.slug ?? "",
+      title: r.title ?? "Untitled Report",
+      category: r.category ?? "Other",
+      description: r.description ?? "",
+      fullDescription: r.fullDescription ?? "",
+      badge: typeof r.badge === "string" ? r.badge : null,
+      offer: r.offer ? "true" : "false",
+      price: typeof r.price === "number" ? r.price : null,
+      basePrice: typeof r.basePrice === "number" ? r.basePrice : null,
+      image: typeof r.image === "string" ? r.image : "/images/report-placeholder.jpg"
+    }));
+}
 
 export default function ReportsPage() {
   const { t } = useTranslation("reports");
@@ -14,11 +34,20 @@ export default function ReportsPage() {
 
   // 👇 Add this useEffect
   useEffect(() => {
+    let isMounted = true;
     async function load() {
-      const updated = await updateReportsData();
-      setReports([...updated]);
+      try {
+        const updated = await updateReportsData();
+        if (!isMounted) return;
+        const safe = sanitizeReports(updated);
+        setReports(safe.length > 0 ? safe : reportsData);
+      } catch (err) {
+        console.error("Failed to load reports:", err);
+        setReports(reportsData);
+      }
     }
     load();
+    return () => { isMounted = false };
   }, []);
 
   const categories = ["All", ...new Set(reports.map((r) => r.category))];
