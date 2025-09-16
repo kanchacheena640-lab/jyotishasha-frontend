@@ -111,15 +111,19 @@ export default function ReportsPage() {
                   className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
                 >
                   {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-                  {report.basePrice && report.price ? (
-                    <>
-                      ₹{report.price}{" "}
-                      <span className="line-through text-sm text-gray-300">
-                        ₹{report.basePrice}
-                      </span>
-                    </>
+                  {typeof report.price === "number" ? (
+                    report.offer ? (
+                      <>
+                        ₹{report.price}{" "}
+                        <span className="line-through text-sm text-gray-300">
+                          ₹{report.basePrice ?? ""}
+                        </span>
+                      </>
+                    ) : (
+                      <>₹{report.price}</>
+                    )
                   ) : (
-                    <>₹{report.price ?? "—"}</>
+                    <>Price Unavailable</>
                   )}
                 </button>
               </div>
@@ -153,15 +157,19 @@ export default function ReportsPage() {
               className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full"
             >
               {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-              {modalReport.basePrice && modalReport.price ? (
-                <>
-                  ₹{modalReport.price}{" "}
-                  <span className="line-through text-sm text-gray-300">
-                    ₹{modalReport.basePrice}
-                  </span>
-                </>
+              {typeof modalReport.price === "number" ? (
+                modalReport.offer ? (
+                  <>
+                    ₹{modalReport.price}{" "}
+                    <span className="line-through text-sm text-gray-300">
+                      ₹{modalReport.basePrice ?? ""}
+                    </span>
+                  </>
+                ) : (
+                  <>₹{modalReport.price}</>
+                )
               ) : (
-                <>₹{modalReport.price ?? "—"}</>
+                <>Price Unavailable</>
               )}
             </button>
           </div>
