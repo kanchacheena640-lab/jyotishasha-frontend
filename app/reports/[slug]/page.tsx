@@ -17,20 +17,22 @@ export default function ReportCheckout() {
 
   const placeRef = useRef<HTMLInputElement | null>(null);
 
+  // Google Places Autocomplete for POB
   useEffect(() => {
     if (window.google && placeRef.current) {
-      const autocomplete = new window.google.maps.places.Autocomplete(placeRef.current, {
-        types: ["(cities)"],
-      });
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        placeRef.current,
+        { types: ["(cities)"] }
+      );
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         setForm((prev) => ({
-            ...prev,
-            pob: place.name || "",
-            latitude: place.geometry?.location?.lat()?.toString() || "",
-            longitude: place.geometry?.location?.lng()?.toString() || "",
-          }));
+          ...prev,
+          pob: place.name || "",
+          latitude: place.geometry?.location?.lat()?.toString() || "",
+          longitude: place.geometry?.location?.lng()?.toString() || "",
+        }));
       });
     }
   }, []);
@@ -39,39 +41,49 @@ export default function ReportCheckout() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // 🔎 Slug + Product Info
+  const params = useParams();
+  const rawSlug = params?.slug;
+  const productId = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug?.toLowerCase();
+  const currentReport = reportsData.find((r: Report) => r.slug === productId);
+  const price = currentReport?.price || 0;
+  const displaySlug = Array.isArray(rawSlug)
+    ? rawSlug.join(" ")
+    : rawSlug?.replace(/-/g, " ") ?? "your report";
+
   const handleSubmit = async () => {
     try {
-      const productId = Array.isArray(rawSlug)
-        ? rawSlug[0]
-        : rawSlug?.toLowerCase();
-
       if (!productId) {
         alert("❗ Product not specified in URL. Please try again.");
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/razorpay-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: productId, amount: price }),
-      });
+      // ✅ Use Render backend URL
+      const res = await fetch(
+        "https://jyotishasha-backend.onrender.com/api/razorpay-order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ product: productId, amount: price }),
+        }
+      );
 
       const orderData = await res.json();
 
-      if (!orderData.order_id) {
+      if (!res.ok || !orderData.order_id) {
         alert("❌ Failed to create Razorpay order");
         return;
       }
 
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // ✅ env key only
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // ✅ from .env
         amount: orderData.amount,
         currency: orderData.currency,
         name: "Jyotishasha",
         description: `Payment for ${productId}`,
         order_id: orderData.order_id,
         handler: async function (response: any) {
-          await fetch("http://localhost:5000/webhook", {
+          await fetch("https://jyotishasha-backend.onrender.com/webhook", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -102,15 +114,6 @@ export default function ReportCheckout() {
     }
   };
 
-  const params = useParams();
-  const rawSlug = params?.slug;
-  const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-  const currentReport = reportsData.find((r: Report) => r.slug === currentSlug);
-  const price = currentReport?.price || 0;
-  const displaySlug = Array.isArray(rawSlug)
-    ? rawSlug.join(" ")
-    : rawSlug?.replace(/-/g, " ") ?? "your report";
-
   return (
     <div className="max-w-xl mx-auto px-4 py-10">
       <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
@@ -119,24 +122,48 @@ export default function ReportCheckout() {
 
       {/* 👤 Personal Info */}
       <div className="bg-white p-5 rounded-xl shadow mb-4">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">👤 Personal Details</h3>
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          👤 Personal Details
+        </h3>
         <div className="space-y-3">
-          <input name="name" type="text" value={form.name} onChange={handleChange} placeholder="Full Name" className="inputStyle placeholderStyle" />
-          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email Address" className="inputStyle placeholderStyle" />
-          <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="Phone Number" className="inputStyle placeholderStyle" />
+          <input
+            name="name"
+            type="text"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Full Name"
+            className="inputStyle placeholderStyle"
+          />
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Email Address"
+            className="inputStyle placeholderStyle"
+          />
+          <input
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="inputStyle placeholderStyle"
+          />
         </div>
       </div>
 
       {/* 🔮 Birth Info */}
       <div className="bg-white p-5 rounded-xl shadow mb-5">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">🔮 Birth Details</h3>
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          🔮 Birth Details
+        </h3>
         <div className="space-y-3">
           <input
             name="dob"
             type="date"
             value={form.dob}
             onChange={handleChange}
-            placeholder="Date of Birth"
             className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
           />
           <input
@@ -144,7 +171,6 @@ export default function ReportCheckout() {
             type="time"
             value={form.tob}
             onChange={handleChange}
-            placeholder="Time of Birth"
             className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
           />
           <input
@@ -180,12 +206,10 @@ export default function ReportCheckout() {
           background-color: #fff;
           color: #333;
         }
-
         .inputStyle:focus {
           border-color: #a855f7;
           box-shadow: 0 0 0 2px #ddd6fe;
         }
-
         .placeholderStyle::placeholder {
           color: #7c4a27 !important;
           opacity: 1;
