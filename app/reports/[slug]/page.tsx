@@ -64,7 +64,7 @@ export default function ReportCheckout() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product: productId, amount: price }),
+          body: JSON.stringify({ product: productId }), // ✅ amount hata diya
         }
       );
 
@@ -77,7 +77,7 @@ export default function ReportCheckout() {
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // ✅ from .env
-        amount: orderData.amount,
+        amount: orderData.amount * 100, // Razorpay ko paise chahiye
         currency: orderData.currency,
         name: "Jyotishasha",
         description: `Payment for ${productId}`,
