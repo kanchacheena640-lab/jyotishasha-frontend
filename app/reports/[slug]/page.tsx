@@ -77,7 +77,7 @@ export default function ReportCheckout() {
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // ✅ from .env
-        amount: orderData.amount * 100, // Razorpay ko paise chahiye
+        amount: orderData.amount * 100, // ✅ paise me convert
         currency: orderData.currency,
         name: "Jyotishasha",
         description: `Payment for ${productId}`,
