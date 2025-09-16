@@ -400,36 +400,17 @@ type PhaseKey = typeof keys[number];
       {result.toolId === 'sadhesati-calculator' && kundaliData.sadhesati && (
         <div className="p-4 bg-gray-50 border border-gray-200 rounded shadow-sm space-y-4">
           <p className="text-lg font-semibold text-gray-800">
-            Sade Sati Report for Moon Sign: {kundaliData.sadhesati.moon_rashi}
+            Sade Sati Report for You having Moon Sign (Rashi): {kundaliData.sadhesati.moon_rashi}
           </p>
               {kundaliData.sadhesati.report_paragraphs?.map((para: string, idx: number) => (
               <p key={idx} className="text-sm text-gray-700 whitespace-pre-line">
                 {replaceIsoDates(para)}
               </p>
             ))}
-    <p className="text-sm text-gray-700 whitespace-pre-line">
-      {kundaliData.sadhesati.summary}
-    </p>
-
-    <div className="space-y-3">
-      
-      {phaseDetails.map((phase: any, idx: number) => (
-        <div
-          key={idx}
-          className={`p-3 border rounded ${
-            phase.is_current
-              ? 'bg-yellow-100 border-yellow-300'
-              : 'bg-white border-gray-300'
-          }`}
-        >
-          <p className="font-medium text-sm text-gray-800">
-            🔹 {phase.phase} ({formatDate(phase.start_date)} – {formatDate(phase.end_date)})
-          </p>
-          <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{phase.impact}</p>
-        </div>
-      ))}
-          </div>
-          </div>
+      <p className="text-sm text-gray-700 whitespace-pre-line">
+        {kundaliData.sadhesati.summary}
+      </p>
+    </div>
         )}
       {/* 👇 Parashari Rajyog UI Block starts here*/}
       {result.toolId === 'parashari-rajyog' && kundaliData.parashari_rajyog && (
