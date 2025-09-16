@@ -1,21 +1,18 @@
 export interface Report {
   title: string;
   slug: string;
-  price: number | null;
-  basePrice?: number;
+  price: number;
   image: string;
   category: string;
   description: string;
-  fullDescription: string;
-  offer?: string;
-  final_price?: number;
+  fullDescription: string
 }
 
 export const reportsData: Report[] = [
   {
     title: "Sadhesati Report",
     slug: "sadhesati_report",
-    price: null,
+    price: 49,
     image: "/reports/sadhesati-report.webp",
     category: "Transit",
     description: "Detailed Saturn Sadhesati report.",
@@ -24,7 +21,7 @@ export const reportsData: Report[] = [
   {
     title: "Financial Report",
     slug: "financial_report",
-    price: null,
+    price: 49,
     image: "/reports/financial-report.webp",
     category: "Finance",
     description: "Gain insights into your financial growth through astrological analysis.",
@@ -33,7 +30,7 @@ export const reportsData: Report[] = [
   {
     title: "Love & Relationship Report",
     slug: "love_relationship_report",
-    price: null,
+    price: 49,
     image: "/reports/love-life-report.webp",
     category: "Love",
     description: "Explore your love life and relationship patterns through your birth chart.",
@@ -42,7 +39,7 @@ export const reportsData: Report[] = [
   {
     title: "Marriage Report",
     slug: "marriage_report",
-    price: null,
+    price: 49,
     image: "/reports/marriage-report.webp",
     category: "Marriage",
     description: "Understand your marriage prospects through birth chart and dasha insights.",
@@ -51,7 +48,7 @@ export const reportsData: Report[] = [
   {
     title: "Startup Suggestion Report",
     slug: "startup_suggestion_report",
-    price: null,
+    price: 49,
     image: "/reports/startup-suggestion-report.webp",
     category: "Self",
     description: "Discover the best startup path for you based on your birth chart and dasha phase.",
@@ -60,7 +57,7 @@ export const reportsData: Report[] = [
   {
     title: "Love Marriage Report",
     slug: "love_marriage_report",
-    price: null,
+    price: 49,
     image: "/reports/love-marriage-report.webp",
     category: "Marriage",
     description: "Understand your chances of love marriage through astrological insights.",
@@ -69,7 +66,7 @@ export const reportsData: Report[] = [
   {
     title: "Government Job Report",
     slug: "government_job_report",
-    price: null,
+    price: 49,
     image: "/reports/government-job-report.webp",
     category: "Marriage",
     description: "Discover your potential for a government career through astrology.",
@@ -78,7 +75,7 @@ export const reportsData: Report[] = [
   {
     title: "Foreign Travel Report",
     slug: "foreign_travel_report",
-    price: null,
+    price: 49,
     image: "/reports/foreign-travel-report.webp",
     category: "Self",
     description: "Know your chances of foreign travel through astrological guidance.",
@@ -87,7 +84,7 @@ export const reportsData: Report[] = [
   {
     title: "Business Report",
     slug: "business_report",
-    price: null,
+    price: 49,
     image: "/reports/business-report.webp",
     category: "Self",
     description: "Discover your business potential and opportunities through astrology.",
@@ -96,19 +93,10 @@ export const reportsData: Report[] = [
   {
     title: "Career Report",
     slug: "career_report",
-    price: null,
+    price: 49,
     image: "/reports/career-report.webp",
     category: "Self",
     description: "Understand your career path and growth through astrology.",
     fullDescription: "The Career Report analyzes your professional strengths, challenges, and opportunities using your birth chart and planetary periods (Mahadasha/Antardasha). It also highlights favorable fields of work and timings for career advancement."
-  },
-  {
-    title: "Legal Disputes Report",
-    slug: "legal_disputes_report",
-    price: null,
-    image: "/reports/legal-disputes-report.webp",
-    category: "Life",
-    description: "Know the chances of court cases, conflicts, or disputes in your life.",
-    fullDescription: "The Legal Disputes Report studies the 6th, 7th, 8th, and 12th houses of your kundali along with Mars, Saturn, and Rahu–Ketu placements. It reveals tendencies for legal issues, conflicts, and possible resolutions. The report also guides on remedies, favorable periods, and strategies to overcome disputes as per Mahadasha–Antardasha and transit influences."
   }
 ];
