@@ -35,14 +35,12 @@ export async function updateReportsData(): Promise<Report[]> {
           ...report,
           price: typeof data.final_price === "number" ? data.final_price : null,
           basePrice: typeof data.base_price === "number" ? data.base_price : null,
-          // ✅ sanitize offer
           offer:
             typeof data.offer === "string"
               ? data.offer
               : data.offer
               ? "true"
               : null,
-          // ✅ sanitize badge
           badge:
             typeof data.badge === "string"
               ? data.badge
