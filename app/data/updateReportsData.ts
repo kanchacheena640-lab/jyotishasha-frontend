@@ -42,8 +42,8 @@ export async function updateReportsData(): Promise<Report[]> {
               ? "true"
               : null,
           badge:
-            typeof data.badge === "string"
-              ? data.badge
+            typeof data.offer === "string"
+              ? data.offer
               : data.offer
               ? "OFFER"
               : null,
