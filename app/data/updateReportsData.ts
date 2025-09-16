@@ -22,19 +22,43 @@ export async function updateReportsData(): Promise<Report[]> {
 
         if (!res.ok || data.error) {
           console.warn(`⚠️ API failed for ${report.slug}:`, data.error);
-          return { ...report, price: null, basePrice: null, offer: null, badge: null };
+          return {
+            ...report,
+            price: null,
+            basePrice: null,
+            offer: null,
+            badge: null,
+          };
         }
 
         return {
           ...report,
-          price: data.final_price ?? report.price,
-          basePrice: data.base_price ?? null,
-          offer: data.offer ?? null,
-          badge: data.offer ?? null,   // 👈 yahi se badge set hoga
+          price: typeof data.final_price === "number" ? data.final_price : null,
+          basePrice: typeof data.base_price === "number" ? data.base_price : null,
+          // ✅ sanitize offer
+          offer:
+            typeof data.offer === "string"
+              ? data.offer
+              : data.offer
+              ? "true"
+              : null,
+          // ✅ sanitize badge
+          badge:
+            typeof data.badge === "string"
+              ? data.badge
+              : data.offer
+              ? "OFFER"
+              : null,
         };
       } catch (e) {
         console.error(`❌ Exception for ${report.slug}:`, e);
-        return { ...report, price: null, basePrice: null, offer: null, badge: null };
+        return {
+          ...report,
+          price: null,
+          basePrice: null,
+          offer: null,
+          badge: null,
+        };
       }
     })
   );

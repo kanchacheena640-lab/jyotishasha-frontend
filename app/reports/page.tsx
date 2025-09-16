@@ -3,51 +3,35 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { reportsData } from "../data/reportsData";
-import { updateReportsData } from "../data/updateReportsData";  // 👈 import price
+import { updateReportsData } from "../data/updateReportsData";
 import { useTranslation } from "react-i18next";
-
-
-function sanitizeReports(data: any): typeof reportsData {
-  if (!Array.isArray(data)) return [];
-  return data
-    .filter(r => r && (r.slug || r.title)) // must have identity
-    .map(r => ({
-      slug: r.slug ?? "",
-      title: r.title ?? "Untitled Report",
-      category: r.category ?? "Other",
-      description: r.description ?? "",
-      fullDescription: r.fullDescription ?? "",
-      badge: typeof r.badge === "string" ? r.badge : null,
-      offer: r.offer ? "true" : "false",
-      price: typeof r.price === "number" ? r.price : null,
-      basePrice: typeof r.basePrice === "number" ? r.basePrice : null,
-      image: typeof r.image === "string" ? r.image : "/images/report-placeholder.jpg"
-    }));
-}
 
 export default function ReportsPage() {
   const { t } = useTranslation("reports");
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [modalReport, setModalReport] = useState<null | typeof reportsData[0]>(null);
+  const [modalReport, setModalReport] = useState<null | typeof reportsData[0]>(
+    null
+  );
   const [reports, setReports] = useState(reportsData);
 
-  // 👇 Add this useEffect
+  // 🔄 Load updated price & badge safely
   useEffect(() => {
     let isMounted = true;
     async function load() {
       try {
         const updated = await updateReportsData();
         if (!isMounted) return;
-        const safe = sanitizeReports(updated);
-        setReports(safe.length > 0 ? safe : reportsData);
+        setReports(updated.length > 0 ? updated : reportsData);
       } catch (err) {
         console.error("Failed to load reports:", err);
         setReports(reportsData);
       }
     }
     load();
-    return () => { isMounted = false };
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const categories = ["All", ...new Set(reports.map((r) => r.category))];
@@ -79,7 +63,9 @@ export default function ReportsPage() {
                 : "bg-white text-purple-600"
             }`}
           >
-            {t(`reports_page.categories.${cat.toLowerCase()}`, { defaultValue: cat })}
+            {t(`reports_page.categories.${cat.toLowerCase()}`, {
+              defaultValue: cat,
+            })}
           </button>
         ))}
       </div>
@@ -125,11 +111,11 @@ export default function ReportsPage() {
                   className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
                 >
                   {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-                  {report.offer ? (
+                  {report.basePrice && report.price ? (
                     <>
-                      ₹{report.price ?? "—"}{" "}
+                      ₹{report.price}{" "}
                       <span className="line-through text-sm text-gray-300">
-                        ₹{report.basePrice ?? ""}
+                        ₹{report.basePrice}
                       </span>
                     </>
                   ) : (
@@ -153,23 +139,29 @@ export default function ReportsPage() {
               ✕
             </button>
             <h2 className="text-xl font-bold mb-2 text-purple-800">
-              {t(`${modalReport.slug}.title`, { defaultValue: modalReport.title })}
+              {t(`${modalReport.slug}.title`, {
+                defaultValue: modalReport.title,
+              })}
             </h2>
             <p className="text-gray-700 mb-4">
-              {t(`${modalReport.slug}.fullDescription`, { defaultValue: modalReport.fullDescription })}
+              {t(`${modalReport.slug}.fullDescription`, {
+                defaultValue: modalReport.fullDescription,
+              })}
             </p>
             <button
               onClick={() => handleBuyNow(modalReport.slug)}
               className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full"
             >
               {t("common.buy_now", { defaultValue: "Buy Now" })}{" "}
-              {modalReport.offer ? (
+              {modalReport.basePrice && modalReport.price ? (
                 <>
                   ₹{modalReport.price}{" "}
-                  <span className="line-through text-sm text-gray-300">₹{modalReport.basePrice}</span>
+                  <span className="line-through text-sm text-gray-300">
+                    ₹{modalReport.basePrice}
+                  </span>
                 </>
               ) : (
-                <>₹{modalReport.price}</>
+                <>₹{modalReport.price ?? "—"}</>
               )}
             </button>
           </div>
