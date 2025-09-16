@@ -77,13 +77,6 @@ export default function ReportsPage() {
             key={index}
             className="relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transform transition duration-300 overflow-hidden border border-gray-200"
           >
-            {/* 🏷️ Badge */}
-            {report.badge && (
-              <span className="absolute top-3 left-3 bg-pink-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
-                {report.badge}
-              </span>
-            )}
-
             <img
               src={report.image}
               alt={t(`${report.slug}.title`, { defaultValue: report.title })}

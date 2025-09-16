@@ -27,7 +27,6 @@ export async function updateReportsData(): Promise<Report[]> {
             price: null,
             basePrice: null,
             offer: null,
-            badge: null,
           };
         }
 
@@ -41,12 +40,6 @@ export async function updateReportsData(): Promise<Report[]> {
               : data.offer
               ? "true"
               : null,
-          badge:
-            typeof data.offer === "string"
-              ? data.offer
-              : data.offer
-              ? "OFFER"
-              : null,
         };
       } catch (e) {
         console.error(`❌ Exception for ${report.slug}:`, e);
@@ -55,7 +48,6 @@ export async function updateReportsData(): Promise<Report[]> {
           price: null,
           basePrice: null,
           offer: null,
-          badge: null,
         };
       }
     })

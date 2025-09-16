@@ -3,7 +3,6 @@ export interface Report {
   slug: string;
   price: number | null;
   basePrice?: number;
-  badge: string | null;
   image: string;
   category: string;
   description: string;
@@ -17,7 +16,6 @@ export const reportsData: Report[] = [
     title: "Sadhesati Report",
     slug: "sadhesati_report",
     price: null,
-    badge: null,
     image: "/reports/sadhesati-report.webp",
     category: "Transit",
     description: "Detailed Saturn Sadhesati report.",
@@ -27,7 +25,6 @@ export const reportsData: Report[] = [
     title: "Financial Report",
     slug: "financial_report",
     price: null,
-    badge: null,
     image: "/reports/financial-report.webp",
     category: "Finance",
     description: "Gain insights into your financial growth through astrological analysis.",
@@ -37,7 +34,6 @@ export const reportsData: Report[] = [
     title: "Love & Relationship Report",
     slug: "love_relationship_report",
     price: null,
-    badge: null,
     image: "/reports/love-life-report.webp",
     category: "Love",
     description: "Explore your love life and relationship patterns through your birth chart.",
@@ -47,7 +43,6 @@ export const reportsData: Report[] = [
     title: "Marriage Report",
     slug: "marriage_report",
     price: null,
-    badge: null,
     image: "/reports/marriage-report.webp",
     category: "Marriage",
     description: "Understand your marriage prospects through birth chart and dasha insights.",
@@ -57,7 +52,6 @@ export const reportsData: Report[] = [
     title: "Startup Suggestion Report",
     slug: "startup_suggestion_report",
     price: null,
-    badge: null,
     image: "/reports/startup-suggestion-report.webp",
     category: "Self",
     description: "Discover the best startup path for you based on your birth chart and dasha phase.",
@@ -67,7 +61,6 @@ export const reportsData: Report[] = [
     title: "Love Marriage Report",
     slug: "love_marriage_report",
     price: null,
-    badge: null,
     image: "/reports/love-marriage-report.webp",
     category: "Marriage",
     description: "Understand your chances of love marriage through astrological insights.",
@@ -77,7 +70,6 @@ export const reportsData: Report[] = [
     title: "Government Job Report",
     slug: "government_job_report",
     price: null,
-    badge: null,
     image: "/reports/government-job-report.webp",
     category: "Marriage",
     description: "Discover your potential for a government career through astrology.",
@@ -87,7 +79,6 @@ export const reportsData: Report[] = [
     title: "Foreign Travel Report",
     slug: "foreign_travel_report",
     price: null,
-    badge: null,
     image: "/reports/foreign-travel-report.webp",
     category: "Self",
     description: "Know your chances of foreign travel through astrological guidance.",
@@ -97,7 +88,6 @@ export const reportsData: Report[] = [
     title: "Business Report",
     slug: "business_report",
     price: null,
-    badge: null,
     image: "/reports/business-report.webp",
     category: "Self",
     description: "Discover your business potential and opportunities through astrology.",
@@ -107,7 +97,6 @@ export const reportsData: Report[] = [
     title: "Career Report",
     slug: "career_report",
     price: null,
-    badge: null,
     image: "/reports/career-report.webp",
     category: "Self",
     description: "Understand your career path and growth through astrology.",
@@ -117,7 +106,6 @@ export const reportsData: Report[] = [
     title: "Legal Disputes Report",
     slug: "legal_disputes_report",
     price: null,
-    badge: null,
     image: "/reports/legal-disputes-report.webp",
     category: "Life",
     description: "Know the chances of court cases, conflicts, or disputes in your life.",
