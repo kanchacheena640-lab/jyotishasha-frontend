@@ -22,7 +22,6 @@ const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelec
 
     const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current!, {
       types: ['(cities)'],
-      componentRestrictions: { country: 'in' },
     });
 
     autocomplete.addListener('place_changed', () => {
