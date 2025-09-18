@@ -1995,7 +1995,7 @@ type PhaseKey = typeof keys[number];
 
       {/* 📢 Google Ad Area */}
       <div className="mt-10 flex justify-center">
-        <a href="/ads/report-offer" target="_blank" rel="noopener noreferrer">
+        <a href="#" target="_blank" rel="noopener noreferrer">
           <Image
             src="/ads/ad-offer.webp"
             alt="Astrology Report Ad"
