@@ -95,7 +95,7 @@ export default function ToolSuggestions({ toolId }: { toolId?: string | null }) 
       <div className="md:hidden fixed bottom-4 right-4 z-50">
         <button
           onClick={() => setDrawerOpen(true)}
-          className="bg-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded shadow-lg"
+          className="bg-pink-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-pink-700 transition"
         >
           🧭 Recommended
         </button>
