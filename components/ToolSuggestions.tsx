@@ -100,25 +100,6 @@ export default function ToolSuggestions({ toolId }: { toolId?: string | null }) 
           ))}
         </div>
       </div>
-
-      {/* ✅ Mobile Drawer Panel */}
-      {drawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-40">
-          <div className="fixed right-0 top-0 w-4/5 h-full bg-white shadow-xl p-4 overflow-y-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-base font-semibold">More About You</h2>
-              <button onClick={() => setDrawerOpen(false)} className="text-gray-600 hover:text-black">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {suggestions.map((sug, i) => (
-                <SuggestionCard key={i} {...sug} />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
