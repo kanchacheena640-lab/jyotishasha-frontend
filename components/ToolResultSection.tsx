@@ -1997,7 +1997,7 @@ type PhaseKey = typeof keys[number];
       <div className="mt-10 flex justify-center">
         <a href="/ads/report-offer" target="_blank" rel="noopener noreferrer">
           <Image
-            src="/ads/ad-offer.jpg"
+            src="/ads/ad-offer.webp"
             alt="Astrology Report Ad"
             width={728}
             height={90}
