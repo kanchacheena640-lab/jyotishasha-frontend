@@ -91,14 +91,14 @@ export default function ToolSuggestions({ toolId }: { toolId?: string | null }) 
         </div>
       </div>
 
-      {/* ✅ Mobile Drawer Trigger */}
-      <div className="md:hidden fixed bottom-4 right-4 z-50">
-        <button
-          onClick={() => setDrawerOpen(true)}
-          className="bg-pink-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-pink-700 transition"
-        >
-          🧭 Recommended
-        </button>
+      {/* ✅ Suggestions Visible on All Screens */}
+      <div className="flex flex-col gap-3 pr-2 pl-6">
+        <h2 className="text-xl font-semibold text-center text-gray-700 mb-1 tracking-wide">More About You</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          {suggestions.map((sug, i) => (
+            <SuggestionCard key={i} {...sug} />
+          ))}
+        </div>
       </div>
 
       {/* ✅ Mobile Drawer Panel */}
