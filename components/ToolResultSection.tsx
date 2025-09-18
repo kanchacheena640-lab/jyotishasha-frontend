@@ -1988,11 +1988,6 @@ type PhaseKey = typeof keys[number];
               {/* Love Life End */}
       </div>
   </div>
-      {/* 🔁 Suggested Tools at Bottom */}
-        <div className="mt-10">
-          <h3 className="text-xl font-bold mb-4">Discover More About Yourself</h3>
-          <ToolSuggestions toolId={result.toolId} />
-        </div>
 
       {/* 📢 Google Ad Area */}
       <div className="mt-10 flex justify-center">
