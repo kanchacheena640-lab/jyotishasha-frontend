@@ -81,16 +81,6 @@ export default function ToolSuggestions({ toolId }: { toolId?: string | null }) 
 
   return (
     <>
-      {/* ✅ Desktop Card Layout */}
-      <div className="hidden md:flex flex-col gap-3 pr-2 pl-6">
-        <h2 className="text-xl font-semibold text-center text-gray-700 mb-1 tracking-wide">More About You</h2>
-        <div className="grid grid-cols-6 gap-4">
-          {suggestions.map((sug, i) => (
-            <SuggestionCard key={i} {...sug} />
-          ))}
-        </div>
-      </div>
-
       {/* ✅ Suggestions Visible on All Screens */}
       <div className="flex flex-col gap-3 pr-2 pl-6">
         <h2 className="text-xl font-semibold text-center text-gray-700 mb-1 tracking-wide">More About You</h2>
