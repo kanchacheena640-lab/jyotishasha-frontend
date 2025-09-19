@@ -49,6 +49,8 @@ export default function Footer() {
             <a href="https://www.facebook.com/AashaJyotish/" target="_blank"><i className="fab fa-facebook text-xl"></i></a>
             <a href="https://www.instagram.com/jyotishasha108/" target="_blank"><i className="fab fa-instagram text-xl"></i></a>
             <a href="https://www.youtube.com/@jyotishasha" target="_blank"><i className="fab fa-youtube text-xl"></i></a>
+            <a href="https://x.com/SpiritualLifes1" target="_blank"><i className="fab fa-twitter"></i></a>
+            <a href="https://in.pinterest.com/remedy999/" target="_blank"><i className="fab fa-pinterest"></i></a>
           </div>
         </div>
       </div>

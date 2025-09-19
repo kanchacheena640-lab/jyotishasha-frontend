@@ -219,17 +219,20 @@ export default function Home() {
 
           {/* Social Icons */}
           <div className="flex justify-center gap-6">
-            <a href="#" className="text-white text-2xl hover:text-purple-300 transition">
+            <a href="https://www.facebook.com/AashaJyotish/" className="text-white text-2xl hover:text-purple-300 transition">
               <i className="fab fa-facebook"></i>
             </a>
-            <a href="#" className="text-white text-2xl hover:text-purple-300 transition">
+            <a href="https://www.instagram.com/jyotishasha108/" className="text-white text-2xl hover:text-purple-300 transition">
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" className="text-white text-2xl hover:text-purple-300 transition">
+            <a href="https://x.com/SpiritualLifes1" className="text-white text-2xl hover:text-purple-300 transition">
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" className="text-white text-2xl hover:text-purple-300 transition">
+            <a href="https://www.youtube.com/@jyotishasha" className="text-white text-2xl hover:text-purple-300 transition">
               <i className="fab fa-youtube"></i>
+            </a>
+            <a href="https://in.pinterest.com/remedy999/" className="text-white text-2xl hover:text-purple-300 transition">
+              <i className="fab fa-pinterest"></i>
             </a>
           </div>
         </div>
