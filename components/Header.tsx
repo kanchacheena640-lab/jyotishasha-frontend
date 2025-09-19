@@ -85,15 +85,21 @@ export default function Header() {
   {/* Mobile Dropdown Menu */}
   {menuOpen && (
     <div className="bg-[#1e1b4b] rounded-b-lg p-4 flex flex-col gap-4 text-white md:hidden mt-2 z-40">
-      <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-      <Link href="/tools" suppressHydrationWarning>
-        Astrology
+      <Link href="/" passHref>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Home</span>
       </Link>
-      <Link href="/reports" onClick={() => setMenuOpen(false)}>Reports</Link>
-      <Link href="/gemstone-consult" suppressHydrationWarning>
-        Rashi by Name
+      <Link href="/tools" passHref suppressHydrationWarning>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Astrology</span>
       </Link>
-      <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+      <Link href="/reports" passHref>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Reports</span>
+      </Link>
+      <Link href="/gemstone-consult" passHref suppressHydrationWarning>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Rashi by Name</span>
+      </Link>
+      <Link href="/contact" passHref>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Contact</span>
+      </Link>
     </div>
   )}
 </header>
