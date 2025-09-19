@@ -76,6 +76,9 @@ export default function Header() {
       Astrology
     </Link>
     <Link href="/reports">Reports</Link>
+    <Link href="/gemstone-consult" suppressHydrationWarning>
+      Rashi by Name
+    </Link>
     <Link href="/contact">Contact</Link>
   </nav>
 
@@ -83,8 +86,13 @@ export default function Header() {
   {menuOpen && (
     <div className="bg-[#1e1b4b] rounded-b-lg p-4 flex flex-col gap-4 text-white md:hidden mt-2 z-40">
       <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-      <Link href="/tools" onClick={() => setMenuOpen(false)}>Tools</Link>
+      <Link href="/tools" suppressHydrationWarning>
+        Astrology
+      </Link>
       <Link href="/reports" onClick={() => setMenuOpen(false)}>Reports</Link>
+      <Link href="/gemstone-consult" suppressHydrationWarning>
+        Rashi by Name
+      </Link>
       <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
     </div>
   )}
