@@ -98,5 +98,14 @@ export const reportsData: Report[] = [
     category: "Self",
     description: "Understand your career path and growth through astrology.",
     fullDescription: "The Career Report analyzes your professional strengths, challenges, and opportunities using your birth chart and planetary periods (Mahadasha/Antardasha). It also highlights favorable fields of work and timings for career advancement."
+  },
+  {
+    title: "Gemstone Consultation",
+    slug: "gemstone_consultation",
+    price: 1,
+    image: "/reports/gemstone_consultation.webp",
+    category: "Self",
+    description: "Get personalized gemstone recommendations based on your birth chart for luck, good quality lifestyle, and success.",
+    fullDescription: "The Gemstone Consultation Report guides you in choosing the right gemstone according to your horoscope. It explains which stone can balance your planets, attract positive energy, and protect you from challenges. Based on your Lagna, Moon sign, and planetary periods (Dasha/Antardasha), this report helps you wear gemstones that improve living quality & style, wealth, relationships, and overall destiny."
   }
 ];

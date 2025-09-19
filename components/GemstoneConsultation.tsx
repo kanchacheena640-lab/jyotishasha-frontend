@@ -4,6 +4,8 @@
 import { useState } from "react";
 import rashiMapping from "@/app/data/rashi_mapping";
 import rashiContent from "@/app/data/rashi_content";
+import Link from "next/link";
+
 
 const normalize = (str: string) =>
   str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -127,7 +129,7 @@ export default function GemstoneConsultation() {
                 Created {result.gemstone_id.charAt(0).toUpperCase() + result.gemstone_id.slice(1)} 
               </h3>
               <a
-                href="https://jyotishasha.com/buy-created-gemstone"
+                href="https://astroblog.in/product-category/rashi-upratan/"
                 target="_blank"
                 className="inline-block bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700"
               >
@@ -145,7 +147,7 @@ export default function GemstoneConsultation() {
                 Original {result.gemstone_id.charAt(0).toUpperCase() + result.gemstone_id.slice(1)}
               </h3>
               <a
-                href="https://jyotishasha.com/buy-original-gemstone"
+                href="https://astroblog.in/product-category/rashi-ratna/"
                 target="_blank"
                 className="inline-block bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700"
               >
@@ -158,9 +160,12 @@ export default function GemstoneConsultation() {
             <p className="text-md text-[#003366] font-semibold mb-3">
               क्या आप अपने वर्तमान <strong>दशा और गोचर</strong> के आधार पर विशेष रत्न परामर्श चाहते हैं?
             </p>
-            <button className="bg-white text-black font-bold px-5 py-2 rounded hover:bg-gray-100 border border-[#007BFF] transition-all">
-              अभी प्राप्त करें – ₹98 में
-            </button>
+            <Link
+              href="/special-gemstone-consult" // 👈 yahan apna slug do
+              className="inline-block bg-white text-black font-bold px-5 py-2 rounded hover:bg-gray-100 border border-[#007BFF] transition-all"
+            >
+              अभी प्राप्त करें – ₹49 में
+            </Link>
           </div>
         </div>
       )}
