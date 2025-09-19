@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://jyotishasha.com
+
+# Sitemaps
+Sitemap: https://jyotishasha.com/sitemap.xml
