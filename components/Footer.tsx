@@ -46,9 +46,9 @@ export default function Footer() {
             Email: <a href="mailto:support@jyotishasha.com" className="underline">support@jyotishasha.com</a>
           </p>
           <div className="flex space-x-4 mt-4">
-            <a href="#" target="_blank"><i className="fab fa-facebook text-xl"></i></a>
-            <a href="#" target="_blank"><i className="fab fa-instagram text-xl"></i></a>
-            <a href="#" target="_blank"><i className="fab fa-whatsapp text-xl"></i></a>
+            <a href="https://www.facebook.com/AashaJyotish/" target="_blank"><i className="fab fa-facebook text-xl"></i></a>
+            <a href="https://www.instagram.com/jyotishasha108/" target="_blank"><i className="fab fa-instagram text-xl"></i></a>
+            <a href="https://www.youtube.com/@jyotishasha" target="_blank"><i className="fab fa-youtube text-xl"></i></a>
           </div>
         </div>
       </div>
