@@ -102,7 +102,7 @@ export const reportsData: Report[] = [
   {
     title: "Gemstone Consultation",
     slug: "gemstone_consultation",
-    price: 1,
+    price: 21,
     image: "/reports/gemstone_consultation.webp",
     category: "Self",
     description: "Get personalized gemstone recommendations based on your birth chart for luck, good quality lifestyle, and success.",
