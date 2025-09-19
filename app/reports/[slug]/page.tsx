@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { reportsData, Report } from "../../data/reportsData";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function ReportCheckout() {
   const [form, setForm] = useState({
@@ -156,20 +158,41 @@ export default function ReportCheckout() {
     <div className="bg-white p-5 rounded-xl shadow mb-5">
       <h3 className="text-lg font-semibold mb-3 text-purple-700">🔮 Birth Details</h3>
       <div className="space-y-3">
-        <input
-          name="dob"
-          type="date"
-          value={form.dob}
-          onChange={handleChange}
-          className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
-        />
-        <input
-          name="tob"
-          type="time"
-          value={form.tob}
-          onChange={handleChange}
-          className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
-        />
+        <div>
+          <label className="block mb-1 font-medium">Date of Birth</label>
+          <DatePicker
+            selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
+            onChange={(date: Date | null) =>
+              setForm((prev) => ({ ...prev, dob: date ? date.toISOString().slice(0, 10) : "" }))
+            }
+            placeholderText="Select your date of birth"
+            dateFormat="dd-MM-yyyy"
+            isClearable
+            withPortal
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
+            className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Time of Birth</label>
+          <div className="relative">
+            {!form.tob && (
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">
+                Time of Birth
+              </span>
+            )}
+            <input
+              type="time"
+              name="tob"
+              value={form.tob}
+              onChange={handleChange}
+              className="w-full pl-28 pr-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+            />
+          </div>
+        </div>
         <input
           name="pob"
           type="text"
