@@ -36,7 +36,7 @@ export default function Home() {
     { name: "Your Career", emoji: "📖", link: "/tools/career-path" },
     { name: "Foreign Travel", emoji: "✈️", link: "/tools/foreign-travel" },
     { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-calculator" },
-    { name: "Business Report", emoji: "💼", link: "/reports/business-path" },
+    { name: "Business Report", emoji: "💼", link: "/reports/business_report" },
     { name: "Government Job", emoji: "👍", link: "/reports/government-job" }
   ];
 
