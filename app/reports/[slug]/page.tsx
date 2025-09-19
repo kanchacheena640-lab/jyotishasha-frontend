@@ -13,6 +13,7 @@ export default function ReportCheckout() {
     pob: "",
     latitude: "",
     longitude: "",
+    language: "",
   });
 
   const placeRef = useRef<HTMLInputElement | null>(null);
@@ -115,106 +116,113 @@ export default function ReportCheckout() {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
-        Fill Your Details for {displaySlug}
-      </h2>
+  <div className="max-w-xl mx-auto px-4 py-10">
+    <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
+      Fill Your Details for {displaySlug}
+    </h2>
 
-      {/* 👤 Personal Info */}
-      <div className="bg-white p-5 rounded-xl shadow mb-4">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">
-          👤 Personal Details
-        </h3>
-        <div className="space-y-3">
-          <input
-            name="name"
-            type="text"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Full Name"
-            className="inputStyle placeholderStyle"
-          />
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Email Address"
-            className="inputStyle placeholderStyle"
-          />
-          <input
-            name="phone"
-            type="tel"
-            value={form.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="inputStyle placeholderStyle"
-          />
-        </div>
+    {/* 👤 Personal Info */}
+    <div className="bg-white p-5 rounded-xl shadow mb-4">
+      <h3 className="text-lg font-semibold mb-3 text-purple-700">👤 Personal Details</h3>
+      <div className="space-y-3">
+        <input
+          name="name"
+          type="text"
+          value={form.name}
+          onChange={handleChange}
+          placeholder="Full Name"
+          className="inputStyle placeholderStyle"
+        />
+        <input
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Email Address"
+          className="inputStyle placeholderStyle"
+        />
+        <input
+          name="phone"
+          type="tel"
+          value={form.phone}
+          onChange={handleChange}
+          placeholder="Phone Number"
+          className="inputStyle placeholderStyle"
+        />
       </div>
-
-      {/* 🔮 Birth Info */}
-      <div className="bg-white p-5 rounded-xl shadow mb-5">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">
-          🔮 Birth Details
-        </h3>
-        <div className="space-y-3">
-          <input
-            name="dob"
-            type="date"
-            value={form.dob}
-            onChange={handleChange}
-            className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
-          />
-          <input
-            name="tob"
-            type="time"
-            value={form.tob}
-            onChange={handleChange}
-            className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
-          />
-          <input
-            name="pob"
-            type="text"
-            ref={placeRef}
-            value={form.pob}
-            onChange={handleChange}
-            placeholder="Place of Birth"
-            className="inputStyle placeholderStyle"
-          />
-        </div>
-        <p className="text-xs text-gray-500 mt-2">
-          🔄 Change details if you're looking for other birth info
-        </p>
-      </div>
-
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
-      >
-        Proceed to Pay ₹{price}
-      </button>
-
-      <style jsx>{`
-        .inputStyle {
-          width: 100%;
-          padding: 10px 12px;
-          font-size: 15px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          outline: none;
-          background-color: #fff;
-          color: #333;
-        }
-        .inputStyle:focus {
-          border-color: #a855f7;
-          box-shadow: 0 0 0 2px #ddd6fe;
-        }
-        .placeholderStyle::placeholder {
-          color: #7c4a27 !important;
-          opacity: 1;
-        }
-      `}</style>
     </div>
-  );
+
+    {/* 🔮 Birth Info */}
+    <div className="bg-white p-5 rounded-xl shadow mb-5">
+      <h3 className="text-lg font-semibold mb-3 text-purple-700">🔮 Birth Details</h3>
+      <div className="space-y-3">
+        <input
+          name="dob"
+          type="date"
+          value={form.dob}
+          onChange={handleChange}
+          className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
+        />
+        <input
+          name="tob"
+          type="time"
+          value={form.tob}
+          onChange={handleChange}
+          className="inputStyle placeholderStyle [&::-webkit-datetime-edit]:text-[#7c4a27]"
+        />
+        <input
+          name="pob"
+          type="text"
+          ref={placeRef}
+          value={form.pob}
+          onChange={handleChange}
+          placeholder="Place of Birth"
+          className="inputStyle placeholderStyle"
+        />
+        {/* 🌐 Language Select */}
+        <select
+          name="language"
+          value={form.language || ""}
+          onChange={handleChange}
+          className="inputStyle"
+        >
+          <option value="">Select Language</option>
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
+        </select>
+      </div>
+      <p className="text-xs text-gray-500 mt-2">
+        🔄 Change details if you're looking for other birth info
+      </p>
+    </div>
+
+    <button
+      onClick={handleSubmit}
+      className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+    >
+      Proceed to Pay ₹{price}
+    </button>
+
+    <style jsx>{`
+      .inputStyle {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        background-color: #fff;
+        color: #333;
+      }
+      .inputStyle:focus {
+        border-color: #a855f7;
+        box-shadow: 0 0 0 2px #ddd6fe;
+      }
+      .placeholderStyle::placeholder {
+        color: #7c4a27 !important;
+        opacity: 1;
+      }
+    `}</style>
+  </div>
+);
 }
