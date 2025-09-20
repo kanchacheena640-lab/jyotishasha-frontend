@@ -59,7 +59,7 @@ export const reportsData: Report[] = [
     slug: "love_marriage_report",
     price: 49,
     image: "/reports/love-marriage-report.webp",
-    category: "Marriage, Love",
+    category: "Marriage",
     description: "Understand your chances of love marriage through astrological insights.",
     fullDescription: "The Love Marriage Report analyzes your birth chart to reveal the possibility, timing, and planetary influences related to love-based marriage. It also highlights emotional compatibility and potential challenges using Mahadasha and Antardasha periods."
   },
