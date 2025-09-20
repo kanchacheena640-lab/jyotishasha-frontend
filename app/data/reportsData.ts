@@ -224,6 +224,6 @@ export const reportsData: Report[] = [
     category: "Self",
     description: "Get clarity on legal disputes, conflicts, and chances of settlement from your chart.",
     fullDescription: "The Legal Disputes Report analyzes the 6th, 7th, and 12th houses along with planetary influences of Saturn, Mars, and Rahu to reveal possibilities of court cases and disputes. It explains timing and challenges related to legal issues through dasha and transit insights. The report also provides guidance for managing conflicts wisely, finding settlement opportunities, and minimizing stress while dealing with legal matters."
-  }
+  },
 
 ];
