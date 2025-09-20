@@ -50,7 +50,7 @@ export const reportsData: Report[] = [
     slug: "startup_suggestion_report",
     price: 49,
     image: "/reports/startup-suggestion-report.webp",
-    category: "Self",
+    category: "Finance",
     description: "Discover the best startup path for you based on your birth chart and dasha phase.",
     fullDescription: "The Startup Suggestion Report combines your astrological blueprint with the planetary period (Mahadasha/Antardasha) to guide you toward a fulfilling entrepreneurial journey."
   },
@@ -59,7 +59,7 @@ export const reportsData: Report[] = [
     slug: "love_marriage_report",
     price: 49,
     image: "/reports/love-marriage-report.webp",
-    category: "Marriage",
+    category: "Marriage, Love",
     description: "Understand your chances of love marriage through astrological insights.",
     fullDescription: "The Love Marriage Report analyzes your birth chart to reveal the possibility, timing, and planetary influences related to love-based marriage. It also highlights emotional compatibility and potential challenges using Mahadasha and Antardasha periods."
   },
@@ -68,7 +68,7 @@ export const reportsData: Report[] = [
     slug: "government_job_report",
     price: 49,
     image: "/reports/government-job-report.webp",
-    category: "Marriage",
+    category: "Self",
     description: "Discover your potential for a government career through astrology.",
     fullDescription: "The Government Job Report evaluates your birth chart and planetary periods (Mahadasha/Antardasha) to reveal your chances of securing a government job, suitable fields, and the most favorable timing for success in this sector."
   },
@@ -122,7 +122,7 @@ export const reportsData: Report[] = [
     slug: "delay_in_marriage_report",
     price: 49,
     image: "/reports/delay_in_marriage_report.webp",
-    category: "Self",
+    category: "Marriage",
     description: "Find the astrological reasons behind marriage delays and remedies for timely settlement.",
     fullDescription: "The Delay in Marriage Report reveals planetary combinations and dasha periods that may cause postponements in marriage. It analyzes your birth chart to identify root causes such as Saturn or Rahu influence, weak Venus, or 7th house challenges. Along with transit insights, the report provides practical guidance and remedies to overcome delays, align with favorable periods, and improve prospects of a timely and harmonious marriage."
   },
@@ -131,7 +131,7 @@ export const reportsData: Report[] = [
     slug: "financial_stability_report",
     price: 49,
     image: "/reports/financial_stability_report.webp",
-    category: "Self",
+    category: "Finance",
     description: "Discover your long-term financial potential and stability through Vedic astrology.",
     fullDescription: "The Financial Stability Report explores how wealth, savings, and stability unfold in your life as per your birth chart. It analyzes the 2nd, 8th, and 11th houses, along with planetary influences of Jupiter, Venus, and Saturn, to highlight financial strengths and challenges. With dasha and transit analysis, the report guides you toward building financial security, handling unexpected expenses, and aligning with opportunities for wealth growth and prosperity."
   },
@@ -140,7 +140,7 @@ export const reportsData: Report[] = [
     slug: "jupiter_transit_report",
     price: 25,
     image: "/reports/jupiter_transit_report.webp",
-    category: "Self",
+    category: "Transit",
     description: "Know how Jupiter’s current transit impacts your career, finance, and relationships.",
     fullDescription: "The Jupiter Transit Report explains the influence of Jupiter’s movement on your life areas like growth, opportunities, finance, and wisdom. Based on your birth chart, it shows how Jupiter’s placement in different houses and signs brings favorable or challenging results. The report also highlights key dates, dasha alignment, and practical advice to maximize Jupiter’s blessings while handling its challenging phases with clarity and confidence."
   },
@@ -158,7 +158,7 @@ export const reportsData: Report[] = [
     slug: "love_disappointment_report",
     price: 25,
     image: "/reports/love_disappointment_report.webp",
-    category: "Self",
+    category: "Love",
     description: "Understand the reasons for love setbacks and guidance to overcome emotional challenges.",
     fullDescription: "The Love Disappointment Report explores your birth chart to find the astrological reasons behind heartbreak, delays, or unfulfilled expectations in relationships. It highlights planetary influences on the 5th and 7th houses, Venus, and the Moon to explain emotional struggles. Along with dasha and transit insights, this report offers practical advice to heal, rebuild confidence, and prepare for healthier and more fulfilling love experiences in the future."
   },
@@ -167,7 +167,7 @@ export const reportsData: Report[] = [
     slug: "problem_in_marriage_report",
     price: 25,
     image: "/reports/problem_in_marriage_report.webp",
-    category: "Self",
+    category: "Marriage",
     description: "Identify causes of conflict in marriage and find practical solutions for harmony.",
     fullDescription: "The Problem in Marriage Report analyzes the 7th house, Venus, Mars, and dasha influences in your birth chart to reveal potential issues in marital life. It highlights challenges like communication gaps, trust issues, or external pressures that may affect your relationship. With transit insights, the report provides guidance and remedies to improve understanding, rebuild harmony, and strengthen the emotional bond between partners for a healthier and lasting marriage."
   },
@@ -185,7 +185,7 @@ export const reportsData: Report[] = [
     slug: "property_report",
     price: 25,
     image: "/reports/property_report.webp",
-    category: "Self",
+    category: "Finance",
     description: "Know the chances of property purchase, inheritance, and real estate gains.",
     fullDescription: "The Property Report analyzes the 4th, 8th, and 11th houses in your birth chart to highlight prospects of buying land, house, or vehicles. It studies planetary influences of Mars, Saturn, and Jupiter to explain opportunities or obstacles in real estate matters. With dasha and transit insights, this report guides you on favorable periods for purchase, managing disputes, and improving stability through property investments and assets."
   },
@@ -194,7 +194,7 @@ export const reportsData: Report[] = [
     slug: "saturn_transit_report",
     price: 25,
     image: "/reports/saturn_transit_report.webp",
-    category: "Self",
+    category: "Transit",
     description: "Discover how Saturn’s transit impacts your career, discipline, and responsibilities.",
     fullDescription: "The Saturn Transit Report explains the influence of Saturn’s movement on different areas of your life including career, finance, health, and personal growth. It highlights karmic lessons, discipline, and responsibilities that Saturn brings as per your birth chart. With dasha and current transit insights, the report provides practical guidance to handle challenges, build long-term stability, and make disciplined choices that lead to lasting success."
   },
@@ -203,7 +203,7 @@ export const reportsData: Report[] = [
     slug: "second_marriage_report",
     price: 25,
     image: "/reports/second_marriage_report.webp",
-    category: "Self",
+    category: "Marriage",
     description: "Analyze prospects of remarriage and possibilities of finding a compatible partner again.",
     fullDescription: "The Second Marriage Report studies the 7th, 8th, and 9th houses in your birth chart to reveal chances of remarriage or relationships after separation. It highlights planetary influences of Venus, Jupiter, and Rahu, along with dasha and transit details, to explain timing and possibilities of a stable second marriage. The report also provides practical guidance to avoid repeating past patterns and to build a harmonious bond in future partnerships."
   },
