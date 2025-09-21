@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Enter admin password"
-            className="w-full p-2 border rounded text-black bg-white pr-16"
+            className="w-full p-2 border rounded text-black bg-white pr-16 caret-indigo-600 placeholder-gray-400"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
