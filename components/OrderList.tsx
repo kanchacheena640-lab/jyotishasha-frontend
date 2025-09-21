@@ -184,7 +184,7 @@ export default function OrderList() {
               onChange={(e) =>
                 setFormData({ ...formData, dob: e.target.value })
               }
-              className="w-full border p-2 mb-2"
+                className="w-full border p-2 mb-2 text-black"
             />
             <input
               type="time"
@@ -192,7 +192,7 @@ export default function OrderList() {
               onChange={(e) =>
                 setFormData({ ...formData, tob: e.target.value })
               }
-              className="w-full border p-2 mb-2"
+                className="w-full border p-2 mb-2 text-black"
             />
             <input
               type="text"
@@ -201,7 +201,7 @@ export default function OrderList() {
               onChange={(e) =>
                 setFormData({ ...formData, pob: e.target.value })
               }
-              className="w-full border p-2 mb-2"
+                className="w-full border p-2 mb-2 text-black"
             />
             <input
               type="text"
@@ -210,7 +210,7 @@ export default function OrderList() {
               onChange={(e) =>
                 setFormData({ ...formData, latitude: e.target.value })
               }
-              className="w-full border p-2 mb-2"
+                className="w-full border p-2 mb-2 text-black"
             />
             <input
               type="text"
@@ -219,7 +219,7 @@ export default function OrderList() {
               onChange={(e) =>
                 setFormData({ ...formData, longitude: e.target.value })
               }
-              className="w-full border p-2 mb-4"
+                className="w-full border p-2 mb-2 text-black"
             />
 
             <div className="flex justify-end space-x-2">
