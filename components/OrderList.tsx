@@ -73,7 +73,13 @@ export default function OrderList() {
                   <td className="p-2 border">{new Date(order.order_time).toLocaleString()}</td>
                   <td className="p-2 border">
                     {order.pdf_url ? (
-                      <a href={order.pdf_url} className="text-blue-600 underline" target="_blank">Download</a>
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_BACKEND_URL}${order.pdf_url}`}
+                        className="text-blue-600 underline"
+                        target="_blank"
+                      >
+                        Download
+                      </a>
                     ) : (
                       <span className="text-gray-500 italic">Not ready</span>
                     )}
