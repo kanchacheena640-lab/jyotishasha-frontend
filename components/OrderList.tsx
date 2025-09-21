@@ -75,15 +75,38 @@ export default function OrderList() {
                     {order.pdf_url ? (
                       <a
                         href={`${process.env.NEXT_PUBLIC_BACKEND_URL}${order.pdf_url}`}
-                        className="text-blue-600 underline"
+                        className="text-blue-600 underline mr-2"
                         target="_blank"
                       >
                         Download
                       </a>
                     ) : (
-                      <span className="text-gray-500 italic">Not ready</span>
+                      <span className="text-gray-500 italic mr-2">Not ready</span>
                     )}
+
+                    <button
+                      onClick={async () => {
+                        try {
+                          const res = await fetch(
+                            `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/api/resend/${order.id}`,
+                            { method: "POST" }
+                          );
+                          if (res.ok) {
+                            alert("Resend started!");
+                          } else {
+                            alert("Failed to resend report.");
+                          }
+                        } catch (error) {
+                          console.error("Resend error:", error);
+                          alert("Error while resending.");
+                        }
+                      }}
+                      className="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600"
+                    >
+                      Resend
+                    </button>
                   </td>
+
                 </tr>
               ))}
             </tbody>
