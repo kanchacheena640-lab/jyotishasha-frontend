@@ -210,7 +210,7 @@ export const reportsData: Report[] = [
   {
     title: "Divorce Possibility Report",
     slug: "divorce_possibility_report",
-    price: 1,
+    price: 49,
     image: "/reports/divorce_possibility_report.webp",
     category: "Self",
     description: "Know the astrological factors that may indicate separation or divorce in marriage.",
