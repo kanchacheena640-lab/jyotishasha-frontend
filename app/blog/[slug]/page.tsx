@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import i18n from "@/i18n"; 
+
 
 interface BlogProps {
   params: {
@@ -19,7 +21,7 @@ export default function BlogDetailPage({ params }: BlogProps) {
     async function fetchBlog() {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[Slug][$eq]=${slug}&populate=*`
+           `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[Slug][$eq]=${slug}&populate=*&locale=${i18n.language}`
         )
         const data = await res.json()
         const single =

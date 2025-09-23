@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import i18n from "@/i18n";
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -11,7 +12,7 @@ export default function BlogPage() {
     async function fetchBlogs() {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate=*`
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate=*&locale=${i18n.language}`
         );
         const data = await res.json();
         setBlogs(Array.isArray(data?.data) ? data.data : []);
