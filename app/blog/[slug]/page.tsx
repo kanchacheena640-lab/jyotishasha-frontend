@@ -1,57 +1,57 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Head from "next/head";
+import { useEffect, useState } from 'react'
+import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
-
+import remarkGfm from 'remark-gfm'
 
 interface BlogProps {
   params: {
-    slug: string;
-  };
+    slug: string
+  }
 }
 
 export default function BlogDetailPage({ params }: BlogProps) {
-  const { slug } = params;
-  const [blog, setBlog] = useState<any>(null);
+  const { slug } = params
+  const [blog, setBlog] = useState<any>(null)
 
   useEffect(() => {
     async function fetchBlog() {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[Slug][$eq]=${slug}&populate=*`
-        );
-        const data = await res.json();
+        )
+        const data = await res.json()
         const single =
           Array.isArray(data?.data) && data.data.length > 0
             ? data.data[0]
-            : null;
-        setBlog(single);
+            : null
+        setBlog(single)
       } catch (err) {
-        console.error("Error fetching blog:", err);
-        setBlog(null);
+        console.error('Error fetching blog:', err)
+        setBlog(null)
       }
     }
-    fetchBlog();
-  }, [slug]);
+
+    fetchBlog()
+  }, [slug])
 
   if (!blog) {
-    return <p className="text-center py-10">Blog not found.</p>;
+    return <p className="text-center py-10">Blog not found.</p>
   }
 
-  // Directly use flat fields from API
-  const title = blog.Title;
+  const title = blog.Title
   const description =
     blog.MetaDescription ||
     blog.Content?.slice(0, 150) ||
-    "Read this blog on Jyotishasha.";
+    'Read this blog on Jyotishasha.'
 
   const cover =
     blog?.CoverImage?.formats?.large?.url
       ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.formats.large.url}`
       : blog?.CoverImage?.url
       ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
-      : "https://jyotishasha.com/default-og.jpg";
+      : 'https://jyotishasha.com/default-og.jpg'
 
   return (
     <>
@@ -80,14 +80,16 @@ export default function BlogDetailPage({ params }: BlogProps) {
         <h1 className="text-4xl font-bold mb-4">{title}</h1>
 
         <p className="text-sm text-gray-500 mb-6">
-          By {blog.Author || "Jyotishasha Team"} | {blog.Published || ""}
+          By {blog.Author || 'Jyotishasha Team'} | {blog.Published || ''}
         </p>
 
-        <div
-          className="prose max-w-none"
-          dangerouslySetInnerHTML={{ __html: blog.Content }}
-        />
+        {/* ✅ ReactMarkdown with GFM and Tailwind styling */}
+        <div className="prose max-w-none prose-p:my-2 prose-li:my-1 prose-h2:mt-6 prose-strong:text-indigo-600">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {blog.Content}
+          </ReactMarkdown>
+        </div>
       </div>
     </>
-  );
+  )
 }
