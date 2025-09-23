@@ -46,12 +46,10 @@ export default function BlogDetailPage({ params }: BlogProps) {
     blog.Content?.slice(0, 150) ||
     'Read this blog on Jyotishasha.'
 
-  const cover =
-    blog?.CoverImage?.formats?.large?.url
-      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.formats.large.url}`
-      : blog?.CoverImage?.url
-      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
-      : 'https://jyotishasha.com/default-og.jpg'
+  // ✅ Updated: safer and more reliable image logic
+  const cover = blog?.CoverImage?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
+    : 'https://jyotishasha.com/default-og.jpg'
 
   return (
     <>

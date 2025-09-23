@@ -46,8 +46,8 @@ export default function BlogPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogs.map((blog: any) => {
             const cover =
-              blog?.CoverImage?.formats?.medium?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.formats.medium.url}`
+              blog?.CoverImage?.url
+                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
                 : "https://jyotishasha.com/default-og.jpg";
 
             return (
@@ -58,15 +58,12 @@ export default function BlogPage() {
                     alt={blog.Title}
                     className="w-full h-48 object-cover rounded"
                   />
-                  <h2 className="text-2xl font-semibold mt-4">
-                    {blog.Title}
-                  </h2>
+                  <h2 className="text-2xl font-semibold mt-4">{blog.Title}</h2>
                   <p className="text-gray-600 mt-2 line-clamp-3">
                     {blog.MetaDescription || ""}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    By {blog.Author || "Jyotishasha Team"} |{" "}
-                    {blog.Published || ""}
+                    By {blog.Author || "Jyotishasha Team"} | {blog.Published || ""}
                   </p>
                 </div>
               </Link>
