@@ -1,5 +1,3 @@
-// Force redeploy - 23 Sept
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -47,26 +45,30 @@ export default function BlogPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogs.map((blog: any) => {
-            const blogData = blog.attributes; // Fix: unwrap attributes
+            const attributes = blog.attributes;
+
             const cover =
-              blogData?.CoverImage?.data?.attributes?.formats?.medium?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blogData.CoverImage.data.attributes.formats.medium.url}`
+              attributes?.CoverImage?.data?.attributes?.formats?.medium?.url
+                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${attributes.CoverImage.data.attributes.formats.medium.url}`
                 : "https://jyotishasha.com/default-og.jpg";
 
             return (
-              <Link key={blog.id} href={`/blog/${blogData.Slug}`}>
+              <Link key={blog.id} href={`/blog/${attributes.Slug}`}>
                 <div className="border rounded-lg shadow p-4 hover:shadow-lg transition cursor-pointer">
                   <img
                     src={cover}
-                    alt={blogData.Title}
+                    alt={attributes.Title}
                     className="w-full h-48 object-cover rounded"
                   />
-                  <h2 className="text-2xl font-semibold mt-4">{blogData.Title}</h2>
+                  <h2 className="text-2xl font-semibold mt-4">
+                    {attributes.Title}
+                  </h2>
                   <p className="text-gray-600 mt-2 line-clamp-3">
-                    {blogData.MetaDescription || ""}
+                    {attributes.MetaDescription || ""}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    By {blogData.Author || "Jyotishasha Team"} | {blogData.Published || ""}
+                    By {attributes.Author || "Jyotishasha Team"} |{" "}
+                    {attributes.Published || ""}
                   </p>
                 </div>
               </Link>
