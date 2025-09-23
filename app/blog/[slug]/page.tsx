@@ -1,60 +1,65 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import Head from 'next/head'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import i18n from "@/i18n"; 
-import { useTranslation } from "react-i18next"; 
-
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
+import ReactMarkdown from "react-markdown";
 
 interface BlogProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
 export default function BlogDetailPage({ params }: BlogProps) {
-  const { i18n } = useTranslation(); 
-  const { slug } = params
-  const [blog, setBlog] = useState<any>(null)
+  const { slug } = params;
+  const { i18n } = useTranslation();
+  const [blog, setBlog] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBlog() {
       try {
+        setLoading(true);
+        const locale = i18n.language === "hi" ? "hi-IN" : i18n.language;
+
         const res = await fetch(
-           `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[Slug][$eq]=${slug}&populate=*&locale=${i18n.language}`
-        )
-        const data = await res.json()
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[Slug][$eq]=${slug}&populate=*&locale=${locale}`
+        );
+        const data = await res.json();
         const single =
           Array.isArray(data?.data) && data.data.length > 0
             ? data.data[0]
-            : null
-        setBlog(single)
+            : null;
+        setBlog(single);
       } catch (err) {
-        console.error('Error fetching blog:', err)
-        setBlog(null)
+        console.error("Error fetching blog:", err);
+        setBlog(null);
+      } finally {
+        setLoading(false);
       }
     }
-
-    fetchBlog()
+    fetchBlog();
   }, [slug, i18n.language]);
 
-  if (!blog) {
-    return <p className="text-center py-10">Blog not found.</p>
+  if (loading) {
+    return <p className="text-center py-10">Loading blog...</p>;
   }
 
-  const title = blog.Title
-  const description =
-    blog.MetaDescription ||
-    blog.Content?.slice(0, 150) ||
-    'Read this blog on Jyotishasha.'
+  if (!blog) {
+    return <p className="text-center py-10">Blog not found.</p>;
+  }
 
-  // ✅ Updated: safer and more reliable image logic
-  const cover = blog?.CoverImage?.url
-    ? blog.CoverImage.url.startsWith("http")
-      ? blog.CoverImage.url
-      : `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
+  const title = blog?.attributes?.Title || "Untitled Blog";
+  const description =
+    blog?.attributes?.MetaDescription ||
+    blog?.attributes?.Content?.slice(0, 150) ||
+    "Read this blog on Jyotishasha.";
+
+  const cover = blog?.attributes?.CoverImage?.data?.attributes?.url
+    ? blog.attributes.CoverImage.data.attributes.url.startsWith("http")
+      ? blog.attributes.CoverImage.data.attributes.url
+      : `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.attributes.CoverImage.data.attributes.url}`
     : "https://jyotishasha.com/default-og.jpg";
 
   return (
@@ -84,16 +89,14 @@ export default function BlogDetailPage({ params }: BlogProps) {
         <h1 className="text-4xl font-bold mb-4">{title}</h1>
 
         <p className="text-sm text-gray-500 mb-6">
-          By {blog.Author || 'Jyotishasha Team'} | {blog.Published || ''}
+          By {blog?.attributes?.Author || "Jyotishasha Team"} |{" "}
+          {blog?.attributes?.Published || ""}
         </p>
 
-        {/* ✅ ReactMarkdown with GFM and Tailwind styling */}
-        <div className="prose max-w-none prose-p:mb-4 prose-li:my-2 prose-h2:mt-6 prose-strong:text-indigo-600 leading-relaxed">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {blog.Content}
-          </ReactMarkdown>
+        <div className="prose max-w-none">
+          <ReactMarkdown>{blog?.attributes?.Content || ""}</ReactMarkdown>
         </div>
       </div>
     </>
-  )
+  );
 }
