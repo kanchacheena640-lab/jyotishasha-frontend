@@ -5,6 +5,7 @@ import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import i18n from "@/i18n"; 
+import { useTranslation } from "react-i18next"; 
 
 
 interface BlogProps {
@@ -14,6 +15,7 @@ interface BlogProps {
 }
 
 export default function BlogDetailPage({ params }: BlogProps) {
+  const { i18n } = useTranslation(); 
   const { slug } = params
   const [blog, setBlog] = useState<any>(null)
 
