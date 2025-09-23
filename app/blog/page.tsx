@@ -45,30 +45,28 @@ export default function BlogPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogs.map((blog: any) => {
-            const attributes = blog.attributes;
-
             const cover =
-              attributes?.CoverImage?.data?.attributes?.formats?.medium?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${attributes.CoverImage.data.attributes.formats.medium.url}`
+              blog?.CoverImage?.formats?.medium?.url
+                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.formats.medium.url}`
                 : "https://jyotishasha.com/default-og.jpg";
 
             return (
-              <Link key={blog.id} href={`/blog/${attributes.Slug}`}>
+              <Link key={blog.id} href={`/blog/${blog.Slug}`}>
                 <div className="border rounded-lg shadow p-4 hover:shadow-lg transition cursor-pointer">
                   <img
                     src={cover}
-                    alt={attributes.Title}
+                    alt={blog.Title}
                     className="w-full h-48 object-cover rounded"
                   />
                   <h2 className="text-2xl font-semibold mt-4">
-                    {attributes.Title}
+                    {blog.Title}
                   </h2>
                   <p className="text-gray-600 mt-2 line-clamp-3">
-                    {attributes.MetaDescription || ""}
+                    {blog.MetaDescription || ""}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    By {attributes.Author || "Jyotishasha Team"} |{" "}
-                    {attributes.Published || ""}
+                    By {blog.Author || "Jyotishasha Team"} |{" "}
+                    {blog.Published || ""}
                   </p>
                 </div>
               </Link>

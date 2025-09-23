@@ -37,19 +37,18 @@ export default function BlogDetailPage({ params }: BlogProps) {
     return <p className="text-center py-10">Blog not found.</p>;
   }
 
-  const blogData = blog.attributes;
-
-  const title = blogData.Title;
+  // Directly use flat fields from API
+  const title = blog.Title;
   const description =
-    blogData.MetaDescription ||
-    blogData.Content?.slice(0, 150) ||
+    blog.MetaDescription ||
+    blog.Content?.slice(0, 150) ||
     "Read this blog on Jyotishasha.";
 
   const cover =
-    blogData?.CoverImage?.data?.attributes?.formats?.large?.url
-      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blogData.CoverImage.data.attributes.formats.large.url}`
-      : blogData?.CoverImage?.data?.attributes?.url
-      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blogData.CoverImage.data.attributes.url}`
+    blog?.CoverImage?.formats?.large?.url
+      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.formats.large.url}`
+      : blog?.CoverImage?.url
+      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
       : "https://jyotishasha.com/default-og.jpg";
 
   return (
@@ -79,13 +78,12 @@ export default function BlogDetailPage({ params }: BlogProps) {
         <h1 className="text-4xl font-bold mb-4">{title}</h1>
 
         <p className="text-sm text-gray-500 mb-6">
-          By {blogData.Author || "Jyotishasha Team"} |{" "}
-          {blogData.Published || ""}
+          By {blog.Author || "Jyotishasha Team"} | {blog.Published || ""}
         </p>
 
         <div
           className="prose max-w-none"
-          dangerouslySetInnerHTML={{ __html: blogData.Content }}
+          dangerouslySetInnerHTML={{ __html: blog.Content }}
         />
       </div>
     </>
