@@ -82,7 +82,7 @@ export default function BlogDetailPage({ params }: BlogProps) {
         </p>
 
         {/* ✅ ReactMarkdown with GFM and Tailwind styling */}
-        <div className="prose max-w-none prose-p:my-2 prose-li:my-1 prose-h2:mt-6 prose-strong:text-indigo-600">
+        <div className="prose max-w-none prose-p:mb-4 prose-li:my-2 prose-h2:mt-6 prose-strong:text-indigo-600 leading-relaxed">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {blog.Content}
           </ReactMarkdown>
