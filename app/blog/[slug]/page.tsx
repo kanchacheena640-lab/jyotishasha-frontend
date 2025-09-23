@@ -37,7 +37,6 @@ export default function BlogDetailPage({ params }: BlogProps) {
     return <p className="text-center py-10">Blog not found.</p>;
   }
 
-  // Strapi fields (capitalized as per your JSON)
   const title = blog.Title;
   const description =
     blog.MetaDescription ||
