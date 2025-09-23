@@ -50,8 +50,10 @@ export default function BlogDetailPage({ params }: BlogProps) {
 
   // ✅ Updated: safer and more reliable image logic
   const cover = blog?.CoverImage?.url
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
-    : 'https://jyotishasha.com/default-og.jpg'
+    ? blog.CoverImage.url.startsWith("http")
+      ? blog.CoverImage.url
+      : `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
+    : "https://jyotishasha.com/default-og.jpg";
 
   return (
     <>

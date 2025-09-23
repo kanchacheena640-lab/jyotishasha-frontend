@@ -46,10 +46,11 @@ export default function BlogPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogs.map((blog: any) => {
-            const cover =
-              blog?.CoverImage?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
-                : "https://jyotishasha.com/default-og.jpg";
+            const cover = blog?.CoverImage?.url
+              ? blog.CoverImage.url.startsWith("http")
+                ? blog.CoverImage.url
+                : `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
+              : "https://jyotishasha.com/default-og.jpg";
 
             return (
               <Link key={blog.id} href={`/blog/${blog.Slug}`}>
