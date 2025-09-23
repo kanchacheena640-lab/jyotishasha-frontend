@@ -47,7 +47,7 @@ export default function BlogPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogs.map((blog: any) => {
-            const blogData = blog.attributes;
+            const blogData = blog.attributes; // Fix: unwrap attributes
             const cover =
               blogData?.CoverImage?.data?.attributes?.formats?.medium?.url
                 ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blogData.CoverImage.data.attributes.formats.medium.url}`
@@ -66,8 +66,7 @@ export default function BlogPage() {
                     {blogData.MetaDescription || ""}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    By {blogData.Author || "Jyotishasha Team"} |{" "}
-                    {blogData.Published || ""}
+                    By {blogData.Author || "Jyotishasha Team"} | {blogData.Published || ""}
                   </p>
                 </div>
               </Link>
