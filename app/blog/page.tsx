@@ -22,7 +22,7 @@ export default function BlogPage() {
       }
     }
     fetchBlogs();
-  }, []);
+   }, [i18n.language]);
 
   return (
     <>

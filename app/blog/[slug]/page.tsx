@@ -36,7 +36,7 @@ export default function BlogDetailPage({ params }: BlogProps) {
     }
 
     fetchBlog()
-  }, [slug])
+  }, [slug, i18n.language]);
 
   if (!blog) {
     return <p className="text-center py-10">Blog not found.</p>
