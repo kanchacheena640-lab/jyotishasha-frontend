@@ -5,7 +5,7 @@ import Head from "next/head";
 
 interface BlogProps {
   params: {
-    slug: string; // ✅ lowercase, kyunki folder ka naam [slug] hai
+    slug: string;
   };
 }
 
@@ -37,14 +37,16 @@ export default function BlogDetailPage({ params }: BlogProps) {
     return <p className="text-center py-10">Blog not found.</p>;
   }
 
-  const title = blog.attributes.Title;
+  // Strapi fields (capitalized as per your JSON)
+  const title = blog.Title;
   const description =
-    blog.attributes.MetaDescription ||
-    blog.attributes.Content?.slice(0, 150) ||
+    blog.MetaDescription ||
+    blog.Content?.slice(0, 150) ||
     "Read this blog on Jyotishasha.";
-  const image = blog.attributes.CoverImage?.url
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.attributes.CoverImage.url}`
-    : "https://jyotishasha.com/default-og.jpg";
+  const cover =
+    blog.CoverImage?.url
+      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.CoverImage.url}`
+      : "https://jyotishasha.com/default-og.jpg";
 
   return (
     <>
@@ -54,22 +56,32 @@ export default function BlogDetailPage({ params }: BlogProps) {
         <meta property="og:title" content={`${title} | Jyotishasha`} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://jyotishasha.com/blog/${slug}`} />
-        <meta property="og:image" content={image} />
+        <meta
+          property="og:url"
+          content={`https://jyotishasha.com/blog/${slug}`}
+        />
+        <meta property="og:image" content={cover} />
       </Head>
 
       <div className="max-w-3xl mx-auto p-6">
-        {blog.attributes.CoverImage && (
+        {blog.CoverImage && (
           <img
-            src={image}
-            alt={blog.attributes.Title}
+            src={cover}
+            alt={title}
             className="w-full h-64 object-cover rounded mb-6"
           />
         )}
+
         <h1 className="text-4xl font-bold mb-4">{title}</h1>
-        <div className="prose max-w-none">
-          <p>{blog.attributes.Content}</p>
-        </div>
+
+        <p className="text-sm text-gray-500 mb-6">
+          By {blog.Author || "Jyotishasha Team"} | {blog.Published || ""}
+        </p>
+
+        <div
+          className="prose max-w-none"
+          dangerouslySetInnerHTML={{ __html: blog.Content }}
+        />
       </div>
     </>
   );
