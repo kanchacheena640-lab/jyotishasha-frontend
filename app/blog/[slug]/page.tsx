@@ -53,8 +53,9 @@ export default function BlogDetailPage({ params }: BlogProps) {
   const title = blog?.attributes?.Title || "Untitled Blog";
   const description =
     blog?.attributes?.MetaDescription ||
-    blog?.attributes?.Content?.slice(0, 150) ||
-    "Read this blog on Jyotishasha.";
+    (typeof blog?.attributes?.Content === "string"
+      ? blog.attributes.Content.slice(0, 150)
+      : "Read this blog on Jyotishasha.");
 
   const cover = blog?.attributes?.CoverImage?.data?.attributes?.url
     ? blog.attributes.CoverImage.data.attributes.url.startsWith("http")

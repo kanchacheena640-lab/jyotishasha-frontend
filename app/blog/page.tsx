@@ -35,7 +35,7 @@ export default function BlogListPage() {
     return <p className="text-center py-10">Loading blogs...</p>;
   }
 
-  if (!blogs.length) {
+  if (!Array.isArray(blogs) || blogs.length === 0) {
     return <p className="text-center py-10">No blogs found.</p>;
   }
 
@@ -50,6 +50,12 @@ export default function BlogListPage() {
               : `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.attributes.CoverImage.data.attributes.url}`
             : "https://jyotishasha.com/default-og.jpg";
 
+          const contentPreview =
+            blog.attributes.MetaDescription ||
+            (typeof blog.attributes.Content === "string"
+              ? blog.attributes.Content.slice(0, 150)
+              : "Read this blog on Jyotishasha.");
+
           return (
             <div key={blog.id} className="border-b pb-6">
               <Link href={`/blog/${blog.attributes.Slug}`}>
@@ -61,10 +67,7 @@ export default function BlogListPage() {
                 <h2 className="text-2xl font-semibold mb-2">
                   {blog.attributes.Title}
                 </h2>
-                <p className="text-gray-600">
-                  {blog.attributes.MetaDescription ||
-                    blog.attributes.Content?.slice(0, 150)}
-                </p>
+                <p className="text-gray-600">{contentPreview}</p>
               </Link>
             </div>
           );
