@@ -162,9 +162,17 @@ export default function ReportCheckout() {
           <label className="block mb-1 font-medium">Date of Birth</label>
           <DatePicker
             selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
-            onChange={(date: Date | null) =>
-              setForm((prev) => ({ ...prev, dob: date ? date.toISOString().slice(0, 10) : "" }))
-            }
+              onChange={(date: Date | null) => {
+                if (date) {
+                  const year = date.getFullYear();
+                  const month = String(date.getMonth() + 1).padStart(2, "0");
+                  const day = String(date.getDate()).padStart(2, "0");
+                  const formatted = `${year}-${month}-${day}`; // ✅ no UTC conversion
+                  setForm((prev) => ({ ...prev, dob: formatted }));
+                } else {
+                  setForm((prev) => ({ ...prev, dob: "" }));
+                }
+              }}
             placeholderText="Select your date of birth"
             dateFormat="dd-MM-yyyy"
             isClearable
