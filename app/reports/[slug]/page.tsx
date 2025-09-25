@@ -40,6 +40,11 @@ export default function ReportCheckout() {
     }
   }, []);
 
+  // Warmup ping to wake backend
+      useEffect(() => {
+        fetch("https://jyotishasha-backend.onrender.com/ping").catch(() => {});
+      }, []);
+
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -54,10 +59,10 @@ export default function ReportCheckout() {
     ? rawSlug.join(" ")
     : rawSlug?.replace(/-/g, " ") ?? "your report";
 
-  const handleSubmit = async () => {
-    try {
-      if (!productId) {
-        alert("❗ Product not specified in URL. Please try again.");
+    const handleSubmit = async () => {
+      try {
+        if (!productId) {
+          alert("❗ Product not specified in URL. Please try again.");
         return;
       }
 
