@@ -1,16 +1,21 @@
 "use client";
+import "@/i18n";     
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { reportsData } from "../data/reportsData";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";  
 
 export default function ReportsPage() {
-  const { t } = useTranslation("reports");
+  const { t, ready } = useTranslation("reports");  
+  if (!ready) return null;   
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [modalReport, setModalReport] = useState<null | typeof reportsData[0]>(null);
 
-  const categories = ["All", ...new Set(reportsData.map((r) => r.category))];
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(reportsData.map((r) => r.category)))],
+    []
+  );
 
   const filteredReports =
     selectedCategory === "All"
