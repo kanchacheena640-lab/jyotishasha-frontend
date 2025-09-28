@@ -108,32 +108,20 @@ export default function ReportCheckout() {
         name: "Jyotishasha",
         description: `Payment for ${productId}`,
         order_id: orderData.order_id,
-        handler: function (response: any) {
-          // 1) turant processing screen dikhao
-          window.location.href = "/processing";
-
-          // 2) backend ko data bhejo
-          const payload = {
-            ...form,
-            product: productId,
-            payment_id: response.razorpay_payment_id,
-            order_id: response.razorpay_order_id,
-            signature: response.razorpay_signature,
-          };
-
-          fetch("https://jyotishasha-backend.onrender.com/webhook", {
+        handler: async function (response: any) {
+          await fetch("https://jyotishasha-backend.onrender.com/webhook", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-            keepalive: true, // ✅ navigate hone ke baad bhi request complete ho sake
-          })
-            .catch(() => {})
-            .finally(() => {
-              // 3) 4 sec baad Thank You page
-              setTimeout(() => {
-                window.location.href = "/thank-you";
-              }, 4000);
-            });
+            body: JSON.stringify({
+              ...form,
+              product: productId,
+              payment_id: response.razorpay_payment_id,
+              order_id: response.razorpay_order_id,
+            }),
+          });
+
+          // ✅ Direct thank-you page
+          window.location.href = "/thank-you";
         },
         prefill: {
           name: form.name,
