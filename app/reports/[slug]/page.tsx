@@ -15,35 +15,43 @@ export default function ReportCheckout() {
     pob: "",
     latitude: "",
     longitude: "",
-    language: "",
+    language: "en", // ✅ Default English
   });
 
   const placeRef = useRef<HTMLInputElement | null>(null);
 
-  // Google Places Autocomplete for POB
-  useEffect(() => {
-    if (window.google && placeRef.current) {
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        placeRef.current,
-        { types: ["(cities)"] }
-      );
-
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        setForm((prev) => ({
-          ...prev,
-          pob: place.name || "",
-          latitude: place.geometry?.location?.lat()?.toString() || "",
-          longitude: place.geometry?.location?.lng()?.toString() || "",
-        }));
-      });
-    }
-  }, []);
-
-  // Warmup ping to wake backend
+  // 🌍 Google Places Autocomplete for POB
       useEffect(() => {
-        fetch("https://jyotishasha-backend.onrender.com/ping").catch(() => {});
-      }, []);
+      if (!placeRef.current) return;
+
+      const interval = setInterval(() => {
+        if ((window as any).google?.maps) {
+          clearInterval(interval);
+
+          const input = placeRef.current!;
+          const autocomplete = new (window as any).google.maps.places.Autocomplete(input, {
+            types: ["(cities)"],
+          });
+
+          autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+            setForm((prev) => ({
+              ...prev,
+              pob: place.name || "",
+              latitude: place.geometry?.location?.lat()?.toString() || "",
+              longitude: place.geometry?.location?.lng()?.toString() || "",
+            }));
+          });
+        }
+      }, 300);
+
+      return () => clearInterval(interval);
+    }, [placeRef]);
+
+  // ⏳ Warmup ping to wake backend
+  useEffect(() => {
+    fetch("https://jyotishasha-backend.onrender.com/ping").catch(() => {});
+  }, []);
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -59,20 +67,30 @@ export default function ReportCheckout() {
     ? rawSlug.join(" ")
     : rawSlug?.replace(/-/g, " ") ?? "your report";
 
-    const handleSubmit = async () => {
-      try {
-        if (!productId) {
-          alert("❗ Product not specified in URL. Please try again.");
+  // 💳 Razorpay Checkout (LIVE version logic)
+  const handleSubmit = async () => {
+    if (!form.email || !form.dob || !form.tob || !form.pob) {
+      alert("❗ Please fill all required fields (Email, DOB, TOB, POB)");
+      return;
+    }
+    if (!form.latitude || !form.longitude) {
+      alert("❗ Please select Place of Birth from suggestions");
+      return;
+    }
+
+    try {
+      if (!productId) {
+        alert("❗ Product not specified in URL. Please try again.");
         return;
       }
 
-      // ✅ Use Render backend URL
+      // ✅ Backend decides amount
       const res = await fetch(
         "https://jyotishasha-backend.onrender.com/api/razorpay-order",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product: productId }), // ✅ amount hata diya
+          body: JSON.stringify({ product: productId }),
         }
       );
 
@@ -84,7 +102,7 @@ export default function ReportCheckout() {
       }
 
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // ✅ from .env
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: orderData.amount * 100, // ✅ paise me convert
         currency: orderData.currency,
         name: "Jyotishasha",
@@ -123,142 +141,177 @@ export default function ReportCheckout() {
   };
 
   return (
-  <div className="max-w-xl mx-auto px-4 py-10">
-    <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
-      Fill Your Details for {displaySlug}
-    </h2>
+    <div className="max-w-xl mx-auto px-4 py-10">
+      <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
+        Fill Your Details for {displaySlug}
+      </h2>
 
-    {/* 👤 Personal Info */}
-    <div className="bg-white p-5 rounded-xl shadow mb-4">
-      <h3 className="text-lg font-semibold mb-3 text-purple-700">👤 Personal Details</h3>
-      <div className="space-y-3">
-        <input
-          name="name"
-          type="text"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="Full Name"
-          className="inputStyle placeholderStyle"
-        />
-        <input
-          name="email"
-          type="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Email Address"
-          className="inputStyle placeholderStyle"
-        />
-        <input
-          name="phone"
-          type="tel"
-          value={form.phone}
-          onChange={handleChange}
-          placeholder="Phone Number"
-          className="inputStyle placeholderStyle"
-        />
+      {/* 👤 Personal Info */}
+      <div className="bg-white p-5 rounded-xl shadow mb-4">
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          👤 Personal Details
+        </h3>
+        <div className="space-y-3">
+          <input
+            name="name"
+            type="text"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Full Name"
+            className="inputStyle placeholderStyle"
+          />
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Email Address"
+            className="inputStyle placeholderStyle"
+            required
+          />
+          <input
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="inputStyle placeholderStyle"
+          />
+        </div>
       </div>
-    </div>
 
-    {/* 🔮 Birth Info */}
-    <div className="bg-white p-5 rounded-xl shadow mb-5">
-      <h3 className="text-lg font-semibold mb-3 text-purple-700">🔮 Birth Details</h3>
-      <div className="space-y-3">
-        <div>
-          <label className="block mb-1 font-medium">Date of Birth</label>
-          <DatePicker
-            selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
+      {/* 🔮 Birth Info */}
+      <div className="bg-white p-5 rounded-xl shadow mb-5">
+        <h3 className="text-lg font-semibold mb-3 text-purple-700">
+          🔮 Birth Details
+        </h3>
+        <div className="space-y-3">
+          {/* Date of Birth */}
+          <div className="relative mb-3">
+            <label className="block mb-1 text-sm font-semibold text-gray-700">
+              Date of Birth *
+            </label>
+            <DatePicker
+              selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
               onChange={(date: Date | null) => {
                 if (date) {
                   const year = date.getFullYear();
                   const month = String(date.getMonth() + 1).padStart(2, "0");
                   const day = String(date.getDate()).padStart(2, "0");
-                  const formatted = `${year}-${month}-${day}`; // ✅ no UTC conversion
+                  const formatted = `${year}-${month}-${day}`;
                   setForm((prev) => ({ ...prev, dob: formatted }));
                 } else {
                   setForm((prev) => ({ ...prev, dob: "" }));
                 }
               }}
-            placeholderText="Select your date of birth"
-            dateFormat="dd-MM-yyyy"
-            isClearable
-            withPortal
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
-          />
-        </div>
+              customInput={
+                <div className="relative">
+                  <input
+                    readOnly
+                    value={form.dob}
+                    className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+                  />
+                  {!form.dob && (
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">
+                      DD-MM-YYYY
+                    </span>
+                  )}
+                </div>
+              }
+              dateFormat="dd-MM-yyyy"
+              isClearable
+              withPortal
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
+          </div>
 
-        <div>
-          <label className="block mb-1 font-medium">Time of Birth</label>
-          <div className="relative">
-            {!form.tob && (
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">
-                Time of Birth
-              </span>
-            )}
+          {/* Time of Birth */}
+          <div className="relative mb-3">
+            <label className="block mb-1 text-sm font-semibold text-gray-700">
+              Time of Birth *
+            </label>
             <input
               type="time"
               name="tob"
               value={form.tob}
               onChange={handleChange}
-              className="w-full pl-28 pr-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+              className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
+              required
+            />
+            {!form.tob && (
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">
+                HH:MM
+              </span>
+            )}
+          </div>
+
+          {/* Place of Birth */}
+          <div className="relative mb-3">
+            <label className="block mb-1 text-sm font-semibold text-gray-700">
+              Place of Birth *
+            </label>
+            <input
+              name="pob"
+              type="text"
+              ref={placeRef}
+              value={form.pob}
+              onChange={handleChange}
+              placeholder="Select City"
+              className="inputStyle placeholderStyle"
+              required
             />
           </div>
+
+          {/* Language */}
+          <div className="relative mb-3">
+            <label className="block mb-1 text-sm font-semibold text-gray-700">
+              Language
+            </label>
+            <select
+              name="language"
+              value={form.language}
+              onChange={handleChange}
+              className="inputStyle"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिंदी</option>
+            </select>
+          </div>
         </div>
-        <input
-          name="pob"
-          type="text"
-          ref={placeRef}
-          value={form.pob}
-          onChange={handleChange}
-          placeholder="Place of Birth"
-          className="inputStyle placeholderStyle"
-        />
-        {/* 🌐 Language Select */}
-        <select
-          name="language"
-          value={form.language || ""}
-          onChange={handleChange}
-          className="inputStyle"
-        >
-          <option value="">Select Language</option>
-          <option value="en">English</option>
-          <option value="hi">हिंदी</option>
-        </select>
+        <p className="text-xs text-gray-500 mt-2">
+          🔄 Change details if you're looking for other birth info
+        </p>
       </div>
-      <p className="text-xs text-gray-500 mt-2">
-        🔄 Change details if you're looking for other birth info
-      </p>
+
+      <button
+        onClick={handleSubmit}
+        className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+      >
+        Proceed to Pay ₹{price}
+      </button>
+
+      <style jsx>{`
+        .inputStyle {
+          width: 100%;
+          padding: 10px 12px;
+          font-size: 15px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          outline: none;
+          background-color: #fff;
+          color: #333;
+        }
+        .inputStyle:focus {
+          border-color: #a855f7;
+          box-shadow: 0 0 0 2px #ddd6fe;
+        }
+        .placeholderStyle::placeholder {
+          color: #9ca3af !important;
+          opacity: 1;
+        }
+      `}</style>
     </div>
-
-    <button
-      onClick={handleSubmit}
-      className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
-    >
-      Proceed to Pay ₹{price}
-    </button>
-
-    <style jsx>{`
-      .inputStyle {
-        width: 100%;
-        padding: 10px 12px;
-        font-size: 15px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        outline: none;
-        background-color: #fff;
-        color: #333;
-      }
-      .inputStyle:focus {
-        border-color: #a855f7;
-        box-shadow: 0 0 0 2px #ddd6fe;
-      }
-      .placeholderStyle::placeholder {
-        color: #7c4a27 !important;
-        opacity: 1;
-      }
-    `}</style>
-  </div>
-);
+  );
 }
