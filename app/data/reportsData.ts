@@ -138,7 +138,7 @@ export const reportsData: Report[] = [
   {
     title: "Jupiter Transit Report",
     slug: "jupiter_transit_report",
-    price: 1,
+    price: 49,
     image: "/reports/jupiter_transit_report.webp",
     category: "Transit",
     description: "Know how Jupiter’s current transit impacts your career, finance, and relationships.",
