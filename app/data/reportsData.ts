@@ -12,7 +12,7 @@ export const reportsData: Report[] = [
   {
     title: "Sadhesati Report",
     slug: "sadhesati_report",
-    price: 49,
+    price: 99,
     image: "/reports/sadhesati-report.webp",
     category: "Transit",
     description: "Detailed Saturn Sadhesati report.",
@@ -21,7 +21,7 @@ export const reportsData: Report[] = [
   {
     title: "Financial Report",
     slug: "financial_report",
-    price: 49,
+    price: 99,
     image: "/reports/financial-report.webp",
     category: "Finance",
     description: "Gain insights into your financial growth through astrological analysis.",
@@ -30,7 +30,7 @@ export const reportsData: Report[] = [
   {
     title: "Love & Relationship Report",
     slug: "love_relationship_report",
-    price: 49,
+    price: 99,
     image: "/reports/love-life-report.webp",
     category: "Love",
     description: "Explore your love life and relationship patterns through your birth chart.",
@@ -39,7 +39,7 @@ export const reportsData: Report[] = [
   {
     title: "Marriage Report",
     slug: "marriage_report",
-    price: 49,
+    price: 99,
     image: "/reports/marriage-report.webp",
     category: "Marriage",
     description: "Understand your marriage prospects through birth chart and dasha insights.",
@@ -48,7 +48,7 @@ export const reportsData: Report[] = [
   {
     title: "Startup Suggestion Report",
     slug: "startup_suggestion_report",
-    price: 49,
+    price: 99,
     image: "/reports/startup-suggestion-report.webp",
     category: "Finance",
     description: "Discover the best startup path for you based on your birth chart and dasha phase.",
@@ -57,7 +57,7 @@ export const reportsData: Report[] = [
   {
     title: "Love Marriage Report",
     slug: "love_marriage_report",
-    price: 49,
+    price: 99,
     image: "/reports/love-marriage-report.webp",
     category: "Marriage",
     description: "Understand your chances of love marriage through astrological insights.",
@@ -66,7 +66,7 @@ export const reportsData: Report[] = [
   {
     title: "Government Job Report",
     slug: "government_job_report",
-    price: 49,
+    price: 99,
     image: "/reports/government-job-report.webp",
     category: "Self",
     description: "Discover your potential for a government career through astrology.",
@@ -75,7 +75,7 @@ export const reportsData: Report[] = [
   {
     title: "Foreign Travel Report",
     slug: "foreign_travel_report",
-    price: 49,
+    price: 99,
     image: "/reports/foreign-travel-report.webp",
     category: "Self",
     description: "Know your chances of foreign travel through astrological guidance.",
@@ -84,7 +84,7 @@ export const reportsData: Report[] = [
   {
     title: "Business Report",
     slug: "business_report",
-    price: 49,
+    price: 99,
     image: "/reports/business-report.webp",
     category: "Self",
     description: "Discover your business potential and opportunities through astrology.",
@@ -93,7 +93,7 @@ export const reportsData: Report[] = [
   {
     title: "Career Report",
     slug: "career_report",
-    price: 49,
+    price: 99,
     image: "/reports/career-report.webp",
     category: "Self",
     description: "Understand your career path and growth through astrology.",
@@ -102,7 +102,7 @@ export const reportsData: Report[] = [
   {
     title: "Gemstone Consultation",
     slug: "gemstone_consultation",
-    price: 21,
+    price: 99,
     image: "/reports/gemstone_consultation.webp",
     category: "Self",
     description: "Get personalized gemstone recommendations based on your birth chart for luck, good quality lifestyle, and success.",
@@ -111,7 +111,7 @@ export const reportsData: Report[] = [
   {
     title: "Children Parenting Report",
     slug: "children_parenting_report",
-    price: 49,
+    price: 99,
     image: "/reports/children_parenting_report.webp",
     category: "Self",
     description: "Understand your child’s traits and parenting guidance based on astrology.",
@@ -120,7 +120,7 @@ export const reportsData: Report[] = [
   {
     title: "Delay in Marriage Report",
     slug: "delay_in_marriage_report",
-    price: 49,
+    price: 99,
     image: "/reports/delay_in_marriage_report.webp",
     category: "Marriage",
     description: "Find the astrological reasons behind marriage delays and remedies for timely settlement.",
@@ -129,7 +129,7 @@ export const reportsData: Report[] = [
   {
     title: "Financial Stability Report",
     slug: "financial_stability_report",
-    price: 49,
+    price: 99,
     image: "/reports/financial_stability_report.webp",
     category: "Finance",
     description: "Discover your long-term financial potential and stability through Vedic astrology.",
@@ -138,7 +138,7 @@ export const reportsData: Report[] = [
   {
     title: "Jupiter Transit Report",
     slug: "jupiter_transit_report",
-    price: 49,
+    price: 99,
     image: "/reports/jupiter_transit_report.webp",
     category: "Transit",
     description: "Know how Jupiter’s current transit impacts your career, finance, and relationships.",
@@ -147,7 +147,7 @@ export const reportsData: Report[] = [
   {
     title: "Lifestyle Analysis Report",
     slug: "lifestyle_analysis_report",
-    price: 25,
+    price: 99,
     image: "/reports/lifestyle_analysis_report.webp",
     category: "Self",
     description: "Get insights on your health, habits, and lifestyle patterns based on your birth chart.",
@@ -156,7 +156,7 @@ export const reportsData: Report[] = [
   {
     title: "Love Disappointment Report",
     slug: "love_disappointment_report",
-    price: 25,
+    price: 99,
     image: "/reports/love_disappointment_report.webp",
     category: "Love",
     description: "Understand the reasons for love setbacks and guidance to overcome emotional challenges.",
@@ -165,7 +165,7 @@ export const reportsData: Report[] = [
   {
     title: "Problem in Marriage Report",
     slug: "problem_in_marriage_report",
-    price: 25,
+    price: 99,
     image: "/reports/problem_in_marriage_report.webp",
     category: "Marriage",
     description: "Identify causes of conflict in marriage and find practical solutions for harmony.",
@@ -174,7 +174,7 @@ export const reportsData: Report[] = [
   {
     title: "Mood & Mental Health Report",
     slug: "mood_mental_health_report",
-    price: 25,
+    price: 99,
     image: "/reports/mood_mental_health_report.webp",
     category: "Self",
     description: "Understand your emotional balance and mental health patterns through astrology.",
@@ -183,7 +183,7 @@ export const reportsData: Report[] = [
   {
     title: "Property Report",
     slug: "property_report",
-    price: 25,
+    price: 99,
     image: "/reports/property_report.webp",
     category: "Finance",
     description: "Know the chances of property purchase, inheritance, and real estate gains.",
@@ -192,7 +192,7 @@ export const reportsData: Report[] = [
   {
     title: "Saturn Transit Report",
     slug: "saturn_transit_report",
-    price: 25,
+    price: 99,
     image: "/reports/saturn_transit_report.webp",
     category: "Transit",
     description: "Discover how Saturn’s transit impacts your career, discipline, and responsibilities.",
@@ -201,7 +201,7 @@ export const reportsData: Report[] = [
   {
     title: "Second Marriage Report",
     slug: "second_marriage_report",
-    price: 25,
+    price: 99,
     image: "/reports/second_marriage_report.webp",
     category: "Marriage",
     description: "Analyze prospects of remarriage and possibilities of finding a compatible partner again.",
@@ -210,7 +210,7 @@ export const reportsData: Report[] = [
   {
     title: "Divorce Possibility Report",
     slug: "divorce_possibility_report",
-    price: 49,
+    price: 99,
     image: "/reports/divorce_possibility_report.webp",
     category: "Self",
     description: "Know the astrological factors that may indicate separation or divorce in marriage.",
@@ -219,7 +219,7 @@ export const reportsData: Report[] = [
   {
     title: "Legal Disputes Report",
     slug: "legal_disputes_report",
-    price: 49,
+    price: 99,
     image: "/reports/legal_disputes_report.webp",
     category: "Self",
     description: "Get clarity on legal disputes, conflicts, and chances of settlement from your chart.",
