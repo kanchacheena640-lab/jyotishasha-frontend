@@ -6,6 +6,8 @@ import '../i18n'; // import i18n config
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useEffect } from "react";
 import { apiGet } from "@/lib/api";
+import PanchangWidget from "@/components/PanchangWidget";
+
 
 
 export default function Home() {
@@ -54,30 +56,7 @@ export default function Home() {
       <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
         🪔 Today’s Panchang
       </h1>
-
-      {/* Panchang Summary */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 text-left">
-        <div className="bg-white/10 border border-purple-500/30 rounded-xl p-4">
-          <p className="text-sm text-purple-200 font-semibold">🌅 Sunrise</p>
-          <p className="text-lg text-white font-bold">06:17 AM</p>
-        </div>
-        <div className="bg-white/10 border border-purple-500/30 rounded-xl p-4">
-          <p className="text-sm text-purple-200 font-semibold">🌇 Sunset</p>
-          <p className="text-lg text-white font-bold">06:00 PM</p>
-        </div>
-        <div className="bg-white/10 border border-green-500/30 rounded-xl p-4">
-          <p className="text-sm text-green-200 font-semibold">✨ Auspicious</p>
-          <p className="text-lg text-white font-bold">11:44 – 12:32</p>
-          <p className="text-xs text-green-300 mt-1">Abhijit Muhurtha</p>
-        </div>
-        <div className="bg-white/10 border border-red-500/30 rounded-xl p-4">
-          <p className="text-sm text-red-200 font-semibold">⚠️ Inauspicious</p>
-          <p className="text-lg text-white font-bold">16:32 – 18:00</p>
-          <p className="text-xs text-red-300 mt-1">Rahu Kaal</p>
-        </div>
-      </div>
-
-      {/* Panchang Tool Cards removed */}
+      <PanchangWidget />
       
       <div className="text-center mt-8">
         <Link
