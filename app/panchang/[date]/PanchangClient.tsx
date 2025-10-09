@@ -70,7 +70,7 @@ export default function PanchangClient({ params }: { params: { date: string } })
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/panchang`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/panchang`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

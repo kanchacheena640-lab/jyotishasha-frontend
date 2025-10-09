@@ -48,7 +48,7 @@ export default function ShubhDates({ params }: ShubhDatesProps) {
     async function fetchDates() {
       try {
         setLoading(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/muhurth/list`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/muhurth/list`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
