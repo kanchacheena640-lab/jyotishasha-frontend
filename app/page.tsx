@@ -35,9 +35,9 @@ export default function Home() {
     { name: "Your Love Life", emoji: "❤️", link: "/tools/love-life" },
     { name: "Your Career", emoji: "📖", link: "/tools/career-path" },
     { name: "Foreign Travel", emoji: "✈️", link: "/tools/foreign-travel" },
-    { name: "Sadhesati Report", emoji: "🪐", link: "/tools/sadhesati-calculator" },
+    { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-calculator" },
     { name: "Business Report", emoji: "💼", link: "/reports/business_report" },
-    { name: "Government Job", emoji: "👍", link: "/reports/government_job_report" }
+    { name: "Government Job", emoji: "👍", link: "/reports/government-job" }
   ];
 
   useEffect(() => {
@@ -49,6 +49,46 @@ export default function Home() {
 
   return (
     <div className="text-center pt-24 bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] min-h-screen">
+    {/* 🪔 Panchang & Muhurtha Preview Section */}
+    <section className="max-w-5xl mx-auto px-6 py-12">
+      <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
+        🪔 Today’s Panchang
+      </h1>
+
+      {/* Panchang Summary */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 text-left">
+        <div className="bg-white/10 border border-purple-500/30 rounded-xl p-4">
+          <p className="text-sm text-purple-200 font-semibold">🌅 Sunrise</p>
+          <p className="text-lg text-white font-bold">06:17 AM</p>
+        </div>
+        <div className="bg-white/10 border border-purple-500/30 rounded-xl p-4">
+          <p className="text-sm text-purple-200 font-semibold">🌇 Sunset</p>
+          <p className="text-lg text-white font-bold">06:00 PM</p>
+        </div>
+        <div className="bg-white/10 border border-green-500/30 rounded-xl p-4">
+          <p className="text-sm text-green-200 font-semibold">✨ Auspicious</p>
+          <p className="text-lg text-white font-bold">11:44 – 12:32</p>
+          <p className="text-xs text-green-300 mt-1">Abhijit Muhurtha</p>
+        </div>
+        <div className="bg-white/10 border border-red-500/30 rounded-xl p-4">
+          <p className="text-sm text-red-200 font-semibold">⚠️ Inauspicious</p>
+          <p className="text-lg text-white font-bold">16:32 – 18:00</p>
+          <p className="text-xs text-red-300 mt-1">Rahu Kaal</p>
+        </div>
+      </div>
+
+      {/* Panchang Tool Cards removed */}
+      
+      <div className="text-center mt-8">
+        <Link
+          href="/panchang/today"
+          className="px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white font-semibold rounded-full transition"
+        >
+          View Full Panchang & Muhurth →
+        </Link>
+      </div>
+    </section>
+
       {/* Zodiac Signs Grid */}
       <section className="max-w-5xl mx-auto px-6 py-12">
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">
@@ -120,7 +160,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 {t('reports.sadhesati.desc')}
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
               <Link href="/reports/sadhesati_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
@@ -137,7 +177,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 Financial insights & wealth prediction for your future.
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
               <Link href="/reports/financial_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
@@ -154,7 +194,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 Analyze your love life, compatibility and challenges.
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
               <Link href="/reports/love_relationship_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
@@ -171,7 +211,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 Get predictions about your married life & partner.
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
               <Link href="/reports/marriage_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now

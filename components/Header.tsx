@@ -76,6 +76,7 @@ export default function Header() {
       Astrology
     </Link>
     <Link href="/reports">Reports</Link>
+    <Link href="/panchang">Panchang</Link>
     <Link href="/gemstone-consult" suppressHydrationWarning>
       Rashi by Name
     </Link>
@@ -92,6 +93,9 @@ export default function Header() {
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Astrology</span>
       </Link>
       <Link href="/reports" passHref>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Reports</span>
+      </Link>
+      <Link href="/panchang" passHref>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Reports</span>
       </Link>
       <Link href="/gemstone-consult" passHref suppressHydrationWarning>
