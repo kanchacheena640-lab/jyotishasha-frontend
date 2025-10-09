@@ -96,7 +96,7 @@ export default function Header() {
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Reports</span>
       </Link>
       <Link href="/panchang" passHref>
-        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Reports</span>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Panchang</span>
       </Link>
       <Link href="/gemstone-consult" passHref suppressHydrationWarning>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Rashi by Name</span>
