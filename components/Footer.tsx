@@ -58,6 +58,18 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
         <p>© {new Date().getFullYear()} Jyotishasha. All Rights Reserved.</p>
+        <div className="mt-2 text-gray-400 text-xs">
+          Content Partner:{" "}
+          <a
+            href="https://www.astroblog.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-400 hover:text-purple-300 font-medium"
+          >
+            AstroBlog
+          </a>{" "}
+          — Your trusted source for astrology news, insights & educational articles.
+        </div>
         <div className="flex justify-center space-x-4 mt-2">
           <img src="/payments/razorpay.png" alt="Razorpay" className="h-6 w-auto" />
           <img src="/payments/upi.png" alt="UPI" className="h-10 w-auto" />
