@@ -139,7 +139,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 {t('reports.sadhesati.desc')}
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
               <Link href="/reports/sadhesati_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
@@ -156,7 +156,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 Financial insights & wealth prediction for your future.
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
               <Link href="/reports/financial_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
@@ -173,7 +173,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 Analyze your love life, compatibility and challenges.
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
               <Link href="/reports/love_relationship_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
@@ -190,7 +190,7 @@ export default function Home() {
               <p className="text-gray-600 text-sm mb-3">
                 Get predictions about your married life & partner.
               </p>
-              <p className="text-blue-700 font-semibold mb-3">Price: ₹49</p>
+              <p className="text-blue-700 font-semibold mb-3">Price: ₹99</p>
               <Link href="/reports/marriage_report" passHref>
               <button className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                 Buy Now
