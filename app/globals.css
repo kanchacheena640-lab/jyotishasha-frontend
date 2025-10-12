@@ -26,3 +26,50 @@ body {
 .animate-blink-once {
   animation: blinkPulse 1.2s ease-out;
 }
+/* ================= 🌐 BLOG & ASTROBLOG STYLING START ================= */
+
+/* 🌐 Blog link styling for imported Astroblog/Jyotishasha content */
+.prose a,
+.blog-content a,
+.article-body a {
+  color: #3b82f6; /* blue-500 */
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed #60a5fa; /* light blue underline */
+  transition: color 0.2s, border-color 0.2s, text-shadow 0.2s;
+}
+
+.prose a:hover,
+.blog-content a:hover,
+.article-body a:hover {
+  color: #1d4ed8; /* darker blue-700 */
+  border-color: #1d4ed8;
+  text-decoration: underline;
+  text-shadow: 0 0 6px rgba(59, 130, 246, 0.6);
+}
+
+/* 🪔 Headings from blog/Astroblog content */
+.prose h2,
+.blog-content h2,
+.article-body h2 {
+  color: #111827; /* almost black (Tailwind gray-900) */
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  border-left: 4px solid #3b82f6; /* blue accent line */
+  padding-left: 0.75rem;
+  line-height: 1.4;
+}
+
+.prose h3,
+.blog-content h3,
+.article-body h3 {
+  color: #1f2937; /* dark gray */
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+/* ================= 🌐 BLOG & ASTROBLOG STYLING END ================= */
+
