@@ -3,6 +3,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Script from "next/script";
 import AdminAwareLayout from "../components/AdminAwareLayout";
 import "react-datepicker/dist/react-datepicker.css";
+import { LanguageProvider } from "@/context/LanguageContext"; // 🆕 added
+
 
 export const metadata = {
   title: "Jyotishasha",

@@ -11,6 +11,18 @@ const nextConfig = {
       },
     ];
   },
+ // 👇 Added: allow AstroBlog images
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'astroblog.in',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.astroblog.in',
+      },
+    ],
+  },
 };
-
 module.exports = nextConfig;
