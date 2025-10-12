@@ -54,7 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="afterInteractive"
         />
 
-        <AdminAwareLayout>{children}</AdminAwareLayout>
+        <LanguageProvider>
+          <AdminAwareLayout>{children}</AdminAwareLayout>
+        </LanguageProvider>
+
+                {/* WhatsApp floating button */}
 
         <a
           href="https://wa.me/917007012255"

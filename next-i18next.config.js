@@ -2,7 +2,7 @@ module.exports = {
   i18n: {
     locales: ['en', 'hi'],
     defaultLocale: 'en',
-    ns: ['common', 'reports'],     // ✅ namespaces list
-    defaultNS: 'common',           // ✅ default namespace
   },
+  ns: ['common', 'home'],       // 👍 यह अब बाहर है
+  defaultNS: 'common',
 };
