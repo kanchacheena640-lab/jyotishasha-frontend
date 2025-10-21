@@ -1,0 +1,28 @@
+/* 🌌 Dasha Timeline Custom Styles */
+
+.dasha-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.dasha-scroll::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.5); /* Indigo-500 */
+  border-radius: 10px;
+}
+
+.dasha-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(129, 140, 248, 0.8);
+}
+
+/* ✨ Glow for active Mahadasha */
+.active-dasha {
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+
+/* 🩵 Hover glow for Antardasha items */
+.antardasha-hover:hover {
+  color: #a5b4fc; /* Indigo-300 */
+  transform: translateX(4px);
+  transition: all 0.2s ease;
+}
