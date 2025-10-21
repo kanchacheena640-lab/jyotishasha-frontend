@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
@@ -8,8 +9,6 @@ import Script from "next/script";
 import DignityBadge from "@/components/DignityBadge";
 import { getDignity } from "@/lib/astro/dignity";
 import DashaTimeline from "@/components/DashaTimeline/DashaTimeline";
-
-
 
 // ✅ Structured Schema Data (App Info)
 const schemaData = {
@@ -53,7 +52,6 @@ interface KundaliPayload {
   grah_dasha_block?: any;
   moon_traits?: any;
   chart_image?: string;
-   
   life_aspects?: {
     aspect: string;
     houses: string;
@@ -69,30 +67,38 @@ interface KundaliPayload {
   }[];
 }
 
+// ✅ Wrap main export in Suspense to fix Next.js build error
 export default function FreeBirthChartResultPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] text-white">
+          <Image src="/loader-astro.gif" alt="Loading Kundali" width={120} height={120} />
+          <p className="mt-4 text-indigo-300 font-medium">Preparing your Kundali...</p>
+        </div>
+      }
+    >
+      <KundaliPageContent />
+    </Suspense>
+  );
+}
+
+// ✅ Actual page content moved here (where useSearchParams runs)
+function KundaliPageContent() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<KundaliPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // ✅ Yahan daalo — NOT inside return, NOT inside (() => { })
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const handleToggle = (i: number) => setOpenIndex(prev => (prev === i ? null : i));
 
-  const handleToggle = (i: number) => {
-    setOpenIndex((prev) => (prev === i ? null : i));
-  };
-  // 🌿 Yoga toggle state (Top level)
   const [openYogaIndex, setOpenYogaIndex] = useState<number | null>(null);
+  const handleYogaToggle = (i: number) => setOpenYogaIndex(prev => (prev === i ? null : i));
 
-  const handleYogaToggle = (i: number) => {
-    setOpenYogaIndex((prev) => (prev === i ? null : i));
-  };
-  // 🌌 Life Aspects toggle state (independent from planets)
   const [openLifeAspectIndex, setOpenLifeAspectIndex] = useState<number | null>(null);
-
-  const handleLifeAspectToggle = (i: number) => {
-    setOpenLifeAspectIndex((prev) => (prev === i ? null : i));
-  };
+  const handleLifeAspectToggle = (i: number) =>
+    setOpenLifeAspectIndex(prev => (prev === i ? null : i));
 
   const name = searchParams.get("name") || "";
   const gender = searchParams.get("gender") || "";
