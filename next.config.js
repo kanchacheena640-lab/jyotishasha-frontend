@@ -11,9 +11,9 @@ const nextConfig = {
       },
     ];
   },
- // 👇 Added: allow AstroBlog images
   images: {
     remotePatterns: [
+      // ✅ AstroBlog images
       {
         protocol: 'https',
         hostname: 'astroblog.in',
@@ -22,7 +22,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.astroblog.in',
       },
+
+      // ✅ Your Render backend (for Kundali & Moon Sign images)
+      {
+        protocol: 'https',
+        hostname: 'jyotishasha-backend.onrender.com',
+      },
     ],
   },
 };
+
 module.exports = nextConfig;
