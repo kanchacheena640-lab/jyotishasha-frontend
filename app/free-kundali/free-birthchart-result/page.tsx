@@ -39,6 +39,7 @@ interface Planet {
 interface KundaliPayload {
   profile?: any;
   lagna_sign?: string;
+  lagna_trait?: string; 
   rashi?: string;
   chart_data?: {
     ascendant?: string;
@@ -326,14 +327,24 @@ function KundaliPageContent() {
               🪐 Birthchart Snippet
             </h2>
 
+            {/* 🧩 Ascendant Text */}
             <p className="leading-relaxed text-[15px] whitespace-pre-line text-justify mb-4">
-              {language === "hi"
-                ? data?.planet_overview?.find((p) => p.planet === "Ascendant (Lagna)")?.text_hi ||
-                  "आपका लग्न शुभ स्थान पर स्थित है, जो आपके व्यक्तित्व में संतुलन और आकर्षण लाता है।"
-                : data?.planet_overview?.find((p) => p.planet === "Ascendant (Lagna)")?.text_en ||
-                  "Your Ascendant defines your personality, confidence, and how you interact with the world."}
+              {data?.lagna_trait ? (
+                <>{data.lagna_trait}</>
+              ) : language === "hi" ? (
+                <>
+                  {data?.planet_overview?.find((p) => p.planet === "Ascendant (Lagna)")?.text_hi ||
+                    "आपका लग्न शुभ स्थान पर स्थित है, जो आपके व्यक्तित्व में संतुलन और आकर्षण लाता है।"}
+                </>
+              ) : (
+                <>
+                  {data?.planet_overview?.find((p) => p.planet === "Ascendant (Lagna)")?.text_en ||
+                    "Your Ascendant defines your personality, confidence, and how you interact with the world."}
+                </>
+              )}
             </p>
 
+            {/* 🕉️ Dasha Line */}
             <div className="text-[15px] text-gray-800 leading-relaxed text-justify mb-6">
               {language === "hi" ? (
                 <>
@@ -362,13 +373,13 @@ function KundaliPageContent() {
               )}
             </div>
 
+            {/* ✨ Closing Line */}
             <div className="pt-3 border-t border-indigo-100 text-sm text-indigo-700/70 text-center">
               {language === "hi"
                 ? "⭐ यह कुंडली आपके जीवन की दिशा को समझने की पहली झलक देती है।"
                 : "⭐ This is the first glimpse of your life's cosmic blueprint."}
             </div>
           </div>
-        </div>
       {/* 🌟 House-wise Planetary Positions (Hindi + English both supported, fixed Hindi fallback) */}
       {data.houses_overview && data.houses_overview.length > 0 && (
       <div className="mt-12">
