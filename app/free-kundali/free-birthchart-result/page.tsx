@@ -291,7 +291,7 @@ function KundaliPageContent() {
             />
           )}
         </div>
-      </div>
+      
         {/* 🌟 Kundali Chart Centered + Snippet Below (Final Vertical Layout) */}
         <div className="flex flex-col items-center justify-center mt-8 space-y-8">
 
@@ -320,7 +320,7 @@ function KundaliPageContent() {
               )}
             </div>
           </div>
-
+        
           {/* 📜 Snippet Below Chart */}
           <div className="w-full max-w-3xl bg-white/95 p-8 rounded-2xl border border-indigo-200/50 shadow-lg text-black">
             <h2 className="text-2xl font-semibold text-indigo-700 mb-4 text-center">
@@ -1084,6 +1084,7 @@ function KundaliPageContent() {
           </div>
         )}
       </div>
+    </div>
     </section>
   );
 }
