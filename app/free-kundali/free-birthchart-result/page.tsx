@@ -291,7 +291,7 @@ function KundaliPageContent() {
             />
           )}
         </div>
-      
+      </div>
         {/* 🌟 Kundali Chart Centered + Snippet Below (Final Vertical Layout) */}
         <div className="flex flex-col items-center justify-center mt-8 space-y-8">
 
