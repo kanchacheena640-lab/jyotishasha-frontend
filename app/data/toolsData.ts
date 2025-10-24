@@ -1,5 +1,13 @@
 export const toolsData = [
   {
+    title: "Free Kundali",
+    slug: "free-kundali",
+    category: "Basic",
+    emoji: "🪐",
+    description: "Get your Free Janam Kundali Online with detailed Lagna, Moon Sign, Yogas, and Doshas — accurate Vedic Birth Chart Analysis instantly.",
+    badge: "🔥 Trending"
+  },
+  {
     title: "Rashi Finder",
     slug: "rashi-finder",
     category: "Basic",
