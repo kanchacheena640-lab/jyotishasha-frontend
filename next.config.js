@@ -11,23 +11,20 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/tools/free-kundali',
+        destination: '/free-kundali',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
-      // ✅ AstroBlog images
-      {
-        protocol: 'https',
-        hostname: 'astroblog.in',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.astroblog.in',
-      },
-
-      // ✅ Your Render backend (for Kundali & Moon Sign images)
-      {
-        protocol: 'https',
-        hostname: 'jyotishasha-backend.onrender.com',
-      },
+      { protocol: 'https', hostname: 'astroblog.in' },
+      { protocol: 'https', hostname: 'www.astroblog.in' },
+      { protocol: 'https', hostname: 'jyotishasha-backend.onrender.com' },
     ],
   },
 };
