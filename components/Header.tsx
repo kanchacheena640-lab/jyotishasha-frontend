@@ -72,6 +72,7 @@ export default function Header() {
   {/* Desktop Nav */}
   <nav className="hidden md:flex justify-center gap-8 text-lg text-white mt-3" style={{ fontFamily: 'Playfair Display, serif' }}>
     <Link href="/">Home</Link>
+    <Link href="/free-kundali">Free-Kudnali</Link>
     <Link href="/tools" suppressHydrationWarning>
       Astrology
     </Link>
@@ -88,6 +89,9 @@ export default function Header() {
     <div className="bg-[#1e1b4b] rounded-b-lg p-4 flex flex-col gap-4 text-white md:hidden mt-2 z-40">
       <Link href="/" passHref>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Home</span>
+      </Link>
+      <Link href="/free-kundali" passHref>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Free-Kundali</span>
       </Link>
       <Link href="/tools" passHref suppressHydrationWarning>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Astrology</span>
