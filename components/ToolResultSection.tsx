@@ -268,30 +268,26 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* 🌅 Lagna (Ascendant) Result Section */}
+          {/* 🌅 Lagna Finder Result Section */}
           {(result.toolId?.toLowerCase() === 'lagna-finder' || result.toolId?.toLowerCase() === 'lagna_finder') &&
-            kundaliData.lagna_sign && (
-              <div className="p-5 bg-green-50 border border-green-200 rounded-2xl shadow-sm">
-                <h2 className="text-xl font-semibold text-green-900 mb-1">
-                  Ascendant (Lagna): {kundaliData.lagna_sign}
-                </h2>
-
-                {kundaliData.lagna_trait ? (
-                  <p
-                    className="text-sm text-gray-800 leading-relaxed whitespace-pre-line"
-                    dangerouslySetInnerHTML={{
-                      __html: kundaliData.lagna_trait
-                        .replace(/Nakshatra of\s+([\w\s]+),\s+Pada\s+(\d+)/gi, '<strong>Nakshatra of $1, Pada $2</strong>')
-                        .replace(/यह\s+([\w\s]+)\s+नक्षत्र,\s+पद\s+(\d+)/gi, '<strong>यह $1 नक्षत्र, पद $2</strong>'),
-                    }}
-                  />
-                ) : (
-                  <p className="text-sm text-gray-600 italic"> 
-                    Lagna description not available.
-                  </p>
-                )}
-              </div>
+            kundaliData.planet_overview && (
+              kundaliData.planet_overview
+                .filter((p: any) => p.planet === 'Ascendant (Lagna)')
+                .map((p: any, idx: number) => (
+                  <div
+                    key={idx}
+                    className="p-5 bg-green-50 border border-green-200 rounded-2xl shadow-sm"
+                  >
+                    <h2 className="text-xl font-semibold text-green-900 mb-1">
+                      Ascendant (Lagna): {kundaliData.lagna_sign || p.summary.split(',')[0].replace('• Position: ', '')}
+                    </h2>
+                    <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">
+                      {p.text}
+                    </p>
+                  </div>
+                ))
             )}
+
 
           {/* 🌙 Rashi Traits */}
           {result.toolId === 'rashi-finder' && kundaliData.moon_traits && (
