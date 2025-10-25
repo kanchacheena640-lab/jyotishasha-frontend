@@ -384,206 +384,208 @@ function KundaliPageContent() {
                 : "⭐ This is the first glimpse of your life's cosmic blueprint."}
             </div>
           </div>
-      {/* 🌟 House-wise Planetary Positions (Hindi + English both supported, fixed Hindi fallback) */}
+      {/* 🌟 House-wise Planetary Positions (Fully Responsive + Corrected Version) */}
       {data.houses_overview && data.houses_overview.length > 0 && (
-      <div className="mt-12">
-        {/* 🌟 Heading + Legend (bilingual) */}
-        <div className="mb-6 text-center px-2">
-          <h2 className="text-lg sm:text-2xl font-semibold text-indigo-300 mb-2 leading-snug break-words">
-            {language === "hi"
-              ? "🏠 भाव अनुसार ग्रह स्थिति (House-wise Planetary Positions)"
-              : "🏠 House-wise Planetary Positions (भाव अनुसार ग्रह स्थिति)"}
-          </h2>
-          <p className="text-xs sm:text-sm text-indigo-400 font-medium px-1">
-            (E = Exalted / उच्च, D = Debilitated / नीच, O = Own Sign / स्वगृह, MT = Mooltrikon / मूलत्रिकोण)
-          </p>
-        </div>
+        <div className="mt-12 w-full">
+          {/* 🌟 Heading + Legend (bilingual) */}
+          <div className="mb-6 text-center px-3">
+            <h2 className="text-lg sm:text-2xl font-semibold text-indigo-300 mb-2 leading-snug break-words">
+              {language === "hi"
+                ? "🏠 भाव अनुसार ग्रह स्थिति (House-wise Planetary Positions)"
+                : "🏠 House-wise Planetary Positions (भाव अनुसार ग्रह स्थिति)"}
+            </h2>
+            <p className="text-xs sm:text-sm text-indigo-400 font-medium">
+              (E = Exalted / उच्च, D = Debilitated / नीच, O = Own Sign / स्वगृह, MT = Mooltrikon / मूलत्रिकोण)
+            </p>
+          </div>
 
-        {/* ✅ Table section wrapped properly inside one block */}
-        {(() => {
-          const signNames = [
-            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
-          ];
+          {/* ✅ Table section wrapped properly inside one block */}
+          {(() => {
+            // 🔧 Helper maps and functions
+            const signNames = [
+              "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+              "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+            ];
 
-          const signHiMap: Record<string, string> = {
-            Aries: "मेष",
-            Taurus: "वृषभ",
-            Gemini: "मिथुन",
-            Cancer: "कर्क",
-            Leo: "सिंह",
-            Virgo: "कन्या",
-            Libra: "तुला",
-            Scorpio: "वृश्चिक",
-            Sagittarius: "धनु",
-            Capricorn: "मकर",
-            Aquarius: "कुंभ",
-            Pisces: "मीन",
-          };
+            const signHiMap: Record<string, string> = {
+              Aries: "मेष",
+              Taurus: "वृषभ",
+              Gemini: "मिथुन",
+              Cancer: "कर्क",
+              Leo: "सिंह",
+              Virgo: "कन्या",
+              Libra: "तुला",
+              Scorpio: "वृश्चिक",
+              Sagittarius: "धनु",
+              Capricorn: "मकर",
+              Aquarius: "कुंभ",
+              Pisces: "मीन",
+            };
 
-          const ordinal = (n: number) => {
-            const s = ["th", "st", "nd", "rd"], v = n % 100;
-            return n + (s[(v - 20) % 10] || s[v] || s[0]);
-          };
+            const getHouseSign = (houseNum: number) => {
+              const idx = (lagnaRashi - 1 + (houseNum - 1)) % 12;
+              return signNames[idx];
+            };
 
-          const getHouseSign = (houseNum: number) => {
-            const idx = (lagnaRashi - 1 + (houseNum - 1)) % 12;
-            return signNames[idx];
-          };
+            const formatDeg = (val: any) => {
+              const num = typeof val === "number" ? val : parseFloat(val);
+              if (Number.isNaN(num)) return "—";
+              const deg = Math.floor(num);
+              const min = Math.round((num - deg) * 60);
+              return `${deg}° ${String(min).padStart(2, "0")}′`;
+            };
 
-          const formatDeg = (val: any) => {
-            const num = typeof val === "number" ? val : parseFloat(val);
-            if (Number.isNaN(num)) return "—";
-            const deg = Math.floor(num);
-            const min = Math.round((num - deg) * 60);
-            return `${deg}° ${String(min).padStart(2, "0")}′`;
-          };
+            return (
+              <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent rounded-2xl border border-gray-200 bg-white shadow-lg">
+                <table className="w-max sm:w-full min-w-[600px] text-xs sm:text-sm text-gray-900">
+                  <thead className="bg-gray-100 text-gray-900 uppercase text-[12px] sm:text-[13px] sticky top-0">
+                    <tr>
+                      <th className="px-3 sm:px-5 py-3 text-left font-semibold whitespace-nowrap">
+                        {language === "hi" ? "भाव" : "House"}
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 text-left font-semibold whitespace-nowrap">
+                        {language === "hi" ? "राशि" : "Sign"}
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 text-left font-semibold whitespace-nowrap">
+                        {language === "hi" ? "ग्रह" : "Planet(s)"}
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 text-left font-semibold whitespace-nowrap">
+                        {language === "hi" ? "डिग्री" : "Degree"}
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 text-left font-semibold whitespace-nowrap">
+                        {language === "hi" ? "नक्षत्र (पद)" : "Nakshatra (Pada)"}
+                      </th>
+                    </tr>
+                  </thead>
 
-          return (
-            <div className="overflow-x-auto w-full max-w-full rounded-2xl border border-gray-200 bg-white shadow-lg px-2 sm:px-4">
-              <table className="min-w-max sm:min-w-full text-xs sm:text-sm text-gray-900">
-                <thead className="bg-gray-100 text-gray-900 uppercase text-[13px]">
-                  <tr>
-                    <th className="px-5 py-3 text-left font-semibold">
-                      {language === "hi" ? "भाव" : "House"}
-                    </th>
-                    <th className="px-5 py-3 text-left font-semibold">
-                      {language === "hi" ? "राशि" : "Sign"}
-                    </th>
-                    <th className="px-5 py-3 text-left font-semibold">
-                      {language === "hi" ? "ग्रह" : "Planet(s)"}
-                    </th>
-                    <th className="px-5 py-3 text-left font-semibold">
-                      {language === "hi" ? "डिग्री" : "Degree"}
-                    </th>
-                    <th className="px-5 py-3 text-left font-semibold">
-                      {language === "hi" ? "नक्षत्र (पद)" : "Nakshatra (Pada)"}
-                    </th>
-                  </tr>
-                </thead>
+                  <tbody>
+                    {data.houses_overview.map((house: any, idx: number) => {
+                      const placements = house?.notable_placements || [];
+                      return (
+                        <tr key={idx} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                          <td className="px-3 sm:px-5 py-3 font-semibold whitespace-nowrap">
+                            {language === "hi"
+                              ? `${house?.house ?? idx + 1} भाव`
+                              : `${house?.house ?? idx + 1}`}
+                          </td>
 
-                <tbody>
-                  {data.houses_overview.map((house: any, idx: number) => {
-                    const placements = house?.notable_placements || [];
-                    return (
-                      <tr key={idx} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                        <td className="px-5 py-3 font-semibold">
-                          {language === "hi"
-                            ? `${house?.house ?? idx + 1} भाव`
-                            : ordinal(house?.house ?? idx + 1)}
-                        </td>
-
-                        {/* Sign */}
-                        <td className="px-5 py-3">
-                          {placements.length > 0
-                            ? (() => {
-                                const p = placements[0];
-                                const chartMatch = data.chart_data?.planets?.find(
-                                  (pl: any) =>
-                                    pl.name?.toLowerCase() === p.planet?.toLowerCase()
-                                );
-                                const engSign =
-                                  p.sign || chartMatch?.sign || getHouseSign(house?.house ?? idx + 1);
-                                const hindiSign =
-                                  chartMatch?.sign_hi || signHiMap[engSign] || engSign;
-                                return language === "hi" ? hindiSign : engSign;
-                              })()
-                            : language === "hi"
-                            ? signHiMap[getHouseSign(house?.house ?? idx + 1)]
-                            : getHouseSign(house?.house ?? idx + 1)}
-                        </td>
-
-                        {/* Planets */}
-                        <td className="px-5 py-3">
-                          {placements.length ? (
-                            <div className="flex flex-col gap-1">
-                              {placements.map((p: any, i: number) => {
-                                const chartMatch = data.chart_data?.planets?.find(
-                                  (pl: any) =>
-                                    pl.name?.toLowerCase() === p.planet?.toLowerCase()
-                                );
-                                const planetName = p.planet;
-                                const planet_hi = chartMatch?.name_hi || planetName;
-                                const dignity = getDignity(p.planet, p.sign, Number(p.degree)).status;
-
-                                const tag =
-                                  planetName === "Ascendant (Lagna)" || planetName === "Lagna"
-                                    ? ""
-                                    : dignity === "Exalted"
-                                    ? "(E)"
-                                    : dignity === "Debilitated"
-                                    ? "(D)"
-                                    : dignity === "Own"
-                                    ? "(O)"
-                                    : dignity === "Mooltrikon"
-                                    ? "(MT)"
-                                    : "(N)";
-
-                                return (
-                                  <div key={i} className="flex items-center gap-1">
-                                    <span className="text-gray-800 font-medium">
-                                      {language === "hi" ? planet_hi : planetName}
-                                    </span>
-                                    {tag && (
-                                      <span
-                                        className={`text-[12px] font-semibold ${
-                                          tag === "(E)"
-                                            ? "text-green-600"
-                                            : tag === "(D)"
-                                            ? "text-red-600"
-                                            : tag === "(O)"
-                                            ? "text-blue-600"
-                                            : tag === "(MT)"
-                                            ? "text-amber-600"
-                                            : "text-gray-400"
-                                        }`}
-                                      >
-                                        {tag}
-                                      </span>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            "—"
-                          )}
-                        </td>
-
-                        {/* Degree */}
-                        <td className="px-5 py-3">
-                          {placements.length
-                            ? placements.map((p: any) => formatDeg(p.degree)).join(", ")
-                            : "—"}
-                        </td>
-
-                        {/* Nakshatra */}
-                        <td className="px-5 py-3">
-                          {placements.length
-                            ? placements
-                                .map((p: any) => {
+                          {/* Sign */}
+                          <td className="px-3 sm:px-5 py-3 whitespace-nowrap">
+                            {placements.length > 0
+                              ? (() => {
+                                  const p = placements[0];
                                   const chartMatch = data.chart_data?.planets?.find(
                                     (pl: any) =>
                                       pl.name?.toLowerCase() === p.planet?.toLowerCase()
                                   );
-                                  const nak_hi = chartMatch?.nakshatra_hi || p.nakshatra;
-                                  return language === "hi"
-                                    ? `${nak_hi}${p.pada ? ` (${p.pada})` : ""}`
-                                    : `${p.nakshatra}${p.pada ? ` (${p.pada})` : ""}`;
-                                })
-                                .join(", ")
-                            : "—"}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          );
-        })()}
-      </div>
-    )}
+                                  const engSign =
+                                    p.sign ||
+                                    chartMatch?.sign ||
+                                    getHouseSign(house?.house ?? idx + 1);
+                                  const hindiSign =
+                                    chartMatch?.sign_hi || signHiMap[engSign] || engSign;
+                                  return language === "hi" ? hindiSign : engSign;
+                                })()
+                              : language === "hi"
+                              ? signHiMap[getHouseSign(house?.house ?? idx + 1)]
+                              : getHouseSign(house?.house ?? idx + 1)}
+                          </td>
+
+                          {/* Planets */}
+                          <td className="px-3 sm:px-5 py-3">
+                            {placements.length ? (
+                              <div className="flex flex-col gap-1">
+                                {placements.map((p: any, i: number) => {
+                                  const chartMatch = data.chart_data?.planets?.find(
+                                    (pl: any) =>
+                                      pl.name?.toLowerCase() === p.planet?.toLowerCase()
+                                  );
+                                  const planetName = p.planet;
+                                  const planet_hi = chartMatch?.name_hi || planetName;
+                                  const dignity =
+                                    getDignity(p.planet, p.sign, Number(p.degree)).status;
+
+                                  const tag =
+                                    planetName === "Ascendant (Lagna)" ||
+                                    planetName === "Lagna"
+                                      ? ""
+                                      : dignity === "Exalted"
+                                      ? "(E)"
+                                      : dignity === "Debilitated"
+                                      ? "(D)"
+                                      : dignity === "Own"
+                                      ? "(O)"
+                                      : dignity === "Mooltrikon"
+                                      ? "(MT)"
+                                      : "(N)";
+
+                                  return (
+                                    <div key={i} className="flex items-center gap-1">
+                                      <span className="text-gray-800 font-medium">
+                                        {language === "hi" ? planet_hi : planetName}
+                                      </span>
+                                      {tag && (
+                                        <span
+                                          className={`text-[10px] sm:text-[12px] font-semibold ${
+                                            tag === "(E)"
+                                              ? "text-green-600"
+                                              : tag === "(D)"
+                                              ? "text-red-600"
+                                              : tag === "(O)"
+                                              ? "text-blue-600"
+                                              : tag === "(MT)"
+                                              ? "text-amber-600"
+                                              : "text-gray-400"
+                                          }`}
+                                        >
+                                          {tag}
+                                        </span>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            ) : (
+                              "—"
+                            )}
+                          </td>
+
+                          {/* Degree */}
+                          <td className="px-3 sm:px-5 py-3 whitespace-nowrap">
+                            {placements.length
+                              ? placements.map((p: any) => formatDeg(p.degree)).join(", ")
+                              : "—"}
+                          </td>
+
+                          {/* Nakshatra */}
+                          <td className="px-3 sm:px-5 py-3 whitespace-nowrap">
+                            {placements.length
+                              ? placements
+                                  .map((p: any) => {
+                                    const chartMatch = data.chart_data?.planets?.find(
+                                      (pl: any) =>
+                                        pl.name?.toLowerCase() === p.planet?.toLowerCase()
+                                    );
+                                    const nak_hi =
+                                      chartMatch?.nakshatra_hi || p.nakshatra;
+                                    return language === "hi"
+                                      ? `${nak_hi}${p.pada ? ` (${p.pada})` : ""}`
+                                      : `${p.nakshatra}${p.pada ? ` (${p.pada})` : ""}`;
+                                  })
+                                  .join(", ")
+                              : "—"}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })()}
+        </div>
+      )}
+
 
       {/* 🔮 Current Dasha Summary Block */}
       {data.dasha_summary && (() => {
