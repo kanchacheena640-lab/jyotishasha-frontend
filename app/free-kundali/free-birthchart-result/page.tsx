@@ -296,14 +296,14 @@ function KundaliPageContent() {
         <div className="flex flex-col items-center justify-center mt-8 space-y-8">
 
           {/* 🪐 Kundali Chart - Centered (Responsive + Glow Fixed) */}
-          <div className="relative flex items-center justify-center w-full max-w-3xl overflow-hidden rounded-3xl">
+          <div className="relative flex items-center justify-center w-full max-w-3xl overflow-hidden rounded-3xl py-4 sm:py-6">
             {/* ✅ Circular glow strictly behind chart */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[90%] aspect-square bg-gradient-to-br from-pink-500/25 via-indigo-500/25 to-purple-600/25 blur-3xl rounded-full opacity-30 pointer-events-none"></div>
+              <div className="w-[80%] aspect-square bg-gradient-to-br from-pink-500/25 via-indigo-500/25 to-purple-600/25 blur-3xl rounded-full opacity-30 pointer-events-none"></div>
             </div>
 
             {/* ✅ Chart wrapper responsive */}
-            <div className="relative z-10 bg-white/10 p-4 rounded-2xl border border-indigo-300/40 shadow-[0_0_25px_rgba(139,92,246,0.4)] backdrop-blur-sm flex items-center justify-center w-full max-w-[320px] sm:max-w-[380px] aspect-square mx-auto">
+            <div className="relative z-10 bg-white/10 p-3 sm:p-4 rounded-2xl border border-indigo-300/40 shadow-[0_0_25px_rgba(139,92,246,0.4)] backdrop-blur-sm flex items-center justify-center w-[90vw] max-w-[340px] aspect-square mx-auto">
               {data.chart_data?.planets ? (
                 <KundaliChartNorth
                   planets={data.chart_data.planets}
