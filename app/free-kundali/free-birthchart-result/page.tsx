@@ -388,14 +388,13 @@ function KundaliPageContent() {
       {data.houses_overview && data.houses_overview.length > 0 && (
       <div className="mt-12">
         {/* 🌟 Heading + Legend (bilingual) */}
-        <div className="mb-6 text-center">
-          <h2 className="text-2xl font-semibold text-indigo-300 mb-2">
+        <div className="mb-6 text-center px-2">
+          <h2 className="text-lg sm:text-2xl font-semibold text-indigo-300 mb-2 leading-snug break-words">
             {language === "hi"
               ? "🏠 भाव अनुसार ग्रह स्थिति (House-wise Planetary Positions)"
               : "🏠 House-wise Planetary Positions (भाव अनुसार ग्रह स्थिति)"}
           </h2>
-
-          <p className="text-sm text-indigo-400 font-medium">
+          <p className="text-xs sm:text-sm text-indigo-400 font-medium px-1">
             (E = Exalted / उच्च, D = Debilitated / नीच, O = Own Sign / स्वगृह, MT = Mooltrikon / मूलत्रिकोण)
           </p>
         </div>
@@ -441,8 +440,8 @@ function KundaliPageContent() {
           };
 
           return (
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-lg">
-              <table className="min-w-full text-sm text-gray-900">
+            <div className="overflow-x-auto w-full max-w-full rounded-2xl border border-gray-200 bg-white shadow-lg px-2 sm:px-4">
+              <table className="min-w-max sm:min-w-full text-xs sm:text-sm text-gray-900">
                 <thead className="bg-gray-100 text-gray-900 uppercase text-[13px]">
                   <tr>
                     <th className="px-5 py-3 text-left font-semibold">
