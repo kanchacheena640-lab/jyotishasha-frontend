@@ -295,24 +295,27 @@ function KundaliPageContent() {
         {/* 🌟 Kundali Chart Centered + Snippet Below (Final Vertical Layout) */}
         <div className="flex flex-col items-center justify-center mt-8 space-y-8">
 
-          {/* 🪐 Kundali Chart - Centered */}
-          <div className="relative flex items-center justify-center w-full max-w-3xl">
-            {/* Confined glow only behind chart */}
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/25 via-indigo-500/25 to-purple-600/25 blur-3xl rounded-3xl opacity-30 pointer-events-none"></div>
+          {/* 🪐 Kundali Chart - Centered (Responsive + Glow Fixed) */}
+          <div className="relative flex items-center justify-center w-full max-w-3xl overflow-hidden rounded-3xl">
+            {/* ✅ Circular glow strictly behind chart */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-[90%] aspect-square bg-gradient-to-br from-pink-500/25 via-indigo-500/25 to-purple-600/25 blur-3xl rounded-full opacity-30 pointer-events-none"></div>
+            </div>
 
-            <div className="relative z-10 bg-white/10 p-5 rounded-2xl border border-indigo-300/40 shadow-[0_0_25px_rgba(139,92,246,0.4)] backdrop-blur-sm flex items-center justify-center min-h-[380px] w-full max-w-[420px]">
+            {/* ✅ Chart wrapper responsive */}
+            <div className="relative z-10 bg-white/10 p-4 rounded-2xl border border-indigo-300/40 shadow-[0_0_25px_rgba(139,92,246,0.4)] backdrop-blur-sm flex items-center justify-center w-full max-w-[320px] sm:max-w-[380px] aspect-square mx-auto">
               {data.chart_data?.planets ? (
                 <KundaliChartNorth
                   planets={data.chart_data.planets}
                   lagnaRashi={lagnaRashi}
-                  size={360}
+                  size={typeof window !== 'undefined' ? Math.min(window.innerWidth * 0.75, 340) : 320}
                 />
               ) : data.chart_image ? (
                 <Image
                   src={data.chart_image}
                   alt="Kundali Chart"
-                  width={360}
-                  height={360}
+                  width={320}
+                  height={320}
                   className="rounded-xl border border-indigo-400/40 shadow-lg"
                 />
               ) : (
@@ -320,6 +323,7 @@ function KundaliPageContent() {
               )}
             </div>
           </div>
+
         
           {/* 📜 Snippet Below Chart */}
           <div className="w-full max-w-3xl bg-white/95 p-8 rounded-2xl border border-indigo-200/50 shadow-lg text-black">
