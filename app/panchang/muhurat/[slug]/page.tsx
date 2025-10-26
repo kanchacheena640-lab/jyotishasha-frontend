@@ -2,6 +2,39 @@ import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
 
 export const revalidate = 86400;
 
+// ✅ 2. Dynamic SEO Metadata Function
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const topic = muhurthTopics[params.slug];
+  const now = new Date();
+  const month = now.toLocaleString("en-US", { month: "long" });
+  const year = now.getFullYear();
+
+  if (!topic) {
+    return {
+      title: "Muhurat Not Found | Jyotishasha",
+      description: "Requested muhurat page does not exist.",
+    };
+  }
+
+  return {
+    title: `${topic.title} – ${month} ${year}`,
+    description: `${topic.description} Updated monthly with auspicious ${topic.activity.replace("-", " ")} dates for ${month} ${year}.`,
+    alternates: { canonical: topic.canonical },
+    openGraph: {
+      title: `${topic.title} – ${month} ${year}`,
+      description: topic.description,
+      url: topic.canonical,
+      images: ["/og/muhurat-base.jpg"],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${topic.title} – ${month} ${year}`,
+      description: topic.description,
+      images: ["/og/muhurat-base.jpg"],
+    },
+  };
+}
 async function getMuhurth(activity: string) {
   const res = await fetch("https://jyotishasha-backend.onrender.com/api/muhurth/list", {
     method: "POST",
@@ -16,7 +49,7 @@ async function getMuhurth(activity: string) {
   });
   if (!res.ok) throw new Error("Failed to load muhurth data");
   const data = await res.json();
-  return data.results || [];
+  return data.results?.slice(0, 30) || [];
 }
 
 export default async function MuhuratPage({ params }: { params: { slug: string } }) {
