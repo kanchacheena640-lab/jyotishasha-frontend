@@ -36,6 +36,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 async function getMuhurth(activity: string) {
+  // --- Fix mapping for Grah Pravesh ---
+  if (activity === "grahpravesh-muhurat") activity = "grahpravesh";
+
   const res = await fetch("https://jyotishasha-backend.onrender.com/api/muhurth/list", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
