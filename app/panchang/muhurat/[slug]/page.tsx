@@ -141,12 +141,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
                     }
                   })()}
                 </p>
-
-
-                <p className="text-xs text-gray-400">
-                    ⭐ Shubh Score: {d.score}/100 – {scoreRemark}
-                </p>
-                </div>
+              </div>
             );
             })
         ) : (
