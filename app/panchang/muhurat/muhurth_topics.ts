@@ -43,7 +43,7 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
 
   "grah-pravesh-muhurat": {
     title: "Grah Pravesh Muhurat – Auspicious Housewarming Dates",
-    slug: "grah-pravesh-muhurat",
+    slug: "grahpravesh-muhurat",
     activity: "grahpravesh", // ✅ backend name: grahpravesh.json
     description:
       "Discover monthly Grah Pravesh Muhurat (Housewarming Dates) for performing Griha Pravesh Puja and entering your new home as per Hindu Panchang.",
