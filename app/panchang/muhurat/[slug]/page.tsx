@@ -121,17 +121,25 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
                   On {d.weekday}, {formattedDate}, the Moon is positioned in the{" "}
                   <strong>{d.nakshatra || "relevant"}</strong> Nakshatra and the Tithi is{" "}
                   <strong>{d.tithi || "auspicious"}</strong>.{" "}
-                  {d.score >= 6
-                    ? "This alignment is very auspicious and supports key life events with positive planetary harmony."
-                    : d.score >= 4
-                    ? "This day carries moderate auspicious strength — suitable for general rituals or routine ceremonies."
-                    : "This date holds lower auspicious strength as per the Panchang, suitable only for small personal activities."}
-                  {" "}
-                  {d.score >= 6
-                    ? `⭐ Shubh Score: ${d.score}/10 — A strongly favorable combination for your ${topic.activity.replace("-", " ")}.`
-                    : d.score >= 4
-                    ? `⭐ Shubh Score: ${d.score}/10 — A balanced day, offering moderate planetary support.`
-                    : `⭐ Shubh Score: ${d.score}/10 — A low-strength day with limited auspicious alignment.`}
+                  {(() => {
+                    switch (Math.round(d.score)) {
+                      case 7:
+                        return "This day shines with strong planetary harmony — highly supportive for major life events and spiritual beginnings.";
+                      case 6:
+                        return "A bright and favorable alignment that encourages progress, joy, and auspicious outcomes.";
+                      case 5:
+                        return "This day holds a balanced mix of energies — suitable for routine rituals and personal growth activities.";
+                      case 4:
+                        return "A day with average auspicious strength, ideal for smaller or symbolic ceremonies.";
+                      case 3:
+                        return "Planetary support is mild; you may proceed with general tasks but avoid crucial beginnings.";
+                      case 2:
+                        return "This alignment carries limited auspicious energy — best reserved for preparatory or routine activities.";
+                      case 1:
+                      default:
+                        return "A subtle planetary influence marks this day, making it peaceful yet not ideal for significant undertakings.";
+                    }
+                  })()}
                 </p>
 
 
