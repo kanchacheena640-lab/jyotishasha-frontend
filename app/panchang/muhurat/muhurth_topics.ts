@@ -54,6 +54,21 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
   ],
   canonical: "https://www.jyotishasha.com/panchang/muhurat/grahpravesh-muhurat",
 },
+  "grah-pravesh-muhurat": {
+    title: "Grah Pravesh Muhurat – Auspicious Housewarming Dates",
+    slug: "grah-pravesh-muhurat",
+    activity: "grahpravesh",
+    description:
+      "Discover monthly Grah Pravesh Muhurat (Housewarming Dates) for performing Griha Pravesh Puja and entering your new home as per Hindu Panchang.",
+    keywords: [
+      "grah pravesh muhurat",
+      "housewarming muhurat",
+      "griha pravesh puja 2025",
+    ],
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/grah-pravesh-muhurat",
+  },
+
 
   "vehicle-muhurat": {
     title: "Vehicle Muhurat – Auspicious Car or Bike Buying Dates",
