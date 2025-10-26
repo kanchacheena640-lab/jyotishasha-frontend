@@ -85,38 +85,54 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           {topic.title} – {monthName} {year}
         </h1>
         <p className="text-gray-300 max-w-3xl">
-          {topic.description} This article lists all Shubh Muhurat dates for {monthName} {year},
-          according to Hindu Panchang and Nakshatra. Ideal for those planning their{" "}
-          {topic.activity.replace("-", " ")} this month with accurate astrological guidance.
+            Discover auspicious <strong>{monthName} {year}</strong> {topic.title.split(" – ")[0]} dates 
+            as per the Hindu Panchang and Nakshatra. Updated every month, this guide helps you find 
+            the most suitable days for your {` ${topic.activity.replace("-", " ")}`} rituals. 
+            All timings for {topic.title.split(" – ")[0]} <strong>{monthName} {year}</strong> are carefully 
+            calculated using Vedic astrology principles to ensure success, peace, and prosperity.
         </p>
       </header>
 
       {/* Muhurat Dates */}
-      <section className="bg-white/10 rounded-2xl border border-purple-400/20 p-6 mb-10">
+        <section className="bg-white/10 rounded-2xl border border-purple-400/20 p-6 mb-10">
         <h2 className="text-xl font-semibold text-purple-200 mb-4">
-          Auspicious Dates for {monthName} {year}
+            Auspicious Dates for {monthName} {year}
         </h2>
 
         {finalDates.length > 0 ? (
-          finalDates.map((d: any) => (
-            <div key={d.date} className="mb-6 pb-4 border-b border-white/10">
-              <h3 className="text-lg font-bold text-purple-300 mb-1">
-                🌟 {d.date} ({d.weekday})
-              </h3>
-              <p className="text-gray-300 text-sm mb-1">
-                <strong>Nakshatra:</strong> {d.nakshatra} &nbsp;|&nbsp;
-                <strong>Tithi:</strong> {d.tithi}
-              </p>
-              {d.reason && (
-                <p className="text-gray-200 text-sm leading-relaxed mb-1">{d.reason}</p>
-              )}
-              <p className="text-xs text-gray-400">⭐ Shubh Score: {d.score}/100</p>
-            </div>
-          ))
+            finalDates.map((d: any, index: number) => {
+            // 🪔 build a richer paragraph for each date
+            const explanation = `
+                On ${d.weekday}, ${d.date}, the Moon is placed in ${d.nakshatra || "a favourable"} Nakshatra
+                and the ${d.tithi || "current"} Tithi is considered auspicious for ${topic.activity.replace("-", " ")}.
+                ${d.reason ? d.reason : ""}
+                With a Shubh Score of ${d.score}/100, this day is ${d.score >= 80 ? "highly recommended" : d.score >= 60 ? "moderately favourable" : "less suitable"} 
+                for your ${topic.activity.replace("-", " ")} according to Vedic Panchang.
+            `;
+
+            return (
+                <div key={index} className="mb-6 pb-4 border-b border-white/10">
+                <h3 className="text-lg font-bold text-purple-300 mb-2">
+                    🌟 {d.date} ({d.weekday})
+                </h3>
+                <p className="text-gray-300 text-sm mb-1">
+                    <strong>Nakshatra:</strong> {d.nakshatra || "—"} &nbsp;|&nbsp;
+                    <strong>Tithi:</strong> {d.tithi || "—"}
+                </p>
+                <p className="text-gray-200 text-sm leading-relaxed mt-2 whitespace-pre-line">
+                    {explanation.trim()}
+                </p>
+                </div>
+            );
+            })
         ) : (
-          <p className="text-gray-400">No auspicious dates found for this month.</p>
+            <p className="text-gray-400">
+            No auspicious dates found for this month. Check again on the 1st of next month when new
+            Panchang data updates automatically.
+            </p>
         )}
-      </section>
+        </section>
+
 
       {/* Astrological Insights */}
       <section className="mb-10">
