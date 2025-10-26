@@ -124,9 +124,16 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
                   {d.score >= 6
                     ? "This alignment is very auspicious and supports key life events with positive planetary harmony."
                     : d.score >= 4
-                    ? "This day carries moderate auspicious strength — suitable for general rituals, ceremonies, or routine activities."
-                    : "This date holds lower auspicious strength as per the Panchang, suitable only for routine or less significant tasks."}
+                    ? "This day carries moderate auspicious strength — suitable for general rituals or routine ceremonies."
+                    : "This date holds lower auspicious strength as per the Panchang, suitable only for small personal activities."}
+                  {" "}
+                  {d.score >= 6
+                    ? `⭐ Shubh Score: ${d.score}/10 — A strongly favorable combination for your ${topic.activity.replace("-", " ")}.`
+                    : d.score >= 4
+                    ? `⭐ Shubh Score: ${d.score}/10 — A balanced day, offering moderate planetary support.`
+                    : `⭐ Shubh Score: ${d.score}/10 — A low-strength day with limited auspicious alignment.`}
                 </p>
+
 
                 <p className="text-xs text-gray-400">
                     ⭐ Shubh Score: {d.score}/100 – {scoreRemark}
