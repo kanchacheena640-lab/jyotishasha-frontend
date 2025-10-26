@@ -142,13 +142,90 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
 
       {/* Astrological Insights */}
       <section className="mb-10">
-        <h2 className="text-xl font-semibold text-purple-200 mb-3">Astrological Insights</h2>
-        <p className="text-gray-300">
-          According to Jyotish principles, these muhurat dates occur when the Moon transits through
-          favourable Nakshatras and Tithis that promote success, happiness, and growth. Avoid
-          periods like Rahu Kaal, Amavasya, and Vishti Karan for best outcomes. Performing the task
-          during Shukla Paksha under auspicious constellations ensures lasting prosperity and
-          harmony in your {topic.activity.replace("-", " ")}.
+        <h2 className="text-xl font-semibold text-purple-200 mb-3">
+          Astrological Insights for {topic.title.split(" – ")[0]}
+        </h2>
+        <p className="text-gray-300 text-sm leading-relaxed">
+          {topic.activity === "naamkaran" && (
+            <>
+              Selecting a <strong>Naamkaran Muhurat</strong> depends on Tithi, Nakshatra,
+              and weekday alignment. Auspicious Tithis include Dwitiya, Tritiya, Panchami,
+              and Dashami, while Chaturthi and Amavasya are avoided. Favourable Nakshatras
+              such as Rohini, Mrigashira, Pushya, Hasta, Swati, and Revati help ensure
+              divine blessings for the newborn’s name. Monday, Wednesday, and Thursday are
+              preferred for baby naming ceremonies.
+            </>
+          )}
+
+          {topic.activity === "marriage" && (
+            <>
+              <strong>Marriage Muhurat</strong> is determined by analyzing Tithi, Nakshatra,
+              and planetary yogas. Benefic Tithis like Dwitiya, Tritiya, Panchami, Saptami,
+              and Dashami are ideal. Nakshatras such as Rohini, Magha, Anuradha, and Revati
+              bring harmony and lifelong prosperity. Monday, Wednesday, Thursday, and Friday
+              are best for weddings, while Tuesday and Saturday are usually avoided.
+            </>
+          )}
+
+          {topic.activity === "grah-pravesh" && (
+            <>
+              For <strong>Grah Pravesh Muhurat</strong>, astrologers look for auspicious
+              Tithis like Dwitiya, Tritiya, Panchami, Dashami, and Ekadashi along with
+              Nakshatras such as Mrigashira, Anuradha, Pushya, and Revati. Avoid Amavasya
+              and Krura Nakshatras like Moola or Jyeshtha. Entering a new home during
+              Shukla Paksha ensures peace, prosperity, and positive vibrations.
+            </>
+          )}
+
+          {topic.activity === "vehicle" && (
+            <>
+              A <strong>Vehicle Buying Muhurat</strong> is chosen by analyzing Tithi,
+              Nakshatra, and weekday combinations. Tithis like Dwitiya, Tritiya, Panchami,
+              and Dashami are preferred. Nakshatras such as Rohini, Mrigashira, Pushya, and
+              Revati bring safety and fortune. Mondays, Wednesdays, and Fridays are ideal
+              for purchasing vehicles, while Tuesdays and Saturdays should be avoided.
+            </>
+          )}
+
+          {topic.activity === "child-birth" && (
+            <>
+              A <strong>Child Birth Muhurat</strong> focuses on ensuring divine timing for
+              the baby’s safe arrival. Auspicious Tithis include Dwitiya, Tritiya, Panchami,
+              and Dashami, and Nakshatras like Rohini, Pushya, and Hasta are considered
+              nurturing. Avoid Amavasya and harsh Nakshatras such as Moola and Jyeshtha.
+              Monday, Wednesday, and Thursday are preferred days for child-related rituals.
+            </>
+          )}
+
+          {topic.activity === "gold-purchase" && (
+            <>
+              The <strong>Gold Buying Muhurat</strong> is decided by checking the Moon’s
+              position, Nakshatra, and Tithi. Favourable Tithis like Dwitiya, Tritiya,
+              Panchami, and Dashami, especially on Pushya Nakshatra or Dhanteras, attract
+              wealth and blessings. Avoid Tuesdays and Saturdays for major jewellery
+              purchases.
+            </>
+          )}
+
+          {topic.activity === "foreign-travel" && (
+            <>
+              Choosing a <strong>Foreign Travel Muhurat</strong> involves looking for
+              auspicious Tithis like Dwitiya, Tritiya, and Panchami along with Nakshatras
+              such as Rohini, Mrigashira, and Anuradha. Avoid Amavasya, Moola, and
+              Jyeshtha. Thursdays and Fridays are ideal for beginning long journeys or
+              overseas ventures.
+            </>
+          )}
+
+          {topic.activity === "property" && (
+            <>
+              A <strong>Property Purchase Muhurat</strong> is determined by auspicious
+              Tithis like Dwitiya, Tritiya, Panchami, and Dashami, and Nakshatras such as
+              Rohini, Mrigashira, Anuradha, and Revati. Avoid days with Moola or Jyeshtha
+              Nakshatra. Performing registration or possession during Shukla Paksha ensures
+              wealth growth and family happiness.
+            </>
+          )}
         </p>
       </section>
 
