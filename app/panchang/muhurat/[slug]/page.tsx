@@ -118,12 +118,14 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
                 </p>
 
                 <p className="text-gray-200 text-sm leading-relaxed mb-2">
-                    On {d.weekday}, {formattedDate}, the Moon is positioned in the{" "}
-                    <strong>{d.nakshatra || "relevant"}</strong> Nakshatra and the Tithi is{" "}
-                    <strong>{d.tithi || "auspicious"}</strong>.{" "}
-                    {d.reason
-                    ? d.reason
-                    : "According to the Vedic Panchang, this alignment is considered spiritually balanced and supportive for new beginnings."}
+                  On {d.weekday}, {formattedDate}, the Moon is positioned in the{" "}
+                  <strong>{d.nakshatra || "relevant"}</strong> Nakshatra and the Tithi is{" "}
+                  <strong>{d.tithi || "auspicious"}</strong>.{" "}
+                  {d.score >= 6
+                    ? "This alignment is very auspicious and supports key life events with positive planetary harmony."
+                    : d.score >= 4
+                    ? "This day carries moderate auspicious strength — suitable for general rituals, ceremonies, or routine activities."
+                    : "This date holds lower auspicious strength as per the Panchang, suitable only for routine or less significant tasks."}
                 </p>
 
                 <p className="text-xs text-gray-400">
