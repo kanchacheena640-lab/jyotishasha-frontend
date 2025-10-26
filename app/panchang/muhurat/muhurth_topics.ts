@@ -3,12 +3,13 @@
 export interface MuhurthTopic {
   title: string;          // Page H1 + <title>
   slug: string;           // URL slug
-  activity: string;       // backend identifier
+  activity: string;       // backend identifier (must match muhurth_engine.py)
   description: string;    // meta + intro paragraph
   keywords: string[];     // meta keywords (optional)
   canonical: string;      // full canonical URL
 }
 
+// ✅ All activities now match backend rule file names exactly
 export const muhurthTopics: Record<string, MuhurthTopic> = {
   "naamkaran-muhurat": {
     title: "Naamkaran Muhurat – Auspicious Baby Naming Dates",
@@ -43,7 +44,7 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
   "grah-pravesh-muhurat": {
     title: "Grah Pravesh Muhurat – Auspicious Housewarming Dates",
     slug: "grah-pravesh-muhurat",
-    activity: "grah-pravesh",
+    activity: "grahpravesh", // ✅ backend name: grahpravesh.json
     description:
       "Discover monthly Grah Pravesh Muhurat (Housewarming Dates) for performing Griha Pravesh Puja and entering your new home as per Hindu Panchang.",
     keywords: [
@@ -55,9 +56,9 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
   },
 
   "vehicle-muhurat": {
-    title: "Vehicle Buying Muhurat – Shubh Car or Bike Purchase Dates",
+    title: "Vehicle Muhurat – Auspicious Car or Bike Buying Dates",
     slug: "vehicle-muhurat",
-    activity: "vehicle",
+    activity: "vehicle", // ✅ backend name: vehicle.json
     description:
       "Get monthly Shubh Muhurat for purchasing a new car, bike or vehicle as per Hindu Panchang and Nakshatra. Updated every month for buyers planning auspicious purchase.",
     keywords: [
@@ -72,7 +73,7 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
   "child-birth-muhurat": {
     title: "Child Birth Muhurat – Auspicious Delivery & Ritual Dates",
     slug: "child-birth-muhurat",
-    activity: "child-birth",
+    activity: "childbirth", // ✅ backend name: childbirth.json
     description:
       "Find auspicious Child Birth Muhurat and related ceremony dates according to Hindu Panchang and Nakshatra. Monthly updates for baby shower and delivery rituals.",
     keywords: [
@@ -87,7 +88,7 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
   "gold-buying-muhurat": {
     title: "Gold Buying Muhurat – Shubh Dates for Jewellery Purchase",
     slug: "gold-buying-muhurat",
-    activity: "gold-purchase",
+    activity: "gold", // ✅ backend name: gold.json
     description:
       "Explore auspicious Gold Buying Muhurat based on Hindu Panchang. Includes monthly Shubh dates for buying gold, silver, or jewellery.",
     keywords: [
@@ -102,7 +103,7 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
   "foreign-travel-muhurat": {
     title: "Foreign Travel Muhurat – Auspicious Dates for Abroad Journeys",
     slug: "foreign-travel-muhurat",
-    activity: "foreign-travel",
+    activity: "travel", // ✅ backend name: travel.json
     description:
       "Check Shubh Muhurat for starting foreign travel, study abroad, or business trips. Monthly updated travel Muhurat dates as per Hindu Panchang.",
     keywords: [
