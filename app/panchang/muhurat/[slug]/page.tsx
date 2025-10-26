@@ -90,42 +90,51 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
         </p>
       </header>
 
-      {/* Muhurat Dates */}
+      {/* Muhurat Dates Section */}
         <section className="bg-white/10 rounded-2xl border border-purple-400/20 p-6 mb-10">
         <h2 className="text-xl font-semibold text-purple-200 mb-4">
             Auspicious Dates for {monthName} {year}
         </h2>
 
-        {finalDates.length > 0 ? (
-            finalDates.map((d: any, index: number) => {
-            // 🪔 build a richer paragraph for each date
-            const explanation = `
-                On ${d.weekday}, ${d.date}, the Moon is placed in ${d.nakshatra || "a favourable"} Nakshatra
-                and the ${d.tithi || "current"} Tithi is considered auspicious for ${topic.activity.replace("-", " ")}.
-                ${d.reason ? d.reason : ""}
-                With a Shubh Score of ${d.score}/100, this day is ${d.score >= 80 ? "highly recommended" : d.score >= 60 ? "moderately favourable" : "less suitable"} 
-                for your ${topic.activity.replace("-", " ")} according to Vedic Panchang.
-            `;
+        {finalDates && finalDates.length > 0 ? (
+            finalDates.map((d: any) => {
+            const formattedDate = new Date(d.date).toLocaleDateString("en-GB");
+            const scoreRemark =
+                d.score >= 75
+                ? "This day is highly auspicious for your " + topic.activity.replace("-", " ") + "."
+                : d.score >= 50
+                ? "It is a moderately favorable day — suitable for general rituals and ceremonies."
+                : "It’s less recommended for major rituals according to the Panchang.";
 
             return (
-                <div key={index} className="mb-6 pb-4 border-b border-white/10">
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                    🌟 {new Date(d.date).toLocaleDateString("en-GB")} ({d.weekday})
+                <div key={d.date} className="mb-6 pb-4 border-b border-white/10">
+                <h3 className="text-lg font-bold text-purple-300 mb-1">
+                    🌟 {formattedDate} ({d.weekday})
                 </h3>
+
                 <p className="text-gray-300 text-sm mb-1">
-                    <strong>Nakshatra:</strong> {d.nakshatra || "—"} &nbsp;|&nbsp;
-                    <strong>Tithi:</strong> {d.tithi || "—"}
+                    <strong>Nakshatra:</strong> {d.nakshatra || "Not specified"} &nbsp;|&nbsp;
+                    <strong>Tithi:</strong> {d.tithi || "Not specified"}
                 </p>
-                <p className="text-gray-200 text-sm leading-relaxed mt-2 whitespace-pre-line">
-                    {explanation.trim()}
+
+                <p className="text-gray-200 text-sm leading-relaxed mb-2">
+                    On {d.weekday}, {formattedDate}, the Moon is positioned in the{" "}
+                    <strong>{d.nakshatra || "relevant"}</strong> Nakshatra and the Tithi is{" "}
+                    <strong>{d.tithi || "auspicious"}</strong>.{" "}
+                    {d.reason
+                    ? d.reason
+                    : "According to the Vedic Panchang, this alignment is considered spiritually balanced and supportive for new beginnings."}
+                </p>
+
+                <p className="text-xs text-gray-400">
+                    ⭐ Shubh Score: {d.score}/100 – {scoreRemark}
                 </p>
                 </div>
             );
             })
         ) : (
             <p className="text-gray-400">
-            No auspicious dates found for this month. Check again on the 1st of next month when new
-            Panchang data updates automatically.
+            No auspicious dates found for this month. Check again on the 1st of next month when new Panchang data updates automatically.
             </p>
         )}
         </section>
