@@ -130,6 +130,9 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
     canonical: "https://www.jyotishasha.com/panchang/muhurat/foreign-travel-muhurat",
   },
 };
+// ✅ Add this alias AFTER the object definition
+muhurthTopics["grahpravesh-muhurat"] =
+  muhurthTopics["grah-pravesh-muhurat"];
 
 // ✅ Global OG image for all pages
 export const GLOBAL_OG_IMAGE = "/og/muhurat-base.jpg";
