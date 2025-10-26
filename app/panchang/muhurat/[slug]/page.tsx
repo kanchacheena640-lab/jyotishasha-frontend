@@ -92,63 +92,51 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
 
       {/* Muhurat Dates Section */}
         <section className="bg-white/10 rounded-2xl border border-purple-400/20 p-6 mb-10">
-        <h2 className="text-xl font-semibold text-purple-200 mb-4">
+          <h2 className="text-xl font-semibold text-purple-200 mb-4">
             Auspicious Dates for {monthName} {year}
-        </h2>
+          </h2>
 
-        {finalDates && finalDates.length > 0 ? (
+          {finalDates && finalDates.length > 0 ? (
             finalDates.map((d: any) => {
-            const formattedDate = new Date(d.date).toLocaleDateString("en-GB");
-            const scoreRemark =
-                d.score >= 75
-                ? "This day is highly auspicious for your " + topic.activity.replace("-", " ") + "."
-                : d.score >= 50
-                ? "It is a moderately favorable day — suitable for general rituals and ceremonies."
-                : "It’s less recommended for major rituals according to the Panchang.";
+              const formattedDate = new Date(d.date).toLocaleDateString("en-GB");
 
-            return (
+              // Single final sentence for each score
+              const getSummary = (score: number) => {
+                switch (Math.round(score)) {
+                  case 7:
+                    return "⭐ This day shines with strong planetary harmony — highly supportive for major life events and spiritual beginnings.";
+                  case 6:
+                    return "⭐ A bright and favorable alignment that encourages progress, joy, and auspicious outcomes.";
+                  case 5:
+                    return "⭐ This day holds a balanced mix of energies — suitable for routine rituals and personal growth activities.";
+                  case 4:
+                    return "⭐ A day with average auspicious strength, ideal for smaller or symbolic ceremonies.";
+                  case 3:
+                    return "⭐ Planetary support is mild; you may proceed with general tasks but avoid crucial beginnings.";
+                  case 2:
+                    return "⭐ This alignment carries limited auspicious energy — best reserved for preparatory or routine activities.";
+                  case 1:
+                  default:
+                    return "⭐ A subtle planetary influence marks this day, making it peaceful yet not ideal for significant undertakings.";
+                }
+              };
+
+              return (
                 <div key={d.date} className="mb-6 pb-4 border-b border-white/10">
-                <h3 className="text-lg font-bold text-purple-300 mb-1">
-                    🌟 {formattedDate} ({d.weekday})
-                </h3>
-
-                <p className="text-gray-300 text-sm mb-1">
-                    <strong>Nakshatra:</strong> {d.nakshatra || "Not specified"} &nbsp;|&nbsp;
-                    <strong>Tithi:</strong> {d.tithi || "Not specified"}
-                </p>
-
-                <p className="text-gray-200 text-sm leading-relaxed mb-2">
-                  On {d.weekday}, {formattedDate}, the Moon is positioned in the{" "}
-                  <strong>{d.nakshatra || "relevant"}</strong> Nakshatra and the Tithi is{" "}
-                  <strong>{d.tithi || "auspicious"}</strong>.{" "}
-                  {(() => {
-                    switch (Math.round(d.score)) {
-                      case 7:
-                        return "This day shines with strong planetary harmony — highly supportive for major life events and spiritual beginnings.";
-                      case 6:
-                        return "A bright and favorable alignment that encourages progress, joy, and auspicious outcomes.";
-                      case 5:
-                        return "This day holds a balanced mix of energies — suitable for routine rituals and personal growth activities.";
-                      case 4:
-                        return "A day with average auspicious strength, ideal for smaller or symbolic ceremonies.";
-                      case 3:
-                        return "Planetary support is mild; you may proceed with general tasks but avoid crucial beginnings.";
-                      case 2:
-                        return "This alignment carries limited auspicious energy — best reserved for preparatory or routine activities.";
-                      case 1:
-                      default:
-                        return "A subtle planetary influence marks this day, making it peaceful yet not ideal for significant undertakings.";
-                    }
-                  })()}
-                </p>
-              </div>
-            );
+                  <div className="text-gray-200 text-sm space-y-1">
+                    <p><strong>Date:</strong> {formattedDate} ({d.weekday})</p>
+                    <p><strong>Nakshatra:</strong> {d.nakshatra || "—"}</p>
+                    <p><strong>Tithi:</strong> {d.tithi || "—"}</p>
+                  </div>
+                  <p className="text-gray-300 text-sm mt-2">{getSummary(d.score)}</p>
+                </div>
+              );
             })
-        ) : (
+          ) : (
             <p className="text-gray-400">
-            No auspicious dates found for this month. Check again on the 1st of next month when new Panchang data updates automatically.
+              No auspicious dates found for this month. Check again on the 1st of next month when new Panchang data updates automatically.
             </p>
-        )}
+          )}
         </section>
 
 
