@@ -68,12 +68,9 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
   const currentMonth = now.getMonth();
   const year = now.getFullYear();
 
-  const finalDates = dates
-    .filter((d: any) => {
-      const dt = new Date(d.date);
-      return dt.getMonth() === currentMonth && dt.getFullYear() === year;
-    })
-    .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const finalDates = dates.sort(
+    (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
   const monthName = new Date(year, currentMonth).toLocaleString("en-US", { month: "long" });
 
@@ -113,7 +110,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             return (
                 <div key={index} className="mb-6 pb-4 border-b border-white/10">
                 <h3 className="text-lg font-bold text-purple-300 mb-2">
-                    🌟 {d.date} ({d.weekday})
+                    🌟 {new Date(d.date).toLocaleDateString("en-GB")} ({d.weekday})
                 </h3>
                 <p className="text-gray-300 text-sm mb-1">
                     <strong>Nakshatra:</strong> {d.nakshatra || "—"} &nbsp;|&nbsp;
