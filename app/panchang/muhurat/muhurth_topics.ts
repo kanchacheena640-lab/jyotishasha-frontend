@@ -9,8 +9,8 @@ export interface MuhurthTopic {
   canonical: string;      // full canonical URL
 }
 
-// ✅ All activities now match backend rule file names exactly
-export const muhurthTopics: Record<string, MuhurthTopic> = {
+// ✅ Use one base variable, not exported yet
+const baseTopics: Record<string, MuhurthTopic> = {
   "naamkaran-muhurat": {
     title: "Naamkaran Muhurat – Auspicious Baby Naming Dates",
     slug: "naamkaran-muhurat",
@@ -23,7 +23,8 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "shubh naamkaran",
       "naamkaran dates 2025",
     ],
-    canonical: "https://www.jyotishasha.com/panchang/muhurat/naamkaran-muhurat",
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/naamkaran-muhurat",
   },
 
   "marriage-muhurat": {
@@ -38,26 +39,14 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "hindu wedding dates",
       "shubh vivah tithi",
     ],
-    canonical: "https://www.jyotishasha.com/panchang/muhurat/marriage-muhurat",
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/marriage-muhurat",
   },
 
-  "grahpravesh-muhurat": {
-  title: "Grah Pravesh Muhurat – Auspicious Housewarming Dates",
-  slug: "grahpravesh-muhurat",
-  activity: "grahpravesh",
-  description:
-    "Discover monthly Grah Pravesh Muhurat (Housewarming Dates) for performing Griha Pravesh Puja and entering your new home as per Hindu Panchang.",
-  keywords: [
-    "grah pravesh muhurat",
-    "housewarming muhurat",
-    "griha pravesh puja 2025",
-  ],
-  canonical: "https://www.jyotishasha.com/panchang/muhurat/grahpravesh-muhurat",
-},
   "grah-pravesh-muhurat": {
     title: "Grah Pravesh Muhurat – Auspicious Housewarming Dates",
     slug: "grah-pravesh-muhurat",
-    activity: "grahpravesh",
+    activity: "grahpravesh", // backend file: grahpravesh.json
     description:
       "Discover monthly Grah Pravesh Muhurat (Housewarming Dates) for performing Griha Pravesh Puja and entering your new home as per Hindu Panchang.",
     keywords: [
@@ -69,11 +58,10 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "https://www.jyotishasha.com/panchang/muhurat/grah-pravesh-muhurat",
   },
 
-
   "vehicle-muhurat": {
     title: "Vehicle Muhurat – Auspicious Car or Bike Buying Dates",
     slug: "vehicle-muhurat",
-    activity: "vehicle", // ✅ backend name: vehicle.json
+    activity: "vehicle",
     description:
       "Get monthly Shubh Muhurat for purchasing a new car, bike or vehicle as per Hindu Panchang and Nakshatra. Updated every month for buyers planning auspicious purchase.",
     keywords: [
@@ -82,13 +70,14 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "bike purchase muhurat",
       "car purchase tithi",
     ],
-    canonical: "https://www.jyotishasha.com/panchang/muhurat/vehicle-muhurat",
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/vehicle-muhurat",
   },
 
   "child-birth-muhurat": {
     title: "Child Birth Muhurat – Auspicious Delivery & Ritual Dates",
     slug: "child-birth-muhurat",
-    activity: "childbirth", // ✅ backend name: childbirth.json
+    activity: "childbirth",
     description:
       "Find auspicious Child Birth Muhurat and related ceremony dates according to Hindu Panchang and Nakshatra. Monthly updates for baby shower and delivery rituals.",
     keywords: [
@@ -97,13 +86,14 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "janm muhurat",
       "garbh sanskar dates",
     ],
-    canonical: "https://www.jyotishasha.com/panchang/muhurat/child-birth-muhurat",
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/child-birth-muhurat",
   },
 
   "gold-buying-muhurat": {
     title: "Gold Buying Muhurat – Shubh Dates for Jewellery Purchase",
     slug: "gold-buying-muhurat",
-    activity: "gold", // ✅ backend name: gold.json
+    activity: "gold",
     description:
       "Explore auspicious Gold Buying Muhurat based on Hindu Panchang. Includes monthly Shubh dates for buying gold, silver, or jewellery.",
     keywords: [
@@ -112,13 +102,14 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "dhanteras muhurat",
       "shubh din for gold",
     ],
-    canonical: "https://www.jyotishasha.com/panchang/muhurat/gold-buying-muhurat",
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/gold-buying-muhurat",
   },
 
   "foreign-travel-muhurat": {
     title: "Foreign Travel Muhurat – Auspicious Dates for Abroad Journeys",
     slug: "foreign-travel-muhurat",
-    activity: "travel", // ✅ backend name: travel.json
+    activity: "travel",
     description:
       "Check Shubh Muhurat for starting foreign travel, study abroad, or business trips. Monthly updated travel Muhurat dates as per Hindu Panchang.",
     keywords: [
@@ -127,12 +118,16 @@ export const muhurthTopics: Record<string, MuhurthTopic> = {
       "study abroad muhurat",
       "shubh yatra dates",
     ],
-    canonical: "https://www.jyotishasha.com/panchang/muhurat/foreign-travel-muhurat",
+    canonical:
+      "https://www.jyotishasha.com/panchang/muhurat/foreign-travel-muhurat",
   },
 };
-// ✅ Add this alias AFTER the object definition
-muhurthTopics["grahpravesh-muhurat"] =
-  muhurthTopics["grah-pravesh-muhurat"];
 
-// ✅ Global OG image for all pages
+// ✅ single export (merged alias) — no duplicate or redeclaration
+export const muhurthTopics: Record<string, MuhurthTopic> = {
+  ...baseTopics,
+  "grahpravesh-muhurat": baseTopics["grah-pravesh-muhurat"], // alias added safely
+};
+
+// ✅ Global OG image
 export const GLOBAL_OG_IMAGE = "/og/muhurat-base.jpg";
