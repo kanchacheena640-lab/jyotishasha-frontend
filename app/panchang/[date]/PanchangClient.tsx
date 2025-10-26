@@ -18,11 +18,7 @@ interface PanchangData {
   ayanamsa?: string;
   weekday?: string;
   date?: string;
-  panchak?: {
-    active: boolean;
-    message: string;
-    nakshatra?: string;
-  };
+  panchak?: { active: boolean; message: string; nakshatra?: string };
 }
 
 export default function PanchangClient({ params }: { params: { date: string } }) {
@@ -36,6 +32,10 @@ export default function PanchangClient({ params }: { params: { date: string } })
   const today = format(new Date(), "yyyy-MM-dd");
   const tomorrow = format(new Date(Date.now() + 86400000), "yyyy-MM-dd");
 
+  // ✅ Fix: use fallback backend URL for mobile
+  const BACKEND_URL =
+    process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
+
   // ✅ Safe date formatting
   let formattedDate = date;
   try {
@@ -47,30 +47,24 @@ export default function PanchangClient({ params }: { params: { date: string } })
     formattedDate = date;
   }
 
-  // ✅ Redirect to today if invalid date typed manually
+  // ✅ Redirect invalid date → today
   useEffect(() => {
     const isIsoDate = /^\d{4}-\d{2}-\d{2}$/.test(date);
-    if (!isIsoDate) {
-      router.replace(`/panchang/${today}`);
-    }
+    if (!isIsoDate) router.replace(`/panchang/${today}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
 
-  // ✅ Handle date change buttons
+  // ✅ Handle date change
   const handleChange = (d: string) => {
     const isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(d);
-    if (!isValidDate) {
-      console.warn("Invalid date format, ignoring push:", d);
-      return;
-    }
-    router.push(`/panchang/${d}`);
+    if (isValidDate) router.push(`/panchang/${d}`);
   };
 
   // 🪔 Fetch Panchang Data
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/panchang`, {
+        const res = await fetch(`${BACKEND_URL}/api/panchang`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -89,6 +83,16 @@ export default function PanchangClient({ params }: { params: { date: string } })
     })();
   }, [date, coordinates]);
 
+  // ✅ Loader fallback (important for mobile)
+  if (!p) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center bg-[#0f0c29] text-gray-300">
+        <p>🔮 Loading Panchang...</p>
+      </main>
+    );
+  }
+
+  // ✅ Panchang summary
   const summary = [
     { label: "🌅 Sunrise", value: p?.sunrise },
     { label: "🌇 Sunset", value: p?.sunset },
@@ -105,10 +109,11 @@ export default function PanchangClient({ params }: { params: { date: string } })
     {
       label: "🔥 Panchak",
       value: p?.panchak?.active ? "Active" : "Not Active",
-      sub: p?.panchak?.message || `Related Nakshatra: ${p?.panchak?.nakshatra || ""}`,
+      sub: p?.panchak?.message || `Nakshatra: ${p?.panchak?.nakshatra || ""}`,
     },
   ];
 
+  // ✅ Muhurtha Tools
   const tools = [
     { icon: "👶", label: "Naamkaran", slug: "naamkaran" },
     { icon: "💍", label: "Marriage", slug: "marriage" },
@@ -128,7 +133,7 @@ export default function PanchangClient({ params }: { params: { date: string } })
         </h1>
         <div className="text-sm text-gray-400 mb-3">📍 {location}</div>
 
-        {/* Date + Location Controls */}
+        {/* Date & Location Controls */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
           <button
             onClick={() => handleChange(today)}
@@ -153,7 +158,6 @@ export default function PanchangClient({ params }: { params: { date: string } })
             onChange={(e) => handleChange(e.target.value)}
             className="px-3 py-1 rounded-md bg-white/10 text-sm text-gray-200 border border-purple-400"
           />
-
           <div className="w-48">
             <PlaceAutocompleteInput
               value={location}
@@ -171,12 +175,11 @@ export default function PanchangClient({ params }: { params: { date: string } })
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-10">
         <div className="bg-white/10 border border-purple-400/20 rounded-xl p-4">
           <p className="text-sm text-purple-300 font-medium">Auspicious Timing</p>
-          <h3 className="text-lg font-semibold text-white">Abhijit Muhurth</h3>
+          <h3 className="text-lg font-semibold text-white">Abhijit Muhurtha</h3>
           <p className="text-purple-200 mt-1">
             {p?.abhijit_muhurta?.start} – {p?.abhijit_muhurta?.end}
           </p>
         </div>
-
         <div className="bg-white/10 border border-red-400/30 rounded-xl p-4">
           <p className="text-sm text-red-300 font-medium">Inauspicious Timing</p>
           <h3 className="text-lg font-semibold text-white">Rahu Kaal</h3>
@@ -187,7 +190,7 @@ export default function PanchangClient({ params }: { params: { date: string } })
       </div>
 
       {/* Panchang Details */}
-      <div className="max-w-7xl mx-auto bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-md p-6 md:p-8">
+      <div className="max-w-7xl mx-auto bg-white/10 rounded-2xl border border-white/10 shadow-md p-6 md:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {summary.map((item, idx) => (
             <div
