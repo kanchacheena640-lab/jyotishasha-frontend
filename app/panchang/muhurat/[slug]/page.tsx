@@ -30,65 +30,144 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
 
   const dates = await getMuhurth(topic.activity);
 
+  // 🎯 Show only current month’s muhurat dates (past + upcoming)
   const now = new Date();
-  const nextMonth = now.getMonth() + 1;
+  const currentMonth = now.getMonth();
   const year = now.getFullYear();
-  const monthName = new Date(year, nextMonth - 1).toLocaleString("en-US", { month: "long" });
-  const filtered = dates.filter((d: any) => {
-    const dt = new Date(d.date);
-    return dt.getMonth() + 1 === nextMonth && dt.getFullYear() === year;
-  });
+
+  const finalDates = dates
+    .filter((d: any) => {
+      const dt = new Date(d.date);
+      return dt.getMonth() === currentMonth && dt.getFullYear() === year;
+    })
+    .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const monthName = new Date(year, currentMonth).toLocaleString("en-US", { month: "long" });
 
   return (
     <article className="max-w-5xl mx-auto px-4 py-10 text-white leading-relaxed">
+      {/* Header */}
       <header className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-purple-300 mb-3">
           {topic.title} – {monthName} {year}
         </h1>
         <p className="text-gray-300 max-w-3xl">
-          {topic.description} This article lists all Shubh Muhurat dates for {monthName} {year} 
-          according to Hindu Panchang and Nakshatra. Ideal for those planning 
-          their {topic.activity.replace("-", " ")} this month.
+          {topic.description} This article lists all Shubh Muhurat dates for {monthName} {year},
+          according to Hindu Panchang and Nakshatra. Ideal for those planning their{" "}
+          {topic.activity.replace("-", " ")} this month with accurate astrological guidance.
         </p>
       </header>
 
-      {/* Muhurat List */}
+      {/* Muhurat Dates */}
       <section className="bg-white/10 rounded-2xl border border-purple-400/20 p-6 mb-10">
         <h2 className="text-xl font-semibold text-purple-200 mb-4">
           Auspicious Dates for {monthName} {year}
         </h2>
-        {filtered.length > 0 ? (
-          <ul className="space-y-2">
-            {filtered.map((d: any) => (
-              <li key={d.date} className="border-b border-white/10 pb-2 text-sm">
-                <strong className="text-purple-200">{d.date}</strong> – {d.nakshatra} Nakshatra ({d.weekday})
-              </li>
-            ))}
-          </ul>
+
+        {finalDates.length > 0 ? (
+          finalDates.map((d: any) => (
+            <div key={d.date} className="mb-6 pb-4 border-b border-white/10">
+              <h3 className="text-lg font-bold text-purple-300 mb-1">
+                🌟 {d.date} ({d.weekday})
+              </h3>
+              <p className="text-gray-300 text-sm mb-1">
+                <strong>Nakshatra:</strong> {d.nakshatra} &nbsp;|&nbsp;
+                <strong>Tithi:</strong> {d.tithi}
+              </p>
+              {d.reason && (
+                <p className="text-gray-200 text-sm leading-relaxed mb-1">{d.reason}</p>
+              )}
+              <p className="text-xs text-gray-400">⭐ Shubh Score: {d.score}/100</p>
+            </div>
+          ))
         ) : (
           <p className="text-gray-400">No auspicious dates found for this month.</p>
         )}
       </section>
 
-      {/* Insights */}
+      {/* Astrological Insights */}
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-purple-200 mb-3">Astrological Insights</h2>
         <p className="text-gray-300">
-          According to Jyotish principles, these dates occur when the Moon transits favorable Nakshatras 
-          and Tithis. Avoid Rahu Kaal and Amavasya for important beginnings. 
-          Proper weekday and nakshatra selection brings harmony and prosperity in your 
-          {` ${topic.activity.replace("-", " ")}.`}
+          According to Jyotish principles, these muhurat dates occur when the Moon transits through
+          favourable Nakshatras and Tithis that promote success, happiness, and growth. Avoid
+          periods like Rahu Kaal, Amavasya, and Vishti Karan for best outcomes. Performing the task
+          during Shukla Paksha under auspicious constellations ensures lasting prosperity and
+          harmony in your {topic.activity.replace("-", " ")}.
         </p>
       </section>
 
-      {/* FAQ */}
+      {/* Astrological Conditions */}
       <section className="bg-white/5 rounded-xl border border-white/10 p-5 mb-10">
-        <h2 className="text-lg font-semibold text-purple-300 mb-3">Common Questions</h2>
-        <ul className="list-disc list-inside text-gray-300 text-sm space-y-2">
-          <li>Which are the most favorable dates for {topic.activity.replace("-", " ")} in {monthName} {year}?</li>
-          <li>Which Nakshatra is best for this activity?</li>
-          <li>How is Muhurat calculated as per Hindu Panchang?</li>
+        <h2 className="text-lg font-semibold text-purple-300 mb-3">
+          🪔 Astrological Conditions for {topic.title.split(" – ")[0]}
+        </h2>
+        <p className="text-gray-300 text-sm mb-4">
+          These planetary and calendar combinations define the auspicious timings for{" "}
+          {topic.activity.replace("-", " ")} as per Hindu Panchang.
+        </p>
+
+        <h3 className="text-purple-200 font-semibold mt-4 mb-2">✅ Favourable Combinations</h3>
+        <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
+          <li><strong>Allowed Tithis:</strong> 2, 3, 5, 6, 7, 10, 11, 13</li>
+          <li><strong>Favourable Weekdays:</strong> Monday, Wednesday, Thursday, Friday</li>
+          <li><strong>Auspicious Nakshatras:</strong> Rohini, Mrigashira, Pushya, Hasta, Swati, Anuradha, Shravana, Revati</li>
         </ul>
+
+        <h3 className="text-purple-200 font-semibold mt-4 mb-2">⚠️ Avoid These Periods</h3>
+        <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
+          <li><strong>Avoid Tithis:</strong> 4, 8, 9, 14, 15, 30</li>
+          <li><strong>Avoid Weekdays:</strong> Tuesday, Saturday</li>
+          <li><strong>Inauspicious Nakshatras:</strong> Moola, Jyeshtha, Krittika, Ashlesha</li>
+          <li><strong>Inauspicious Yogas:</strong> Vyatipata, Vaidhriti</li>
+          <li><strong>Inauspicious Karans:</strong> Vishti (Bhadra)</li>
+        </ul>
+
+        <h3 className="text-purple-200 font-semibold mt-4 mb-2">💡 Special Notes</h3>
+        <p className="text-gray-300 text-sm">
+          Days with Pushya Nakshatra or during Shukla Paksha are extremely beneficial. Avoid
+          Amavasya and eclipses. Performing small puja before beginning ensures long-term peace and
+          protection.
+        </p>
+      </section>
+
+      {/* FAQ with Answers */}
+      <section className="bg-white/5 rounded-xl border border-white/10 p-5 mb-10">
+        <h2 className="text-lg font-semibold text-purple-300 mb-3">Frequently Asked Questions</h2>
+        <div className="space-y-4 text-gray-300 text-sm">
+          <div>
+            <p className="font-semibold">
+              1️⃣ Which are the most favourable dates for {topic.activity.replace("-", " ")} in{" "}
+              {monthName} {year}?
+            </p>
+            <p className="text-gray-400">
+              The most auspicious dates are those when Moon stays in Rohini, Mrigashira, or Pushya
+              Nakshatra with Shukla Paksha tithi. You can refer to the list above; dates with higher
+              scores indicate stronger planetary support.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold">
+              2️⃣ Which Nakshatra is best for {topic.activity.replace("-", " ")}?
+            </p>
+            <p className="text-gray-400">
+              Nakshatras like Rohini, Pushya, Hasta, and Swati are known to bring prosperity and
+              harmony. They help avoid accidents and ensure success in material matters.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold">
+              3️⃣ How is Muhurat calculated as per Hindu Panchang?
+            </p>
+            <p className="text-gray-400">
+              A Muhurat is determined based on the position of the Moon, Tithi, Nakshatra, Yoga, and
+              Karan. Favourable combinations during Shukla Paksha (waxing phase of the Moon) are
+              preferred for all auspicious beginnings.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Internal Links */}
