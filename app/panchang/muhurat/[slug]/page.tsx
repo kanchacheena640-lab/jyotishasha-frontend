@@ -564,7 +564,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
                 className="block bg-white/5 hover:bg-white/10 transition-colors rounded-xl border border-white/10 p-4 shadow-sm hover:shadow-md"
               >
                 <h3 className="text-purple-300 font-semibold text-sm mb-1">
-                  {t.title.split(" – ")[0]}
+                  {t.title.split(" – ")[0]} – {monthName} {year}
                 </h3>
                 <p className="text-gray-400 text-xs line-clamp-2">
                   {t.description}
