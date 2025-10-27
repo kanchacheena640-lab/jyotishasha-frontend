@@ -2,6 +2,8 @@ import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
 import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
 import { faq_muhurth } from "@/app/data/faq_muhurth";
 import Script from "next/script";
+import Link from "next/link";
+
 
 
 export const revalidate = 86400;
@@ -91,12 +93,12 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
         </h1>
         <p className="text-gray-300 max-w-3xl">
           Discover auspicious <strong>{monthName} {year}</strong> {topic.title.split(" – ")[0]} dates 
-          as per the <a 
-            href="/panchang" 
-            className="text-purple-300 hover:text-purple-100 underline"
-          >
-            Hindu Panchang
-          </a> and Nakshatra. Updated every month, this guide helps you find 
+          as per the <Link 
+              href="/panchang" 
+              className="text-purple-300 hover:text-purple-100 underline"
+            >
+              Hindu Panchang
+            </Link> and Nakshatra. Updated every month, this guide helps you find 
           the most suitable days for your {` ${topic.activity.replace("-", " ")}`} rituals. 
           All timings for {topic.title.split(" – ")[0]} <strong>{monthName} {year}</strong> are carefully 
           calculated using Vedic astrology principles to ensure success, peace, and prosperity.
