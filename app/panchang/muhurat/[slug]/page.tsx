@@ -170,7 +170,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             </>
           )}
 
-          {topic.activity === "grah-pravesh" && (
+          {topic.activity === "grah_pravesh" && (
             <>
               For <strong>Grah Pravesh Muhurat</strong>, astrologers look for auspicious
               Tithis like Dwitiya, Tritiya, Panchami, Dashami, and Ekadashi along with
@@ -190,7 +190,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             </>
           )}
 
-          {topic.activity === "child-birth" && (
+          {topic.activity === "childbirth" && (
             <>
               A <strong>Child Birth Muhurat</strong> focuses on ensuring divine timing for
               the baby’s safe arrival. Auspicious Tithis include Dwitiya, Tritiya, Panchami,
@@ -200,7 +200,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             </>
           )}
 
-          {topic.activity === "gold-purchase" && (
+          {topic.activity === "gold" && (
             <>
               The <strong>Gold Buying Muhurat</strong> is decided by checking the Moon’s
               position, Nakshatra, and Tithi. Favourable Tithis like Dwitiya, Tritiya,
@@ -210,7 +210,7 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             </>
           )}
 
-          {topic.activity === "foreign-travel" && (
+          {topic.activity === "travel" && (
             <>
               Choosing a <strong>Foreign Travel Muhurat</strong> involves looking for
               auspicious Tithis like Dwitiya, Tritiya, and Panchami along with Nakshatras
@@ -275,25 +275,101 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             </tbody>
           </table>
         )}
+        {topic.activity === "childbirth" && (
+          <table className="w-full text-sm text-gray-300 border-collapse">
+            <tbody>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Tithis</td>
+                <td>Dwitiya, Tritiya, Panchami, Saptami, Dashami, Ekadashi, Trayodashi</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Tithis</td>
+                <td>Chaturthi, Ashtami, Navami, Chaturdashi, Amavasya</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
+                <td>Rohini, Mrigashira, Pushya, Hasta, Anuradha, Shravana, Dhanishtha, Revati</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Nakshatras</td>
+                <td>Ashwini, Bharani, Ashlesha, Magha, Jyeshtha, Moola</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
+                <td>Monday, Wednesday, Thursday, Friday</td>
+              </tr>
+              <tr>
+                <td className="py-2 font-semibold text-purple-200">Avoid Weekdays</td>
+                <td>Saturday, Sunday, Tuesday</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
 
+        {topic.activity === "travel" && (
+          <table className="w-full text-sm text-gray-300 border-collapse">
+            <tbody>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Tithis</td>
+                <td>Dwitiya, Tritiya, Panchami, Shashti, Dashami, Ekadashi, Trayodashi</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Tithis</td>
+                <td>Chaturthi, Ashtami, Navami, Chaturdashi, Purnima, Amavasya</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
+                <td>Punarvasu, Swati, Anuradha, Shravana, Dhanishtha, Uttara Bhadrapada, Rohini, Pushya</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Nakshatras</td>
+                <td>Ashwini, Bharani, Magha, Jyeshtha, Moola, Purva Ashadha</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
+                <td>Wednesday, Thursday, Friday</td>
+              </tr>
+              <tr>
+                <td className="py-2 font-semibold text-purple-200">Avoid Weekdays</td>
+                <td>Saturday, Sunday, Tuesday</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
         {topic.activity === "marriage" && (
           <table className="w-full text-sm text-gray-300 border-collapse">
             <tbody>
               <tr className="border-b border-white/10">
                 <td className="py-2 font-semibold text-purple-200">Favourable Tithis</td>
-                <td>Dwitiya, Tritiya, Panchami, Saptami, Dashami, Trayodashi</td>
+                <td>Dwitiya (2), Tritiya (3), Panchami (5), Saptami (7), Dashami (10), Ekadashi (11), Trayodashi (13)</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Tithis</td>
+                <td>Chaturthi (4), Ashtami (8), Navami (9), Chaturdashi (14), Purnima (15), Amavasya (30)</td>
               </tr>
               <tr className="border-b border-white/10">
                 <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
-                <td>Rohini, Mrigashira, Magha, Hasta, Anuradha, Uttara Phalguni, Revati</td>
+                <td>Rohini, Mrigashira, Uttara Phalguni, Hasta, Swati, Anuradha, Shravana, Dhanishtha, Revati</td>
               </tr>
               <tr className="border-b border-white/10">
-                <td className="py-2 font-semibold text-purple-200">Avoid Days</td>
-                <td>Chaturthi, Ashtami, Amavasya, full eclipses</td>
+                <td className="py-2 font-semibold text-purple-200">Avoid Nakshatras</td>
+                <td>Krittika, Ashlesha, Jyeshtha, Moola, Magha</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
+                <td>Monday, Wednesday, Thursday, Friday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Weekdays</td>
+                <td>Saturday, Sunday, Tuesday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Yogas</td>
+                <td>Vyatipata, Vaidhriti</td>
               </tr>
               <tr>
-                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
-                <td>Monday, Wednesday, Thursday, Friday, Sunday</td>
+                <td className="py-2 font-semibold text-purple-200">Avoid Karans</td>
+                <td>Vishti (Bhadra)</td>
               </tr>
             </tbody>
           </table>
@@ -304,53 +380,117 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             <tbody>
               <tr className="border-b border-white/10">
                 <td className="py-2 font-semibold text-purple-200">Favourable Tithis</td>
-                <td>Dwitiya, Tritiya, Panchami, Saptami, Dashami</td>
-              </tr>
-              <tr className="border-b border-white/10">
-                <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
-                <td>Rohini, Mrigashira, Pushya, Revati, Swati</td>
-              </tr>
-              <tr>
-                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
-                <td>Monday, Wednesday, Thursday, Friday</td>
-              </tr>
-            </tbody>
-          </table>
-        )}
-
-        {topic.activity === "grah-pravesh" && (
-          <table className="w-full text-sm text-gray-300 border-collapse">
-            <tbody>
-              <tr className="border-b border-white/10">
-                <td className="py-2 font-semibold text-purple-200">Best Tithis</td>
-                <td>Dwitiya, Tritiya, Panchami, Dashami, Ekadashi</td>
+                <td>Dwitiya (2), Tritiya (3), Panchami (5), Shashti (6), Saptami (7), Dashami (10), Ekadashi (11), Trayodashi (13)</td>
               </tr>
               <tr className="border-b border-white/10">
                 <td className="py-2 font-semibold text-purple-200">Avoid Tithis</td>
-                <td>Amavasya, Chaturthi, Ashtami, Navami</td>
+                <td>Chaturthi (4), Ashtami (8), Navami (9), Chaturdashi (14), Purnima (15), Amavasya (30)</td>
               </tr>
               <tr className="border-b border-white/10">
-                <td className="py-2 font-semibold text-purple-200">Good Nakshatras</td>
-                <td>Rohini, Mrigashira, Pushya, Uttara Phalguni, Anuradha</td>
+                <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
+                <td>Ashwini, Rohini, Mrigashira, Punarvasu, Pushya, Hasta, Swati, Anuradha, Shravana, Revati</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Nakshatras</td>
+                <td>Krittika, Ashlesha, Moola, Jyeshtha</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
+                <td>Monday, Wednesday, Thursday, Friday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Weekdays</td>
+                <td>Tuesday, Saturday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Yogas</td>
+                <td>Vyatipata, Vaidhriti</td>
               </tr>
               <tr>
-                <td className="py-2 font-semibold text-purple-200">Best Weekdays</td>
-                <td>Monday, Wednesday, Thursday, Friday</td>
+                <td className="py-2 font-semibold text-purple-200">Avoid Karans</td>
+                <td>Vishti (Bhadra)</td>
               </tr>
             </tbody>
           </table>
         )}
 
-        {topic.activity === "gold-purchase" && (
+        {topic.activity === "grah_pravesh" && (
+          <table className="w-full text-sm text-gray-300 border-collapse">
+            <tbody>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Tithis</td>
+                <td>Dwitiya (2), Tritiya (3), Panchami (5), Saptami (7), Dashami (10), Ekadashi (11), Trayodashi (13)</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Tithis</td>
+                <td>Chaturthi (4), Ashtami (8), Navami (9), Chaturdashi (14), Purnima (15), Amavasya (30)</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
+                <td>Rohini, Mrigashira, Uttara Phalguni, Hasta, Swati, Anuradha, Shravana, Dhanishta, Revati</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Nakshatras</td>
+                <td>Krittika, Ashlesha, Magha, Mula, Jyeshtha</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
+                <td>Monday, Wednesday, Thursday, Friday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Weekdays</td>
+                <td>Saturday, Sunday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Yogas</td>
+                <td>Vyatipata, Vaidhriti</td>
+              </tr>
+              <tr>
+                <td className="py-2 font-semibold text-purple-200">Avoid Karans</td>
+                <td>Vishti (Bhadra)</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+
+        {topic.activity === "gold" && (
           <table className="w-full text-sm text-gray-300 border-collapse">
             <tbody>
               <tr className="border-b border-white/10">
                 <td className="py-2 font-semibold text-purple-200">Special Days</td>
                 <td>Akshaya Tritiya, Dhanteras, Pushya Nakshatra days</td>
               </tr>
-              <tr>
+              <tr className="border-b border-white/10">
                 <td className="py-2 font-semibold text-purple-200">Favourable Tithis</td>
-                <td>Tritiya, Panchami, Dashami, Ekadashi</td>
+                <td>Dwitiya (2), Tritiya (3), Panchami (5), Saptami (7), Dashami (10), Ekadashi (11), Trayodashi (13)</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Tithis</td>
+                <td>Chaturthi (4), Ashtami (8), Navami (9), Chaturdashi (14), Purnima (15), Amavasya (30)</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Auspicious Nakshatras</td>
+                <td>Rohini, Mrigashira, Pushya, Hasta, Swati, Anuradha, Shravana, Dhanishtha, Uttara Phalguni</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Nakshatras</td>
+                <td>Ashwini, Bharani, Ashlesha, Magha, Jyeshtha, Moola</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Favourable Weekdays</td>
+                <td>Monday, Wednesday, Thursday, Friday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Weekdays</td>
+                <td>Saturday, Sunday, Tuesday</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="py-2 font-semibold text-purple-200">Avoid Yogas</td>
+                <td>Vyatipata, Vaidhriti, Ganda, Shoola</td>
+              </tr>
+              <tr>
+                <td className="py-2 font-semibold text-purple-200">Avoid Karans</td>
+                <td>Vishti (Bhadra)</td>
               </tr>
             </tbody>
           </table>
