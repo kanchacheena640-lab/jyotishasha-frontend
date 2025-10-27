@@ -543,25 +543,36 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
       {/* CTA for paid reports */}
       <CtaReport />
 
-      {/* Internal Links */}
-      <footer className="text-sm text-gray-400 border-t border-white/10 pt-4">
-        <p>Explore more Muhurat articles:</p>
-        <ul className="flex flex-wrap gap-2 mt-2">
+      {/* 📰 Related Muhurat Articles Section */}
+      <footer className="mt-12 border-t border-white/10 pt-8">
+        <h2 className="text-xl font-semibold text-purple-200 mb-4">
+          🔮 Explore More Muhurat Guides
+        </h2>
+        <p className="text-gray-400 mb-6 text-sm">
+          Read detailed astrology-based articles on other important Muhurats and rituals.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {Object.values(muhurthTopics)
             .filter((t) => t.slug !== topic.slug)
             .map((t) => (
-              <li key={t.slug}>
-                <a
-                  href={`/panchang/muhurat/${t.slug}`}
-                  className="text-purple-300 hover:text-purple-100 underline text-xs"
-                >
+              <a
+                key={t.slug}
+                href={`/panchang/muhurat/${t.slug}`}
+                className="block bg-white/5 hover:bg-white/10 transition-colors rounded-xl border border-white/10 p-4 shadow-sm hover:shadow-md"
+              >
+                <h3 className="text-purple-300 font-semibold text-sm mb-1">
                   {t.title.split(" – ")[0]}
-                </a>
-              </li>
+                </h3>
+                <p className="text-gray-400 text-xs line-clamp-2">
+                  {t.description}
+                </p>
+              </a>
             ))}
-        </ul>
-        <p className="mt-6 text-xs text-gray-500">
-          Data auto-updated from Jyotishasha API • Based on Hindu Panchang (Lahiri Ayanamsa)
+        </div>
+
+        <p className="mt-10 text-xs text-gray-500 text-center border-t border-white/5 pt-4">
+          Data auto-updated from Jyotishasha API • Based on authentic Hindu Panchang (Lahiri Ayanamsa)
         </p>
       </footer>
     </article>
