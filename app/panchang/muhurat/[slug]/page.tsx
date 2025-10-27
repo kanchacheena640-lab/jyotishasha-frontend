@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${topic.title} – ${month} ${year}`,
     description: `${topic.description} Updated monthly with auspicious ${topic.activity.replace("-", " ")} dates for ${month} ${year}.`,
+    keywords: topic.keywords || [], // ✅ added for semantic search
     alternates: { canonical: topic.canonical },
     openGraph: {
       title: `${topic.title} – ${month} ${year}`,
@@ -89,11 +90,16 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           {topic.title} – {monthName} {year}
         </h1>
         <p className="text-gray-300 max-w-3xl">
-            Discover auspicious <strong>{monthName} {year}</strong> {topic.title.split(" – ")[0]} dates 
-            as per the Hindu Panchang and Nakshatra. Updated every month, this guide helps you find 
-            the most suitable days for your {` ${topic.activity.replace("-", " ")}`} rituals. 
-            All timings for {topic.title.split(" – ")[0]} <strong>{monthName} {year}</strong> are carefully 
-            calculated using Vedic astrology principles to ensure success, peace, and prosperity.
+          Discover auspicious <strong>{monthName} {year}</strong> {topic.title.split(" – ")[0]} dates 
+          as per the <a 
+            href="/panchang" 
+            className="text-purple-300 hover:text-purple-100 underline"
+          >
+            Hindu Panchang
+          </a> and Nakshatra. Updated every month, this guide helps you find 
+          the most suitable days for your {` ${topic.activity.replace("-", " ")}`} rituals. 
+          All timings for {topic.title.split(" – ")[0]} <strong>{monthName} {year}</strong> are carefully 
+          calculated using Vedic astrology principles to ensure success, peace, and prosperity.
         </p>
       </header>
 
@@ -593,6 +599,33 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           Data auto-updated from Jyotishasha API • Based on authentic Hindu Panchang (Lahiri Ayanamsa)
         </p>
       </footer>
+      <Script id="breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Panchang",
+              "item": "https://www.jyotishasha.com/panchang"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Muhurat",
+              "item": "https://www.jyotishasha.com/panchang/muhurat"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": topic.title.split(" – ")[0],
+              "item": topic.canonical
+            }
+          ]
+        })}
+      </Script>
+
     </article>
   );
 }
