@@ -141,6 +141,28 @@ export const faq_muhurth: Record<string, FAQItem[]> = {
         a: "Saturday is generally avoided for starting long or important journeys, as it is ruled by Saturn (Shani), which may cause delays or fatigue during travel.",
     },
   ],
+  grah_pravesh: [
+    {
+        q: "Which Tithis are best for Grah Pravesh Muhurat?",
+        a: "Dwitiya, Tritiya, Panchami, Dashami, and Ekadashi Tithis are considered auspicious for Grah Pravesh as they bring prosperity, peace, and positive energy into the new home.",
+    },
+    {
+        q: "Which Nakshatra is good for Griha Pravesh?",
+        a: "Rohini, Mrigashira, Pushya, Anuradha, and Revati Nakshatras are most favorable for Grah Pravesh. These stars ensure happiness and stability in the new house.",
+    },
+    {
+        q: "Which months are ideal for Grah Pravesh ceremony?",
+        a: "The months of Magha, Phalguna, Vaishakha, and Jyeshtha are generally considered best for Grah Pravesh. Avoid the months of Ashadha, Shravan, and Bhadrapada when most ceremonies are paused (Chaturmas).",
+    },
+    {
+        q: "Why is Muhurat important for Grah Pravesh?",
+        a: "Performing Grah Pravesh during a favorable Muhurat ensures that the planetary energies are balanced, inviting prosperity, health, and harmony for all family members.",
+    },
+    {
+        q: "What should be avoided on the day of Grah Pravesh?",
+        a: "Avoid entering the house during Amavasya or when Rahu Kalam is active. Ensure the ceremony is done in Shukla Paksha and the east-facing main door is decorated with torans and Kalash for good fortune.",
+    },
+    ],
 };
 
 export default faq_muhurth;

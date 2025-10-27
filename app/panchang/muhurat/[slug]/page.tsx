@@ -1,5 +1,7 @@
 import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
 import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
+import { faq_muhurth } from "@/app/data/faq_muhurth";
+import Script from "next/script";
 
 
 export const revalidate = 86400;
@@ -508,47 +510,38 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
         {/* CTA promoting same category Muhurat */}
         <CtaMuhurth slug={topic.slug} />
 
-      {/* FAQ with Answers */}
+      {/* ✅ FAQ Section */}
       <section className="bg-white/5 rounded-xl border border-white/10 p-5 mb-10">
-        <h2 className="text-lg font-semibold text-purple-300 mb-3">Frequently Asked Questions</h2>
+        <h2 className="text-lg font-semibold text-purple-300 mb-3">
+          Frequently Asked Questions
+        </h2>
         <div className="space-y-4 text-gray-300 text-sm">
-          <div>
-            <p className="font-semibold">
-              1️⃣ Which are the most favourable dates for {topic.activity.replace("-", " ")} in{" "}
-              {monthName} {year}?
-            </p>
-            <p className="text-gray-400">
-              The most auspicious dates are those when Moon stays in Rohini, Mrigashira, or Pushya
-              Nakshatra with Shukla Paksha tithi. You can refer to the list above; dates with higher
-              scores indicate stronger planetary support.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold">
-              2️⃣ Which Nakshatra is best for {topic.activity.replace("-", " ")}?
-            </p>
-            <p className="text-gray-400">
-              Nakshatras like Rohini, Pushya, Hasta, and Swati are known to bring prosperity and
-              harmony. They help avoid accidents and ensure success in material matters.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold">
-              3️⃣ How is Muhurat calculated as per Hindu Panchang?
-            </p>
-            <p className="text-gray-400">
-              A Muhurat is determined based on the position of the Moon, Tithi, Nakshatra, Yoga, and
-              Karan. Favourable combinations during Shukla Paksha (waxing phase of the Moon) are
-              preferred for all auspicious beginnings.
-            </p>
-          </div>
+          {faq_muhurth[topic.activity]?.map((faq, i) => (
+            <div key={i}>
+              <p className="font-semibold">{i + 1}️⃣ {faq.q}</p>
+              <p className="text-gray-400">{faq.a}</p>
+            </div>
+          )) || (
+            <p className="text-gray-500">No FAQs available for this topic yet.</p>
+          )}
         </div>
       </section>
+
+      {/* ✅ Add Google FAQ Schema for SEO */}
+      <Script id="faq-schema" type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": (faq_muhurth[topic.activity] || []).map((faq) => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": { "@type": "Answer", "text": faq.a },
+          })),
+        })}
+      </Script>
+
       {/* CTA for paid reports */}
       <CtaReport />
-
 
       {/* Internal Links */}
       <footer className="text-sm text-gray-400 border-t border-white/10 pt-4">
