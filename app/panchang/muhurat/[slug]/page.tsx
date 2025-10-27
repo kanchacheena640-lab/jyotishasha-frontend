@@ -545,14 +545,16 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
 
       {/* 📰 Related Muhurat Articles Section */}
       <footer className="mt-12 border-t border-white/10 pt-8">
-        <h2 className="text-xl font-semibold text-purple-200 mb-4">
-          🔮 Explore More Muhurat Guides
+        {/* Dynamic heading with month & year */}
+        <h2 className="text-xl md:text-2xl font-semibold text-purple-200 mb-2">
+          🔮 Explore More Muhurat Guides – {monthName} {year}
         </h2>
         <p className="text-gray-400 mb-6 text-sm">
-          Read detailed astrology-based articles on other important Muhurats and rituals.
+          Read astrology-based insights and monthly guides for other important Muhurats and Vedic rituals.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Related article-style cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
           {Object.values(muhurthTopics)
             .filter((t) => t.slug !== topic.slug)
             .map((t) => (
@@ -571,6 +573,22 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
             ))}
         </div>
 
+        {/* External authoritative link (SEO trust link) */}
+        <div className="mt-6 text-center">
+          <a
+            href="https://astroblog.in/product-category/rashi-ratna/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gradient-to-r from-purple-500/20 to-purple-700/20 text-purple-200 border border-purple-400/30 rounded-xl px-5 py-2 text-sm hover:bg-purple-500/30 transition"
+          >
+            💎 Buy Original & Abhimantrit Rashi Ratna
+          </a>
+          <p className="text-xs text-gray-500 mt-2">
+            Energized gemstones blessed under Vedic rituals for prosperity and protection.
+          </p>
+        </div>
+
+        {/* Footer credit line */}
         <p className="mt-10 text-xs text-gray-500 text-center border-t border-white/5 pt-4">
           Data auto-updated from Jyotishasha API • Based on authentic Hindu Panchang (Lahiri Ayanamsa)
         </p>
