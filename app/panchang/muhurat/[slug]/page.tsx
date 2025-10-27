@@ -1,4 +1,6 @@
 import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
+import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
+
 
 export const revalidate = 86400;
 
@@ -231,6 +233,9 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           )}
         </p>
       </section>
+
+          {/* After Insights Section */}
+          <CtaKundali />
 
       {/* 🪔 Astrological Summary Table */}
       <section className="bg-white/5 rounded-xl border border-white/10 p-5 mb-10">
@@ -500,6 +505,8 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           These details are based on traditional Hindu Panchang and are updated monthly for each activity type.
         </p>
       </section>
+        {/* CTA promoting same category Muhurat */}
+        <CtaMuhurth slug={topic.slug} />
 
       {/* FAQ with Answers */}
       <section className="bg-white/5 rounded-xl border border-white/10 p-5 mb-10">
@@ -539,6 +546,9 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           </div>
         </div>
       </section>
+      {/* CTA for paid reports */}
+      <CtaReport />
+
 
       {/* Internal Links */}
       <footer className="text-sm text-gray-400 border-t border-white/10 pt-4">
