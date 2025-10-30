@@ -72,7 +72,7 @@ export default function Header() {
   {/* Desktop Nav */}
   <nav className="hidden md:flex justify-center gap-8 text-lg text-white mt-3" style={{ fontFamily: 'Playfair Display, serif' }}>
     <Link href="/">Home</Link>
-    <Link href="/free-kundali">Free-Kudnali</Link>
+    <Link href="/free-kundali">Free-Kundali</Link>
     <Link href="/tools" suppressHydrationWarning>
       Astrology
     </Link>
