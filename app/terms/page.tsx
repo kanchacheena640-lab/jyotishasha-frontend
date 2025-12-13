@@ -16,6 +16,12 @@ export default function TermsPage() {
         be bound by these terms.
       </p>
 
+      <h2 className="text-2xl font-semibold mt-6 mb-2">Eligibility</h2>
+      <p className="text-gray-300 mb-4">
+        You must be at least 13 years of age to use Jyotishasha. By using our
+        services, you confirm that you meet this eligibility requirement.
+      </p>
+
       <h2 className="text-2xl font-semibold mt-6 mb-2">Scope of Services</h2>
       <p className="text-gray-300 mb-4">
         Jyotishasha provides astrology-based content including Kundali analysis,
@@ -64,6 +70,15 @@ export default function TermsPage() {
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">
+        Prohibited Use
+      </h2>
+      <p className="text-gray-300 mb-4">
+        Users must not misuse the platform, attempt to disrupt services, abuse
+        content, or use Jyotishasha for unlawful or harmful activities. We
+        reserve the right to restrict or terminate access in case of misuse.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-6 mb-2">
         Limitation of Liability
       </h2>
       <p className="text-gray-300 mb-4">
@@ -81,6 +96,14 @@ export default function TermsPage() {
         reports, and guidance provided through Jyotishasha are for informational
         and spiritual purposes only. They should not be considered as medical,
         legal, financial, or professional advice.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-6 mb-2">
+        Governing Law
+      </h2>
+      <p className="text-gray-300 mb-4">
+        These Terms & Conditions shall be governed and interpreted in accordance
+        with the laws of India.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">

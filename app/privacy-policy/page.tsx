@@ -43,11 +43,15 @@ export default function PrivacyPolicyPage() {
         <li>Generating personalized astrology reports and horoscopes</li>
         <li>Providing Panchang, Kundali, and related services</li>
         <li>Improving user experience and service quality</li>
-        <li>Sending service-related notifications or updates (only if enabled)</li>
+        <li>
+          Sending service-related notifications or updates (only if enabled)
+        </li>
       </ul>
       <p className="text-gray-300 mb-4">
-        We do <strong>not</strong> sell, rent, or trade your personal data with
-        any third party.
+        We do <strong>not</strong> sell or trade your personal data. Limited data
+        may be shared with trusted third-party services such as payment gateways,
+        analytics, notification services, and hosting providers solely for
+        service delivery, security, and legal compliance.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">
@@ -89,6 +93,14 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">
+        Children’s Privacy
+      </h2>
+      <p className="text-gray-300 mb-4">
+        Jyotishasha services are not intended for children under the age of 13.
+        We do not knowingly collect personal information from minors.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-6 mb-2">
         Changes to This Policy
       </h2>
       <p className="text-gray-300 mb-4">
@@ -107,7 +119,7 @@ export default function PrivacyPolicyPage() {
 
       <p className="text-gray-500 text-sm mt-10">
         Jyotishasha is available on the Google Play Store. By using our website
-        or app, you agree to this Privacy Policy.
+        or mobile application, you agree to this Privacy Policy.
       </p>
     </div>
   );
