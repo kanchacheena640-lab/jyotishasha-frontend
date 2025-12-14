@@ -113,7 +113,7 @@ export default function PrivacyPolicyPage() {
         If you have any questions or concerns regarding this Privacy Policy,
         please contact us:
         <br />
-        <strong>Email:</strong> support@jyotishasha.com <br />
+        <strong>Email:</strong> jraviom@gmail.com <br />
         <strong>Phone:</strong> +91 7007012255
       </p>
 
@@ -128,7 +128,7 @@ export default function PrivacyPolicyPage() {
       <p className="text-gray-300 mb-4">
         Users can request deletion of their Jyotishasha account and associated
         personal data at any time. To request account deletion, please email
-        <strong> support@jyotishasha.com </strong>
+        <strong> jraviom@gmail.com </strong>
         from your registered email address with the subject line
         <strong> “Account Deletion Request”</strong>.
       </p>
