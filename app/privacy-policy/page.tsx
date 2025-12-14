@@ -121,6 +121,28 @@ export default function PrivacyPolicyPage() {
         Jyotishasha is available on the Google Play Store. By using our website
         or mobile application, you agree to this Privacy Policy.
       </p>
+
+      <h2 className="text-2xl font-semibold mt-6 mb-2">
+        Account Deletion
+      </h2>
+      <p className="text-gray-300 mb-4">
+        Users can request deletion of their Jyotishasha account and associated
+        personal data at any time. To request account deletion, please email
+        <strong> support@jyotishasha.com </strong>
+        from your registered email address with the subject line
+        <strong> “Account Deletion Request”</strong>.
+      </p>
+      <p className="text-gray-300 mb-4">
+        After verification, we will permanently delete the user account and
+        associated personal data, including profile details, birth information,
+        and usage data, within <strong>7 working days</strong>.
+      </p>
+      <p className="text-gray-300 mb-4">
+        Certain transaction records or information required to be retained for
+        legal, regulatory, or accounting purposes may be kept for the period
+        mandated by applicable laws.
+      </p>
+
     </div>
   );
 }
