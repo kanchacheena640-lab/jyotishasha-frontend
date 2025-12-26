@@ -139,16 +139,6 @@ export default function DailyHoroscopePage({ params }: Props) {
                 {signName} Essentials
             </p>
 
-            <ul className="list-disc pl-6 space-y-2 text-gray-800">
-            <li><b>Element:</b> Fire</li>
-            <li><b>Ruling Planet:</b> Mars</li>
-            <li><b>Zodiac Quality:</b> Cardinal</li>
-            <li><b>Power Colors:</b> Red, Crimson, Gold</li>
-            <li><b>Lucky Numbers:</b> 1, 9</li>
-            <li><b>Strengths:</b> Courage, leadership, enthusiasm, initiative</li>
-            <li><b>Challenges:</b> Impulsiveness, impatience, quick reactions</li>
-            </ul>
-
             <div className="mt-4 whitespace-pre-line text-gray-800">
                 {data.essentials}
             </div>
