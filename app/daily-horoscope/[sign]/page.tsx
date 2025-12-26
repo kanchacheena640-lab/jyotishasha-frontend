@@ -26,6 +26,7 @@ export default function DailyHoroscopePage({ params }: Props) {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+
       {/* 🔵 HERO */}
       <div className="rounded-2xl bg-gradient-to-r from-blue-700 to-indigo-800 p-8 mb-10 text-white">
         <h1 className="text-3xl md:text-4xl font-bold leading-snug">
@@ -40,21 +41,17 @@ export default function DailyHoroscopePage({ params }: Props) {
       <section className="grid md:grid-cols-3 gap-6 mb-12">
         {/* Horoscope */}
         <div className="md:col-span-2 bg-white rounded-2xl shadow-md p-6 text-gray-900">
-          <h2 className="text-2xl font-semibold mb-4">
-            Today’s Horoscope
-          </h2>
-
           <DailyHoroscopeBlock sign={sign} lang="en" />
         </div>
 
         {/* CTA */}
         <div className="bg-white border border-purple-200 rounded-2xl p-6 flex flex-col justify-center">
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Personalized Astrology Experience
+            Your Personal Astrology App
           </h3>
           <p className="text-gray-700 text-sm mb-4">
             Personalized Horoscope • Daily Panchang •  
-            Ask 1 Question FREE to our Astrologer
+            Ask One Question to Our Astrologer – <b>FREE</b>
           </p>
           <a
             href="/app-download"
@@ -66,7 +63,7 @@ export default function DailyHoroscopePage({ params }: Props) {
       </section>
 
       {/* 📚 FIXED SEO CONTENT */}
-      <section className="bg-gray-50 rounded-2xl p-8 space-y-8 text-gray-900">
+      <section className="bg-gray-50 rounded-2xl p-8 space-y-10 text-gray-900">
         <div>
           <h2 className="text-2xl font-semibold mb-2">{signName} Nature</h2>
           <p>{data.nature}</p>
