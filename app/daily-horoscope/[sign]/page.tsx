@@ -14,60 +14,84 @@ export default function DailyHoroscopePage({ params }: Props) {
   }
 
   const data = zodiacData[sign];
+  const today = new Date().toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      {/* H1 – SEO */}
-      <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      {/* 🔵 HERO HEADER */}
+      <div className="rounded-2xl bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-8 mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold leading-snug">
+          {sign.charAt(0).toUpperCase() + sign.slice(1)} Daily Horoscope – {today}
+        </h1>
+        <p className="mt-3 text-blue-100 text-lg">
+          Traits, Love, Finance & Compatibility
+        </p>
+      </div>
 
-      {/* Intro */}
-      <p className="text-lg mb-6">{data.nature}</p>
+      {/* 🔮 DAILY HOROSCOPE + CTA */}
+      <section className="grid md:grid-cols-3 gap-6 mb-10">
+        {/* Horoscope Card */}
+        <div className="md:col-span-2 bg-white rounded-2xl shadow-md p-6 text-gray-900">
+          <h2 className="text-2xl font-semibold mb-4">
+            Today’s Horoscope for {sign}
+          </h2>
 
-      {/* Daily Horoscope (API se baad me inject hoga) */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-2">Today’s Horoscope</h2>
+          <DailyHoroscopeBlock sign={sign} lang="en" />
+        </div>
 
-        <DailyHoroscopeBlock sign={sign} lang="en" />
-        </section>
+        {/* CTA */}
+        <div className="bg-purple-50 rounded-2xl p-6 flex flex-col justify-center text-center">
+          <h3 className="text-xl font-semibold mb-2">
+            Get Personalized Horoscope
+          </h3>
+          <p className="text-gray-700 mb-4">
+            Based on your exact birth details, dasha & transits.
+          </p>
+          <a
+            href="/app-download"
+            className="inline-block px-6 py-3 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 transition"
+          >
+            📲 Download App
+          </a>
+        </div>
+      </section>
 
-      {/* Fixed SEO Content */}
-      <section className="space-y-6">
+      {/* 📚 FIXED SEO CONTENT */}
+      <section className="bg-gray-50 rounded-2xl p-8 space-y-8 text-gray-900">
         <div>
-          <h2 className="text-xl font-semibold">Love</h2>
+          <h2 className="text-2xl font-semibold mb-2">Aries Nature</h2>
+          <p>{data.nature}</p>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-2">Aries Love</h2>
           <p>{data.love}</p>
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold">Finance</h2>
+          <h2 className="text-2xl font-semibold mb-2">Aries Finance</h2>
           <p>{data.finance}</p>
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold">Compatibility</h2>
+          <h2 className="text-2xl font-semibold mb-2">
+            Aries Compatibility
+          </h2>
           <p>{data.compatibility}</p>
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold">More About {sign}</h2>
+          <h2 className="text-2xl font-semibold mb-2">
+            More About Aries
+          </h2>
           <p>{data.essentials}</p>
         </div>
       </section>
-
-      {/* CTA */}
-      <div className="mt-10 p-6 rounded-xl bg-purple-100 text-center">
-        <h3 className="text-xl font-semibold mb-2">
-          Get Personalized Horoscope Daily
-        </h3>
-        <p className="mb-4">
-          Based on your exact birth details, dasha & transits.
-        </p>
-        <a
-          href="/app-download"
-          className="inline-block px-6 py-3 rounded-lg bg-purple-600 text-white font-semibold"
-        >
-          Download App
-        </a>
-      </div>
     </div>
   );
 }
