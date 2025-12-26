@@ -135,10 +135,6 @@ export default function DailyHoroscopePage({ params }: Props) {
             More About {signName}
             </h2>
 
-            <p className="mb-4 font-semibold">
-                {signName} Essentials
-            </p>
-
             <div className="mt-4 whitespace-pre-line text-gray-800">
                 {data.essentials}
             </div>

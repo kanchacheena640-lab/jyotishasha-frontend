@@ -77,7 +77,7 @@ export default function Home() {
           {zodiacSigns.map((sign, idx) => (
             <Link
               key={idx}
-              href={`/horoscope/${sign.name.toLowerCase()}`}
+              href={`/daily-horoscope/${sign.name.toLowerCase()}`}
               className="flex flex-col items-center bg-[#1e1b4b] p-4 rounded-lg hover:bg-purple-600 transition"
             >
               <img src={sign.img} alt={sign.name} className="w-20 h-20 mb-2" />
