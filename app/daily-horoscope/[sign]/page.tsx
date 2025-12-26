@@ -1,6 +1,48 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { zodiacData, type ZodiacSign } from "@/lib/zodiac";
 import DailyHoroscopeBlock from "@/components/DailyHoroscopeBlock";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { sign: string };
+}): Promise<Metadata> {
+  const sign = params.sign.toLowerCase() as ZodiacSign;
+
+  if (!zodiacData[sign]) {
+    return {
+      title: "Daily Horoscope | Jyotishasha",
+      description:
+        "Read today's horoscope, zodiac traits, love, finance and compatibility at Jyotishasha.",
+      alternates: { canonical: "https://jyotishasha.com/daily-horoscope" },
+    };
+  }
+
+  const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
+
+  const today = new Date().toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  return {
+    title: `${signName} Daily Horoscope – ${today} | Traits, Love, Finance & Compatibility`,
+    description: `Read ${signName} daily horoscope for ${today}. Get insights on ${signName} nature, love life, finance, compatibility and personalized astrology guidance at Jyotishasha.`,
+    alternates: {
+      canonical: `https://jyotishasha.com/daily-horoscope/${sign}`,
+    },
+    openGraph: {
+      title: `${signName} Daily Horoscope – ${today}`,
+      description: `Today's ${signName} horoscope with traits, love, finance and compatibility.`,
+      url: `https://jyotishasha.com/daily-horoscope/${sign}`,
+      siteName: "Jyotishasha",
+      type: "article",
+    },
+  };
+}
 
 interface Props {
   params: { sign: string };
@@ -93,8 +135,8 @@ export default function DailyHoroscopePage({ params }: Props) {
             More About {signName}
             </h2>
 
-            <p className="mb-4">
-            Aries Essentials
+            <p className="mb-4 font-semibold">
+                {signName} Essentials
             </p>
 
             <ul className="list-disc pl-6 space-y-2 text-gray-800">
@@ -107,11 +149,9 @@ export default function DailyHoroscopePage({ params }: Props) {
             <li><b>Challenges:</b> Impulsiveness, impatience, quick reactions</li>
             </ul>
 
-            <p className="mt-4">
-            {signName} season (March 21 – April 19) marks the beginning of the zodiac cycle,
-            symbolizing rebirth, drive, and fearless action. {signName} natives inspire
-            others by transforming ideas into reality through bold execution.
-            </p>
+            <div className="mt-4 whitespace-pre-line text-gray-800">
+                {data.essentials}
+            </div>
         </div>
         </section>
     </div>
