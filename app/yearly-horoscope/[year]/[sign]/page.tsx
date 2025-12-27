@@ -4,6 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+
 const VALID_SIGNS = [
   "aries","taurus","gemini","cancer","leo","virgo",
   "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
