@@ -161,34 +161,35 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
             </p>
         </section>
 
-        {/* STRONG CTA BLOCK */}
-        <section className="rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-white">
-            <p className="text-lg font-semibold mb-4">
-            {data.cta}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3">
+        {/* TOP CTA ROW */}
+        <div className="mb-6 flex items-center justify-between gap-4">
             <a
                 href="/daily-horoscope"
-                className="rounded-xl bg-white/20 px-4 py-2 text-center font-semibold hover:bg-white/30"
+                className="rounded-xl border border-purple-300 px-4 py-2 font-semibold text-purple-700 hover:bg-purple-50"
             >
-                🔮 Read Daily Horoscope
+                🔮 Daily Horoscope
             </a>
 
             <a
                 href="/yearly-horoscope"
-                className="rounded-xl bg-white/20 px-4 py-2 text-center font-semibold hover:bg-white/30"
+                className="rounded-xl border border-indigo-300 px-4 py-2 font-semibold text-indigo-700 hover:bg-indigo-50"
             >
-                📅 View Yearly Horoscope
+                📅 Yearly Horoscope
             </a>
+            </div>
+
+            {/* CENTER APP CTA */}
+            <section className="rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-center text-white">
+            <p className="text-lg font-semibold mb-4">
+                {data.cta}
+            </p>
 
             <a
                 href="/app"
-                className="rounded-xl bg-yellow-400 text-purple-900 px-4 py-2 text-center font-bold hover:bg-yellow-300"
+                className="inline-block rounded-xl bg-yellow-400 px-6 py-3 font-bold text-purple-900 hover:bg-yellow-300"
             >
                 📱 Get Jyotishasha App
             </a>
-            </div>
         </section>
         </div>
     </main>
