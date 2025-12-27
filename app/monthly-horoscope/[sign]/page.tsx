@@ -156,21 +156,43 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
           </p>
         </section>
 
-        {/* TOP CTA ROW */}
+       {/* TOP CTA ROW */}
         <div className="flex items-center justify-between gap-4">
-          <a
-            href="/daily-horoscope"
-            className="rounded-xl border border-purple-300 px-4 py-2 font-semibold text-gray-900 hover:bg-purple-50"
-          >
-            🔮 Daily Horoscope
-          </a>
 
-          <a
-            href="/yearly-horoscope"
-            className="rounded-xl border border-indigo-300 px-4 py-2 font-semibold text-gray-900 hover:bg-indigo-50"
-          >
+        <a
+            href={`/daily-horoscope/${sign}`}
+            className="
+            rounded-xl
+            bg-white
+            border border-purple-300
+            px-4 py-2
+            font-semibold
+            text-gray-900
+            shadow-sm
+            hover:bg-purple-100
+            hover:text-purple-900
+            "
+        >
+            🔮 Daily Horoscope
+        </a>
+
+        <a
+            href={`/yearly-horoscope/${sign}`}
+            className="
+            rounded-xl
+            bg-white
+            border border-indigo-300
+            px-4 py-2
+            font-semibold
+            text-gray-900
+            shadow-sm
+            hover:bg-indigo-100
+            hover:text-indigo-900
+            "
+        >
             📅 Yearly Horoscope
-          </a>
+        </a>
+
         </div>
 
         {/* CENTER APP CTA */}
