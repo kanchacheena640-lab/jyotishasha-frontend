@@ -4,164 +4,67 @@ import Link from "next/link";
 import Image from "next/image";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
-
-
 const VALID_SIGNS = [
   "aries","taurus","gemini","cancer","leo","virgo",
   "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
 ];
 
+export async function generateStaticParams() {
+  const years = ["2025", "2026", "2027"];
+  return years.flatMap(year =>
+    VALID_SIGNS.map(sign => ({ year, sign }))
+  );
+}
+
 type PageProps = {
-  params: {
-    year: string;
-    sign: string;
-  };
+  params: { year: string; sign: string };
 };
 
-// -----------------------------
-// SEO
-// -----------------------------
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
-  const sign = params.sign.toLowerCase();
-  const year = params.year;
-
-  if (!VALID_SIGNS.includes(sign)) return {};
-
-  const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
-
+  if (!VALID_SIGNS.includes(params.sign)) return {};
+  const name = params.sign.charAt(0).toUpperCase() + params.sign.slice(1);
   return {
-    title: `${signName} ${year} Yearly Horoscope | Career, Love, Finance & Health`,
-    description: `Read ${signName} yearly horoscope ${year}. Detailed predictions for career, money, love, relationships and health based on Vedic astrology.`,
-    alternates: {
-      canonical: `/yearly-horoscope/${year}/${sign}`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    title: `${name} ${params.year} Yearly Horoscope | Jyotishasha`,
+    description: `${name} yearly horoscope ${params.year} based on Vedic astrology.`,
   };
 }
 
-// -----------------------------
-// Page
-// -----------------------------
 export default async function YearlySignPage({ params }: PageProps) {
-  const sign = params.sign.toLowerCase();
-  const year = params.year;
-
+  const { year, sign } = params;
   if (!VALID_SIGNS.includes(sign)) notFound();
 
-  // language (future ready)
-  const lang = "en";
-
-  // API call (CORRECT signature)
-  const signData = await getYearlyHoroscope(year, sign, lang);
-  if (!signData) notFound();
+  const data = await getYearlyHoroscope(year, sign, "en");
+  if (!data) notFound();
 
   const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-14 text-gray-900">
-
-      {/* HERO */}
-      <section className="mb-10 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-8 py-10 text-white flex items-center gap-6">
-        
+    <main className="mx-auto max-w-4xl px-6 py-14">
+      <section className="mb-10 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-8 py-10 text-white flex gap-6 items-center">
         <Image
           src={`/zodiac/${sign}.png`}
-          alt={`${signName} zodiac sign`}
+          alt={signName}
           width={72}
           height={72}
           className="bg-white rounded-full p-2"
-          priority
         />
-
-        <div>
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-2">
-            {signData.title}
-          </h1>
-          <p className="text-purple-100 text-lg leading-relaxed">
-            Complete yearly horoscope {year} for {signName} — career, money,
-            relationships, health and long-term guidance.
-          </p>
-        </div>
+        <h1 className="text-3xl font-extrabold">
+          {signName} Horoscope {year}
+        </h1>
       </section>
 
-      {/* OVERVIEW */}
-      <section className="mb-8 rounded-2xl bg-white border shadow-sm p-6">
-        <h2 className="text-2xl font-semibold mb-3">
-          {signName} Yearly Overview {year}
-        </h2>
-        <p className="leading-relaxed text-gray-800">
-          {signData.introduction?.content?.[0]}
-        </p>
-      </section>
+      <p className="mb-8 text-lg text-gray-800">
+        {data.introduction?.content?.[0]}
+      </p>
 
-      {/* CAREER */}
-      <section className="mb-8 rounded-2xl bg-white border shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-3">
-          {signData.career_finance.heading}
-        </h2>
-        <p className="leading-relaxed text-gray-800">
-          {signData.career_finance.content[0]}
-        </p>
-      </section>
-
-      {/* LOVE */}
-      <section className="mb-8 rounded-2xl bg-white border shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-3">
-          {signData.love_relationships.heading}
-        </h2>
-        <p className="leading-relaxed text-gray-800">
-          {signData.love_relationships.content[0]}
-        </p>
-      </section>
-
-      {/* HEALTH */}
-      <section className="mb-8 rounded-2xl bg-white border shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-3">
-          {signData.health_wellness.heading}
-        </h2>
-        <p className="leading-relaxed text-gray-800">
-          {signData.health_wellness.content[0]}
-        </p>
-      </section>
-
-      {/* SUMMARY */}
-      <section className="mb-10 rounded-2xl bg-yellow-50 border border-yellow-200 p-6">
-        <h2 className="text-xl font-semibold mb-3">
-          Final Summary for {signName} {year}
-        </h2>
-        <p className="leading-relaxed font-medium text-gray-900">
-          {signData.final_summary.content}
-        </p>
-      </section>
-
-      {/* CTA */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between">
-        <Link
-          href={`/daily-horoscope/${sign}`}
-          className="rounded-xl bg-white border px-4 py-3 font-semibold shadow-sm hover:bg-purple-50"
-        >
-          🔮 Read Daily Horoscope
-        </Link>
-
-        <Link
-          href={`/monthly-horoscope/${sign}`}
-          className="rounded-xl bg-white border px-4 py-3 font-semibold shadow-sm hover:bg-indigo-50"
-        >
-          📅 View Monthly Horoscope
-        </Link>
-
-        <Link
-          href="/app-download"
-          className="rounded-xl bg-gradient-to-r from-purple-700 to-indigo-700 px-6 py-3 font-bold text-white text-center"
-        >
-          📱 Get Jyotishasha App
-        </Link>
-      </div>
-
+      <Link
+        href={`/yearly-horoscope/${year}`}
+        className="text-purple-700 font-semibold"
+      >
+        ← Back to all signs
+      </Link>
     </main>
   );
 }

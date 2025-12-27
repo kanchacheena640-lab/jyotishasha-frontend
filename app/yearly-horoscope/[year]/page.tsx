@@ -3,18 +3,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-export async function generateStaticParams() {
-  const years = ["2025", "2026", "2027"];
-  const signs = [
-    "aries","taurus","gemini","cancer","leo","virgo",
-    "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
-  ];
-
-  return years.flatMap(year =>
-    signs.map(sign => ({ year, sign }))
-  );
-}
-
 const VALID_YEARS = ["2025", "2026", "2027"];
 
 const ZODIACS = [
@@ -50,7 +38,6 @@ export default function YearlyHoroscopeLanding({ params }: PageProps) {
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
-
       <section className="mb-12 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-8 py-12 text-white">
         <h1 className="text-4xl font-extrabold mb-4">
           Yearly Horoscope {year}
@@ -74,12 +61,11 @@ export default function YearlyHoroscopeLanding({ params }: PageProps) {
               height={64}
               className="mx-auto mb-3"
             />
-            <div className="font-bold text-gray-900">{z.name}</div>
+            <div className="font-bold">{z.name}</div>
             <div className="text-sm text-gray-500">{year} Horoscope</div>
           </Link>
         ))}
       </div>
-
     </main>
   );
 }
