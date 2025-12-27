@@ -4,19 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
-export async function generateStaticParams() {
-  const years = ["2025", "2026", "2027"];
-  const signs = [
-    "aries","taurus","gemini","cancer","leo","virgo",
-    "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
-  ];
-
-  return years.flatMap(year =>
-    signs.map(sign => ({ year, sign }))
-  );
-}
+export const dynamic = "force-dynamic";
 
 const VALID_SIGNS = [
   "aries","taurus","gemini","cancer","leo","virgo",
