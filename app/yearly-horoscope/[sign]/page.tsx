@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
 const YEAR = 2026;
+
+const SITE_URL = "https://www.jyotishasha.com";
 
 const VALID_SIGNS = [
   "aries","taurus","gemini","cancer","leo","virgo",
@@ -12,13 +15,40 @@ const VALID_SIGNS = [
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: { params: { sign: string } }) {
-  if (!VALID_SIGNS.includes(params.sign)) return {};
+/* -----------------------------
+   SEO (FINAL)
+-------------------------------- */
+export async function generateMetadata(
+  { params }: { params: { sign: string } }
+): Promise<Metadata> {
+  const sign = params.sign;
+  if (!VALID_SIGNS.includes(sign)) return {};
 
-  const name = params.sign.charAt(0).toUpperCase() + params.sign.slice(1);
+  const name = sign.charAt(0).toUpperCase() + sign.slice(1);
+  const url = `${SITE_URL}/yearly-horoscope/${sign}`;
+
   return {
     title: `${name} Horoscope 2026 | Jyotishasha`,
     description: `${name} yearly horoscope 2026 – career, love, finance, health and remedies.`,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${name} Horoscope 2026 | Jyotishasha`,
+      description: `${name} yearly horoscope 2026 – career, love, finance, health and remedies.`,
+      url,
+      type: "article",
+      siteName: "Jyotishasha",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} Horoscope 2026 | Jyotishasha`,
+      description: `${name} yearly horoscope 2026 – career, love, finance, health and remedies.`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -83,7 +113,6 @@ export default async function YearlySignPage({
 
       <div className="space-y-8">
 
-        {/* INTRODUCTION */}
         {data.introduction && (
           <CardSection title={data.introduction.heading}>
             {data.introduction.content.map((p: string, i: number) => (
@@ -92,7 +121,6 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* PLANETARY OVERVIEW */}
         {data.planetary_overview && (
           <CardSection title={data.planetary_overview.heading}>
             {data.planetary_overview.content.map((p: string, i: number) => (
@@ -101,13 +129,11 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* CAREER & FINANCE */}
         {data.career_finance && (
           <CardSection title={data.career_finance.heading}>
             {data.career_finance.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
             ))}
-
             {data.career_finance.practical_tips?.length > 0 && (
               <ul className="mt-4 list-disc pl-5 space-y-2">
                 {data.career_finance.practical_tips.map(
@@ -120,7 +146,6 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* LOVE */}
         {data.love_relationships && (
           <CardSection title={data.love_relationships.heading}>
             {data.love_relationships.content.map((p: string, i: number) => (
@@ -129,7 +154,6 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* HEALTH */}
         {data.health_wellness && (
           <CardSection title={data.health_wellness.heading}>
             {data.health_wellness.content.map((p: string, i: number) => (
@@ -138,13 +162,11 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* SPIRITUALITY */}
         {data.spirituality_remedies && (
           <CardSection title={data.spirituality_remedies.heading}>
             {data.spirituality_remedies.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
             ))}
-
             {data.spirituality_remedies.remedies?.length > 0 && (
               <ul className="mt-4 list-disc pl-5 space-y-2">
                 {data.spirituality_remedies.remedies.map(
@@ -157,7 +179,6 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* MONTHLY HIGHLIGHTS */}
         {data.monthly_highlights?.length > 0 && (
           <section className="rounded-2xl bg-purple-50 border border-purple-200 p-6">
             <h2 className="mb-4 text-xl font-semibold text-gray-900">
@@ -166,16 +187,9 @@ export default async function YearlySignPage({
             <div className="grid gap-4 sm:grid-cols-2">
               {data.monthly_highlights.map(
                 (m: { month: string; theme: string }, i: number) => (
-                  <div
-                    key={i}
-                    className="rounded-xl bg-white p-4 shadow-sm"
-                  >
-                    <h3 className="font-semibold text-gray-900">
-                      {m.month}
-                    </h3>
-                    <p className="text-gray-700">
-                      {m.theme}
-                    </p>
+                  <div key={i} className="rounded-xl bg-white p-4 shadow-sm">
+                    <h3 className="font-semibold text-gray-900">{m.month}</h3>
+                    <p className="text-gray-700">{m.theme}</p>
                   </div>
                 )
               )}
@@ -183,32 +197,25 @@ export default async function YearlySignPage({
           </section>
         )}
 
-        {/* FAQ */}
         {data.faqs?.length > 0 && (
           <CardSection title="FAQs">
             {data.faqs.map(
               (f: { question: string; answer: string }, i: number) => (
                 <div key={i}>
-                  <p className="font-semibold text-gray-900">
-                    {f.question}
-                  </p>
-                  <p className="text-gray-700">
-                    {f.answer}
-                  </p>
+                  <p className="font-semibold text-gray-900">{f.question}</p>
+                  <p className="text-gray-700">{f.answer}</p>
                 </div>
               )
             )}
           </CardSection>
         )}
 
-        {/* FINAL SUMMARY */}
         {data.final_summary && (
           <CardSection title={data.final_summary.heading}>
             <p>{data.final_summary.content}</p>
           </CardSection>
         )}
 
-        {/* BACK */}
         <div className="pt-4">
           <Link
             href="/yearly-horoscope"
