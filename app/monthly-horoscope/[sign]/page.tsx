@@ -88,66 +88,110 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
-      {/* Title */}
-      <h1 className="text-2xl md:text-3xl font-bold mb-6">
+    <main className="mx-auto max-w-3xl px-4 py-10 text-gray-900">
+        {/* Title */}
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-8 text-purple-800">
         {data.title}
-      </h1>
+        </h1>
 
-      {/* Theme */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Monthly Theme</h2>
-        <p className="text-gray-700 leading-relaxed">{data.theme}</p>
-      </section>
+        {/* Card Wrapper */}
+        <div className="space-y-6">
 
-      {/* Career & Money */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Career & Money</h2>
-        <p className="text-gray-700 whitespace-pre-line leading-relaxed">
-          {data.career_money}
-        </p>
-      </section>
-
-      {/* Love & Relationships */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Love & Relationships</h2>
-        <p className="text-gray-700 whitespace-pre-line leading-relaxed">
-          {data.love_relationships}
-        </p>
-      </section>
-
-      {/* Health & Lifestyle */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Health & Lifestyle</h2>
-        <p className="text-gray-700 whitespace-pre-line leading-relaxed">
-          {data.health_lifestyle}
-        </p>
-      </section>
-
-      {/* Key Dates */}
-      {Array.isArray(data.key_dates) && data.key_dates.length > 0 && (
-        <section className="mb-6">
-          <h2 className="text-lg font-semibold mb-2">Key Dates</h2>
-          <ul className="list-disc pl-5 text-gray-700">
-            {data.key_dates.map((item: string, i: number) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
+        {/* Theme */}
+        <section className="rounded-2xl bg-white shadow-sm border p-6">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+            Monthly Theme
+            </h2>
+            <p className="leading-relaxed text-gray-800">
+            {data.theme}
+            </p>
         </section>
-      )}
 
-      {/* Monthly Advice */}
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">Monthly Advice</h2>
-        <p className="text-gray-700 leading-relaxed">
-          {data.monthly_advice}
-        </p>
-      </section>
+        {/* Career & Money */}
+        <section className="rounded-2xl bg-white shadow-sm border p-6">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+            Career & Money
+            </h2>
+            <p className="whitespace-pre-line leading-relaxed text-gray-800">
+            {data.career_money}
+            </p>
+        </section>
 
-      {/* CTA */}
-      <section className="rounded-xl border p-4 bg-gray-50">
-        <p className="text-sm text-gray-800">{data.cta}</p>
-      </section>
+        {/* Love */}
+        <section className="rounded-2xl bg-white shadow-sm border p-6">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+            Love & Relationships
+            </h2>
+            <p className="whitespace-pre-line leading-relaxed text-gray-800">
+            {data.love_relationships}
+            </p>
+        </section>
+
+        {/* Health */}
+        <section className="rounded-2xl bg-white shadow-sm border p-6">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+            Health & Lifestyle
+            </h2>
+            <p className="whitespace-pre-line leading-relaxed text-gray-800">
+            {data.health_lifestyle}
+            </p>
+        </section>
+
+        {/* Key Dates */}
+        {data.key_dates?.length > 0 && (
+            <section className="rounded-2xl bg-purple-50 border border-purple-200 p-6">
+            <h2 className="text-xl font-semibold text-purple-800 mb-3">
+                Important Dates
+            </h2>
+            <ul className="list-disc pl-5 space-y-1 text-gray-800">
+                {data.key_dates.map((d: string, i: number) => (
+                <li key={i}>{d}</li>
+                ))}
+            </ul>
+            </section>
+        )}
+
+        {/* Advice */}
+        <section className="rounded-2xl bg-yellow-50 border border-yellow-200 p-6">
+            <h2 className="text-xl font-semibold text-yellow-800 mb-3">
+            Monthly Advice
+            </h2>
+            <p className="text-gray-900 font-medium">
+            {data.monthly_advice}
+            </p>
+        </section>
+
+        {/* STRONG CTA BLOCK */}
+        <section className="rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-white">
+            <p className="text-lg font-semibold mb-4">
+            {data.cta}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+            <a
+                href="/daily-horoscope"
+                className="rounded-xl bg-white/20 px-4 py-2 text-center font-semibold hover:bg-white/30"
+            >
+                🔮 Read Daily Horoscope
+            </a>
+
+            <a
+                href="/yearly-horoscope"
+                className="rounded-xl bg-white/20 px-4 py-2 text-center font-semibold hover:bg-white/30"
+            >
+                📅 View Yearly Horoscope
+            </a>
+
+            <a
+                href="/app"
+                className="rounded-xl bg-yellow-400 text-purple-900 px-4 py-2 text-center font-bold hover:bg-yellow-300"
+            >
+                📱 Get Jyotishasha App
+            </a>
+            </div>
+        </section>
+        </div>
     </main>
-  );
+    );
+
 }
