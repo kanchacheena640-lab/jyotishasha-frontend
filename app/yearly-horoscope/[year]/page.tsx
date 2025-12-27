@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   const years = ["2025", "2026", "2027"];
   const signs = [
     "aries","taurus","gemini","cancer","leo","virgo",
-    "libra","scorpio","agittarius","capricorn","aquarius","pisces"
+    "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
   ];
 
   return years.flatMap(year =>
