@@ -84,9 +84,11 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
     <main className="mx-auto max-w-3xl px-4 py-10 text-gray-900">
 
       {/* Title */}
-      <h1 className="text-3xl md:text-4xl font-extrabold mb-10 text-black">
-        {data.title}
-      </h1>
+      <div className="mb-8 rounded-2xl bg-gradient-to-r from-purple-800 to-indigo-800 px-6 py-6">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-white">
+            {data.title}
+        </h1>
+        </div>
 
       <div className="space-y-6">
 
