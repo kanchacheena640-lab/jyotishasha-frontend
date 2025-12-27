@@ -81,31 +81,60 @@ export default function DailyHoroscopePage({ params }: Props) {
 
       {/* 🔮 DAILY HOROSCOPE + CTA */}
       <section className="grid md:grid-cols-3 gap-6 mb-12">
+
         {/* Horoscope */}
         <div className="md:col-span-2 bg-white rounded-2xl shadow-md p-6 text-gray-900">
           <DailyHoroscopeBlock sign={sign} lang="en" />
         </div>
 
-        {/* CTA */}
-        <div className="rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-700 p-6 flex flex-col justify-center text-white">
-            <h3 className="text-xl font-semibold mb-2">
-                Jyotishasha Mobile App
+        {/* CTA COLUMN */}
+        <div className="space-y-4">
+
+          {/* APP CTA */}
+          <div className="rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-700 p-6 flex flex-col justify-center text-white">
+            <h3 className="text-lg md:text-xl font-semibold mb-2">
+              Jyotishasha Mobile App
             </h3>
 
             <p className="text-sm text-purple-100 mb-4 leading-relaxed">
-                Personalized Horoscope • Daily Panchang •  
-                Ask One Question to Our Astrologer – <span className="font-semibold">FREE</span>
+              Personalized Horoscope • Daily Panchang •  
+              Ask One Question to Our Astrologer –{" "}
+              <span className="font-semibold">FREE</span>
             </p>
 
             <a
-                href="/app-download"
-                className="mt-2 inline-block text-center px-6 py-3 rounded-lg bg-white text-purple-700 font-semibold hover:bg-purple-100 transition"
+              href="/app-download"
+              className="inline-block w-fit px-6 py-3 rounded-lg bg-white text-purple-700 font-semibold hover:bg-purple-100 transition"
             >
-                Download Now
+              📱 Download App
             </a>
-            </div>
-      </section>
+          </div>
 
+          {/* MONTHLY + YEARLY CTA */}
+          <div className="rounded-2xl border bg-white p-6 flex flex-col justify-center">
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+              Explore More Horoscopes
+            </h3>
+
+            <div className="flex flex-col gap-3">
+              <a
+                href={`/monthly-horoscope/${sign}`}
+                className="rounded-xl border border-purple-300 px-4 py-3 font-semibold text-gray-900 hover:bg-purple-50 transition"
+              >
+                📅 Read Monthly Horoscope
+              </a>
+
+              <a
+                href={`/yearly-horoscope/${sign}`}
+                className="rounded-xl border border-indigo-300 px-4 py-3 font-semibold text-gray-900 hover:bg-indigo-50 transition"
+              >
+                🗓️ View Yearly Horoscope
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
       {/* 📚 FIXED SEO CONTENT */}
       <section className="bg-gray-50 rounded-2xl p-8 space-y-10 text-gray-900 leading-relaxed">
         <div>
