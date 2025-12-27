@@ -31,9 +31,26 @@ export default function YearlyHoroscopePage() {
         <h1 className="text-4xl font-extrabold mb-4">
           Yearly Horoscope {YEAR}
         </h1>
-        <p className="text-purple-100 text-lg">
+        <p className="text-purple-100 text-lg mb-6">
           Select your zodiac sign to read detailed yearly horoscope for {YEAR}.
         </p>
+
+        {/* CTA BUTTONS */}
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/daily-horoscope"
+            className="rounded-xl bg-white px-5 py-2 font-semibold text-gray-900 shadow hover:bg-purple-100 transition"
+          >
+            🔮 Daily Horoscope
+          </Link>
+
+          <Link
+            href="/monthly-horoscope"
+            className="rounded-xl bg-white px-5 py-2 font-semibold text-gray-900 shadow hover:bg-indigo-100 transition"
+          >
+            📅 Monthly Horoscope
+          </Link>
+        </div>
       </section>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
