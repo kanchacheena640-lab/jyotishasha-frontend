@@ -1,46 +1,39 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 const VALID_YEARS = ["2025", "2026", "2027"];
 
 const ZODIACS = [
-  { sign: "aries", name: "Aries", emoji: "🐏" },
-  { sign: "taurus", name: "Taurus", emoji: "🐂" },
-  { sign: "gemini", name: "Gemini", emoji: "👬" },
-  { sign: "cancer", name: "Cancer", emoji: "🦀" },
-  { sign: "leo", name: "Leo", emoji: "🦁" },
-  { sign: "virgo", name: "Virgo", emoji: "👧" },
-  { sign: "libra", name: "Libra", emoji: "⚖️" },
-  { sign: "scorpio", name: "Scorpio", emoji: "🦂" },
-  { sign: "sagittarius", name: "Sagittarius", emoji: "🏹" },
-  { sign: "capricorn", name: "Capricorn", emoji: "🐐" },
-  { sign: "aquarius", name: "Aquarius", emoji: "🏺" },
-  { sign: "pisces", name: "Pisces", emoji: "🐟" },
+  { sign: "aries", name: "Aries", img: "/zodiac/aries.png" },
+  { sign: "taurus", name: "Taurus", img: "/zodiac/taurus.png" },
+  { sign: "gemini", name: "Gemini", img: "/zodiac/gemini.png" },
+  { sign: "cancer", name: "Cancer", img: "/zodiac/cancer.png" },
+  { sign: "leo", name: "Leo", img: "/zodiac/leo.png" },
+  { sign: "virgo", name: "Virgo", img: "/zodiac/virgo.png" },
+  { sign: "libra", name: "Libra", img: "/zodiac/libra.png" },
+  { sign: "scorpio", name: "Scorpio", img: "/zodiac/scorpio.png" },
+  { sign: "sagittarius", name: "Sagittarius", img: "/zodiac/sagittarius.png" },
+  { sign: "capricorn", name: "Capricorn", img: "/zodiac/capricorn.png" },
+  { sign: "aquarius", name: "Aquarius", img: "/zodiac/aquarius.png" },
+  { sign: "pisces", name: "Pisces", img: "/zodiac/pisces.png" },
 ];
 
-type PageProps = {
-  params: { year: string };
-};
+type PageProps = { params: { year: string } };
 
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
-  const { year } = params;
-
-  if (!VALID_YEARS.includes(year)) return {};
-
+  if (!VALID_YEARS.includes(params.year)) return {};
   return {
-    title: `Yearly Horoscope ${year} | Jyotishasha`,
-    description: `Read detailed yearly horoscope ${year} for all 12 zodiac signs.`,
-    alternates: { canonical: `/yearly-horoscope/${year}` },
-    robots: { index: true, follow: true },
+    title: `Yearly Horoscope ${params.year} | Jyotishasha`,
+    description: `Complete yearly horoscope ${params.year} for all zodiac signs.`,
   };
 }
 
 export default function YearlyHoroscopeLanding({ params }: PageProps) {
   const { year } = params;
-
   if (!VALID_YEARS.includes(year)) notFound();
 
   return (
@@ -51,22 +44,29 @@ export default function YearlyHoroscopeLanding({ params }: PageProps) {
           Yearly Horoscope {year}
         </h1>
         <p className="text-purple-100 text-lg">
-          Complete yearly horoscope predictions for all zodiac signs.
+          Select your zodiac sign for detailed yearly predictions.
         </p>
       </section>
 
-      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
         {ZODIACS.map((z) => (
           <Link
             key={z.sign}
             href={`/yearly-horoscope/${year}/${z.sign}`}
-            className="rounded-2xl bg-white border p-6 text-center shadow-sm hover:shadow-lg"
+            className="rounded-2xl bg-white border p-6 text-center shadow-sm hover:shadow-lg hover:scale-105 transition"
           >
-            <div className="text-4xl mb-2">{z.emoji}</div>
-            <div className="font-semibold">{z.name}</div>
+            <Image
+              src={z.img}
+              alt={z.name}
+              width={64}
+              height={64}
+              className="mx-auto mb-3"
+            />
+            <div className="font-bold text-gray-900">{z.name}</div>
+            <div className="text-sm text-gray-500">{year} Horoscope</div>
           </Link>
         ))}
-      </section>
+      </div>
 
     </main>
   );

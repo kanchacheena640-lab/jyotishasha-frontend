@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
 const VALID_SIGNS = [
@@ -34,7 +35,10 @@ export async function generateMetadata(
     alternates: {
       canonical: `/yearly-horoscope/${year}/${sign}`,
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -47,10 +51,10 @@ export default async function YearlySignPage({ params }: PageProps) {
 
   if (!VALID_SIGNS.includes(sign)) notFound();
 
-  // ✅ language explicitly defined
+  // language (future ready)
   const lang = "en";
 
-  // ✅ Direct single-sign fetch (correct signature)
+  // API call (CORRECT signature)
   const signData = await getYearlyHoroscope(year, sign, lang);
   if (!signData) notFound();
 
@@ -60,14 +64,26 @@ export default async function YearlySignPage({ params }: PageProps) {
     <main className="mx-auto max-w-4xl px-6 py-14 text-gray-900">
 
       {/* HERO */}
-      <section className="mb-10 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-8 py-10 text-white">
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-3">
-          {signData.title}
-        </h1>
-        <p className="text-purple-100 text-lg leading-relaxed">
-          Complete yearly horoscope {year} for {signName} — career, money,
-          relationships, health and long-term guidance.
-        </p>
+      <section className="mb-10 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-8 py-10 text-white flex items-center gap-6">
+        
+        <Image
+          src={`/zodiac/${sign}.png`}
+          alt={`${signName} zodiac sign`}
+          width={72}
+          height={72}
+          className="bg-white rounded-full p-2"
+          priority
+        />
+
+        <div>
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-2">
+            {signData.title}
+          </h1>
+          <p className="text-purple-100 text-lg leading-relaxed">
+            Complete yearly horoscope {year} for {signName} — career, money,
+            relationships, health and long-term guidance.
+          </p>
+        </div>
       </section>
 
       {/* OVERVIEW */}
