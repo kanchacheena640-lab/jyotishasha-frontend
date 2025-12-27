@@ -3,6 +3,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
+export async function generateStaticParams() {
+  const years = ["2025", "2026", "2027"];
+  const signs = [
+    "aries","taurus","gemini","cancer","leo","virgo",
+    "libra","scorpio","agittarius","capricorn","aquarius","pisces"
+  ];
+
+  return years.flatMap(year =>
+    signs.map(sign => ({ year, sign }))
+  );
+}
+
 const VALID_YEARS = ["2025", "2026", "2027"];
 
 const ZODIACS = [
