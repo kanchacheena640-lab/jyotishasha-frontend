@@ -61,7 +61,7 @@ export default function YearlyHoroscopeLanding({ params }: PageProps) {
               height={64}
               className="mx-auto mb-3"
             />
-            <div className="font-bold">{z.name}</div>
+            <div className="font-bold text-gray-900">{z.name}</div>
             <div className="text-sm text-gray-500">{year} Horoscope</div>
           </Link>
         ))}
