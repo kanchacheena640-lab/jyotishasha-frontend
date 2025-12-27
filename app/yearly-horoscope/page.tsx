@@ -1,9 +1,7 @@
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-const VALID_YEARS = ["2025", "2026", "2027"];
+const YEAR = "2026";
 
 const ZODIACS = [
   { sign: "aries", name: "Aries", img: "/zodiac/aries.png" },
@@ -20,30 +18,21 @@ const ZODIACS = [
   { sign: "pisces", name: "Pisces", img: "/zodiac/pisces.png" },
 ];
 
-type PageProps = { params: { year: string } };
+export const metadata = {
+  title: "Yearly Horoscope 2026 | Jyotishasha",
+  description:
+    "Read 2026 yearly horoscope for all zodiac signs. Career, love, finance and health predictions based on Vedic astrology.",
+};
 
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
-  if (!VALID_YEARS.includes(params.year)) return {};
-  return {
-    title: `Yearly Horoscope ${params.year} | Jyotishasha`,
-    description: `Complete yearly horoscope ${params.year} for all zodiac signs.`,
-  };
-}
-
-export default function YearlyHoroscopeLanding({ params }: PageProps) {
-  const { year } = params;
-  if (!VALID_YEARS.includes(year)) notFound();
-
+export default function YearlyHoroscopePage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
       <section className="mb-12 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-8 py-12 text-white">
         <h1 className="text-4xl font-extrabold mb-4">
-          Yearly Horoscope {year}
+          Yearly Horoscope {YEAR}
         </h1>
         <p className="text-purple-100 text-lg">
-          Select your zodiac sign for detailed yearly predictions.
+          Select your zodiac sign to read detailed yearly horoscope for {YEAR}.
         </p>
       </section>
 
@@ -51,7 +40,7 @@ export default function YearlyHoroscopeLanding({ params }: PageProps) {
         {ZODIACS.map((z) => (
           <Link
             key={z.sign}
-            href={`/yearly-horoscope/${year}/${z.sign}`}
+            href={`/yearly-horoscope/${z.sign}`}
             className="rounded-2xl bg-white border p-6 text-center shadow-sm hover:shadow-lg hover:scale-105 transition"
           >
             <Image
@@ -62,7 +51,9 @@ export default function YearlyHoroscopeLanding({ params }: PageProps) {
               className="mx-auto mb-3"
             />
             <div className="font-bold text-gray-900">{z.name}</div>
-            <div className="text-sm text-gray-500">{year} Horoscope</div>
+            <div className="text-sm text-gray-500">
+              {YEAR} Horoscope
+            </div>
           </Link>
         ))}
       </div>

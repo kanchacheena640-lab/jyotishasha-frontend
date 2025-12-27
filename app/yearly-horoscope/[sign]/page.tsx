@@ -1,41 +1,32 @@
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
-export const dynamicParams = true;
-export const dynamic = "force-dynamic";
-
-export async function generateStaticParams() { const years = ["2025", "2026", "2027"]; const signs = [ "aries","taurus","gemini","cancer","leo","virgo", "libra","scorpio","sagittarius","capricorn","aquarius","pisces" ]; return years.flatMap(year => signs.map(sign => ({ year, sign })) ); }
+const YEAR = "2026";
 
 const VALID_SIGNS = [
   "aries","taurus","gemini","cancer","leo","virgo",
   "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
 ];
 
-type PageProps = {
-  params: { year: string; sign: string };
-};
+export const dynamic = "force-dynamic";
 
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { sign: string } }) {
   if (!VALID_SIGNS.includes(params.sign)) return {};
   const name = params.sign.charAt(0).toUpperCase() + params.sign.slice(1);
 
   return {
-    title: `${name} ${params.year} Yearly Horoscope | Jyotishasha`,
-    description: `${name} yearly horoscope ${params.year} based on Vedic astrology.`,
+    title: `${name} Horoscope 2026 | Jyotishasha`,
+    description: `${name} yearly horoscope 2026 – career, love, finance and health predictions.`,
   };
 }
 
-export default async function YearlySignPage({ params }: PageProps) {
-  const { year, sign } = params;
-
+export default async function YearlySignPage({ params }: { params: { sign: string } }) {
+  const sign = params.sign;
   if (!VALID_SIGNS.includes(sign)) notFound();
 
-  const data = await getYearlyHoroscope(year, sign, "en");
+  const data = await getYearlyHoroscope(YEAR, sign, "en");
   if (!data) notFound();
 
   const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
@@ -51,7 +42,7 @@ export default async function YearlySignPage({ params }: PageProps) {
           className="bg-white rounded-full p-2"
         />
         <h1 className="text-3xl font-extrabold">
-          {signName} Horoscope {year}
+          {signName} Horoscope {YEAR}
         </h1>
       </section>
 
@@ -60,7 +51,7 @@ export default async function YearlySignPage({ params }: PageProps) {
       </p>
 
       <Link
-        href={`/yearly-horoscope/${year}`}
+        href="/yearly-horoscope"
         className="text-purple-700 font-semibold"
       >
         ← Back to all signs
