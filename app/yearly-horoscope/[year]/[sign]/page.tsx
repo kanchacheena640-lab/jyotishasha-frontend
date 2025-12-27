@@ -47,8 +47,11 @@ export default async function YearlySignPage({ params }: PageProps) {
 
   if (!VALID_SIGNS.includes(sign)) notFound();
 
-  // ✅ Direct single-sign fetch
-  const signData = await getYearlyHoroscope(year, sign);
+  // ✅ language explicitly defined
+  const lang = "en";
+
+  // ✅ Direct single-sign fetch (correct signature)
+  const signData = await getYearlyHoroscope(year, sign, lang);
   if (!signData) notFound();
 
   const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
