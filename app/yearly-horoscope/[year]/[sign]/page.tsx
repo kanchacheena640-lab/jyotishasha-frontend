@@ -4,15 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
 
-export const dynamicParams = true;
-
-export const dynamic = "force-dynamic";
-
 const VALID_SIGNS = [
   "aries","taurus","gemini","cancer","leo","virgo",
   "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
 ];
-
 
 type PageProps = {
   params: { year: string; sign: string };
@@ -23,6 +18,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   if (!VALID_SIGNS.includes(params.sign)) return {};
   const name = params.sign.charAt(0).toUpperCase() + params.sign.slice(1);
+
   return {
     title: `${name} ${params.year} Yearly Horoscope | Jyotishasha`,
     description: `${name} yearly horoscope ${params.year} based on Vedic astrology.`,
@@ -31,6 +27,7 @@ export async function generateMetadata(
 
 export default async function YearlySignPage({ params }: PageProps) {
   const { year, sign } = params;
+
   if (!VALID_SIGNS.includes(sign)) notFound();
 
   const data = await getYearlyHoroscope(year, sign, "en");
