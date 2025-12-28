@@ -43,6 +43,8 @@ export async function generateMetadata() {
 export default async function TodayPanchangPage() {
   const p = await getTodayPanchang();
 
+  const isHindi = p.language === "hi";
+
   /* ---------------- ARTICLE SCHEMA ---------------- */
   const articleSchema = {
     "@context": "https://schema.org",
@@ -101,108 +103,135 @@ export default async function TodayPanchangPage() {
   };
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-10 text-gray-200">
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+  <main className="max-w-4xl mx-auto px-4 py-10 text-gray-200">
+    {/* JSON-LD */}
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+    />
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+    />
 
-      {/* H1 */}
-      <h1 className="text-3xl font-bold text-purple-300 mb-4">
-        Today Panchang – {p.weekday}, {p.date}
-      </h1>
+    {/* H1 */}
+    <h1 className="text-3xl font-bold text-purple-300 mb-4">
+      {isHindi
+        ? `आज का पंचांग – ${p.weekday}, ${p.date}`
+        : `Today Panchang – ${p.weekday}, ${p.date}`}
+    </h1>
 
-      {/* Intro */}
-      <p className="mb-4">
-        Today Panchang gives complete Hindu calendar details including
-        Tithi, Nakshatra, Chaughadiya, Rahu Kaal and Panchak based on accurate
-        sunrise and sunset calculations.
-      </p>
+    {/* Intro */}
+    <p className="mb-4">
+      {isHindi
+        ? "आज का पंचांग तिथि, नक्षत्र, चौघड़िया, राहु काल और पंचक की संपूर्ण जानकारी प्रदान करता है। यह पंचांग सूर्य उदय और सूर्यास्त की सटीक गणना पर आधारित है।"
+        : "Today Panchang provides complete Hindu calendar details including Tithi, Nakshatra, Chaughadiya, Rahu Kaal and Panchak based on accurate sunrise and sunset calculations."}
+    </p>
 
-      {/* Tithi & Nakshatra */}
-      <p className="mb-3">
-        Aaj <strong>{p.tithi.paksha} {p.tithi.name}</strong> Tithi hai,
-        jo <strong>{p.tithi.start_ist}</strong> se shuru hokar{" "}
-        <strong>{p.tithi.end_ist}</strong> tak rahegi.  
-        Chandrama <strong>{p.nakshatra.name}</strong> Nakshatra
-        (Pada {p.nakshatra.pada}) mein sthit hai.
-      </p>
-
-      {/* Chaughadiya */}
-      <p className="mb-3">
-        Aaj ke Chaughadiya din aur raat ko Shubh aur Ashubh samayon
-        mein baantte hain. Amrit, Shubh aur Labh Chaughadiya
-        mahatvapurn karya shuru karne ke liye uttam hote hain.
-      </p>
-
-      {/* Rahu Kaal */}
-      <p className="mb-4">
-        Aaj ka Rahu Kaal <strong>{p.rahu_kaal.start} – {p.rahu_kaal.end}</strong>{" "}
-        ke beech rahega. Is dauran naye kaam shuru karna varjit maana jata hai.
-      </p>
-
-      {/* Panchak */}
-      {p.panchak.active ? (
-        <p className="mb-4 text-red-300">
-          Aaj Panchak lagu hai kyunki Chandra{" "}
-          <strong>{p.panchak.nakshatra}</strong> Nakshatra mein hain.
-        </p>
+    {/* Tithi & Nakshatra */}
+    <p className="mb-3">
+      {isHindi ? (
+        <>
+          आज <strong>{p.tithi.paksha} {p.tithi.name}</strong> तिथि है,
+          जो <strong>{p.tithi.start_ist}</strong> से प्रारंभ होकर{" "}
+          <strong>{p.tithi.end_ist}</strong> तक रहेगी।
+          चंद्रमा <strong>{p.nakshatra.name}</strong> नक्षत्र
+          (पाद {p.nakshatra.pada}) में स्थित है।
+        </>
       ) : (
-        <p className="mb-4 text-green-300">
-          Aaj Panchak nahi hai, isliye din shubh mana jata hai.
-        </p>
+        <>
+          Today is <strong>{p.tithi.paksha} {p.tithi.name}</strong>.
+          The Tithi starts at <strong>{p.tithi.start_ist}</strong> and ends at{" "}
+          <strong>{p.tithi.end_ist}</strong>.
+          The Moon is placed in <strong>{p.nakshatra.name}</strong> Nakshatra
+          (Pada {p.nakshatra.pada}).
+        </>
       )}
+    </p>
 
-      {/* INTERNAL LINKS */}
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold text-purple-300 mb-3">
-          Useful Astrology Links
-        </h2>
-        <ul className="list-disc list-inside space-y-1 text-purple-200">
-          <li><a href="/horoscope/today" className="underline">Today Horoscope</a></li>
-          <li><a href="/panchang" className="underline">Complete Panchang Calendar</a></li>
-          <li><a href="/kundali" className="underline">Free Kundali & Birth Chart</a></li>
-        </ul>
-      </section>
+    {/* Chaughadiya */}
+    <p className="mb-3">
+      {isHindi
+        ? "आज के चौघड़िया दिन और रात को शुभ और अशुभ समय में विभाजित करते हैं। अमृत, शुभ और लाभ चौघड़िया को महत्वपूर्ण कार्यों के लिए उत्तम माना जाता है।"
+        : "Today’s Chaughadiya divides the day and night into Shubh (auspicious) and Ashubh (inauspicious) periods. Amrit, Shubh and Labh are considered ideal for important activities."}
+    </p>
 
-      {/* APP CTA */}
-      <section className="mt-12 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">
-          Daily Panchang on Mobile
-        </h2>
-        <p className="text-purple-200 mb-4">
-          Get Today Panchang, Chaughadiya, Rahu Kaal & Horoscope instantly.
-        </p>
-        <a
-          href="https://play.google.com/store/apps/details?id=YOUR_APP_ID"
-          className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-xl"
-        >
-          Download Jyotishasha App
-        </a>
-      </section>
+    {/* Rahu Kaal */}
+    <p className="mb-4">
+      {isHindi ? (
+        <>
+          आज का राहु काल <strong>{p.rahu_kaal.start} – {p.rahu_kaal.end}</strong> रहेगा।
+          इस दौरान नए कार्य प्रारंभ करने से बचना चाहिए।
+        </>
+      ) : (
+        <>
+          Rahu Kaal today is observed between{" "}
+          <strong>{p.rahu_kaal.start} – {p.rahu_kaal.end}</strong>.
+          Avoid starting new or important tasks during this period.
+        </>
+      )}
+    </p>
 
-      {/* ADS */}
-      <div className="mt-10 text-center text-sm text-gray-400">
-        Advertisement
-      </div>
-
-      {/* CITY KEYWORDS (SAFE) */}
-      <section className="mt-10 text-sm text-gray-400">
-        <p>
-          Users searching for <strong>Today Panchang in {DEFAULT_CITY}</strong>,
-          Aaj Ka Panchang, Daily Panchang, Chaughadiya Today and Rahu Kaal Today
-          can trust Jyotishasha for accurate information.
-        </p>
-      </section>
-
-      <p className="mt-6 text-xs text-gray-500">
-        This Today Panchang page updates automatically every day.
+    {/* Panchak */}
+    {p.panchak.active ? (
+      <p className="mb-4 text-red-300">
+        {isHindi
+          ? <>आज पंचक लागू है क्योंकि चंद्रमा <strong>{p.panchak.nakshatra}</strong> नक्षत्र में स्थित है।</>
+          : <>Panchak is active today due to the Moon’s placement in <strong>{p.panchak.nakshatra}</strong> Nakshatra.</>}
       </p>
-    </main>
-  );
+    ) : (
+      <p className="mb-4 text-green-300">
+        {isHindi
+          ? "आज पंचक नहीं है, इसलिए दिन शुभ माना जाता है।"
+          : "There is no Panchak today, making the day suitable for auspicious activities."}
+      </p>
+    )}
+
+    {/* INTERNAL LINKS */}
+    <section className="mt-10">
+      <h2 className="text-xl font-semibold text-purple-300 mb-3">
+        Useful Astrology Links
+      </h2>
+      <ul className="list-disc list-inside space-y-1 text-purple-200">
+        <li><a href="/horoscope/today" className="underline">Today Horoscope</a></li>
+        <li><a href="/panchang" className="underline">Complete Panchang Calendar</a></li>
+        <li><a href="/kundali" className="underline">Free Kundali & Birth Chart</a></li>
+      </ul>
+    </section>
+
+    {/* APP CTA */}
+    <section className="mt-12 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-center">
+      <h2 className="text-2xl font-bold text-white mb-2">
+        Daily Panchang on Mobile
+      </h2>
+      <p className="text-purple-200 mb-4">
+        Get Today Panchang, Chaughadiya, Rahu Kaal & Horoscope instantly.
+      </p>
+      <a
+        href="https://play.google.com/store/apps/details?id=YOUR_APP_ID"
+        className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-xl"
+      >
+        Download Jyotishasha App
+      </a>
+    </section>
+
+    {/* ADS */}
+    <div className="mt-10 text-center text-sm text-gray-400">
+      Advertisement
+    </div>
+
+    {/* CITY KEYWORDS */}
+    <section className="mt-10 text-sm text-gray-400">
+      <p>
+        Users searching for <strong>Today Panchang in {DEFAULT_CITY}</strong>,
+        Aaj Ka Panchang, Daily Panchang, Chaughadiya Today and Rahu Kaal Today
+        can trust Jyotishasha for accurate information.
+      </p>
+    </section>
+
+    <p className="mt-6 text-xs text-gray-500">
+      This Today Panchang page updates automatically every day.
+    </p>
+  </main>
+);
 }
