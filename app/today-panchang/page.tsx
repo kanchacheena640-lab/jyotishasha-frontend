@@ -195,7 +195,7 @@ export default async function TodayPanchangPage() {
             : `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(p.date)}`}
         </h1>
 
-        <Card className="space-y-4 max-w-3xl">
+        <Card className="space-y-4 max-w-4xl">
           {!isHindi ? (
             <>
               <p>
@@ -251,7 +251,7 @@ export default async function TodayPanchangPage() {
       <Section
         title={isHindi ? "आज की तिथि, नक्षत्र और शुभ मुहूर्त" : "Today’s Tithi, Nakshatra & Shubh Muhurat"}
       >
-        <Card className="space-y-4 max-w-3xl">
+        <Card className="space-y-4 max-w-4xl">
           <p>
             {!isHindi ? (
               <>
@@ -332,7 +332,7 @@ export default async function TodayPanchangPage() {
             : "Chaughadiya Muhurat shows auspicious and inauspicious periods of the day and night, helping in planning important activities."
         }
       >
-        <div className="max-w-3xl">
+        <div className="max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* DAY */}
             <Card>
