@@ -281,91 +281,95 @@ export default async function TodayPanchangPage() {
           : "Chaughadiya Muhurat shows auspicious and inauspicious periods of the day and night, helping in planning important activities."}
       </p>
 
-      {/* GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 🔒 WIDTH CONTROL WRAPPER */}
+      <div className="max-w-3xl">
 
-        {/* ================= DAYTIME ================= */}
-        <div className="bg-white/95 rounded-xl p-4 shadow text-gray-800">
-          <h3 className="font-semibold text-lg mb-3">
-            {isHindi ? "दिन का चौघड़िया" : "Daytime Chaughadiya"}
-          </h3>
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          {/* Shubh */}
-          <p className="text-green-600 font-medium mb-1">
-            {isHindi ? "शुभ चौघड़िया" : "Shubh Chaughadiya"}
-          </p>
-          <table className="w-full text-sm mb-4">
-            <tbody>
-              {(p.chaughadiya.day as ChaughadiyaItem[])
-                .filter(c => c.nature_en === "shubh")
-                .map((c, i) => (
-                  <tr key={i} className="border-b last:border-0">
-                    <td className="py-1">{isHindi ? c.name : c.name_en}</td>
-                    <td className="py-1 text-right">{c.start} – {c.end}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          {/* ================= DAYTIME ================= */}
+          <div className="bg-white/95 rounded-2xl p-5 shadow text-gray-800">
+            <h3 className="font-semibold text-lg mb-4">
+              {isHindi ? "दिन का चौघड़िया" : "Daytime Chaughadiya"}
+            </h3>
 
-          {/* Ashubh */}
-          <p className="text-red-600 font-medium mb-1">
-            {isHindi ? "अशुभ चौघड़िया" : "Ashubh Chaughadiya"}
-          </p>
-          <table className="w-full text-sm">
-            <tbody>
-              {(p.chaughadiya.day as ChaughadiyaItem[])
-                .filter(c => c.nature_en === "ashubh")
-                .map((c, i) => (
-                  <tr key={i} className="border-b last:border-0">
-                    <td className="py-1">{isHindi ? c.name : c.name_en}</td>
-                    <td className="py-1 text-right">{c.start} – {c.end}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+            {/* Shubh */}
+            <p className="text-green-600 font-medium mb-1">
+              {isHindi ? "शुभ चौघड़िया" : "Shubh Chaughadiya"}
+            </p>
+            <table className="w-full text-sm mb-4">
+              <tbody>
+                {(p.chaughadiya.day as ChaughadiyaItem[])
+                  .filter(c => c.nature_en === "shubh")
+                  .map((c, i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-1">{isHindi ? c.name : c.name_en}</td>
+                      <td className="py-1 text-right">{c.start} – {c.end}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            {/* Ashubh */}
+            <p className="text-red-600 font-medium mb-1">
+              {isHindi ? "अशुभ चौघड़िया" : "Ashubh Chaughadiya"}
+            </p>
+            <table className="w-full text-sm">
+              <tbody>
+                {(p.chaughadiya.day as ChaughadiyaItem[])
+                  .filter(c => c.nature_en === "ashubh")
+                  .map((c, i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-1">{isHindi ? c.name : c.name_en}</td>
+                      <td className="py-1 text-right">{c.start} – {c.end}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* ================= NIGHTTIME ================= */}
+          <div className="bg-white/95 rounded-2xl p-5 shadow text-gray-800">
+            <h3 className="font-semibold text-lg mb-4">
+              {isHindi ? "रात्रि का चौघड़िया" : "Nighttime Chaughadiya"}
+            </h3>
+
+            {/* Shubh */}
+            <p className="text-green-600 font-medium mb-1">
+              {isHindi ? "शुभ चौघड़िया" : "Shubh Chaughadiya"}
+            </p>
+            <table className="w-full text-sm mb-4">
+              <tbody>
+                {(p.chaughadiya.night as ChaughadiyaItem[])
+                  .filter(c => c.nature_en === "shubh")
+                  .map((c, i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-1">{isHindi ? c.name : c.name_en}</td>
+                      <td className="py-1 text-right">{c.start} – {c.end}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            {/* Ashubh */}
+            <p className="text-red-600 font-medium mb-1">
+              {isHindi ? "अशुभ चौघड़िया" : "Ashubh Chaughadiya"}
+            </p>
+            <table className="w-full text-sm">
+              <tbody>
+                {(p.chaughadiya.night as ChaughadiyaItem[])
+                  .filter(c => c.nature_en === "ashubh")
+                  .map((c, i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-1">{isHindi ? c.name : c.name_en}</td>
+                      <td className="py-1 text-right">{c.start} – {c.end}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+
         </div>
-
-        {/* ================= NIGHTTIME ================= */}
-        <div className="bg-white/95 rounded-xl p-4 shadow text-gray-800">
-          <h3 className="font-semibold text-lg mb-3">
-            {isHindi ? "रात्रि का चौघड़िया" : "Nighttime Chaughadiya"}
-          </h3>
-
-          {/* Shubh */}
-          <p className="text-green-600 font-medium mb-1">
-            {isHindi ? "शुभ चौघड़िया" : "Shubh Chaughadiya"}
-          </p>
-          <table className="w-full text-sm mb-4">
-            <tbody>
-              {(p.chaughadiya.night as ChaughadiyaItem[])
-                .filter(c => c.nature_en === "shubh")
-                .map((c, i) => (
-                  <tr key={i} className="border-b last:border-0">
-                    <td className="py-1">{isHindi ? c.name : c.name_en}</td>
-                    <td className="py-1 text-right">{c.start} – {c.end}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-
-          {/* Ashubh */}
-          <p className="text-red-600 font-medium mb-1">
-            {isHindi ? "अशुभ चौघड़िया" : "Ashubh Chaughadiya"}
-          </p>
-          <table className="w-full text-sm">
-            <tbody>
-              {(p.chaughadiya.night as ChaughadiyaItem[])
-                .filter(c => c.nature_en === "ashubh")
-                .map((c, i) => (
-                  <tr key={i} className="border-b last:border-0">
-                    <td className="py-1">{isHindi ? c.name : c.name_en}</td>
-                    <td className="py-1 text-right">{c.start} – {c.end}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-
       </div>
     </section>
     {/* ================== End Chaughadiya Section ================== */}
