@@ -46,7 +46,7 @@ export async function generateMetadata() {
   const p = await getTodayPanchang();
 
   return {
-    title: `Today Panchang – ${p.weekday}, ${p.date} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`,
+    title: `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(p.date)} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`,
     description: `Today Panchang with ${p.tithi.name} Tithi, ${p.nakshatra.name} Nakshatra, Chaughadiya timings, Rahu Kaal and Panchak. Updated daily.`,
     alternates: { canonical: "/today-panchang" },
   };
@@ -61,7 +61,7 @@ export default async function TodayPanchangPage() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `Today Panchang – ${p.weekday}, ${p.date}`,
+    headline: `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(p.date)}`,
     description:
       "Daily updated Hindu Panchang with Tithi, Nakshatra, Chaughadiya, Rahu Kaal and Panchak.",
     datePublished: p.date,
