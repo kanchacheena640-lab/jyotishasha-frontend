@@ -28,6 +28,18 @@ async function getTodayPanchang() {
   const data = await res.json();
   return data.selected_date;
 }
+function formatDDMMYYYYWithTime(dateTimeStr: string) {
+  // Expected: "YYYY-MM-DD HH:mm"
+  const [date, time] = dateTimeStr.split(" ");
+  if (!date || !time) return dateTimeStr;
+
+  const [y, m, d] = date.split("-");
+  if (y.length === 4) {
+    return `${d}-${m}-${y} ${time}`;
+  }
+
+  return dateTimeStr;
+}
 function formatDDMMYYYY(dateStr: string) {
   // already DD-MM-YYYY
   if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
@@ -194,28 +206,28 @@ export default async function TodayPanchangPage() {
       <div className="bg-white/95 rounded-2xl p-5 shadow text-gray-800 space-y-4 max-w-3xl">
 
         <p>
-          {!isHindi ? (
-            <>
-              On <strong>{p.weekday}, {formatDDMMYYYY(p.date)}</strong>, the lunar day is{" "}
-              <strong>{p.tithi.paksha} {p.tithi.name}</strong>, starting at{" "}
-              <strong>{p.tithi.start_ist}</strong> and ending at{" "}
-              <strong>{p.tithi.end_ist}</strong>.
-              The Moon remains in <strong>{p.nakshatra.name}</strong> Nakshatra
-              (Pada {p.nakshatra.pada}), which is traditionally used to determine
-              <strong> Shubh Muhurat</strong> for important life events.
-            </>
-          ) : (
-            <>
-              <strong>{p.weekday}, {formatDDMMYYYY(p.date)}</strong> को{" "}
-              <strong>{p.tithi.paksha} {p.tithi.name}</strong> तिथि प्रभाव में है,
-              जो <strong>{p.tithi.start_ist}</strong> से प्रारंभ होकर{" "}
-              <strong>{p.tithi.end_ist}</strong> तक मान्य रहेगी।
-              चंद्रमा <strong>{p.nakshatra.name}</strong> नक्षत्र के
-              <strong> पाद {p.nakshatra.pada}</strong> में स्थित है, जिसके आधार पर
-              शुभ मुहूर्त निर्धारित किए जाते हैं।
-            </>
-          )}
-        </p>
+        {!isHindi ? (
+          <>
+            On <strong>{p.weekday}, {formatDDMMYYYY(p.date)}</strong>, the lunar day is{" "}
+            <strong>{p.tithi.paksha} {p.tithi.name}</strong>, starting at{" "}
+            <strong>{formatDDMMYYYYWithTime(p.tithi.start_ist)}</strong> and ending at{" "}
+            <strong>{formatDDMMYYYYWithTime(p.tithi.end_ist)}</strong>.
+            The Moon remains in <strong>{p.nakshatra.name}</strong> Nakshatra
+            (Pada {p.nakshatra.pada}), which is traditionally used to determine
+            <strong> Shubh Muhurat</strong> for important life events.
+          </>
+        ) : (
+          <>
+            <strong>{p.weekday}, {formatDDMMYYYY(p.date)}</strong> को{" "}
+            <strong>{p.tithi.paksha} {p.tithi.name}</strong> तिथि प्रभाव में है,
+            जो <strong>{formatDDMMYYYYWithTime(p.tithi.start_ist)}</strong> से प्रारंभ होकर{" "}
+            <strong>{formatDDMMYYYYWithTime(p.tithi.end_ist)}</strong> तक मान्य रहेगी।
+            चंद्रमा <strong>{p.nakshatra.name}</strong> नक्षत्र के
+            <strong> पाद {p.nakshatra.pada}</strong> में स्थित है, जिसके आधार पर
+            शुभ मुहूर्त निर्धारित किए जाते हैं।
+          </>
+        )}
+      </p>
 
         {/* Muhurat Links */}
         <div className="pt-2 border-t text-sm">
