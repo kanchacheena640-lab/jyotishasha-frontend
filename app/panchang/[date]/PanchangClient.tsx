@@ -222,131 +222,114 @@ export default function PanchangClient({ params }: { params: { date: string } })
       
     {/* 🕰️ Chaughadiya Section */}
     {p?.chaughadiya && (
-      <section className="max-w-7xl mx-auto mt-10 mb-10">
+      <section className="max-w-7xl mx-auto mt-12 mb-12">
         {/* Header */}
-        <div className="mb-5 flex items-center justify-between gap-3">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-purple-200 leading-tight">
-              🕰️ Chaughadiya
-            </h2>
-            <p className="text-sm text-gray-300 mt-1">
-              Green = Shubh • Red = Ashubh
-            </p>
-          </div>
-
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/15 border border-green-400/30 text-green-200">
-              Shubh
-            </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-red-500/15 border border-red-400/30 text-red-200">
-              Ashubh
-            </span>
-          </div>
+        <div className="mb-6 text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-purple-200">
+            🕰️ Chaughadiya
+          </h2>
+          <p className="text-sm mt-2">
+            <span className="text-green-400 font-semibold">Green = Auspicious</span>{" "}
+            •{" "}
+            <span className="text-red-400 font-semibold">Red = Inauspicious</span>
+          </p>
         </div>
 
-        {/* Glass Card Wrapper */}
-        <div className="rounded-2xl border border-white/10 bg-white/10 shadow-lg backdrop-blur-md p-5 md:p-6">
-          {/* Day */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-lg font-semibold text-green-200">
+        {/* Wrapper */}
+        <div className="rounded-2xl bg-[#1b1638] border border-purple-500/25 shadow-xl p-6 md:p-7">
+
+          {/* DAY */}
+          <div className="mb-10">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-green-300">
                 Day Chaughadiya
               </h3>
-              <span className="text-xs text-gray-300">
+              <span className="text-sm text-gray-300 font-medium">
                 {p.sunrise} – {p.sunset}
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {p.chaughadiya.day.map((c, i) => {
                 const isShubh = c.nature_en === "shubh";
                 return (
                   <div
                     key={i}
-                    className={`rounded-xl p-3 border transition-all hover:-translate-y-[1px] hover:shadow-md
+                    className={`rounded-xl p-4 border
                       ${
                         isShubh
-                          ? "bg-gradient-to-br from-green-500/15 to-emerald-500/10 border-green-400/30"
-                          : "bg-gradient-to-br from-red-500/15 to-rose-500/10 border-red-400/25"
+                          ? "bg-green-500/20 border-green-400/50"
+                          : "bg-red-500/20 border-red-400/50"
                       }`}
                   >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="font-semibold text-white">{c.name}</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-lg font-semibold text-white">
+                        {c.name}
+                      </div>
                       <span
-                        className={`shrink-0 px-2 py-[2px] rounded-full text-[10px] font-bold tracking-wide
+                        className={`px-2 py-1 rounded text-[11px] font-bold tracking-wide
                           ${
                             isShubh
-                              ? "bg-green-500/20 text-green-200 border border-green-400/30"
-                              : "bg-red-500/20 text-red-200 border border-red-400/30"
+                              ? "bg-green-500 text-black"
+                              : "bg-red-500 text-black"
                           }`}
                       >
-                        {isShubh ? "SHUBH" : "ASHUBH"}
+                        {isShubh ? "AUSPICIOUS" : "INAUSPICIOUS"}
                       </span>
                     </div>
 
-                    <div className="mt-2 text-xs text-gray-200">
+                    <div className="mt-3 text-lg font-bold text-white">
                       {c.start} – {c.end}
                     </div>
-
-                    {/* tiny accent line */}
-                    <div
-                      className={`mt-3 h-[2px] rounded-full ${
-                        isShubh ? "bg-green-400/40" : "bg-red-400/35"
-                      }`}
-                    />
                   </div>
                 );
               })}
             </div>
           </div>
 
-          {/* Night */}
+          {/* NIGHT */}
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-lg font-semibold text-blue-200">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-blue-300">
                 Night Chaughadiya
               </h3>
-              <span className="text-xs text-gray-300">
-                {p.sunset} – (next sunrise)
+              <span className="text-sm text-gray-300 font-medium">
+                {p.sunset} – Next Sunrise
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {p.chaughadiya.night.map((c, i) => {
                 const isShubh = c.nature_en === "shubh";
                 return (
                   <div
                     key={i}
-                    className={`rounded-xl p-3 border transition-all hover:-translate-y-[1px] hover:shadow-md
+                    className={`rounded-xl p-4 border
                       ${
                         isShubh
-                          ? "bg-gradient-to-br from-green-500/15 to-emerald-500/10 border-green-400/30"
-                          : "bg-gradient-to-br from-red-500/15 to-rose-500/10 border-red-400/25"
+                          ? "bg-green-500/20 border-green-400/50"
+                          : "bg-red-500/20 border-red-400/50"
                       }`}
                   >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="font-semibold text-white">{c.name}</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-lg font-semibold text-white">
+                        {c.name}
+                      </div>
                       <span
-                        className={`shrink-0 px-2 py-[2px] rounded-full text-[10px] font-bold tracking-wide
+                        className={`px-2 py-1 rounded text-[11px] font-bold tracking-wide
                           ${
                             isShubh
-                              ? "bg-green-500/20 text-green-200 border border-green-400/30"
-                              : "bg-red-500/20 text-red-200 border border-red-400/30"
+                              ? "bg-green-500 text-black"
+                              : "bg-red-500 text-black"
                           }`}
                       >
-                        {isShubh ? "SHUBH" : "ASHUBH"}
+                        {isShubh ? "AUSPICIOUS" : "INAUSPICIOUS"}
                       </span>
                     </div>
 
-                    <div className="mt-2 text-xs text-gray-200">
+                    <div className="mt-3 text-lg font-bold text-white">
                       {c.start} – {c.end}
                     </div>
-
-                    <div
-                      className={`mt-3 h-[2px] rounded-full ${
-                        isShubh ? "bg-green-400/40" : "bg-red-400/35"
-                      }`}
-                    />
                   </div>
                 );
               })}
@@ -355,6 +338,7 @@ export default function PanchangClient({ params }: { params: { date: string } })
         </div>
       </section>
     )}
+
 
         {/* 🔮 Shubh Muhurtha Tools Section */}
         <div className="mt-10">
