@@ -231,7 +231,7 @@ export default async function TodayPanchangPage() {
 
         {/* Muhurat Links */}
         <div className="pt-3 border-t text-sm">
-          <p className="font-medium mb-3 text-purple-700">
+          <p className="font-medium mb-3 text-purple-700 text-center">
             {isHindi ? "आज के प्रमुख शुभ मुहूर्त:" : "Key Shubh Muhurat for Today:"}
           </p>
 
