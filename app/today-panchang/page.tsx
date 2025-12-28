@@ -121,11 +121,24 @@ export default async function TodayPanchangPage() {
         : `Today Panchang – ${p.weekday}, ${p.date}`}
     </h1>
 
-    {/* Intro */}
+    {/* Intro – Dynamic, SEO-friendly */}
     <p className="mb-4">
-      {isHindi
-        ? "आज का पंचांग तिथि, नक्षत्र, चौघड़िया, राहु काल और पंचक की संपूर्ण जानकारी प्रदान करता है। यह पंचांग सूर्य उदय और सूर्यास्त की सटीक गणना पर आधारित है।"
-        : "Today Panchang provides complete Hindu calendar details including Tithi, Nakshatra, Chaughadiya, Rahu Kaal and Panchak based on accurate sunrise and sunset calculations."}
+      {isHindi ? (
+        <>
+          आज का दिन <strong>ब्रह्म मुहूर्त</strong> से आरंभ होता है, जो{" "}
+          <strong>{p.brahma_muhurta.start} से {p.brahma_muhurta.end}</strong> तक रहता है।
+          इस पंचांग में आपको आज के नक्षत्र, तिथि, चौघड़िया, राहु काल और अन्य
+          महत्वपूर्ण ज्योतिषीय विवरण प्राप्त होंगे।
+        </>
+      ) : (
+        <>
+          Today begins with the sacred <strong>Brahma Muhurta</strong>, observed from{" "}
+          <strong>{p.brahma_muhurta.start} to {p.brahma_muhurta.end}</strong>.
+          In this Today Panchang article, you will find complete details of Tithi,
+          Nakshatra, Chaughadiya, Rahu Kaal, and other important Hindu calendar timings
+          based on precise astronomical calculations.
+        </>
+      )}
     </p>
 
     {/* Tithi & Nakshatra */}
@@ -141,7 +154,7 @@ export default async function TodayPanchangPage() {
       ) : (
         <>
           Today is <strong>{p.tithi.paksha} {p.tithi.name}</strong>.
-          The Tithi starts at <strong>{p.tithi.start_ist}</strong> and ends at{" "}
+          The Tithi starts at <strong>{p.tithi.start_ist}</strong> and continues until{" "}
           <strong>{p.tithi.end_ist}</strong>.
           The Moon is placed in <strong>{p.nakshatra.name}</strong> Nakshatra
           (Pada {p.nakshatra.pada}).
