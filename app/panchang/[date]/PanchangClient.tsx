@@ -19,6 +19,21 @@ interface PanchangData {
   weekday?: string;
   date?: string;
   panchak?: { active: boolean; message: string; nakshatra?: string };
+  chaughadiya?: ChaughadiyaData;
+}
+
+interface ChaughadiyaSlot {
+  name: string;
+  name_en: string;
+  nature: string;
+  nature_en: string;
+  start: string;
+  end: string;
+}
+
+interface ChaughadiyaData {
+  day: ChaughadiyaSlot[];
+  night: ChaughadiyaSlot[];
 }
 
 export default function PanchangClient({ params }: { params: { date: string } }) {
@@ -170,6 +185,61 @@ export default function PanchangClient({ params }: { params: { date: string } })
           </div>
         </div>
       </section>
+  
+  {/* 🕰️ Chaughadiya Section */}
+  {p?.chaughadiya && (
+    <div className="max-w-5xl mx-auto mb-10">
+      <h2 className="text-xl md:text-2xl font-semibold text-purple-200 mb-4 text-center">
+        🕰️ Chaughadiya
+      </h2>
+
+      {/* Day */}
+      <div className="mb-6">
+        <h3 className="text-lg font-medium text-green-300 mb-2">Day Chaughadiya</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {p.chaughadiya.day.map((c: any, i: number) => (
+            <div
+              key={i}
+              className={`rounded-xl p-3 text-center text-sm border
+                ${
+                  c.nature_en === "shubh"
+                    ? "bg-green-500/10 border-green-400/40"
+                    : "bg-red-500/10 border-red-400/30"
+                }`}
+            >
+              <div className="font-semibold">{c.name}</div>
+              <div className="text-xs text-gray-300">
+                {c.start} – {c.end}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Night */}
+      <div>
+        <h3 className="text-lg font-medium text-blue-300 mb-2">Night Chaughadiya</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {p.chaughadiya.night.map((c: any, i: number) => (
+            <div
+              key={i}
+              className={`rounded-xl p-3 text-center text-sm border
+                ${
+                  c.nature_en === "shubh"
+                    ? "bg-green-500/10 border-green-400/40"
+                    : "bg-red-500/10 border-red-400/30"
+                }`}
+            >
+              <div className="font-semibold">{c.name}</div>
+              <div className="text-xs text-gray-300">
+                {c.start} – {c.end}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
 
       {/* Timing Boxes */}
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-10">
