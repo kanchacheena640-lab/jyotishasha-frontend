@@ -18,7 +18,7 @@ async function getTodayPanchang() {
       date: today,
       latitude: 26.8467,
       longitude: 80.9462,
-      language: "hi",
+      language: "en",
     }),
     next: { revalidate: 3600 }, // 🔑 freshness
   });
