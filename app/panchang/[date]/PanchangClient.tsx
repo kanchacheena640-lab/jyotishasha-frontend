@@ -218,10 +218,11 @@ export default function PanchangClient({ params }: { params: { date: string } })
             </div>
           ))}
         </div>
-
-      {/* 🕰️ Chaughadiya Section */}
-      {p?.chaughadiya && (
-        <div className="max-w-5xl mx-auto mb-10">
+     
+      
+    {/* 🕰️ Chaughadiya Section */}
+    {p?.chaughadiya && (
+      <div className="max-w-5xl mx-auto mt-12 mb-10">
           <h2 className="text-xl md:text-2xl font-semibold text-purple-200 mb-4 text-center">
             🕰️ Chaughadiya
           </h2>
