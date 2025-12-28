@@ -230,19 +230,35 @@ export default async function TodayPanchangPage() {
       </p>
 
         {/* Muhurat Links */}
-        <div className="pt-2 border-t text-sm">
-          <p className="font-medium mb-2 text-purple-700">
+        <div className="pt-3 border-t text-sm">
+          <p className="font-medium mb-3 text-purple-700">
             {isHindi ? "आज के प्रमुख शुभ मुहूर्त:" : "Key Shubh Muhurat for Today:"}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <a className="hover:underline" href="/panchang/muhurat/marriage-muhurat">Marriage Muhurat</a>
-            <a className="hover:underline" href="/panchang/muhurat/naamkaran-muhurat">Naamkaran Muhurat</a>
-            <a className="hover:underline" href="/panchang/muhurat/grah-pravesh-muhurat">Grah Pravesh Muhurat</a>
-            <a className="hover:underline" href="/panchang/muhurat/vehicle-muhurat">Vehicle Muhurat</a>
-            <a className="hover:underline" href="/panchang/muhurat/child-birth-muhurat">Child Birth Muhurat</a>
-            <a className="hover:underline" href="/panchang/muhurat/gold-buying-muhurat">Gold Buying Muhurat</a>
-            <a className="hover:underline" href="/panchang/muhurat/foreign-travel-muhurat">Foreign Travel Muhurat</a>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { label: "Marriage Muhurat", url: "/panchang/muhurat/marriage-muhurat" },
+              { label: "Naamkaran Muhurat", url: "/panchang/muhurat/naamkaran-muhurat" },
+              { label: "Grah Pravesh Muhurat", url: "/panchang/muhurat/grah-pravesh-muhurat" },
+              { label: "Vehicle Muhurat", url: "/panchang/muhurat/vehicle-muhurat" },
+              { label: "Child Birth Muhurat", url: "/panchang/muhurat/child-birth-muhurat" },
+              { label: "Gold Buying Muhurat", url: "/panchang/muhurat/gold-buying-muhurat" },
+              { label: "Foreign Travel Muhurat", url: "/panchang/muhurat/foreign-travel-muhurat" },
+            ].map((item) => (
+              <a
+                key={item.url}
+                href={item.url}
+                className="
+                  block text-center rounded-lg px-4 py-3
+                  bg-purple-50 text-purple-700 font-medium
+                  hover:bg-purple-600 hover:text-white
+                  transition-all duration-200
+                  shadow-sm hover:shadow
+                "
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
 
