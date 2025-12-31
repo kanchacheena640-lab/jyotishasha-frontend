@@ -54,18 +54,20 @@ export default function HoroscopeTabs() {
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
         {RASHIS.map((r) => (
           <Link
-                key={r.key}
-                href={`/${active}/${r.key}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center"
-            >
+            key={r.key}
+            href={`/${active}/${r.key}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center text-gray-800"
+          >
             <img
               src={r.icon}
               alt={`${r.name} ${active}`}
               className="h-12 w-12 mx-auto mb-2"
             />
-            <p className="font-medium text-sm">{r.name}</p>
+            <p className="font-semibold text-sm text-gray-900">
+                {r.name}
+            </p>
             {active === "daily-horoscope" && (
               <span className="text-[11px] text-green-600">
                 Updated Today
