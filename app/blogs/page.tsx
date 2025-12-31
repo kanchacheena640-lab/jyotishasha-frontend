@@ -2,7 +2,7 @@
 import Link from "next/link";
 import HoroscopeTabs from "@/components/blogs/HoroscopeTabs";
 
-export const revalidate = 3600; // hourly refresh
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Astrology Updates & Daily Insights | Jyotishasha",
@@ -11,6 +11,9 @@ export const metadata = {
 };
 
 export default async function BlogsHubPage() {
+  const cardClass =
+    "bg-white rounded-[14px] p-[18px] text-center shadow-[0_6px_16px_rgba(0,0,0,0.06)] transition hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(0,0,0,0.12)]";
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
       {/* HERO */}
@@ -37,20 +40,17 @@ export default async function BlogsHubPage() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Link href="/panchang" className="card">
+          <Link href="/panchang" className={cardClass}>
             Today’s Panchang
           </Link>
 
-          <Link
-            href="/panchang/muhurat/marriage-muhurat"
-            className="card"
-          >
+          <Link href="/panchang/muhurat/marriage-muhurat" className={cardClass}>
             Marriage Muhurat
           </Link>
 
           <Link
             href="/panchang/muhurat/grah-pravesh-muhurat"
-            className="card"
+            className={cardClass}
           >
             Griha Pravesh Muhurat
           </Link>
@@ -64,15 +64,15 @@ export default async function BlogsHubPage() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Link href="/transits/saturn" className="card">
+          <Link href="/transits/saturn" className={cardClass}>
             Saturn Transit • Long-term Impact
           </Link>
 
-          <Link href="/transits/jupiter" className="card">
+          <Link href="/transits/jupiter" className={cardClass}>
             Jupiter Transit • Growth Phase
           </Link>
 
-          <Link href="/transits/venus" className="card">
+          <Link href="/transits/venus" className={cardClass}>
             Venus Transit • Love & Comforts
           </Link>
         </div>
@@ -98,22 +98,6 @@ export default async function BlogsHubPage() {
           <strong>Source:</strong> Jyotishasha Astrology Research Desk
         </p>
       </footer>
-
-      {/* CARD STYLE */}
-      <style jsx>{`
-        .card {
-          background: #ffffff;
-          border-radius: 14px;
-          padding: 18px;
-          text-align: center;
-          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-          transition: all 0.25s ease;
-        }
-        .card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-        }
-      `}</style>
     </div>
   );
 }
