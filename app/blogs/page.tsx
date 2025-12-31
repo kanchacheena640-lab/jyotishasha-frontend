@@ -1,6 +1,8 @@
 // app/blogs/page.tsx
 import Link from "next/link";
 import HoroscopeTabs from "@/components/blogs/HoroscopeTabs";
+import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
+
 
 export const revalidate = 3600;
 
@@ -33,27 +35,56 @@ export default async function BlogsHubPage() {
       {/* HOROSCOPE HUB */}
       <HoroscopeTabs />
 
-      {/* MUHURAT & PANCHANG */}
+      {/* TODAY PANCHANG */}
+    <section className="mb-20">
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Today’s Panchang & Muhurat
+      </h2>
+
+      <div className="max-w-xl mx-auto">
+        <Link
+          href="/today-panchang"
+          className="block bg-white rounded-xl p-6 text-center shadow hover:shadow-lg transition"
+        >
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            Today’s Panchang
+          </h3>
+          <p className="text-sm text-gray-600 mb-3">
+            Tithi, Nakshatra, Yoga, Karana, Rahu Kaal & Auspicious Muhurats
+          </p>
+          <span className="text-purple-600 font-medium">
+            Read Today’s Panchang →
+          </span>
+        </Link>
+      </div>
+    </section>
+
+      {/* MONTHLY MUHURAT ARTICLES */}
       <section className="mb-20">
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Muhurat & Panchang
+          Auspicious Muhurats (Monthly Updated)
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Link href="/panchang" className={cardClass}>
-            Today’s Panchang
-          </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {Object.values(muhurthTopics).map((topic) => (
+            <Link
+              key={topic.slug}
+              href={topic.canonical.replace("https://www.jyotishasha.com", "")}
+              className="bg-white rounded-xl p-5 shadow hover:shadow-lg transition"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                {topic.title}
+              </h3>
 
-          <Link href="/panchang/muhurat/marriage-muhurat" className={cardClass}>
-            Marriage Muhurat
-          </Link>
+              <p className="text-sm text-gray-600 mb-3">
+                {topic.description}
+              </p>
 
-          <Link
-            href="/panchang/muhurat/grah-pravesh-muhurat"
-            className={cardClass}
-          >
-            Griha Pravesh Muhurat
-          </Link>
+              <span className="text-xs text-green-700 font-medium">
+                Updated Monthly
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
