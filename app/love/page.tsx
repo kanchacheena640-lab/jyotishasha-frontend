@@ -14,7 +14,6 @@ export default function LoveFormPage() {
 
   const [form, setForm] = useState({
     language: "en",
-
     boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
     girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
   });
@@ -32,7 +31,6 @@ export default function LoveFormPage() {
     const payload = {
       language: form.language,
       boy_is_user: true,
-
       user: { ...form.boy },
       partner: { ...form.girl },
     };
@@ -49,7 +47,6 @@ export default function LoveFormPage() {
     const data = await res.json();
     sessionStorage.setItem("love_payload", JSON.stringify(payload));
     sessionStorage.setItem("love_summary", JSON.stringify(data));
-
     router.push("/love/result");
   };
 
@@ -57,15 +54,24 @@ export default function LoveFormPage() {
     "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold text-center text-gray-900">
-        💍 Vedic Matchmaking Compatibility
-      </h1>
+    <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
+      {/* HERO HEADER */}
+      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-center text-white shadow-xl">
+        <h1 className="text-3xl font-extrabold flex items-center justify-center gap-2">
+          <span>💍</span>
+          <span>Vedic Matchmaking Compatibility</span>
+        </h1>
+        <p className="mt-3 text-purple-100 leading-relaxed">
+          Enter complete birth details to check love & marriage compatibility
+          using authentic Vedic astrology.
+        </p>
+      </div>
 
       {/* BOY CARD */}
-      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5 space-y-4">
-        <h2 className="text-lg font-semibold text-blue-800 flex items-center gap-2">
-          👨 Boy Details
+      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 space-y-4">
+        <h2 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
+          <span>👨</span>
+          <span>Boy Details</span>
         </h2>
 
         <input
@@ -75,7 +81,7 @@ export default function LoveFormPage() {
           onChange={(e) => update("boy", "name", e.target.value)}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="date"
             className={inputClass}
@@ -102,9 +108,10 @@ export default function LoveFormPage() {
       </div>
 
       {/* GIRL CARD */}
-      <div className="rounded-2xl border border-pink-200 bg-pink-50 p-5 space-y-4">
-        <h2 className="text-lg font-semibold text-pink-800 flex items-center gap-2">
-          👩 Girl Details
+      <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 space-y-4">
+        <h2 className="text-lg font-semibold text-pink-900 flex items-center gap-2">
+          <span>👩</span>
+          <span>Girl Details</span>
         </h2>
 
         <input
@@ -114,7 +121,7 @@ export default function LoveFormPage() {
           onChange={(e) => update("girl", "name", e.target.value)}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="date"
             className={inputClass}
