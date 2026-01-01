@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
 
+const BACKEND =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://jyotishasha-backend.onrender.com";
+
 export default function RelationshipFutureReportForm() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
@@ -22,33 +24,73 @@ export default function RelationshipFutureReportForm() {
     }));
   };
 
-  const submit = () => {
+  const input =
+    "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
+
+  const submit = async () => {
     if (!form.email) {
-      alert("Email is required to send your report.");
+      alert("Email is required to receive the report.");
       return;
     }
 
     setLoading(true);
 
     const payload = {
-      product_slug: "relationship_future_report",
-      email: form.email,              // ✅ mandatory
+      product: "relationship_future_report",
+      email: form.email,
       language: form.language,
       boy_is_user: true,
       user: form.boy,
       partner: form.girl,
     };
 
-    sessionStorage.setItem(
-      "relationship_report_payload",
-      JSON.stringify(payload)
-    );
+    try {
+      // 1️⃣ Create Razorpay Order
+      const res = await fetch(`${BACKEND}/api/razorpay-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product: "relationship_future_report" }),
+      });
 
-    router.push("/checkout/relationship_future_report");
+      const order = await res.json();
+      if (!order.order_id) {
+        alert("Unable to initiate payment");
+        setLoading(false);
+        return;
+      }
+
+      // 2️⃣ Open Razorpay directly
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        order_id: order.order_id,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Jyotishasha",
+        description: "Relationship Future Report",
+        handler: async function (response: any) {
+          await fetch(`${BACKEND}/webhook`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...payload,
+              payment_id: response.razorpay_payment_id,
+              order_id: response.razorpay_order_id,
+            }),
+          });
+
+          window.location.href = "/thank-you";
+        },
+        theme: { color: "#7c3aed" },
+      };
+
+      const rz = new (window as any).Razorpay(options);
+      rz.open();
+    } catch (e) {
+      alert("Payment failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
-
-  const inputClass =
-    "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
@@ -58,42 +100,32 @@ export default function RelationshipFutureReportForm() {
           💞 Relationship Future Report
         </h1>
         <p className="mt-3 text-purple-100">
-          Enter both partners’ birth details. Report will be sent on email.
+          Deep love → marriage analysis. Delivered on email.
         </p>
       </div>
 
-      {/* CONTACT */}
-      <div className="rounded-2xl border border-purple-200 bg-purple-50 p-6 space-y-3">
+      {/* EMAIL */}
+      <div className="rounded-2xl border border-purple-200 bg-purple-50 p-6 space-y-2">
         <h2 className="text-lg font-semibold text-purple-900">
-          📧 Contact Email (Required)
+          📧 Email (Required)
         </h2>
         <input
           type="email"
-          className={inputClass}
-          placeholder="Enter your email address"
+          className={input}
+          placeholder="Enter your email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
-        <p className="text-xs text-gray-600">
-          Your premium report will be delivered on this email.
-        </p>
       </div>
 
       {/* BOY */}
       <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 space-y-4">
         <h2 className="text-lg font-semibold text-blue-900">👨 Boy Details</h2>
-
-        <input
-          className={inputClass}
-          placeholder="Boy Name"
-          onChange={(e) => update("boy", "name", e.target.value)}
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="date" className={inputClass} onChange={(e) => update("boy", "dob", e.target.value)} />
-          <input type="time" className={inputClass} onChange={(e) => update("boy", "tob", e.target.value)} />
+        <input className={input} placeholder="Name" onChange={(e) => update("boy", "name", e.target.value)} />
+        <div className="grid sm:grid-cols-2 gap-4">
+          <input type="date" className={input} onChange={(e) => update("boy", "dob", e.target.value)} />
+          <input type="time" className={input} onChange={(e) => update("boy", "tob", e.target.value)} />
         </div>
-
         <PlaceAutocompleteInput
           value={form.boy.pob}
           onChange={(v) => update("boy", "pob", v)}
@@ -108,18 +140,11 @@ export default function RelationshipFutureReportForm() {
       {/* GIRL */}
       <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 space-y-4">
         <h2 className="text-lg font-semibold text-pink-900">👩 Girl Details</h2>
-
-        <input
-          className={inputClass}
-          placeholder="Girl Name"
-          onChange={(e) => update("girl", "name", e.target.value)}
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="date" className={inputClass} onChange={(e) => update("girl", "dob", e.target.value)} />
-          <input type="time" className={inputClass} onChange={(e) => update("girl", "tob", e.target.value)} />
+        <input className={input} placeholder="Name" onChange={(e) => update("girl", "name", e.target.value)} />
+        <div className="grid sm:grid-cols-2 gap-4">
+          <input type="date" className={input} onChange={(e) => update("girl", "dob", e.target.value)} />
+          <input type="time" className={input} onChange={(e) => update("girl", "tob", e.target.value)} />
         </div>
-
         <PlaceAutocompleteInput
           value={form.girl.pob}
           onChange={(v) => update("girl", "pob", v)}
@@ -131,12 +156,13 @@ export default function RelationshipFutureReportForm() {
         />
       </div>
 
+      {/* PAY */}
       <button
         onClick={submit}
         disabled={loading}
         className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg"
       >
-        {loading ? "Preparing Checkout…" : "Continue to Payment"}
+        {loading ? "Opening Payment…" : "Pay ₹199 & Generate Report"}
       </button>
     </div>
   );
