@@ -41,10 +41,6 @@ export default async function SunTransitPage() {
   const currentTransit = sunFuture[0];
   const nextTransit = sunFuture[1];
 
-  /* 🔮 PLACEHOLDERS (backend-ready) */
-  const nakshatra = "—"; // future: data.positions.Sun.nakshatra
-  const nakshatraPada = "—"; // future: data.positions.Sun.pada
-
   return (
     <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
       <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
@@ -54,17 +50,16 @@ export default async function SunTransitPage() {
           Sun Transit in {sunPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
         </h1>
 
-        {/* INTRO (ENRICHED, NON-REPETITIVE) */}
+        {/* INTRO (CLEAN & SEO-SAFE) */}
         <p className="text-gray-800 mb-10 leading-relaxed">
           The Sun is currently transiting through <strong>{sunPos?.rashi}</strong> rashi,
           marking an important astrological phase. At present, Surya is positioned at{" "}
-          <strong>{sunPos?.degree}°</strong>, moving under{" "}
-          <strong>{nakshatra}</strong> nakshatra{" "}
-          <strong>{nakshatraPada}</strong> pada.  
+          <strong>{sunPos?.degree}°</strong>, influencing themes related to authority,
+          confidence, vitality and life direction.
           <br /><br />
-          In Vedic astrology, the Sun represents authority, vitality, confidence and life
-          direction. As it progresses through this sign, its influence unfolds differently
-          for each ascendant based on house placement, dignity and individual chart factors.
+          In Vedic astrology, the Sun governs leadership, responsibility and self-expression.
+          As it moves through this sign, its effects manifest differently for each ascendant
+          depending on house placement, planetary dignity and individual chart factors.
         </p>
 
         {/* SNAPSHOT CARD */}
@@ -99,7 +94,7 @@ export default async function SunTransitPage() {
           <p className="text-gray-800 leading-relaxed">
             This Sun transit activates themes of leadership, responsibility, health and
             self-expression. Strong Sun placements may support recognition and confidence,
-            while weaker dignity may demand humility, patience and disciplined action.
+            while weaker dignity may require humility, patience and disciplined action.
           </p>
         </section>
 
