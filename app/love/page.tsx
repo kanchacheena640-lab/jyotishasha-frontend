@@ -15,32 +15,14 @@ export default function LoveFormPage() {
   const [form, setForm] = useState({
     language: "en",
 
-    boy: {
-      name: "",
-      dob: "",
-      tob: "",
-      pob: "",
-      lat: 0,
-      lng: 0,
-    },
-
-    girl: {
-      name: "",
-      dob: "",
-      tob: "",
-      pob: "",
-      lat: 0,
-      lng: 0,
-    },
+    boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
+    girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
   });
 
   const update = (section: "boy" | "girl", field: string, value: any) => {
     setForm((prev) => ({
       ...prev,
-      [section]: {
-        ...prev[section],
-        [field]: value,
-      },
+      [section]: { ...prev[section], [field]: value },
     }));
   };
 
@@ -49,25 +31,10 @@ export default function LoveFormPage() {
 
     const payload = {
       language: form.language,
-      boy_is_user: true, // 🔒 LOCKED
+      boy_is_user: true,
 
-      user: {
-        name: form.boy.name,
-        dob: form.boy.dob,
-        tob: form.boy.tob,
-        pob: form.boy.pob,
-        lat: form.boy.lat,
-        lng: form.boy.lng,
-      },
-
-      partner: {
-        name: form.girl.name,
-        dob: form.girl.dob,
-        tob: form.girl.tob,
-        pob: form.girl.pob,
-        lat: form.girl.lat,
-        lng: form.girl.lng,
-      },
+      user: { ...form.boy },
+      partner: { ...form.girl },
     };
 
     const res = await fetch(
@@ -80,41 +47,44 @@ export default function LoveFormPage() {
     );
 
     const data = await res.json();
-
     sessionStorage.setItem("love_payload", JSON.stringify(payload));
     sessionStorage.setItem("love_summary", JSON.stringify(data));
 
     router.push("/love/result");
   };
 
+  const inputClass =
+    "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
+
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-semibold">
-        Vedic Matchmaking Compatibility
+    <div className="max-w-3xl mx-auto p-6 space-y-8">
+      <h1 className="text-3xl font-bold text-center text-gray-900">
+        💍 Vedic Matchmaking Compatibility
       </h1>
 
-      {/* BOY DETAILS */}
-      <div className="border rounded p-4 space-y-3">
-        <h2 className="font-medium">Boy Details</h2>
+      {/* BOY CARD */}
+      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5 space-y-4">
+        <h2 className="text-lg font-semibold text-blue-800 flex items-center gap-2">
+          👨 Boy Details
+        </h2>
 
         <input
-          className="w-full border rounded px-3 py-2"
-          placeholder="Name"
+          className={inputClass}
+          placeholder="Boy Name"
           value={form.boy.name}
           onChange={(e) => update("boy", "name", e.target.value)}
         />
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <input
             type="date"
-            className="w-full border rounded px-3 py-2"
+            className={inputClass}
             value={form.boy.dob}
             onChange={(e) => update("boy", "dob", e.target.value)}
           />
-
           <input
             type="time"
-            className="w-full border rounded px-3 py-2"
+            className={inputClass}
             value={form.boy.tob}
             onChange={(e) => update("boy", "tob", e.target.value)}
           />
@@ -131,28 +101,29 @@ export default function LoveFormPage() {
         />
       </div>
 
-      {/* GIRL DETAILS */}
-      <div className="border rounded p-4 space-y-3">
-        <h2 className="font-medium">Girl Details</h2>
+      {/* GIRL CARD */}
+      <div className="rounded-2xl border border-pink-200 bg-pink-50 p-5 space-y-4">
+        <h2 className="text-lg font-semibold text-pink-800 flex items-center gap-2">
+          👩 Girl Details
+        </h2>
 
         <input
-          className="w-full border rounded px-3 py-2"
-          placeholder="Name"
+          className={inputClass}
+          placeholder="Girl Name"
           value={form.girl.name}
           onChange={(e) => update("girl", "name", e.target.value)}
         />
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <input
             type="date"
-            className="w-full border rounded px-3 py-2"
+            className={inputClass}
             value={form.girl.dob}
             onChange={(e) => update("girl", "dob", e.target.value)}
           />
-
           <input
             type="time"
-            className="w-full border rounded px-3 py-2"
+            className={inputClass}
             value={form.girl.tob}
             onChange={(e) => update("girl", "tob", e.target.value)}
           />
@@ -169,12 +140,13 @@ export default function LoveFormPage() {
         />
       </div>
 
+      {/* SUBMIT */}
       <button
         onClick={submit}
         disabled={loading}
-        className="w-full bg-purple-600 text-white py-3 rounded text-lg"
+        className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-95"
       >
-        {loading ? "Analyzing…" : "Check Matchmaking"}
+        {loading ? "Analyzing Matchmaking…" : "Check Matchmaking"}
       </button>
     </div>
   );
