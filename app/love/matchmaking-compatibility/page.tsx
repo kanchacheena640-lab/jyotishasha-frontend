@@ -35,32 +35,39 @@ export default function MatchmakingCompatibilityPage() {
   }, [router]);
 
   if (loading || !data) {
-    return <div className="p-6 text-center">Loading detailed analysis…</div>;
+    return (
+      <div className="p-6 text-center text-gray-700">
+        Loading detailed analysis…
+      </div>
+    );
   }
 
   const verdict = data.verdict;
+  const kootaNotes =
+    data.sections.find((s: any) => s.id === "koota_notes")?.data
+      ?.koota_notes || [];
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
+    <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
       {/* HEADER */}
-      <div className="space-y-2">
+      <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold text-gray-900">
           🧿 Matchmaking Compatibility
         </h1>
         <p className="text-gray-600">
-          Complete Vedic Ashtakoot analysis
+          Complete Vedic Ashtakoot analysis for marriage compatibility
         </p>
       </div>
 
       {/* TOP SCORE */}
-      <div className="rounded-2xl border bg-indigo-50 p-5">
-        <h2 className="text-lg font-semibold text-indigo-800">
+      <div className="rounded-3xl border border-indigo-200 bg-indigo-50 p-6 text-center">
+        <h2 className="text-lg font-semibold text-indigo-900">
           Ashtakoot Score
         </h2>
-        <p className="text-3xl font-bold mt-2 text-indigo-700">
+        <p className="text-5xl font-extrabold mt-3 text-indigo-800">
           {verdict.score}/{verdict.max_score}
         </p>
-        <p className="mt-2 text-gray-700">
+        <p className="mt-4 text-gray-800 leading-relaxed">
           {verdict.reason_line}
         </p>
       </div>
@@ -71,35 +78,33 @@ export default function MatchmakingCompatibilityPage() {
           Koota-wise Breakdown
         </h2>
 
-        {data.sections
-          .find((s: any) => s.id === "koota_notes")
-          ?.data?.koota_notes?.map((k: any) => (
-            <div
-              key={k.key}
-              className="rounded-xl border p-4 bg-white"
-            >
-              <div className="flex justify-between items-center">
-                <h3 className="font-semibold capitalize">
-                  {k.key.replace("_", " ")}
-                </h3>
-                <span className="text-sm font-medium">
-                  {k.score}/{k.max}
-                </span>
-              </div>
-              <p className="text-sm text-gray-600 mt-1">
-                {k.note}
-              </p>
+        {kootaNotes.map((k: any) => (
+          <div
+            key={k.key}
+            className="rounded-xl border border-gray-200 bg-gray-50 p-4"
+          >
+            <div className="flex justify-between items-center">
+              <h3 className="font-semibold capitalize text-gray-900">
+                {k.key.replace("_", " ")}
+              </h3>
+              <span className="text-sm font-semibold text-gray-700">
+                {k.score}/{k.max}
+              </span>
             </div>
-          ))}
+            <p className="text-sm text-gray-700 mt-2">
+              {k.note}
+            </p>
+          </div>
+        ))}
       </div>
 
-      {/* FLOW */}
+      {/* LOVE → MARRIAGE FLOW */}
       {data.sections.find((s: any) => s.id === "love_to_marriage_flow") && (
-        <div className="rounded-2xl bg-purple-50 p-5">
-          <h2 className="text-lg font-semibold text-purple-800">
+        <div className="rounded-2xl border border-purple-200 bg-purple-50 p-6">
+          <h2 className="text-lg font-semibold text-purple-900">
             Love → Marriage Flow
           </h2>
-          <p className="mt-2 text-gray-700">
+          <p className="mt-3 text-gray-800">
             {
               data.sections.find(
                 (s: any) => s.id === "love_to_marriage_flow"
@@ -109,10 +114,49 @@ export default function MatchmakingCompatibilityPage() {
         </div>
       )}
 
+      {/* PREMIUM REPORT CTA */}
+      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-7 text-white shadow-xl space-y-4">
+        <h2 className="text-2xl font-bold">
+          🔮 Relationship Future Report
+        </h2>
+
+        <p className="text-purple-100">
+          Want clarity beyond just score? Get a complete Love → Marriage
+          report with verdict, dosha impact, remedies and future direction.
+        </p>
+
+        <ul className="text-sm text-purple-100 space-y-1">
+          <li>✔ Dosha & cancellation analysis</li>
+          <li>✔ Marriage stability & timing guidance</li>
+          <li>✔ Practical Vedic remedies</li>
+        </ul>
+
+        <div className="flex items-center gap-3">
+          <span className="line-through text-purple-200">₹399</span>
+          <span className="text-3xl font-extrabold">₹199</span>
+          <span className="bg-yellow-400 text-black text-xs px-3 py-1 rounded-full">
+            Early Bird
+          </span>
+        </div>
+
+        <button
+          onClick={() =>
+            router.push("/checkout/relationship_future_report")
+          }
+          className="w-full bg-white text-purple-700 font-semibold py-3 rounded-xl hover:bg-gray-100 transition"
+        >
+          Unlock Full Relationship Report
+        </button>
+
+        <p className="text-xs text-purple-200 text-center">
+          Secure payment • PDF delivered on email
+        </p>
+      </div>
+
       {/* DISCLAIMER */}
-      <div className="text-xs text-gray-500">
-        This analysis is based on Vedic astrology principles and
-        should be treated as guidance, not absolute prediction.
+      <div className="text-xs text-gray-500 border-t pt-4">
+        This analysis is based on classical Vedic astrology principles.
+        It is meant for guidance, not absolute certainty.
       </div>
     </div>
   );

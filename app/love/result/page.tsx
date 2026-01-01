@@ -22,7 +22,11 @@ export default function LoveResultSummaryPage() {
   }, [router]);
 
   if (!summary) {
-    return <div className="p-6 text-center">Loading result…</div>;
+    return (
+      <div className="p-6 text-center text-gray-700">
+        Loading result…
+      </div>
+    );
   }
 
   const ashtakoot = summary?.data?.ashtakoot;
@@ -35,11 +39,12 @@ export default function LoveResultSummaryPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
+    <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
       {/* HEADER */}
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold text-gray-900">
-          💑 Matchmaking Result
+        <h1 className="text-3xl font-bold text-gray-900 flex items-center justify-center gap-2">
+          <span className="text-2xl">💑</span>
+          <span>Matchmaking Result</span>
         </h1>
         <p className="text-gray-600">
           Summary of your Vedic compatibility analysis
@@ -52,22 +57,22 @@ export default function LoveResultSummaryPage() {
         {/* COMPATIBILITY */}
         <div
           onClick={() => go("/love/matchmaking-compatibility")}
-          className="cursor-pointer rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white p-5 shadow-sm hover:shadow-md transition"
+          className="cursor-pointer rounded-2xl border border-indigo-200 bg-indigo-50 p-5 hover:shadow-md transition"
         >
           <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-semibold text-indigo-800">
-                🧿 Matchmaking Compatibility
+            <div className="space-y-1">
+              <h2 className="text-lg font-semibold text-indigo-900 flex items-center gap-2">
+                <span>🧿</span>
+                <span>Matchmaking Compatibility</span>
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                Ashtakoot score overview
+              <p className="text-sm text-indigo-700">
+                View detailed Ashtakoot analysis →
               </p>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-indigo-700">
+              <p className="text-2xl font-bold text-indigo-900">
                 {score}/{maxScore}
               </p>
-              <p className="text-xs text-gray-500">View detailed Vedic analysis</p>
             </div>
           </div>
         </div>
@@ -75,16 +80,17 @@ export default function LoveResultSummaryPage() {
         {/* TRUTH OR DARE */}
         <div
           onClick={() => go("/love/truth-or-dare")}
-          className="cursor-pointer rounded-2xl border border-rose-200 bg-gradient-to-br from-rose-50 to-white p-5 shadow-sm hover:shadow-md transition"
+          className="cursor-pointer rounded-2xl border border-rose-200 bg-rose-50 p-5 hover:shadow-md transition"
         >
           <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-semibold text-rose-800">
-                🔥 Truth or Dare
+            <div className="space-y-1">
+              <h2 className="text-lg font-semibold text-rose-900 flex items-center gap-2">
+                <span>🔥</span>
+                <span>Truth or Dare</span>
               </h2>
-              <p className="text-sm text-rose-700 font-medium mt-1">
-                Real relationship signal 'click'→
-            </p>
+              <p className="text-sm text-rose-700">
+                Real relationship risk signal →
+              </p>
             </div>
             <span
               className={`px-4 py-2 rounded-full text-white font-semibold ${
@@ -101,15 +107,16 @@ export default function LoveResultSummaryPage() {
         {/* MARRIAGE POTENTIAL */}
         <div
           onClick={() => go("/love/marriage-potential")}
-          className="cursor-pointer rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm hover:shadow-md transition"
+          className="cursor-pointer rounded-2xl border border-emerald-200 bg-emerald-50 p-5 hover:shadow-md transition"
         >
           <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-semibold text-emerald-800">
-                💍 Marriage Potential
+            <div className="space-y-1">
+              <h2 className="text-lg font-semibold text-emerald-900 flex items-center gap-2">
+                <span>💍</span>
+                <span>Marriage Potential</span>
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                Marriage outlook in detail →
+              <p className="text-sm text-emerald-700">
+                Long-term marriage outlook →
               </p>
             </div>
             <span
@@ -129,13 +136,14 @@ export default function LoveResultSummaryPage() {
         </div>
       </div>
 
-      {/* PREMIUM REPORT — HERO */}
-      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-6 text-white shadow-xl space-y-4">
-        <h2 className="text-2xl font-bold">
-          🔮 Relationship Future Report
+      {/* PREMIUM REPORT HERO */}
+      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-7 text-white shadow-xl space-y-4">
+        <h2 className="text-2xl font-bold flex items-center gap-2">
+          <span>🔮</span>
+          <span>Relationship Future Report</span>
         </h2>
 
-        <p className="text-purple-100">
+        <p className="text-purple-100 leading-relaxed">
           Complete Love → Marriage Vedic analysis with clear verdict,
           risks, remedies & future direction.
         </p>
@@ -149,7 +157,7 @@ export default function LoveResultSummaryPage() {
         <div className="flex items-center gap-3">
           <span className="line-through text-purple-200">₹399</span>
           <span className="text-3xl font-extrabold">₹199</span>
-          <span className="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">
+          <span className="bg-yellow-400 text-black text-xs px-3 py-1 rounded-full">
             Early Bird
           </span>
         </div>
@@ -158,7 +166,7 @@ export default function LoveResultSummaryPage() {
           onClick={() =>
             router.push("/checkout/relationship_future_report")
           }
-          className="w-full bg-white text-purple-700 font-semibold py-3 rounded-xl shadow hover:bg-gray-100 transition"
+          className="w-full bg-white text-purple-700 font-semibold py-3 rounded-xl hover:bg-gray-100 transition"
         >
           Unlock Full Report
         </button>
