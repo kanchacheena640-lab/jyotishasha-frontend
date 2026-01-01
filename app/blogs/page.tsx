@@ -88,23 +88,79 @@ export default async function BlogsHubPage() {
         </div>
       </section>
 
-      {/* TRANSITS */}
+      {/* PLANETARY TRANSITS */}
       <section className="mb-20">
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Planetary Transit Highlights
+          Planetary Transits (Live Gochar)
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Link href="/transits/saturn" className={cardClass}>
-            Saturn Transit • Long-term Impact
+        <p className="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
+          Explore detailed planet-wise transit (Gochar) analysis with dates,
+          ascendant-wise effects and remedies based on Vedic astrology.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <Link href="/sun-transit" className={cardClass}>
+            ☀️ Sun Transit<br />
+            <span className="text-sm text-gray-600">
+              Authority • Confidence • Career
+            </span>
           </Link>
 
-          <Link href="/transits/jupiter" className={cardClass}>
-            Jupiter Transit • Growth Phase
+          <Link href="/moon-transit" className={cardClass}>
+            🌙 Moon Transit<br />
+            <span className="text-sm text-gray-600">
+              Mind • Emotions • Daily Mood
+            </span>
           </Link>
 
-          <Link href="/transits/venus" className={cardClass}>
-            Venus Transit • Love & Comforts
+          <Link href="/mars-transit" className={cardClass}>
+            🔴 Mars Transit<br />
+            <span className="text-sm text-gray-600">
+              Energy • Action • Courage
+            </span>
+          </Link>
+
+          <Link href="/mercury-transit" className={cardClass}>
+            🟢 Mercury Transit<br />
+            <span className="text-sm text-gray-600">
+              Intellect • Speech • Business
+            </span>
+          </Link>
+
+          <Link href="/jupiter-transit" className={cardClass}>
+            🟡 Jupiter Transit<br />
+            <span className="text-sm text-gray-600">
+              Growth • Wisdom • Expansion
+            </span>
+          </Link>
+
+          <Link href="/venus-transit" className={cardClass}>
+            💗 Venus Transit<br />
+            <span className="text-sm text-gray-600">
+              Love • Comfort • Relationships
+            </span>
+          </Link>
+
+          <Link href="/saturn-transit" className={cardClass}>
+            🪐 Saturn Transit<br />
+            <span className="text-sm text-gray-600">
+              Karma • Discipline • Tests
+            </span>
+          </Link>
+
+          <Link href="/rahu-transit" className={cardClass}>
+            ☊ Rahu Transit<br />
+            <span className="text-sm text-gray-600">
+              Desire • Sudden Change • Illusion
+            </span>
+          </Link>
+
+          <Link href="/ketu-transit" className={cardClass}>
+            ☋ Ketu Transit<br />
+            <span className="text-sm text-gray-600">
+              Detachment • Moksha • Insight
+            </span>
           </Link>
         </div>
       </section>
