@@ -219,7 +219,7 @@ export const reportsData: Report[] = [
   {
     title: "Legal Disputes Report",
     slug: "legal_disputes_report",
-    price: 51,
+    price: 1,
     image: "/reports/legal_disputes_report.webp",
     category: "Self",
     description: "Get clarity on legal disputes, conflicts, and chances of settlement from your chart.",
@@ -228,7 +228,7 @@ export const reportsData: Report[] = [
   {
     title: "Relationship Future Report",
     slug: "relationship_future_report",
-    price: 1,
+    price: 199,
     image: "/reports/relationship-future-report.webp",
     category: "Love",
     description: "Get a complete Love → Marriage future analysis using authentic Vedic astrology.",
