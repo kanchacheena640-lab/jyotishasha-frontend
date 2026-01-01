@@ -35,21 +35,14 @@ export default function RelationshipFutureReportForm() {
 
     setLoading(true);
 
-    const payload = {
-      product: "relationship_future_report",
-      email: form.email,
-      language: form.language,
-      boy_is_user: true,
-      user: form.boy,
-      partner: form.girl,
-    };
-
     try {
       // 1️⃣ Create Razorpay Order
       const res = await fetch(`${BACKEND}/api/razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: "relationship_future_report" }),
+        body: JSON.stringify({
+          product: "relationship_future_report",
+        }),
       });
 
       const order = await res.json();
@@ -67,12 +60,35 @@ export default function RelationshipFutureReportForm() {
         currency: order.currency,
         name: "Jyotishasha",
         description: "Relationship Future Report",
+
         handler: async function (response: any) {
+          // 🔥 FINAL FIX: FLATTEN PAYLOAD (matches backend expectation)
           await fetch(`${BACKEND}/webhook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              ...payload,
+              product: "relationship_future_report",
+              email: form.email,
+              language: form.language,
+
+              // 👇 REQUIRED TOP-LEVEL USER FIELDS
+              name: form.boy.name,
+              dob: form.boy.dob,
+              tob: form.boy.tob,
+              pob: form.boy.pob,
+              latitude: form.boy.lat,
+              longitude: form.boy.lng,
+
+              boy_is_user: true,
+              partner: {
+                name: form.girl.name,
+                dob: form.girl.dob,
+                tob: form.girl.tob,
+                pob: form.girl.pob,
+                latitude: form.girl.lat,
+                longitude: form.girl.lng,
+              },
+
               payment_id: response.razorpay_payment_id,
               order_id: response.razorpay_order_id,
             }),
@@ -80,6 +96,7 @@ export default function RelationshipFutureReportForm() {
 
           window.location.href = "/thank-you";
         },
+
         theme: { color: "#7c3aed" },
       };
 
@@ -121,10 +138,22 @@ export default function RelationshipFutureReportForm() {
       {/* BOY */}
       <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 space-y-4">
         <h2 className="text-lg font-semibold text-blue-900">👨 Boy Details</h2>
-        <input className={input} placeholder="Name" onChange={(e) => update("boy", "name", e.target.value)} />
+        <input
+          className={input}
+          placeholder="Name"
+          onChange={(e) => update("boy", "name", e.target.value)}
+        />
         <div className="grid sm:grid-cols-2 gap-4">
-          <input type="date" className={input} onChange={(e) => update("boy", "dob", e.target.value)} />
-          <input type="time" className={input} onChange={(e) => update("boy", "tob", e.target.value)} />
+          <input
+            type="date"
+            className={input}
+            onChange={(e) => update("boy", "dob", e.target.value)}
+          />
+          <input
+            type="time"
+            className={input}
+            onChange={(e) => update("boy", "tob", e.target.value)}
+          />
         </div>
         <PlaceAutocompleteInput
           value={form.boy.pob}
@@ -140,10 +169,22 @@ export default function RelationshipFutureReportForm() {
       {/* GIRL */}
       <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 space-y-4">
         <h2 className="text-lg font-semibold text-pink-900">👩 Girl Details</h2>
-        <input className={input} placeholder="Name" onChange={(e) => update("girl", "name", e.target.value)} />
+        <input
+          className={input}
+          placeholder="Name"
+          onChange={(e) => update("girl", "name", e.target.value)}
+        />
         <div className="grid sm:grid-cols-2 gap-4">
-          <input type="date" className={input} onChange={(e) => update("girl", "dob", e.target.value)} />
-          <input type="time" className={input} onChange={(e) => update("girl", "tob", e.target.value)} />
+          <input
+            type="date"
+            className={input}
+            onChange={(e) => update("girl", "dob", e.target.value)}
+          />
+          <input
+            type="time"
+            className={input}
+            onChange={(e) => update("girl", "tob", e.target.value)}
+          />
         </div>
         <PlaceAutocompleteInput
           value={form.girl.pob}
