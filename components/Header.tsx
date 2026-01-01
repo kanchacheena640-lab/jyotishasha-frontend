@@ -77,7 +77,7 @@ export default function Header() {
       Astrology
     </Link>
     <Link href="/reports">Reports</Link>
-    <Link href="/panchang">Panchang</Link>
+    <Link href="/blogs">Blogs</Link>
     <Link href="/gemstone-consult" suppressHydrationWarning>
       Rashi by Name
     </Link>
@@ -99,8 +99,8 @@ export default function Header() {
       <Link href="/reports" passHref>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Reports</span>
       </Link>
-      <Link href="/panchang" passHref>
-        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Panchang</span>
+      <Link href="/blogs" passHref>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Blogs</span>
       </Link>
       <Link href="/gemstone-consult" passHref suppressHydrationWarning>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Rashi by Name</span>
