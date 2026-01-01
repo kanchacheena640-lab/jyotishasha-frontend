@@ -43,19 +43,18 @@ export default function AscendantTransitCards({
                 depend on dignity, strength and personal effort.
               </p>
 
-              {/* Bottom row */}
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-blue-200">
-                  Activated House: {house}
-                </span>
-
-                <a
-                  href="/app-download"
-                  className="text-white font-semibold underline hover:text-yellow-300 transition"
-                >
-                  Get App · Know Your Lagna · Report @ ₹51 →
-                </a>
+              {/* Bottom info */}
+              <div className="text-sm text-blue-200 mb-2">
+                Activated House: {house}
               </div>
+
+              {/* CTA – new line */}
+              <a
+                href="/app-download"
+                className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
+              >
+                Get App · Know Your Lagna · Personalized Report @ ₹51 →
+              </a>
             </div>
           );
         })}
