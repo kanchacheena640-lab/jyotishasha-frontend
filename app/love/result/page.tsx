@@ -3,15 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const BACKEND =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://jyotishasha-backend.onrender.com";
-
 export default function LoveResultSummaryPage() {
   const router = useRouter();
   const [summary, setSummary] = useState<any>(null);
   const [payload, setPayload] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const s = sessionStorage.getItem("love_summary");
@@ -24,10 +19,9 @@ export default function LoveResultSummaryPage() {
 
     setSummary(JSON.parse(s));
     setPayload(JSON.parse(p));
-    setLoading(false);
   }, [router]);
 
-  if (loading || !summary) {
+  if (!summary) {
     return <div className="p-6 text-center">Loading result…</div>;
   }
 
@@ -41,91 +35,137 @@ export default function LoveResultSummaryPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-semibold">
-        Matchmaking Result Summary
-      </h1>
-
-      {/* MATCHMAKING COMPATIBILITY */}
-      <div
-        onClick={() => go("/love/matchmaking-compatibility")}
-        className="cursor-pointer border rounded p-4 hover:shadow"
-      >
-        <h2 className="font-medium">Matchmaking Compatibility</h2>
-        <p className="text-lg mt-2">
-          {score} / {maxScore}
-        </p>
-        <p className="text-sm text-gray-500 mt-1">
-          Tap to view full Ashtakoot details
+    <div className="max-w-3xl mx-auto p-6 space-y-8">
+      {/* HEADER */}
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold text-gray-900">
+          💑 Matchmaking Result
+        </h1>
+        <p className="text-gray-600">
+          Summary of your Vedic compatibility analysis
         </p>
       </div>
 
-      {/* TRUTH OR DARE */}
-      <div
-        onClick={() => go("/love/truth-or-dare")}
-        className="cursor-pointer border rounded p-4 hover:shadow"
-      >
-        <h2 className="font-medium">Truth or Dare</h2>
-        <span
-          className={`inline-block mt-2 px-3 py-1 rounded text-white text-sm ${
-            summary?.truth_or_dare?.verdict === "TRUTH"
-              ? "bg-green-600"
-              : "bg-red-600"
-          }`}
+      {/* SUMMARY CARDS */}
+      <div className="space-y-4">
+
+        {/* COMPATIBILITY */}
+        <div
+          onClick={() => go("/love/matchmaking-compatibility")}
+          className="cursor-pointer rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white p-5 shadow-sm hover:shadow-md transition"
         >
-          {summary?.truth_or_dare?.verdict || "DARE"}
-        </span>
-        <p className="text-sm text-gray-500 mt-2">
-          Tap to view detailed relationship signals
-        </p>
-      </div>
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-indigo-800">
+                🧿 Matchmaking Compatibility
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                Ashtakoot score overview
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-2xl font-bold text-indigo-700">
+                {score}/{maxScore}
+              </p>
+              <p className="text-xs text-gray-500">Tap to view</p>
+            </div>
+          </div>
+        </div>
 
-      {/* MARRIAGE POTENTIAL */}
-      <div
-        onClick={() => go("/love/marriage-potential")}
-        className="cursor-pointer border rounded p-4 hover:shadow"
-      >
-        <h2 className="font-medium">Marriage Potential</h2>
-        <span
-          className={`inline-block mt-2 px-3 py-1 rounded text-white text-sm ${
-            summary?.marriage_potential?.band === "High" ||
-            summary?.marriage_potential?.band === "Positive"
-              ? "bg-green-600"
-              : summary?.marriage_potential?.band === "Low" ||
-                summary?.marriage_potential?.band === "Negative"
-              ? "bg-red-600"
-              : "bg-gray-500"
-          }`}
+        {/* TRUTH OR DARE */}
+        <div
+          onClick={() => go("/love/truth-or-dare")}
+          className="cursor-pointer rounded-2xl border border-rose-200 bg-gradient-to-br from-rose-50 to-white p-5 shadow-sm hover:shadow-md transition"
         >
-          {summary?.marriage_potential?.band || "Medium"}
-        </span>
-        <p className="text-sm text-gray-500 mt-2">
-          Tap to view marriage probability breakdown
-        </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-rose-800">
+                🔥 Truth or Dare
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                Relationship risk signal
+              </p>
+            </div>
+            <span
+              className={`px-4 py-2 rounded-full text-white font-semibold ${
+                summary?.truth_or_dare?.verdict === "TRUTH"
+                  ? "bg-green-600"
+                  : "bg-red-600"
+              }`}
+            >
+              {summary?.truth_or_dare?.verdict || "DARE"}
+            </span>
+          </div>
+        </div>
+
+        {/* MARRIAGE POTENTIAL */}
+        <div
+          onClick={() => go("/love/marriage-potential")}
+          className="cursor-pointer rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm hover:shadow-md transition"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-emerald-800">
+                💍 Marriage Potential
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                Long-term marriage outlook
+              </p>
+            </div>
+            <span
+              className={`px-4 py-2 rounded-full text-white font-semibold ${
+                summary?.marriage_potential?.band === "High" ||
+                summary?.marriage_potential?.band === "Positive"
+                  ? "bg-green-600"
+                  : summary?.marriage_potential?.band === "Low" ||
+                    summary?.marriage_potential?.band === "Negative"
+                  ? "bg-red-600"
+                  : "bg-gray-500"
+              }`}
+            >
+              {summary?.marriage_potential?.band || "Medium"}
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* PREMIUM REPORT CTA */}
-      <div className="border rounded p-5 bg-purple-50">
-        <h2 className="text-lg font-semibold">
-          Relationship Future Report
+      {/* PREMIUM REPORT — HERO */}
+      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-6 text-white shadow-xl space-y-4">
+        <h2 className="text-2xl font-bold">
+          🔮 Relationship Future Report
         </h2>
-        <p className="text-sm text-gray-700 mt-1">
-          Complete Love → Marriage analysis (PDF on Email)
+
+        <p className="text-purple-100">
+          Complete Love → Marriage Vedic analysis with clear verdict,
+          risks, remedies & future direction.
         </p>
 
-        <p className="mt-3">
-          <span className="line-through text-gray-500 mr-2">₹399</span>
-          <span className="text-xl font-bold text-purple-700">
-            ₹199 (Early Bird)
+        <ul className="text-sm text-purple-100 space-y-1">
+          <li>✔ Dosha impact & cancellations</li>
+          <li>✔ Love vs Marriage direction</li>
+          <li>✔ Practical remedies & guidance</li>
+        </ul>
+
+        <div className="flex items-center gap-3">
+          <span className="line-through text-purple-200">₹399</span>
+          <span className="text-3xl font-extrabold">₹199</span>
+          <span className="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">
+            Early Bird
           </span>
-        </p>
+        </div>
 
         <button
-          onClick={() => router.push("/checkout/relationship_future_report")}
-          className="mt-4 bg-purple-600 text-white px-6 py-2 rounded"
+          onClick={() =>
+            router.push("/checkout/relationship_future_report")
+          }
+          className="w-full bg-white text-purple-700 font-semibold py-3 rounded-xl shadow hover:bg-gray-100 transition"
         >
           Unlock Full Report
         </button>
+
+        <p className="text-xs text-purple-200 text-center">
+          Secure payment • PDF delivered on email
+        </p>
       </div>
     </div>
   );
