@@ -5,6 +5,7 @@ import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
 
 export const revalidate = 3600;
 
+/* ---------------- SEO ---------------- */
 export const metadata: Metadata = {
   title: "Sun Transit in Sagittarius – Dates, Effects & Remedies | Jyotishasha",
   description:
@@ -14,6 +15,14 @@ export const metadata: Metadata = {
   },
 };
 
+/* ---------------- Helpers ---------------- */
+function formatDate(dateStr?: string) {
+  if (!dateStr) return "-";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
+}
+
+/* ---------------- Data Fetch ---------------- */
 async function fetchSunTransit() {
   const res = await fetch(
     "https://jyotishasha-backend.onrender.com/api/transit/current",
@@ -23,6 +32,7 @@ async function fetchSunTransit() {
   return res.json();
 }
 
+/* ---------------- Page ---------------- */
 export default async function SunTransitPage() {
   const data = await fetchSunTransit();
 
@@ -31,9 +41,12 @@ export default async function SunTransitPage() {
   const currentTransit = sunFuture[0];
   const nextTransit = sunFuture[1];
 
+  /* 🔮 PLACEHOLDERS (backend-ready) */
+  const nakshatra = "—"; // future: data.positions.Sun.nakshatra
+  const nakshatraPada = "—"; // future: data.positions.Sun.pada
+
   return (
     <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
-      {/* WHITE CONTENT WRAPPER */}
       <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
 
         {/* H1 */}
@@ -41,17 +54,22 @@ export default async function SunTransitPage() {
           Sun Transit in {sunPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
         </h1>
 
-        {/* INTRO */}
+        {/* INTRO (ENRICHED, NON-REPETITIVE) */}
         <p className="text-gray-800 mb-10 leading-relaxed">
           The Sun is currently transiting through <strong>{sunPos?.rashi}</strong> rashi,
-          marking an important astrological shift. Surya governs authority, vitality,
-          confidence and life direction. Its movement influences each ascendant differently
-          based on house placement and planetary dignity.
+          marking an important astrological phase. At present, Surya is positioned at{" "}
+          <strong>{sunPos?.degree}°</strong>, moving under{" "}
+          <strong>{nakshatra}</strong> nakshatra{" "}
+          <strong>{nakshatraPada}</strong> pada.  
+          <br /><br />
+          In Vedic astrology, the Sun represents authority, vitality, confidence and life
+          direction. As it progresses through this sign, its influence unfolds differently
+          for each ascendant based on house placement, dignity and individual chart factors.
         </p>
 
-        {/* SNAPSHOT */}
+        {/* SNAPSHOT CARD */}
         <section className="bg-blue-900 rounded-xl p-6 mb-12 text-white">
-          <h2 className="text-xl font-semibold mb-4 text-white">
+          <h2 className="text-xl font-semibold mb-4">
             Current Sun Transit Snapshot
           </h2>
 
@@ -62,11 +80,13 @@ export default async function SunTransitPage() {
             <div><strong>Motion:</strong> {sunPos?.motion}</div>
             <div>
               <strong>Transit Period:</strong>{" "}
-              {currentTransit?.entering_date} – {currentTransit?.exit_date}
+              {formatDate(currentTransit?.entering_date)} –{" "}
+              {formatDate(currentTransit?.exit_date)}
             </div>
             <div>
               <strong>Next Transit:</strong>{" "}
-              {nextTransit?.to_rashi} on {nextTransit?.entering_date}
+              {nextTransit?.to_rashi} on{" "}
+              {formatDate(nextTransit?.entering_date)}
             </div>
           </div>
         </section>
@@ -77,9 +97,9 @@ export default async function SunTransitPage() {
             Why This Sun Transit Matters
           </h2>
           <p className="text-gray-800 leading-relaxed">
-            This transit activates themes of leadership, responsibility, health and
-            self-expression. Strong Sun placements may bring recognition and clarity,
-            while weaker dignity may require humility and disciplined action.
+            This Sun transit activates themes of leadership, responsibility, health and
+            self-expression. Strong Sun placements may support recognition and confidence,
+            while weaker dignity may demand humility, patience and disciplined action.
           </p>
         </section>
 
@@ -102,13 +122,13 @@ export default async function SunTransitPage() {
           </ul>
         </section>
 
-        {/* FINAL CTA */}
+        {/* CTA */}
         <div className="mt-16 text-left">
           <Link
             href="/app-download"
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            Get Your Personalized Sun Transit Report @ ₹51 →
+            Get the app for a personalized experience →
           </Link>
         </div>
 
