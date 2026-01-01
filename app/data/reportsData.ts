@@ -225,5 +225,15 @@ export const reportsData: Report[] = [
     description: "Get clarity on legal disputes, conflicts, and chances of settlement from your chart.",
     fullDescription: "The Legal Disputes Report analyzes the 6th, 7th, and 12th houses along with planetary influences of Saturn, Mars, and Rahu to reveal possibilities of court cases and disputes. It explains timing and challenges related to legal issues through dasha and transit insights. The report also provides guidance for managing conflicts wisely, finding settlement opportunities, and minimizing stress while dealing with legal matters."
   },
+  {
+    title: "Relationship Future Report",
+    slug: "relationship_future_report",
+    price: 199,
+    image: "/reports/relationship-future-report.webp",
+    category: "Love",
+    description: "Get a complete Love → Marriage future analysis using authentic Vedic astrology.",
+    fullDescription:
+      "The Relationship Future Report provides a deep Vedic analysis of your love life and marriage prospects by comparing both partners’ birth charts. It covers Ashtakoot compatibility, Mangal Dosh impact, emotional bonding, long-term stability, and Love vs Arranged Marriage indicators. The report also highlights potential risks, favorable periods, and practical remedies, helping you understand the true future direction of your relationship with clarity and confidence."
+  },
 
 ];
