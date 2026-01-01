@@ -228,7 +228,7 @@ export const reportsData: Report[] = [
   {
     title: "Relationship Future Report",
     slug: "relationship_future_report",
-    price: 199,
+    price: 1,
     image: "/reports/relationship-future-report.webp",
     category: "Love",
     description: "Get a complete Love → Marriage future analysis using authentic Vedic astrology.",
