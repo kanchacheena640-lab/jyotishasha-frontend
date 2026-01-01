@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function BlogsHubPage() {
   const cardClass =
-    "bg-white rounded-[14px] p-[18px] text-center shadow-[0_6px_16px_rgba(0,0,0,0.06)] transition hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(0,0,0,0.12)]";
+    "bg-white rounded-[14px] p-[18px] text-center shadow-[0_6px_16px_rgba(0,0,0,0.06)] transition hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(0,0,0,0.12)] text-gray-900";
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
@@ -70,9 +70,11 @@ export default async function BlogsHubPage() {
             <Link
               key={topic.slug}
               href={topic.canonical.replace("https://www.jyotishasha.com", "")}
-              className="bg-white rounded-xl p-5 shadow hover:shadow-lg transition"
+              className="bg-white rounded-xl p-5 shadow hover:shadow-lg transition text-gray-900"
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">
+              <div className="text-3xl mb-2">🪔</div>
+
+              <h3 className="text-lg font-semibold mb-1">
                 {topic.title}
               </h3>
 
@@ -100,68 +102,61 @@ export default async function BlogsHubPage() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
           <Link href="/sun-transit" className={cardClass}>
-            ☀️ Sun Transit<br />
-            <span className="text-sm text-gray-600">
-              Authority • Confidence • Career
-            </span>
+            <div className="text-3xl mb-2">☀️</div>
+            <h3 className="text-lg font-semibold mb-1">Sun Transit</h3>
+            <p className="text-sm text-gray-600">Authority • Confidence • Career</p>
           </Link>
 
           <Link href="/moon-transit" className={cardClass}>
-            🌙 Moon Transit<br />
-            <span className="text-sm text-gray-600">
-              Mind • Emotions • Daily Mood
-            </span>
+            <div className="text-3xl mb-2">🌙</div>
+            <h3 className="text-lg font-semibold mb-1">Moon Transit</h3>
+            <p className="text-sm text-gray-600">Mind • Emotions • Daily Mood</p>
           </Link>
 
           <Link href="/mars-transit" className={cardClass}>
-            🔴 Mars Transit<br />
-            <span className="text-sm text-gray-600">
-              Energy • Action • Courage
-            </span>
+            <div className="text-3xl mb-2">🔴</div>
+            <h3 className="text-lg font-semibold mb-1">Mars Transit</h3>
+            <p className="text-sm text-gray-600">Energy • Action • Courage</p>
           </Link>
 
           <Link href="/mercury-transit" className={cardClass}>
-            🟢 Mercury Transit<br />
-            <span className="text-sm text-gray-600">
-              Intellect • Speech • Business
-            </span>
+            <div className="text-3xl mb-2">🟢</div>
+            <h3 className="text-lg font-semibold mb-1">Mercury Transit</h3>
+            <p className="text-sm text-gray-600">Intellect • Speech • Business</p>
           </Link>
 
           <Link href="/jupiter-transit" className={cardClass}>
-            🟡 Jupiter Transit<br />
-            <span className="text-sm text-gray-600">
-              Growth • Wisdom • Expansion
-            </span>
+            <div className="text-3xl mb-2">🟡</div>
+            <h3 className="text-lg font-semibold mb-1">Jupiter Transit</h3>
+            <p className="text-sm text-gray-600">Growth • Wisdom • Expansion</p>
           </Link>
 
           <Link href="/venus-transit" className={cardClass}>
-            💗 Venus Transit<br />
-            <span className="text-sm text-gray-600">
-              Love • Comfort • Relationships
-            </span>
+            <div className="text-3xl mb-2">💗</div>
+            <h3 className="text-lg font-semibold mb-1">Venus Transit</h3>
+            <p className="text-sm text-gray-600">Love • Comfort • Relationships</p>
           </Link>
 
           <Link href="/saturn-transit" className={cardClass}>
-            🪐 Saturn Transit<br />
-            <span className="text-sm text-gray-600">
-              Karma • Discipline • Tests
-            </span>
+            <div className="text-3xl mb-2">🪐</div>
+            <h3 className="text-lg font-semibold mb-1">Saturn Transit</h3>
+            <p className="text-sm text-gray-600">Karma • Discipline • Tests</p>
           </Link>
 
           <Link href="/rahu-transit" className={cardClass}>
-            ☊ Rahu Transit<br />
-            <span className="text-sm text-gray-600">
-              Desire • Sudden Change • Illusion
-            </span>
+            <div className="text-3xl mb-2">☊</div>
+            <h3 className="text-lg font-semibold mb-1">Rahu Transit</h3>
+            <p className="text-sm text-gray-600">Desire • Sudden Change • Illusion</p>
           </Link>
 
           <Link href="/ketu-transit" className={cardClass}>
-            ☋ Ketu Transit<br />
-            <span className="text-sm text-gray-600">
-              Detachment • Moksha • Insight
-            </span>
+            <div className="text-3xl mb-2">☋</div>
+            <h3 className="text-lg font-semibold mb-1">Ketu Transit</h3>
+            <p className="text-sm text-gray-600">Detachment • Moksha • Insight</p>
           </Link>
+
         </div>
       </section>
 
