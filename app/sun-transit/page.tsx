@@ -54,7 +54,7 @@ export default async function SunTransitPage() {
         <p className="text-gray-800 mb-10 leading-relaxed">
           The Sun is currently transiting through <strong>{sunPos?.rashi}</strong> rashi,
           marking an important astrological phase. At present, Surya is positioned at{" "}
-          <strong>{sunPos?.degree}°</strong>, influencing themes related to authority,
+          <strong>{sunPos?.degree}°</strong> in <strong>{sunPos?.rashi}</strong> rashi, influencing themes related to authority,
           confidence, vitality and life direction.
           <br /><br />
           In Vedic astrology, the Sun governs leadership, responsibility and self-expression.
