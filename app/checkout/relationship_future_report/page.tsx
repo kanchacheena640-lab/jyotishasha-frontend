@@ -46,7 +46,7 @@ export default function RelationshipFutureReportCheckout() {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         order_id: order.order_id,
-        amount: order.amount * 100,
+        amount: order.amount,
         currency: order.currency,
         name: "Jyotishasha",
         description: "Relationship Future Report",
