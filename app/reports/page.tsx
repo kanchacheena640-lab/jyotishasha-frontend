@@ -23,6 +23,13 @@ export default function ReportsPage() {
       : reportsData.filter((r) => r.category === selectedCategory);
 
   const handleBuyNow = (slug: string) => {
+    // Dual / partner-based reports
+    if (slug === "relationship_future_report") {
+      router.push(`/love/report/${slug}`);
+      return;
+    }
+
+    // Normal single-user reports
     router.push(`/reports/${slug}`);
   };
 
