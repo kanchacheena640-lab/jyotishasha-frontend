@@ -78,8 +78,8 @@ export default function Header() {
     </Link>
     <Link href="/reports">Reports</Link>
     <Link href="/blogs">Blogs</Link>
-    <Link href="/gemstone-consult" suppressHydrationWarning>
-      Rashi by Name
+    <Link href="/love" suppressHydrationWarning>
+      Match-Making
     </Link>
     <Link href="/contact">Contact</Link>
   </nav>
@@ -102,8 +102,8 @@ export default function Header() {
       <Link href="/blogs" passHref>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Blogs</span>
       </Link>
-      <Link href="/gemstone-consult" passHref suppressHydrationWarning>
-        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Rashi by Name</span>
+      <Link href="/love" passHref suppressHydrationWarning>
+        <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Match-Making</span>
       </Link>
       <Link href="/contact" passHref>
         <span onClick={() => setMenuOpen(false)} className="cursor-pointer">Contact</span>
