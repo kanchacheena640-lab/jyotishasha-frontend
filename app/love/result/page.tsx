@@ -67,7 +67,7 @@ export default function LoveResultSummaryPage() {
               <p className="text-2xl font-bold text-indigo-700">
                 {score}/{maxScore}
               </p>
-              <p className="text-xs text-gray-500">Tap to view</p>
+              <p className="text-xs text-gray-500">View detailed Vedic analysis</p>
             </div>
           </div>
         </div>
@@ -82,9 +82,9 @@ export default function LoveResultSummaryPage() {
               <h2 className="text-lg font-semibold text-rose-800">
                 🔥 Truth or Dare
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                Relationship risk signal
-              </p>
+              <p className="text-sm text-rose-700 font-medium mt-1">
+                Real relationship signal 'click'→
+            </p>
             </div>
             <span
               className={`px-4 py-2 rounded-full text-white font-semibold ${
@@ -109,7 +109,7 @@ export default function LoveResultSummaryPage() {
                 💍 Marriage Potential
               </h2>
               <p className="text-sm text-gray-600 mt-1">
-                Long-term marriage outlook
+                Marriage outlook in detail →
               </p>
             </div>
             <span
