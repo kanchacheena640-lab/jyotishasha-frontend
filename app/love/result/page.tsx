@@ -89,7 +89,7 @@ export default function LoveResultSummaryPage() {
               <span>Mangal Dosh Analysis</span>
             </h2>
             <p className="text-sm text-orange-700">
-              Mars dosha impact & cancellation →
+              Marriage dosha & cancellation check →
             </p>
           </div>
 
@@ -102,12 +102,12 @@ export default function LoveResultSummaryPage() {
                 : "bg-gray-500"
             }`}
           >
-            {summary?.data?.mangal_dosh?.signal || "VIEW"}
+            {summary?.data?.mangal_dosh?.signal || "CHECK"}
           </span>
         </div>
       </div>
 
-      
+
         {/* TRUTH OR DARE */}
         <div
           onClick={() => go("/love/truth-or-dare")}

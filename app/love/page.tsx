@@ -36,7 +36,7 @@ export default function LoveFormPage() {
     };
 
     const res = await fetch(
-      `${BACKEND}/api/relationship/premium/analyze`,
+      `${BACKEND}/api/love/report`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
