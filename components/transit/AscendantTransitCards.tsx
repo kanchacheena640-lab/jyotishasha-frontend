@@ -53,7 +53,7 @@ export default function AscendantTransitCards({
                 href="/app-download"
                 className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
               >
-                Get App · Know Your Lagna · Personalized Report @ ₹51 →
+                Get App  →
               </a>
             </div>
           );
