@@ -53,7 +53,7 @@ export default function AscendantTransitCards({
                 href="/app-download"
                 className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
               >
-                Get App  →
+                Get the app for personalized guidance  →
               </a>
             </div>
           );
