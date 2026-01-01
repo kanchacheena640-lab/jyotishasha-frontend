@@ -22,40 +22,50 @@ export default function MangalDoshPage() {
 
   if (!data) {
     return (
-      <div className="p-6 text-center">
+      <div className="p-8 text-center text-gray-700">
         {lang === "hi" ? "मंगल दोष लोड हो रहा है…" : "Loading Mangal Dosh…"}
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6 bg-white">
-      <h1 className="text-3xl font-bold text-gray-900">
-        🔥 {lang === "hi" ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
-      </h1>
-
-      <p className="text-gray-700">{data.summary}</p>
-
-      <div
-        className={`rounded-xl p-4 text-white font-semibold ${
-          data.signal === "GREEN"
-            ? "bg-green-600"
-            : data.signal === "RED"
-            ? "bg-red-600"
-            : "bg-gray-600"
-        }`}
-      >
-        {lang === "hi" ? "कुल संकेत" : "Overall Signal"}: {data.signal}
+    <div className="max-w-3xl mx-auto p-6 space-y-8 bg-gray-50 min-h-screen">
+      {/* HEADER */}
+      <div className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-600 p-6 text-white shadow-lg">
+        <h1 className="text-3xl font-bold">
+          🔥 {lang === "hi" ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
+        </h1>
+        <p className="mt-2 text-orange-100">
+          {data.summary}
+        </p>
       </div>
 
-      {/* BOY */}
+      {/* SIGNAL CARD */}
+      <div
+        className={`rounded-2xl p-5 text-center font-semibold shadow ${
+          data.signal === "GREEN"
+            ? "bg-green-100 text-green-800"
+            : data.signal === "RED"
+            ? "bg-red-100 text-red-800"
+            : "bg-gray-200 text-gray-800"
+        }`}
+      >
+        {lang === "hi" ? "कुल संकेत" : "Overall Signal"}:{" "}
+        <span className="font-bold">{data.signal}</span>
+      </div>
+
+      {/* BOY CARD */}
       {data.boy && (
-        <div className="rounded-xl border p-4 space-y-2">
-          <h2 className="font-semibold text-lg">
-            {lang === "hi" ? "लड़के की कुंडली" : "Boy’s Chart"}
+        <div className="rounded-2xl bg-white p-6 shadow space-y-3">
+          <h2 className="text-xl font-semibold text-gray-900">
+            👨 {lang === "hi" ? "लड़के की कुंडली" : "Boy’s Chart"}
           </h2>
-          <p>{data.boy.status?.is_mangalic}</p>
-          <ul className="list-disc pl-5 text-sm">
+
+          <p className="text-gray-700 font-medium">
+            {data.boy.status?.is_mangalic}
+          </p>
+
+          <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
             {data.boy.summary_block?.points?.map(
               (p: string, i: number) => (
                 <li key={i}>{p}</li>
@@ -65,14 +75,18 @@ export default function MangalDoshPage() {
         </div>
       )}
 
-      {/* GIRL */}
+      {/* GIRL CARD */}
       {data.girl && (
-        <div className="rounded-xl border p-4 space-y-2">
-          <h2 className="font-semibold text-lg">
-            {lang === "hi" ? "लड़की की कुंडली" : "Girl’s Chart"}
+        <div className="rounded-2xl bg-white p-6 shadow space-y-3">
+          <h2 className="text-xl font-semibold text-gray-900">
+            👩 {lang === "hi" ? "लड़की की कुंडली" : "Girl’s Chart"}
           </h2>
-          <p>{data.girl.status?.is_mangalic}</p>
-          <ul className="list-disc pl-5 text-sm">
+
+          <p className="text-gray-700 font-medium">
+            {data.girl.status?.is_mangalic}
+          </p>
+
+          <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
             {data.girl.summary_block?.points?.map(
               (p: string, i: number) => (
                 <li key={i}>{p}</li>
