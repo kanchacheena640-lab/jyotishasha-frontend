@@ -3,8 +3,8 @@
 import { ASCENDANTS } from "./ascendants";
 
 const RASHI_INDEX: Record<string, number> = {
-  Aries:1, Taurus:2, Gemini:3, Cancer:4, Leo:5, Virgo:6,
-  Libra:7, Scorpio:8, Sagittarius:9, Capricorn:10, Aquarius:11, Pisces:12
+  Aries: 1, Taurus: 2, Gemini: 3, Cancer: 4, Leo: 5, Virgo: 6,
+  Libra: 7, Scorpio: 8, Sagittarius: 9, Capricorn: 10, Aquarius: 11, Pisces: 12
 };
 
 function getHouse(asc: string, rashi: string) {
@@ -19,36 +19,41 @@ export default function AscendantTransitCards({
   planetRashi: string;
 }) {
   return (
-    <section className="mt-14">
-      <h2 className="text-2xl font-semibold mb-6 text-center">
+    <section className="mt-16">
+      <h2 className="text-2xl font-semibold mb-8 text-center text-black">
         Ascendant-wise Effects of {planet} Transit
       </h2>
 
       <div className="grid sm:grid-cols-2 gap-6">
-        {ASCENDANTS.map((asc, i) => {
+        {ASCENDANTS.map((asc) => {
           const house = getHouse(asc, planetRashi);
 
           return (
-            <div key={asc} className="bg-white rounded-xl p-5 shadow">
-              <h3 className="font-semibold text-lg mb-1">
+            <div
+              key={asc}
+              className="bg-blue-900 rounded-xl p-5 shadow-lg text-white"
+            >
+              <h3 className="font-semibold text-lg mb-2 text-white">
                 {asc} Ascendant
               </h3>
 
-              <p className="text-sm text-gray-700 mb-3">
+              <p className="text-sm text-blue-100 mb-4 leading-relaxed">
                 For {asc} ascendant, {planet} transits the {house} house,
-                activating matters related to this house theme.
+                activating themes connected with this area of life. The results
+                depend on dignity, strength and personal effort.
               </p>
 
-              {/* 🔮 Future backend hook */}
-              {/* effect_json[planet][asc][house] */}
-
+              {/* Bottom row */}
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-500">House {house}</span>
+                <span className="text-blue-200">
+                  Activated House: {house}
+                </span>
+
                 <a
                   href="/app-download"
-                  className="text-purple-600 font-medium"
+                  className="text-white font-semibold underline hover:text-yellow-300 transition"
                 >
-                  Get personal report →
+                  Get App · Know Your Lagna · Report @ ₹51 →
                 </a>
               </div>
             </div>

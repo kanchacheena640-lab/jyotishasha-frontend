@@ -50,12 +50,12 @@ export default async function SunTransitPage() {
         </p>
 
         {/* SNAPSHOT */}
-        <section className="border border-gray-200 rounded-xl p-6 mb-12">
-          <h2 className="text-xl font-semibold mb-4">
+        <section className="bg-blue-900 rounded-xl p-6 mb-12 text-white">
+          <h2 className="text-xl font-semibold mb-4 text-white">
             Current Sun Transit Snapshot
           </h2>
 
-          <div className="grid sm:grid-cols-2 gap-3 text-gray-800">
+          <div className="grid sm:grid-cols-2 gap-3 text-sm">
             <div><strong>Planet:</strong> Sun (Surya)</div>
             <div><strong>Current Rashi:</strong> {sunPos?.rashi}</div>
             <div><strong>Degree:</strong> {sunPos?.degree}°</div>
