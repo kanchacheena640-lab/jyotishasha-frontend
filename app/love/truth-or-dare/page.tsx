@@ -20,8 +20,11 @@ export default function TruthOrDareDetailPage() {
 
   // 🔒 IMPORTANT FIX: no loading screen
   if (!data) {
-    router.replace("/love");
-    return null;
+    return (
+      <div className="p-8 text-center text-gray-600">
+        Loading Truth or Dare…
+      </div>
+    );
   }
 
   const isTruth = data.verdict === "TRUTH";

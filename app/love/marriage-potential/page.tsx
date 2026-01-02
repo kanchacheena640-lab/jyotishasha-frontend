@@ -20,8 +20,11 @@ export default function MarriagePotentialDetailPage() {
 
   // 🔒 no loader, no blank page
   if (!data) {
-    router.replace("/love");
-    return null;
+    return (
+      <div className="p-6 text-center text-gray-600">
+        Loading marriage potential…
+      </div>
+    );
   }
 
   const user = data.user_result;

@@ -20,8 +20,11 @@ export default function MatchmakingCompatibilityPage() {
 
   // 🔒 IMPORTANT FIX: no loading screen, no backend call
   if (!data) {
-    router.replace("/love");
-    return null;
+    return (
+      <div className="p-6 text-center text-gray-600">
+        Loading compatibility…
+      </div>
+    );
   }
 
   const verdict = data.verdict;

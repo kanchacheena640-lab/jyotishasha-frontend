@@ -23,8 +23,11 @@ export default function LoveResultSummaryPage() {
 
   // 🔒 IMPORTANT FIX: no loading screen, direct redirect handled above
   if (!summary) {
-    router.replace("/love");
-    return null;
+    return (
+      <div className="p-6 text-center text-gray-600">
+        Loading result…
+      </div>
+    );
   }
 
   const ashtakoot = summary?.data?.ashtakoot;

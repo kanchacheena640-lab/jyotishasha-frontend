@@ -26,6 +26,7 @@ export default function LoveFormPage() {
   };
 
   const submit = async () => {
+    if (loading) return;
     setLoading(true);
 
     const payload = {
@@ -36,7 +37,7 @@ export default function LoveFormPage() {
     };
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 sec timeout
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
 
     try {
       const res = await fetch(`${BACKEND}/api/love/report`, {
@@ -46,18 +47,20 @@ export default function LoveFormPage() {
         signal: controller.signal,
       });
 
-      if (!res.ok) {
-        throw new Error("Server error");
-      }
+      if (!res.ok) throw new Error("API error");
 
       const data = await res.json();
+
+      // 🔒 HARD STORAGE (no race condition)
       sessionStorage.setItem("love_payload", JSON.stringify(payload));
       sessionStorage.setItem("love_summary", JSON.stringify(data));
+
+      // 🔒 allow browser to flush storage
+      await new Promise((r) => setTimeout(r, 80));
+
       router.push("/love/result");
-    } catch (err) {
-      alert(
-        "Calculation is taking longer than usual. Please try again in a moment."
-      );
+    } catch (e) {
+      alert("Calculation is taking longer than usual. Please try again.");
       setLoading(false);
     } finally {
       clearTimeout(timeoutId);
@@ -71,24 +74,17 @@ export default function LoveFormPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
-      {/* HERO HEADER */}
+      {/* HERO */}
       <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-center text-white shadow-xl">
-        <h1 className="text-3xl font-extrabold flex items-center justify-center gap-2">
-          <span>💍</span>
-          <span>Vedic Matchmaking Compatibility</span>
-        </h1>
-        <p className="mt-3 text-purple-100 leading-relaxed">
-          Enter complete birth details to check love & marriage compatibility
-          using authentic Vedic astrology.
+        <h1 className="text-3xl font-extrabold">💍 Vedic Matchmaking</h1>
+        <p className="mt-3 text-purple-100">
+          Enter birth details to check love & marriage compatibility
         </p>
       </div>
 
-      {/* BOY CARD */}
+      {/* BOY */}
       <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
-          <span>👨</span>
-          <span>Boy Details</span>
-        </h2>
+        <h2 className="text-lg font-semibold text-blue-900">👨 Boy Details</h2>
 
         <div>
           <label className={labelClass}>Full Name</label>
@@ -135,12 +131,9 @@ export default function LoveFormPage() {
         </div>
       </div>
 
-      {/* GIRL CARD */}
+      {/* GIRL */}
       <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-pink-900 flex items-center gap-2">
-          <span>👩</span>
-          <span>Girl Details</span>
-        </h2>
+        <h2 className="text-lg font-semibold text-pink-900">👩 Girl Details</h2>
 
         <div>
           <label className={labelClass}>Full Name</label>
@@ -191,15 +184,14 @@ export default function LoveFormPage() {
       <button
         onClick={submit}
         disabled={loading}
-        className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-95 disabled:opacity-60"
+        className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white disabled:opacity-60"
       >
         {loading ? "Analyzing Matchmaking…" : "Check Matchmaking"}
       </button>
 
-      {/* LOADING HELPER */}
       {loading && (
-        <p className="text-xs text-gray-500 text-center mt-2">
-          Calculating kundali, Manglik dosh & compatibility… please wait
+        <p className="text-xs text-gray-500 text-center">
+          Calculating kundali, dosh & compatibility…
         </p>
       )}
     </div>

@@ -22,8 +22,11 @@ export default function MangalDoshPage() {
 
   // 🔒 IMPORTANT FIX: no loading screen
   if (!data) {
-    router.replace("/love");
-    return null;
+    return (
+      <div className="p-8 text-center text-gray-600">
+        {lang === "hi" ? "मंगल दोष लोड हो रहा है…" : "Loading Mangal Dosh…"}
+      </div>
+    );
   }
 
   return (
