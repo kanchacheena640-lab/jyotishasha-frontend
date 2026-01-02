@@ -144,7 +144,7 @@ export default function MarriagePotentialDetailPage() {
 
         <button
           onClick={() =>
-            router.push("/report/relationship_future_report")
+            router.push("love/report/relationship_future_report")
           }
           className="w-full bg-white text-purple-700 font-semibold py-3 rounded-xl hover:bg-gray-100 transition"
         >
