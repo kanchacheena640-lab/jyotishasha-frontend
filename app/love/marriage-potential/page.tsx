@@ -86,14 +86,25 @@ export default function MarriagePotentialDetailPage() {
         ))}
       </div>
 
-      {/* PREMIUM CTA */}
-      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-7 text-white">
-        <h2 className="text-2xl font-bold">
-          🔮 Relationship Future Report
+      {/* PREMIUM REPORT HERO */}
+      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-7 text-white shadow-xl space-y-4">
+        <h2 className="text-2xl font-bold flex items-center gap-2">
+          <span>🔮</span>
+          <span>Relationship Future Report</span>
         </h2>
-        <p className="text-purple-100 mt-2">
-          Full Love → Marriage report with remedies & clear direction.
+
+        <p className="text-purple-100 leading-relaxed">
+          Complete Love → Marriage Vedic analysis with clear verdict,
+          risks, remedies & future direction.
         </p>
+
+        <div className="flex items-center gap-3">
+          <span className="line-through text-purple-200">₹399</span>
+          <span className="text-3xl font-extrabold">₹199</span>
+          <span className="bg-yellow-400 text-black text-xs px-3 py-1 rounded-full">
+            Early Bird
+          </span>
+        </div>
 
         <button
           onClick={() =>
