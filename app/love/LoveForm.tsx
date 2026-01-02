@@ -30,42 +30,49 @@ export default function LoveFormPage() {
     setLoading(true);
 
     const payload = {
-      language: form.language,
-      boy_is_user: true,
-      user: { ...form.boy },
-      partner: { ...form.girl },
+        language: form.language,
+        boy_is_user: true,
+        user: form.boy,
+        partner: form.girl,
     };
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
-
     try {
-      const res = await fetch(`${BACKEND}/api/love/report`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      });
+        const [truthRes, marriageRes] = await Promise.all([
+        fetch(`${BACKEND}/api/love/truth-or-dare`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        }),
+        fetch(`${BACKEND}/api/love/love-marriage-probability`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        }),
+        ]);
 
-      if (!res.ok) throw new Error("API error");
+        if (!truthRes.ok || !marriageRes.ok) {
+        throw new Error("API error");
+        }
 
-      const data = await res.json();
+        const truthJson = await truthRes.json();
+        const marriageJson = await marriageRes.json();
 
-      // 🔒 HARD STORAGE (no race condition)
-      sessionStorage.setItem("love_payload", JSON.stringify(payload));
-      sessionStorage.setItem("love_summary", JSON.stringify(data));
+        sessionStorage.setItem("love_payload", JSON.stringify(payload));
+        sessionStorage.setItem(
+        "love_tools",
+        JSON.stringify({
+            truth_or_dare: truthJson.data,
+            marriage_potential: marriageJson.data,
+        })
+        );
 
-      // 🔒 allow browser to flush storage
-      await new Promise((r) => setTimeout(r, 80));
-
-      router.push("/love/result");
+        await new Promise((r) => setTimeout(r, 50));
+        router.push("/love/result");
     } catch (e) {
-      alert("Calculation is taking longer than usual. Please try again.");
-      setLoading(false);
-    } finally {
-      clearTimeout(timeoutId);
+        alert("Calculation failed. Please try again.");
+        setLoading(false);
     }
-  };
+    };
 
   const inputClass =
     "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500";

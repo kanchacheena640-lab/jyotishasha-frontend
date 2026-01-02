@@ -6,23 +6,27 @@ import { useRouter } from "next/navigation";
 export default function LoveResultSummaryPage() {
   const router = useRouter();
   const [summary, setSummary] = useState<any>(null);
+  const [tools, setTools] = useState<any>(null);
   const [payload, setPayload] = useState<any>(null);
 
   useEffect(() => {
     const s = sessionStorage.getItem("love_summary");
+    const t = sessionStorage.getItem("love_tools");
     const p = sessionStorage.getItem("love_payload");
 
-    if (!s || !p) {
+    if (!s || !t || !p) {
       router.replace("/love");
       return;
     }
 
     setSummary(JSON.parse(s));
+    setTools(JSON.parse(t));
     setPayload(JSON.parse(p));
+
   }, [router]);
 
   // 🔒 IMPORTANT FIX: no loading screen, direct redirect handled above
-  if (!summary) {
+  if (!summary || !tools) {
     return (
       <div className="p-6 text-center text-gray-600">
         Loading result…
@@ -122,12 +126,12 @@ export default function LoveResultSummaryPage() {
             </div>
             <span
               className={`px-4 py-2 rounded-full text-white font-semibold ${
-                summary?.truth_or_dare?.verdict === "TRUTH"
+                tools?.truth_or_dare?.verdict === "TRUTH"
                   ? "bg-green-600"
                   : "bg-red-600"
               }`}
             >
-              {summary?.truth_or_dare?.verdict || "DARE"}
+              {tools?.truth_or_dare?.verdict || "DARE"}
             </span>
           </div>
         </div>
@@ -149,16 +153,16 @@ export default function LoveResultSummaryPage() {
             </div>
             <span
               className={`px-4 py-2 rounded-full text-white font-semibold ${
-                summary?.marriage_potential?.band === "High" ||
-                summary?.marriage_potential?.band === "Positive"
+                tools?.marriage_potential?.user_result?.band === "High" ||
+                tools?.marriage_potential?.user_result?.band === "Positive"
                   ? "bg-green-600"
-                  : summary?.marriage_potential?.band === "Low" ||
-                    summary?.marriage_potential?.band === "Negative"
+                  : tools?.marriage_potential?.user_result?.band === "Low" ||
+                    tools?.marriage_potential?.user_result?.band === "Negative"
                   ? "bg-red-600"
                   : "bg-gray-500"
               }`}
             >
-              {summary?.marriage_potential?.band || "Medium"}
+              {tools?.marriage_potential?.user_result?.band || "Medium"}
             </span>
           </div>
         </div>
