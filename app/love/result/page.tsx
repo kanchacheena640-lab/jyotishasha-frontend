@@ -14,19 +14,19 @@ export default function LoveResultSummaryPage() {
     const t = sessionStorage.getItem("love_tools");
     const p = sessionStorage.getItem("love_payload");
 
-    if (!s || !t || !p) {
+    if (!s || !p) {
       router.replace("/love");
       return;
     }
 
     setSummary(JSON.parse(s));
-    setTools(JSON.parse(t));
+    setTools(t ? JSON.parse(t) : {});
     setPayload(JSON.parse(p));
 
   }, [router]);
 
   // 🔒 IMPORTANT FIX: no loading screen, direct redirect handled above
-  if (!summary || !tools) {
+  if (!summary) {
     return (
       <div className="p-6 text-center text-gray-600">
         Loading result…
