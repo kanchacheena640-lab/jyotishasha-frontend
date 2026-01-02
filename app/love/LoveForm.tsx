@@ -35,16 +35,33 @@ export default function LoveFormPage() {
       partner: { ...form.girl },
     };
 
-    const res = await fetch(`${BACKEND}/api/love/report`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 sec timeout
 
-    const data = await res.json();
-    sessionStorage.setItem("love_payload", JSON.stringify(payload));
-    sessionStorage.setItem("love_summary", JSON.stringify(data));
-    router.push("/love/result");
+    try {
+      const res = await fetch(`${BACKEND}/api/love/report`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+
+      if (!res.ok) {
+        throw new Error("Server error");
+      }
+
+      const data = await res.json();
+      sessionStorage.setItem("love_payload", JSON.stringify(payload));
+      sessionStorage.setItem("love_summary", JSON.stringify(data));
+      router.push("/love/result");
+    } catch (err) {
+      alert(
+        "Calculation is taking longer than usual. Please try again in a moment."
+      );
+      setLoading(false);
+    } finally {
+      clearTimeout(timeoutId);
+    }
   };
 
   const inputClass =
@@ -178,6 +195,13 @@ export default function LoveFormPage() {
       >
         {loading ? "Analyzing Matchmaking…" : "Check Matchmaking"}
       </button>
+
+      {/* LOADING HELPER */}
+      {loading && (
+        <p className="text-xs text-gray-500 text-center mt-2">
+          Calculating kundali, Manglik dosh & compatibility… please wait
+        </p>
+      )}
     </div>
   );
 }
