@@ -1,160 +1,101 @@
-"use client";
+import LoveFormPage from "./LoveForm";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
+export const metadata = {
+  title: "Vedic Match-Making & Kundali Milan | Marriage Compatibility Check",
+  description:
+    "Check Vedic match-making and kundali milan for marriage compatibility. Analyze Manglik (Mangal Dosh), Ashtakoot guna milan and planetary harmony for love and marriage.",
+};
 
-const BACKEND =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://jyotishasha-backend.onrender.com";
-
-export default function LoveFormPage() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
-  const [form, setForm] = useState({
-    language: "en",
-    boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
-    girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
-  });
-
-  const update = (section: "boy" | "girl", field: string, value: any) => {
-    setForm((prev) => ({
-      ...prev,
-      [section]: { ...prev[section], [field]: value },
-    }));
-  };
-
-  const submit = async () => {
-    setLoading(true);
-
-    const payload = {
-      language: form.language,
-      boy_is_user: true,
-      user: { ...form.boy },
-      partner: { ...form.girl },
-    };
-
-    const res = await fetch(
-      `${BACKEND}/api/love/report`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }
-    );
-
-    const data = await res.json();
-    sessionStorage.setItem("love_payload", JSON.stringify(payload));
-    sessionStorage.setItem("love_summary", JSON.stringify(data));
-    router.push("/love/result");
-  };
-
-  const inputClass =
-    "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
-
+export default function LovePage() {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
-      {/* HERO HEADER */}
-      <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-center text-white shadow-xl">
-        <h1 className="text-3xl font-extrabold flex items-center justify-center gap-2">
-          <span>💍</span>
-          <span>Vedic Matchmaking Compatibility</span>
+    <>
+      {/* SEO INTRO */}
+      <section className="max-w-3xl mx-auto px-6 pt-8 text-gray-800">
+        <h1 className="text-2xl font-semibold mb-2">
+          Vedic Match-Making & Kundali Milan for Marriage & Compatibility Check
         </h1>
-        <p className="mt-3 text-purple-100 leading-relaxed">
-          Enter complete birth details to check love & marriage compatibility
-          using authentic Vedic astrology.
+        <p className="text-sm text-gray-600 leading-relaxed">
+          Vedic match-making and kundali milan is the traditional method of
+          checking marriage compatibility in Vedic astrology. This compatibility
+          check evaluates emotional, physical and long-term relationship harmony
+          using Ashtakoot guna milan, Manglik (Mangal Dosh) analysis and planetary
+          placements from both birth charts.
         </p>
-      </div>
+      </section>
 
-      {/* BOY CARD */}
-      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
-          <span>👨</span>
-          <span>Boy Details</span>
+      {/* CLIENT FORM */}
+      <LoveFormPage />
+
+      <section className="max-w-3xl mx-auto px-6 mt-10 text-gray-700">
+        <h2 className="text-xl font-semibold mb-3">
+          Why Use Vedic Match-Making & Kundali Milan?
+        </h2>
+        <p className="text-sm leading-relaxed">
+          This Vedic match-making tool helps you check marriage and relationship
+          compatibility using authentic kundali milan principles. It analyzes
+          Ashtakoot guna milan, Manglik (Mangal Dosh) and planetary harmony to
+          understand emotional balance, long-term stability and potential challenges
+          before marriage.
+        </p>
+      </section>
+
+      {/* SEO FAQ SECTION */}
+      <section className="max-w-3xl mx-auto px-6 pb-16 mt-12">
+        <h2 className="text-xl font-semibold mb-4">
+          Match-Making, Kundali Milan & Manglik Dosh – FAQs
         </h2>
 
-        <input
-          className={inputClass}
-          placeholder="Boy Name"
-          value={form.boy.name}
-          onChange={(e) => update("boy", "name", e.target.value)}
-        />
+        <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
+          <div>
+            <strong>What is Vedic match-making?</strong>
+            <p>
+              Vedic match-making is the process of comparing two kundalis to
+              assess marriage compatibility. It includes kundali milan,
+              planetary analysis, Ashtakoot guna milan and dosha evaluation to
+              understand long-term marital harmony.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input
-            type="date"
-            className={inputClass}
-            value={form.boy.dob}
-            onChange={(e) => update("boy", "dob", e.target.value)}
-          />
-          <input
-            type="time"
-            className={inputClass}
-            value={form.boy.tob}
-            onChange={(e) => update("boy", "tob", e.target.value)}
-          />
+          <div>
+            <strong>What is Ashtakoot Guna Milan?</strong>
+            <p>
+              Ashtakoot guna milan is an eight-factor compatibility system used
+              in kundali matching. It measures mental, emotional, health and
+              family compatibility, where a higher score indicates better
+              marriage prospects.
+            </p>
+          </div>
+
+          <div>
+            <strong>What is Manglik (Mangal Dosh) in match-making?</strong>
+            <p>
+              Manglik Dosh occurs when Mars is placed in specific houses of the
+              birth chart. In marriage match-making, Manglik analysis is
+              essential to identify potential conflicts, delays or instability
+              in married life.
+            </p>
+          </div>
+
+          <div>
+            <strong>Is match-making required for love marriages?</strong>
+            <p>
+              Yes. Even in love marriages, kundali match-making helps identify
+              strengths, challenges and long-term compatibility, allowing
+              couples to take informed and balanced decisions.
+            </p>
+          </div>
+
+          <div>
+            <strong>Is birth time necessary for accurate compatibility check?</strong>
+            <p>
+              Birth time significantly improves the accuracy of kundali milan,
+              especially for Manglik Dosh and planetary strength analysis.
+              However, basic match-making can still be performed using date and
+              place of birth.
+            </p>
+          </div>
         </div>
-
-        <PlaceAutocompleteInput
-          value={form.boy.pob}
-          onChange={(val) => update("boy", "pob", val)}
-          onPlaceSelected={(place) => {
-            update("boy", "pob", place.name);
-            update("boy", "lat", place.lat);
-            update("boy", "lng", place.lng);
-          }}
-        />
-      </div>
-
-      {/* GIRL CARD */}
-      <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-pink-900 flex items-center gap-2">
-          <span>👩</span>
-          <span>Girl Details</span>
-        </h2>
-
-        <input
-          className={inputClass}
-          placeholder="Girl Name"
-          value={form.girl.name}
-          onChange={(e) => update("girl", "name", e.target.value)}
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input
-            type="date"
-            className={inputClass}
-            value={form.girl.dob}
-            onChange={(e) => update("girl", "dob", e.target.value)}
-          />
-          <input
-            type="time"
-            className={inputClass}
-            value={form.girl.tob}
-            onChange={(e) => update("girl", "tob", e.target.value)}
-          />
-        </div>
-
-        <PlaceAutocompleteInput
-          value={form.girl.pob}
-          onChange={(val) => update("girl", "pob", val)}
-          onPlaceSelected={(place) => {
-            update("girl", "pob", place.name);
-            update("girl", "lat", place.lat);
-            update("girl", "lng", place.lng);
-          }}
-        />
-      </div>
-
-      {/* SUBMIT */}
-      <button
-        onClick={submit}
-        disabled={loading}
-        className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-95"
-      >
-        {loading ? "Analyzing Matchmaking…" : "Check Matchmaking"}
-      </button>
-    </div>
+      </section>
+    </>
   );
 }
