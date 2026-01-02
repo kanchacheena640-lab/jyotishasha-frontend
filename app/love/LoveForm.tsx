@@ -25,9 +25,21 @@ export default function LoveFormPage() {
     }));
   };
 
+
   const submit = async () => {
     if (loading) return;
     setLoading(true);
+
+     if (
+        !form.boy.dob ||
+        !form.girl.dob ||
+        form.boy.lat === 0 ||
+        form.girl.lat === 0
+    ) {
+        alert("Please fill birth date and select place properly");
+        setLoading(false);
+        return;
+    }
 
     const payload = {
         language: form.language,
@@ -37,41 +49,54 @@ export default function LoveFormPage() {
     };
 
     try {
+        // 1️⃣ MAIN REPORT (Ashtakoot + Mangal Dosh)
+        const reportRes = await fetch(`${BACKEND}/api/love/report`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+        if (!reportRes.ok) throw new Error("Report API failed");
+        const reportJson = await reportRes.json();
+
+        // 2️⃣ TOOLS (Truth / Marriage)
         const [truthRes, marriageRes] = await Promise.all([
-        fetch(`${BACKEND}/api/love/truth-or-dare`, {
+            fetch(`${BACKEND}/api/love/truth-or-dare`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-        }),
-        fetch(`${BACKEND}/api/love/love-marriage-probability`, {
+            }),
+            fetch(`${BACKEND}/api/love/love-marriage-probability`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-        }),
+            }),
         ]);
 
         if (!truthRes.ok || !marriageRes.ok) {
-        throw new Error("API error");
+            throw new Error("Tool API failed");
         }
 
         const truthJson = await truthRes.json();
         const marriageJson = await marriageRes.json();
 
+        // 3️⃣ STORAGE (ORDER IMPORTANT)
         sessionStorage.setItem("love_payload", JSON.stringify(payload));
+        sessionStorage.setItem("love_summary", JSON.stringify(reportJson));
         sessionStorage.setItem(
-        "love_tools",
-        JSON.stringify({
+            "love_tools",
+            JSON.stringify({
             truth_or_dare: truthJson.data,
             marriage_potential: marriageJson.data,
-        })
+            })
         );
 
-        await new Promise((r) => setTimeout(r, 50));
+        // 4️⃣ RESULT PAGE
         router.push("/love/result");
-    } catch (e) {
+        } catch (e) {
         alert("Calculation failed. Please try again.");
         setLoading(false);
-    }
+        }
+
     };
 
   const inputClass =
