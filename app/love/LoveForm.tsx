@@ -35,14 +35,11 @@ export default function LoveFormPage() {
       partner: { ...form.girl },
     };
 
-    const res = await fetch(
-      `${BACKEND}/api/love/report`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }
-    );
+    const res = await fetch(`${BACKEND}/api/love/report`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
     const data = await res.json();
     sessionStorage.setItem("love_payload", JSON.stringify(payload));
@@ -51,7 +48,9 @@ export default function LoveFormPage() {
   };
 
   const inputClass =
-    "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
+    "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500";
+
+  const labelClass = "block text-xs font-medium text-gray-600 mb-1";
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
@@ -74,37 +73,49 @@ export default function LoveFormPage() {
           <span>Boy Details</span>
         </h2>
 
-        <input
-          className={inputClass}
-          placeholder="Boy Name"
-          value={form.boy.name}
-          onChange={(e) => update("boy", "name", e.target.value)}
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className={labelClass}>Full Name</label>
           <input
-            type="date"
             className={inputClass}
-            value={form.boy.dob}
-            onChange={(e) => update("boy", "dob", e.target.value)}
-          />
-          <input
-            type="time"
-            className={inputClass}
-            value={form.boy.tob}
-            onChange={(e) => update("boy", "tob", e.target.value)}
+            value={form.boy.name}
+            onChange={(e) => update("boy", "name", e.target.value)}
           />
         </div>
 
-        <PlaceAutocompleteInput
-          value={form.boy.pob}
-          onChange={(val) => update("boy", "pob", val)}
-          onPlaceSelected={(place) => {
-            update("boy", "pob", place.name);
-            update("boy", "lat", place.lat);
-            update("boy", "lng", place.lng);
-          }}
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Date of Birth</label>
+            <input
+              type="date"
+              className={inputClass}
+              value={form.boy.dob}
+              onChange={(e) => update("boy", "dob", e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className={labelClass}>Time of Birth</label>
+            <input
+              type="time"
+              className={inputClass}
+              value={form.boy.tob}
+              onChange={(e) => update("boy", "tob", e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className={labelClass}>Place of Birth</label>
+          <PlaceAutocompleteInput
+            value={form.boy.pob}
+            onChange={(val) => update("boy", "pob", val)}
+            onPlaceSelected={(place) => {
+              update("boy", "pob", place.name);
+              update("boy", "lat", place.lat);
+              update("boy", "lng", place.lng);
+            }}
+          />
+        </div>
       </div>
 
       {/* GIRL CARD */}
@@ -114,44 +125,56 @@ export default function LoveFormPage() {
           <span>Girl Details</span>
         </h2>
 
-        <input
-          className={inputClass}
-          placeholder="Girl Name"
-          value={form.girl.name}
-          onChange={(e) => update("girl", "name", e.target.value)}
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className={labelClass}>Full Name</label>
           <input
-            type="date"
             className={inputClass}
-            value={form.girl.dob}
-            onChange={(e) => update("girl", "dob", e.target.value)}
-          />
-          <input
-            type="time"
-            className={inputClass}
-            value={form.girl.tob}
-            onChange={(e) => update("girl", "tob", e.target.value)}
+            value={form.girl.name}
+            onChange={(e) => update("girl", "name", e.target.value)}
           />
         </div>
 
-        <PlaceAutocompleteInput
-          value={form.girl.pob}
-          onChange={(val) => update("girl", "pob", val)}
-          onPlaceSelected={(place) => {
-            update("girl", "pob", place.name);
-            update("girl", "lat", place.lat);
-            update("girl", "lng", place.lng);
-          }}
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Date of Birth</label>
+            <input
+              type="date"
+              className={inputClass}
+              value={form.girl.dob}
+              onChange={(e) => update("girl", "dob", e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className={labelClass}>Time of Birth</label>
+            <input
+              type="time"
+              className={inputClass}
+              value={form.girl.tob}
+              onChange={(e) => update("girl", "tob", e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className={labelClass}>Place of Birth</label>
+          <PlaceAutocompleteInput
+            value={form.girl.pob}
+            onChange={(val) => update("girl", "pob", val)}
+            onPlaceSelected={(place) => {
+              update("girl", "pob", place.name);
+              update("girl", "lat", place.lat);
+              update("girl", "lng", place.lng);
+            }}
+          />
+        </div>
       </div>
 
       {/* SUBMIT */}
       <button
         onClick={submit}
         disabled={loading}
-        className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-95"
+        className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg hover:opacity-95 disabled:opacity-60"
       >
         {loading ? "Analyzing Matchmaking…" : "Check Matchmaking"}
       </button>
