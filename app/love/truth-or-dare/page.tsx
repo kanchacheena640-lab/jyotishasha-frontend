@@ -3,43 +3,25 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const BACKEND =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://jyotishasha-backend.onrender.com";
-
 export default function TruthOrDareDetailPage() {
   const router = useRouter();
   const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const payload = sessionStorage.getItem("love_payload");
-    if (!payload) {
+    const s = sessionStorage.getItem("love_summary");
+    if (!s) {
       router.replace("/love");
       return;
     }
 
-    const run = async () => {
-      const res = await fetch(`${BACKEND}/api/love/truth-or-dare`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: payload,
-      });
-
-      const json = await res.json();
-      setData(json?.data);
-      setLoading(false);
-    };
-
-    run();
+    const parsed = JSON.parse(s);
+    setData(parsed?.truth_or_dare || parsed?.data?.truth_or_dare);
   }, [router]);
 
-  if (loading || !data) {
-    return (
-      <div className="p-6 text-center text-gray-700">
-        Loading analysis…
-      </div>
-    );
+  // 🔒 IMPORTANT FIX: no loading screen
+  if (!data) {
+    router.replace("/love");
+    return null;
   }
 
   const isTruth = data.verdict === "TRUTH";
@@ -134,7 +116,7 @@ export default function TruthOrDareDetailPage() {
 
         <button
           onClick={() =>
-            router.push("/report/relationship_future_report")
+            router.push("/love/report/relationship_future_report")
           }
           className="w-full bg-white text-purple-700 font-semibold py-3 rounded-xl hover:bg-gray-100 transition"
         >

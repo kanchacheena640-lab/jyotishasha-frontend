@@ -21,12 +21,10 @@ export default function LoveResultSummaryPage() {
     setPayload(JSON.parse(p));
   }, [router]);
 
+  // 🔒 IMPORTANT FIX: no loading screen, direct redirect handled above
   if (!summary) {
-    return (
-      <div className="p-6 text-center text-gray-700">
-        Loading result…
-      </div>
-    );
+    router.replace("/love");
+    return null;
   }
 
   const ashtakoot = summary?.data?.ashtakoot;
@@ -53,7 +51,6 @@ export default function LoveResultSummaryPage() {
 
       {/* SUMMARY CARDS */}
       <div className="space-y-4">
-
         {/* COMPATIBILITY */}
         <div
           onClick={() => go("/love/matchmaking-compatibility")}
@@ -69,44 +66,41 @@ export default function LoveResultSummaryPage() {
                 View detailed Ashtakoot analysis →
               </p>
             </div>
-            <div className="text-right">
-              <p className="text-2xl font-bold text-indigo-900">
-                {score}/{maxScore}
-              </p>
-            </div>
-          </div>
-        </div>
-
-      {/* MANGAL DOSH */}
-      <div
-        onClick={() => go("/love/mangal-dosh")}
-        className="cursor-pointer rounded-2xl border border-orange-200 bg-orange-50 p-5 hover:shadow-md transition"
-      >
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <h2 className="text-lg font-semibold text-orange-900 flex items-center gap-2">
-              <span>🔥</span>
-              <span>Mangal Dosh Analysis</span>
-            </h2>
-            <p className="text-sm text-orange-700">
-              Marriage dosha & cancellation check →
+            <p className="text-2xl font-bold text-indigo-900">
+              {score}/{maxScore}
             </p>
           </div>
-
-          <span
-            className={`px-4 py-2 rounded-full text-white font-semibold ${
-              summary?.data?.mangal_dosh?.signal === "GREEN"
-                ? "bg-green-600"
-                : summary?.data?.mangal_dosh?.signal === "RED"
-                ? "bg-red-600"
-                : "bg-gray-500"
-            }`}
-          >
-            {summary?.data?.mangal_dosh?.signal || "CHECK"}
-          </span>
         </div>
-      </div>
 
+        {/* MANGAL DOSH */}
+        <div
+          onClick={() => go("/love/mangal-dosh")}
+          className="cursor-pointer rounded-2xl border border-orange-200 bg-orange-50 p-5 hover:shadow-md transition"
+        >
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h2 className="text-lg font-semibold text-orange-900 flex items-center gap-2">
+                <span>🔥</span>
+                <span>Mangal Dosh Analysis</span>
+              </h2>
+              <p className="text-sm text-orange-700">
+                Marriage dosha & cancellation check →
+              </p>
+            </div>
+
+            <span
+              className={`px-4 py-2 rounded-full text-white font-semibold ${
+                summary?.data?.mangal_dosh?.signal === "GREEN"
+                  ? "bg-green-600"
+                  : summary?.data?.mangal_dosh?.signal === "RED"
+                  ? "bg-red-600"
+                  : "bg-gray-500"
+              }`}
+            >
+              {summary?.data?.mangal_dosh?.signal || "CHECK"}
+            </span>
+          </div>
+        </div>
 
         {/* TRUTH OR DARE */}
         <div
@@ -179,12 +173,6 @@ export default function LoveResultSummaryPage() {
           risks, remedies & future direction.
         </p>
 
-        <ul className="text-sm text-purple-100 space-y-1">
-          <li>✔ Dosha impact & cancellations</li>
-          <li>✔ Love vs Marriage direction</li>
-          <li>✔ Practical remedies & guidance</li>
-        </ul>
-
         <div className="flex items-center gap-3">
           <span className="line-through text-purple-200">₹399</span>
           <span className="text-3xl font-extrabold">₹199</span>
@@ -201,10 +189,6 @@ export default function LoveResultSummaryPage() {
         >
           Unlock Full Report
         </button>
-
-        <p className="text-xs text-purple-200 text-center">
-          Secure payment • PDF delivered on email
-        </p>
       </div>
     </div>
   );

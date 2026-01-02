@@ -3,48 +3,30 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const BACKEND =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://jyotishasha-backend.onrender.com";
-
 export default function MatchmakingCompatibilityPage() {
   const router = useRouter();
   const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const payload = sessionStorage.getItem("love_payload");
-    if (!payload) {
+    const s = sessionStorage.getItem("love_summary");
+    if (!s) {
       router.replace("/love");
       return;
     }
 
-    const run = async () => {
-      const res = await fetch(`${BACKEND}/api/love/report`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: payload,
-      });
-
-      const json = await res.json();
-      setData(json?.data);
-      setLoading(false);
-    };
-
-    run();
+    const parsed = JSON.parse(s);
+    setData(parsed?.data);
   }, [router]);
 
-  if (loading || !data) {
-    return (
-      <div className="p-6 text-center text-gray-700">
-        Loading detailed analysis…
-      </div>
-    );
+  // 🔒 IMPORTANT FIX: no loading screen, no backend call
+  if (!data) {
+    router.replace("/love");
+    return null;
   }
 
   const verdict = data.verdict;
   const kootaNotes =
-    data.sections.find((s: any) => s.id === "koota_notes")?.data
+    data.sections?.find((s: any) => s.id === "koota_notes")?.data
       ?.koota_notes || [];
 
   return (
@@ -99,7 +81,7 @@ export default function MatchmakingCompatibilityPage() {
       </div>
 
       {/* LOVE → MARRIAGE FLOW */}
-      {data.sections.find((s: any) => s.id === "love_to_marriage_flow") && (
+      {data.sections?.find((s: any) => s.id === "love_to_marriage_flow") && (
         <div className="rounded-2xl border border-purple-200 bg-purple-50 p-6">
           <h2 className="text-lg font-semibold text-purple-900">
             Love → Marriage Flow
@@ -125,12 +107,6 @@ export default function MatchmakingCompatibilityPage() {
           report with verdict, dosha impact, remedies and future direction.
         </p>
 
-        <ul className="text-sm text-purple-100 space-y-1">
-          <li>✔ Dosha & cancellation analysis</li>
-          <li>✔ Marriage stability & timing guidance</li>
-          <li>✔ Practical Vedic remedies</li>
-        </ul>
-
         <div className="flex items-center gap-3">
           <span className="line-through text-purple-200">₹399</span>
           <span className="text-3xl font-extrabold">₹199</span>
@@ -147,10 +123,6 @@ export default function MatchmakingCompatibilityPage() {
         >
           Unlock Full Relationship Report
         </button>
-
-        <p className="text-xs text-purple-200 text-center">
-          Secure payment • PDF delivered on email
-        </p>
       </div>
 
       {/* DISCLAIMER */}
