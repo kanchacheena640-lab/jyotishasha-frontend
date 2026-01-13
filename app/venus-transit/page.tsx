@@ -108,12 +108,6 @@ export default async function VenusTransitPage() {
           planetRashi={venusPos?.rashi}
         />
 
-        {/* 🔐 EEAT TRUST */}
-        <section className="mt-16 bg-white rounded-2xl p-6 md:p-8 relative z-10">
-          <EEATTrustSnippet />
-        </section>
-
-
         {/* REMEDIES */}
         <section className="mt-16">
           <h2 className="text-2xl font-semibold mb-3">
@@ -138,6 +132,12 @@ export default async function VenusTransitPage() {
         </div>
 
       </article>
+
+      {/* 🔐 EEAT TRUST */}
+        <section className="mt-16 bg-white rounded-2xl p-6 md:p-8">
+          <EEATTrustSnippet />
+        </section>
+        
     </div>
   );
 }
