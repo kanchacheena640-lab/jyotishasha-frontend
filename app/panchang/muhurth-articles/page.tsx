@@ -2,6 +2,8 @@ import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
 import Link from "next/link";
 import Script from "next/script";
 import Image from "next/image";
+import AppDownloadCTA from "@/components/AppDownloadCTA";
+
 
 export const revalidate = 86400; // 🔁 Auto-refresh every 24 hrs
 
@@ -116,6 +118,13 @@ export default function AllMuhurthArticlesPage() {
             );
         })}
         </section>
+        <AppDownloadCTA
+          utm={{
+            source: "muhurat_hub",
+            medium: "content_cta",
+            campaign: "all_muhurat",
+          }}
+        />
 
       {/* 💎 External Authority Link (E-A-T) */}
       <div className="mt-12 text-center">

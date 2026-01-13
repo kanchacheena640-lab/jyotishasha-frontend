@@ -3,6 +3,8 @@ import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
 import { faq_muhurth } from "@/app/data/faq_muhurth";
 import Script from "next/script";
 import Link from "next/link";
+import AppDownloadCTA from "@/components/AppDownloadCTA";
+
 
 
 
@@ -104,6 +106,13 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           calculated using Vedic astrology principles to ensure success, peace, and prosperity.
         </p>
       </header>
+      <AppDownloadCTA
+        utm={{
+          source: "muhurat_page",
+          medium: "content_cta",
+          campaign: topic.slug,
+        }}
+      />
 
       {/* Muhurat Dates Section */}
         <section className="bg-white/10 rounded-2xl border border-purple-400/20 p-6 mb-10">
@@ -534,6 +543,13 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
           )}
         </div>
       </section>
+      <AppDownloadCTA
+        utm={{
+          source: "muhurat_faq",
+          medium: "content_cta",
+          campaign: topic.slug,
+        }}
+      />
 
       {/* ✅ Add Google FAQ Schema for SEO */}
       <Script id="faq-schema" type="application/ld+json">
@@ -552,6 +568,13 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
       <CtaReport />
 
       {/* 📰 Related Muhurat Articles Section */}
+      <AppDownloadCTA
+        utm={{
+          source: "muhurat_bottom",
+          medium: "content_cta",
+          campaign: topic.slug,
+        }}
+      />
       <footer className="mt-12 border-t border-white/10 pt-8">
         {/* Dynamic heading with month & year */}
         <h2 className="text-xl md:text-2xl font-semibold text-purple-200 mb-2">

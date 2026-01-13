@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import Link from "next/link";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
+import AppDownloadCTA from "@/components/AppDownloadCTA";
+
 
 interface PanchangData {
   sunrise?: string;
@@ -203,6 +205,13 @@ export default function PanchangClient({ params }: { params: { date: string } })
           </p>
         </div>
       </div>
+      <AppDownloadCTA
+        utm={{
+          source: "daily_panchang",
+          medium: "primary_cta",
+          campaign: "timing_section",
+        }}
+      />
 
       {/* Panchang Details */}
       <div className="max-w-7xl mx-auto bg-white/10 rounded-2xl border border-white/10 shadow-md p-6 md:p-8">
@@ -338,6 +347,14 @@ export default function PanchangClient({ params }: { params: { date: string } })
         </div>
       </section>
     )}
+
+    <AppDownloadCTA
+      utm={{
+        source: "daily_panchang",
+        medium: "secondary_cta",
+        campaign: "chaughadiya",
+      }}
+    />
 
 
         {/* 🔮 Shubh Muhurtha Tools Section */}

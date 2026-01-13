@@ -26,6 +26,11 @@ body {
 .animate-blink-once {
   animation: blinkPulse 1.2s ease-out;
 }
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 96px;
+  }
+}
 /* ================= 🌐 BLOG & ASTROBLOG STYLING START ================= */
 
 /* 🌐 Blog link styling for imported Astroblog/Jyotishasha content */

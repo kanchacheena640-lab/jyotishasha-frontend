@@ -4,6 +4,8 @@ import Script from "next/script";
 import AdminAwareLayout from "../components/AdminAwareLayout";
 import "react-datepicker/dist/react-datepicker.css";
 import { LanguageProvider } from "@/context/LanguageContext"; // 🆕 added
+import StickyAppDownloadCTA from "@/components/StickyAppDownloadCTA";
+
 
 
 export const metadata = {
@@ -58,13 +60,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AdminAwareLayout>{children}</AdminAwareLayout>
         </LanguageProvider>
 
+        {/* 🔽 STICKY APP DOWNLOAD CTA (MOBILE ONLY) */}
+        <StickyAppDownloadCTA
+          utm={{
+            source: "site_global",
+            medium: "sticky_cta",
+            campaign: "app_download",
+          }}
+        />
+
                 {/* WhatsApp floating button */}
 
         <a
           href="https://wa.me/917007012255"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-4 right-4 z-50 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 transition-all"
+          className="
+            fixed right-4 z-50
+            bottom-[88px] md:bottom-4
+            bg-green-500 hover:bg-green-600
+            text-white px-4 py-3 rounded-full
+            shadow-lg flex items-center gap-2 transition-all
+          "
         >
           <i className="fab fa-whatsapp text-xl"></i>
           Chat with us
