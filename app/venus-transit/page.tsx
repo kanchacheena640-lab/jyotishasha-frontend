@@ -109,7 +109,9 @@ export default async function VenusTransitPage() {
         />
 
         {/* 🔐 EEAT TRUST */}
-        <EEATTrustSnippet />
+        <section className="mt-16 bg-white rounded-2xl p-6 md:p-8 relative z-10">
+          <EEATTrustSnippet />
+        </section>
 
 
         {/* REMEDIES */}
