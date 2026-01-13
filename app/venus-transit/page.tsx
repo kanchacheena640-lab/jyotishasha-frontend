@@ -45,7 +45,7 @@ export default async function VenusTransitPage() {
 
   return (
     <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
-      <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
+      <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 pb-32 shadow-xl text-black">
 
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
