@@ -1,6 +1,8 @@
 // app/today-panchang/page.tsx
 
 import { format } from "date-fns";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
@@ -116,7 +118,9 @@ export async function generateMetadata() {
       p.date
     )} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`,
     description: `Today Panchang with ${p.tithi.name} Tithi, ${p.nakshatra.name} Nakshatra, Chaughadiya timings, Rahu Kaal and Panchak. Updated daily.`,
-    alternates: { canonical: "/today-panchang" },
+    alternates: {
+      canonical: "https://www.jyotishasha.com/today-panchang",
+    },
   };
 }
 
@@ -246,6 +250,10 @@ export default async function TodayPanchangPage() {
           )}
         </Card>
       </section>
+
+      <p className="text-xs text-gray-500">
+        Panchang calculated using Indian standard latitude–longitude (IST).
+      </p>
 
       {/* ================== TITHI & NAKSHATRA ================== */}
       <Section
@@ -557,6 +565,10 @@ export default async function TodayPanchangPage() {
           Download Jyotishasha App
         </a>
       </section>
+      {/* 🔐 EEAT TRUST */}
+      <section className="mt-10">
+        <EEATTrustSnippet />
+      </section>
 
       {/* ================== ADS + SEO FOOTER ================== */}
       <div className="mt-6 text-center text-sm text-gray-400">Advertisement</div>
@@ -568,7 +580,7 @@ export default async function TodayPanchangPage() {
         </p>
       </section>
 
-      <p className="text-xs text-gray-500">This Today Panchang page updates automatically every day.</p>
+      <p className="text-xs text-gray-500">This Today Panchang page updates every day.</p>
     </main>
   );
 }

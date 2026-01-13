@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { reportsData, Report } from "../../data/reportsData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 export default function ReportCheckout() {
   const [form, setForm] = useState({
@@ -285,6 +286,11 @@ export default function ReportCheckout() {
           🔄 Change details if you're looking for other birth info
         </p>
       </div>
+
+      {/* 🔐 EEAT TRUST */}
+      <section className="mt-10 mb-6">
+        <EEATTrustSnippet />
+      </section>
 
       <button
         onClick={handleSubmit}

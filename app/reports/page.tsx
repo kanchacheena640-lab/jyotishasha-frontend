@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { reportsData } from "../data/reportsData";
 import { useTranslation } from "react-i18next";  
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 export default function ReportsPage() {
   const { t, ready } = useTranslation("reports");  
@@ -121,6 +123,10 @@ export default function ReportsPage() {
           </div>
         </div>
       )}
+      {/* 🔐 EEAT TRUST */}
+      <section className="mt-16">
+        <EEATTrustSnippet />
+      </section>
     </div>
   );
 }

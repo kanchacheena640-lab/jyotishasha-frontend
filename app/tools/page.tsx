@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { toolsData } from "../data/toolsData";
 import { useTranslation } from "react-i18next";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 export default function ToolsPage() {
   const { t, ready } = useTranslation("tools");
@@ -77,6 +79,10 @@ export default function ToolsPage() {
           </Link>
         ))}
       </div>
+      {/* 🔐 EEAT TRUST */}
+      <section className="mt-16">
+        <EEATTrustSnippet />
+      </section>
     </div>
   );
 }

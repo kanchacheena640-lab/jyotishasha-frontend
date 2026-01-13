@@ -7,6 +7,7 @@ import ToolResultSection from '@/components/ToolResultSection';
 import { fetchFullKundali } from '@/utils/fetchFullKundali';
 import { fetchLifeTool } from '@/utils/fetchLifeTool';
 import { parseToolResponse, ParsedResult } from '@/utils/parseToolResponse';
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 export default function ToolDynamicPage() {
   const { toolId } = useParams() as { toolId: string };
@@ -41,9 +42,15 @@ export default function ToolDynamicPage() {
   return (
     <div className="space-y-6">
       {!submitted && <ToolInputForm toolId={toolId} onSubmit={handleSubmit} />}
-      {kundaliData && result && (
-        <ToolResultSection kundaliData={kundaliData} result={result} />
-      )}
-    </div>
-  );
+      {kundaliData && result ? (
+      <div className="space-y-6">
+        <ToolResultSection
+          kundaliData={kundaliData}
+          result={result}
+        />
+        <EEATTrustSnippet />
+      </div>
+    ) : null}
+  </div>
+);
 }

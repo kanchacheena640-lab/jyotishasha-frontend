@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 export default function MatchmakingCompatibilityPage() {
   const router = useRouter();
@@ -127,6 +129,11 @@ export default function MatchmakingCompatibilityPage() {
           Unlock Full Relationship Report
         </button>
       </div>
+
+      {/* 🔐 EEAT TRUST */}
+      <section className="mt-16">
+        <EEATTrustSnippet />
+      </section>
 
       {/* DISCLAIMER */}
       <div className="text-xs text-gray-500 border-t pt-4">

@@ -1,4 +1,6 @@
 import LoveFormPage from "./LoveForm";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 export const metadata = {
   title: "Vedic Match-Making & Kundali Milan | Marriage Compatibility Check",
@@ -95,6 +97,11 @@ export default function LovePage() {
             </div>
           </div>
         </div>
+
+        {/* 🔐 EEAT TRUST */}
+      <section className="mt-16">
+        <EEATTrustSnippet />
+      </section>
 
       </section>
     </>
