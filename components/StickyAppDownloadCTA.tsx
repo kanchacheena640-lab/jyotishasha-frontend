@@ -1,11 +1,13 @@
 "use client";
 
+type UTM = {
+  source: string;
+  medium?: string;
+  campaign?: string;
+};
+
 type StickyAppDownloadCTAProps = {
-  utm?: {
-    source: string;
-    medium?: string;
-    campaign?: string;
-  };
+  utm?: UTM;
 };
 
 export default function StickyAppDownloadCTA({
@@ -14,9 +16,18 @@ export default function StickyAppDownloadCTA({
   const base =
     "https://play.google.com/store/apps/details?id=com.jyotishasha.app";
 
-  const link = utm
-    ? `${base}?utm_source=${utm.source}&utm_medium=${utm.medium || "sticky"}&utm_campaign=${utm.campaign || "app_download"}`
-    : base;
+  const buildLink = () => {
+    if (!utm) return base;
+
+    const url = new URL(base);
+    url.searchParams.set("utm_source", utm.source);
+    url.searchParams.set("utm_medium", utm.medium || "sticky");
+    url.searchParams.set("utm_campaign", utm.campaign || "app_download");
+
+    return url.toString();
+  };
+
+  const link = buildLink();
 
   return (
     <div

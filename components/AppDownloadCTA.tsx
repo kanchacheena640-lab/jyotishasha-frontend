@@ -11,16 +11,22 @@ type AppDownloadCTAProps = {
 };
 
 export default function AppDownloadCTA({ utm }: AppDownloadCTAProps) {
-  const base =
-    "https://play.google.com/store/apps/details?id=com.jyotishasha.app";
+  const base = "https://play.google.com/store/apps/details?id=com.jyotishasha.app";
 
-  const link = utm
-    ? `${base}?utm_source=${encodeURIComponent(utm.source)}&utm_medium=${encodeURIComponent(
-        utm.medium || "organic"
-      )}&utm_campaign=${encodeURIComponent(
-        utm.campaign || "app_download"
-      )}`
-    : base;
+  const buildLink = () => {
+    if (!utm) return base;
+
+    const url = new URL(base);
+
+    // ✅ IMPORTANT: base already has id=..., so this will append using "&"
+    url.searchParams.set("utm_source", utm.source);
+    url.searchParams.set("utm_medium", utm.medium || "organic");
+    url.searchParams.set("utm_campaign", utm.campaign || "app_download");
+
+    return url.toString();
+  };
+
+  const link = buildLink();
 
   const handleClick = () => {
     if (typeof window !== "undefined" && (window as any).gtag && utm) {
@@ -41,6 +47,7 @@ export default function AppDownloadCTA({ utm }: AppDownloadCTAProps) {
       <p className="text-gray-300 text-sm mb-4">
         Free Kundali • Daily Astrology • No calls • Pocket-friendly
       </p>
+
       <a
         href={link}
         target="_blank"
