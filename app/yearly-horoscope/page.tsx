@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 const YEAR = "2026";
 
@@ -61,6 +63,10 @@ export default function YearlyHoroscopePage() {
           </Link>
         ))}
       </div>
+      {/* 🔐 EEAT TRUST */}
+      <section className="mt-16">
+        <EEATTrustSnippet />
+      </section>
 
       {/* CTA SECTION (AFTER RASHI TABS) */}
       <section className="mt-14 grid gap-6 md:grid-cols-3">

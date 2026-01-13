@@ -2,6 +2,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 export const revalidate = 3600;
 
@@ -105,6 +107,8 @@ export default async function MarsTransitPage() {
           planet="Mars"
           planetRashi={marsPos?.rashi}
         />
+        {/* 🔐 EEAT TRUST */}
+        <EEATTrustSnippet />
 
         {/* REMEDIES */}
         <section className="mt-16">

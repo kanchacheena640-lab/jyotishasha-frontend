@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Script from "next/script";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 // ✅ Dynamic import for Google Places Autocomplete
 const PlaceAutocompleteInput = dynamic(
@@ -181,6 +183,8 @@ export default function FreeKundaliPage() {
             🔮 Generate My Free Kundali
           </button>
         </form>
+        {/* 🔐 EEAT TRUST */}
+        <EEATTrustSnippet />
 
         {/* Footer Info */}
         <p className="text-center text-gray-300 mt-6 text-sm">
@@ -206,4 +210,5 @@ export default function FreeKundaliPage() {
       </div>
     </section>
   );
+  
 }

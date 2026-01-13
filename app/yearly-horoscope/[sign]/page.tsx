@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 const YEAR = 2026;
 
@@ -215,6 +217,9 @@ export default async function YearlySignPage({
             <p>{data.final_summary.content}</p>
           </CardSection>
         )}
+
+        {/* 🔐 EEAT TRUST */}
+        <EEATTrustSnippet />
 
         <div className="pt-4">
           <Link
