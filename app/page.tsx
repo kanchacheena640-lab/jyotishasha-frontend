@@ -37,9 +37,9 @@ export default function Home() {
     { name: "Your Love Life", emoji: "❤️", link: "/tools/love-life" },
     { name: "Your Career", emoji: "📖", link: "/tools/career-path" },
     { name: "Foreign Travel", emoji: "✈️", link: "/tools/foreign-travel" },
-    { name: "Sadhesati Report", emoji: "🪐", link: "/reports/sadhesati-calculator" },
+    { name: "Sadhesati Report", emoji: "🪐", link: "reports/sadhesati_report" },
     { name: "Business Report", emoji: "💼", link: "/reports/business_report" },
-    { name: "Government Job", emoji: "👍", link: "/reports/government-job" }
+    { name: "Government Job", emoji: "👍", link: "/reports/government_job_report" }
   ];
 
   useEffect(() => {
