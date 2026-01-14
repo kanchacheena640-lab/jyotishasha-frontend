@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 const YEAR = 2026;
@@ -217,6 +216,12 @@ export default async function YearlySignPage({
             <p>{data.final_summary.content}</p>
           </CardSection>
         )}
+
+        {/* 🔎 Authority note (EEAT – indirect) */}
+        <p className="text-sm text-gray-500 leading-relaxed">
+          This yearly horoscope is prepared using classical Vedic astrology principles,
+          planetary transits, and Jyotishasha research methodology.
+        </p>
 
         
         <div className="pt-4">

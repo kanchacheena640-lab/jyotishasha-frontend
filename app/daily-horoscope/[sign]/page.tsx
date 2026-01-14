@@ -135,6 +135,14 @@ export default function DailyHoroscopePage({ params }: Props) {
 
         </div>
       </section>
+
+      {/* 🔎 Authority note (EEAT – indirect) */}
+        <p className="md:col-span-2 text-sm text-gray-500 leading-relaxed mt-2">
+          This daily horoscope is prepared using classical Vedic astrology principles,
+          planetary transits, and Jyotishasha research methodology.
+        </p>
+
+
       {/* 📚 FIXED SEO CONTENT */}
       <section className="bg-gray-50 rounded-2xl p-8 space-y-10 text-gray-900 leading-relaxed">
         <div>

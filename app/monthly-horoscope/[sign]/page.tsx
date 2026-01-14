@@ -171,6 +171,12 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
           </p>
         </section>
 
+        {/* 🔎 Authority note (EEAT – indirect) */}
+        <p className="text-sm text-gray-500 leading-relaxed">
+          This monthly horoscope is prepared using classical Vedic astrology principles,
+          planetary transits, and Jyotishasha research methodology.
+        </p>
+
         {/* INTERNAL LINKS */}
         <div className="flex items-center justify-between gap-4">
           <a

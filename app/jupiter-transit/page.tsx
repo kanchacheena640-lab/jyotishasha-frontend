@@ -119,6 +119,13 @@ export default async function JupiterTransitPage() {
           </ul>
         </section>
 
+        {/* 🔎 Authority Note (EEAT – indirect) */}
+        <p className="mt-10 text-sm text-gray-500 leading-relaxed">
+          This Jupiter transit analysis is prepared using classical Vedic astrology
+          principles, Gochar rules, planetary dignity, and Jyotishasha research methodology.
+          Dates are calculated using sidereal zodiac (Lahiri Ayanamsa).
+        </p>
+
         {/* CTA */}
         <div className="mt-16 text-left">
           <Link
