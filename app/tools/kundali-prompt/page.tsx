@@ -203,24 +203,45 @@ Answer clearly and confidently.
       </form>
 
       {prompt && (
-        <div className="relative mt-6 max-w-4xl">
-            {/* Copy Button */}
-            <button
-            type="button"
-            onClick={() => {
-                navigator.clipboard.writeText(prompt);
-            }}
-            className="absolute top-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-3 py-1 rounded shadow"
-            >
-            Copy
-            </button>
+        <div className="mt-6 max-w-4xl">
+            {/* Header Bar */}
+            <div className="flex justify-between items-center bg-gray-900 border border-indigo-500/40 rounded-t px-3 py-2">
+            <span className="text-xs text-indigo-300 font-medium">
+                Generated Prompt
+            </span>
 
-            {/* Prompt Textarea */}
+            <button
+                type="button"
+                onClick={() => {
+                navigator.clipboard.writeText(prompt);
+                }}
+                className="
+                flex items-center gap-1
+                bg-indigo-600 hover:bg-indigo-700
+                active:bg-indigo-800
+                active:scale-95
+                transition-all duration-150
+                text-white text-xs px-3 py-1.5
+                rounded shadow-md
+                "
+            >
+                📋 Copy
+            </button>
+            </div>
+
+            {/* Textarea */}
             <textarea
             value={prompt}
             readOnly
             rows={28}
-            className="w-full bg-black text-green-400 font-mono p-4 border border-indigo-500/40 rounded"
+            className="
+                w-full
+                bg-black text-green-400 font-mono
+                p-4
+                border border-t-0 border-indigo-500/40
+                rounded-b
+                overflow-auto
+            "
             />
         </div>
         )}
