@@ -158,6 +158,7 @@ export default function AstrologyMethodologyPage() {
             <h2 className="text-2xl font-semibold text-indigo-200 mb-3">
               Our Vision: Astrology Meets Mathematical Precision
             </h2>
+
             <p className="text-gray-200 leading-relaxed">
               At Jyotishasha, we treat Vedic Astrology (Jyotish) not as guesswork,
               but as a structured mathematical and astronomical discipline. Our
@@ -171,6 +172,89 @@ export default function AstrologyMethodologyPage() {
               principles.
             </p>
           </div>
+
+          {/* VEDIC ASTROLOGY EXPLAINED */}
+            <div>
+              <h2 className="text-2xl font-semibold text-indigo-200 mb-3">
+                Vedic Astrology Explained: Foundations, Branches & Scientific Basis
+              </h2>
+
+              <p className="text-gray-200 leading-relaxed">
+                Vedic Astrology, traditionally known as <strong>Jyotish Shastra</strong>,
+                is an ancient Indian system of astronomical time-mapping. Its primary
+                objective is not prediction alone, but understanding how cosmic cycles
+                influence human life through mathematically observable planetary motion.
+              </p>
+
+              <p className="text-gray-200 leading-relaxed mt-3">
+                Unlike belief-driven astrology systems, Vedic Astrology is deeply rooted in
+                <strong> observational astronomy</strong>. It relies on precise planetary
+                longitudes, lunar cycles, sidereal constellations (Nakshatras), and
+                time-sensitive calculations derived from Panchang principles.
+              </p>
+
+              <h3 className="text-xl font-semibold text-indigo-200 mt-6 mb-2">
+                Core Branches of Vedic Astrology
+              </h3>
+
+              <ul className="list-disc list-inside text-gray-200 space-y-2">
+                <li>
+                  <strong>Hora Shastra:</strong> Birth chart analysis covering personality,
+                  career, marriage, health, and life direction.
+                </li>
+                <li>
+                  <strong>Muhurta Shastra:</strong> Selection of auspicious timings based on
+                  Tithi, Nakshatra, Yoga, and planetary strength.
+                </li>
+                <li>
+                  <strong>Prashna Jyotish:</strong> Event-based astrology where charts are
+                  cast for the moment a question is asked.
+                </li>
+                <li>
+                  <strong>Samhita Jyotish:</strong> Mundane astrology dealing with nations,
+                  weather patterns, economic cycles, and collective events.
+                </li>
+              </ul>
+
+              <h3 className="text-xl font-semibold text-indigo-200 mt-6 mb-2">
+                Sidereal Zodiac vs Tropical Zodiac
+              </h3>
+
+              <p className="text-gray-200 leading-relaxed">
+                Vedic Astrology follows the <strong>Sidereal Zodiac</strong>, which aligns
+                planetary positions with real astronomical constellations. Western astrology
+                uses the Tropical Zodiac, which is season-based and does not account for
+                precession of the equinoxes.
+              </p>
+
+              <p className="text-gray-200 leading-relaxed mt-3">
+                Jyotishasha strictly uses the Sidereal framework combined with Lahiri
+                Ayanamsa to ensure planetary positions reflect actual sky coordinates rather
+                than symbolic seasonal divisions.
+              </p>
+
+              <h3 className="text-xl font-semibold text-indigo-200 mt-6 mb-2">
+                Why Panchang, Nakshatra & Dasha Matter
+              </h3>
+
+              <p className="text-gray-200 leading-relaxed">
+                Panchang elements such as Tithi, Nakshatra, Yoga, and Karana are not ritual
+                abstractions. They are time-segmentation models derived from Moon–Sun
+                angular relationships, which directly influence mental, emotional, and
+                situational outcomes.
+              </p>
+
+              <p className="text-gray-200 leading-relaxed mt-3">
+                Dasha systems like Vimshottari operate on the Moon’s Nakshatra placement at
+                birth. Because Jyotishasha calculates Moon longitude using ephemeris-based
+                astronomy, Dasha timelines remain mathematically consistent and verifiable.
+              </p>
+
+              <p className="text-gray-200 leading-relaxed mt-3">
+                Jyotishasha follows <strong>only classical Vedic Jyotish</strong> principles
+                and does not mix systems, beliefs, or modern symbolic astrology layers.
+              </p>
+            </div>
 
           {/* Engine */}
           <div>
@@ -334,7 +418,7 @@ export default function AstrologyMethodologyPage() {
               <li>Precise time and location validation</li>
             </ul>
           </div>
-
+          
           {/* FAQ */}
           <div className="pt-2">
             <h2 className="text-2xl font-semibold text-indigo-200 mb-4">

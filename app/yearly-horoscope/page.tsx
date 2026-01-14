@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 const YEAR = "2026";
