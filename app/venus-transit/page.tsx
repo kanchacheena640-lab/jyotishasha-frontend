@@ -2,14 +2,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 export const revalidate = 3600;
 
 /* ---------------- SEO ---------------- */
 export const metadata: Metadata = {
-  title: "Venus Transit – Dates, Effects & Remedies | Jyotishasha",
+  title: "Venus Transit in Vedic Astrology – Dates, Effects & Remedies | Jyotishasha",
   description:
     "Venus (Shukra) transit with dates, ascendant-wise effects on love, relationships, luxury and remedies as per Vedic astrology.",
   alternates: {
@@ -125,7 +124,10 @@ export default async function VenusTransitPage() {
         <p className="mt-10 text-sm text-gray-500 leading-relaxed">
           This Venus transit analysis is prepared using classical Vedic astrology
           principles, Gochar rules, planetary dignity, and Jyotishasha research methodology.
-          Dates are calculated using sidereal zodiac (Lahiri Ayanamsa).
+          Dates are calculated using sidereal zodiac (Lahiri Ayanamsa).{" "}
+          <Link href="/astrology-methodology" className="underline text-blue-700">
+            Astrology calculation methodology
+          </Link>
         </p>
 
         {/* CTA */}

@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { toolsData } from "../data/toolsData";
 import { useTranslation } from "react-i18next";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 export default function ToolsPage() {
@@ -28,9 +27,15 @@ export default function ToolsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">
+      <h1 className="text-4xl font-bold text-center mb-4 text-white drop-shadow-lg">
         {t("tools_page.heading", { defaultValue: "Free Astrology Tools" })}
       </h1>
+
+      <p className="text-center text-gray-200 max-w-2xl mx-auto mb-10">
+        Use our free astrology tools to get instant insights into career, marriage,
+        love life, destiny and planetary influences using authentic Vedic astrology
+        calculations.
+      </p>
 
       <div className="sticky top-[72px] md:top-[80px] z-20 flex flex-wrap justify-center gap-3 mb-8 py-4">
         <div className="flex flex-wrap justify-center gap-3">
@@ -79,7 +84,10 @@ export default function ToolsPage() {
           </Link>
         ))}
       </div>
-      
+      <p className="mt-12 text-sm text-gray-400 text-center leading-relaxed">
+        All tools are based on classical Vedic astrology principles and Jyotishasha
+        calculation methodology.
+      </p>
     </div>
   );
 }

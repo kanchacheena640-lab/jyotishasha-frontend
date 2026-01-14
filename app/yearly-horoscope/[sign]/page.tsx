@@ -29,13 +29,13 @@ export async function generateMetadata(
   const url = `${SITE_URL}/yearly-horoscope/${sign}`;
 
   return {
-    title: `${name} Horoscope 2026 | Jyotishasha`,
+    title: `${name} Horoscope 2026 | Vedic Predictions | Jyotishasha`,
     description: `${name} yearly horoscope 2026 – career, love, finance, health and remedies.`,
     alternates: {
       canonical: url,
     },
     openGraph: {
-      title: `${name} Horoscope 2026 | Jyotishasha`,
+      title: `${name} Horoscope 2026 | Vedic Predictions | Jyotishasha`,
       description: `${name} yearly horoscope 2026 – career, love, finance, health and remedies.`,
       url,
       type: "article",

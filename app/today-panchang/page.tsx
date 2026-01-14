@@ -552,6 +552,11 @@ export default async function TodayPanchangPage() {
         </div>
       </section>
 
+      <p className="text-xs text-gray-500 mt-4">
+        Panchang calculations follow traditional Vedic astronomy principles
+        using sidereal zodiac and Jyotishasha methodology.
+      </p>
+
       {/* ================== APP CTA ================== */}
       <section className="mt-2 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-center">
         <h2 className="text-2xl font-bold text-white mb-2">Get Today Panchang on Mobile</h2>
