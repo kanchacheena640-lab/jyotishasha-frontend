@@ -203,13 +203,28 @@ Answer clearly and confidently.
       </form>
 
       {prompt && (
-        <textarea
-          value={prompt}
-          readOnly
-          rows={28}
-          className="mt-6 w-full max-w-4xl bg-black text-green-400 font-mono p-4 border"
-        />
-      )}
+        <div className="relative mt-6 max-w-4xl">
+            {/* Copy Button */}
+            <button
+            type="button"
+            onClick={() => {
+                navigator.clipboard.writeText(prompt);
+            }}
+            className="absolute top-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-3 py-1 rounded shadow"
+            >
+            Copy
+            </button>
+
+            {/* Prompt Textarea */}
+            <textarea
+            value={prompt}
+            readOnly
+            rows={28}
+            className="w-full bg-black text-green-400 font-mono p-4 border border-indigo-500/40 rounded"
+            />
+        </div>
+        )}
+
     </section>
   );
 }
