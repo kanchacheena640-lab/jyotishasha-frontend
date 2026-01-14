@@ -16,10 +16,16 @@ const RASHIS = [
   "Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"
 ];
 
+// Normalize rashi names (CRITICAL FIX)
+function normalizeRashi(r: string) {
+  if (!r) return "";
+  return r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
+}
+
 // Transit rashi → house from Lagna
 function getHouseFromLagna(lagnaRashi: string, transitRashi: string) {
-  const l = RASHIS.indexOf(lagnaRashi);
-  const t = RASHIS.indexOf(transitRashi);
+  const l = RASHIS.indexOf(normalizeRashi(lagnaRashi));
+  const t = RASHIS.indexOf(normalizeRashi(transitRashi));
   if (l === -1 || t === -1) return null;
   return ((t - l + 12) % 12) + 1; // 1–12
 }
