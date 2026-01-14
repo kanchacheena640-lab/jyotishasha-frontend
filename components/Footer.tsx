@@ -25,6 +25,7 @@ export default function Footer() {
             <li><Link href="/tools">Tools</Link></li>
             <li><Link href="/reports">Reports</Link></li>
             <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/astrology-methodology">Methodology</Link></li>
           </ul>
         </div>
 
@@ -53,15 +54,6 @@ export default function Footer() {
             <a href="https://www.youtube.com/@jyotishasha" target="_blank"><i className="fab fa-youtube text-xl"></i></a>
             <a href="https://x.com/SpiritualLifes1" target="_blank"><i className="fab fa-twitter"></i></a>
             <a href="https://in.pinterest.com/remedy999/" target="_blank"><i className="fab fa-pinterest"></i></a>
-            {/* Play Store */}
-            <a
-              href="https://play.google.com/store/apps/details?id=com.jyotishasha.app&utm_source=website&utm_medium=organic&utm_campaign=app_launch"
-              target="_blank"
-              rel="noopener"
-              aria-label="Download Jyotishasha App from Google Play"
-            >
-              <i className="fab fa-google-play text-xl"></i>
-            </a>
           </div>
         </div>
       </div>
