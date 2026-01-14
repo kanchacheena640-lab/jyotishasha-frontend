@@ -131,7 +131,7 @@ export default async function VenusTransitPage() {
           </Link>
         </div>
         {/* 🔐 EEAT TRUST */}
-        <section className="mt-16 bg-white rounded-2xl p-6 md:p-8">
+        <section className="mt-16 bg-blue-50 rounded-2xl p-6 md:p-8">
           <EEATTrustSnippet />
         </section>        
       </article>
