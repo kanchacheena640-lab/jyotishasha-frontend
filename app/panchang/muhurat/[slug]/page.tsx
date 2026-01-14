@@ -527,6 +527,13 @@ export default async function MuhuratPage({ params }: { params: { slug: string }
         {/* CTA promoting same category Muhurat */}
         <CtaMuhurth slug={topic.slug} />
 
+      {/* 🔎 Authority / EEAT (indirect, global pattern) */}
+      <p className="text-gray-400 text-xs leading-relaxed mb-8">
+        Muhurat dates and rules are calculated using authentic Hindu Panchang,
+        Nakshatra–Tithi combinations, and classical Vedic astrology principles
+        followed by Jyotishasha research methodology.
+      </p>
+
       {/* ✅ FAQ Section */}
       <section className="bg-white/5 rounded-xl border border-white/10 p-5 mb-10">
         <h2 className="text-lg font-semibold text-purple-300 mb-3">

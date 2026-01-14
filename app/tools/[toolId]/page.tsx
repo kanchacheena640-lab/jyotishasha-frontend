@@ -48,6 +48,12 @@ export default function ToolDynamicPage() {
           kundaliData={kundaliData}
           result={result}
         />
+
+        {/* 🔎 Authority / EEAT (ONLY after result) */}
+        <p className="text-sm text-gray-500 leading-relaxed">
+          This analysis is generated using classical Vedic astrology principles,
+          birth chart calculations, and Jyotishasha research methodology.
+        </p>
       
       </div>
     ) : null}
