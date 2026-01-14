@@ -8,6 +8,22 @@ const PlaceAutocompleteInput = dynamic(
   { ssr: false }
 );
 
+/* ---------------- HELPERS ---------------- */
+
+// Rashi order (sidereal)
+const RASHIS = [
+  "Aries","Taurus","Gemini","Cancer","Leo","Virgo",
+  "Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"
+];
+
+// Transit rashi → house from Lagna
+function getHouseFromLagna(lagnaRashi: string, transitRashi: string) {
+  const l = RASHIS.indexOf(lagnaRashi);
+  const t = RASHIS.indexOf(transitRashi);
+  if (l === -1 || t === -1) return null;
+  return ((t - l + 12) % 12) + 1; // 1–12
+}
+
 export default function KundaliPromptPage() {
   const [form, setForm] = useState({
     name: "",
@@ -29,7 +45,8 @@ export default function KundaliPromptPage() {
     e.preventDefault();
     setLoading(true);
 
-    const payload = {
+    /* -------- 1) Kundali API -------- */
+    const kundaliPayload = {
       name: form.name,
       dob: form.dob,
       tob: form.tob,
@@ -41,34 +58,37 @@ export default function KundaliPromptPage() {
       language: form.language,
     };
 
-    /* 1️⃣ Kundali API hit */
-    const res = await fetch(
+    const kundaliRes = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/full-kundali-modern`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(kundaliPayload),
       }
     );
+    const kundali = await kundaliRes.json();
 
-    const data = await res.json();
+    /* -------- 2) Transit API -------- */
+    const transitRes = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/transit/current`
+    );
+    const transit = await transitRes.json();
 
-    /* 2️⃣ Prompt Build */
+    /* -------- 3) Prompt Build -------- */
     const lines: string[] = [];
 
-    /* ===== NAME ONLY ===== */
+    /* NAME ONLY */
     lines.push(`Name: ${form.name}\n`);
 
-    /* ===== ASCENDANT ===== */
-    const ascendant =
-      data?.chart_data?.ascendant || data?.lagna_sign || "";
-    lines.push(`This person is a ${ascendant} Ascendant.\n`);
+    /* ASCENDANT */
+    const lagnaRashi =
+      kundali?.chart_data?.ascendant || kundali?.lagna_sign || "";
+    lines.push(`This person is a ${lagnaRashi} Ascendant.\n`);
 
-    /* ===== MOON NAKSHATRA ===== */
-    const moon = data?.chart_data?.planets?.find(
+    /* MOON NAKSHATRA */
+    const moon = kundali?.chart_data?.planets?.find(
       (p: any) => p.name === "Moon"
     );
-
     if (moon?.nakshatra) {
       lines.push(
         `Moon Nakshatra: ${moon.nakshatra}${
@@ -77,36 +97,41 @@ export default function KundaliPromptPage() {
       );
     }
 
-    /* ===== NATAL PLANETS (NO DIGNITY) ===== */
-    data?.chart_data?.planets?.forEach((p: any) => {
+    /* NATAL PLANETS */
+    kundali?.chart_data?.planets?.forEach((p: any) => {
       if (!p?.name) return;
       if (p.name.toLowerCase().includes("ascendant")) return;
-
       lines.push(
         `${p.name} is placed in ${p.house} house in ${p.sign} sign.`
       );
     });
 
-    /* ===== CURRENT DASHA (NAME ONLY) ===== */
-    const dasha = data?.dasha_summary?.current_block;
+    /* CURRENT DASHA (NAME ONLY) */
+    const dasha = kundali?.dasha_summary?.current_block;
     if (dasha) {
       lines.push(`\nCurrent Mahadasha: ${dasha.mahadasha || "—"}`);
       lines.push(`Current Antardasha: ${dasha.antardasha || "—"}`);
     }
 
-    /* ===== CURRENT TRANSITS ===== */
-    const transits = data?.current_transits || data?.transits;
-    if (Array.isArray(transits) && transits.length > 0) {
+    /* CURRENT TRANSITS (WITH HOUSE FROM LAGNA) */
+    const positions = transit?.positions || {};
+    const transitLines: string[] = [];
+
+    Object.entries(positions).forEach(([planet, p]: any) => {
+      if (!p?.rashi) return;
+      const house = getHouseFromLagna(lagnaRashi, p.rashi);
+      if (!house) return;
+      transitLines.push(
+        `${planet} is transiting through ${house} house in ${p.rashi} sign.`
+      );
+    });
+
+    if (transitLines.length) {
       lines.push(`\nCurrent planetary transits:`);
-      transits.forEach((t: any) => {
-        if (!t?.planet || !t?.house || !t?.sign) return;
-        lines.push(
-          `${t.planet} is transiting through ${t.house} house in ${t.sign} sign.`
-        );
-      });
+      transitLines.forEach(l => lines.push(l));
     }
 
-    /* ===== RULES ===== */
+    /* RULES */
     lines.push(`
 Analyze the above kundali strictly using Vedic astrology.
 Do not mention houses where no planet is present.
@@ -120,7 +145,7 @@ Answer clearly and confidently.
   return (
     <section className="min-h-screen bg-black text-white p-6">
       <h1 className="text-xl font-semibold mb-4">
-        🔮 Kundali → Prompt Generator (Isolated Tool)
+        🔮 Kundali → Prompt Generator (Kundali + Transit)
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
@@ -175,7 +200,7 @@ Answer clearly and confidently.
         <textarea
           value={prompt}
           readOnly
-          rows={26}
+          rows={28}
           className="mt-6 w-full max-w-4xl bg-black text-green-400 font-mono p-4 border"
         />
       )}
