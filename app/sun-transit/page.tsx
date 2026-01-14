@@ -119,6 +119,54 @@ export default async function SunTransitPage() {
             <li>Donate wheat, jaggery or copper on Sundays</li>
           </ul>
         </section>
+        {/* 🔗 Explore Other Planetary Transits */}
+        <div className="mt-10 border-t pt-4">
+          <p className="text-sm text-gray-600 mb-2">
+            Explore other planetary transits:
+          </p>
+
+          <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm">
+            <Link href="/moon-transit" className="text-blue-700 hover:underline">
+              Moon Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/mars-transit" className="text-blue-700 hover:underline">
+              Mars Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/mercury-transit" className="text-blue-700 hover:underline">
+              Mercury Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/jupiter-transit" className="text-blue-700 hover:underline">
+              Jupiter Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/venus-transit" className="text-blue-700 hover:underline">
+              Venus Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/saturn-transit" className="text-blue-700 hover:underline">
+              Saturn Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/rahu-transit" className="text-blue-700 hover:underline">
+              Rahu Transit
+            </Link>
+            <span className="text-gray-400">|</span>
+
+            <Link href="/ketu-transit" className="text-blue-700 hover:underline">
+              Ketu Transit
+            </Link>
+          </div>
+        </div>
+
 
         {/* 🔎 Authority Note (EEAT – indirect) */}
         <p className="mt-10 text-sm text-gray-500 leading-relaxed">
