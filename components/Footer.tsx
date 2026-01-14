@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+
 
 export default function Footer() {
   return (
@@ -52,6 +54,13 @@ export default function Footer() {
             <a href="https://x.com/SpiritualLifes1" target="_blank"><i className="fab fa-twitter"></i></a>
             <a href="https://in.pinterest.com/remedy999/" target="_blank"><i className="fab fa-pinterest"></i></a>
           </div>
+        </div>
+      </div>
+
+      {/* 🔐 EEAT TRUST (Global – Footer Top) */}
+      <div className="bg-[#0f0c29] border-t border-white/10 mt-10">
+        <div className="max-w-6xl mx-auto px-6 py-10">
+          <EEATTrustSnippet />
         </div>
       </div>
 
