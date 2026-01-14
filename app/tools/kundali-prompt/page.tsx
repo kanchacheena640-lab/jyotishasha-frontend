@@ -41,7 +41,7 @@ export default function KundaliPromptPage() {
       language: form.language,
     };
 
-    // 🔁 1) Kundali hit
+    /* 1️⃣ Kundali API hit */
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/full-kundali-modern`,
       {
@@ -53,45 +53,60 @@ export default function KundaliPromptPage() {
 
     const data = await res.json();
 
-    // 🔁 2) Prompt build (INLINE – no reuse elsewhere)
+    /* 2️⃣ Prompt Build */
     const lines: string[] = [];
 
-    lines.push(`CLIENT DETAILS`);
-    lines.push(`Name: ${form.name}`);
-    lines.push(`Date of Birth: ${form.dob}`);
-    lines.push(`Time of Birth: ${form.tob}`);
-    lines.push(`Place of Birth: ${form.place}\n`);
+    /* ===== NAME ONLY ===== */
+    lines.push(`Name: ${form.name}\n`);
 
-    const asc =
+    /* ===== ASCENDANT ===== */
+    const ascendant =
       data?.chart_data?.ascendant || data?.lagna_sign || "";
-    lines.push(`This person is a ${asc} Ascendant.\n`);
+    lines.push(`This person is a ${ascendant} Ascendant.\n`);
 
-    data?.chart_data?.planets?.forEach((p: any) => {
-      if (!p?.name || p.name.includes("Ascendant")) return;
-      lines.push(
-        `${p.name} is placed in ${p.house} house in ${p.sign} sign in ${p.dignity || "neutral"} state.`
-      );
-    });
+    /* ===== MOON NAKSHATRA ===== */
+    const moon = data?.chart_data?.planets?.find(
+      (p: any) => p.name === "Moon"
+    );
 
-    const d = data?.dasha_summary?.current_block;
-    if (d) {
+    if (moon?.nakshatra) {
       lines.push(
-        `\nCurrent Mahadasha: ${d.mahadasha} (${d.period})`
-      );
-      lines.push(
-        `Current Antardasha: ${d.antardasha} (${d.period})`
+        `Moon Nakshatra: ${moon.nakshatra}${
+          moon.pada ? ` (Pada ${moon.pada})` : ""
+        }\n`
       );
     }
 
-    if (Array.isArray(data?.current_transits)) {
+    /* ===== NATAL PLANETS (NO DIGNITY) ===== */
+    data?.chart_data?.planets?.forEach((p: any) => {
+      if (!p?.name) return;
+      if (p.name.toLowerCase().includes("ascendant")) return;
+
+      lines.push(
+        `${p.name} is placed in ${p.house} house in ${p.sign} sign.`
+      );
+    });
+
+    /* ===== CURRENT DASHA (NAME ONLY) ===== */
+    const dasha = data?.dasha_summary?.current_block;
+    if (dasha) {
+      lines.push(`\nCurrent Mahadasha: ${dasha.mahadasha || "—"}`);
+      lines.push(`Current Antardasha: ${dasha.antardasha || "—"}`);
+    }
+
+    /* ===== CURRENT TRANSITS ===== */
+    const transits = data?.current_transits || data?.transits;
+    if (Array.isArray(transits) && transits.length > 0) {
       lines.push(`\nCurrent planetary transits:`);
-      data.current_transits.forEach((t: any) => {
+      transits.forEach((t: any) => {
+        if (!t?.planet || !t?.house || !t?.sign) return;
         lines.push(
           `${t.planet} is transiting through ${t.house} house in ${t.sign} sign.`
         );
       });
     }
 
+    /* ===== RULES ===== */
     lines.push(`
 Analyze the above kundali strictly using Vedic astrology.
 Do not mention houses where no planet is present.
@@ -105,7 +120,7 @@ Answer clearly and confidently.
   return (
     <section className="min-h-screen bg-black text-white p-6">
       <h1 className="text-xl font-semibold mb-4">
-        🔮 Kundali → Prompt Generator (Internal)
+        🔮 Kundali → Prompt Generator (Isolated Tool)
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
@@ -116,6 +131,7 @@ Answer clearly and confidently.
           required
           className="w-full p-2 text-black"
         />
+
         <input
           type="date"
           name="dob"
@@ -123,6 +139,7 @@ Answer clearly and confidently.
           required
           className="w-full p-2 text-black"
         />
+
         <input
           type="time"
           name="tob"
@@ -158,7 +175,7 @@ Answer clearly and confidently.
         <textarea
           value={prompt}
           readOnly
-          rows={24}
+          rows={26}
           className="mt-6 w-full max-w-4xl bg-black text-green-400 font-mono p-4 border"
         />
       )}
