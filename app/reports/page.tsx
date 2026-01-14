@@ -123,10 +123,7 @@ export default function ReportsPage() {
           </div>
         </div>
       )}
-      {/* 🔐 EEAT TRUST */}
-      <section className="mt-16">
-        <EEATTrustSnippet />
-      </section>
+      
     </div>
   );
 }

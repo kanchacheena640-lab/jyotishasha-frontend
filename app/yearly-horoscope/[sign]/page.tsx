@@ -218,9 +218,7 @@ export default async function YearlySignPage({
           </CardSection>
         )}
 
-        {/* 🔐 EEAT TRUST */}
-        <EEATTrustSnippet />
-
+        
         <div className="pt-4">
           <Link
             href="/yearly-horoscope"

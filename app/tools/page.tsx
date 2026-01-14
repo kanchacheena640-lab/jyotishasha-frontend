@@ -79,10 +79,7 @@ export default function ToolsPage() {
           </Link>
         ))}
       </div>
-      {/* 🔐 EEAT TRUST */}
-      <section className="mt-16">
-        <EEATTrustSnippet />
-      </section>
+      
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 /**
@@ -201,13 +200,7 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
           >
             📱 Get Jyotishasha App
           </a>
-        </section>
-
-        {/* 🔐 EEAT TRUST */}
-        <section className="mt-12">
-          <EEATTrustSnippet />
-        </section>
-
+        </section>        
       </div>
     </main>
   );

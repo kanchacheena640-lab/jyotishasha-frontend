@@ -287,11 +287,7 @@ export default function ReportCheckout() {
         </p>
       </div>
 
-      {/* 🔐 EEAT TRUST */}
-      <section className="mt-10 mb-6">
-        <EEATTrustSnippet />
-      </section>
-
+      
       <button
         onClick={handleSubmit}
         className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"

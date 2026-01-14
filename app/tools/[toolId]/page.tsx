@@ -48,7 +48,7 @@ export default function ToolDynamicPage() {
           kundaliData={kundaliData}
           result={result}
         />
-        <EEATTrustSnippet />
+      
       </div>
     ) : null}
   </div>

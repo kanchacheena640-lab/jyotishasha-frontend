@@ -565,11 +565,7 @@ export default async function TodayPanchangPage() {
           Download Jyotishasha App
         </a>
       </section>
-      {/* 🔐 EEAT TRUST */}
-      <section className="mt-10">
-        <EEATTrustSnippet />
-      </section>
-
+      
       {/* ================== ADS + SEO FOOTER ================== */}
       <div className="mt-6 text-center text-sm text-gray-400">Advertisement</div>
 

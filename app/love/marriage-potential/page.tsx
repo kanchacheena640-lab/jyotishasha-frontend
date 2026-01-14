@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 export default function MarriagePotentialDetailPage() {
@@ -117,10 +116,7 @@ export default function MarriagePotentialDetailPage() {
           Unlock Full Relationship Report
         </button>
       </div>
-      {/* 🔐 EEAT TRUST */}
-      <section className="mt-16">
-        <EEATTrustSnippet />
-      </section>
+      
     </div>
   );
 }

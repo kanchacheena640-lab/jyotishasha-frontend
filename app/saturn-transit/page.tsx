@@ -110,9 +110,7 @@ export default async function SaturnTransitPage() {
           planetRashi={saturnPos?.rashi}
         />
 
-        {/* 🔐 EEAT TRUST */}
-        <EEATTrustSnippet />
-
+        
         {/* REMEDIES */}
         <section className="mt-16">
           <h2 className="text-2xl font-semibold mb-3">

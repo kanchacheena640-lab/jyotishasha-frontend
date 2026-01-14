@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { zodiacData, type ZodiacSign } from "@/lib/zodiac";
 import DailyHoroscopeBlock from "@/components/DailyHoroscopeBlock";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 export async function generateMetadata({
   params,
@@ -170,8 +169,6 @@ export default function DailyHoroscopePage({ params }: Props) {
             </div>
         </div>
         </section>
-        {/* 🔐 EEAT TRUST */}
-        <EEATTrustSnippet />
-    </div>
+      </div>
   );
 }

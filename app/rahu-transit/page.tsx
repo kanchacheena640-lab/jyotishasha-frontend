@@ -108,8 +108,7 @@ export default async function RahuTransitPage() {
           planetRashi={rahuPos?.rashi}
         />
 
-        {/* 🔐 EEAT TRUST */}
-        <EEATTrustSnippet />        
+       
 
         {/* REMEDIES */}
         <section className="mt-16">

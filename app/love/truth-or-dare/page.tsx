@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 export default function TruthOrDareDetailPage() {
@@ -89,11 +88,6 @@ export default function TruthOrDareDetailPage() {
             Early Bird
           </span>
         </div>
-
-        {/* 🔐 EEAT TRUST */}
-        <section className="mt-14">
-          <EEATTrustSnippet />
-        </section>
 
         <button
           onClick={() =>
