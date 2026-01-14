@@ -127,6 +127,10 @@ export default async function SunTransitPage() {
           Dates are calculated using sidereal zodiac (Lahiri Ayanamsa).
         </p>
 
+        <Link href="/astrology-methodology" className="underline text-blue-700">
+          Astrology calculation methodology
+        </Link>
+
         {/* CTA */}
         <div className="mt-16 text-left">
           <Link
