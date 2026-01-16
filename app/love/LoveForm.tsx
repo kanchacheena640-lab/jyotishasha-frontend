@@ -108,7 +108,7 @@ export default function LoveFormPage() {
     <div className="max-w-3xl mx-auto p-6 space-y-10 bg-white">
       {/* HERO */}
       <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-center text-white shadow-xl">
-        <h1 className="text-3xl font-extrabold">💍 Vedic Matchmaking</h1>
+        <h2 className="text-3xl font-extrabold">💍 Vedic Matchmaking</h2>
         <p className="mt-3 text-purple-100">
           Enter birth details to check love & marriage compatibility
         </p>
