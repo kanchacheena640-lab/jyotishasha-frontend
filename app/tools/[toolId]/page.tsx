@@ -2,6 +2,21 @@ import type { Metadata } from "next";
 import { toolContentMap } from "@/app/data/toolContent";
 import ToolDynamicPage from "./ToolDynamicPage";
 
+function buildFaqJsonLd(faq: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map((item) => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a,
+      },
+    })),
+  };
+}
+
 export function generateMetadata(
   { params }: { params: { toolId: string } }
 ): Metadata {
@@ -51,6 +66,16 @@ export default function ToolPage({ params }: { params: { toolId: string } }) {
               <li key={i}>{b}</li>
             ))}
           </ul>
+
+          {/* ✅ FAQ JSON-LD (SEO ONLY, invisible) */}
+{tool?.faq?.length > 0 && (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(buildFaqJsonLd(tool.faq)),
+    }}
+  />
+)}
 
           {/* 🎥 VIDEO */}
           {tool.video?.youtubeUrl && (
