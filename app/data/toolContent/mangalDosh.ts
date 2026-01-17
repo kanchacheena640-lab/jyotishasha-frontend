@@ -43,7 +43,7 @@ export const mangalDoshContent = {
 
   video: {
     title: "What is Mangal Dosh? Truth vs Myths Explained",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=xFoM847JcXU",
   },
 
   faq: [
