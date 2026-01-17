@@ -43,7 +43,7 @@ export const neechbhangRajyogContent = {
 
   video: {
     title: "Neechbhang Rajyog Explained – From Weakness to Strength",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

@@ -46,7 +46,7 @@ export const rashiFinderContent = {
 
   video: {
     title: "What Is Rashi? How to Find Your Exact Moon Rashi",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

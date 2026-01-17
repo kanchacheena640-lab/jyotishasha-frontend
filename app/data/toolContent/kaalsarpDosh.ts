@@ -43,7 +43,7 @@ export const kaalsarpDoshContent = {
 
   video: {
     title: "Kaalsarp Dosh Explained – Myth vs Reality",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/shorts/6GGjmt47Mzw",
   },
 
   faq: [

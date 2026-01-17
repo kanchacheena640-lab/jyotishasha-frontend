@@ -45,7 +45,7 @@ export const vipreetRajyogContent = {
 
   video: {
     title: "Vipreet Rajyog Explained – Success After Struggle",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

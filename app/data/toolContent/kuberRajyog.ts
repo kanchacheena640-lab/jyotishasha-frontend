@@ -45,7 +45,7 @@ export const kuberRajyogContent = {
 
   video: {
     title: "Kuber Rajyog Explained – Wealth & Savings Yoga in Kundali",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

@@ -45,7 +45,7 @@ export const loveLifeContent = {
 
   video: {
     title: "Love Life Astrology Explained – Romance & Relationships in Kundali",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/shorts/GBjl0sUR_QQ",
   },
 
   faq: [

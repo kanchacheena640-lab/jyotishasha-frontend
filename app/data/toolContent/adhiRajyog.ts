@@ -45,7 +45,7 @@ export const adhiRajyogContent = {
 
   video: {
     title: "Adhi Rajyog Explained – Moon Based Rajyog in Kundali",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

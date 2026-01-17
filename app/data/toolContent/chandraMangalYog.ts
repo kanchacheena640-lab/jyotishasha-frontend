@@ -43,7 +43,7 @@ export const chandraMangalYogContent = {
 
   video: {
     title: "Chandra Mangal Yog Explained – Wealth, Business & Results",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

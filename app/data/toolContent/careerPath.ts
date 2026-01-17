@@ -45,7 +45,7 @@ export const careerPathContent = {
 
   video: {
     title: "Career Path Astrology Explained – Choose the Right Profession",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

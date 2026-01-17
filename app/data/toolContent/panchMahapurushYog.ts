@@ -43,7 +43,7 @@ export const panchMahapurushYogContent = {
 
   video: {
     title: "Panch Mahapurush Yog Explained – The Five Great Yogas",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [

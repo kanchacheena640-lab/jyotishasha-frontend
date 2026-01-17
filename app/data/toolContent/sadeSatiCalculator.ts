@@ -43,7 +43,7 @@ export const sadeSatiCalculatorContent = {
 
   video: {
     title: "What is Sade Sati? Saturn Transit Explained Clearly",
-    youtubeUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+    youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
   },
 
   faq: [
