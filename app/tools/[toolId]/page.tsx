@@ -1,62 +1,55 @@
-'use client';
+import type { Metadata } from "next";
+import { toolContentMap } from "@/app/data/toolContent";
+import ToolDynamicPage from "./ToolDynamicPage";
 
-import { useParams } from 'next/navigation';
-import { useState } from 'react';
-import ToolInputForm, { FormData } from '@/components/ToolInputForm';
-import ToolResultSection from '@/components/ToolResultSection';
-import { fetchFullKundali } from '@/utils/fetchFullKundali';
-import { fetchLifeTool } from '@/utils/fetchLifeTool';
-import { parseToolResponse, ParsedResult } from '@/utils/parseToolResponse';
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+export function generateMetadata({ params }: { params: { toolId: string } }): Metadata {
+  const tool = toolContentMap[params.toolId];
 
-export default function ToolDynamicPage() {
-  const { toolId } = useParams() as { toolId: string };
-  const [kundaliData, setKundaliData] = useState<any>(null);
-  const [result, setResult] = useState<ParsedResult | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  if (!tool) {
+    return {
+      title: "Free Astrology Tool | Jyotishasha",
+      description: "Use free Vedic astrology tools for accurate life guidance.",
+      alternates: {
+        canonical: `https://www.jyotishasha.com/tools/${params.toolId}`,
+      },
+    };
+  }
 
-  const handleSubmit = async (formData: FormData) => {
-    console.log("📨 Tool page received formData:", formData);
-    if (!toolId) return;
-
-    const LIFE_TOOL_IDS = ['career-path', 'marriage-path', 'foreign-travel', 'government-job', 'business-path', 'love-life',]; // extend later
-
-    let data;
-    if (LIFE_TOOL_IDS.includes(toolId)) {
-      const [kundali, lifeTool] = await Promise.all([
-        fetchFullKundali({ ...formData, toolId }),
-        fetchLifeTool({ ...formData, toolId }),
-      ]);
-
-      data = { ...lifeTool, ...kundali };
-    } else {
-      data = await fetchFullKundali({ ...formData, toolId });
-    }
-
-    setKundaliData(data);
-    const parsed = await parseToolResponse(data, toolId);
-    setResult(parsed);
-    setSubmitted(true);
+  return {
+    title: tool.seo.title,
+    description: tool.seo.description,
+    keywords: tool.seo.keywords,
+    alternates: {
+      canonical: `https://www.jyotishasha.com/tools/${params.toolId}`,
+    },
   };
+}
+
+export default function ToolPage({ params }: { params: { toolId: string } }) {
+  const tool = toolContentMap[params.toolId];
 
   return (
-    <div className="space-y-6">
-      {!submitted && <ToolInputForm toolId={toolId} onSubmit={handleSubmit} />}
-      {kundaliData && result ? (
-      <div className="space-y-6">
-        <ToolResultSection
-          kundaliData={kundaliData}
-          result={result}
-        />
-
-        {/* 🔎 Authority / EEAT (ONLY after result) */}
-        <p className="text-sm text-gray-500 leading-relaxed">
-          This analysis is generated using classical Vedic astrology principles,
-          birth chart calculations, and Jyotishasha research methodology.
-        </p>
+    <div className="max-w-5xl mx-auto px-4 py-10 space-y-10">
       
-      </div>
-    ) : null}
-  </div>
-);
+      {/* ✅ SEO CONTENT (SERVER RENDERED) */}
+      {tool && (
+        <section className="space-y-4">
+          <h1 className="text-3xl font-bold">{tool.seo.title}</h1>
+
+          <p className="text-gray-700">{tool.content.intro}</p>
+          <p className="text-gray-700">{tool.content.whatIsRashi}</p>
+          <p className="text-gray-700">{tool.content.whyMoonRashiImportant}</p>
+
+          <ul className="list-disc pl-6 text-gray-700">
+            {tool.content.benefits.map((b: string, i: number) => (
+                <li key={i}>{b}</li>
+            ))}
+            </ul>
+        </section>
+      )}
+
+      {/* ✅ TOOL FORM + RESULT (CLIENT) */}
+      <ToolDynamicPage />
+    </div>
+  );
 }
