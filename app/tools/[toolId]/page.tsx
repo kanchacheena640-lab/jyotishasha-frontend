@@ -31,14 +31,13 @@ export default function ToolPage({ params }: { params: { toolId: string } }) {
   const tool = toolContentMap[params.toolId];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 space-y-12 text-white">
-      
-      {/* ✅ TOOL FORM + RESULT (CLIENT FIRST) */}
+    <>
+      {/* 🔹 TOOL (FULL WIDTH – unchanged layout) */}
       <ToolDynamicPage />
 
-      {/* ✅ SEO + INFORMATION CONTENT (FORM KE NEECH) */}
+      {/* 🔹 SEO CONTENT (separate container) */}
       {tool && (
-        <section className="space-y-4">
+        <div className="max-w-5xl mx-auto px-4 py-12 text-white space-y-6">
           <h2 className="text-2xl font-bold text-purple-300">
             {tool.seo.title}
           </h2>
@@ -53,7 +52,7 @@ export default function ToolPage({ params }: { params: { toolId: string } }) {
             ))}
           </ul>
 
-          {/* 🎥 VIDEO (auto visible when link added) */}
+          {/* 🎥 VIDEO */}
           {tool.video?.youtubeUrl && (
             <div className="mt-8">
               <h3 className="text-xl font-semibold text-purple-300 mb-3">
@@ -69,8 +68,8 @@ export default function ToolPage({ params }: { params: { toolId: string } }) {
               </div>
             </div>
           )}
-        </section>
+        </div>
       )}
-    </div>
+    </>
   );
 }
