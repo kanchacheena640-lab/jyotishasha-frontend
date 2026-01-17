@@ -145,9 +145,9 @@ export default function PanchangClient({ params }: { params: { date: string } })
     <main className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white px-4 py-10 md:py-14">
       {/* Header */}
       <section className="text-center mb-6">
-        <h1 className="text-2xl md:text-3xl font-semibold text-purple-300 mb-1">
-          Panchang for {formattedDate}
-        </h1>
+        <h2 className="text-xl md:text-2xl font-semibold text-purple-300 mb-1">
+          Panchang Details for {formattedDate}
+        </h2>
         <div className="text-sm text-gray-400 mb-3">📍 {location}</div>
 
         {/* Date & Location Controls */}
