@@ -91,7 +91,7 @@ export default async function SunTransitHousePage({
       </h1>
 
       <AscendantSunTransitClient
-        ascendant={ascendant}
+        ascendant={params.ascendant}   // ✅ "pisces"
         planet="sun"
         lang="en"
         initialHouse={houseNum}
