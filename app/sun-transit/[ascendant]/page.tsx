@@ -194,6 +194,35 @@ export default async function SunTransitAscendantPage({
           initialData={initialData}
         />
 
+        {/* 🔗 House-wise Sun Transit Effects (SEO index) */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Sun Transit in {titleCase(ascendant)} Ascendant – House-wise Effects
+          </h2>
+
+          <p className="text-gray-700 mb-6 leading-relaxed">
+            Explore how the Sun transit impacts each house for {titleCase(ascendant)} ascendant.
+            Each house activates different life areas such as career, health, relationships,
+            finances, authority and self-expression.
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
+              <Link
+                key={h}
+                href={`/sun-transit/${ascendant}/house-${h}`}
+                className="border rounded-xl px-4 py-3 text-sm hover:border-blue-700 hover:bg-blue-50 transition"
+              >
+                <strong>House {h}</strong>
+                <div className="text-gray-600 mt-1">
+                  Sun transit effects in House {h}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+
         {/* Internal linking for SEO */}
         <section className="mt-12 border-t pt-6">
           <h2 className="text-lg font-semibold mb-3">Explore other Ascendants</h2>
