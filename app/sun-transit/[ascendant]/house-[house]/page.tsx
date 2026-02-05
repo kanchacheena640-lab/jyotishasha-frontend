@@ -56,7 +56,7 @@ export async function generateMetadata({
 
   if (!houseNum || houseNum < 1 || houseNum > 12) {
     return {
-      title: "Sun Transit House Effects | Jyotishasha",
+      title: "Sun Transit House Effects 🔥| Jyotishasha",
       robots: { index: false, follow: false },
     };
   }
@@ -66,7 +66,7 @@ export async function generateMetadata({
     params.ascendant.slice(1);
 
   return {
-    title: `Sun Transit in ${ascTitle} Ascendant – House ${houseNum} Effects | Jyotishasha`,
+    title: `Sun Transit in ${ascTitle} Ascendant – House ${houseNum} Effects | Jyotishasha`, 
     description: `Sun transit effects for ${ascTitle} ascendant in House ${houseNum} as per Vedic astrology.`,
     alternates: {
       canonical: `https://www.jyotishasha.com/sun-transit/${params.ascendant}/house-${houseNum}`,
