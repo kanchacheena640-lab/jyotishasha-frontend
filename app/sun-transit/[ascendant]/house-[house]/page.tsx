@@ -7,6 +7,12 @@ export const revalidate = 3600;
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
+export async function generateStaticParams() {
+  return Array.from({ length: 12 }, (_, i) => ({
+    house: `house-${i + 1}`,
+  }));
+}
+
 /* ---------- DATA ---------- */
 async function fetchTransit({
   ascendant,
