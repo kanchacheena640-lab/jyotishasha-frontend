@@ -8,9 +8,23 @@ export const revalidate = 3600;
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
 export async function generateStaticParams() {
-  return Array.from({ length: 12 }, (_, i) => ({
-    house: `house-${i + 1}`,
-  }));
+  const ascendants = [
+    "aries","taurus","gemini","cancer","leo","virgo",
+    "libra","scorpio","sagittarius","capricorn","aquarius","pisces",
+  ];
+
+  const params: { ascendant: string; house: string }[] = [];
+
+  for (const ascendant of ascendants) {
+    for (let i = 1; i <= 12; i++) {
+      params.push({
+        ascendant,
+        house: `house-${i}`,
+      });
+    }
+  }
+
+  return params;
 }
 
 /* ---------- DATA ---------- */
