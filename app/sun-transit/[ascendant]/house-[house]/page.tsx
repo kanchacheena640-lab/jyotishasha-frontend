@@ -7,13 +7,13 @@ export const revalidate = 3600;
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
-/* ---------------- Data Fetch ---------------- */
+/* ---------- DATA ---------- */
 async function fetchTransit({
   ascendant,
   house,
   lang,
 }: {
-  ascendant: string; // slug e.g. "pisces"
+  ascendant: string; // "pisces"
   house: number;     // 1–12
   lang: "en" | "hi";
 }) {
@@ -25,12 +25,13 @@ async function fetchTransit({
   return res.json();
 }
 
-/* ---------------- SEO METADATA ---------------- */
+/* ---------- SEO ---------- */
 export async function generateMetadata({
   params,
 }: {
-  params: { ascendant: string; house: string }; // house = "house-1"
+  params: { ascendant: string; house: string }; // "house-1"
 }): Promise<Metadata> {
+
   const houseNum = Number(params.house.replace("house-", ""));
 
   if (!houseNum || houseNum < 1 || houseNum > 12) {
@@ -46,22 +47,24 @@ export async function generateMetadata({
 
   return {
     title: `Sun Transit in ${ascTitle} Ascendant – House ${houseNum} Effects | Jyotishasha`,
-    description: `Sun transit effects for ${ascTitle} ascendant in House ${houseNum} as per Vedic astrology. Career, health, authority and remedies explained.`,
+    description: `Sun transit effects for ${ascTitle} ascendant in House ${houseNum} as per Vedic astrology.`,
     alternates: {
       canonical: `https://www.jyotishasha.com/sun-transit/${params.ascendant}/house-${houseNum}`,
     },
   };
 }
 
-/* ---------------- PAGE ---------------- */
+/* ---------- PAGE ---------- */
 export default async function SunTransitHousePage({
   params,
 }: {
-  params: { ascendant: string; house: string }; // house = "house-1"
+  params: { ascendant: string; house: string }; // "house-1"
 }) {
+
   const houseNum = Number(params.house.replace("house-", ""));
+
   if (!houseNum || houseNum < 1 || houseNum > 12) {
-    notFound(); // correct place
+    notFound();
   }
 
   const ascTitle =
@@ -69,31 +72,21 @@ export default async function SunTransitHousePage({
     params.ascendant.slice(1);
 
   const dataEn = await fetchTransit({
-    ascendant: params.ascendant, // slug (lowercase) ONLY
+    ascendant: params.ascendant, // slug only
     house: houseNum,
     lang: "en",
   });
 
-  if (!dataEn) {
-    notFound(); // backend content missing
-  }
+  if (!dataEn) notFound();
 
   return (
-    <article className="max-w-5xl mx-auto px-6 py-14 bg-white rounded-2xl shadow">
-      <nav className="text-sm mb-6 text-gray-600">
-        <Link href="/sun-transit">Sun Transit</Link> ›{" "}
-        <Link href={`/sun-transit/${params.ascendant}`}>
-          {ascTitle} Ascendant
-        </Link>{" "}
-        › House {houseNum}
-      </nav>
-
-      <h1 className="text-3xl font-bold mb-6">
+    <article>
+      <h1>
         Sun Transit in {ascTitle} Ascendant – House {houseNum}
       </h1>
 
       <AscendantSunTransitClient
-        ascendant={params.ascendant}   // slug to client (IMPORTANT)
+        ascendant={params.ascendant}
         planet="sun"
         lang="en"
         initialHouse={houseNum}
@@ -102,3 +95,4 @@ export default async function SunTransitHousePage({
     </article>
   );
 }
+
