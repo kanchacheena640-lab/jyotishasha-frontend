@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
 
 export const revalidate = 3600;
@@ -29,7 +30,14 @@ export async function generateMetadata({
 }: {
   params: { ascendant: string; house: string };
 }): Promise<Metadata> {
-  const houseNum = Number(params.house.replace("house-", ""));
+    const houseNum = Number(params.house);
+
+    if (!houseNum || houseNum < 1 || houseNum > 12) {
+    return {
+        title: "Sun Transit House Effects | Jyotishasha",
+        robots: { index: false, follow: false },
+    };
+    }
   const asc = params.ascendant;
 
   return {
@@ -48,7 +56,11 @@ export default async function SunTransitHousePage({
   params: { ascendant: string; house: string };
 }) {
   const ascendant = params.ascendant;
-  const houseNum = Number(params.house.replace("house-", ""));
+  const houseNum = Number(params.house);
+
+  if (!houseNum || houseNum < 1 || houseNum > 12) {
+    notFound(); // ✅ correct place
+  }
 
   const dataEn = await fetchTransit({
     ascendant,
@@ -56,17 +68,15 @@ export default async function SunTransitHousePage({
     lang: "en",
   });
 
+  if (!dataEn) {
+    notFound(); // ✅ backend missing content
+  }
+
   return (
     <article className="max-w-5xl mx-auto px-6 py-14 bg-white rounded-2xl shadow">
       <nav className="text-sm mb-6 text-gray-600">
-        <Link href="/sun-transit" className="hover:underline">
-          Sun Transit
-        </Link>{" "}
-        ›{" "}
-        <Link
-          href={`/sun-transit/${ascendant}`}
-          className="hover:underline"
-        >
+        <Link href="/sun-transit">Sun Transit</Link> ›{" "}
+        <Link href={`/sun-transit/${ascendant}`}>
           {ascendant} Ascendant
         </Link>{" "}
         › House {houseNum}
