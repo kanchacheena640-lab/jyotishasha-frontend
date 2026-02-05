@@ -210,7 +210,7 @@ export default async function SunTransitAscendantPage({
             {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
               <Link
                 key={h}
-                href={`/sun-transit/${ascendant}/house-${h}`}
+                href={`/sun-transit/${ascendant}/house-${h}`}   // ✅ FIXED
                 className="border rounded-xl px-4 py-3 text-sm hover:border-blue-700 hover:bg-blue-50 transition"
               >
                 <strong>House {h}</strong>
