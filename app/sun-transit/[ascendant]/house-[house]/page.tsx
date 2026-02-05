@@ -67,10 +67,10 @@ export default async function SunTransitHousePage({
   }
 
   const dataEn = await fetchTransit({
-    ascendant,
+    ascendant: params.ascendant, // "pisces"
     house: houseNum,
     lang: "en",
-  });
+    });
 
   if (!dataEn) {
     notFound(); // ✅ backend missing content
