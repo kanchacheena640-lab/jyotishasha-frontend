@@ -4,15 +4,11 @@ import { notFound } from "next/navigation";
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
 /* ---------- DATA ---------- */
-async function fetchTransit(
-  ascendant: string,
-  house: number
-) {
+async function fetchTransit(ascendant: string, house: number) {
   const res = await fetch(
     `${BACKEND}/api/transit?ascendant=${ascendant}&planet=sun&house=${house}&lang=en`,
     { cache: "no-store" }
   );
-
   if (!res.ok) return null;
   return res.json();
 }
@@ -23,7 +19,7 @@ export async function generateMetadata({
 }: {
   params: { ascendant: string; house: string };
 }): Promise<Metadata> {
-  const houseNum = Number(params.house.replace("house-", ""));
+  const houseNum = Number(params.house);
   if (!houseNum || houseNum < 1 || houseNum > 12) {
     return { robots: { index: false, follow: false } };
   }
@@ -47,15 +43,11 @@ export default async function SunTransitHousePage({
 }: {
   params: { ascendant: string; house: string };
 }) {
-  const houseNum = Number(params.house.replace("house-", ""));
+  const houseNum = Number(params.house);
   if (!houseNum || houseNum < 1 || houseNum > 12) notFound();
 
   const data = await fetchTransit(params.ascendant, houseNum);
   if (!data) notFound();
-
-  const ascTitle =
-    params.ascendant.charAt(0).toUpperCase() +
-    params.ascendant.slice(1);
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-12 text-black">
