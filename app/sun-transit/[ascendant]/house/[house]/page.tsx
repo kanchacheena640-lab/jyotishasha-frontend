@@ -107,6 +107,42 @@ export default async function SunTransitHousePage({
             </p>
         </div>
 
+        {/* CTA – Personalized Transit Report */}
+        <div className="mt-10 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-7 text-white shadow-lg">
+
+        <h3 className="text-2xl font-bold mb-3">
+            This Is a General Transit — Want Your Real Prediction?
+        </h3>
+
+        <p className="text-white/95 leading-relaxed mb-5">
+            This page explains the <strong>Sun transit in House {houseNum}</strong> for a
+            <strong> {params.ascendant.charAt(0).toUpperCase() + params.ascendant.slice(1)} Ascendant</strong>.
+            <br /><br />
+            But in real life, results change based on:
+        </p>
+
+        <ul className="list-disc pl-6 space-y-1 text-white/95 mb-6">
+            <li>Which houses the Sun actually rules in your chart</li>
+            <li>Exact degree strength and combustion status</li>
+            <li>Aspects from Saturn, Jupiter, Mars, Rahu–Ketu</li>
+            <li>Your current Mahadasha & Antardasha running now</li>
+            <li>Moon sign and emotional response to this transit</li>
+        </ul>
+
+        <p className="text-white/95 mb-6 leading-relaxed">
+            That is why two Taurus Ascendants experience the <em>same Sun transit</em>
+            in completely different ways.
+        </p>
+
+        <a
+            href={`/personalized-transit-report?planet=sun&house=${houseNum}&ascendant=${params.ascendant}`}
+            className="inline-block bg-white text-orange-700 font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition"
+        >
+            Get My Personalized Sun Transit Report →
+        </a>
+
+        </div>
+
         </article>
     </div>
     );

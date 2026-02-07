@@ -43,7 +43,7 @@ async function fetchTransitClient(args: {
 
 export default function AscendantSunTransitClient(props: {
   ascendant: string; // slug: pisces
-  planet: "sun";
+  planet: string;
   lang: "en" | "hi";
   initialHouse: number;
   initialData: TransitData | null;
@@ -81,7 +81,7 @@ export default function AscendantSunTransitClient(props: {
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-3">
-        {titleCase(props.ascendant)} Ascendant – House-wise Effects (Sun Transit)
+        {titleCase(props.ascendant)} Ascendant – House-wise Effects ({titleCase(props.planet)} Transit)
       </h2>
 
       {/* House Tabs */}
