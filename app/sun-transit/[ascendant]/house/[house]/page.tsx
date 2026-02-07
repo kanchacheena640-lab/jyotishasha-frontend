@@ -50,39 +50,64 @@ export default async function SunTransitHousePage({
   if (!data) notFound();
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12 text-black">
-      <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+    <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
+        <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
 
-      <p className="text-gray-700 mb-8">{data.summary}</p>
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+            {data.title}
+        </h1>
 
-      {data.sections.map((sec: any, i: number) => (
-        <section key={i} className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">{sec.heading}</h2>
-          <ul className="list-disc pl-6 text-gray-700">
-            {sec.points.map((p: string, j: number) => (
-              <li key={j}>{p}</li>
+        <p className="text-gray-800 mb-10 leading-relaxed text-lg">
+            {data.summary}
+        </p>
+
+        <div className="space-y-10">
+            {data.sections.map((sec: any, i: number) => (
+            <section key={i} className="border-l-4 border-blue-700 pl-6">
+                <h2 className="text-2xl font-semibold mb-3">
+                {sec.heading}
+                </h2>
+
+                <ul className="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed">
+                {sec.points.map((p: string, j: number) => (
+                    <li key={j}>{p}</li>
+                ))}
+                </ul>
+            </section>
             ))}
-          </ul>
-        </section>
-      ))}
+        </div>
 
-      <h3 className="font-semibold mt-10">Strengths</h3>
-      <ul className="list-disc pl-6 mb-6">
-        {data.strengths.map((s: string, i: number) => (
-          <li key={i}>{s}</li>
-        ))}
-      </ul>
+        <div className="grid md:grid-cols-2 gap-8 mt-14">
+            <div className="bg-green-50 rounded-xl p-6">
+            <h3 className="text-xl font-semibold mb-3 text-green-800">
+                Strengths
+            </h3>
+            <ul className="list-disc pl-6 space-y-1 text-gray-700">
+                {data.strengths.map((s: string, i: number) => (
+                <li key={i}>{s}</li>
+                ))}
+            </ul>
+            </div>
 
-      <h3 className="font-semibold">Challenges</h3>
-      <ul className="list-disc pl-6 mb-6">
-        {data.challenges.map((c: string, i: number) => (
-          <li key={i}>{c}</li>
-        ))}
-      </ul>
+            <div className="bg-red-50 rounded-xl p-6">
+            <h3 className="text-xl font-semibold mb-3 text-red-800">
+                Challenges
+            </h3>
+            <ul className="list-disc pl-6 space-y-1 text-gray-700">
+                {data.challenges.map((c: string, i: number) => (
+                <li key={i}>{c}</li>
+                ))}
+            </ul>
+            </div>
+        </div>
 
-      <p className="text-gray-800">
-        <strong>Closing:</strong> {data.closing}
-      </p>
-    </main>
-  );
+        <div className="mt-12 border-t pt-6">
+            <p className="text-gray-800 leading-relaxed text-lg">
+            <strong>Closing Insight:</strong> {data.closing}
+            </p>
+        </div>
+
+        </article>
+    </div>
+    );
 }
