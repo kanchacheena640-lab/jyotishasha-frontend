@@ -52,7 +52,7 @@ export default function AscendantTransitCards({
 
               {/* CTA – new line */}
               <a
-                href={`/${planetSlug}-transit/${asc.toLowerCase()}/house-${house}`}
+                href={`/${planetSlug}/${asc.toLowerCase()}/house-${house}`}
                 className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
               >
                 See How This Transit Affects You  →
