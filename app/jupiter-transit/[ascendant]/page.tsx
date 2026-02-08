@@ -1,4 +1,3 @@
-// app/jupiter-transit/[ascendant]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -80,6 +79,13 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://www.jyotishasha.com/jupiter-transit/${a}`,
     },
+    openGraph: {
+      title: `Jupiter Transit for ${ascName} Ascendant`,
+      description: `House-wise effects of Jupiter transit for ${ascName} ascendant.`,
+      url: `https://www.jyotishasha.com/jupiter-transit/${a}`,
+      siteName: "Jyotishasha",
+      type: "article",
+    },
   };
 }
 
@@ -111,26 +117,26 @@ export default async function JupiterTransitAscendantPage({
   });
 
   return (
-    <div className="bg-gradient-to-b from-purple-900 to-purple-800 py-16">
+    <div className="bg-gradient-to-b from-yellow-900 to-amber-800 py-16">
       <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
 
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl md:text-4xl font-bold">
             Jupiter Transit Effects for {titleCase(ascendant)} Ascendant
           </h1>
-          <Link href="/jupiter-transit" className="text-sm text-purple-700 hover:underline">
+          <Link href="/jupiter-transit" className="text-sm text-amber-700 hover:underline">
             ← Back to Jupiter Transit
           </Link>
         </div>
 
         <p className="text-gray-800 mb-8 leading-relaxed">
-          This page explains the <strong>house-wise effects</strong> of Jupiter transit for{" "}
-          <strong>{titleCase(ascendant)} Ascendant</strong>. Jupiter governs wisdom,
-          expansion, fortune, guidance, ethics and long-term growth.
+          This page explains the <strong>house-wise effects</strong> of the Jupiter transit for{" "}
+          <strong>{titleCase(ascendant)} Ascendant</strong>. Jupiter governs growth, wisdom,
+          expansion, fortune, guidance and long-term progress.
         </p>
 
         {/* Snapshot */}
-        <section className="bg-purple-900 rounded-xl p-6 mb-10 text-white">
+        <section className="bg-amber-900 rounded-xl p-6 mb-10 text-white">
           <h2 className="text-xl font-semibold mb-4">Current Jupiter Transit Snapshot</h2>
           <div className="grid sm:grid-cols-2 gap-3 text-sm">
             <div><strong>Planet:</strong> Jupiter (Guru)</div>
@@ -160,7 +166,7 @@ export default async function JupiterTransitAscendantPage({
               <Link
                 key={h}
                 href={`/jupiter-transit/${ascendant}/house-${h}`}
-                className="border rounded-xl px-4 py-3 text-sm hover:border-purple-700 hover:bg-purple-50 transition"
+                className="border rounded-xl px-4 py-3 text-sm hover:border-amber-700 hover:bg-amber-50 transition"
               >
                 <strong>House {h}</strong>
                 <div className="text-gray-600 mt-1">

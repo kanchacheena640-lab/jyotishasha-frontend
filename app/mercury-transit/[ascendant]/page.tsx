@@ -1,4 +1,3 @@
-// app/mercury-transit/[ascendant]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -76,7 +75,7 @@ export async function generateMetadata({
 
   return {
     title: `Mercury Transit for ${ascName} Ascendant – House-wise Effects | Jyotishasha`,
-    description: `Detailed house-wise effects of Mercury transit for ${ascName} ascendant as per Vedic astrology.`,
+    description: `House-wise effects of Mercury transit for ${ascName} ascendant as per Vedic astrology.`,
     alternates: {
       canonical: `https://www.jyotishasha.com/mercury-transit/${a}`,
     },
@@ -126,7 +125,7 @@ export default async function MercuryTransitAscendantPage({
         <p className="text-gray-800 mb-8 leading-relaxed">
           This page explains the <strong>house-wise effects</strong> of Mercury transit for{" "}
           <strong>{titleCase(ascendant)} Ascendant</strong>. Mercury governs intellect,
-          communication, logic, learning, trade and analytical ability.
+          communication, business skills, analysis and decision-making.
         </p>
 
         {/* Snapshot */}
@@ -140,7 +139,7 @@ export default async function MercuryTransitAscendantPage({
           </div>
         </section>
 
-        {/* Reused client */}
+        {/* Reusable client */}
         <AscendantSunTransitClient
           ascendant={ascendant}
           planet="mercury"
