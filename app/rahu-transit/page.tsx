@@ -183,7 +183,7 @@ export default async function RahuTransitPage() {
         {/* CTA */}
         <div className="mt-16 text-left">
           <Link
-            href="/app-download"
+            href={`/rahu-transit/${rahuPos?.rashi?.toLowerCase()}`}
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
             See How This Transit Affects You →
