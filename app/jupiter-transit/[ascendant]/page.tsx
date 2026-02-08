@@ -1,4 +1,4 @@
-// app/mercury-transit/[ascendant]/page.tsx
+// app/jupiter-transit/[ascendant]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -21,8 +21,8 @@ function titleCase(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-/* -------- CURRENT MERCURY POSITION -------- */
-async function fetchMercuryCurrent() {
+/* -------- CURRENT JUPITER POSITION -------- */
+async function fetchJupiterCurrent() {
   const res = await fetch(
     "https://jyotishasha-backend.onrender.com/api/transit/current",
     { next: { revalidate: 3600 } }
@@ -67,7 +67,7 @@ export async function generateMetadata({
 
   if (!a || !isValidAscendant(a)) {
     return {
-      title: "Mercury Transit Ascendant Effects | Jyotishasha",
+      title: "Jupiter Transit Ascendant Effects | Jyotishasha",
       robots: { index: false, follow: false },
     };
   }
@@ -75,16 +75,16 @@ export async function generateMetadata({
   const ascName = titleCase(a);
 
   return {
-    title: `Mercury Transit for ${ascName} Ascendant – House-wise Effects | Jyotishasha`,
-    description: `Detailed house-wise effects of Mercury transit for ${ascName} ascendant as per Vedic astrology.`,
+    title: `Jupiter Transit for ${ascName} Ascendant – House-wise Effects | Jyotishasha`,
+    description: `Detailed house-wise effects of Jupiter transit for ${ascName} ascendant as per Vedic astrology.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/mercury-transit/${a}`,
+      canonical: `https://www.jyotishasha.com/jupiter-transit/${a}`,
     },
   };
 }
 
 /* -------- PAGE -------- */
-export default async function MercuryTransitAscendantPage({
+export default async function JupiterTransitAscendantPage({
   params,
   searchParams,
 }: {
@@ -100,50 +100,50 @@ export default async function MercuryTransitAscendantPage({
       ? Number(searchParams.house)
       : 1;
 
-  const current = await fetchMercuryCurrent();
-  const mercuryPos = current?.positions?.Mercury;
+  const current = await fetchJupiterCurrent();
+  const jupiterPos = current?.positions?.Jupiter;
 
   const initialData = await fetchTransitContent({
     ascendant,
-    planet: "mercury",
+    planet: "jupiter",
     house: initialHouse,
     lang,
   });
 
   return (
-    <div className="bg-gradient-to-b from-emerald-900 to-emerald-800 py-16">
+    <div className="bg-gradient-to-b from-purple-900 to-purple-800 py-16">
       <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
 
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl md:text-4xl font-bold">
-            Mercury Transit Effects for {titleCase(ascendant)} Ascendant
+            Jupiter Transit Effects for {titleCase(ascendant)} Ascendant
           </h1>
-          <Link href="/mercury-transit" className="text-sm text-emerald-700 hover:underline">
-            ← Back to Mercury Transit
+          <Link href="/jupiter-transit" className="text-sm text-purple-700 hover:underline">
+            ← Back to Jupiter Transit
           </Link>
         </div>
 
         <p className="text-gray-800 mb-8 leading-relaxed">
-          This page explains the <strong>house-wise effects</strong> of Mercury transit for{" "}
-          <strong>{titleCase(ascendant)} Ascendant</strong>. Mercury governs intellect,
-          communication, logic, learning, trade and analytical ability.
+          This page explains the <strong>house-wise effects</strong> of Jupiter transit for{" "}
+          <strong>{titleCase(ascendant)} Ascendant</strong>. Jupiter governs wisdom,
+          expansion, fortune, guidance, ethics and long-term growth.
         </p>
 
         {/* Snapshot */}
-        <section className="bg-emerald-900 rounded-xl p-6 mb-10 text-white">
-          <h2 className="text-xl font-semibold mb-4">Current Mercury Transit Snapshot</h2>
+        <section className="bg-purple-900 rounded-xl p-6 mb-10 text-white">
+          <h2 className="text-xl font-semibold mb-4">Current Jupiter Transit Snapshot</h2>
           <div className="grid sm:grid-cols-2 gap-3 text-sm">
-            <div><strong>Planet:</strong> Mercury (Budh)</div>
-            <div><strong>Current Rashi:</strong> {mercuryPos?.rashi || "-"}</div>
-            <div><strong>Degree:</strong> {mercuryPos?.degree ? `${mercuryPos.degree}°` : "-"}</div>
-            <div><strong>Motion:</strong> {mercuryPos?.motion || "-"}</div>
+            <div><strong>Planet:</strong> Jupiter (Guru)</div>
+            <div><strong>Current Rashi:</strong> {jupiterPos?.rashi || "-"}</div>
+            <div><strong>Degree:</strong> {jupiterPos?.degree ? `${jupiterPos.degree}°` : "-"}</div>
+            <div><strong>Motion:</strong> {jupiterPos?.motion || "-"}</div>
           </div>
         </section>
 
         {/* Reused client */}
         <AscendantSunTransitClient
           ascendant={ascendant}
-          planet="mercury"
+          planet="jupiter"
           lang={lang}
           initialHouse={initialHouse}
           initialData={initialData}
@@ -152,19 +152,19 @@ export default async function MercuryTransitAscendantPage({
         {/* House links */}
         <section className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Mercury Transit in {titleCase(ascendant)} Ascendant – House-wise Effects
+            Jupiter Transit in {titleCase(ascendant)} Ascendant – House-wise Effects
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
               <Link
                 key={h}
-                href={`/mercury-transit/${ascendant}/house-${h}`}
-                className="border rounded-xl px-4 py-3 text-sm hover:border-emerald-700 hover:bg-emerald-50 transition"
+                href={`/jupiter-transit/${ascendant}/house-${h}`}
+                className="border rounded-xl px-4 py-3 text-sm hover:border-purple-700 hover:bg-purple-50 transition"
               >
                 <strong>House {h}</strong>
                 <div className="text-gray-600 mt-1">
-                  Mercury transit effects in House {h}
+                  Jupiter transit effects in House {h}
                 </div>
               </Link>
             ))}
