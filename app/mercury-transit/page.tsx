@@ -104,6 +104,7 @@ export default async function MercuryTransitPage() {
         <AscendantTransitCards
           planet="Mercury"
           planetRashi={mercuryPos?.rashi}
+          planetSlug="mercury-transit"
         />
 
         
@@ -181,7 +182,7 @@ export default async function MercuryTransitPage() {
             href="/app-download"
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            Get the app for a personalized experience →
+            See How This Transit Affects You →
           </Link>
         </div>
       </article>

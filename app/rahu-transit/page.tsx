@@ -106,6 +106,7 @@ export default async function RahuTransitPage() {
         <AscendantTransitCards
           planet="Rahu"
           planetRashi={rahuPos?.rashi}
+          planetSlug="rahu-transit"
         />
 
        
@@ -185,7 +186,7 @@ export default async function RahuTransitPage() {
             href="/app-download"
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            Get the app for a personalized experience →
+            See How This Transit Affects You →
           </Link>
         </div>
 

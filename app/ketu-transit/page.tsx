@@ -104,6 +104,7 @@ export default async function KetuTransitPage() {
         <AscendantTransitCards
           planet="Ketu"
           planetRashi={ketuPos?.rashi}
+          planetSlug="ketu-transit"
         />
 
         {/* REMEDIES */}
@@ -180,7 +181,7 @@ export default async function KetuTransitPage() {
             href="/app-download"
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            Get the app for a personalized experience →
+            See How This Transit Affects You →
           </Link>
         </div>
 

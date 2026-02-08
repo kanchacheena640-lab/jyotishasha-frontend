@@ -108,6 +108,7 @@ export default async function SaturnTransitPage() {
         <AscendantTransitCards
           planet="Saturn"
           planetRashi={saturnPos?.rashi}
+          planetSlug="saturn-transit"
         />
 
         
@@ -185,7 +186,7 @@ export default async function SaturnTransitPage() {
             href="/app-download"
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            Get the app for a personalized experience →
+            See How This Transit Affects You →
           </Link>
         </div>
 

@@ -14,9 +14,11 @@ function getHouse(asc: string, rashi: string) {
 export default function AscendantTransitCards({
   planet,
   planetRashi,
+  planetSlug,
 }: {
   planet: string;
   planetRashi: string;
+  planetSlug: string;
 }) {
   return (
     <section className="mt-16">
