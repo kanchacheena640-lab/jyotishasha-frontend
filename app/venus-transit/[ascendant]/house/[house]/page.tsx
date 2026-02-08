@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -110,6 +112,13 @@ export default async function VenusTransitHousePage({
             <strong>Closing Insight:</strong> {data.closing}
           </p>
         </div>
+
+        <TransitInternalLinks
+          planetName="Venus"
+          planetSlug="venus-transit"
+          ascendant={params.ascendant}
+          currentHouse={houseNum}
+        />
 
         {/* CTA – Personalized Venus Transit */}
         <div className="mt-10 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl p-7 text-white shadow-lg">

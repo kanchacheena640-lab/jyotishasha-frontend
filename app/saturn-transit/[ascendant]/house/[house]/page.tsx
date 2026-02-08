@@ -1,6 +1,8 @@
 // app/saturn-transit/[ascendant]/house/[house]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -111,6 +113,13 @@ export default async function SaturnTransitHousePage({
             <strong>Closing Insight:</strong> {data.closing}
           </p>
         </div>
+
+        <TransitInternalLinks
+          planetName="Saturn"
+          planetSlug="saturn-transit"
+          ascendant={params.ascendant}
+          currentHouse={houseNum}
+        />
 
         {/* CTA – Personalized Saturn Transit */}
         <div className="mt-10 bg-gradient-to-r from-slate-700 to-gray-900 rounded-2xl p-7 text-white shadow-lg">

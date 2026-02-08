@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -110,6 +112,13 @@ export default async function JupiterTransitHousePage({
             <strong>Closing Insight:</strong> {data.closing}
           </p>
         </div>
+
+        <TransitInternalLinks
+          planetName="Jupiter"
+          planetSlug="jupiter-transit"
+          ascendant={params.ascendant}
+          currentHouse={houseNum}
+        />
 
         {/* CTA – Personalized Jupiter Transit Report */}
         <div className="mt-10 bg-gradient-to-r from-amber-500 to-yellow-600 rounded-2xl p-7 text-white shadow-lg">

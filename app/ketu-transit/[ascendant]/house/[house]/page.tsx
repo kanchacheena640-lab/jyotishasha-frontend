@@ -1,6 +1,8 @@
 // app/ketu-transit/[ascendant]/house/[house]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -121,6 +123,13 @@ export default async function KetuTransitHousePage({
             <strong>Closing Insight:</strong> {data.closing}
           </p>
         </div>
+
+        <TransitInternalLinks
+          planetName="Ketu"
+          planetSlug="ketu-transit"
+          ascendant={params.ascendant}
+          currentHouse={houseNum}
+        />
 
         {/* CTA – PERSONALIZED KETU TRANSIT */}
         <div className="mt-12 bg-gradient-to-r from-gray-800 to-slate-900 rounded-2xl p-7 text-white shadow-lg">

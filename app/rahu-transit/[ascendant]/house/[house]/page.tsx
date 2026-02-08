@@ -1,6 +1,8 @@
 // app/rahu-transit/[ascendant]/house/[house]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -110,6 +112,12 @@ export default async function RahuTransitHousePage({
             <strong>Closing Insight:</strong> {data.closing}
           </p>
         </div>
+        <TransitInternalLinks
+          planetName="Rahu"
+          planetSlug="rahu-transit"
+          ascendant={params.ascendant}
+          currentHouse={houseNum}
+        />
 
         {/* CTA */}
         <div className="mt-10 bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-7 text-white">
