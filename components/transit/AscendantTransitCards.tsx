@@ -52,10 +52,10 @@ export default function AscendantTransitCards({
 
               {/* CTA – new line */}
               <a
-                href="/app-download"
+                href={`/${planetSlug}-transit/${asc.toLowerCase()}/house-${house}`}
                 className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
               >
-                Get the app for personalized guidance  →
+                See How This Transit Affects You  →
               </a>
             </div>
           );
