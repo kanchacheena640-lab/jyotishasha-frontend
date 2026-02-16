@@ -45,6 +45,53 @@ export default async function sitemap() {
     lastModified: now,
   }));
 
+  // 🪐 Transit URLs
+
+const planets = [
+  "sun",
+  "moon",
+  "mars",
+  "mercury",
+  "jupiter",
+  "venus",
+  "saturn",
+  "rahu",
+  "ketu",
+];
+
+const ascendants = [
+  "aries",
+  "taurus",
+  "gemini",
+  "cancer",
+  "leo",
+  "virgo",
+  "libra",
+  "scorpio",
+  "sagittarius",
+  "capricorn",
+  "aquarius",
+  "pisces",
+];
+
+const transitUrls: { url: string; lastModified: string }[] = [];
+
+planets.forEach((planet) => {
+  transitUrls.push({
+    url: `${baseUrl}/${planet}-transit`,
+    lastModified: now,
+  });
+
+  ascendants.forEach((asc) => {
+    for (let house = 1; house <= 12; house++) {
+      transitUrls.push({
+        url: `${baseUrl}/${planet}-transit/${asc}/house-${house}`,
+        lastModified: now,
+      });
+    }
+  });
+});
+
   // 🔁 Combine all
   return [
     ...staticUrls,
@@ -52,5 +99,7 @@ export default async function sitemap() {
     ...toolUrls,
     ...reportUrls,
     ...kundaliUrls,
+    ...transitUrls,
   ];
+
 }
