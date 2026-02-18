@@ -17,6 +17,12 @@ const nextConfig = {
         source: '/:planet-transit/:ascendant/house-:house',
         destination: '/:planet-transit/:ascendant/house/:house',
       },
+
+       // ✅ Holi year rewrite
+      {
+        source: '/holi-:year',
+        destination: '/holi/:year',
+      },
     ];
   },
 
