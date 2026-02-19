@@ -238,17 +238,39 @@ export default async function HoliYearPage({
         )}
 
         {/* Rangwali Holi Section */}
-        <section className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
-            Rangwali Holi {year}
-          </h2>
+        <section className="mb-16">
 
-          <p className="text-gray-800 leading-relaxed">
-            Rangwali Holi will be celebrated on <strong>{dhulandi}</strong>.
-            This festival marks joy, celebration and the symbolic victory
-            of positivity over negativity.
-          </p>
+          <div className="rounded-2xl border border-blue-200 shadow-md p-8 bg-gradient-to-r from-blue-50 via-white to-blue-100">
+
+            <h2 className="text-2xl font-semibold mb-6 text-blue-900">
+              Rangwali Holi {year} – Festival of Colors
+            </h2>
+
+            <div className="text-gray-800 leading-relaxed space-y-4">
+
+              <p>
+                Rangwali Holi in {year} will be celebrated on{" "}
+                <strong>{formatDateDDMMYYYY(dhulandi)}</strong>.
+                It is observed on the day following Holika Dahan and marks the
+                joyful celebration of colors across India.
+              </p>
+
+              <p>
+                On this day, people apply gulal, exchange sweets, and celebrate
+                unity and harmony. Traditionally, it represents the victory of
+                good over evil and the arrival of spring season.
+              </p>
+
+              <p>
+                In many regions, Holi festivities begin in the morning and continue
+                throughout the day with music, community gatherings, and festive meals.
+              </p>
+
+            </div>
+
+          </div>
         </section>
+
 
         {/* Authority Note */}
         <p className="mt-10 text-sm text-gray-500 leading-relaxed">
