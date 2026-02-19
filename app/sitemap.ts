@@ -92,6 +92,17 @@ planets.forEach((planet) => {
   });
 });
 
+// 🎨 Holi Year URLs
+const currentYear = new Date().getFullYear();
+const holiUrls: { url: string; lastModified: string }[] = [];
+
+for (let year = currentYear - 1; year <= currentYear + 5; year++) {
+  holiUrls.push({
+    url: `${baseUrl}/holi-${year}`,
+    lastModified: now,
+  });
+}
+
   // 🔁 Combine all
   return [
     ...staticUrls,
@@ -100,6 +111,7 @@ planets.forEach((planet) => {
     ...reportUrls,
     ...kundaliUrls,
     ...transitUrls,
+    ...holiUrls,
   ];
 
 }
