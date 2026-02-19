@@ -183,25 +183,56 @@ export default async function HoliYearPage({
         {/* Rashi Tips */}
         {Object.keys(rashiTips).length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-semibold mb-8">
+
+            <h2 className="text-2xl font-semibold mb-8 text-blue-900">
               Rashi Wise Holika Dahan Tips
             </h2>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {Object.entries(rashiTips).map(([sign, item]) => (
-                <div
-                  key={sign}
-                  className="bg-white border rounded-2xl p-6 shadow-sm"
-                >
-                  <div className="font-semibold text-lg capitalize mb-2">
-                    {sign}
-                  </div>
 
-                  <p className="text-sm text-gray-700">
-                    {item.tip.en}
-                  </p>
-                </div>
-              ))}
+              {[
+                "aries",
+                "taurus",
+                "gemini",
+                "cancer",
+                "leo",
+                "virgo",
+                "libra",
+                "scorpio",
+                "sagittarius",
+                "capricorn",
+                "aquarius",
+                "pisces",
+              ]
+                .filter((sign) => rashiTips[sign])
+                .map((sign) => {
+                  const item = rashiTips[sign];
+
+                  return (
+                    <div
+                      key={sign}
+                      className="relative overflow-hidden rounded-2xl border border-blue-200 shadow-md p-6 bg-gradient-to-r from-blue-50 via-white to-blue-100"
+                    >
+                      {/* Header */}
+                      <div className="flex items-center gap-4 mb-4">
+                        <img
+                          src={`/zodiac/${sign}.png`}
+                          alt={`${sign} zodiac sign`}
+                          className="w-10 h-10 object-contain"
+                        />
+
+                        <div className="font-semibold text-lg capitalize text-blue-900">
+                          {sign}
+                        </div>
+                      </div>
+
+                      {/* Tip */}
+                      <p className="text-sm text-gray-800 leading-relaxed">
+                        {item.tip.en}
+                      </p>
+                    </div>
+                  );
+                })}
             </div>
           </section>
         )}
