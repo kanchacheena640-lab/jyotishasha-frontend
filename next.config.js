@@ -18,11 +18,6 @@ const nextConfig = {
         destination: '/:planet-transit/:ascendant/house/:house',
       },
 
-       // ✅ Holi year rewrite
-      {
-        source: '/holi-:year',
-        destination: '/holi/:year',
-      },
     ];
   },
 
@@ -31,6 +26,12 @@ const nextConfig = {
       {
         source: '/tools/free-kundali',
         destination: '/free-kundali',
+        permanent: true,
+      },
+       // ✅ Holi year rewrite
+      {
+        source: '/holi-:year',
+        destination: '/holi/:year',
         permanent: true,
       },
     ];

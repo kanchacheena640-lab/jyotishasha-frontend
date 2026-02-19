@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import LocationText from "@/components/location/LocationText";
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -42,6 +43,7 @@ function formatDateDDMMYYYY(dateStr?: string) {
   const day = String(d.getDate()).padStart(2, "0");
   const month = String(d.getMonth() + 1).padStart(2, "0");
   const year = d.getFullYear();
+  
 
   return `${day}-${month}-${year}`;
 }
@@ -80,10 +82,13 @@ export async function generateMetadata({
   if (!data)
     return { robots: { index: false, follow: false } };
 
+
   return {
     title: `Holi ${year} Date & Time in India: Holika Dahan Muhurat and Rangwali Holi`,
     description: `Holi ${year} date, Holika Dahan muhurat, Bhadra rules and Rangwali Holi celebration details.`,
-    alternates: { canonical: `/holi-${year}` },
+    alternates: {
+      canonical: `https://www.jyotishasha.com/holi-${year}`,
+    },
     robots: { index: true, follow: true },
   };
 }
@@ -108,9 +113,90 @@ export default async function HoliYearPage({
     <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
       <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
 
+        {/* JSON-LD Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: `Why does Holi ${year} date change every year?`,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Holi follows the lunar calendar based on Phalguna Purnima."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  name: "What is the correct time for Holika Dahan?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Holika Dahan is performed during the Pradosh period after sunset avoiding Bhadra."
+                  }
+                }
+              ]
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              name: `Holi ${year} Complete Explanation by Jyotishasha`,
+              description: `Detailed explanation of Holi ${year}, Holika Dahan Muhurat and Rangwali Holi significance.`,
+              thumbnailUrl: "https://i.ytimg.com/vi/3rgZa19zWP8/maxresdefault.jpg",
+              uploadDate: new Date().toISOString(),
+              embedUrl: "https://www.youtube.com/embed/3rgZa19zWP8",
+              publisher: {
+                "@type": "Organization",
+                name: "Jyotishasha",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.jyotishasha.com/logo.png"
+                }
+              }
+            })
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://www.jyotishasha.com"
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Festivals",
+                  item: "https://www.jyotishasha.com/festivals"
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: `Holi ${year}`,
+                  item: `https://www.jyotishasha.com/holi-${year}`
+                }
+              ]
+            })
+          }}
+        />
+
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
-          Holi {year} Date & Time in India: Holika Dahan Muhurat and Rangwali Holi
+          Holi {year} Date & Time in <LocationText />: Holika Dahan Muhurat and Rangwali Holi
         </h1>
 
         {/* Year Navigation */}
@@ -137,7 +223,7 @@ export default async function HoliYearPage({
 
           <div className="bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-2xl p-8 shadow-xl">
             <div className="text-sm uppercase opacity-80">Rangwali Holi</div>
-            <div className="text-3xl font-bold mt-2">{formatDateDDMMYYYY(dhulandi)}</div>
+            <div className="text-3xl font-bold mt-2">{formatDateDDMMYYYY(dhulandi ?? "")}</div>
           </div>
         </section>
 
@@ -250,7 +336,7 @@ export default async function HoliYearPage({
 
               <p>
                 Rangwali Holi in {year} will be celebrated on{" "}
-                <strong>{formatDateDDMMYYYY(dhulandi)}</strong>.
+                <strong>{formatDateDDMMYYYY(dhulandi ?? "")}</strong>.
                 It is observed on the day following Holika Dahan and marks the
                 joyful celebration of colors across India.
               </p>
@@ -325,6 +411,7 @@ export default async function HoliYearPage({
           </div>
         </section>
 
+
         {/* Authority / EEAT Section */}
         <section className="mb-20">
           <div className="rounded-2xl border border-blue-200 shadow-md p-8 bg-gradient-to-r from-blue-50 via-white to-blue-100">
@@ -351,6 +438,79 @@ export default async function HoliYearPage({
               combining classical scriptures, Panchang rules and modern astronomical
               precision for accuracy.
             </p>
+
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="mb-20">
+          <div className="rounded-2xl border border-blue-200 shadow-md p-8 bg-white">
+
+            <h2 className="text-xl font-semibold mb-6 text-blue-900">
+              Explore More Hindu Festival & Panchang Resources
+            </h2>
+
+            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+
+              <Link href="/free-kundali" className="text-blue-700 hover:underline">
+                Free Kundali with Reading & Yog Dosh Analysis
+              </Link>
+
+              <Link href="/tools" className="text-blue-700 hover:underline">
+                Free Astrology Tools
+              </Link>
+
+              <Link href="/love" className="text-blue-700 hover:underline">
+                Love Compatibility & Match Making
+              </Link>
+
+              <Link href="/panchang/2026-02-19" className="text-blue-700 hover:underline">
+                Today Panchang & Shubh Muhurat
+              </Link>
+
+              <Link href={`/holi-${year - 1}`} className="text-blue-700 hover:underline">
+                Holi {year - 1} Date & Muhurat
+              </Link>
+
+              <Link href={`/holi-${year + 1}`} className="text-blue-700 hover:underline">
+                Holi {year + 1} Date & Muhurat
+              </Link>
+
+            </div>
+
+          </div>
+        </section>
+        {/* YouTube Video Section */}
+        <section className="mb-20">
+          <div className="rounded-2xl border border-blue-200 shadow-md p-8 bg-gradient-to-r from-blue-50 via-white to-blue-100">
+
+            <h2 className="text-2xl font-semibold mb-6 text-blue-900">
+              Holi {year} – Watch Complete Explanation Video
+            </h2>
+
+            {/* YouTube Embed */}
+            <div className="aspect-video mb-6">
+              <iframe
+                className="w-full h-full rounded-xl"
+                src="https://www.youtube.com/embed/3rgZa19zWP8"
+                title="Opel Stone : One for Love & Wealth"
+                frameBorder="0"
+                loading="lazy"
+                allowFullScreen
+              />
+            </div>
+
+            {/* Subscribe CTA */}
+            <div className="text-center">
+              <a
+                href="https://www.youtube.com/@Jyotishasha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-semibold transition-all"
+              >
+                🔔 Subscribe to Jyotishasha on YouTube
+              </a>
+            </div>
 
           </div>
         </section>

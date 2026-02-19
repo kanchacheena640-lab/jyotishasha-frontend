@@ -5,7 +5,7 @@ import AdminAwareLayout from "../components/AdminAwareLayout";
 import "react-datepicker/dist/react-datepicker.css";
 import { LanguageProvider } from "@/context/LanguageContext"; // 🆕 added
 import StickyAppDownloadCTA from "@/components/StickyAppDownloadCTA";
-
+import LocationProvider from "@/components/location/LocationProvider";
 
 
 export const metadata = {
@@ -61,9 +61,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="afterInteractive"
         />
 
-        <LanguageProvider>
-          <AdminAwareLayout>{children}</AdminAwareLayout>
-        </LanguageProvider>
+         {/* Providers wrap whole app once */}
+          <LanguageProvider>
+            <LocationProvider>
+              <AdminAwareLayout>
+                {children}
+              </AdminAwareLayout>
+            </LocationProvider>
+          </LanguageProvider>
 
         {/* 🔽 STICKY APP DOWNLOAD CTA (MOBILE ONLY) */}
         <StickyAppDownloadCTA
@@ -74,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-                {/* WhatsApp floating button */}
+        {/* WhatsApp floating button */}
 
         <a
           href="https://wa.me/917007012255"
