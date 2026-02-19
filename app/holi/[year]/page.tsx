@@ -95,7 +95,7 @@ export default async function HoliYearPage({
 
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
-          Holi {year} Date, Holika Dahan Muhurat & Rangwali Holi Details
+          Holi {year} Date & Time in India: Holika Dahan Muhurat and Rangwali Holi
         </h1>
 
         {/* Year Navigation */}
@@ -114,17 +114,56 @@ export default async function HoliYearPage({
         </div>
 
         {/* Snapshot Card */}
-        <section className="bg-orange-50 rounded-xl p-6 mb-12">
-          <h2 className="text-xl font-semibold mb-4">
-            Holika Dahan Overview
-          </h2>
+        <section className="relative overflow-hidden rounded-2xl mb-14 shadow-lg border border-orange-200">
 
-          <div className="grid sm:grid-cols-2 gap-3 text-sm">
-            <div><strong>Date:</strong> {holika.date}</div>
-            <div><strong>Muhurat:</strong> {holika.muhurta ?? "-"}</div>
-            <div><strong>Sunset:</strong> {holika.sunset ?? "-"}</div>
-            <div><strong>Duration:</strong> {holika.duration ?? "-"}</div>
-            <div><strong>Method:</strong> {holika.method ?? "-"}</div>
+          {/* Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-100 via-pink-50 to-yellow-100 opacity-70" />
+
+          <div className="relative p-8">
+
+            <h2 className="text-2xl font-semibold mb-6 text-orange-800">
+              🔥 Holika Dahan {year} – Key Details
+            </h2>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm">
+
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="text-gray-500 text-xs uppercase">Date</div>
+                <div className="font-semibold text-lg text-gray-900">
+                  {holika.date}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="text-gray-500 text-xs uppercase">Muhurat</div>
+                <div className="font-semibold text-lg text-gray-900">
+                  {holika.muhurta ?? "-"}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="text-gray-500 text-xs uppercase">Sunset</div>
+                <div className="font-semibold text-lg text-gray-900">
+                  {holika.sunset ?? "-"}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="text-gray-500 text-xs uppercase">Duration</div>
+                <div className="font-semibold text-lg text-gray-900">
+                  {holika.duration ?? "-"}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="text-gray-500 text-xs uppercase">Method</div>
+                <div className="font-semibold text-lg text-gray-900">
+                  {holika.method ?? "-"}
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </section>
 
