@@ -114,14 +114,14 @@ export default async function HoliYearPage({
         </div>
 
         {/* Snapshot Card */}
-        <section className="relative overflow-hidden rounded-2xl mb-14 shadow-lg border border-orange-200">
+        <section className="relative overflow-hidden rounded-2xl mb-14 shadow-lg border border-blue-200">
 
-          {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-100 via-pink-50 to-yellow-100 opacity-70" />
+          {/* Soft Blue Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-white to-blue-100 opacity-70" />
 
           <div className="relative p-8">
 
-            <h2 className="text-2xl font-semibold mb-6 text-orange-800">
+            <h2 className="text-2xl font-semibold mb-6 text-blue-800">
               🔥 Holika Dahan {year} – Key Details
             </h2>
 
