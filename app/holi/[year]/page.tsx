@@ -270,14 +270,90 @@ export default async function HoliYearPage({
 
           </div>
         </section>
+        {/* FAQ Section */}
+        <section className="mb-16">
+          <div className="rounded-2xl border border-blue-200 shadow-md p-8 bg-white">
 
+            <h2 className="text-2xl font-semibold mb-8 text-blue-900">
+              Holi {year} – Frequently Asked Questions
+            </h2>
 
-        {/* Authority Note */}
-        <p className="mt-10 text-sm text-gray-500 leading-relaxed">
-          This Holi calculation follows classical Vedic Panchang rules,
-          including Purnima tithi validation, sunset timing and Bhadra avoidance,
-          calculated using sidereal zodiac (Lahiri Ayanamsa).
-        </p>
+            <div className="space-y-6 text-gray-800">
+
+              <div>
+                <h3 className="font-semibold text-lg">
+                  Why does Holi date change every year?
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed">
+                  Holi is determined by Phalguna Purnima according to the Hindu lunar
+                  calendar. Since lunar months do not match the Gregorian calendar
+                  exactly, Holi dates shift every year.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg">
+                  What is the correct time for Holika Dahan?
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed">
+                  Holika Dahan is performed during the Pradosh period after sunset,
+                  provided Bhadra (Vishti Karana) is not active during that time.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg">
+                  Is Holika Dahan time location specific?
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed">
+                  Yes. Sunset timing and tithi boundaries vary based on geographical
+                  location. Panchang calculations depend on latitude and longitude.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg">
+                  What is the difference between Holika Dahan and Rangwali Holi?
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed">
+                  Holika Dahan is the bonfire ritual performed on the evening of
+                  Purnima, while Rangwali Holi is celebrated the next day with colors.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* Authority / EEAT Section */}
+        <section className="mb-20">
+          <div className="rounded-2xl border border-blue-200 shadow-md p-8 bg-gradient-to-r from-blue-50 via-white to-blue-100">
+
+            <h2 className="text-xl font-semibold mb-4 text-blue-900">
+              Panchang Calculation Methodology
+            </h2>
+
+            <p className="text-sm text-gray-800 leading-relaxed">
+              Holi {year} dates and Holika Dahan muhurat on this page are calculated
+              using classical Vedic Panchang principles including Phalguna Purnima
+              validation, Pradosh period alignment, Bhadra avoidance rules and
+              sidereal (Lahiri) ayanamsa based astronomical calculations.
+            </p>
+
+            <p className="mt-4 text-sm text-gray-800 leading-relaxed">
+              Sunset timings and tithi boundaries are computed according to the
+              specified geographical coordinates. All festival timings are location
+              sensitive and derived using traditional Hindu calendar algorithms.
+            </p>
+
+            <p className="mt-4 text-sm text-gray-800 leading-relaxed">
+              This content is prepared by Jyotishasha research methodology,
+              combining classical scriptures, Panchang rules and modern astronomical
+              precision for accuracy.
+            </p>
+
+          </div>
+        </section>
 
       </article>
     </div>
