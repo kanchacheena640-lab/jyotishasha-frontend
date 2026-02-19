@@ -35,6 +35,17 @@ function clampYear(y: number) {
   return Math.min(Math.max(y, now - 2), now + 20);
 }
 
+function formatDateDDMMYYYY(dateStr?: string) {
+  if (!dateStr) return "-";
+
+  const d = new Date(dateStr);
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
+
 async function fetchHoli(year: number): Promise<HoliApiResponse | null> {
   try {
     const res = await fetch(`${BACKEND}/api/festivals/holi`, {
@@ -121,12 +132,12 @@ export default async function HoliYearPage({
         <section className="grid md:grid-cols-2 gap-6 mb-14">
           <div className="bg-blue-900 text-white rounded-2xl p-8 shadow-xl">
             <div className="text-sm uppercase opacity-80">Holika Dahan</div>
-            <div className="text-3xl font-bold mt-2">{holika.date}</div>
+            <div className="text-3xl font-bold mt-2">{formatDateDDMMYYYY(holika.date)}</div>
           </div>
 
           <div className="bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-2xl p-8 shadow-xl">
             <div className="text-sm uppercase opacity-80">Rangwali Holi</div>
-            <div className="text-3xl font-bold mt-2">{dhulandi ?? "-"}</div>
+            <div className="text-3xl font-bold mt-2">{formatDateDDMMYYYY(dhulandi)}</div>
           </div>
         </section>
 
@@ -135,7 +146,7 @@ export default async function HoliYearPage({
           <div className="mb-12 bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-xl">
             <p className="text-gray-800 text-sm">
               Due to Bhadra on the previous day, Holika Dahan has been shifted to{" "}
-              <strong>{holika.date}</strong> during{" "}
+              <strong>{formatDateDDMMYYYY(holika.date)}</strong> during{" "}
               <strong>{holika.muhurta}</strong>.
             </p>
           </div>
@@ -150,7 +161,7 @@ export default async function HoliYearPage({
           <div className="grid sm:grid-cols-3 gap-6 text-center">
             <div className="bg-blue-50 rounded-xl p-6">
               <div className="text-xs uppercase text-gray-500">Date</div>
-              <div className="font-bold text-lg mt-2">{holika.date}</div>
+              <div className="font-bold text-lg mt-2">{formatDateDDMMYYYY(holika.date)}</div>
             </div>
 
             <div className="bg-blue-50 rounded-xl p-6">
