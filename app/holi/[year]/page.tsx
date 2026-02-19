@@ -1,4 +1,5 @@
 // app/holi/[year]/page.tsx
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -46,6 +47,7 @@ async function fetchHoli(year: number): Promise<HoliApiResponse | null> {
       }),
       cache: "no-store",
     });
+
     if (!res.ok) return null;
     return await res.json();
   } catch {
@@ -63,12 +65,13 @@ export async function generateMetadata({
 
   const year = clampYear(Number(params.year));
   const data = await fetchHoli(year);
+
   if (!data)
     return { robots: { index: false, follow: false } };
 
   return {
-    title: `Holi ${year} Date & Holika Dahan Muhurat | Jyotishasha`,
-    description: `Holi ${year} date, Holika Dahan muhurat, sunset timing and Panchang calculation.`,
+    title: `Holi ${year} Date & Time in India: Holika Dahan Muhurat and Rangwali Holi`,
+    description: `Holi ${year} date, Holika Dahan muhurat, Bhadra rules and Rangwali Holi celebration details.`,
     alternates: { canonical: `/holi-${year}` },
     robots: { index: true, follow: true },
   };
@@ -83,6 +86,7 @@ export default async function HoliYearPage({
 
   const year = clampYear(Number(params.year));
   const data = await fetchHoli(year);
+
   if (!data) return notFound();
 
   const holika = data.holika_dahan;
@@ -90,7 +94,7 @@ export default async function HoliYearPage({
   const rashiTips = data.rashi_tips ?? {};
 
   return (
-    <div className="bg-gradient-to-b from-orange-100 to-pink-100 py-16">
+    <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
       <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
 
         {/* H1 */}
@@ -99,122 +103,116 @@ export default async function HoliYearPage({
         </h1>
 
         {/* Year Navigation */}
-        <div className="flex gap-6 mb-10 text-sm">
-          <Link href={`/holi-${year - 1}`} className="text-orange-700 hover:underline">
+        <div className="flex gap-6 mb-12 text-sm">
+          <Link href={`/holi-${year - 1}`} className="text-blue-700 hover:underline">
             Holi {year - 1}
           </Link>
 
-          <span className="font-semibold border-b-2 border-orange-600 pb-1">
+          <span className="font-semibold border-b-2 border-blue-700 pb-1">
             Holi {year}
           </span>
 
-          <Link href={`/holi-${year + 1}`} className="text-orange-700 hover:underline">
+          <Link href={`/holi-${year + 1}`} className="text-blue-700 hover:underline">
             Holi {year + 1}
           </Link>
         </div>
 
-        {/* Snapshot Card */}
-        <section className="relative overflow-hidden rounded-2xl mb-14 shadow-lg border border-blue-200">
+        {/* Top Date Cards */}
+        <section className="grid md:grid-cols-2 gap-6 mb-14">
+          <div className="bg-blue-900 text-white rounded-2xl p-8 shadow-xl">
+            <div className="text-sm uppercase opacity-80">Holika Dahan</div>
+            <div className="text-3xl font-bold mt-2">{holika.date}</div>
+          </div>
 
-          {/* Soft Blue Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-white to-blue-100 opacity-70" />
-
-          <div className="relative p-8">
-
-            <h2 className="text-2xl font-semibold mb-6 text-blue-800">
-              🔥 Holika Dahan {year} – Key Details
-            </h2>
-
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm">
-
-              <div className="bg-white rounded-xl p-4 shadow-sm">
-                <div className="text-gray-500 text-xs uppercase">Date</div>
-                <div className="font-semibold text-lg text-gray-900">
-                  {holika.date}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-4 shadow-sm">
-                <div className="text-gray-500 text-xs uppercase">Muhurat</div>
-                <div className="font-semibold text-lg text-gray-900">
-                  {holika.muhurta ?? "-"}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-4 shadow-sm">
-                <div className="text-gray-500 text-xs uppercase">Sunset</div>
-                <div className="font-semibold text-lg text-gray-900">
-                  {holika.sunset ?? "-"}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-4 shadow-sm">
-                <div className="text-gray-500 text-xs uppercase">Duration</div>
-                <div className="font-semibold text-lg text-gray-900">
-                  {holika.duration ?? "-"}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-4 shadow-sm">
-                <div className="text-gray-500 text-xs uppercase">Method</div>
-                <div className="font-semibold text-lg text-gray-900">
-                  {holika.method ?? "-"}
-                </div>
-              </div>
-
-            </div>
-
+          <div className="bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-2xl p-8 shadow-xl">
+            <div className="text-sm uppercase opacity-80">Rangwali Holi</div>
+            <div className="text-3xl font-bold mt-2">{dhulandi ?? "-"}</div>
           </div>
         </section>
 
-        {/* Rangwali Holi */}
-        <section className="bg-pink-50 rounded-xl p-6 mb-12">
-          <h2 className="text-xl font-semibold mb-3">
-            Rangwali Holi (Dhulandi)
+        {/* Shift Message */}
+        {holika.method?.includes("Day 2") && (
+          <div className="mb-12 bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-xl">
+            <p className="text-gray-800 text-sm">
+              Due to Bhadra on the previous day, Holika Dahan has been shifted to{" "}
+              <strong>{holika.date}</strong> during{" "}
+              <strong>{holika.muhurta}</strong>.
+            </p>
+          </div>
+        )}
+
+        {/* Holika Details Card */}
+        <section className="bg-white border rounded-2xl p-8 shadow-sm mb-14">
+          <h2 className="text-2xl font-semibold mb-6">
+            Holika Dahan {year} Details
           </h2>
-          <p className="text-sm">
-            <strong>Date:</strong> {dhulandi ?? "-"}
-          </p>
+
+          <div className="grid sm:grid-cols-3 gap-6 text-center">
+            <div className="bg-blue-50 rounded-xl p-6">
+              <div className="text-xs uppercase text-gray-500">Date</div>
+              <div className="font-bold text-lg mt-2">{holika.date}</div>
+            </div>
+
+            <div className="bg-blue-50 rounded-xl p-6">
+              <div className="text-xs uppercase text-gray-500">Muhurat</div>
+              <div className="font-bold text-lg mt-2">
+                {holika.muhurta ?? "-"}
+              </div>
+            </div>
+
+            <div className="bg-blue-50 rounded-xl p-6">
+              <div className="text-xs uppercase text-gray-500">Moon Sign</div>
+              <div className="font-bold text-lg mt-2">
+                {data.moon_sign_on_holi ?? "-"}
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* Rashi Wise Tips */}
+        {/* Rashi Tips */}
         {Object.keys(rashiTips).length > 0 && (
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6">
-              Rashi Wise Holika Tips
+          <section className="mb-16">
+            <h2 className="text-2xl font-semibold mb-8">
+              Rashi Wise Holika Dahan Tips
             </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {Object.entries(rashiTips).map(([sign, item]) => (
-                <div key={sign} className="border rounded-xl p-5 bg-white shadow-sm">
-                  <div className="font-semibold text-lg mb-2">{sign}</div>
-                  <div className="text-xs text-gray-500 mb-2">
-                    Moon in House {item.moon_transit_house}
+                <div
+                  key={sign}
+                  className="bg-white border rounded-2xl p-6 shadow-sm"
+                >
+                  <div className="font-semibold text-lg capitalize mb-2">
+                    {sign}
                   </div>
-                  <p className="text-sm">{item.tip.en}</p>
+
+                  <p className="text-sm text-gray-700">
+                    {item.tip.en}
+                  </p>
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        {/* Summary Paragraph */}
-        <section className="mb-12">
+        {/* Rangwali Holi Section */}
+        <section className="mb-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Rangwali Holi {year}
+          </h2>
+
           <p className="text-gray-800 leading-relaxed">
-            Holi {year} will be observed with Holika Dahan on {holika.date}
-            {holika.muhurta ? ` during ${holika.muhurta}` : ""}.
-            The muhurat is calculated using Phalguna Purnima, sunset timing,
-            and traditional Panchang rules. Rangwali Holi will be celebrated
-            on {dhulandi}. All timings are calculated using sidereal zodiac
-            and Vedic calendar principles.
+            Rangwali Holi will be celebrated on <strong>{dhulandi}</strong>.
+            This festival marks joy, celebration and the symbolic victory
+            of positivity over negativity.
           </p>
         </section>
 
         {/* Authority Note */}
         <p className="mt-10 text-sm text-gray-500 leading-relaxed">
           This Holi calculation follows classical Vedic Panchang rules,
-          tithi boundaries, and Bhadra avoidance principles using
-          Lahiri Ayanamsa.
+          including Purnima tithi validation, sunset timing and Bhadra avoidance,
+          calculated using sidereal zodiac (Lahiri Ayanamsa).
         </p>
 
       </article>
