@@ -14,7 +14,7 @@ const nextConfig = {
 
       // ✅ Planet → Ascendant → House rewrite (ALL planets)
       {
-        source: '/:planet-transit/:ascendant/house-:house',
+        source: '/:planet-transit/:ascendant/house-:house(\\d+)',
         destination: '/:planet-transit/:ascendant/house/:house',
       },
       // ✅ Holi year rewrite
@@ -38,7 +38,12 @@ const nextConfig = {
         source: '/holi/:year(\\d{4})',
         destination: '/holi-:year',
         permanent: true,
-      }
+      },
+      {
+        source: '/:planet-transit/:ascendant/house/:house(\\d+)',
+        destination: '/:planet-transit/:ascendant/house-:house',
+        permanent: true,
+      },
     ];
   },
 
