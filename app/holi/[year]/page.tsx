@@ -196,7 +196,7 @@ export default async function HoliYearPage({
 
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
-          Holi {year} Date & Time in <LocationText />: Holika Dahan Muhurat and Rangwali Holi
+          Holi {year} Date & Time <LocationText />: Holika Dahan Muhurat and Rangwali Holi
         </h1>
 
         {/* Year Navigation */}
