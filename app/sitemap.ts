@@ -1,6 +1,7 @@
 import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
 import { toolsData } from "@/app/data/toolsData";
-import { reportsData } from "@/app/data/reportsData"; // ✅ reports added
+import { reportsData } from "@/app/data/reportsData";
+import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
 
 export default async function sitemap() {
   const baseUrl = "https://www.jyotishasha.com";
@@ -103,6 +104,15 @@ for (let year = currentYear - 1; year <= currentYear + 5; year++) {
   });
 }
 
+// 🪔 Ekadashi URLs
+const ekadashiSlugs = getAllEkadashiSlugs();
+
+const ekadashiUrls = ekadashiSlugs.map((slug) => ({
+  url: `${baseUrl}/ekadashi/${slug}`,
+  lastModified: now,
+}));
+
+
   // 🔁 Combine all
   return [
     ...staticUrls,
@@ -112,6 +122,7 @@ for (let year = currentYear - 1; year <= currentYear + 5; year++) {
     ...kundaliUrls,
     ...transitUrls,
     ...holiUrls,
+    ...ekadashiUrls,
   ];
 
 }

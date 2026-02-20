@@ -194,6 +194,39 @@ export default async function HoliYearPage({
           }}
         />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ReligiousEvent",
+            name: `Holi ${year}`,
+            description: `Holi ${year} including Holika Dahan muhurat and Rangwali Holi celebration details in India.`,
+            startDate: new Date(holika.date).toISOString(),
+            endDate: dhulandi
+              ? new Date(dhulandi).toISOString()
+              : new Date(holika.date).toISOString(),
+            eventStatus: "https://schema.org/EventScheduled",
+            eventAttendanceMode:
+              "https://schema.org/OfflineEventAttendanceMode",
+            location: {
+              "@type": "Place",
+              name: "India",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "IN",
+              },
+            },
+            organizer: {
+              "@type": "Organization",
+              name: "Jyotishasha",
+              url: "https://www.jyotishasha.com",
+            },
+            mainEntityOfPage: `https://www.jyotishasha.com/holi-${year}`,
+          }),
+        }}
+      />
+
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
           Holi {year} Date & Time <LocationText />: Holika Dahan Muhurat and Rangwali Holi
