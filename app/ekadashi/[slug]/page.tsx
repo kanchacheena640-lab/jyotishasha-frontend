@@ -201,20 +201,30 @@ export default async function Page({
             </div>
           </section>
 
-          {/* Video Section */}
-          {content.videoUrl && (
-            <section className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-              <div className="bg-orange-600 p-3 text-white font-bold text-center text-sm md:text-base">📺 Watch Vrat Katha Video</div>
-              <div className="aspect-video">
+          {/* --- Video Section (Updated) --- */}
+          <section className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <div className="bg-orange-600 p-3 text-white font-bold text-center text-sm md:text-base">
+              📺 Watch Vrat Katha Video
+            </div>
+            <div className="aspect-video bg-orange-50 flex items-center justify-center">
+              {content.videoUrl ? (
                 <iframe 
                   className="w-full h-full" 
-                  src={`https://www.youtube.com/embed/${content.videoUrl.split('v=')[1]}`} 
+                  src={`https://www.youtube.com/embed/${content.videoUrl.split('v=')[1] || content.videoUrl.split('/').pop()}`} 
                   title="Ekadashi Video"
                   allowFullScreen 
                 />
-              </div>
-            </section>
-          )}
+              ) : (
+                <div className="text-center p-6">
+                  <div className="text-orange-300 text-4xl mb-2">🎬</div>
+                  <p className="text-gray-500 text-sm italic font-medium">Video Katha coming soon...</p>
+                  <a href="https://youtube.com/@jyotishasha" target="_blank" className="text-orange-600 text-xs font-bold mt-2 inline-block hover:underline">
+                    Subscribe for Updates →
+                  </a>
+                </div>
+              )}
+            </div>
+          </section>
 
           {/* Benefits - Dark Theme for contrast */}
           <section className="bg-zinc-900 text-white p-6 md:p-8 rounded-2xl shadow-xl">
@@ -241,6 +251,34 @@ export default async function Page({
             </div>
           </section>
         </div>
+
+        {/* --- Is line ke niche paste karein (FAQ Section ke theek baad) --- */}
+          <section className="mt-16 border-t border-gray-100 pt-10">
+            <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <span className="w-2 h-6 bg-orange-600 rounded-full"></span>
+              Explore Other Ekadashis
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {getAllEkadashiSlugs().map((slug) => {
+                const otherContent = getEkadashiContent(slug);
+                return (
+                  <Link 
+                    key={slug} 
+                    href={`/ekadashi/${slug}`}
+                    className={`p-3 text-center rounded-xl border text-[11px] md:text-xs font-bold transition-all active:scale-95
+                      ${params.slug === slug 
+                        ? "bg-orange-100 border-orange-200 text-orange-800 shadow-inner" 
+                        : "bg-gray-50 border-gray-100 text-gray-600 hover:border-orange-200 hover:bg-white hover:shadow-md"
+                      }`}
+                  >
+                    {otherContent?.name.en}
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Footer ab iske theek niche aayega */}
 
         <footer className="mt-16 pt-8 border-t border-gray-100 text-[10px] md:text-xs text-gray-400 text-center leading-loose">
            <p>© Jyotishasha - Vedic Astrology & Panchang Research Center.</p>
