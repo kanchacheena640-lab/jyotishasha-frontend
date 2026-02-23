@@ -4,17 +4,11 @@ import {
   getEkadashiContent,
   getAllEkadashiSlugs,
 } from "@/app/data/ekadashi";
+import LocationText from "@/components/location/LocationText";
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
-/* ---------------- STATIC PARAMS ---------------- */
-
-export async function generateStaticParams() {
-  const slugs = getAllEkadashiSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
-/* ---------------- FETCH DYNAMIC DATA (PRO GET METHOD) ---------------- */
+/* ---------------- FETCH DYNAMIC DATA ---------------- */
 
 async function getEkadashiDynamicData(slug: string, year: number) {
   try {
@@ -28,11 +22,16 @@ async function getEkadashiDynamicData(slug: string, year: number) {
 
     if (!res.ok) return null;
     const result = await res.json();
-    return result.data; // Return the 'data' object from backend response
+    return result.data; 
   } catch (error) {
     console.error("Fetch Error:", error);
     return null;
   }
+}
+
+export async function generateStaticParams() {
+  const slugs = getAllEkadashiSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 /* ---------------- PAGE ---------------- */
@@ -47,190 +46,177 @@ export default async function Page({
   const content = getEkadashiContent(params.slug);
   if (!content) notFound();
 
-  // 1. Determine the year from URL or current year
+  // 1. Logic for Year: Default to current, or use searchParam
   const currentYear = new Date().getFullYear();
   const selectedYear = searchParams.year ? parseInt(searchParams.year) : currentYear;
 
-  // 2. Fetch the data for that specific year
+  // 2. Fetch Dynamic Timings
   const dynamic = await getEkadashiDynamicData(params.slug, selectedYear);
 
   const currentUrl = `https://www.jyotishasha.com/ekadashi/${params.slug}`;
 
-  /* ---------------- SCHEMA ---------------- */
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: `${content.name.en} ${selectedYear}`,
-    description: content.intro.en.slice(0, 160),
-    author: { "@type": "Organization", name: "Jyotishasha" },
-    publisher: {
-      "@type": "Organization",
-      name: "Jyotishasha",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.jyotishasha.com/logo.png",
-      },
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": currentUrl },
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: content.faq.en.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
-    })),
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.jyotishasha.com" },
-      { "@type": "ListItem", position: 2, name: "Ekadashi", item: "https://www.jyotishasha.com/ekadashi" },
-      { "@type": "ListItem", position: 3, name: content.name.en, item: currentUrl },
-    ],
-  };
-
-  const getYouTubeId = (url: string) => {
-    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
-    return match ? match[1] : "";
-  };
-
-  const videoSchema = content.videoUrl && {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: `${content.name.en} Vrat Vidhi`,
-    description: content.intro.en.slice(0, 160),
-    thumbnailUrl: `https://img.youtube.com/vi/${getYouTubeId(content.videoUrl)}/hqdefault.jpg`,
-    uploadDate: new Date().toISOString(),
-    contentUrl: content.videoUrl,
-    embedUrl: content.videoUrl,
-    publisher: {
-      "@type": "Organization",
-      name: "Jyotishasha",
-      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
-    },
-  };
-
-  const eventSchema = dynamic && {
-    "@context": "https://schema.org",
-    "@type": "ReligiousEvent",
-    name: `${content.name.en} ${selectedYear}`,
-    startDate: new Date(dynamic.vrat_date).toISOString(),
-    endDate: dynamic.parana?.parana_date 
-      ? `${dynamic.parana.parana_date}T00:00:00+05:30` 
-      : `${dynamic.vrat_date}T23:59:59+05:30`,
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
-      "@type": "Place",
-      name: "India",
-      address: { "@type": "PostalAddress", addressCountry: "IN" },
-    },
-    description: content.intro.en.slice(0, 160),
-    organizer: { "@type": "Organization", name: "Jyotishasha", url: "https://www.jyotishasha.com" },
-    url: currentUrl,
-  };
-
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      {/* JSON-LD SCHEMAS */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      {videoSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />}
-      {eventSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }} />}
+    <div className="bg-gradient-to-b from-orange-900 to-orange-800 py-16 min-h-screen">
+      <article className="max-w-5xl mx-auto bg-white rounded-3xl px-6 md:px-10 py-14 shadow-2xl text-black">
+        
+        {/* --- SEO BREADCRUMBS --- */}
+        <nav className="flex text-sm text-gray-500 mb-6 gap-2">
+          <Link href="/" className="hover:text-orange-600">Home</Link> <span>/</span>
+          <Link href="/ekadashi" className="hover:text-orange-600">Ekadashi</Link> <span>/</span>
+          <span className="text-orange-700 font-medium">{content.name.en}</span>
+        </nav>
 
-      {/* HERO */}
-      <h1 className="text-4xl font-bold mb-4">
-        {content.name.en} ({content.name.hi}) - {selectedYear}
-      </h1>
+        {/* --- H1 TITLE --- */}
+        <h1 className="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">
+          {content.name.en} ({content.name.hi}) {selectedYear} <LocationText />: Date, Muhurat & Katha
+        </h1>
 
-      {/* YEAR SELECTOR TABS */}
-      <div className="flex space-x-4 mb-8 border-b pb-2">
-        {[2026, 2027].map((y) => (
-          <Link
-            key={y}
-            href={`/ekadashi/${params.slug}?year=${y}`}
-            className={`px-4 py-1 rounded-full ${selectedYear === y ? "bg-orange-600 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`}
-          >
-            {y} Details
-          </Link>
-        ))}
-      </div>
-
-      {/* DYNAMIC VRAT INFO CARD */}
-      {dynamic ? (
-        <div className="bg-orange-50 border-l-8 border-orange-500 p-6 rounded-lg shadow-sm mb-8 space-y-2">
-          <p className="text-xl font-bold text-orange-900 mb-2">Vrat & Parana Timings ({selectedYear})</p>
-          <p className="text-md"><strong>Vrat Date:</strong> {dynamic.vrat_date}</p>
-          <p className="text-md"><strong>Tithi:</strong> {dynamic.tithi.start} – {dynamic.tithi.end}</p>
-          <p className="text-md"><strong>Parana Time:</strong> {dynamic.parana.start} – {dynamic.parana.end}</p>
-          <p className="text-md"><strong>Hari Vasara Ends:</strong> {dynamic.parana.hari_vasara_end}</p>
-        </div>
-      ) : (
-        <div className="bg-red-50 p-4 rounded mb-8 text-red-700">
-          Timings for {selectedYear} are not available yet.
-        </div>
-      )}
-
-      {/* CONTENT SECTIONS */}
-      <section className="mb-8 prose prose-orange max-w-none">
-        <h2 className="text-2xl font-semibold mb-3">About {content.name.en}</h2>
-        <p className="whitespace-pre-line text-gray-700 leading-relaxed">{content.intro.en}</p>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">Significance</h2>
-        <p className="whitespace-pre-line text-gray-700 leading-relaxed">{content.significance.en}</p>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">Vrat Vidhi</h2>
-        <ul className="list-disc ml-6 space-y-3 text-gray-700">
-          {content.vidhi.en.map((item: string, i: number) => (
-            <li key={i}>{item}</li>
+        {/* --- YEAR NAVIGATION (Holi Style) --- */}
+        <div className="flex gap-6 mb-12 text-sm border-b pb-4">
+          {[2026, 2027].map((y) => (
+            <Link 
+              key={y}
+              href={`/ekadashi/${params.slug}?year=${y}`}
+              className={`${selectedYear === y ? "font-bold border-b-2 border-orange-700 text-orange-700 pb-1" : "text-gray-500 hover:text-orange-600"}`}
+            >
+              {content.name.en} {y}
+            </Link>
           ))}
-        </ul>
-      </section>
+        </div>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">Benefits</h2>
-        <ul className="list-disc ml-6 space-y-3 text-gray-700">
-          {content.benefits.en.map((item: string, i: number) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
-      </section>
-
-      {/* FAQ SECTION */}
-      <section className="mb-8 bg-gray-50 p-6 rounded-xl">
-        <h2 className="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
-        {content.faq.en.map((item: { q: string; a: string }, i: number) => (
-          <div key={i} className="mb-6 last:mb-0">
-            <p className="font-bold text-gray-900 text-lg mb-1 italic">Q: {item.q}</p>
-            <p className="text-gray-700 pl-4 border-l-2 border-orange-200">{item.a}</p>
+        {/* --- TOP HIGHLIGHT CARDS (Holi Style) --- */}
+        <section className="grid md:grid-cols-2 gap-6 mb-14">
+          <div className="bg-orange-700 text-white rounded-2xl p-8 shadow-lg transform hover:scale-105 transition-transform">
+            <div className="text-sm uppercase opacity-80 font-semibold">Vrat Date</div>
+            <div className="text-3xl font-bold mt-2">
+                {dynamic?.vrat_date ? new Date(dynamic.vrat_date).toLocaleDateString('en-GB', {day: '2-digit', month: 'long', year: 'numeric'}) : "Check Panchang"}
+            </div>
+            <div className="mt-2 text-orange-200 text-sm">Month: {content.month} ({content.paksha} Paksha)</div>
           </div>
-        ))}
-      </section>
 
-      {/* FOOTER LINKS */}
-      <div className="border-t pt-8 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <p className="font-bold mb-3 text-gray-800">Related Ekadashi</p>
-          <Link href="/ekadashi/nirjala-ekadashi" className="block text-blue-600 hover:underline mb-1">Nirjala Ekadashi</Link>
-          <Link href="/ekadashi/devshayani-ekadashi" className="block text-blue-600 hover:underline">Devshayani Ekadashi</Link>
+          <div className="bg-gradient-to-r from-orange-800 to-red-900 text-white rounded-2xl p-8 shadow-lg transform hover:scale-105 transition-transform">
+            <div className="text-sm uppercase opacity-80 font-semibold">Parana Time (Fast Breaking)</div>
+            <div className="text-3xl font-bold mt-2">{dynamic?.parana?.start || "TBA"} - {dynamic?.parana?.end || "TBA"}</div>
+            <div className="mt-2 text-orange-200 text-sm">On Dwadashi Tithi</div>
+          </div>
+        </section>
+
+        {/* --- DETAILED MUHURAT TABLE --- */}
+        {dynamic && (
+            <section className="bg-orange-50 border border-orange-100 rounded-2xl p-8 mb-14">
+                <h2 className="text-2xl font-bold mb-6 text-orange-900 flex items-center gap-2">
+                    📅 {content.name.en} {selectedYear} Detailed Timings
+                </h2>
+                <div className="grid sm:grid-cols-3 gap-6">
+                    <div className="bg-white p-4 rounded-xl shadow-sm border border-orange-100 text-center">
+                        <div className="text-xs uppercase text-gray-500 font-bold">Tithi Starts</div>
+                        <div className="text-orange-800 font-semibold mt-1">{dynamic.tithi.start}</div>
+                    </div>
+                    <div className="bg-white p-4 rounded-xl shadow-sm border border-orange-100 text-center">
+                        <div className="text-xs uppercase text-gray-500 font-bold">Tithi Ends</div>
+                        <div className="text-orange-800 font-semibold mt-1">{dynamic.tithi.end}</div>
+                    </div>
+                    <div className="bg-white p-4 rounded-xl shadow-sm border border-orange-100 text-center">
+                        <div className="text-xs uppercase text-gray-500 font-bold">Hari Vasara End</div>
+                        <div className="text-orange-800 font-semibold mt-1">{dynamic.parana.hari_vasara_end}</div>
+                    </div>
+                </div>
+            </section>
+        )}
+
+        {/* --- MAIN CONTENT: INTRO & SIGNIFICANCE --- */}
+        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-16">
+            <h2 className="text-3xl font-bold text-orange-900 mb-4">About {content.name.en}</h2>
+            <p className="whitespace-pre-line bg-gray-50 p-6 rounded-2xl border-l-4 border-orange-500 italic">
+                {content.intro.en}
+            </p>
+
+            <h2 className="text-3xl font-bold text-orange-900 mt-12 mb-4">Significance (Mahatmya)</h2>
+            <p className="whitespace-pre-line">{content.significance.en}</p>
         </div>
-        <div className="sm:text-right">
-          <Link href="/ekadashi" className="inline-block bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-semibold hover:bg-blue-100 transition">
-            View All Ekadashi List →
-          </Link>
-        </div>
-      </div>
+
+        {/* --- VRAT VIDHI (Step by Step) --- */}
+        <section className="mb-16 bg-gradient-to-br from-white to-orange-50 rounded-3xl border border-orange-100 p-8 shadow-inner">
+            <h2 className="text-3xl font-bold text-orange-900 mb-8">Pooja Vidhi: How to perform {content.name.en}</h2>
+            <div className="space-y-4">
+                {content.vidhi.en.map((step, i) => (
+                    <div key={i} className="flex gap-4 items-start">
+                        <span className="bg-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">{i+1}</span>
+                        <p className="text-gray-700 pt-1">{step}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        {/* --- BENEFITS SECTION --- */}
+        <section className="mb-16 grid md:grid-cols-2 gap-8">
+            <div className="bg-green-50 p-8 rounded-3xl border border-green-100">
+                <h3 className="text-2xl font-bold text-green-900 mb-4">Benefits of this Vrat</h3>
+                <ul className="space-y-3">
+                    {content.benefits.en.map((b, i) => (
+                        <li key={i} className="flex items-center gap-2 text-green-800">
+                            <span className="text-xl">✨</span> {b}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="bg-blue-50 p-8 rounded-3xl border border-blue-100">
+                <h3 className="text-2xl font-bold text-blue-900 mb-4">Important Note</h3>
+                <p className="text-blue-800 text-sm leading-relaxed">
+                    Always break the fast during the Parana time mentioned above. Breaking it during Hari Vasara or after Dwadashi ends is considered inauspicious according to Shastras.
+                </p>
+            </div>
+        </section>
+
+        {/* --- YOUTUBE SECTION --- */}
+        {content.videoUrl && (
+            <section className="mb-16">
+                <div className="rounded-3xl border border-orange-200 shadow-xl overflow-hidden bg-white">
+                    <div className="p-8 bg-orange-600 text-white">
+                        <h2 className="text-2xl font-bold">{content.name.en} Vrat Katha & Vidhi Video</h2>
+                    </div>
+                    <div className="aspect-video">
+                        <iframe
+                            className="w-full h-full"
+                            src={`https://www.youtube.com/embed/${content.videoUrl.split('v=')[1]}`}
+                            title="Ekadashi Video"
+                            allowFullScreen
+                        />
+                    </div>
+                    <div className="p-6 text-center">
+                        <a href="https://youtube.com/@jyotishasha" target="_blank" className="text-red-600 font-bold hover:underline">
+                            🔔 Subscribe to Jyotishasha for Daily Updates
+                        </a>
+                    </div>
+                </div>
+            </section>
+        )}
+
+        {/* --- FAQ SECTION --- */}
+        <section className="mb-16 bg-gray-50 p-8 rounded-3xl border border-gray-200">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+            <div className="space-y-8">
+                {content.faq.en.map((item, i) => (
+                    <div key={i} className="border-b border-gray-200 pb-6 last:border-0">
+                        <h3 className="font-bold text-lg text-orange-900 mb-2">Q: {item.q}</h3>
+                        <p className="text-gray-700 pl-4 border-l-4 border-orange-200">{item.a}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        {/* --- AUTHORITY SECTION (SEO) --- */}
+        <footer className="mt-20 pt-10 border-t border-gray-100">
+            <div className="bg-gray-100 p-8 rounded-2xl text-sm text-gray-600 leading-relaxed">
+                <h4 className="font-bold text-gray-800 mb-2">Panchang Calculation Methodology</h4>
+                <p>
+                    The {content.name.en} {selectedYear} timings provided are based on the Vedic Luni-Solar calendar. We use precise astronomical algorithms (Lahiri Ayanamsa) to calculate Tithi, Nakshatra, and Parana timings for India. Please note that timings may vary slightly based on your specific city's sunrise.
+                </p>
+                <p className="mt-4 italic">Last updated: {new Date().toLocaleDateString('en-IN', {day: 'numeric', month: 'long', year: 'numeric'})}</p>
+            </div>
+        </footer>
+
+      </article>
     </div>
   );
 }
