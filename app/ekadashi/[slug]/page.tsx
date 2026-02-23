@@ -12,7 +12,7 @@ const BACKEND = "https://jyotishasha-backend.onrender.com";
 function formatDate(dateStr: string | undefined) {
   if (!dateStr) return "TBA";
   const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr; // Fallback if already formatted
+  if (isNaN(d.getTime())) return dateStr; 
   const day = String(d.getDate()).padStart(2, "0");
   const month = String(d.getMonth() + 1).padStart(2, "0");
   const year = d.getFullYear();
@@ -26,7 +26,7 @@ async function getEkadashiDynamicData(slug: string, year: number) {
       `${BACKEND}/api/ekadashi/find-by-slug/${slug}?year=${year}`,
       {
         method: "GET",
-        next: { revalidate: 86400 }, // Cache for 24 hours
+        next: { revalidate: 86400 }, // Cache 24 hrs
       }
     );
     if (!res.ok) return null;
@@ -59,34 +59,19 @@ export default async function Page({
   const dynamic = await getEkadashiDynamicData(params.slug, selectedYear);
 
   const currentUrl = `https://www.jyotishasha.com/ekadashi/${params.slug}`;
+  
+  // Saari dates ko format kar liya pehle hi
   const displayDate = formatDate(dynamic?.vrat_date);
-  const displayParana = dynamic ? `${dynamic.parana.start} - ${dynamic.parana.end}` : "TBA";
+  const displayParanaTime = dynamic ? `${dynamic.parana.start} - ${dynamic.parana.end}` : "TBA";
+  const displayParanaDate = formatDate(dynamic?.parana?.parana_date);
+  const tithiStart = dynamic?.tithi?.start || "TBA";
+  const tithiEnd = dynamic?.tithi?.end || "TBA";
 
-  /* --- SEO SCHEMAS --- */
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": `${content.name.en} ${selectedYear} Date & Muhurat`,
-    "description": content.intro.en.slice(0, 160),
-    "author": { "@type": "Organization", "name": "Jyotishasha" },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": currentUrl },
-  };
-
-  const eventSchema = dynamic && {
-    "@context": "https://schema.org",
-    "@type": "ReligiousEvent",
-    "name": `${content.name.en} Vrat`,
-    "startDate": dynamic.vrat_date,
-    "location": { "@type": "Place", "name": "India" },
-  };
+  // Share Text Builder
+  const shareText = `✨ *${content.name.en} ${selectedYear}* ✨\n\n📅 Date: ${displayDate}\n⏳ Parana Time: ${displayParanaTime}\n📅 Parana Date: ${displayParanaDate}\n\nCheck full details here:\n🔗 ${currentUrl}`;
 
   return (
     <div className="bg-gradient-to-b from-orange-900 to-orange-800 py-6 md:py-16 min-h-screen">
-      
-      {/* JSON-LD Schemas */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      {eventSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }} />}
-
       <article className="max-w-5xl mx-auto bg-white rounded-2xl md:rounded-3xl px-4 md:px-10 py-8 md:py-14 shadow-2xl text-black">
         
         {/* Breadcrumbs */}
@@ -96,9 +81,9 @@ export default async function Page({
           <span className="text-orange-700 font-bold">{content.name.en}</span>
         </nav>
 
-        {/* Heading */}
-        <h1 className="text-2xl md:text-4xl font-extrabold mb-6 leading-tight text-gray-900">
-          {content.name.en} {selectedYear} <LocationText />: Vrat Date, Parana Time & Katha
+        {/* Heading - Size reduced for mobile */}
+        <h1 className="text-xl md:text-3xl font-extrabold mb-6 leading-tight text-gray-900">
+          {content.name.en} {selectedYear} <LocationText />: Vrat Date, Muhurat & Katha
         </h1>
 
         {/* Year Tabs */}
@@ -114,38 +99,40 @@ export default async function Page({
           ))}
         </div>
 
-        {/* Top Cards (Mobile Responsive) */}
+        {/* Identical & Balanced Top Cards */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div className="bg-orange-700 text-white rounded-xl p-6 shadow-md border-b-4 border-orange-900">
-            <p className="text-[10px] uppercase opacity-80 font-bold">Vrat Date (Ekadashi)</p>
-            <p className="text-2xl md:text-3xl font-black mt-1">{displayDate}</p>
-            <p className="text-xs mt-2 opacity-90">{content.month} Month, {content.paksha} Paksha</p>
+          <div className="bg-orange-700 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[110px]">
+            <p className="text-xs md:text-sm font-bold uppercase tracking-wider opacity-90 mb-1">Vrat Date (Ekadashi)</p>
+            <p className="text-xl md:text-2xl font-black">{displayDate}</p>
+            <p className="text-[10px] md:text-xs mt-1 opacity-80">{content.month} Month • {content.paksha} Paksha</p>
           </div>
-          <div className="bg-zinc-900 text-white rounded-xl p-6 shadow-md border-b-4 border-zinc-700">
-            <p className="text-[10px] uppercase opacity-80 font-bold">Parana Time (Fast Break)</p>
-            <p className="text-2xl md:text-3xl font-black mt-1 text-orange-400">{displayParana}</p>
-            <p className="text-xs mt-2 opacity-90">On Dwadashi, {formatDate(dynamic?.parana?.parana_date)}</p>
+
+          <div className="bg-orange-800 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[110px]">
+            <p className="text-xs md:text-sm font-bold uppercase tracking-wider opacity-90 mb-1">Parana Time (Fast Break)</p>
+            <p className="text-xl md:text-2xl font-black">{displayParanaTime}</p>
+            <p className="text-[10px] md:text-xs mt-1 opacity-80 underline decoration-orange-400">Parana Date: {displayParanaDate}</p>
           </div>
         </section>
 
-        {/* Dynamic Summary & Share Bar */}
+        {/* Dynamic Summary & Share */}
         {dynamic && (
           <div className="mb-12">
             <div className="bg-orange-50 border-x border-t border-orange-100 p-5 rounded-t-xl text-sm md:text-base text-gray-700 leading-relaxed italic shadow-sm">
               <p>
                 In <strong>{selectedYear}</strong>, the auspicious <strong>{content.name.en}</strong> will be observed on <strong>{displayDate}</strong>. 
-                According to Vedic Panchang, the Ekadashi Tithi begins at {dynamic.tithi.start} and ends at {dynamic.tithi.end}. 
-                Devotees should break their fast during the Parana window of <strong>{displayParana}</strong> on the next day for successful completion of the Vrat.
+                According to Vedic Panchang, the Ekadashi Tithi begins at {tithiStart} and ends at {tithiEnd}. 
+                Devotees should break their fast during the Parana window of <strong>{displayParanaTime}</strong> on <strong>{displayParanaDate}</strong> for successful completion of the Vrat.
               </p>
             </div>
             <div className="bg-zinc-100 border border-orange-100 p-3 rounded-b-xl flex items-center justify-between gap-4">
-               <span className="text-[10px] md:text-xs font-bold text-gray-500 uppercase">Share Timing with Family:</span>
+               <span className="text-[10px] md:text-xs font-bold text-gray-500 uppercase">Share Details:</span>
                <a 
-                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`✨ *${content.name.en} ${selectedYear}* ✨\n\n📅 Date: ${displayDate}\n⏳ Parana: ${displayParana}\n\nCheck full Vidhi & Katha here:\n🔗 ${currentUrl}`)}`}
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`}
                 target="_blank"
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 transition-transform active:scale-95 shadow-md"
+                rel="noopener noreferrer"
+                className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full text-xs font-bold transition-all active:scale-95 shadow-md"
                >
-                 WhatsApp Share
+                 WhatsApp
                </a>
             </div>
           </div>
@@ -154,15 +141,15 @@ export default async function Page({
         {/* Detailed Muhurat Table */}
         {dynamic && (
           <section className="mb-12">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">📅 Detailed Muhurat for {selectedYear}</h2>
+            <h2 className="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-gray-800">📅 Detailed Muhurat for {selectedYear}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                {[
-                 { label: "Tithi Starts", value: dynamic.tithi.start },
-                 { label: "Tithi Ends", value: dynamic.tithi.end },
-                 { label: "Hari Vasara End", value: dynamic.parana.hari_vasara_end }
+                 { label: "Tithi Starts", value: tithiStart },
+                 { label: "Tithi Ends", value: tithiEnd },
+                 { label: "Hari Vasara End", value: dynamic.parana.hari_vasara_end || "TBA" }
                ].map((item, idx) => (
-                 <div key={idx} className="bg-white border border-gray-100 p-4 rounded-lg text-center shadow-sm">
-                   <p className="text-[10px] uppercase text-gray-400 font-bold">{item.label}</p>
+                 <div key={idx} className="bg-white border border-gray-100 p-4 rounded-lg text-center shadow-sm hover:border-orange-200 transition-colors">
+                   <p className="text-[10px] uppercase text-gray-400 font-bold tracking-tighter">{item.label}</p>
                    <p className="text-orange-800 font-bold text-sm mt-1">{item.value}</p>
                  </div>
                ))}
@@ -170,15 +157,15 @@ export default async function Page({
           </section>
         )}
 
-        {/* Static Content Sections */}
+        {/* Rest of the Content Sections (About, Vidhi, etc.) */}
         <div className="space-y-12">
           <section>
-            <h2 className="text-2xl font-bold text-orange-900 border-l-4 border-orange-600 pl-3 mb-4">About {content.name.en}</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-orange-900 border-l-4 border-orange-600 pl-3 mb-4">About {content.name.en}</h2>
             <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm md:text-base">{content.intro.en}</p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-orange-900 border-l-4 border-orange-600 pl-3 mb-4">Pooja Vidhi (Rituals)</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-orange-900 border-l-4 border-orange-600 pl-3 mb-4">Pooja Vidhi (Rituals)</h2>
             <div className="bg-gray-50 p-6 rounded-2xl space-y-4">
               {content.vidhi.en.map((step: string, i: number) => (
                 <div key={i} className="flex gap-4">
@@ -189,28 +176,36 @@ export default async function Page({
             </div>
           </section>
 
+          {/* Video Section */}
           {content.videoUrl && (
             <section className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-              <div className="bg-orange-600 p-4 text-white font-bold text-center">📺 Watch Vrat Katha Video</div>
+              <div className="bg-orange-600 p-3 text-white font-bold text-center text-sm md:text-base">📺 Watch Vrat Katha Video</div>
               <div className="aspect-video">
-                <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${content.videoUrl.split('v=')[1]}`} allowFullScreen />
+                <iframe 
+                  className="w-full h-full" 
+                  src={`https://www.youtube.com/embed/${content.videoUrl.split('v=')[1]}`} 
+                  title="Ekadashi Video"
+                  allowFullScreen 
+                />
               </div>
             </section>
           )}
 
+          {/* Benefits - Dark Theme for contrast */}
           <section className="bg-zinc-900 text-white p-6 md:p-8 rounded-2xl shadow-xl">
              <h2 className="text-xl md:text-2xl font-bold mb-4 text-orange-400">Benefits of this Fast</h2>
              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {content.benefits.en.map((b: string, i: number) => (
                   <li key={i} className="flex items-start gap-2 text-sm md:text-base">
-                    <span className="text-orange-500 text-xl">✓</span> {b}
+                    <span className="text-orange-500 text-lg">✓</span> {b}
                   </li>
                 ))}
              </ul>
           </section>
 
+          {/* FAQ */}
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 underline decoration-orange-200 decoration-4 underline-offset-8">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {content.faq.en.map((item: any, i: number) => (
                 <div key={i} className="border border-gray-100 p-4 rounded-xl hover:bg-orange-50 transition-colors">
@@ -222,8 +217,9 @@ export default async function Page({
           </section>
         </div>
 
-        <footer className="mt-16 pt-8 border-t border-gray-100 text-[10px] md:text-xs text-gray-400 text-center">
-           <p>© Jyotishasha - Vedic Astrology & Panchang Research. Calculations based on Lahiri Ayanamsa.</p>
+        <footer className="mt-16 pt-8 border-t border-gray-100 text-[10px] md:text-xs text-gray-400 text-center leading-loose">
+           <p>© Jyotishasha - Vedic Astrology & Panchang Research Center.</p>
+           <p>Last Updated: {displayDate}</p>
         </footer>
 
       </article>
