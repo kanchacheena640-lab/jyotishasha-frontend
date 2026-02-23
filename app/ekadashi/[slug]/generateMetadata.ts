@@ -3,23 +3,31 @@ import { getEkadashiContent } from "@/app/data/ekadashi";
 
 export async function generateMetadata({
   params,
+  searchParams, // Isse hume pata chalega user 2026 dekh raha hai ya 2027
 }: {
   params: { slug: string };
+  searchParams: { year?: string };
 }): Promise<Metadata> {
   const content = getEkadashiContent(params.slug);
   if (!content) return {};
 
-  const year = new Date().getFullYear();
-  const url = `https://www.jyotishasha.com/ekadashi/${params.slug}`;
-  const title = `${content.name.en} ${year} Date, Vrat Vidhi, Parana Time & Katha`;
-  const description = `${content.name.en} ${year} vrat date, tithi timing, parana time, astrological significance and full vidhi details.`;
+  // URL se year lo, agar nahi hai toh current year lo
+  const currentYear = new Date().getFullYear();
+  const displayYear = searchParams.year ? searchParams.year : currentYear.toString();
+  
+  // Canonical URL humesha base rakhenge ya specific year ke saath
+  const url = `https://www.jyotishasha.com/ekadashi/${params.slug}${searchParams.year ? `?year=${searchParams.year}` : ""}`;
+  
+  // Title aur Description mein dynamic year daal diya
+  const title = `${content.name.en} ${displayYear} Date, Vrat Vidhi, Parana Time & Katha`;
+  const description = `Complete guide for ${content.name.en} in ${displayYear}. Find accurate vrat date, tithi timings, parana time (breaking fast), and astrological significance.`;
 
   return {
     title,
     description,
 
     alternates: {
-      canonical: url,
+      canonical: `https://www.jyotishasha.com/ekadashi/${params.slug}`, // Canonical base hi rakho SEO ke liye best hai
     },
 
     openGraph: {
@@ -33,7 +41,7 @@ export async function generateMetadata({
           url: "https://www.jyotishasha.com/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: content.name.en,
+          alt: `${content.name.en} ${displayYear}`,
         },
       ],
     },
