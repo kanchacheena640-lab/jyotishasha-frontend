@@ -166,18 +166,29 @@ export default async function Page({
         {/* Detailed Muhurat Table */}
         {dynamic && (
           <section className="mb-12">
-            <h2 className="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-gray-800">📅 Detailed Muhurat for {selectedYear}</h2>
+            <h2 className="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-gray-800">
+              📅 Detailed Muhurat for {selectedYear}
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-               {[
-                 { label: "Tithi Starts", value: tithiStart },
-                 { label: "Tithi Ends", value: tithiEnd },
-                 { label: "Hari Vasara End", value: dynamic.parana.hari_vasara_end || "TBA" }
-               ].map((item, idx) => (
-                 <div key={idx} className="bg-white border border-gray-100 p-4 rounded-lg text-center shadow-sm hover:border-orange-200 transition-colors">
-                   <p className="text-[10px] uppercase text-gray-400 font-bold tracking-tighter">{item.label}</p>
-                   <p className="text-orange-800 font-bold text-sm mt-1">{item.value}</p>
-                 </div>
-               ))}
+              {[
+                { 
+                  label: "Tithi Starts", 
+                  value: `${formatDate(tithiStart)} | ${formatTimeOnly(tithiStart)}` 
+                },
+                { 
+                  label: "Tithi Ends", 
+                  value: `${formatDate(tithiEnd)} | ${formatTimeOnly(tithiEnd)}` 
+                },
+                { 
+                  label: "Hari Vasara End", 
+                  value: `${formatDate(dynamic.parana.hari_vasara_end)} | ${formatTimeOnly(dynamic.parana.hari_vasara_end)}` 
+                }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white border border-gray-100 p-4 rounded-lg text-center shadow-sm hover:border-orange-200 transition-colors">
+                  <p className="text-[10px] uppercase text-gray-400 font-bold tracking-tighter">{item.label}</p>
+                  <p className="text-orange-800 font-bold text-sm mt-1">{item.value}</p>
+                </div>
+              ))}
             </div>
           </section>
         )}
@@ -198,31 +209,6 @@ export default async function Page({
                   <p className="text-gray-700 text-sm md:text-base">{step}</p>
                 </div>
               ))}
-            </div>
-          </section>
-
-          {/* --- Video Section (Updated) --- */}
-          <section className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-            <div className="bg-orange-600 p-3 text-white font-bold text-center text-sm md:text-base">
-              📺 Watch Vrat Katha Video
-            </div>
-            <div className="aspect-video bg-orange-50 flex items-center justify-center">
-              {content.videoUrl ? (
-                <iframe 
-                  className="w-full h-full" 
-                  src={`https://www.youtube.com/embed/${content.videoUrl.split('v=')[1] || content.videoUrl.split('/').pop()}`} 
-                  title="Ekadashi Video"
-                  allowFullScreen 
-                />
-              ) : (
-                <div className="text-center p-6">
-                  <div className="text-orange-300 text-4xl mb-2">🎬</div>
-                  <p className="text-gray-500 text-sm italic font-medium">Video Katha coming soon...</p>
-                  <a href="https://youtube.com/@jyotishasha" target="_blank" className="text-orange-600 text-xs font-bold mt-2 inline-block hover:underline">
-                    Subscribe for Updates →
-                  </a>
-                </div>
-              )}
             </div>
           </section>
 
