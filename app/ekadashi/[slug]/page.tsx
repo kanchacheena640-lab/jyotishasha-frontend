@@ -102,29 +102,27 @@ export default async function Page({
         {/* Identical & Balanced Top Cards */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           
-          {/* Card 1: Vrat Details */}
-          <div className="bg-orange-700 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[125px]">
+          {/* Card 1: Vrat Date */}
+          <div className="bg-orange-700 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[120px]">
             <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80 mb-1">
               Vrat Date (Ekadashi)
             </p>
             <p className="text-xl md:text-2xl font-black">
               {displayDate}
             </p>
-            <div className="mt-2 text-[10px] md:text-xs opacity-90 border-t border-orange-600 pt-1">
+            <div className="mt-2 text-[10px] md:text-xs opacity-90 border-t border-orange-600/50 pt-1">
               {content.month} Month • {content.paksha} Paksha
             </div>
           </div>
 
-          {/* Card 2: Parana Details - EXACTLY IDENTICAL STRUCTURE */}
-          <div className="bg-orange-800 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[125px]">
+          {/* Card 2: Parana Date & Time */}
+          <div className="bg-orange-800 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[120px]">
             <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80 mb-1">
               Parana (Fast Break)
             </p>
-            {/* Date on main line like Card 1 */}
             <p className="text-xl md:text-2xl font-black">
               {displayParanaDate}
             </p>
-            {/* Time range on the bottom line */}
             <div className="mt-2 text-[10px] md:text-xs font-bold text-orange-200 border-t border-orange-700 pt-1">
               Time: {displayParanaTime}
             </div>
