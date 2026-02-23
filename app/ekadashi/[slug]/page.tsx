@@ -19,6 +19,13 @@ function formatDate(dateStr: string | undefined) {
   return `${day}-${month}-${year}`;
 }
 
+/* --- Is line ke niche paste karein (formatDate function ke baad) --- */
+function formatTimeOnly(timeStr: string | undefined) {
+  if (!timeStr) return "TBA";
+  // Ye line date (YYYY-MM-DD) ko dhoond kar hata degi
+  return timeStr.replace(/\d{4}-\d{2}-\d{2}/g, '').trim();
+}
+
 /* ---------------- FETCH DYNAMIC DATA ---------------- */
 async function getEkadashiDynamicData(slug: string, year: number) {
   try {
@@ -62,7 +69,9 @@ export default async function Page({
   
   // Saari dates ko format kar liya pehle hi
   const displayDate = formatDate(dynamic?.vrat_date);
-  const displayParanaTime = dynamic ? `${dynamic.parana.start} - ${dynamic.parana.end}` : "TBA";
+  const displayParanaTime = dynamic 
+      ? `${formatTimeOnly(dynamic.parana.start)} - ${formatTimeOnly(dynamic.parana.end)}` 
+      : "TBA";
   const displayParanaDate = formatDate(dynamic?.parana?.parana_date);
   const tithiStart = dynamic?.tithi?.start || "TBA";
   const tithiEnd = dynamic?.tithi?.end || "TBA";
@@ -115,7 +124,7 @@ export default async function Page({
             </div>
           </div>
 
-          {/* Card 2: Parana Date & Time */}
+          {/* Card 2: Parana (Existing Card 2 ko isse replace karein) */}
           <div className="bg-orange-800 text-white rounded-xl p-5 shadow-md flex flex-col justify-center min-h-[120px]">
             <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80 mb-1">
               Parana (Fast Break)
