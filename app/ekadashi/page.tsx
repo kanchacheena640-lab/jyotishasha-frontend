@@ -28,17 +28,11 @@ async function getAllEkadashiData(year: number) {
 }
 
 export default async function EkadashiDirectoryPage() {
-  // 1. Pehle ye line add karo (Isse error chali jayegi)
   const currentYear = 2026; 
-
-  // 2. Phir data fetch karo
   const allData = await getAllEkadashiData(currentYear);
-  
   const now = new Date();
   const nextEkadashi = allData.find((item: any) => new Date(item.vrat_date) >= now) || allData[0];
 
-  // --- Combined JSON-LD (Events + FAQ) ---
-  // --- JSON-LD Schema (Strict Event + FAQ) ---
   const combinedSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -51,119 +45,105 @@ export default async function EkadashiDirectoryPage() {
           "item": {
             "@type": "Event",
             "name": `${item.name} Ekadashi Vrat`,
-            "startDate": item.vrat_date, // Proper ISO Date format (YYYY-MM-DD)
-            "location": {
-              "@type": "Place",
-              "name": "Jyotishasha - Online Vedic Panchang",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "IN"
-              }
-            },
-            "description": `${item.name} Ekadashi Vrat date, Parana timings: ${item.parana.start} - ${item.parana.end}`,
-            "url": `https://www.jyotishasha.com/ekadashi/${item.slug}`,
-            "eventStatus": "https://schema.org/EventScheduled",
-            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode"
+            "startDate": item.vrat_date,
+            "url": `https://www.jyotishasha.com/ekadashi/${item.slug}`
           }
         }))
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What are the Ekadashi dates in 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": `In 2026, there are 24 Ekadashis. The next upcoming one is ${nextEkadashi?.name} on ${formatDate(nextEkadashi?.vrat_date)}.`
-            }
-          }
-        ]
       }
     ]
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#fffdfa]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }} />
 
-      {/* --- SEO Header --- */}
-      <section className="max-w-7xl mx-auto px-4 py-12 text-center">
-        <span className="text-orange-600 font-bold tracking-widest uppercase text-xs">Spiritual Guide 2026</span>
-        <h1 className="text-4xl md:text-6xl font-black text-gray-900 mt-2 mb-6">
-          Ekadashi <span className="text-blue-700">Calendar 2026</span>
+      {/* --- SEO Header (Brand Colors) --- */}
+      <section className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <div className="mb-4 inline-block px-4 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold uppercase tracking-widest">
+          🔱 Vedic Panchang 2026
+        </div>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+          Ekadashi <span className="text-orange-600">Vrat Calendar</span>
         </h1>
         
         {nextEkadashi && (
-          <div className="inline-flex items-center gap-3 bg-blue-50 border border-blue-100 p-2 pr-5 rounded-full mb-8">
-            <span className="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">Next Vrat</span>
-            <p className="text-sm font-bold text-blue-900">
-              {nextEkadashi.name}: <span className="text-orange-600">{formatDate(nextEkadashi.vrat_date)}</span>
+          <div className="inline-flex items-center gap-4 bg-white border-2 border-orange-100 p-2 pr-6 rounded-full shadow-sm">
+            <span className="bg-orange-600 text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase animate-pulse">Next Upcoming</span>
+            <p className="text-sm font-bold text-gray-800">
+              {nextEkadashi.name}: <span className="text-orange-600 font-black">{formatDate(nextEkadashi.vrat_date)}</span>
             </p>
           </div>
         )}
       </section>
 
-      {/* --- Blue Section with Cards --- */}
-      <section className="bg-[#0f172a] py-16 px-4 rounded-t-[40px] md:rounded-t-[80px]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* --- Boxes Section (Light & Clean) --- */}
+      <section className="bg-orange-50/50 py-16 px-4 border-y border-orange-100">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {allData.map((item: any, index: number) => {
              const isNext = item.slug === nextEkadashi?.slug;
              const isPast = new Date(item.vrat_date) < now;
              return (
-               <div key={index} className={`bg-white rounded-3xl p-8 transition-all ${isPast ? "opacity-50 grayscale" : "hover:-translate-y-2 shadow-2xl"} ${isNext ? "ring-4 ring-orange-500 ring-offset-4 ring-offset-[#0f172a]" : ""}`}>
-                 <h2 className="text-2xl font-black text-gray-900">{item.name}</h2>
-                 <p className="text-blue-600 font-bold text-[10px] uppercase mb-4">{item.month} Month</p>
-                 <div className="space-y-2 border-t pt-4 mb-6 text-sm">
-                   <div className="flex justify-between"><span className="text-gray-400 font-medium">Date</span><span className="font-bold">{formatDate(item.vrat_date)}</span></div>
-                   <div className="text-right">
-                        <p>{item.parana.start} - {item.parana.end}</p>
-                        <p className="text-[10px] text-gray-400 font-medium">{formatDate(item.parana.parana_date)}</p>
-                        </div>
+               <div key={index} className={`relative bg-white rounded-2xl p-6 border-2 transition-all duration-300 shadow-sm hover:shadow-xl
+                 ${isPast ? "opacity-60 border-gray-100" : "border-white hover:border-orange-200"} 
+                 ${isNext ? "ring-2 ring-orange-500 scale-[1.02]" : ""}`}>
+                 
+                 <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-bold text-gray-800">{item.name}</h2>
+                    <span className="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded tracking-tighter uppercase">{item.month}</span>
                  </div>
-                 <Link href={`/ekadashi/${item.slug}`} className="block w-full text-center py-3 bg-gray-900 text-white font-black rounded-xl text-xs hover:bg-blue-700 transition-all">VIEW FULL DETAILS</Link>
+
+                 <div className="space-y-3 mb-6 text-sm border-t border-orange-50 pt-4">
+                   <div className="flex justify-between font-medium">
+                     <span className="text-gray-500">Vrat Date:</span>
+                     <span className="text-gray-900 font-bold">{formatDate(item.vrat_date)}</span>
+                   </div>
+                   <div className="flex justify-between font-medium">
+                     <span className="text-gray-500">Parana:</span>
+                     <div className="text-right">
+                        <p className="text-orange-700 font-bold">{item.parana.start} - {item.parana.end}</p>
+                        <p className="text-[10px] text-gray-400 font-medium italic">{formatDate(item.parana.parana_date)}</p>
+                     </div>
+                   </div>
+                 </div>
+
+                 <Link href={`/ekadashi/${item.slug}`} className="block w-full text-center py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl text-xs transition-colors uppercase tracking-wider">
+                   Read Full Katha
+                 </Link>
                </div>
              );
           })}
         </div>
       </section>
 
-      {/* --- Video Section (Newly Added) --- */}
-      <section className="max-w-5xl mx-auto px-4 py-20">
-        <div className="bg-gray-900 rounded-[32px] overflow-hidden shadow-2xl">
-          <div className="p-8 text-center">
-            <h2 className="text-2xl md:text-3xl font-black text-white mb-2">Watch Ekadashi Mahatmya</h2>
-            <p className="text-gray-400 text-sm">Learn the significance of all Ekadashi Vrats in one video</p>
-          </div>
-          <div className="aspect-video bg-black">
+      {/* --- Video Section (Lord Vishnu Video) --- */}
+      <section className="max-w-4xl mx-auto px-4 py-20">
+        <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900">Why Observe Ekadashi?</h2>
+            <div className="h-1 w-20 bg-orange-500 mx-auto mt-2"></div>
+        </div>
+        <div className="bg-white rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
+          <div className="aspect-video bg-gray-100">
             <iframe 
               className="w-full h-full"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Bhai yahan apna channel/video link daal dena
-              title="Ekadashi Katha Video"
+              src="https://www.youtube.com/embed/O-M6D606Q9o" // Krishna/Vishnu Bhajan/Katha Placeholder
+              title="Ekadashi Importance Video"
               allowFullScreen
             />
           </div>
         </div>
       </section>
 
-      {/* --- FAQ / SEO Content --- */}
-      <section className="max-w-4xl mx-auto px-6 pb-20">
-        <h2 className="text-3xl font-black mb-8 text-gray-900 border-b-4 border-blue-100 pb-2 inline-block">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-4">
-          <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-            <h3 className="font-bold text-lg text-blue-900">What is the best way to keep Ekadashi fast?</h3>
-            <p className="text-gray-600 mt-2 text-sm md:text-base leading-relaxed">
-              The best way is to maintain a 'Sattvic' diet. Most devotees prefer a waterless (Nirjala) fast or a fruit-based (Phalahar) diet, avoiding grains and beans completely.
-            </p>
-          </div>
-          <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-            <h3 className="font-bold text-lg text-blue-900">Why is Parana timing so important?</h3>
-            <p className="text-gray-600 mt-2 text-sm md:text-base leading-relaxed">
-              Breaking the fast (Parana) within the calculated Muhurat is crucial. Doing it after the Tithi ends or during Hari Vasara is considered incomplete according to Shastras.
-            </p>
-          </div>
+      {/* --- FAQ Section --- */}
+      <section className="max-w-4xl mx-auto px-6 pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-50">
+                <h3 className="font-bold text-orange-700 mb-2">How to break Ekadashi fast?</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">Fast must be broken during the Parana window (shown above) on Dwadashi day for full spiritual benefits.</p>
+            </div>
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-50">
+                <h3 className="font-bold text-orange-700 mb-2">What to eat during Vrat?</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">Stick to fruits, milk, and root vegetables. Strictly avoid grains, pulses, and onions.</p>
+            </div>
         </div>
       </section>
     </main>
