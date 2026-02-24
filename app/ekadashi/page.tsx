@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
 
 const BACKEND_URL = "https://jyotishasha-backend.onrender.com";
 
@@ -32,6 +33,9 @@ export default async function EkadashiDirectoryPage() {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
 
+  // Saare local slugs pehle hi mangwa liye
+  const allLocalSlugs = getAllEkadashiSlugs();
+
   const [data2026, data2027] = await Promise.all([
     getAllEkadashiData(2026),
     getAllEkadashiData(2027)
@@ -46,7 +50,7 @@ export default async function EkadashiDirectoryPage() {
   return (
     <main className="min-h-screen bg-[#FDFCFE] pb-20 text-gray-900">
       
-      {/* 1. HERO HEADER - Mobile Optimized */}
+      {/* 1. HERO HEADER */}
       <section className="bg-white border-b border-[#EDE9FE] py-12 md:py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-3xl md:text-7xl font-black text-[#2E1065] mb-4 tracking-tight">
@@ -74,23 +78,25 @@ export default async function EkadashiDirectoryPage() {
       <section className="max-w-7xl mx-auto px-4 py-12 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {combinedData.map((item: any, idx: number) => {
+
+            // --- SMART SLUG LOGIC (Spelling Fix) ---
+            const backendSlug = item.slug || "";
+            const baseName = backendSlug.replace("-ekadashi", "").toLowerCase();
+            
+            // Local slugs mein match dhoondo taaki 404 na aaye
+            const matchedSlug = allLocalSlugs.find(s => s.toLowerCase().includes(baseName)) || backendSlug;
+            
+            // Final URL ensure karna (slug-ekadashi format)
+            const finalURL = matchedSlug.includes("ekadashi") ? matchedSlug : `${matchedSlug}-ekadashi`;
+
             const itemDate = new Date(item.vrat_date);
             itemDate.setHours(0, 0, 0, 0);
             
             const isToday = itemDate.getTime() === now.getTime();
             const isNextYear = itemDate.getFullYear() === 2027;
             
-            // Adding "Ekadashi" to the name
             const rawName = (typeof item.name === "object" ? item.name.en : item.name) || item.name_en || item.ekadashi_name || "Ekadashi";
             const displayName = rawName.toLowerCase().includes("ekadashi") ? rawName : `${rawName} Ekadashi`;
-
-            // 3. BACKEND SLUG LOGIC (Exactly like Single Page)
-            // Hum backend se aane wala slug hi lenge (e.g., "papmochini")
-            // Aur usme "-ekadashi" add karenge agar pehle se nahi hai.
-            const backendSlug = item.slug || "";
-            const finalSlug = backendSlug.endsWith("-ekadashi") 
-              ? backendSlug 
-              : `${backendSlug}-ekadashi`;
 
             return (
               <div
@@ -139,9 +145,8 @@ export default async function EkadashiDirectoryPage() {
                   </div>
                 </div>
 
-                {/* CTA Button with Backend-Driven URL */}
                 <Link
-                  href={`/ekadashi/${finalSlug}`}
+                  href={`/ekadashi/${finalURL}`}
                   className={`mt-8 flex items-center justify-center gap-2 w-full py-5 font-black rounded-2xl text-[11px] uppercase tracking-[0.25em] transition-all active:scale-95 ${
                     isToday ? 'bg-orange-600 hover:bg-orange-700' : 'bg-[#4C1D95] hover:bg-[#6D28D9]'
                   } text-white shadow-lg`}
