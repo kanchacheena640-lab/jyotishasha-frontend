@@ -84,13 +84,13 @@ export default async function EkadashiDirectoryPage() {
             const rawName = (typeof item.name === "object" ? item.name.en : item.name) || item.name_en || item.ekadashi_name || "Ekadashi";
             const displayName = rawName.toLowerCase().includes("ekadashi") ? rawName : `${rawName} Ekadashi`;
 
-            // 3. MASTER SLUG LOGIC (Title se slug banana taaki spelling mistake na ho)
-            // Isse "Papamochani Ekadashi" ban jayega "papamochani-ekadashi"
-            const cleanSlug = displayName
-              .toLowerCase()
-              .trim()
-              .replace(/\s+/g, '-') 
-              .replace(/[^\w\-]+/g, '');
+            // 3. BACKEND SLUG LOGIC (Exactly like Single Page)
+            // Hum backend se aane wala slug hi lenge (e.g., "papmochini")
+            // Aur usme "-ekadashi" add karenge agar pehle se nahi hai.
+            const backendSlug = item.slug || "";
+            const finalSlug = backendSlug.endsWith("-ekadashi") 
+              ? backendSlug 
+              : `${backendSlug}-ekadashi`;
 
             return (
               <div
@@ -139,14 +139,14 @@ export default async function EkadashiDirectoryPage() {
                   </div>
                 </div>
 
-                {/* UPDATED CTA BUTTON */}
+                {/* CTA Button with Backend-Driven URL */}
                 <Link
-                  href={`/ekadashi/${cleanSlug}`}
+                  href={`/ekadashi/${finalSlug}`}
                   className={`mt-8 flex items-center justify-center gap-2 w-full py-5 font-black rounded-2xl text-[11px] uppercase tracking-[0.25em] transition-all active:scale-95 ${
                     isToday ? 'bg-orange-600 hover:bg-orange-700' : 'bg-[#4C1D95] hover:bg-[#6D28D9]'
                   } text-white shadow-lg`}
                 >
-                  View Full Details →
+                  Vrat Vidhi & Details →
                 </Link>
               </div>
             );
