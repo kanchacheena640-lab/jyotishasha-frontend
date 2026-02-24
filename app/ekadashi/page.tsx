@@ -68,64 +68,82 @@ export default async function EkadashiDirectoryPage() {
           {allData.map((item: any, idx: number) => {
             const isPast = new Date(item.vrat_date) < now;
 
-            // 1. NAME FIX: Multiple keys check kar rahe hain
-            const displayName = item.name_en || item.name?.en || item.ekadashi_name || item.name || "Ekadashi Vrat";
+            // 1. NAME FIX: Key names ko dhyan se check karte hue
+            // Agar backend me 'name' object hai {en: '...'}, toh wo use hoga
+            const displayName = 
+              (typeof item.name === 'object' ? item.name.en : item.name) || 
+              item.name_en || 
+              item.ekadashi_name || 
+              "Ekadashi Vrat";
             
-            // 2. PAKSHA FIX: Agar API se aa raha hai toh wo, nahi toh calculation (Safe side ke liye fallback)
-            const displayPaksha = item.paksha || (idx % 2 === 0 ? "Shukla Paksha" : "Krishna Paksha");
+            // 2. PAKSHA & MONTH FIX
+            const displayPaksha = item.paksha || "Ekadashi Tithi";
+            const displayMonth = item.month || "Panchang";
 
             return (
               <div 
                 key={idx} 
-                className={`group relative bg-white border-b-8 rounded-[2.5rem] p-8 transition-all duration-500 hover:-translate-y-3 
+                className={`group relative bg-white border-t-4 rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-3 
                 ${isPast 
-                  ? "border-gray-200 opacity-60" 
-                  : "border-orange-500 shadow-[0_20px_50px_rgba(255,165,0,0.1)] hover:shadow-orange-200"
+                  ? "border-gray-200 opacity-60 grayscale-[0.5]" 
+                  : "border-blue-600 shadow-[0_15px_45px_rgba(30,58,138,0.1)] hover:shadow-blue-200"
                 }`}
               >
-                {/* Name Section - Ab Name Gayab Nahi Hoga */}
+                {/* Badge & Name Section */}
                 <div className="mb-8">
-                  <span className="text-[10px] font-black bg-orange-100 text-orange-700 px-3 py-1 rounded-full uppercase tracking-widest">
-                    {item.month || "Panchang"} Month
-                  </span>
-                  <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-3 group-hover:text-orange-600 transition-colors">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black bg-blue-50 text-blue-700 px-3 py-1 rounded-full uppercase tracking-widest">
+                      {displayMonth} Month
+                    </span>
+                    {!isPast && (
+                      <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    )}
+                  </div>
+                  
+                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-4 group-hover:text-blue-700 transition-colors leading-tight">
                     {displayName}
                   </h2>
-                  <p className="text-orange-500 font-bold text-xs mt-1 uppercase tracking-tighter">
+                  
+                  <p className="text-blue-500 font-bold text-xs mt-2 uppercase tracking-[0.1em]">
                     {displayPaksha}
                   </p>
                 </div>
                 
-                {/* Details Box - Better Contrast */}
-                <div className="space-y-4 bg-orange-50/50 rounded-3xl p-6 border border-orange-100/50">
+                {/* Details Box - Jyotishasha Blue Tints */}
+                <div className="space-y-4 bg-slate-50 rounded-3xl p-6 border border-slate-100">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-500 font-bold text-[11px] uppercase tracking-widest">Vrat Date</span>
-                    <span className="text-gray-900 font-black text-lg">{formatDate(item.vrat_date)}</span>
+                    <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">Vrat Date</span>
+                    <span className="text-slate-900 font-black text-lg">{formatDate(item.vrat_date)}</span>
                   </div>
                   
-                  <div className="h-px bg-orange-200/30 w-full" />
+                  <div className="h-px bg-slate-200 w-full" />
                   
                   <div className="flex justify-between items-start">
-                    <span className="text-gray-500 font-bold text-[11px] uppercase tracking-widest mt-1">Parana Time</span>
+                    <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Parana Time</span>
                     <div className="text-right">
-                      <p className="text-orange-700 font-black text-sm">
-                        {/* Time se date hatane ke liye formatting */}
-                        {item.parana?.start?.split(' ')[1] || item.parana?.start} - {item.parana?.end?.split(' ')[1] || item.parana?.end}
+                      <p className="text-blue-800 font-black text-sm">
+                        {item.parana?.start?.includes(' ') ? item.parana.start.split(' ')[1] : item.parana?.start} - 
+                        {item.parana?.end?.includes(' ') ? item.parana.end.split(' ')[1] : item.parana?.end}
                       </p>
-                      <p className="text-[10px] text-gray-400 font-bold mt-1">
-                        On {formatDate(item.parana?.parana_date)}
+                      <p className="text-[10px] text-slate-400 font-bold mt-1">
+                        {formatDate(item.parana?.parana_date)}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Button - Vibrant Black */}
+                {/* Action Button - Jyotishasha Dark Blue */}
                 <Link 
                   href={`/ekadashi/${item.slug}`} 
-                  className="mt-8 flex items-center justify-center w-full py-5 bg-zinc-900 text-white font-black rounded-2xl text-[11px] uppercase tracking-[0.2em] transition-all hover:bg-orange-600 hover:shadow-xl active:scale-95"
+                  className="mt-8 flex items-center justify-center gap-2 w-full py-5 bg-slate-900 text-white font-black rounded-2xl text-[11px] uppercase tracking-[0.2em] transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95"
                 >
-                  View Katha & Vidhi
+                  Explore Katha <span className="text-blue-400">→</span>
                 </Link>
+
+                {/* Background Decorative Element */}
+                <div className="absolute -bottom-2 -right-2 text-slate-50 font-black text-6xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {idx + 1}
+                </div>
               </div>
             );
           })}
