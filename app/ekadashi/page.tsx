@@ -62,93 +62,103 @@ export default async function EkadashiDirectoryPage() {
         </div>
       </section>
 
-      {/* 2. VIBRANT GRID SECTION */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {allData.map((item: any, idx: number) => {
-            const isPast = new Date(item.vrat_date) < now;
+      {/* 2. VIBRANT GRID SECTION – Jyotishasha Theme */}
+<section className="max-w-7xl mx-auto px-4 py-20">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+    {allData.map((item: any, idx: number) => {
+      const isPast = new Date(item.vrat_date) < now;
 
-            // 1. NAME FIX: Key names ko dhyan se check karte hue
-            // Agar backend me 'name' object hai {en: '...'}, toh wo use hoga
-            const displayName = 
-              (typeof item.name === 'object' ? item.name.en : item.name) || 
-              item.name_en || 
-              item.ekadashi_name || 
-              "Ekadashi Vrat";
-            
-            // 2. PAKSHA & MONTH FIX
-            const displayPaksha = item.paksha || "Ekadashi Tithi";
-            const displayMonth = item.month || "Panchang";
+      const displayName =
+        (typeof item.name === "object" ? item.name.en : item.name) ||
+        item.name_en ||
+        item.ekadashi_name ||
+        "Ekadashi Vrat";
 
-            return (
-              <div 
-                key={idx} 
-                className={`group relative bg-white border-t-4 rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-3 
-                ${isPast 
-                  ? "border-gray-200 opacity-60 grayscale-[0.5]" 
-                  : "border-blue-600 shadow-[0_15px_45px_rgba(30,58,138,0.1)] hover:shadow-blue-200"
-                }`}
-              >
-                {/* Badge & Name Section */}
-                <div className="mb-8">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black bg-blue-50 text-blue-700 px-3 py-1 rounded-full uppercase tracking-widest">
-                      {displayMonth} Month
-                    </span>
-                    {!isPast && (
-                      <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-                    )}
-                  </div>
-                  
-                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-4 group-hover:text-blue-700 transition-colors leading-tight">
-                    {displayName}
-                  </h2>
-                  
-                  <p className="text-blue-500 font-bold text-xs mt-2 uppercase tracking-[0.1em]">
-                    {displayPaksha}
-                  </p>
-                </div>
-                
-                {/* Details Box - Jyotishasha Blue Tints */}
-                <div className="space-y-4 bg-slate-50 rounded-3xl p-6 border border-slate-100">
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">Vrat Date</span>
-                    <span className="text-slate-900 font-black text-lg">{formatDate(item.vrat_date)}</span>
-                  </div>
-                  
-                  <div className="h-px bg-slate-200 w-full" />
-                  
-                  <div className="flex justify-between items-start">
-                    <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Parana Time</span>
-                    <div className="text-right">
-                      <p className="text-blue-800 font-black text-sm">
-                        {item.parana?.start?.includes(' ') ? item.parana.start.split(' ')[1] : item.parana?.start} - 
-                        {item.parana?.end?.includes(' ') ? item.parana.end.split(' ')[1] : item.parana?.end}
-                      </p>
-                      <p className="text-[10px] text-slate-400 font-bold mt-1">
-                        {formatDate(item.parana?.parana_date)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+      const displayPaksha = item.paksha || "Ekadashi Tithi";
+      const displayMonth = item.month || "Panchang";
 
-                {/* Action Button - Jyotishasha Dark Blue */}
-                <Link 
-                  href={`/ekadashi/${item.slug}`} 
-                  className="mt-8 flex items-center justify-center gap-2 w-full py-5 bg-slate-900 text-white font-black rounded-2xl text-[11px] uppercase tracking-[0.2em] transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95"
-                >
-                  Explore Katha <span className="text-blue-400">→</span>
-                </Link>
+      return (
+        <div
+          key={idx}
+          className={`group relative rounded-[28px] p-8 transition-all duration-500 hover:-translate-y-3
+          ${
+            isPast
+              ? "bg-white/60 border border-gray-200 opacity-60 grayscale-[0.4]"
+              : "bg-gradient-to-br from-[#F5EAFE] via-white to-[#EDE9FE] border border-[#DDD6FE] shadow-[0_15px_50px_rgba(109,40,217,0.15)] hover:shadow-[0_25px_60px_rgba(109,40,217,0.25)]"
+          }`}
+        >
+          {/* Month Badge */}
+          <div className="mb-8">
+            <div className="flex justify-between items-center">
+              <span className="text-[10px] font-black bg-[#EDE9FE] text-[#6D28D9] px-4 py-1.5 rounded-full uppercase tracking-widest">
+                {displayMonth} Month
+              </span>
 
-                {/* Background Decorative Element */}
-                <div className="absolute -bottom-2 -right-2 text-slate-50 font-black text-6xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                  {idx + 1}
-                </div>
+              {!isPast && (
+                <span className="flex h-2 w-2 rounded-full bg-[#6D28D9] animate-pulse"></span>
+              )}
+            </div>
+
+            <h2 className="text-2xl md:text-3xl font-black text-[#2E1065] mt-5 leading-tight group-hover:text-[#6D28D9] transition-colors">
+              {displayName}
+            </h2>
+
+            <p className="text-[#7C3AED] font-bold text-xs mt-2 uppercase tracking-[0.15em]">
+              {displayPaksha}
+            </p>
+          </div>
+
+          {/* Details Card */}
+          <div className="space-y-5 bg-white rounded-3xl p-6 border border-[#E9D5FF] shadow-inner">
+            <div className="flex justify-between items-center">
+              <span className="text-[#A78BFA] font-bold text-[10px] uppercase tracking-widest">
+                Vrat Date
+              </span>
+              <span className="text-[#2E1065] font-black text-lg">
+                {formatDate(item.vrat_date)}
+              </span>
+            </div>
+
+            <div className="h-px bg-[#E9D5FF] w-full" />
+
+            <div className="flex justify-between items-start">
+              <span className="text-[#A78BFA] font-bold text-[10px] uppercase tracking-widest mt-1">
+                Parana Time
+              </span>
+              <div className="text-right">
+                <p className="text-[#6D28D9] font-black text-sm">
+                  {item.parana?.start?.includes(" ")
+                    ? item.parana.start.split(" ")[1]
+                    : item.parana?.start}{" "}
+                  -
+                  {item.parana?.end?.includes(" ")
+                    ? item.parana.end.split(" ")[1]
+                    : item.parana?.end}
+                </p>
+                <p className="text-[10px] text-[#A78BFA] font-bold mt-1">
+                  {formatDate(item.parana?.parana_date)}
+                </p>
               </div>
-            );
-          })}
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <Link
+            href={`/ekadashi/${item.slug}`}
+            className="mt-8 flex items-center justify-center gap-2 w-full py-5 bg-[#4C1D95] text-white font-black rounded-2xl text-[11px] uppercase tracking-[0.25em] transition-all hover:bg-[#6D28D9] hover:shadow-[0_15px_35px_rgba(109,40,217,0.4)] active:scale-95"
+          >
+            Explore Katha →
+          </Link>
+
+          {/* Decorative Number */}
+          <div className="absolute -bottom-4 -right-3 text-[#EDE9FE] font-black text-7xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+            {idx + 1}
+          </div>
         </div>
-      </section>
+      );
+    })}
+  </div>
+</section>
 
       {/* 3. INFO SECTION (Aapka Favorite) */}
       <section className="max-w-7xl mx-auto px-4">
