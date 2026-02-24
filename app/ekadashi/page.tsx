@@ -117,27 +117,9 @@ export default async function EkadashiDirectoryPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {combinedData.map((item: any, idx: number) => {
 
-            // --- SMART SLUG & MAPPING LOGIC ---
-            const backendSlugRaw = (item.slug || "").toLowerCase().replace("-ekadashi", "");
-            
-            // Manual Mapping for known mismatches
-            const slugMap: { [key: string]: string } = {
-              "papmochini": "papamochani",
-              "padmini": "padmini",
-              "shattila": "shattila",
-              "shravan-putrada": "shravana-putrada",
-              "paush-putrada": "pausha-putrada"
-            };
-
-            const correctedBase = slugMap[backendSlugRaw] || backendSlugRaw;
-            
-            // Local files se match karna
-            const matchedSlug = allLocalSlugs.find(s => 
-              s.toLowerCase().includes(correctedBase) || 
-              correctedBase.includes(s.toLowerCase().replace("-ekadashi", ""))
-            ) || backendSlugRaw;
-            
-            const finalURL = matchedSlug.includes("ekadashi") ? matchedSlug : `${matchedSlug}-ekadashi`;
+           // --- CLEAN SLUG LOGIC ---
+            const backendSlug = item.slug || "";
+            const finalURL = backendSlug.includes("ekadashi") ? backendSlug : `${backendSlug}-ekadashi`;
 
             const itemDate = new Date(item.vrat_date);
             itemDate.setHours(0, 0, 0, 0);
