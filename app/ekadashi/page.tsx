@@ -84,6 +84,14 @@ export default async function EkadashiDirectoryPage() {
             const rawName = (typeof item.name === "object" ? item.name.en : item.name) || item.name_en || item.ekadashi_name || "Ekadashi";
             const displayName = rawName.toLowerCase().includes("ekadashi") ? rawName : `${rawName} Ekadashi`;
 
+            // 3. MASTER SLUG LOGIC (Title se slug banana taaki spelling mistake na ho)
+            // Isse "Papamochani Ekadashi" ban jayega "papamochani-ekadashi"
+            const cleanSlug = displayName
+              .toLowerCase()
+              .trim()
+              .replace(/\s+/g, '-') 
+              .replace(/[^\w\-]+/g, '');
+
             return (
               <div
                 key={idx}
@@ -131,12 +139,14 @@ export default async function EkadashiDirectoryPage() {
                   </div>
                 </div>
 
-                {/* Corrected Link Path */}
+                {/* UPDATED CTA BUTTON */}
                 <Link
-                  href={`/ekadashi/${item.slug.endsWith("-ekadashi") ? item.slug : `${item.slug}-ekadashi`}`}
-                  className={`mt-8 flex items-center justify-center gap-2 w-full py-5 font-black rounded-2xl text-[11px] uppercase tracking-[0.25em] transition-all active:scale-95 ${isToday ? 'bg-orange-600 hover:bg-orange-700' : 'bg-[#4C1D95] hover:bg-[#6D28D9]'} text-white shadow-lg`}
+                  href={`/ekadashi/${cleanSlug}`}
+                  className={`mt-8 flex items-center justify-center gap-2 w-full py-5 font-black rounded-2xl text-[11px] uppercase tracking-[0.25em] transition-all active:scale-95 ${
+                    isToday ? 'bg-orange-600 hover:bg-orange-700' : 'bg-[#4C1D95] hover:bg-[#6D28D9]'
+                  } text-white shadow-lg`}
                 >
-                  Explore Katha →
+                  View Full Details →
                 </Link>
               </div>
             );
