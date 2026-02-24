@@ -133,7 +133,7 @@ export default async function EkadashiDirectoryPage() {
 
                 {/* Corrected Link Path */}
                 <Link
-                  href={`/ekadashi/${item.slug}`}
+                  href={`/ekadashi/${item.slug.endsWith("-ekadashi") ? item.slug : `${item.slug}-ekadashi`}`}
                   className={`mt-8 flex items-center justify-center gap-2 w-full py-5 font-black rounded-2xl text-[11px] uppercase tracking-[0.25em] transition-all active:scale-95 ${isToday ? 'bg-orange-600 hover:bg-orange-700' : 'bg-[#4C1D95] hover:bg-[#6D28D9]'} text-white shadow-lg`}
                 >
                   Explore Katha →
