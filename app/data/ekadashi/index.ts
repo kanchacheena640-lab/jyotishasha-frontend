@@ -11,7 +11,7 @@ import kamika from "./kamika-ekadashi";
 import mokshada from "./mokshada-ekadashi";
 import mohini from "./mohini-ekadashi";
 import nirjala from "./nirjala-ekadashi";
-import papamochani from "./papamochani-ekadashi";
+import papmochani from "./papmochani-ekadashi";
 import papankusha from "./papankusha-ekadashi";
 import parivartini from "./parivartini-ekadashi";
 import paushaPutrada from "./pausha-putrada-ekadashi";
@@ -37,7 +37,7 @@ export const ekadashiList: EkadashiContent[] = [
   mokshada,
   mohini,
   nirjala,
-  papamochani,
+  papmochani,
   papankusha,
   parivartini,
   paushaPutrada,
