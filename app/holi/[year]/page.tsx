@@ -59,6 +59,7 @@ async function fetchHoli(year: number): Promise<HoliApiResponse | null> {
         year,
       }),
       cache: "no-store",
+      next: { revalidate: 0 },
     });
 
     if (!res.ok) return null;
@@ -79,9 +80,8 @@ export async function generateMetadata({
   const year = clampYear(Number(params.year));
   const data = await fetchHoli(year);
 
-  if (!data)
+  if (!data?.holika_dahan?.date)
     return { robots: { index: false, follow: false } };
-
 
   return {
     title: `Holi ${year} Date & Time in India: Holika Dahan Muhurat and Rangwali Holi`,
@@ -103,10 +103,10 @@ export default async function HoliYearPage({
   const year = clampYear(Number(params.year));
   const data = await fetchHoli(year);
 
-  if (!data) return notFound();
+  if (!data?.holika_dahan?.date) return notFound();
 
   const holika = data.holika_dahan;
-  const dhulandi = data.holi_dhulandi?.date;
+  const dhulandi = data?.holi_dhulandi?.date ?? null;
   const rashiTips = data.rashi_tips ?? {};
 
   return (
@@ -202,10 +202,15 @@ export default async function HoliYearPage({
             "@type": "ReligiousEvent",
             name: `Holi ${year}`,
             description: `Holi ${year} including Holika Dahan muhurat and Rangwali Holi celebration details in India.`,
-            startDate: new Date(holika.date).toISOString(),
+            startDate: holika?.date
+              ? new Date(holika.date).toISOString()
+              : undefined,
+
             endDate: dhulandi
               ? new Date(dhulandi).toISOString()
-              : new Date(holika.date).toISOString(),
+              : holika?.date
+              ? new Date(holika.date).toISOString()
+              : undefined,
             eventStatus: "https://schema.org/EventScheduled",
             eventAttendanceMode:
               "https://schema.org/OfflineEventAttendanceMode",
