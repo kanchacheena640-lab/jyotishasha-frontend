@@ -1,7 +1,7 @@
 import { EkadashiContent } from "@/types/ekadashi";
 
 const content: EkadashiContent = {
-  slug: "parivartini-ekadashi",
+  slug: "parsva-ekadashi",
 
   name: {
     en: "Parivartini Ekadashi",
@@ -13,7 +13,7 @@ const content: EkadashiContent = {
   paksha: "Shukla",
 
   intro: {
-    en: `Parivartini Ekadashi, also known as Parshva Ekadashi or Vaman Ekadashi, falls during the Shukla Paksha of the Bhadrapada month. The word 'Parivartini' signifies 'change' or 'turning.' According to the Puranas, it is on this day that Lord Vishnu, who has been in Yoga Nidra since Devshayani Ekadashi, shifts His position (turns over) from the left side to the right. 
+    en: `Parshva Ekadashi, also known as Parivartini Ekadashi or Vaman Ekadashi, falls during the Shukla Paksha of the Bhadrapada month. The word 'Parivartini' signifies 'change' or 'turning.' According to the Puranas, it is on this day that Lord Vishnu, who has been in Yoga Nidra since Devshayani Ekadashi, shifts His position (turns over) from the left side to the right. 
 
 The significance of this day is deeply linked to the Vamana Avatar (the fifth incarnation of Lord Vishnu). It was on this day that Lord Vamana took the three steps to reclaim the universe from King Bali. Observing this fast is believed to be so meritorious that it cleanses all sins and is equivalent to performing a Vajapeya Yagna. It represents a spiritual turning point where the devotee seeks a fundamental change in their consciousness.`,
 

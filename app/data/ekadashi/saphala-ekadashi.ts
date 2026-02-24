@@ -1,7 +1,7 @@
 import { EkadashiContent } from "@/types/ekadashi";
 
 const content: EkadashiContent = {
-  slug: "safala-ekadashi",
+  slug: "saphala-ekadashi",
 
   name: {
     en: "Safala Ekadashi",

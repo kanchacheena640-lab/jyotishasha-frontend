@@ -15,12 +15,12 @@ import mohini from "./mohini-ekadashi";
 import nirjala from "./nirjala-ekadashi";
 import papmochini from "./papmochini-ekadashi"; // Updated to 'i'
 import papankusha from "./papankusha-ekadashi";
-import parsva from "./parivartini-ekadashi";     // API calls it 'parsva'
-import paushaPutrada from "./pausha-putrada-ekadashi";
+import parsva from "./parsva-ekadashi";     // API calls it 'parsva'
+import paushaPutrada from "./putrada-pausha-ekadashi";
 import rama from "./rama-ekadashi";
-import safala from "./safala-ekadashi";
+import saphala from "./saphala-ekadashi";
 import shattila from "./shattila-ekadashi";
-import putradaShravana from "./shravana-putrada-ekadashi"; // API calls it 'putrada-shravana'
+import putradaShravana from "./putrada-shravana-ekadashi"; // API calls it 'putrada-shravana'
 import utpanna from "./utpanna-ekadashi";
 import varuthini from "./varuthini-ekadashi";
 import vijaya from "./vijaya-ekadashi";
@@ -31,7 +31,7 @@ import parama from "./parama-ekadashi";
 export const ekadashiList: EkadashiContent[] = [
   amalaki, apara, aja, devshayani, devutthana, indira, jaya, 
   kamada, kamika, mokshada, mohini, nirjala, papmochini, 
-  papankusha, parsva, paushaPutrada, rama, safala, shattila, 
+  papankusha, parsva, paushaPutrada, rama, saphala, shattila, 
   putradaShravana, utpanna, varuthini, vijaya, yogini, padmini, parama
 ];
 
