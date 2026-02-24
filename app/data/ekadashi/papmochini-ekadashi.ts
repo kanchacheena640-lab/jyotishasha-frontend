@@ -1,10 +1,10 @@
 import { EkadashiContent } from "@/types/ekadashi";
 
 const content: EkadashiContent = {
-  slug: "papmochani-ekadashi",
+  slug: "papmochini-ekadashi",
 
   name: {
-    en: "Papmochani Ekadashi",
+    en: "Papmochini Ekadashi",
     hi: "पापमोचिनी एकादशी"
   },
 

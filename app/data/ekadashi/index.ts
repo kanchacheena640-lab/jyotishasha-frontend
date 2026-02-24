@@ -1,4 +1,6 @@
 import { EkadashiContent } from "@/types/ekadashi";
+
+// Imports (Make sure file names match these paths)
 import amalaki from "./amalaki-ekadashi";
 import apara from "./apara-ekadashi";
 import aja from "./aja-ekadashi";
@@ -11,58 +13,33 @@ import kamika from "./kamika-ekadashi";
 import mokshada from "./mokshada-ekadashi";
 import mohini from "./mohini-ekadashi";
 import nirjala from "./nirjala-ekadashi";
-import papmochani from "./papmochani-ekadashi";
+import papmochini from "./papmochini-ekadashi"; // Updated to 'i'
 import papankusha from "./papankusha-ekadashi";
-import parivartini from "./parivartini-ekadashi";
+import parsva from "./parivartini-ekadashi";     // API calls it 'parsva'
 import paushaPutrada from "./pausha-putrada-ekadashi";
 import rama from "./rama-ekadashi";
 import safala from "./safala-ekadashi";
 import shattila from "./shattila-ekadashi";
-import shravanaPutrada from "./shravana-putrada-ekadashi";
+import putradaShravana from "./shravana-putrada-ekadashi"; // API calls it 'putrada-shravana'
 import utpanna from "./utpanna-ekadashi";
 import varuthini from "./varuthini-ekadashi";
 import vijaya from "./vijaya-ekadashi";
 import yogini from "./yogini-ekadashi";
+import padmini from "./padmini-ekadashi";
+import parama from "./parama-ekadashi";
 
 export const ekadashiList: EkadashiContent[] = [
-  amalaki,
-  apara,
-  aja,
-  devshayani,
-  devutthana,
-  indira,
-  jaya,
-  kamada,
-  kamika,
-  mokshada,
-  mohini,
-  nirjala,
-  papmochani,
-  papankusha,
-  parivartini,
-  paushaPutrada,
-  rama,
-  safala,
-  shattila,
-  shravanaPutrada,
-  utpanna,
-  varuthini,
-  vijaya,
-  yogini,
+  amalaki, apara, aja, devshayani, devutthana, indira, jaya, 
+  kamada, kamika, mokshada, mohini, nirjala, papmochini, 
+  papankusha, parsva, paushaPutrada, rama, safala, shattila, 
+  putradaShravana, utpanna, varuthini, vijaya, yogini, padmini, parama
 ];
 
-export function getEkadashiContent(
-  slug: string
-): EkadashiContent | null {
-  return (
-    ekadashiList.find(
-      (item) => item.slug === slug
-    ) || null
-  );
+export function getEkadashiContent(slug: string): EkadashiContent | null {
+  // SEO URL (/papmochini-ekadashi) se API slug (papmochini) nikalne ke liye
+  return ekadashiList.find((item) => item.slug === slug) || null;
 }
 
 export function getAllEkadashiSlugs(): string[] {
-  return ekadashiList.map(
-    (item) => item.slug
-  );
+  return ekadashiList.map((item) => item.slug);
 }
