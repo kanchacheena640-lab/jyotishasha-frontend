@@ -7,6 +7,7 @@ const BACKEND_URL = "https://jyotishasha-backend.onrender.com";
 export const metadata: Metadata = {
   title: "Ekadashi Vrat Calendar 2026-2027: Dates, Parana Time & Katha",
   description: "Complete Ekadashi calendar with accurate Vrat dates, Parana timings, and detailed Katha videos for 2026 and 2027.",
+  alternates: { canonical: "https://yourdomain.com/ekadashi" } // Change to your actual domain
 };
 
 function formatDate(dateStr: string | undefined) {
@@ -33,7 +34,6 @@ export default async function EkadashiDirectoryPage() {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
 
-  // Saare local slugs pehle hi mangwa liye
   const allLocalSlugs = getAllEkadashiSlugs();
 
   const [data2026, data2027] = await Promise.all([
@@ -47,9 +47,47 @@ export default async function EkadashiDirectoryPage() {
   const combinedData = [...upcoming2026, ...upcoming2027].slice(0, 24);
   const nextEkadashi = combinedData[0];
 
+  // --- SCHEMA MARKUP DATA GENERATION ---
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://yourdomain.com" },
+      { "@type": "ListItem", "position": 2, "name": "Ekadashi Calendar", "item": "https://yourdomain.com/ekadashi" }
+    ]
+  };
+
+  const eventSchema = combinedData.slice(0, 5).map(item => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": `${item.name || item.ekadashi_name} Ekadashi Vrat`,
+    "startDate": item.vrat_date,
+    "location": { "@type": "Place", "name": "Worldwide/Online" },
+    "description": `Fast and Parana timings for ${item.name || item.ekadashi_name} Ekadashi.`
+  }));
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is the next Ekadashi?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": nextEkadashi ? `The next Ekadashi is ${nextEkadashi.name || nextEkadashi.ekadashi_name} on ${formatDate(nextEkadashi.vrat_date)}.` : "Please check our calendar for upcoming dates."
+        }
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-[#FDFCFE] pb-20 text-gray-900">
-      
+      {/* Inject Schemas */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       {/* 1. HERO HEADER */}
       <section className="bg-white border-b border-[#EDE9FE] py-12 md:py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
@@ -79,19 +117,30 @@ export default async function EkadashiDirectoryPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {combinedData.map((item: any, idx: number) => {
 
-            // --- SMART SLUG LOGIC (Spelling Fix) ---
-            const backendSlug = item.slug || "";
-            const baseName = backendSlug.replace("-ekadashi", "").toLowerCase();
+            // --- SMART SLUG & MAPPING LOGIC ---
+            const backendSlugRaw = (item.slug || "").toLowerCase().replace("-ekadashi", "");
             
-            // Local slugs mein match dhoondo taaki 404 na aaye
-            const matchedSlug = allLocalSlugs.find(s => s.toLowerCase().includes(baseName)) || backendSlug;
+            // Manual Mapping for known mismatches
+            const slugMap: { [key: string]: string } = {
+              "papmochini": "papamochani",
+              "padmini": "padmini",
+              "shattila": "shattila",
+              "shravan-putrada": "shravana-putrada",
+              "paush-putrada": "pausha-putrada"
+            };
+
+            const correctedBase = slugMap[backendSlugRaw] || backendSlugRaw;
             
-            // Final URL ensure karna (slug-ekadashi format)
+            // Local files se match karna
+            const matchedSlug = allLocalSlugs.find(s => 
+              s.toLowerCase().includes(correctedBase) || 
+              correctedBase.includes(s.toLowerCase().replace("-ekadashi", ""))
+            ) || backendSlugRaw;
+            
             const finalURL = matchedSlug.includes("ekadashi") ? matchedSlug : `${matchedSlug}-ekadashi`;
 
             const itemDate = new Date(item.vrat_date);
             itemDate.setHours(0, 0, 0, 0);
-            
             const isToday = itemDate.getTime() === now.getTime();
             const isNextYear = itemDate.getFullYear() === 2027;
             
@@ -138,7 +187,7 @@ export default async function EkadashiDirectoryPage() {
                     <span className="text-[#A78BFA] font-bold text-[10px] uppercase tracking-widest mt-1">Parana</span>
                     <div className="text-right">
                       <p className={`font-black text-sm ${isToday ? 'text-orange-800' : 'text-[#6D28D9]'}`}>
-                        {item.parana?.start?.includes(" ") ? item.parana.start.split(" ")[1] : item.parana?.start} - {item.parana?.end?.includes(" ") ? item.parana.end.split(" ")[1] : item.parana?.end}
+                        {item.parana?.start?.split(" ")[1] || item.parana?.start} - {item.parana?.end?.split(" ")[1] || item.parana?.end}
                       </p>
                       <p className="text-[10px] text-[#A78BFA] font-bold mt-1">On {formatDate(item.parana?.parana_date)}</p>
                     </div>
