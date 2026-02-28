@@ -14,13 +14,23 @@ export default function NavratriClient({
   initialData,
 }: Props) {
 
+  const baseYear = initialYear
+
   const [year, setYear] = useState<number>(initialYear)
   const [navType, setNavType] = useState<"chaitra" | "shardiya">(initialData.type)
   const [data, setData] = useState<NavratriResponse>(initialData)
+  const [loading, setLoading] = useState(false)
 
   async function updateData(newYear: number, newType: "chaitra" | "shardiya") {
-    const res = await fetchNavratri({ year: newYear, type: newType })
-    setData(res)
+    try {
+      setLoading(true)
+      const res = await fetchNavratri({ year: newYear, type: newType })
+      setData(res)
+    } catch (err) {
+      console.error("Navratri update error:", err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   function handleYearChange(newYear: number) {
@@ -33,11 +43,14 @@ export default function NavratriClient({
     updateData(year, type)
   }
 
+  const getMataImage = (name: string) =>
+    `/images/navratri/${name.toLowerCase().replace(/\s+/g, "-")}.webp`
+
   return (
     <>
       {/* Year Switcher */}
       <div className="flex justify-center gap-4 mb-8">
-        {[year, year + 1, year + 2].map((y) => (
+        {[baseYear, baseYear + 1, baseYear + 2].map((y) => (
           <button
             key={y}
             onClick={() => handleYearChange(y)}
@@ -77,33 +90,51 @@ export default function NavratriClient({
         </button>
       </div>
 
+      {loading && (
+        <p className="text-center text-gray-500 mb-6">Loading...</p>
+      )}
+
       {/* 9 Devi Cards */}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
         {data.days.map((day: NavratriDay) => (
           <div
             key={day.day_number}
-            className="bg-white rounded-xl shadow-sm hover:shadow-lg transition p-6 border border-[#F3E5D8]"
+            className="bg-gradient-to-b from-[#FFF7ED] to-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden border border-[#F3E5D8]"
           >
-            <h3 className="text-xl font-semibold text-[#7A1C1C] mb-2">
-              {day.mata_name}
-            </h3>
+            {/* Image */}
+            <img
+              src={getMataImage(day.mata_name)}
+              alt={day.mata_name}
+              className="w-full h-44 object-cover"
+              loading="lazy"
+            />
 
-            <p className="text-sm text-gray-600 mb-1">
-              {day.date}
-            </p>
+            <div className="p-5">
+              {/* Heading */}
+              <h3 className="text-lg font-bold text-[#7A1C1C] mb-1">
+                Day {day.day_number} – {day.mata_name}
+              </h3>
 
-            <p className="text-sm text-gray-500 mb-4">
-              Tithi: {day.tithi}
-            </p>
+              {/* Date */}
+              <p className="text-sm text-gray-600 mb-2">
+                {day.date}
+              </p>
 
-            <a
-              href={`/navratri/maa-${day.mata_name
-                .toLowerCase()
-                .replace(/\s+/g, "-")}`}
-              className="inline-block text-sm font-medium text-[#B91C1C] hover:underline"
-            >
-              Explore →
-            </a>
+              {/* Subtle Tithi Info */}
+              <p className="text-xs text-gray-400 mb-3">
+                {day.tithi_window.name} ({day.tithi_window.paksha})
+              </p>
+
+              {/* Link */}
+              <a
+                href={`/navratri/maa-${day.mata_name
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
+                className="inline-block text-sm font-medium text-[#B91C1C] hover:underline"
+              >
+                Explore →
+              </a>
+            </div>
           </div>
         ))}
       </div>
