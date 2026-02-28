@@ -18,6 +18,9 @@ export interface NavratriResponse {
   type: "chaitra" | "shardiya"
   year: number
   days: NavratriDay[]
+  start_date?: string
+  end_date?: string
+  total_days?: number
 }
 
 interface FetchParams {
@@ -31,11 +34,25 @@ export async function fetchNavratri({
 }: FetchParams): Promise<NavratriResponse> {
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/festivals/navratri?year=${year}&type=${type}`,
-    { cache: "no-store" }
+    "https://jyotishasha-backend.onrender.com/api/festivals/navratri",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        year,
+        latitude: 26.8467,
+        longitude: 80.9462,
+        type
+      }),
+      cache: "no-store"
+    }
   )
 
   if (!res.ok) {
+    const text = await res.text()
+    console.error("Navratri API Error:", text)
     throw new Error("Failed to fetch Navratri data")
   }
 
