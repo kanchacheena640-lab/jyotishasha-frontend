@@ -3,6 +3,13 @@ import type { NavratriResponse } from "../../lib/fetchNavratri"
 import { fetchNavratri } from "../../lib/fetchNavratri"
 import NavratriClient from "./NavratriClient"
 
+
+const formatDate = (dateString: string) => {
+  if (!dateString) return ""
+  const [year, month, day] = dateString.split("-")
+  return `${day}-${month}-${year}`
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const year = new Date().getUTCFullYear()
 
@@ -54,9 +61,10 @@ export default async function NavratriPage() {
     type: "auto",
   })
 
-  const startDate = initialData?.days?.[0]?.date || ""
-  const endDate =
-    initialData?.days?.[initialData.days.length - 1]?.date || ""
+  const days = initialData?.days ?? []
+
+  const startDate = days.length > 0 ? days[0].date : ""
+  const endDate = days.length > 0 ? days[days.length - 1].date : ""
 
   return (
     <main className="min-h-screen bg-[#FFF8F1] text-[#2B2B2B]">
@@ -132,7 +140,7 @@ export default async function NavratriPage() {
                     name: `When is Navratri ${currentYear}?`,
                     acceptedAnswer: {
                         "@type": "Answer",
-                        text: `Navratri ${currentYear} begins on ${startDate} and ends on ${endDate}.`
+                        text: `Navratri ${currentYear} begins on ${formatDate(startDate)} and ends on ${formatDate(endDate)}.`
                     }
                     },
                     {
@@ -182,7 +190,7 @@ export default async function NavratriPage() {
 
       </section>
 
-      <section className="mt-16 max-w-3xl mx-auto px-4">
+      <section className="mt-16 mb-32 max-w-3xl mx-auto px-4">
         <h2 className="text-2xl font-bold text-[#7A1C1C] mb-6 text-center">
             Frequently Asked Questions
         </h2>
@@ -193,7 +201,7 @@ export default async function NavratriPage() {
                 When is Navratri {currentYear}?
             </h3>
             <p>
-                Navratri {currentYear} begins on {startDate} and ends on {endDate}.
+                Navratri {currentYear} begins on {formatDate(startDate)} and ends on {formatDate(endDate)}.
             </p>
             </div>
 
