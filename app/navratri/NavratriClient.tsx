@@ -14,6 +14,11 @@ export default function NavratriClient({
   initialData,
 }: Props) {
 
+const formatDate = (dateString: string) => {
+  const [year, month, day] = dateString.split("-")
+  return `${day}-${month}-${year}`
+}
+
   const baseYear = initialYear
 
   const [year, setYear] = useState<number>(initialYear)
@@ -117,7 +122,7 @@ export default function NavratriClient({
 
               {/* Date */}
               <p className="text-sm text-gray-600 mb-2">
-                {day.date}
+                {formatDate(day.date)}
               </p>
 
               {/* Subtle Tithi Info */}
