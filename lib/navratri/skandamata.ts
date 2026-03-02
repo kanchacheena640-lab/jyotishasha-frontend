@@ -4,39 +4,46 @@ export const SKANDAMATA = {
 
   hi: {
     metaTitle:
-      "मां स्कंदमाता {year}: पूजा विधि, मंत्र और महत्व | नवरात्रि पांचवां दिन",
+      "मां स्कंदमाता {year}: पूजा विधि, मंत्र, विशुद्धि चक्र और महत्व | नवरात्रि पांचवां दिन",
 
     metaDescription:
-      "मां स्कंदमाता की पूजा {date} को की जाएगी। जानें पूजा विधि, मंत्र (Om Devi Skandamatayai Namah), शुभ रंग {day5Color} और आध्यात्मिक महत्व।",
+      "{navType} नवरात्रि {year} के पांचवें दिन {date} को मां स्कंदमाता की पूजा की जाती है। जानें पूजा विधि, मंत्र, शुभ रंग {day5Color}, विशुद्धि चक्र और संतान सुख का महत्व।",
 
     title:
-      "मां स्कंदमाता: नवरात्रि {year} का पांचवां दिन",
+      "मां स्कंदमाता: नवरात्रि {year} का पांचवां दिन मातृत्व और संरक्षण का स्वरूप",
 
     hero: {
       intro:
-        "{navType} नवरात्रि {year} के पांचवें दिन {date} को मां स्कंदमाता की पूजा की जाती है। वे मातृत्व, करुणा और संरक्षण की प्रतीक हैं। इस दिन का शुभ रंग {day5Color} है।"
+        "{navType} नवरात्रि {year} के पांचवें दिन {date} को मां स्कंदमाता की आराधना की जाती है। वे मातृत्व, करुणा और दिव्य संरक्षण की प्रतीक हैं। इस दिन का शुभ रंग {day5Color} है, जो संतुलन और शांति का संकेत देता है।"
     },
 
     sections: [
 
       {
-        id: "who-is",
-        title: "मां स्कंदमाता कौन हैं?",
+        id: "scriptural-context",
+        title: "पौराणिक संदर्भ और कथा",
         content:
-          "मां स्कंदमाता नवदुर्गा का पांचवां स्वरूप हैं। वे भगवान कार्तिकेय (स्कंद) की माता हैं। वे कमल पर विराजमान रहती हैं और अपनी गोद में स्कंद को धारण करती हैं।"
+          "मां स्कंदमाता भगवान कार्तिकेय (स्कंद) की माता हैं, जिन्होंने तारकासुर का वध किया था। देवी के इस स्वरूप में वे कमल पर विराजमान रहती हैं और अपनी गोद में बाल स्कंद को धारण करती हैं। यह रूप दर्शाता है कि दिव्य शक्ति करुणा और संरक्षण के माध्यम से कार्य करती है।"
       },
 
       {
-        id: "spiritual-meaning",
-        title: "पांचवें दिन का आध्यात्मिक महत्व",
+        id: "symbolism",
+        title: "मां स्कंदमाता का प्रतीकात्मक अर्थ",
         content:
-          "मां स्कंदमाता की पूजा से भक्ति, प्रेम और आंतरिक शांति की प्राप्ति होती है। यह दिन परिवार और संतान सुख के लिए विशेष माना जाता है।"
+          "मां स्कंदमाता चार भुजाओं वाली हैं। दो हाथों में कमल, एक हाथ में बाल स्कंद और एक हाथ वरमुद्रा में होता है। उनका कमलासन पवित्रता का प्रतीक है। उनका स्वरूप दर्शाता है कि मातृत्व में ही सर्वोच्च शक्ति और संतुलन निहित है।"
+      },
+
+      {
+        id: "chakra-connection",
+        title: "विशुद्धि चक्र और आंतरिक शुद्धि",
+        content:
+          "नवरात्रि का पांचवां दिन विशुद्धि चक्र से जुड़ा माना जाता है। यह चक्र संवाद, अभिव्यक्ति और सत्य का केंद्र है। मां स्कंदमाता की उपासना से मन और वाणी में शुद्धता आती है तथा व्यक्ति पारिवारिक और सामाजिक संबंधों में संतुलन स्थापित कर पाता है।"
       },
 
       {
         id: "mantra",
         title: "मां स्कंदमाता मंत्र",
-        content: "पूजन के समय यह मंत्र जप करें:",
+        content: "पूजन के समय निम्न मंत्र का जप करें:",
         list: [
           "ॐ देवी स्कन्दमातायै नमः",
           "(Om Devi Skandamatayai Namah)"
@@ -45,23 +52,30 @@ export const SKANDAMATA = {
 
       {
         id: "puja-vidhi",
-        title: "पूजा विधि",
+        title: "पांचवें दिन की विस्तृत पूजा विधि",
         content:
-          "{date} को मां को केले, पुष्प और मिठाई अर्पित करें। कमल के फूल अर्पित करना विशेष शुभ माना जाता है।"
+          "प्रातः स्नान कर स्वच्छ वस्त्र धारण करें। मां को केले, कमल पुष्प और मिष्ठान अर्पित करें। 108 बार मंत्र जप करें। संतान सुख और पारिवारिक शांति के लिए विशेष प्रार्थना करें। ध्यान के समय मां को बाल स्कंद के साथ कमलासन में विराजमान रूप में स्मरण करें।"
       },
 
       {
         id: "color-bhog",
         title: "शुभ रंग और भोग",
         content:
-          "नवरात्रि {year} के पांचवें दिन का शुभ रंग {day5Color} है। मां को केले का भोग अर्पित किया जाता है।"
+          "नवरात्रि {year} के पांचवें दिन का शुभ रंग {day5Color} है। इस रंग के वस्त्र धारण करना संतुलन और शांति का प्रतीक है। मां को केले का भोग अर्पित करना अत्यंत शुभ माना जाता है।"
       },
 
       {
-        id: "benefits",
-        title: "पूजा के लाभ",
+        id: "spiritual-benefits",
+        title: "आध्यात्मिक और पारिवारिक लाभ",
         content:
-          "मां स्कंदमाता की आराधना से संतान सुख, पारिवारिक सुख और मानसिक शांति प्राप्त होती है।"
+          "मां स्कंदमाता की आराधना से संतान सुख, पारिवारिक सौहार्द और मानसिक संतुलन प्राप्त होता है। यह साधना व्यक्ति को करुणा और धैर्य का अनुभव कराती है। आध्यात्मिक रूप से यह भक्ति और प्रेम को मजबूत करती है।"
+      },
+
+      {
+        id: "who-should-worship",
+        title: "किन लोगों को विशेष पूजा करनी चाहिए",
+        content:
+          "जो लोग संतान सुख की कामना रखते हैं या पारिवारिक संबंधों में सामंजस्य चाहते हैं, उन्हें मां स्कंदमाता की पूजा करनी चाहिए। विद्यार्थियों और युवाओं के लिए भी यह दिन आत्मविश्वास और संरक्षण का प्रतीक है।"
       }
 
     ],
@@ -71,13 +85,19 @@ export const SKANDAMATA = {
         question:
           "नवरात्रि {year} में मां स्कंदमाता की पूजा कब है?",
         answer:
-          "{date} को मां स्कंदमाता की पूजा की जाएगी।"
+          "{date} को मां स्कंदमाता की पूजा की जाएगी, जो नवरात्रि का पांचवां दिन है।"
+      },
+      {
+        question:
+          "मां स्कंदमाता का संबंध किस देवता से है?",
+        answer:
+          "वे भगवान कार्तिकेय (स्कंद) की माता हैं।"
       },
       {
         question:
           "मां स्कंदमाता का मंत्र क्या है?",
         answer:
-          "ॐ देवी स्कन्दमातायै नमः (Om Devi Skandamatayai Namah)"
+          "ॐ देवी स्कन्दमातायै नमः"
       },
       {
         question:
@@ -90,39 +110,46 @@ export const SKANDAMATA = {
 
   en: {
     metaTitle:
-      "Maa Skandamata {year}: Puja Vidhi, Mantra and Significance | Navratri Day 5",
+      "Maa Skandamata {year}: Puja Vidhi, Mantra and Vishuddha Chakra Significance | Navratri Day 5",
 
     metaDescription:
-      "Maa Skandamata is worshipped on {date}. Know puja vidhi, mantra (Om Devi Skandamatayai Namah), auspicious color {day5Color} and spiritual meaning.",
+      "Maa Skandamata is worshipped on {date}, the fifth day of {navType} Navratri {year}. Learn puja vidhi, mantra, auspicious color {day5Color} and Vishuddha chakra connection.",
 
     title:
-      "Maa Skandamata: Navratri {year} Day 5 Guide",
+      "Maa Skandamata: Navratri {year} Day 5 Guide to Motherly Grace",
 
     hero: {
       intro:
-        "On {date}, the fifth day of {navType} Navratri {year}, devotees worship Maa Skandamata. She symbolizes motherhood, compassion and protection. The auspicious color for Day 5 is {day5Color}."
+        "On {date}, the fifth day of {navType} Navratri {year}, devotees worship Maa Skandamata. She symbolizes divine motherhood, compassion and protection. The auspicious color for Day 5 is {day5Color}."
     },
 
     sections: [
 
       {
-        id: "who-is",
-        title: "Who is Maa Skandamata?",
+        id: "scriptural-context",
+        title: "Mythological Background",
         content:
-          "Maa Skandamata is the fifth form of Navdurga. She is the mother of Lord Kartikeya (Skanda). She is depicted sitting on a lotus while holding her son in her lap."
+          "Maa Skandamata is the mother of Lord Kartikeya, who defeated the demon Tarakasura. She is depicted seated on a lotus holding her child Skanda. Her form represents nurturing strength and protective divinity."
       },
 
       {
-        id: "spiritual-meaning",
-        title: "Spiritual Significance",
+        id: "symbolism",
+        title: "Symbolism of Maa Skandamata",
         content:
-          "Day 5 represents purity and devotion. Worshipping Maa Skandamata brings family harmony and mental peace."
+          "She has four arms, holding lotus flowers and blessing devotees while carrying her son. The lotus seat signifies purity and spiritual elevation. Her maternal posture symbolizes balance between power and compassion."
+      },
+
+      {
+        id: "chakra-connection",
+        title: "Connection with Vishuddha Chakra",
+        content:
+          "Day 5 of Navratri is associated with the Vishuddha (throat) chakra, governing communication and expression. Worshipping Maa Skandamata purifies speech and enhances harmony in relationships."
       },
 
       {
         id: "mantra",
         title: "Maa Skandamata Mantra",
-        content: "Chant this mantra during worship:",
+        content: "Chant the following mantra with devotion:",
         list: [
           "ॐ देवी स्कन्दमातायै नमः",
           "(Om Devi Skandamatayai Namah)"
@@ -131,23 +158,30 @@ export const SKANDAMATA = {
 
       {
         id: "puja-vidhi",
-        title: "Puja Vidhi",
+        title: "Detailed Puja Vidhi for Day 5",
         content:
-          "On {date}, offer bananas, flowers and sweets. Lotus flowers are considered highly auspicious."
+          "Offer bananas, lotus flowers and sweets. Chant the mantra 108 times and pray for family harmony and protection. Meditation on her lotus seated form enhances spiritual focus."
       },
 
       {
         id: "color-bhog",
         title: "Auspicious Color and Offering",
         content:
-          "The auspicious color for Navratri {year} Day 5 is {day5Color}. Offering bananas is believed to bring blessings."
+          "The auspicious color for Navratri {year} Day 5 is {day5Color}. Offering bananas symbolizes prosperity and nourishment."
       },
 
       {
-        id: "benefits",
-        title: "Benefits of Worship",
+        id: "spiritual-benefits",
+        title: "Spiritual and Family Benefits",
         content:
-          "Worshipping Maa Skandamata brings prosperity, family happiness and emotional stability."
+          "Worshipping Maa Skandamata strengthens family bonds, brings emotional stability and fosters devotion. Spiritually, she enhances purity of intention and compassion."
+      },
+
+      {
+        id: "who-should-worship",
+        title: "Who Should Worship Maa Skandamata",
+        content:
+          "Parents, students and individuals seeking harmony and protection benefit from her worship. Day 5 encourages nurturing energy and balanced communication."
       }
 
     ],
@@ -157,7 +191,13 @@ export const SKANDAMATA = {
         question:
           "When is Maa Skandamata worshipped in Navratri {year}?",
         answer:
-          "She is worshipped on {date}, the fifth day of Navratri."
+          "She is worshipped on {date}, the fifth day of {navType} Navratri {year}."
+      },
+      {
+        question:
+          "Who is Skanda in relation to Maa Skandamata?",
+        answer:
+          "Skanda is Lord Kartikeya, her divine son."
       },
       {
         question:
@@ -167,9 +207,9 @@ export const SKANDAMATA = {
       },
       {
         question:
-          "What is the Day 5 auspicious color?",
+          "What is the auspicious color for Day 5?",
         answer:
-          "The auspicious color for Day 5 of Navratri {year} is {day5Color}."
+          "The auspicious color for Navratri {year} Day 5 is {day5Color}."
       }
     ]
   }
