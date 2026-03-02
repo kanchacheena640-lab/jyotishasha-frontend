@@ -4,6 +4,7 @@ import { useState } from "react"
 import { fetchNavratri } from "@/lib/fetchNavratri"
 import type { NavratriResponse, NavratriDay } from "@/lib/fetchNavratri"
 import { NAVDURGA_LIST } from "@/lib/navratri"
+import { getNavratriColors } from "@/lib/navratri/getNavratriColors"
 
 interface Props {
   mata: any
@@ -59,6 +60,12 @@ export default function NavdurgaDetailClient({
   const dayData = data.days.find(
     (d: NavratriDay) => d.day_number === mata.day
   )
+
+  const colors = data.start_date
+    ? getNavratriColors(data.start_date)
+    : []
+
+  const dayColor = colors[mata.day - 1] ?? ""
 
   return (
     <section className="max-w-5xl mx-auto px-4 py-12">
@@ -175,7 +182,8 @@ export default function NavdurgaDetailClient({
                 {section.content
                 .replace("{year}", String(year))
                 .replace("{date}", formatDate(dayData?.date))
-                .replace("{navType}", navType === "chaitra" ? "Chaitra" : "Shardiya")}
+                .replace("{navType}", navType === "chaitra" ? "Chaitra" : "Shardiya")
+                .replace("{day1Color}", dayColor)}
             </p>
             )}
 
