@@ -6,6 +6,7 @@ import Link from "next/link"
 
 interface Props {
   params: { slug: string }
+  searchParams?: { type?: string }
 }
 
 const formatDate = (dateString?: string) => {
@@ -20,7 +21,11 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
   const mata = getNavdurgaBySlug(params.slug)
   if (!mata) return {}
 
@@ -50,20 +55,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: mata.en.metaTitle.replace("{year}", String(year)),
       description: mata.en.metaDescription.replace("{year}", String(year)),
-      images: [`https://www.jyotishasha.com/images/navratri/${params.slug}.jpg`],
+      images: [
+        `https://www.jyotishasha.com/images/navratri/${params.slug}.jpg`,
+      ],
     },
   }
 }
 
-export default async function NavdurgaDetailPage({ params }: Props) {
+export default async function NavdurgaDetailPage({
+  params,
+  searchParams,
+}: Props) {
   const mata = getNavdurgaBySlug(params.slug)
   if (!mata) notFound()
 
   const year = new Date().getFullYear()
 
+  const type =
+    searchParams?.type === "shardiya" ? "shardiya" : "chaitra"
+
   const navData = await fetchNavratri({
     year,
-    type: "auto",
+    type,
   })
 
   const dayData = navData.days.find(
@@ -76,27 +89,28 @@ export default async function NavdurgaDetailPage({ params }: Props) {
 
   return (
     <main className="bg-[#FFF8F1] text-[#2B2B2B] min-h-screen">
+      {/* ---------------- SEO SCHEMA ---------------- */}
 
-      {/* ---------- Structured Data ---------- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
-            headline: content.title.replace("{year}", String(year)),
-            datePublished: dayData?.date,
-            author: {
-              "@type": "Organization",
-              name: "Jyotishasha",
+            "@type": "Event",
+            name: content.title.replace("{year}", String(year)),
+            startDate: dayData?.date,
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            eventStatus: "https://schema.org/EventScheduled",
+            location: {
+              "@type": "Place",
+              name: "India",
             },
-            publisher: {
+            image: `https://www.jyotishasha.com/images/navratri/${params.slug}.jpg`,
+            description: content.hero?.intro || "",
+            organizer: {
               "@type": "Organization",
               name: "Jyotishasha",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://www.jyotishasha.com/logo.png",
-              },
+              url: "https://www.jyotishasha.com",
             },
           }),
         }}
@@ -132,9 +146,25 @@ export default async function NavdurgaDetailPage({ params }: Props) {
         }}
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: `${content.title.replace("{year}", String(year))} Story`,
+            description: "Watch detailed story and significance of this Navdurga form.",
+            thumbnailUrl: `https://www.jyotishasha.com/images/navratri/${params.slug}.jpg`,
+            uploadDate: `${year}-01-01`,
+            embedUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+            publisher: {
+              "@type": "Organization",
+              name: "Jyotishasha",
+            },
+          }),
+        }}
+      />
       <section className="max-w-4xl mx-auto px-4 py-14">
-
-       {/* ---------------- HERO ---------------- */}
 
         {/* H1 */}
         <h1 className="text-4xl md:text-5xl font-bold text-[#7A1C1C] mb-4">
@@ -143,26 +173,40 @@ export default async function NavdurgaDetailPage({ params }: Props) {
 
         {/* Year Line */}
         <p className="text-sm text-gray-500 mb-6">
-          Navratri {year} | Day {mata.day}
+          Navratri {year} | Day {mata.day} |{" "}
+          {type === "chaitra" ? "Chaitra" : "Shardiya"}
         </p>
 
-        {/* Toggle (UI only for now) */}
+        {/* Toggle */}
         <div className="flex gap-4 mb-8">
-          <button className="px-4 py-2 bg-[#7A1C1C] text-white rounded-full text-sm">
+          <Link
+            href={`/navratri/${params.slug}?type=chaitra`}
+            className={`px-4 py-2 rounded-full text-sm ${
+              type === "chaitra"
+                ? "bg-[#7A1C1C] text-white"
+                : "border border-[#7A1C1C]"
+            }`}
+          >
             Chaitra
-          </button>
-          <button className="px-4 py-2 border border-[#7A1C1C] rounded-full text-sm">
+          </Link>
+
+          <Link
+            href={`/navratri/${params.slug}?type=shardiya`}
+            className={`px-4 py-2 rounded-full text-sm ${
+              type === "shardiya"
+                ? "bg-[#7A1C1C] text-white"
+                : "border border-[#7A1C1C]"
+            }`}
+          >
             Shardiya
-          </button>
+          </Link>
         </div>
 
         {/* Dynamic Paragraph */}
         <p className="text-gray-700 mb-8 leading-relaxed">
-          In Navratri {year}, Maa {content.title
-            .replace(" – Navratri {year} Day " + mata.day + " Significance", "")
-            .replace("{year}", "")} is worshipped on {date}. 
-          This sacred day represents spiritual discipline, divine feminine energy 
-          and inner transformation during the nine powerful nights of Navratri.
+          In Navratri {year}, Maa{" "}
+          {content.title.replace("{year}", "").split(" –")[0]} is worshipped on{" "}
+          {date}. This sacred day represents divine feminine energy and spiritual discipline.
         </p>
 
         {/* Image */}
@@ -172,8 +216,7 @@ export default async function NavdurgaDetailPage({ params }: Props) {
           className="w-full rounded-xl shadow-lg mb-12"
         />
 
-        {/* ---------------- STATIC ARTICLE ---------------- */}
-
+        {/* Static Sections */}
         {content.sections.map((section) => (
           <div key={section.id} className="mb-12">
             <h2 className="text-2xl font-semibold text-[#7A1C1C] mb-4">
@@ -198,10 +241,29 @@ export default async function NavdurgaDetailPage({ params }: Props) {
           </div>
         ))}
 
-        {/* YouTube Video Section */}
+        {/* FAQ Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: content.faqs?.map((faq: any) => ({
+                "@type": "Question",
+                name: faq.question.replace("{year}", String(year)),
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer.replace("{year}", String(year)),
+                },
+              })),
+            }),
+          }}
+        />
+
+        {/* YouTube Video */}
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-[#7A1C1C] mb-6">
-            Watch Maa {content.title} Story
+            Watch Maa {content.title.replace("{year}", String(year))} Story
           </h2>
 
           <div className="aspect-video">
@@ -214,8 +276,7 @@ export default async function NavdurgaDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {/* ---------------- NAVDURGA GRID ---------------- */}
-
+        {/* Navdurga Grid */}
         <div className="mt-20">
           <h2 className="text-2xl font-bold text-[#7A1C1C] mb-8 text-center">
             Explore All 9 Forms of Maa Durga
@@ -228,7 +289,11 @@ export default async function NavdurgaDetailPage({ params }: Props) {
               return (
                 <Link
                   key={m.slug}
-                  href={isActive ? "#" : `/navratri/${m.slug}`}
+                  href={
+                    isActive
+                      ? "#"
+                      : `/navratri/${m.slug}?type=${type}`
+                  }
                   className={`p-6 rounded-xl text-center shadow-md transition ${
                     isActive
                       ? "bg-gray-200 opacity-60 pointer-events-none"
@@ -248,25 +313,6 @@ export default async function NavdurgaDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {/* FAQ */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-[#7A1C1C] mb-6">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-6">
-            {content.faqs.map((faq, idx) => (
-              <div key={idx}>
-                <h3 className="font-semibold">
-                  {faq.question.replace("{year}", String(year))}
-                </h3>
-                <p className="text-gray-700">
-                  {faq.answer.replace("{year}", String(year))}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
     </main>
   )
