@@ -1,7 +1,7 @@
 import { Metadata } from "next"
-import type { NavratriResponse } from "../../lib/fetchNavratri"
-import { fetchNavratri } from "../../lib/fetchNavratri"
+import { fetchNavratri, type NavratriResponse } from "@/lib/fetchNavratri"
 import NavratriClient from "./NavratriClient"
+import { NAVRATRI_ARTICLE_DATA } from "@/lib/navratri"
 
 
 const formatDate = (dateString: string) => {
@@ -61,7 +61,7 @@ export default async function NavratriPage() {
     type: "auto",
   })
 
-  const days = initialData?.days ?? []
+  const days = initialData.days ?? []
 
   const startDate = days.length > 0 ? days[0].date : ""
   const endDate = days.length > 0 ? days[days.length - 1].date : ""
@@ -188,6 +188,54 @@ export default async function NavratriPage() {
           initialData={initialData}
         />
 
+      </section>
+
+      {/* ---------------- Static SEO Article ---------------- */}
+      <section className="mt-20 max-w-4xl mx-auto px-4">
+        {(() => {
+          const article = NAVRATRI_ARTICLE_DATA.en
+          return (
+            <>
+              <h2 className="text-3xl font-bold text-[#7A1C1C] mb-6">
+                {article.title.replace("{year}", String(currentYear))}
+              </h2>
+
+              <p className="mb-8 text-gray-700">
+                {article.hero.shortIntro
+                  .replace("{year}", String(currentYear))
+                  .replace("{startDate}", formatDate(startDate))
+                  .replace("{endDate}", formatDate(endDate))
+                  .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")}
+              </p>
+
+              {article.sections.map((section) => (
+                <div key={section.id} className="mb-10">
+                  <h3 className="text-xl font-semibold text-[#7A1C1C] mb-3">
+                    {section.title.replace("{year}", String(currentYear))}
+                  </h3>
+
+                  {section.content && (
+                    <p className="text-gray-700 mb-4">
+                      {section.content
+                        .replace("{year}", String(currentYear))
+                        .replace("{startDate}", formatDate(startDate))
+                        .replace("{endDate}", formatDate(endDate))
+                        .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")}
+                    </p>
+                  )}
+
+                  {section.list && (
+                    <ul className="list-disc pl-6 space-y-2 text-gray-700">
+                      {section.list.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </>
+          )
+        })()}
       </section>
 
       <section className="mt-16 mb-32 max-w-3xl mx-auto px-4">

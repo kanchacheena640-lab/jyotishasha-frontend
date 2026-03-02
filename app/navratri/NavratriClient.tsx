@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { fetchNavratri } from "../../lib/fetchNavratri"
-import type { NavratriResponse, NavratriDay } from "../../lib/fetchNavratri"
+import { fetchNavratri } from "@/lib/fetchNavratri"
+import type { NavratriResponse, NavratriDay } from "@/lib/fetchNavratri"
 
 interface Props {
   initialYear: number

@@ -14,6 +14,12 @@ export interface NavratriDay {
   tithi_window: TithiWindow
 }
 
+export interface Ghatasthapana {
+  muhurat?: string
+  start?: string
+  end?: string
+}
+
 export interface NavratriResponse {
   type: "chaitra" | "shardiya"
   year: number
@@ -21,6 +27,7 @@ export interface NavratriResponse {
   start_date?: string
   end_date?: string
   total_days?: number
+  ghatasthapana?: Ghatasthapana   // ✅ ADD THIS
 }
 
 interface FetchParams {
