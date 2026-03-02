@@ -189,32 +189,7 @@ export default async function NavratriPage() {
             Sandhi Puja timing and divine details of all 9 forms of Maa Durga.
           </p>
         </header>
-        
-        {/* 🔥 MASTER DYNAMIC PARAGRAPH */}
-        {(() => {
-          const ghatTime =
-            initialData.kalash_sthapana?.abhijit_muhurta
-              ? `${initialData.kalash_sthapana.abhijit_muhurta.start} - ${initialData.kalash_sthapana.abhijit_muhurta.end}`
-              : ""
 
-          const day1 = days[0]?.mata_name ?? ""
-          const day9 = days[days.length - 1]?.mata_name ?? ""
-
-          const vijayDate = initialData.vijayadashami?.date ?? ""
-
-          return (
-            <p className="mt-6 mb-12 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
-              Navratri {currentYear} begins on {formatDate(initialData.start_date)}
-              and concludes on {formatDate(initialData.end_date)}, spanning{" "}
-              {initialData.total_days ?? ""} sacred days dedicated to Maa Durga.
-              Kalash Sthapana will be performed on{" "}
-              {formatDate(initialData.kalash_sthapana?.date)} during the auspicious
-              Abhijit Muhurat of {ghatTime}. The festival starts with {day1}
-              and culminates with {day9}. Vijayadashami will be observed on{" "}
-              {formatDate(vijayDate)}.
-            </p>
-          )
-        })()}
         <NavratriClient
           initialYear={currentYear}
           initialData={initialData}

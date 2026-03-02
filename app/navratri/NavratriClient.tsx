@@ -14,7 +14,8 @@ export default function NavratriClient({
   initialData,
 }: Props) {
 
-const formatDate = (dateString: string) => {
+const formatDate = (dateString?: string) => {
+  if (!dateString) return ""
   const [year, month, day] = dateString.split("-")
   return `${day}-${month}-${year}`
 }
@@ -94,6 +95,19 @@ const formatDate = (dateString: string) => {
           Shardiya Navratri
         </button>
       </div>
+
+      {/* 🔥 MASTER DYNAMIC PARAGRAPH */}
+        <p className="mt-2 mb-10 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
+          Navratri {data.year ?? year} begins on {formatDate(data.start_date)}
+          and concludes on {formatDate(data.end_date)}, spanning{" "}
+          {data.total_days ?? ""} sacred days dedicated to Maa Durga.
+          Kalash Sthapana will be performed on{" "}
+          {formatDate(data.kalash_sthapana?.date)} during the auspicious
+          Abhijit Muhurat of{" "}
+          {data.kalash_sthapana?.abhijit_muhurta
+            ? `${data.kalash_sthapana.abhijit_muhurta.start} - ${data.kalash_sthapana.abhijit_muhurta.end}`
+            : ""}.
+        </p>
 
       {loading && (
         <p className="text-center text-gray-500 mb-6">Loading...</p>
