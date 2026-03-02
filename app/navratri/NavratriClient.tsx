@@ -23,7 +23,9 @@ const formatDate = (dateString?: string) => {
   const baseYear = initialYear
 
   const [year, setYear] = useState<number>(initialYear)
-  const [navType, setNavType] = useState<"chaitra" | "shardiya">(initialData.type)
+  const [navType, setNavType] = useState<"chaitra" | "shardiya">(
+    initialData.type === "shardiya" ? "shardiya" : "chaitra"
+  )
   const [data, setData] = useState<NavratriResponse>(initialData)
   const [loading, setLoading] = useState(false)
 
@@ -98,12 +100,14 @@ const formatDate = (dateString?: string) => {
 
       {/* 🔥 MASTER DYNAMIC PARAGRAPH */}
         <p className="mt-2 mb-10 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
-          Navratri {data.year ?? year} begins on {formatDate(data.start_date)}
-           and concludes on {formatDate(data.end_date)}, spanning{" "}
-          {data.total_days ?? ""} sacred days dedicated to Maa Durga.
+          Navratri {data.year} begins on{" "}
+          {formatDate(data.start_date)}{" "}
+          and concludes on{" "}
+          {formatDate(data.end_date)}, spanning{" "}
+          {data.total_days} sacred days dedicated to Maa Durga.{" "}
           Kalash Sthapana will be performed on{" "}
-          {formatDate(data.kalash_sthapana?.date)} during the auspicious
-          Abhijit Muhurat of{" "}
+          {formatDate(data.kalash_sthapana?.date)}{" "}
+          during the auspicious Abhijit Muhurat of{" "}
           {data.kalash_sthapana?.abhijit_muhurta
             ? `${data.kalash_sthapana.abhijit_muhurta.start} - ${data.kalash_sthapana.abhijit_muhurta.end}`
             : ""}.
