@@ -16,7 +16,7 @@ export const NAVRATRI_ARTICLE_DATA = {
         id: "why-two-navratri",
         title: "नवरात्रि वर्ष में दो बार क्यों आती है?",
         content:
-          "नवरात्रि मुख्य रूप से दो बार मनाई जाती है — चैत्र (वसंत) और शारदीय (शरद) ऋतु में। ये दोनों काल ऋतु संधि के समय आते हैं जब प्रकृति में ऊर्जा परिवर्तन होता है। दिन और रात का संतुलन इस समय लगभग समान होता है, जो आध्यात्मिक संतुलन का प्रतीक है। इसलिए यह काल आत्मशुद्धि और शक्ति साधना के लिए श्रेष्ठ माना गया है।"
+          "नवरात्रि मुख्य रूप से दो बार मनाई जाती है - चैत्र (वसंत) और शारदीय (शरद) ऋतु में। ये दोनों काल ऋतु संधि के समय आते हैं जब प्रकृति में ऊर्जा परिवर्तन होता है। दिन और रात का संतुलन इस समय लगभग समान होता है, जो आध्यात्मिक संतुलन का प्रतीक है। इसलिए यह काल आत्मशुद्धि और शक्ति साधना के लिए श्रेष्ठ माना गया है।"
       },
 
       {
@@ -107,21 +107,21 @@ export const NAVRATRI_ARTICLE_DATA = {
         id: "why-two-navratri",
         title: "Why Does Navratri Occur Twice a Year?",
         content:
-          "Navratri is observed prominently twice a year — during Chaitra (spring) and Ashwin/Shardiya (autumn). These periods coincide with seasonal transitions known as Ritu Sandhi in Vedic tradition. Around these equinox phases, day and night achieve near balance, symbolizing cosmic equilibrium. Spiritually, these transitions are believed to be powerful windows for inner purification, discipline, and energy recalibration."
+          "Navratri is observed prominently twice a year - during Chaitra (spring) and Ashwin/Shardiya (autumn). These periods coincide with seasonal transitions known as Ritu Sandhi in Vedic tradition. Around these equinox phases, day and night achieve near balance, symbolizing cosmic equilibrium. Spiritually, these transitions are believed to be powerful windows for inner purification, discipline, and energy recalibration."
       },
 
       {
         id: "vedic-date-calculation",
         title: "How Are Navratri Dates Determined in Vedic Astrology?",
         content:
-          "Navratri begins on Shukla Paksha Pratipada — the first lunar day of the waxing Moon — in specific lunar months. The Hindu Panchang follows a lunisolar calendar system, meaning dates are calculated based on lunar tithi, sunrise alignment, and lunar month identification. This ensures Navratri always aligns with natural cosmic rhythms rather than fixed solar calendar dates."
+          "Navratri begins on Shukla Paksha Pratipada - the first lunar day of the waxing Moon - in specific lunar months. The Hindu Panchang follows a lunisolar calendar system, meaning dates are calculated based on lunar tithi, sunrise alignment, and lunar month identification. This ensures Navratri always aligns with natural cosmic rhythms rather than fixed solar calendar dates."
       },
 
       {
         id: "spiritual-scientific-analysis",
         title: "Spiritual & Scientific Significance of Navratri",
         content:
-          "Navratri represents structured spiritual discipline. According to Devi Mahatmya, the nine days symbolize awakening divine strength within. From a scientific lens, seasonal transitions affect digestion, immunity, and hormonal balance. Traditional Navratri fasting — satvik diet, reduced grains, and detox foods — supports metabolic reset, gut cleansing, and improved mental clarity during these vulnerable seasonal shifts."
+          "Navratri represents structured spiritual discipline. According to Devi Mahatmya, the nine days symbolize awakening divine strength within. From a scientific lens, seasonal transitions affect digestion, immunity, and hormonal balance. Traditional Navratri fasting - satvik diet, reduced grains, and detox foods - supports metabolic reset, gut cleansing, and improved mental clarity during these vulnerable seasonal shifts."
       },
 
       {
