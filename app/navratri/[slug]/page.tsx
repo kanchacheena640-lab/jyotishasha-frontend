@@ -68,10 +68,36 @@ export default async function NavdurgaDetailPage({ params }: Props) {
   const currentYear = new Date().getFullYear()
 
   /* Upcoming Navratri default */
-  const initialData = await fetchNavratri({
+  let initialData
+
+  const today = new Date()
+
+  const chaitra = await fetchNavratri({
     year: currentYear,
-    type: "auto",
+    type: "chaitra",
   })
+
+  const chaitraEnd = new Date(chaitra.end_date)
+
+  if (chaitraEnd >= today) {
+    initialData = chaitra
+  } else {
+    const shardiya = await fetchNavratri({
+      year: currentYear,
+      type: "shardiya",
+    })
+
+    const shardiyaEnd = new Date(shardiya.end_date)
+
+    if (shardiyaEnd >= today) {
+      initialData = shardiya
+    } else {
+      initialData = await fetchNavratri({
+        year: currentYear + 1,
+        type: "chaitra",
+      })
+    }
+  }
 
   const dayData = initialData.days.find(
     (d) => d.day_number === mata.day
