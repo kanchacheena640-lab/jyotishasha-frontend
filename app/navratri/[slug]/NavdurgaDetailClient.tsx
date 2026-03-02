@@ -23,6 +23,10 @@ export default function NavdurgaDetailClient({
     return `${day}-${month}-${year}`
   }
 
+  const goddessName = mata.en.title
+    .replace("Maa ", "")
+    .replace(": Navratri {year} Day 1 Complete Guide", "")
+    
   const baseYear = initialYear
 
   const [year, setYear] = useState(initialYear)
@@ -107,13 +111,12 @@ export default function NavdurgaDetailClient({
       <p className="mt-4 mb-10 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
 
         During {navType === "chaitra" ? "Chaitra" : "Shardiya"} Navratri {year}, 
-        Maa {mata.en.title.replace("Maa ", "").replace(" –", "")} is worshipped 
-        on {formatDate(dayData?.date)} as the divine embodiment of spiritual strength and divine feminine energy.
+        Maa {goddessName} is worshipped on {formatDate(dayData?.date)} as the divine embodiment of strength, purity and spiritual awakening.
 
         {mata.day === 1 && (
             <>
-            {" "}Navratri {year} begins with the sacred Kalash Sthapana ceremony 
-            performed on {formatDate(data.kalash_sthapana?.date)} during the auspicious 
+            {" "}Navratri {year} formally begins with Kalash Sthapana on{" "}
+            {formatDate(data.kalash_sthapana?.date)} during the auspicious 
             Abhijit Muhurat of{" "}
             {data.kalash_sthapana?.abhijit_muhurta
                 ? `${data.kalash_sthapana.abhijit_muhurta.start} - ${data.kalash_sthapana.abhijit_muhurta.end}`
@@ -121,9 +124,8 @@ export default function NavdurgaDetailClient({
             </>
         )}
 
-        {" "}Below you will find complete details about Maa{" "}
-        {mata.en.title.replace("Maa ", "").replace(" –", "")}, including 
-        vrat katha, puja vidhi, mantra, symbolism and spiritual significance.
+        {" "}Below you will find detailed information about her mythology, 
+        symbolism, mantra, puja vidhi and spiritual significance.
 
         </p>
 
@@ -163,14 +165,32 @@ export default function NavdurgaDetailClient({
       {/* Static Sections */}
       {mata.en.sections.map((section: any) => (
         <div key={section.id} className="mb-10">
-          <h2 className="text-2xl font-semibold text-[#7A1C1C] mb-3">
+
+            <h2 className="text-2xl font-semibold text-[#7A1C1C] mb-3">
             {section.title}
-          </h2>
-          <p className="text-gray-700 leading-relaxed">
-            {section.content}
-          </p>
+            </h2>
+
+            {section.content && (
+            <p className="text-gray-700 leading-relaxed mb-4">
+                {section.content
+                .replace("{year}", String(year))
+                .replace("{date}", formatDate(dayData?.date))
+                .replace("{navType}", navType === "chaitra" ? "Chaitra" : "Shardiya")}
+            </p>
+            )}
+
+            {section.list && (
+            <ul className="list-disc pl-6 space-y-2 text-gray-800">
+                {section.list.map((item: string, i: number) => (
+                <li key={i} className="font-medium">
+                    {item}
+                </li>
+                ))}
+            </ul>
+            )}
+
         </div>
-      ))}
+        ))}
 
     </section>
   )
