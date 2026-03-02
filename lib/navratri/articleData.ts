@@ -13,57 +13,56 @@ export const NAVRATRI_ARTICLE_DATA = {
 
     sections: [
       {
-        id: "when-is-navratri",
-        title: "Navratri {year} कब है?",
+        id: "why-two-navratri",
+        title: "नवरात्रि वर्ष में दो बार क्यों आती है?",
         content:
-          "Navratri {year} {startDate} से शुरू होकर {endDate} तक चलेगी। पहले दिन प्रतिपदा पर घटस्थापना की जाती है, नवमी को महापूजन और कन्या पूजन होता है, तथा दसवें दिन विजयदशमी के रूप में उत्सव का समापन होता है।"
+          "नवरात्रि मुख्य रूप से दो बार मनाई जाती है — चैत्र (वसंत) और शारदीय (शरद) ऋतु में। ये दोनों काल ऋतु संधि के समय आते हैं जब प्रकृति में ऊर्जा परिवर्तन होता है। दिन और रात का संतुलन इस समय लगभग समान होता है, जो आध्यात्मिक संतुलन का प्रतीक है। इसलिए यह काल आत्मशुद्धि और शक्ति साधना के लिए श्रेष्ठ माना गया है।"
       },
 
       {
-        id: "navratri-significance",
-        title: "नवरात्रि का आध्यात्मिक महत्व",
+        id: "vedic-date-calculation",
+        title: "वैदिक ज्योतिष के अनुसार नवरात्रि की तिथि कैसे निर्धारित होती है?",
         content:
-          "नवरात्रि केवल एक उत्सव नहीं बल्कि आत्मिक शुद्धि और शक्ति जागरण की साधना है। देवी महात्म्य के अनुसार यह पर्व दैवी ऊर्जा के जागरण का प्रतीक है। नौ दिन साधक के भीतर साहस, संतुलन, विवेक और सकारात्मक परिवर्तन को उत्पन्न करते हैं। यह अज्ञान, भय और नकारात्मकता पर विजय का प्रतीक है।"
+          "नवरात्रि शुक्ल पक्ष की प्रतिपदा तिथि से प्रारंभ होती है। हिन्दू पंचांग चंद्र आधारित होता है, इसलिए तिथि का निर्धारण चंद्रमा की गति, सूर्योदय और मास की गणना से किया जाता है। इस प्रकार नवरात्रि प्राकृतिक और ब्रह्मांडीय ऊर्जा चक्र के अनुसार निर्धारित होती है।"
       },
 
       {
-        id: "navratri-calendar",
-        title: "नवरात्रि {year} की 9 दिन की सूची",
+        id: "spiritual-scientific-analysis",
+        title: "नवरात्रि का आध्यात्मिक और वैज्ञानिक महत्व",
         content:
-          "नीचे नवरात्रि के नौ दिनों की देवी, तिथि और शुभ रंग की जानकारी दी गई है:",
-        table: true
+          "देवी महात्म्य के अनुसार नवरात्रि दैवी शक्ति जागरण का पर्व है। वैज्ञानिक दृष्टि से ऋतु परिवर्तन के समय शरीर की प्रतिरक्षा प्रणाली प्रभावित होती है। नवरात्रि में सात्विक आहार, उपवास और अनुशासन शरीर के विषहरण, पाचन सुधार और मानसिक स्पष्टता में सहायक होते हैं।"
       },
 
       {
-        id: "ghatasthapana",
-        title: "घटस्थापना मुहूर्त {year}",
+        id: "facts-myths",
+        title: "नवरात्रि व्रत से जुड़े तथ्य और भ्रांतियां",
         content:
-          "घटस्थापना नवरात्रि का आरंभिक संस्कार है और प्रतिपदा तिथि में शुभ मुहूर्त में की जाती है। इस वर्ष घटस्थापना का उपयुक्त समय {ghatTime} है। कलश ब्रह्मांड और जीवन ऊर्जा का प्रतीक है, जबकि जौ बोना समृद्धि और विकास का संकेत देता है।"
-      },
-
-      {
-        id: "puja-vidhi",
-        title: "घटस्थापना विधि",
-        content:
-          "प्रातः स्नान कर स्वच्छ स्थान पर मिट्टी बिछाकर जौ बोए जाते हैं। तांबे या मिट्टी के कलश में जल भरकर सुपारी, सिक्का और आम के पत्ते रखें तथा नारियल स्थापित करें। इसके बाद दीप प्रज्वलित कर देवी का आह्वान करें और मंत्रोच्चार के साथ पूजा प्रारंभ करें।"
+          "यह मान्यता गलत है कि व्रत केवल भोजन त्याग है। वास्तव में यह मन, वचन और कर्म की शुद्धि का साधन है। व्रत का उद्देश्य आत्मसंयम और आंतरिक अनुशासन है। श्रद्धा और निष्ठा का महत्व कर्मकांड से अधिक माना गया है।"
       },
 
       {
         id: "nine-goddesses",
-        title: "नवदुर्गा – माँ दुर्गा के 9 स्वरूप",
+        title: "नवदुर्गा – 9 रूपों का आध्यात्मिक अर्थ",
         content:
-          "नवरात्रि के प्रत्येक दिन देवी के एक रूप की पूजा की जाती है:",
+          "नवरात्रि के नौ दिन साधक के आंतरिक विकास के नौ चरणों का प्रतीक हैं:",
         list: [
-          "मां शैलपुत्री – शक्ति और स्थिरता",
-          "मां ब्रह्मचारिणी – तप और ज्ञान",
-          "मां चंद्रघंटा – साहस और रक्षा",
-          "मां कूष्मांडा – सृजन शक्ति",
-          "मां स्कंदमाता – मातृत्व और मार्गदर्शन",
-          "मां कात्यायनी – पराक्रम और विजय",
-          "मां कालरात्रि – अज्ञान का नाश",
-          "मां महागौरी – शुद्धता और शांति",
-          "मां सिद्धिदात्री – सिद्धि और सफलता"
+          "शैलपुत्री – स्थिरता और आधार",
+          "ब्रह्मचारिणी – तप और संयम",
+          "चंद्रघंटा – साहस और सुरक्षा",
+          "कूष्मांडा – सृजन शक्ति",
+          "स्कंदमाता – उत्तरदायित्व और मार्गदर्शन",
+          "कात्यायनी – धर्म और पराक्रम",
+          "कालरात्रि – भय का नाश",
+          "महागौरी – शुद्धता और नवजीवन",
+          "सिद्धिदात्री – सिद्धि और पूर्णता"
         ]
+      },
+
+      {
+        id: "vijayadashami-meaning",
+        title: "विजयदशमी का महत्व",
+        content:
+          "दसवां दिन विजयदशमी आध्यात्मिक साधना की पूर्णता का प्रतीक है। यह धर्म की अधर्म पर और सकारात्मकता की नकारात्मकता पर विजय का संदेश देता है। नौ दिनों की साधना के बाद साधक आंतरिक रूप से सशक्त होता है।"
       }
     ],
 
@@ -105,57 +104,56 @@ export const NAVRATRI_ARTICLE_DATA = {
 
     sections: [
       {
-        id: "when-is-navratri",
-        title: "When is Navratri {year}?",
+        id: "why-two-navratri",
+        title: "Why Does Navratri Occur Twice a Year?",
         content:
-          "Navratri {year} starts on {startDate} and ends on {endDate}. The festival begins with Ghatasthapana on Pratipada and culminates with Vijayadashami on the tenth day, marking the victory of good over evil."
+          "Navratri is observed prominently twice a year — during Chaitra (spring) and Ashwin/Shardiya (autumn). These periods coincide with seasonal transitions known as Ritu Sandhi in Vedic tradition. Around these equinox phases, day and night achieve near balance, symbolizing cosmic equilibrium. Spiritually, these transitions are believed to be powerful windows for inner purification, discipline, and energy recalibration."
       },
 
       {
-        id: "navratri-significance",
-        title: "Spiritual Significance of Navratri",
+        id: "vedic-date-calculation",
+        title: "How Are Navratri Dates Determined in Vedic Astrology?",
         content:
-          "Navratri represents inner cleansing, discipline, and devotion. According to Devi Mahatmya, it symbolizes awakening divine strength within oneself. Each of the nine days honors a different form of Goddess Durga, guiding devotees toward courage, wisdom, balance, and spiritual growth."
+          "Navratri begins on Shukla Paksha Pratipada — the first lunar day of the waxing Moon — in specific lunar months. The Hindu Panchang follows a lunisolar calendar system, meaning dates are calculated based on lunar tithi, sunrise alignment, and lunar month identification. This ensures Navratri always aligns with natural cosmic rhythms rather than fixed solar calendar dates."
       },
 
       {
-        id: "navratri-calendar",
-        title: "Navratri {year}: 9-Day Schedule",
+        id: "spiritual-scientific-analysis",
+        title: "Spiritual & Scientific Significance of Navratri",
         content:
-          "Below is the day-wise Navdurga schedule along with auspicious colors:",
-        table: true
+          "Navratri represents structured spiritual discipline. According to Devi Mahatmya, the nine days symbolize awakening divine strength within. From a scientific lens, seasonal transitions affect digestion, immunity, and hormonal balance. Traditional Navratri fasting — satvik diet, reduced grains, and detox foods — supports metabolic reset, gut cleansing, and improved mental clarity during these vulnerable seasonal shifts."
       },
 
       {
-        id: "ghatasthapana",
-        title: "Ghatasthapana Muhurat {year}",
+        id: "facts-myths",
+        title: "Facts & Myths About Navratri Vrat",
         content:
-          "Ghatasthapana marks the ceremonial beginning of Navratri and is performed during an auspicious Muhurat on the first lunar day. This year, the suitable Muhurat is {ghatTime}. The Kalash symbolizes cosmic energy, and sowing barley seeds signifies prosperity and growth."
-      },
-
-      {
-        id: "puja-vidhi",
-        title: "Ghatasthapana Procedure",
-        content:
-          "After a purifying bath, prepare a clean altar and sow barley seeds in soil. Fill a kalash with water, place mango leaves, a coin, and a betel nut inside, and position a coconut on top. Light a lamp and invoke Goddess Durga with devotion and discipline."
+          "A common misconception is that Navratri fasting is merely food restriction. In reality, it emphasizes mental discipline and sensory control. Another myth suggests strict ritual compliance is mandatory for benefit; however, devotion and intent are considered more important in scriptural texts. Navratri is a universal spiritual practice open to all seekers, not restricted by gender or region."
       },
 
       {
         id: "nine-goddesses",
-        title: "Navdurga – 9 Forms of Goddess Durga",
+        title: "Navdurga – The 9 Forms and Their Inner Significance",
         content:
-          "Each of the nine days is dedicated to a specific form of the Goddess:",
+          "Each of the nine days represents a stage of inner transformation:",
         list: [
-          "Shailputri – Strength and stability",
-          "Brahmacharini – Devotion and wisdom",
-          "Chandraghanta – Protection and courage",
-          "Kushmanda – Creative energy",
-          "Skandamata – Motherly guidance",
-          "Katyayani – Valor and righteousness",
-          "Kaalratri – Destroyer of darkness",
-          "Mahagauri – Purity and peace",
-          "Siddhidatri – Giver of success"
+          "Shailputri – Grounding and stability",
+          "Brahmacharini – Discipline and endurance",
+          "Chandraghanta – Courage under pressure",
+          "Kushmanda – Creative manifestation",
+          "Skandamata – Responsibility and nurturing",
+          "Katyayani – Righteous action",
+          "Kaalratri – Confronting fear",
+          "Mahagauri – Purification and renewal",
+          "Siddhidatri – Integration and fulfillment"
         ]
+      },
+
+      {
+        id: "vijayadashami-meaning",
+        title: "Why Vijayadashami Concludes Navratri",
+        content:
+          "The tenth day, Vijayadashami, marks the culmination of disciplined spiritual effort. It symbolizes the victory of clarity over confusion and righteousness over negativity. After nine days of structured purification, devotees emerge mentally strengthened and spiritually aligned."
       }
     ],
 
