@@ -132,7 +132,7 @@ export const NAVRATRI_ARTICLE_DATA = {
 
       {
         id: "navratri-calendar",
-        title: "Navratri {year} 9-Day Schedule",
+        title: "Navratri {year}: 9-Day Schedule",
         content:
           "Below is the day-wise Navdurga schedule along with auspicious colors:",
         table: true

@@ -4,7 +4,7 @@ import NavratriClient from "./NavratriClient"
 import { NAVRATRI_ARTICLE_DATA } from "@/lib/navratri"
 import { getNavratriColors } from "@/lib/navratri/getNavratriColors"
 
-const formatDate = (dateString: string) => {
+const formatDate = (dateString?: string) => {
   if (!dateString) return ""
   const [year, month, day] = dateString.split("-")
   return `${day}-${month}-${year}`
@@ -62,11 +62,16 @@ export default async function NavratriPage() {
   })
 
   const days = initialData.days ?? []
+  const startDate = initialData.start_date ?? ""
 
-  const startDate = days.length > 0 ? days[0].date : ""
+  const endDate = initialData.end_date ?? ""
   const colors = startDate ? getNavratriColors(startDate) : []
   const day1Color = colors[0] ?? ""
-  const endDate = days.length > 0 ? days[days.length - 1].date : ""
+ 
+  const ghatTime =
+  initialData.kalash_sthapana?.abhijit_muhurta
+    ? `${initialData.kalash_sthapana.abhijit_muhurta.start} - ${initialData.kalash_sthapana.abhijit_muhurta.end}`
+    : ""
 
   return (
     <main className="min-h-screen bg-[#FFF8F1] text-[#2B2B2B]">
@@ -83,8 +88,8 @@ export default async function NavratriPage() {
                     name: `Navratri ${currentYear}`,
                     description: `Navratri ${currentYear} festival with Kalash Sthapana Muhurat and 9 forms of Maa Durga.`,
                     inLanguage: "en-IN",
-                    startDate: startDate,
-                    endDate: endDate,
+                    startDate: initialData.start_date,
+                    endDate: initialData.end_date,
                     eventStatus: "https://schema.org/EventScheduled",
                     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
                     location: {
@@ -184,7 +189,32 @@ export default async function NavratriPage() {
             Sandhi Puja timing and divine details of all 9 forms of Maa Durga.
           </p>
         </header>
+        
+        {/* 🔥 MASTER DYNAMIC PARAGRAPH */}
+        {(() => {
+          const ghatTime =
+            initialData.kalash_sthapana?.abhijit_muhurta
+              ? `${initialData.kalash_sthapana.abhijit_muhurta.start} - ${initialData.kalash_sthapana.abhijit_muhurta.end}`
+              : ""
 
+          const day1 = days[0]?.mata_name ?? ""
+          const day9 = days[days.length - 1]?.mata_name ?? ""
+
+          const vijayDate = initialData.vijayadashami?.date ?? ""
+
+          return (
+            <p className="mt-6 mb-12 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
+              Navratri {currentYear} begins on {formatDate(initialData.start_date)}
+              and concludes on {formatDate(initialData.end_date)}, spanning{" "}
+              {initialData.total_days ?? ""} sacred days dedicated to Maa Durga.
+              Kalash Sthapana will be performed on{" "}
+              {formatDate(initialData.kalash_sthapana?.date)} during the auspicious
+              Abhijit Muhurat of {ghatTime}. The festival starts with {day1}
+              and culminates with {day9}. Vijayadashami will be observed on{" "}
+              {formatDate(vijayDate)}.
+            </p>
+          )
+        })()}
         <NavratriClient
           initialYear={currentYear}
           initialData={initialData}
@@ -207,7 +237,7 @@ export default async function NavratriPage() {
                   .replace("{year}", String(currentYear))
                   .replace("{startDate}", formatDate(startDate))
                   .replace("{endDate}", formatDate(endDate))
-                  .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                  .replace("{ghatTime}", ghatTime)
                   .replace("{day1Color}", day1Color)
                 }
               </p>
@@ -224,7 +254,7 @@ export default async function NavratriPage() {
                         .replace("{year}", String(currentYear))
                         .replace("{startDate}", formatDate(startDate))
                         .replace("{endDate}", formatDate(endDate))
-                        .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                        .replace("{ghatTime}", ghatTime)
                         .replace("{day1Color}", day1Color)}
                     </p>
                   )}
@@ -256,7 +286,7 @@ export default async function NavratriPage() {
                 .replace("{year}", String(currentYear))
                 .replace("{startDate}", formatDate(startDate))
                 .replace("{endDate}", formatDate(endDate))
-                .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                .replace("{ghatTime}", ghatTime)
                 .replace("{day1Color}", day1Color)}
             </h3>
 
@@ -265,7 +295,7 @@ export default async function NavratriPage() {
                 .replace("{year}", String(currentYear))
                 .replace("{startDate}", formatDate(startDate))
                 .replace("{endDate}", formatDate(endDate))
-                .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                .replace("{ghatTime}", ghatTime)
                 .replace("{day1Color}", day1Color)}
             </p>
           </div>
