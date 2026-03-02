@@ -4,11 +4,11 @@ export const NAVRATRI_ARTICLE_DATA = {
       "Navratri {year} – तिथि, घटस्थापना मुहूर्त, 9 दिन की सूची और शुभ रंग",
 
     subtitle:
-      "चैत्र और शारदीय नवरात्रि {year} की संपूर्ण जानकारी",
+      "चैत्र और शारदीय नवरात्रि {year} की संपूर्ण आध्यात्मिक मार्गदर्शिका",
 
     hero: {
       shortIntro:
-        "Navratri {year} हिन्दू पंचांग के अनुसार वर्ष का अत्यंत पवित्र शक्ति पर्व है। इस वर्ष नवरात्रि {startDate} से प्रारंभ होकर {endDate} तक मनाई जाएगी। घटस्थापना का शुभ मुहूर्त {ghatTime} है। पहले दिन का शुभ रंग {day1Color} रहेगा। इन नौ दिनों में माँ दुर्गा के नौ स्वरूपों की पूजा की जाती है।"
+        "Navratri {year} हिन्दू पंचांग का अत्यंत पवित्र शक्ति पर्व है। इस वर्ष नवरात्रि {startDate} से प्रारंभ होकर {endDate} तक मनाई जाएगी। घटस्थापना का शुभ मुहूर्त {ghatTime} है। पहले दिन का शुभ रंग {day1Color} रहेगा। यह पर्व माँ दुर्गा की नौ दिव्य शक्तियों की उपासना, आत्मशुद्धि और सकारात्मक ऊर्जा के जागरण का अवसर प्रदान करता है।"
     },
 
     sections: [
@@ -16,14 +16,14 @@ export const NAVRATRI_ARTICLE_DATA = {
         id: "when-is-navratri",
         title: "Navratri {year} कब है?",
         content:
-          "Navratri {year} {startDate} से शुरू होकर {endDate} तक चलेगी। पहले दिन घटस्थापना और नौवें दिन नवमी पूजन किया जाता है, जबकि दसवें दिन विजयदशमी मनाई जाती है।"
+          "Navratri {year} {startDate} से शुरू होकर {endDate} तक चलेगी। पहले दिन प्रतिपदा पर घटस्थापना की जाती है, नवमी को महापूजन और कन्या पूजन होता है, तथा दसवें दिन विजयदशमी के रूप में उत्सव का समापन होता है।"
       },
 
       {
         id: "navratri-significance",
-        title: "नवरात्रि का महत्व",
+        title: "नवरात्रि का आध्यात्मिक महत्व",
         content:
-          "नवरात्रि आत्मशुद्धि, शक्ति जागरण और सकारात्मक ऊर्जा का पर्व है। इन नौ दिनों में देवी दुर्गा के नौ रूपों की आराधना कर साधक अपने जीवन में साहस, संतुलन और आध्यात्मिक उन्नति प्राप्त करता है। यह पर्व हमें अज्ञान और भय पर विजय पाने की प्रेरणा देता है।"
+          "नवरात्रि केवल एक उत्सव नहीं बल्कि आत्मिक शुद्धि और शक्ति जागरण की साधना है। देवी महात्म्य के अनुसार यह पर्व दैवी ऊर्जा के जागरण का प्रतीक है। नौ दिन साधक के भीतर साहस, संतुलन, विवेक और सकारात्मक परिवर्तन को उत्पन्न करते हैं। यह अज्ञान, भय और नकारात्मकता पर विजय का प्रतीक है।"
       },
 
       {
@@ -38,14 +38,14 @@ export const NAVRATRI_ARTICLE_DATA = {
         id: "ghatasthapana",
         title: "घटस्थापना मुहूर्त {year}",
         content:
-          "घटस्थापना प्रतिपदा तिथि में शुभ मुहूर्त में की जाती है। इस वर्ष घटस्थापना का उपयुक्त समय {ghatTime} है। कलश स्थापना के साथ नवरात्रि पूजा का आरंभ होता है।"
+          "घटस्थापना नवरात्रि का आरंभिक संस्कार है और प्रतिपदा तिथि में शुभ मुहूर्त में की जाती है। इस वर्ष घटस्थापना का उपयुक्त समय {ghatTime} है। कलश ब्रह्मांड और जीवन ऊर्जा का प्रतीक है, जबकि जौ बोना समृद्धि और विकास का संकेत देता है।"
       },
 
       {
         id: "puja-vidhi",
         title: "घटस्थापना विधि",
         content:
-          "प्रातः स्नान कर साफ स्थान पर मिट्टी बिछाकर जौ बोए जाते हैं। तांबे या मिट्टी के कलश में जल भरकर उसमें सुपारी, सिक्का और आम के पत्ते रखें तथा नारियल स्थापित करें। इसके बाद देवी का आह्वान कर दीप और धूप अर्पित करें।"
+          "प्रातः स्नान कर स्वच्छ स्थान पर मिट्टी बिछाकर जौ बोए जाते हैं। तांबे या मिट्टी के कलश में जल भरकर सुपारी, सिक्का और आम के पत्ते रखें तथा नारियल स्थापित करें। इसके बाद दीप प्रज्वलित कर देवी का आह्वान करें और मंत्रोच्चार के साथ पूजा प्रारंभ करें।"
       },
 
       {
@@ -63,18 +63,6 @@ export const NAVRATRI_ARTICLE_DATA = {
           "मां कालरात्रि – अज्ञान का नाश",
           "मां महागौरी – शुद्धता और शांति",
           "मां सिद्धिदात्री – सिद्धि और सफलता"
-        ]
-      },
-
-      {
-        id: "vrat-rules",
-        title: "नवरात्रि व्रत के नियम",
-        content:
-          "नवरात्रि में सात्विक आहार और अनुशासन का पालन किया जाता है। व्रत केवल भोजन का त्याग नहीं बल्कि मन और विचारों की शुद्धि का भी प्रतीक है।",
-        list: [
-          "आहार: कुट्टू, सिंघाड़ा, साबूदाना, फल",
-          "वर्जित: प्याज, लहसुन, मांसाहार",
-          "अनुशासन: संयम, जप और ध्यान"
         ]
       }
     ],
@@ -96,9 +84,9 @@ export const NAVRATRI_ARTICLE_DATA = {
           "इस वर्ष घटस्थापना का शुभ समय {ghatTime} है।"
       },
       {
-        question: "नवरात्रि कितने दिन की होती है?",
+        question: "चैत्र और शारदीय नवरात्रि में क्या अंतर है?",
         answer:
-          "नवरात्रि नौ दिनों तक चलती है और दसवें दिन विजयदशमी मनाई जाती है।"
+          "चैत्र नवरात्रि वसंत ऋतु में और शारदीय नवरात्रि शरद ऋतु में मनाई जाती है। दोनों में माँ दुर्गा के नौ रूपों की पूजा की जाती है।"
       }
     ]
   },
@@ -108,11 +96,11 @@ export const NAVRATRI_ARTICLE_DATA = {
       "Navratri {year} – Dates, Ghatasthapana Muhurat, 9-Day Schedule & Colors",
 
     subtitle:
-      "Complete Guide to Chaitra and Shardiya Navratri {year}",
+      "Complete Spiritual Guide to Chaitra and Shardiya Navratri {year}",
 
     hero: {
       shortIntro:
-        "Navratri {year} is one of the most sacred Hindu festivals dedicated to Goddess Durga. It begins on {startDate} and concludes on {endDate}. The Ghatasthapana Muhurat is {ghatTime}. The auspicious color for Day 1 is {day1Color}."
+        "Navratri {year} is a sacred Hindu festival devoted to Goddess Durga. It begins on {startDate} and concludes on {endDate}. The Ghatasthapana Muhurat is {ghatTime}. The auspicious color for Day 1 is {day1Color}. These nine days symbolize spiritual renewal, divine feminine energy, and the triumph of righteousness over negativity."
     },
 
     sections: [
@@ -120,14 +108,14 @@ export const NAVRATRI_ARTICLE_DATA = {
         id: "when-is-navratri",
         title: "When is Navratri {year}?",
         content:
-          "Navratri {year} starts on {startDate} and ends on {endDate}. The festival begins with Ghatasthapana and concludes with Vijayadashami on the tenth day."
+          "Navratri {year} starts on {startDate} and ends on {endDate}. The festival begins with Ghatasthapana on Pratipada and culminates with Vijayadashami on the tenth day, marking the victory of good over evil."
       },
 
       {
         id: "navratri-significance",
-        title: "Significance of Navratri",
+        title: "Spiritual Significance of Navratri",
         content:
-          "Navratri symbolizes spiritual cleansing, devotion, and the victory of good over evil. The nine days are dedicated to the nine forms of Goddess Durga, representing strength, courage, wisdom, and purity."
+          "Navratri represents inner cleansing, discipline, and devotion. According to Devi Mahatmya, it symbolizes awakening divine strength within oneself. Each of the nine days honors a different form of Goddess Durga, guiding devotees toward courage, wisdom, balance, and spiritual growth."
       },
 
       {
@@ -142,14 +130,14 @@ export const NAVRATRI_ARTICLE_DATA = {
         id: "ghatasthapana",
         title: "Ghatasthapana Muhurat {year}",
         content:
-          "Ghatasthapana is performed on the first day during an auspicious time. This year, the suitable Muhurat is {ghatTime}."
+          "Ghatasthapana marks the ceremonial beginning of Navratri and is performed during an auspicious Muhurat on the first lunar day. This year, the suitable Muhurat is {ghatTime}. The Kalash symbolizes cosmic energy, and sowing barley seeds signifies prosperity and growth."
       },
 
       {
         id: "puja-vidhi",
         title: "Ghatasthapana Procedure",
         content:
-          "After taking a bath, prepare a clean altar and sow barley seeds in soil. Fill a kalash with water, place mango leaves, a coin, and a betel nut inside, and position a coconut on top. Light a lamp and invoke Goddess Durga."
+          "After a purifying bath, prepare a clean altar and sow barley seeds in soil. Fill a kalash with water, place mango leaves, a coin, and a betel nut inside, and position a coconut on top. Light a lamp and invoke Goddess Durga with devotion and discipline."
       },
 
       {
@@ -186,6 +174,11 @@ export const NAVRATRI_ARTICLE_DATA = {
         question: "What is the Ghatasthapana Muhurat?",
         answer:
           "The auspicious Ghatasthapana Muhurat this year is {ghatTime}."
+      },
+      {
+        question: "What is the difference between Chaitra and Shardiya Navratri?",
+        answer:
+          "Chaitra Navratri occurs in spring, while Shardiya Navratri is celebrated in autumn. Both honor the nine divine forms of Goddess Durga."
       }
     ]
   }
