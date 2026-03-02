@@ -24,8 +24,8 @@ export default function NavdurgaDetailClient({
   }
 
   const goddessName = mata.en.title
+    .split(":")[0]       // "Maa Brahmacharini"
     .replace("Maa ", "")
-    .replace(": Navratri {year} Day 1 Complete Guide", "")
     
   const baseYear = initialYear
 
@@ -113,14 +113,14 @@ export default function NavdurgaDetailClient({
         During {navType === "chaitra" ? "Chaitra" : "Shardiya"} Navratri {year}, 
         Maa {goddessName} is worshipped on {formatDate(dayData?.date)} as the divine embodiment of strength, purity and spiritual awakening.
 
-        {mata.day === 1 && (
+        {/* Only Day 1 Extra Line */}
+        {mata.day === 1 && data.kalash_sthapana && (
             <>
-            {" "}Navratri {year} formally begins with Kalash Sthapana on{" "}
-            {formatDate(data.kalash_sthapana?.date)} during the auspicious 
+            {" "}Navratri formally begins with Kalash Sthapana on{" "}
+            {formatDate(data.kalash_sthapana.date)} during the auspicious 
             Abhijit Muhurat of{" "}
-            {data.kalash_sthapana?.abhijit_muhurta
-                ? `${data.kalash_sthapana.abhijit_muhurta.start} - ${data.kalash_sthapana.abhijit_muhurta.end}`
-                : ""}.
+            {data.kalash_sthapana.abhijit_muhurta?.start} -{" "}
+            {data.kalash_sthapana.abhijit_muhurta?.end}.
             </>
         )}
 
