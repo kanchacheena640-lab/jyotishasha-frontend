@@ -248,7 +248,7 @@ export default async function NavratriPage() {
         })()}
       </section>
 
-      <section className="mt-16 mb-32 max-w-3xl mx-auto px-4">
+      <section className="mt-16 mb-40 max-w-3xl mx-auto px-6 py-10 bg-white rounded-2xl shadow-sm">
       <h2 className="text-2xl font-bold text-[#7A1C1C] mb-6 text-center">
         Frequently Asked Questions
       </h2>
