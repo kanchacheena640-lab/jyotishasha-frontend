@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { fetchNavratri } from "@/lib/fetchNavratri"
 import type { NavratriResponse, NavratriDay } from "@/lib/fetchNavratri"
+import { NAVDURGA_LIST } from "@/lib/navratri"
 
 interface Props {
   mata: any
@@ -103,12 +104,28 @@ export default function NavdurgaDetailClient({
       </div>
 
       {/* Dynamic Paragraph */}
-      <p className="text-gray-700 text-center mb-10 leading-relaxed">
-        Maa {mata.en.title.split(" –")[0]} is worshipped on{" "}
-        {formatDate(dayData?.date)} during{" "}
-        {navType === "chaitra" ? "Chaitra Navratri" : "Shardiya Navratri"}{" "}
-        {year}.
-      </p>
+      <p className="mt-4 mb-10 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
+
+        During {navType === "chaitra" ? "Chaitra" : "Shardiya"} Navratri {year}, 
+        Maa {mata.en.title.replace("Maa ", "").replace(" –", "")} is worshipped 
+        on {formatDate(dayData?.date)} as the divine embodiment of spiritual strength and divine feminine energy.
+
+        {mata.day === 1 && (
+            <>
+            {" "}Navratri {year} begins with the sacred Kalash Sthapana ceremony 
+            performed on {formatDate(data.kalash_sthapana?.date)} during the auspicious 
+            Abhijit Muhurat of{" "}
+            {data.kalash_sthapana?.abhijit_muhurta
+                ? `${data.kalash_sthapana.abhijit_muhurta.start} - ${data.kalash_sthapana.abhijit_muhurta.end}`
+                : ""}.
+            </>
+        )}
+
+        {" "}Below you will find complete details about Maa{" "}
+        {mata.en.title.replace("Maa ", "").replace(" –", "")}, including 
+        vrat katha, puja vidhi, mantra, symbolism and spiritual significance.
+
+        </p>
 
       {loading && (
         <p className="text-center text-gray-500 mb-6">Loading...</p>
@@ -120,6 +137,28 @@ export default function NavdurgaDetailClient({
         alt={mata.en.title}
         className="w-full rounded-xl shadow-lg mb-12"
       />
+
+      {/* Other 8 Navdurga Links */}
+        <div className="mt-6 mb-16 text-center">
+
+        <h2 className="text-xl font-semibold text-[#7A1C1C] mb-6">
+            Explore Other Forms of Maa Durga
+        </h2>
+
+        <div className="flex flex-wrap justify-center gap-4">
+            {NAVDURGA_LIST
+            .filter((m) => m.slug !== mata.slug)
+            .map((m) => (
+                <a
+                key={m.slug}
+                href={`/navratri/${m.slug}`}
+                className="px-4 py-2 bg-white border border-[#7A1C1C] text-[#7A1C1C] rounded-full text-sm hover:bg-[#7A1C1C] hover:text-white transition"
+                >
+                Day {m.day} – {m.en.title.replace("{year}", String(year))}
+                </a>
+            ))}
+        </div>
+        </div>
 
       {/* Static Sections */}
       {mata.en.sections.map((section: any) => (
