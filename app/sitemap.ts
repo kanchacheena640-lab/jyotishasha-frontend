@@ -2,6 +2,7 @@ import { muhurthTopics } from "@/app/panchang/muhurat/muhurth_topics";
 import { toolsData } from "@/app/data/toolsData";
 import { reportsData } from "@/app/data/reportsData";
 import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
+import { NAVDURGA_LIST } from "@/lib/navratri";
 
 export default async function sitemap() {
   const baseUrl = "https://www.jyotishasha.com";
@@ -43,6 +44,16 @@ export default async function sitemap() {
     "/terms",
   ].map((path) => ({
     url: `${baseUrl}${path}`,
+    lastModified: now,
+  }));
+
+  // 🌺 Navratri Pages
+  const navratriUrls = [
+    { url: `${baseUrl}/navratri`, lastModified: now },
+  ];
+
+  const navdurgaUrls = NAVDURGA_LIST.map((mata) => ({
+    url: `${baseUrl}/navratri/${mata.slug}`,
     lastModified: now,
   }));
 
@@ -123,6 +134,8 @@ const ekadashiUrls = ekadashiSlugs.map((slug) => ({
     ...transitUrls,
     ...holiUrls,
     ...ekadashiUrls,
+    ...navratriUrls,
+    ...navdurgaUrls,
   ];
 
 }
