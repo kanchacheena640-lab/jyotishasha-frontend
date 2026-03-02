@@ -1,5 +1,5 @@
-export const KAALRATRI = {
-  slug: "maa-kaalratri",
+export const KALARATRI = {
+  slug: "maa-kalaratri",
   day: 7,
 
   hi: {

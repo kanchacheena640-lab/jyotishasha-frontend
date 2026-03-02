@@ -6,7 +6,7 @@ import { CHANDRAGHANTA } from "./chandraghanta"
 import { KUSHMANDA } from "./kushmanda"
 import { SKANDAMATA } from "./skandamata"
 import { KATYAYANI } from "./katyayani"
-import { KAALRATRI } from "./kaalratri"
+import { KALARATRI } from "./kalaratri"
 import { MAHAGAURI } from "./mahagauri"
 import { SIDDHIDATRI } from "./siddhidatri"
 
@@ -25,7 +25,7 @@ export const NAVDURGA_LIST = [
   KUSHMANDA,
   SKANDAMATA,
   KATYAYANI,
-  KAALRATRI,
+  KALARATRI,
   MAHAGAURI,
   SIDDHIDATRI
 ]
