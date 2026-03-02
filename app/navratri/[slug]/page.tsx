@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getNavdurgaBySlug, NAVDURGA_LIST } from "@/lib/navratri"
 import { fetchNavratri } from "@/lib/fetchNavratri"
+import Link from "next/link"
 
 interface Props {
   params: { slug: string }
@@ -133,32 +134,54 @@ export default async function NavdurgaDetailPage({ params }: Props) {
 
       <section className="max-w-4xl mx-auto px-4 py-14">
 
-        {/* Hero */}
-        <h1 className="text-4xl md:text-5xl font-bold text-[#7A1C1C] mb-6">
+       {/* ---------------- HERO ---------------- */}
+
+        {/* H1 */}
+        <h1 className="text-4xl md:text-5xl font-bold text-[#7A1C1C] mb-4">
           {content.title.replace("{year}", String(year))}
         </h1>
 
-        <p className="text-gray-600 mb-8">
-          {content.hero.intro
-            .replace("{year}", String(year))
-            .replace("{date}", date)}
+        {/* Year Line */}
+        <p className="text-sm text-gray-500 mb-6">
+          Navratri {year} | Day {mata.day}
         </p>
 
+        {/* Toggle (UI only for now) */}
+        <div className="flex gap-4 mb-8">
+          <button className="px-4 py-2 bg-[#7A1C1C] text-white rounded-full text-sm">
+            Chaitra
+          </button>
+          <button className="px-4 py-2 border border-[#7A1C1C] rounded-full text-sm">
+            Shardiya
+          </button>
+        </div>
+
+        {/* Dynamic Paragraph */}
+        <p className="text-gray-700 mb-8 leading-relaxed">
+          In Navratri {year}, Maa {content.title
+            .replace(" – Navratri {year} Day " + mata.day + " Significance", "")
+            .replace("{year}", "")} is worshipped on {date}. 
+          This sacred day represents spiritual discipline, divine feminine energy 
+          and inner transformation during the nine powerful nights of Navratri.
+        </p>
+
+        {/* Image */}
         <img
           src={`/images/navratri/${params.slug.replace("maa-", "")}.webp`}
           alt={content.title}
           className="w-full rounded-xl shadow-lg mb-12"
         />
 
-        {/* Sections */}
+        {/* ---------------- STATIC ARTICLE ---------------- */}
+
         {content.sections.map((section) => (
-          <div key={section.id} className="mb-10">
+          <div key={section.id} className="mb-12">
             <h2 className="text-2xl font-semibold text-[#7A1C1C] mb-4">
               {section.title}
             </h2>
 
             {section.content && (
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 mb-4 leading-relaxed">
                 {section.content
                   .replace("{year}", String(year))
                   .replace("{date}", date)}
@@ -188,6 +211,40 @@ export default async function NavdurgaDetailPage({ params }: Props) {
               title="Navratri Video"
               allowFullScreen
             />
+          </div>
+        </div>
+
+        {/* ---------------- NAVDURGA GRID ---------------- */}
+
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold text-[#7A1C1C] mb-8 text-center">
+            Explore All 9 Forms of Maa Durga
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {NAVDURGA_LIST.map((m) => {
+              const isActive = m.slug === params.slug
+
+              return (
+                <Link
+                  key={m.slug}
+                  href={isActive ? "#" : `/navratri/${m.slug}`}
+                  className={`p-6 rounded-xl text-center shadow-md transition ${
+                    isActive
+                      ? "bg-gray-200 opacity-60 pointer-events-none"
+                      : "bg-white hover:shadow-lg"
+                  }`}
+                >
+                  <h3 className="font-semibold text-[#7A1C1C]">
+                    {m.en.title.replace("{year}", String(year))}
+                  </h3>
+
+                  <p className="text-sm text-gray-500 mt-2">
+                    Day {m.day}
+                  </p>
+                </Link>
+              )
+            })}
           </div>
         </div>
 
