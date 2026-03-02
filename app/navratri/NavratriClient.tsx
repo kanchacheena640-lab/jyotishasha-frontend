@@ -99,7 +99,7 @@ const formatDate = (dateString?: string) => {
       {/* 🔥 MASTER DYNAMIC PARAGRAPH */}
         <p className="mt-2 mb-10 text-gray-700 max-w-4xl mx-auto text-center leading-relaxed">
           Navratri {data.year ?? year} begins on {formatDate(data.start_date)}
-          and concludes on {formatDate(data.end_date)}, spanning{" "}
+           and concludes on {formatDate(data.end_date)}, spanning{" "}
           {data.total_days ?? ""} sacred days dedicated to Maa Durga.
           Kalash Sthapana will be performed on{" "}
           {formatDate(data.kalash_sthapana?.date)} during the auspicious
