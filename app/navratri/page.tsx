@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { fetchNavratri, type NavratriResponse } from "@/lib/fetchNavratri"
 import NavratriClient from "./NavratriClient"
 import { NAVRATRI_ARTICLE_DATA } from "@/lib/navratri"
-
+import { getNavratriColors } from "@/lib/navratri/getNavratriColors"
 
 const formatDate = (dateString: string) => {
   if (!dateString) return ""
@@ -64,6 +64,8 @@ export default async function NavratriPage() {
   const days = initialData.days ?? []
 
   const startDate = days.length > 0 ? days[0].date : ""
+  const colors = startDate ? getNavratriColors(startDate) : []
+  const day1Color = colors[0] ?? ""
   const endDate = days.length > 0 ? days[days.length - 1].date : ""
 
   return (
@@ -205,7 +207,9 @@ export default async function NavratriPage() {
                   .replace("{year}", String(currentYear))
                   .replace("{startDate}", formatDate(startDate))
                   .replace("{endDate}", formatDate(endDate))
-                  .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")}
+                  .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                  .replace("{day1Color}", day1Color)
+                }
               </p>
 
               {article.sections.map((section) => (
@@ -220,7 +224,8 @@ export default async function NavratriPage() {
                         .replace("{year}", String(currentYear))
                         .replace("{startDate}", formatDate(startDate))
                         .replace("{endDate}", formatDate(endDate))
-                        .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")}
+                        .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                        .replace("{day1Color}", day1Color)}
                     </p>
                   )}
 
@@ -239,48 +244,34 @@ export default async function NavratriPage() {
       </section>
 
       <section className="mt-16 mb-32 max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-[#7A1C1C] mb-6 text-center">
-            Frequently Asked Questions
-        </h2>
+      <h2 className="text-2xl font-bold text-[#7A1C1C] mb-6 text-center">
+        Frequently Asked Questions
+      </h2>
 
-        <div className="space-y-6 text-gray-700">
-            <div>
+      <div className="space-y-6 text-gray-700">
+        {NAVRATRI_ARTICLE_DATA.en.faqs.map((faq, idx) => (
+          <div key={idx}>
             <h3 className="font-semibold">
-                When is Navratri {currentYear}?
+              {faq.question
+                .replace("{year}", String(currentYear))
+                .replace("{startDate}", formatDate(startDate))
+                .replace("{endDate}", formatDate(endDate))
+                .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                .replace("{day1Color}", day1Color)}
             </h3>
-            <p>
-                Navratri {currentYear} begins on {formatDate(startDate)} and ends on {formatDate(endDate)}.
-            </p>
-            </div>
 
-            <div>
-            <h3 className="font-semibold">
-                What is Kalash Sthapana Muhurat?
-            </h3>
             <p>
-                Kalash Sthapana marks the beginning of Navratri and is performed during an auspicious muhurat on the first day.
+              {faq.answer
+                .replace("{year}", String(currentYear))
+                .replace("{startDate}", formatDate(startDate))
+                .replace("{endDate}", formatDate(endDate))
+                .replace("{ghatTime}", initialData.ghatasthapana?.muhurat ?? "")
+                .replace("{day1Color}", day1Color)}
             </p>
-            </div>
-
-            <div>
-            <h3 className="font-semibold">
-                What is the difference between Chaitra and Shardiya Navratri?
-            </h3>
-            <p>
-                Chaitra Navratri occurs in spring while Shardiya Navratri is celebrated in autumn. Both honor the 9 forms of Maa Durga.
-            </p>
-            </div>
-
-            <div>
-            <h3 className="font-semibold">
-                How many days is Navratri celebrated?
-            </h3>
-            <p>
-                Navratri is celebrated for nine nights and ten days.
-            </p>
-            </div>
-        </div>
-        </section>
+          </div>
+        ))}
+      </div>
+    </section>
     </main>
   )
 }

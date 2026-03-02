@@ -145,7 +145,7 @@ export default async function NavdurgaDetailPage({ params }: Props) {
         </p>
 
         <img
-          src={`/images/navratri/${params.slug}.webp`}
+          src={`/images/navratri/${params.slug.replace("maa-", "")}.webp`}
           alt={content.title}
           className="w-full rounded-xl shadow-lg mb-12"
         />
