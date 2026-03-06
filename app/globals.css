@@ -78,3 +78,37 @@ body {
 }
 /* ================= 🌐 BLOG & ASTROBLOG STYLING END ================= */
 
+/* ================= 🕉️ PANCHANG TICKER START ================= */
+
+.ticker-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 28s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* pause on hover or touch */
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .ticker-track {
+    animation-duration: 18s;
+  }
+}
+
+/* ================= 🕉️ PANCHANG TICKER END ================= */
