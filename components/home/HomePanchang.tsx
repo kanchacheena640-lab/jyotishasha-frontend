@@ -120,14 +120,14 @@ export default function HomePanchang({ data, events }: Props) {
             </div>
 
             {/* Link only for Ekadashi */}
-{isEkadashi && (
-  <a
-    href={`/${event.slug.startsWith("ekadashi/") ? event.slug : `ekadashi/${event.slug}`}`}
-    className="text-green-400 text-xs hover:underline"
-  >
-    Know Details →
-  </a>
-)}
+            {isEkadashi && (
+              <a
+                href={`/ekadashi/${event.slug.replace(/^ekadashi\//, "").replace(/-?ekadashi$/, "")}-ekadashi`}
+                className="text-green-400 text-xs hover:underline"
+              >
+                Know Details →
+              </a>
+            )}
 
           </div>
         );
