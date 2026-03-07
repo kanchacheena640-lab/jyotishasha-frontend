@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+
 
 type EventItem = {
   name: string;
@@ -121,12 +123,12 @@ export default function HomePanchang({ data, events }: Props) {
 
             {/* Link only for Ekadashi */}
             {isEkadashi && (
-              <a
-                href={`/${event.slug.replace(/-?ekadashi$/, "")}-ekadashi`}
+              <Link
+                href={`/ekadashi/${event.slug.replace(/^ekadashi\//, "").replace(/-?ekadashi$/, "")}-ekadashi`}
                 className="text-green-400 text-xs hover:underline"
               >
                 Know Details →
-              </a>
+              </Link>
             )}
 
           </div>
