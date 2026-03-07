@@ -89,35 +89,51 @@ export default function HomePanchang({ data, events }: Props) {
         </div>
 
         {/* UPCOMING EVENTS */}
-        {activeTab === "upcoming" && events && (
+{activeTab === "upcoming" && events && (
 
-          <div className="grid grid-cols-2 gap-3 text-sm">
+  <div className="grid grid-cols-2 gap-3 text-sm">
 
-            {events
-              .filter((event) => event.name !== "Maha Shivratri")
-              .slice(0, 6)
-              .map((event) => (
+    {events
+      .filter((event) => event.name !== "Maha Shivratri")
+      .slice(0, 6)
+      .map((event) => {
 
-                <div
-                  key={event.slug}
-                  className="bg-[#1a1740] px-3 py-3 rounded-xl border border-purple-800 flex flex-col justify-between text-center"
-                >
+        const isEkadashi = event.slug.includes("ekadashi");
 
-                  <div className="text-xs text-purple-400">
-                    {formatDate(event.date)}
-                  </div>
+        return (
+          <div
+            key={event.slug}
+            className="bg-[#1a1740] px-4 py-4 rounded-xl border border-purple-800 text-center flex flex-col gap-2"
+          >
 
-                  <div className="text-white font-semibold text-sm">
-                    {event.name}
-                  </div>
+            {/* Date */}
+            <div className="text-xs text-purple-400">
+              {formatDate(event.date)}
+            </div>
 
-                </div>
+            {/* Panchang style sentence */}
+            <div className="text-white text-sm leading-relaxed">
+              ✨ The upcoming festival is{" "}
+              <span className="font-semibold">{event.name}</span>.
+            </div>
 
-              ))}
+            {/* Link only for Ekadashi */}
+            {isEkadashi && (
+              <a
+                href={`/ekadashi/${event.slug}`}
+                className="text-green-400 text-xs hover:underline"
+              >
+                Know Details →
+              </a>
+            )}
 
           </div>
+        );
+      })}
 
-        )}
+  </div>
+
+)}
 
         {/* TODAY / TOMORROW PANCHANG */}
 {activeTab !== "upcoming" && (
