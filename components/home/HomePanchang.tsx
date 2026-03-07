@@ -122,7 +122,7 @@ export default function HomePanchang({ data, events }: Props) {
             {/* Link only for Ekadashi */}
             {isEkadashi && (
               <a
-                href={`/${event.slug}-ekadashi`}
+                href={`/${event.slug.replace(/-?ekadashi$/, "")}-ekadashi`}
                 className="text-green-400 text-xs hover:underline"
               >
                 Know Details →
