@@ -114,7 +114,9 @@ export default function HomePanchang({ data, events }: Props) {
             {/* Panchang style sentence */}
             <div className="text-white text-sm leading-relaxed">
               ✨ The upcoming festival is{" "}
-              <span className="font-semibold">{event.name}</span>.
+              <span className="font-semibold">
+                {event.name}{isEkadashi ? " Ekadashi" : ""}
+              </span>.
             </div>
 
             {/* Link only for Ekadashi */}
