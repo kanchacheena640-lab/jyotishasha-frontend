@@ -120,14 +120,30 @@ export default function HomePanchang({ data, events }: Props) {
             </div>
 
             {/* Link only for Ekadashi */}
-            {isEkadashi && (
-              <a
-                href={`/${event.slug}-ekadashi`}
-                className="text-green-400 text-xs hover:underline"
-              >
-                Know Details →
-              </a>
-            )}
+            {isEkadashi && (() => {
+
+              let slug = event.slug.toLowerCase();
+
+              // remove prefix if already present
+              if (slug.startsWith("ekadashi/")) {
+                slug = slug.replace("ekadashi/", "");
+              }
+
+              // ensure suffix exists
+              if (!slug.endsWith("-ekadashi")) {
+                slug = `${slug}-ekadashi`;
+              }
+
+              return (
+                <a
+                  href={`/ekadashi/${slug}`}
+                  className="text-green-400 text-xs hover:underline"
+                >
+                  Know Details →
+                </a>
+              );
+
+            })()}
 
           </div>
         );
