@@ -35,9 +35,19 @@ export default function HomeTicker({ data }: Props) {
     const startMin = toMinutes(slot.start);
     const endMin = toMinutes(slot.end);
 
-    if (currentMinutes >= startMin && currentMinutes < endMin) {
-      activeSlot = slot;
-      break;
+    // normal slot
+    if (startMin <= endMin) {
+      if (currentMinutes >= startMin && currentMinutes < endMin) {
+        activeSlot = slot;
+        break;
+      }
+    }
+    // midnight crossing slot (night chaughadiya)
+    else {
+      if (currentMinutes >= startMin || currentMinutes < endMin) {
+        activeSlot = slot;
+        break;
+      }
     }
   }
 
