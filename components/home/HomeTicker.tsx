@@ -27,7 +27,13 @@ export default function HomeTicker({ data }: Props) {
   ];
 
   const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const istTime = new Date(
+    now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const currentMinutes =
+    istTime.getHours() * 60 + istTime.getMinutes();
 
   let activeSlot: any = null;
 
