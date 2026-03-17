@@ -5,16 +5,20 @@ import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
 
 export const revalidate = 3600;
 
-/* ---------------- SEO ---------------- */
-export const metadata: Metadata = {
-  title: "Jupiter Transit – Dates, Effects & Remedies | Jyotishasha",
-  description:
-    "Jupiter (Guru) transit with dates, ascendant-wise effects, wisdom, growth, remedies and next transit details as per Vedic astrology.",
-  alternates: {
-    canonical: "https://www.jyotishasha.com/jupiter-transit",
-  },
-};
+const currentYear = new Date().getFullYear();
 
+/* ---------------- SEO ---------------- */
+export async function generateMetadata(): Promise<Metadata> {
+  const year = new Date().getFullYear();
+
+  return {
+    title: `Jupiter Transit ${year} – Date, Effects & Predictions | Jyotishasha`,
+    description: `Jupiter Transit ${year}: exact date, rashi change, zodiac-wise effects and remedies as per Vedic astrology.`,
+    alternates: {
+      canonical: "https://www.jyotishasha.com/jupiter-transit",
+    },
+  };
+}
 /* ---------------- Helpers ---------------- */
 function formatDate(dateStr?: string) {
   if (!dateStr) return "-";
@@ -47,8 +51,12 @@ export default async function JupiterTransitPage() {
 
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
-          Jupiter Transit in {jupiterPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
+          Jupiter Transit {currentYear} in {jupiterPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
         </h1>
+
+        <p className="text-gray-700 mb-4">
+          Jupiter transit {currentYear} is one of the most important astrological events, bringing major changes in growth, career, marriage and fortune.
+        </p>
 
         {/* INTRO */}
         <p className="text-gray-800 mb-10 leading-relaxed">
@@ -181,7 +189,7 @@ export default async function JupiterTransitPage() {
             href={`/jupiter-transit/${jupiterPos?.rashi?.toLowerCase()}`}
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            See How This Transit Affects You →
+            See Jupiter Transit {currentYear} Effects for Your Ascendant →
           </Link>
         </div>
 
