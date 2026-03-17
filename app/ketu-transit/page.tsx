@@ -2,19 +2,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
+import { getTransitMetadata } from "@/lib/seo/transitSeo";
+
 
 
 export const revalidate = 3600;
 
-/* ---------------- SEO ---------------- */
-export const metadata: Metadata = {
-  title: "Ketu Transit – Dates, Effects & Remedies | Jyotishasha",
-  description:
-    "Ketu transit with dates, ascendant-wise effects on detachment, spirituality, confusion and remedies as per Vedic astrology.",
-  alternates: {
-    canonical: "https://www.jyotishasha.com/ketu-transit",
-  },
-};
+const currentYear = new Date().getFullYear();
+
+export async function generateMetadata() {
+  return getTransitMetadata("Ketu", "ketu-transit");
+}
 
 /* ---------------- Helpers ---------------- */
 function formatDate(dateStr?: string) {
@@ -48,8 +46,12 @@ export default async function KetuTransitPage() {
 
         {/* H1 */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
-          Ketu Transit in {ketuPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
+          Ketu Transit {currentYear} in {ketuPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
         </h1>
+
+        <p>
+          Ketu transit {currentYear} brings major karmic shifts, detachment and spiritual transformation.
+        </p>
 
         {/* INTRO */}
         <p className="text-gray-800 mb-10 leading-relaxed">
@@ -62,6 +64,10 @@ export default async function KetuTransitPage() {
           sudden realizations. Its transit often reduces material attachment while
           highlighting hidden weaknesses and inner truths based on house placement.
         </p>
+
+        <h2>
+          Ketu Transit Dates {currentYear}
+        </h2>
 
         {/* SNAPSHOT CARD */}
         <section className="bg-blue-900 rounded-xl p-6 mb-12 text-white">
@@ -85,6 +91,15 @@ export default async function KetuTransitPage() {
               {formatDate(nextTransit?.entering_date)}
             </div>
           </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-3">
+            Ketu Transit {currentYear} Effects for All Zodiac Signs
+          </h2>
+          <p className="text-gray-800">
+            This Ketu transit will impact all zodiac signs differently based on house placement, karmic patterns and planetary aspects.
+          </p>
         </section>
 
         {/* WHY IT MATTERS */}
@@ -181,7 +196,7 @@ export default async function KetuTransitPage() {
             href={`/ketu-transit/${ketuPos?.rashi?.toLowerCase()}`}
             className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
           >
-            See How This Transit Affects You →
+            See Ketu Transit {currentYear} Effects for Your Ascendant →
           </Link>
         </div>
 

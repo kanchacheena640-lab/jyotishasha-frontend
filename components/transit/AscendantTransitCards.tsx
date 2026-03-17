@@ -7,6 +7,8 @@ const RASHI_INDEX: Record<string, number> = {
   Libra: 7, Scorpio: 8, Sagittarius: 9, Capricorn: 10, Aquarius: 11, Pisces: 12
 };
 
+const currentYear = new Date().getFullYear();
+
 function getHouse(asc: string, rashi: string) {
   return ((RASHI_INDEX[rashi] - RASHI_INDEX[asc] + 12) % 12) + 1;
 }
@@ -23,7 +25,7 @@ export default function AscendantTransitCards({
   return (
     <section className="mt-16">
       <h2 className="text-2xl font-semibold mb-8 text-center text-black">
-        Ascendant-wise Effects of {planet} Transit
+        Ascendant-wise {planet} Transit {currentYear} Effects
       </h2>
 
       <div className="grid sm:grid-cols-2 gap-6">
@@ -36,13 +38,11 @@ export default function AscendantTransitCards({
               className="bg-blue-900 rounded-xl p-5 shadow-lg text-white"
             >
               <h3 className="font-semibold text-lg mb-2 text-white">
-                {asc} Ascendant
+                {planet} Transit in {asc} Ascendant
               </h3>
 
               <p className="text-sm text-blue-100 mb-4 leading-relaxed">
-                For {asc} ascendant, {planet} transits the {house} house,
-                activating themes connected with this area of life. The results
-                depend on dignity, strength and personal effort.
+                For {asc} ascendant, {planet} transit {currentYear} occurs in the {house} house, bringing changes related to this area of life. This transit influences key aspects depending on planetary strength, aspects and personal karma.
               </p>
 
               {/* Bottom info */}
@@ -55,7 +55,7 @@ export default function AscendantTransitCards({
                 href={`/${planetSlug}/${asc.toLowerCase()}/house-${house}`}
                 className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
               >
-                See How This Transit Affects You  →
+                See {planet} Transit {currentYear} Effects →
               </a>
             </div>
           );
