@@ -106,11 +106,7 @@ export default async function KetuTransitHousePage({
           Ketu Transit {currentYear} in {ascTitle} Ascendant – House {houseNum} Effects & Meaning
         </h1>
 
-        <DynamicTransitChart 
-          ascendant={params.ascendant} 
-          activePlanet="ketu" 
-          house={houseNum} 
-        />
+        
 
         {/* Vedic Disclaimer (For USA Traffic) */}
         <VedicNote />
@@ -123,7 +119,12 @@ export default async function KetuTransitHousePage({
             This phase often changes how you perceive situations, respond emotionally, and engage with this domain, pushing you toward clarity beyond surface-level attachments.
           </p>
         </div>
-
+        
+        <DynamicTransitChart 
+          ascendant={params.ascendant} 
+          activePlanet="ketu" 
+          house={houseNum} 
+        />
 
         {/* SECTIONS */}
         <div className="space-y-10">

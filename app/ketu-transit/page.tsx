@@ -4,6 +4,8 @@ import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
 import { getTransitMetadata } from "@/lib/seo/transitSeo";
 import VedicNote from "@/components/VedicNote";
+import DynamicTransitChart from "@/components/DynamicTransitChart";
+
 
 export const revalidate = 3600;
 
@@ -97,8 +99,6 @@ export default async function KetuTransitPage() {
         <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight text-blue-950">
           Ketu Transit {currentYear} in {ketuPos?.rashi} (South Node) – Meaning, Effects & Remedies
         </h1>
-
-        /* GLOBAL TRUST + NAV */
 
         <aside className="mb-10">
           {/* Vedic Note Component */}

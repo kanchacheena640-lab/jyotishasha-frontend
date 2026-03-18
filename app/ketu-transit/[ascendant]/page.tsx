@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
 import VedicNote from "@/components/VedicNote";
+import DynamicTransitChart from "@/components/DynamicTransitChart";
+
 
 export const revalidate = 3600;
 
@@ -226,6 +228,7 @@ export default async function KetuTransitAscendantPage({
 
             This transition works internally, influencing perception, emotional response, and how you engage with situations.
           </p>
+
 
         <p className="text-sm text-slate-500 mt-3">
           Below you can explore how Ketu affects each house for {ascName} ascendant.
