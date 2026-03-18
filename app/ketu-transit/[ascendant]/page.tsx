@@ -235,6 +235,16 @@ export default async function KetuTransitAscendantPage({
         </p>
         </div>
 
+        {/* ✅ Visual Chart Integration - Snapshot Section se pehle */}
+        <div className="my-10">
+          <DynamicTransitChart 
+            ascendant={ascendant} 
+            activePlanet="ketu" 
+            house={currentHouse} // Yeh current house positions se calculate ho raha hai
+            size={340}
+          />
+        </div>
+
         {/* Snapshot Section */}
         <section className="bg-slate-900 rounded-2xl p-8 mb-16 text-white shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-5">
