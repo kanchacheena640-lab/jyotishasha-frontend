@@ -172,9 +172,6 @@ export default async function KetuTransitPage() {
 
         {/* EFFECTS SECTION */}
         <section id="signs" className="mb-20 scroll-mt-10">
-          <h2 className="text-3xl font-bold mb-8 text-blue-950">
-            Ketu Transit {currentYear} Effects and Meaning for All Zodiac Signs
-          </h2>
           <AscendantTransitCards
             planet="Ketu"
             planetRashi={ketuPos?.rashi}

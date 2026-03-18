@@ -1,35 +1,36 @@
-// app/mars-transit/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
-
+import { getTransitMetadata } from "@/lib/seo/transitSeo";
+import VedicNote from "@/components/VedicNote";
 
 export const revalidate = 3600;
 
-/* ---------------- SEO ---------------- */
-export const metadata: Metadata = {
-  title: "Mars Transit – Dates, Effects & Remedies | Jyotishasha",
-  description:
-    "Mars transit with dates, ascendant-wise effects, energy, action, conflict themes and remedies as per Vedic astrology.",
-  alternates: {
-    canonical: "https://www.jyotishasha.com/mars-transit",
-  },
-};
+const currentYear = new Date().getFullYear();
+
+export async function generateMetadata(): Promise<Metadata> {
+  // Global SEO: Focus on Energy, Ambition, and Action
+  return getTransitMetadata("Mars", "mars-transit");
+}
 
 /* ---------------- Helpers ---------------- */
 function formatDate(dateStr?: string) {
   if (!dateStr) return "-";
   const d = new Date(dateStr);
-  return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
-/* ---------------- Data Fetch ---------------- */
+/* ---------------- Data Fetch (Server Side) ---------------- */
 async function fetchMarsTransit() {
   const res = await fetch(
     "https://jyotishasha-backend.onrender.com/api/transit/current",
     { next: { revalidate: 3600 } }
   );
-  if (!res.ok) throw new Error("Failed to fetch transit data");
+  if (!res.ok) throw new Error("Failed to fetch Mars transit data");
   return res.json();
 }
 
@@ -40,151 +41,146 @@ export default async function MarsTransitPage() {
   const marsPos = data.positions?.Mars;
   const marsFuture = data.future_transits?.Mars || [];
   const currentTransit = marsFuture[0];
-  const nextTransit = marsFuture[1];
+
+  /* FAQ Schema for Mars (Mangal) */
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        "name": `What are the effects of Mars Transit ${currentYear}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Mars transit, or Mangal Gochar, influences your energy levels, willpower, and ability to take action. It can trigger professional breakthroughs or conflicts depending on its house placement.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to handle Mars transit energy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The best way to channel Mars energy is through physical discipline, strategic planning, and avoiding impulsive reactions during heated situations."
+        }
+      }
+    ]
+  };
 
   return (
-    <div className="bg-gradient-to-b from-blue-900 to-blue-800 py-16">
-      <article className="max-w-5xl mx-auto bg-white rounded-2xl px-6 md:px-10 py-14 shadow-xl text-black">
+    <div className="bg-gradient-to-b from-slate-900 to-red-950/20 py-16 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
-        {/* H1 */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-6">
-          Mars Transit in {marsPos?.rashi} – Dates, Effects & Remedies for All Zodiac Signs
+      <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
+        
+        {/* H1 - Dynamic Action Hook */}
+        <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight text-slate-950 tracking-tight">
+          Mars Transit {currentYear} in {marsPos?.rashi} – <span className="text-red-600">Action & Courage</span>
         </h1>
 
-        {/* INTRO */}
-        <p className="text-gray-800 mb-10 leading-relaxed">
-          Mars is currently transiting through <strong>{marsPos?.rashi}</strong> rashi,
-          activating themes of action, courage, ambition and conflict management.
-          At present, Mangal is positioned at <strong>{marsPos?.degree}°</strong> in{" "}
-          <strong>{marsPos?.rashi}</strong> rashi.
-          <br /><br />
-          In Vedic astrology, Mars represents energy, initiative, willpower and physical
-          drive. Its transit influences how decisively one acts, handles pressure and
-          channels aggression, with results varying for each ascendant based on house
-          placement and planetary strength.
-        </p>
+        <aside className="mb-10">
+          <VedicNote />
+          <div className="flex gap-6 text-[10px] font-black text-blue-700 uppercase tracking-[0.2em] border-b border-slate-100 pb-4 mt-6">
+            <Link href="#signs" className="hover:text-blue-900 transition underline underline-offset-8">
+              ↓ Forecast by Sign
+            </Link>
+            <Link href="#remedies" className="hover:text-blue-900 transition underline underline-offset-8">
+              ↓ Vedic Remedies
+            </Link>
+          </div>
+        </aside>
 
-        {/* SNAPSHOT */}
-        <section className="bg-blue-900 rounded-xl p-6 mb-12 text-white">
-          <h2 className="text-xl font-semibold mb-4">
-            Current Mars Transit Snapshot
+        {/* Intro Section */}
+        <div className="prose prose-slate max-w-none text-lg text-slate-700 leading-relaxed mb-12 font-medium">
+          <p>
+            The <strong>Mars transit {currentYear}</strong> (Mangal Gochar) serves as a cosmic engine for <strong>ambition and drive</strong>. In <strong>Vedic astrology</strong>, Mars is the planet of willpower, physical vitality, and strategic action. Its movement through <strong>{marsPos?.rashi}</strong> shapes how we confront challenges and pursue our desires.
+          </p>
+          <p>
+            As a planet of initiative, Mars governs our <strong>ability to compete and win</strong>. Understanding this transit helps in channeling raw energy into productive outcomes while avoiding burnout or unnecessary friction.
+          </p>
+        </div>
+
+        {/* SNAPSHOT CARD - Technical Data */}
+        <section className="bg-slate-900 rounded-[2rem] p-8 mb-16 text-white shadow-2xl relative overflow-hidden border border-white/5">
+          <div className="absolute top-0 right-0 p-4 opacity-5">
+            <span className="text-9xl font-black italic">Mangal</span>
+          </div>
+          
+          <h2 className="text-xl font-bold mb-8 text-red-500 flex items-center gap-3 uppercase tracking-tighter">
+            <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            Current Mars (Mangal) Status
           </h2>
 
-          <div className="grid sm:grid-cols-2 gap-3 text-sm">
-            <div><strong>Planet:</strong> Mars (Mangal)</div>
-            <div><strong>Current Rashi:</strong> {marsPos?.rashi}</div>
-            <div><strong>Degree:</strong> {marsPos?.degree}°</div>
-            <div><strong>Motion:</strong> {marsPos?.motion}</div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 text-sm relative z-10">
             <div>
-              <strong>Transit Period:</strong>{" "}
-              {formatDate(currentTransit?.entering_date)} –{" "}
-              {formatDate(currentTransit?.exit_date)}
+              <p className="text-slate-500 uppercase font-black text-[10px] tracking-widest mb-2">Active Sign</p>
+              <p className="text-2xl font-black">{marsPos?.rashi} <span className="text-red-400 font-medium text-lg">({marsPos?.degree}°)</span></p>
             </div>
             <div>
-              <strong>Next Transit:</strong>{" "}
-              {nextTransit?.to_rashi} on{" "}
-              {formatDate(nextTransit?.entering_date)}
+              <p className="text-slate-500 uppercase font-black text-[10px] tracking-widest mb-2">Transit Motion</p>
+              <p className="text-2xl font-black text-amber-400">{marsPos?.motion}</p>
+            </div>
+            <div className="sm:col-span-2 md:col-span-1">
+              <p className="text-slate-500 uppercase font-black text-[10px] tracking-widest mb-2">Transit Duration</p>
+              <p className="text-base font-bold">
+                {formatDate(currentTransit?.entering_date)} – {formatDate(currentTransit?.exit_date)}
+              </p>
             </div>
           </div>
-        </section>
-
-        {/* WHY IT MATTERS */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-3">
-            Why This Mars Transit Matters
-          </h2>
-          <p className="text-gray-800 leading-relaxed">
-            Mars transit governs motivation, assertiveness, competition and conflict
-            handling. A strong Mars transit supports courage, leadership and decisive
-            action, while a challenging placement may increase impatience, anger or
-            impulsive decisions if energy is not directed constructively.
-          </p>
         </section>
 
         {/* ASCENDANT CARDS */}
-        <AscendantTransitCards
-          planet="Mars"
-          planetRashi={marsPos?.rashi}
-          planetSlug="mars-transit"
-        />
-        
-        {/* REMEDIES */}
-        <section className="mt-16">
-          <h2 className="text-2xl font-semibold mb-3">
-            Remedies for Mars Transit
-          </h2>
-          <ul className="list-disc pl-6 text-gray-800 space-y-1">
-            <li>Practice physical discipline and controlled exercise</li>
-            <li>Chant Hanuman Chalisa or Mangal Beej Mantra</li>
-            <li>Avoid impulsive decisions and heated arguments</li>
-            <li>Donate red lentils or copper on Tuesdays</li>
-          </ul>
+        <section id="signs" className="mb-20">
+          <AscendantTransitCards
+            planet="Mars"
+            planetRashi={marsPos?.rashi}
+            planetSlug="mars-transit"
+          />
         </section>
-        {/* 🔗 Explore Other Planetary Transits */}
-        <div className="mt-10 border-t pt-4">
-          <p className="text-sm text-gray-600 mb-2">
-            Explore other planetary transits:
-          </p>
 
-          <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm">
-            <Link href="/sun-transit" className="text-blue-700 hover:underline">
-              Sun Transit
-            </Link>
-            <span className="text-gray-400">|</span>
+        {/* REMEDIES - Strength & Balance */}
+        <section id="remedies" className="mb-20 scroll-mt-20">
+          <h2 className="text-3xl font-black mb-8 text-slate-950">Mars Discipline & Remedies</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-8 bg-red-50 rounded-3xl border border-red-100">
+              <h3 className="font-black text-red-900 mb-4 uppercase tracking-widest text-xs">Vedic Propitiation</h3>
+              <ul className="space-y-4 text-slate-700 text-sm font-medium">
+                <li className="flex gap-3">🪔 <span>Chant the <strong>Mangal Beej Mantra</strong>: <em>"Om Kraam Kreem Kraum Sah Bhaumaye Namah"</em>.</span></li>
+                <li className="flex gap-3">🔴 <span>Donate red lentils (Masoor Dal) or copper on <strong>Tuesdays</strong> to balance energy.</span></li>
+              </ul>
+            </div>
+            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-200">
+              <h3 className="font-black text-slate-900 mb-4 uppercase tracking-widest text-xs">Practical Alignment</h3>
+              <ul className="space-y-4 text-slate-700 text-sm font-medium">
+                <li className="flex gap-3">🏃‍♂️ <span><strong>Physical Outlets:</strong> Channel Mars through intense exercise or sport to avoid irritability.</span></li>
+                <li className="flex gap-3">⚔️ <span><strong>Conflict Control:</strong> Practice "pause before reacting" during heated discussions.</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-            <Link href="/moon-transit" className="text-blue-700 hover:underline">
-              Moon Transit
-            </Link>
-            <span className="text-gray-400">|</span>           
-
-            <Link href="/mercury-transit" className="text-blue-700 hover:underline">
-              Mercury Transit
-            </Link>
-            <span className="text-gray-400">|</span>
-
-            <Link href="/jupiter-transit" className="text-blue-700 hover:underline">
-              Jupiter Transit
-            </Link>
-            <span className="text-gray-400">|</span>
-
-            <Link href="/venus-transit" className="text-blue-700 hover:underline">
-              Venus Transit
-            </Link>
-            <span className="text-gray-400">|</span>
-
-            <Link href="/saturn-transit" className="text-blue-700 hover:underline">
-              Saturn Transit
-            </Link>
-            <span className="text-gray-400">|</span>
-
-            <Link href="/rahu-transit" className="text-blue-700 hover:underline">
-              Rahu Transit
-            </Link>
-            <span className="text-gray-400">|</span>
-
-            <Link href="/ketu-transit" className="text-blue-700 hover:underline">
-              Ketu Transit
+        {/* Footer Authority & Silo Linking */}
+        <footer className="mt-20 pt-12 border-t border-slate-100">
+          <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] mb-6">Planetary Transits</h4>
+          <div className="flex flex-wrap gap-x-6 gap-y-3 text-xs font-black text-blue-700">
+            {["Sun", "Moon", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"].map((p) => (
+              <Link key={p} href={`/${p.toLowerCase()}-transit`} className="hover:text-blue-900 hover:underline">
+                {p} Transit →
+              </Link>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center md:text-left">
+            <Link
+              href={`/mars-transit/${marsPos?.rashi?.toLowerCase()}`}
+              className="inline-block bg-slate-900 text-white px-12 py-5 rounded-full font-black text-lg hover:bg-red-600 transition shadow-2xl shadow-slate-200 hover:scale-105 active:scale-95"
+            >
+              Unlock Your Energy Map →
             </Link>
           </div>
-        </div>
-
-
-        {/* 🔎 Authority Note (EEAT – indirect) */}
-        <p className="mt-10 text-sm text-gray-500 leading-relaxed">
-          This Mars transit analysis is prepared using classical Vedic astrology
-          principles, Gochar rules, planetary dignity, and Jyotishasha research methodology.
-          Dates are calculated using sidereal zodiac (Lahiri Ayanamsa).
-        </p>
-
-        {/* CTA */}
-        <div className="mt-16 text-left">
-          <Link
-            href={`/mars-transit/${marsPos?.rashi?.toLowerCase()}`}
-            className="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition"
-          >
-            See How This Transit Affects You →
-          </Link>
-        </div>
+        </footer>
 
       </article>
     </div>
