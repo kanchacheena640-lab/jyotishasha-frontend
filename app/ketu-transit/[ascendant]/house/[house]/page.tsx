@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+import VedicNote from "@/components/VedicNote";
+import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 const currentYear = new Date().getFullYear();
@@ -105,17 +106,24 @@ export default async function KetuTransitHousePage({
           Ketu Transit {currentYear} in {ascTitle} Ascendant – House {houseNum} Effects & Meaning
         </h1>
 
+        <DynamicTransitChart 
+          ascendant={params.ascendant} 
+          activePlanet="ketu" 
+          house={houseNum} 
+        />
+
+        {/* Vedic Disclaimer (For USA Traffic) */}
+        <VedicNote />
+
         {/* ✅ STEP 2: Intro Replacement (Modern & Balanced Tone) */}
         <div className="mb-10">
           <p className="text-lg leading-relaxed text-slate-700">
-            Ketu transit {currentYear} (South Node transit) in House {houseNum} for {ascTitle} ascendant brings karmic shifts, detachment, and inner transformation. In astrology, Ketu represents past-life patterns and spiritual growth, often influencing career, relationships, and mindset.
+            Ketu transit {currentYear} (South Node transit) in House {houseNum} for {ascTitle} ascendant highlights a specific area of life where detachment and inner shifts become more noticeable. 
+
+            This phase often changes how you perceive situations, respond emotionally, and engage with this domain, pushing you toward clarity beyond surface-level attachments.
           </p>
         </div>
 
-        {/* Vedic Disclaimer (For USA Traffic) */}
-        <aside className="mb-12 p-5 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-amber-900 text-sm italic shadow-sm">
-          <strong>Global Note:</strong> This guide uses the Sidereal (Vedic) Zodiac. If you are familiar with Western Astrology, results may differ; ensure you are reading for your Vedic Ascendant (Lagna).
-        </aside>
 
         {/* SECTIONS */}
         <div className="space-y-10">

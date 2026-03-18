@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
 import { getTransitMetadata } from "@/lib/seo/transitSeo";
+import VedicNote from "@/components/VedicNote";
 
 export const revalidate = 3600;
 
@@ -97,15 +98,27 @@ export default async function KetuTransitPage() {
           Ketu Transit {currentYear} in {ketuPos?.rashi} (South Node) – Meaning, Effects & Remedies
         </h1>
 
-        {/* ⚠️ GLOBAL TRUST & NAV BOX (Crucial for USA Traffic) */}
+        /* GLOBAL TRUST + NAV */
+
         <aside className="mb-10">
-          <div className="p-4 bg-amber-50 border-l-4 border-amber-500 text-amber-900 text-sm mb-6 rounded-r-lg italic">
-            <strong>Note for Global Readers:</strong> We use <strong>Vedic (Sidereal) Astrology</strong>. If you follow Western signs, your results may shift. Check the forecast for your <strong>Vedic Ascendant (Lagna)</strong> for 100% accuracy.
-          </div>
-          
-          <div className="flex gap-6 text-xs font-bold text-blue-700 uppercase tracking-widest border-b pb-4">
-            <Link href="#signs" className="hover:text-blue-900 transition underline underline-offset-4">↓ Results for All Signs</Link>
-            <Link href="#remedies" className="hover:text-blue-900 transition underline underline-offset-4">↓ Vedic Remedies</Link>
+          {/* Vedic Note Component */}
+          <VedicNote />
+
+          {/* Navigation Links */}
+          <div className="flex gap-6 text-xs font-bold text-blue-700 uppercase tracking-widest border-b pb-4 mt-4">
+            <Link
+              href="#signs"
+              className="hover:text-blue-900 transition underline underline-offset-4"
+            >
+              ↓ Results for All Signs
+            </Link>
+
+            <Link
+              href="#remedies"
+              className="hover:text-blue-900 transition underline underline-offset-4"
+            >
+              ↓ Vedic Remedies
+            </Link>
           </div>
         </aside>
 

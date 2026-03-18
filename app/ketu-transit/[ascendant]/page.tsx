@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
+import VedicNote from "@/components/VedicNote";
 
 export const revalidate = 3600;
 
@@ -206,9 +207,7 @@ export default async function KetuTransitAscendantPage({
         </header>
 
         {/* Global Trust Box */}
-        <aside className="mb-10 p-5 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-amber-900 text-sm italic shadow-sm">
-          <strong>Important Note:</strong> This analysis uses <strong>Vedic Astrology</strong>. If you follow Western Sun signs, results may vary. For accuracy, please read for your <strong>Vedic Ascendant (Lagna)</strong>.
-        </aside>
+        <VedicNote />
 
         {/* ✅ STEP 2: INTRO REPLACEMENT (Keyword Density Boost) */}
         <div className="prose prose-slate max-w-none mb-10">
