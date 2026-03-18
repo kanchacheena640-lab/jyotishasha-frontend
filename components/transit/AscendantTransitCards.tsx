@@ -28,9 +28,9 @@ export default function AscendantTransitCards({
 
   return (
     <section className="mt-20 scroll-mt-24" id="signs">
-      {/* 1. Global Header (No Hindi terms in main titles) */}
+      {/* 1. Global Header */}
       <div className="text-center mb-12 px-4">
-        <h2 className="text-3xl md:text-5xl font-black mb-4 text-slate-900 leading-tight tracking-tight">
+        <h2 className="text-3xl md:text-5xl font-black mb-4 text-slate-900 leading-tight tracking-tight text-balance">
           {planet} Transit {currentYear} Effects by <span className="text-blue-600">Ascendant</span>
         </h2>
         <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-lg font-medium leading-relaxed">
@@ -60,9 +60,9 @@ export default function AscendantTransitCards({
                   </span>
                 </div>
 
-                {/* International Naming */}
+                {/* Visible Rising Text Fix */}
                 <h3 className="font-black text-2xl mb-3 text-slate-900 group-hover:text-blue-700 transition-colors">
-                  {asc} <span className="text-slate-300 font-medium italic">Rising</span>
+                  {asc} <span className="text-slate-500 font-medium italic">Rising</span>
                 </h3>
 
                 {/* Pure English Content */}
@@ -71,9 +71,9 @@ export default function AscendantTransitCards({
                 </p>
               </div>
 
-              {/* Modern CTA */}
+              {/* Modern CTA - Optimized for Ascendant Hub Navigation */}
               <Link
-                href={`/${planetSlug}/${slug}/house/${house}`}
+                href={`/${planetSlug}/${slug}`}
                 className="w-full text-center py-4 bg-white border-2 border-slate-900 text-slate-900 text-[11px] font-black rounded-2xl hover:bg-slate-900 hover:text-white transition-all duration-300 uppercase tracking-[0.2em] relative z-10"
               >
                 Full {asc} Forecast →
