@@ -1,5 +1,6 @@
 "use client";
-
+import React from "react";
+import Link from "next/link";
 import { ASCENDANTS } from "./ascendants";
 
 const RASHI_INDEX: Record<string, number> = {
@@ -22,45 +23,73 @@ export default function AscendantTransitCards({
   planetRashi: string;
   planetSlug: string;
 }) {
-  return (
-    <section className="mt-16">
-      <h2 className="text-2xl font-semibold mb-8 text-center text-black">
-        Ascendant-wise {planet} Transit {currentYear} Effects
-      </h2>
+  const isKetu = planet.toLowerCase() === "ketu";
+  const planetDisplayName = isKetu ? "Ketu (South Node)" : planet;
 
-      <div className="grid sm:grid-cols-2 gap-6">
+  return (
+    <section className="mt-20 scroll-mt-24" id="signs">
+      {/* 1. Optimized Section Header for SEO */}
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-5xl font-black mb-4 text-slate-900 leading-tight">
+          {planet} Transit {currentYear} Effects by <span className="text-blue-600">Lagna</span>
+        </h2>
+        <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-lg font-medium leading-relaxed">
+          Select your <strong>Vedic Ascendant</strong> to see how the {planetDisplayName} transit through {planetRashi} activates specific karmic houses in your birth chart.
+        </p>
+      </div>
+
+      {/* 2. Responsive Grid with Professional Spacing */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {ASCENDANTS.map((asc) => {
           const house = getHouse(asc, planetRashi);
+          const slug = asc.toLowerCase();
 
           return (
-            <div
+            <article
               key={asc}
-              className="bg-blue-900 rounded-xl p-5 shadow-lg text-white"
+              className="group relative bg-white border border-slate-100 rounded-[2rem] p-8 shadow-sm hover:shadow-2xl hover:shadow-blue-900/5 hover:border-blue-200 transition-all duration-500 flex flex-col justify-between overflow-hidden"
             >
-              <h3 className="font-semibold text-lg mb-2 text-white">
-                {planet} Transit in {asc} Ascendant
-              </h3>
+              {/* Background Glow Effect on Hover */}
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <p className="text-sm text-blue-100 mb-4 leading-relaxed">
-                For {asc} ascendant, {planet} transit {currentYear} occurs in the {house} house, bringing changes related to this area of life. This transit influences key aspects depending on planetary strength, aspects and personal karma.
-              </p>
+              <div className="relative z-10">
+                {/* House Badge */}
+                <div className="flex justify-between items-center mb-6">
+                  <div className="bg-blue-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.15em] shadow-lg shadow-blue-200">
+                    House {house} Activated
+                  </div>
+                  <span className="text-2xl grayscale group-hover:grayscale-0 transition-all duration-300">
+                    ✨
+                  </span>
+                </div>
 
-              {/* Bottom info */}
-              <div className="text-sm text-blue-200 mb-2">
-                Activated House: {house}
+                {/* Title with Semantic Lagna Keyword */}
+                <h3 className="font-black text-2xl mb-3 text-slate-900 group-hover:text-blue-700 transition-colors">
+                  {asc} <span className="text-slate-300 font-medium italic">Lagna</span>
+                </h3>
+
+                {/* SEO Optimized Snippet */}
+                <p className="text-[13px] md:text-sm text-slate-600 mb-8 leading-relaxed font-medium">
+                  For <strong>{asc} ascendant</strong>, the {planetDisplayName} transit moves into the <strong>{house} house</strong>. In Vedic astrology, this phase triggers significant {isKetu ? "karmic release and detachment" : "shifts and growth"} in this life area.
+                </p>
               </div>
 
-              {/* CTA – new line */}
-              <a
-                href={`/${planetSlug}/${asc.toLowerCase()}/house-${house}`}
-                className="inline-block text-sm font-semibold text-white underline hover:text-yellow-300 transition"
+              {/* High-Conversion CTA Button */}
+              <Link
+                href={`/${planetSlug}/${slug}/house/${house}`}
+                className="w-full text-center py-4 bg-slate-900 text-white text-[11px] font-black rounded-2xl hover:bg-blue-600 transition-all duration-300 uppercase tracking-[0.2em] shadow-xl shadow-slate-200 group-hover:shadow-blue-200 relative z-10"
               >
-                See {planet} Transit {currentYear} Effects →
-              </a>
-            </div>
+                Read {asc} Analysis →
+              </Link>
+            </article>
           );
         })}
       </div>
+
+      {/* 3. Global Context Footer (Small SEO Boost) */}
+      <p className="mt-12 text-center text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+        Calculated using High-Precision Ephemeris • Sidereal (Lahiri) Zodiac
+      </p>
     </section>
   );
 }
