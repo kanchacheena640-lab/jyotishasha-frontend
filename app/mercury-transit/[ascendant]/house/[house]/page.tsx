@@ -85,7 +85,7 @@ export default async function MercuryTransitHousePage({
 
         {/* H1 - Intellectual Authority */}
         <h1 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] text-slate-950 tracking-tight">
-          Mercury in <span className="text-emerald-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-300 font-light italic">Rising</span>
+          Mercury in <span className="text-emerald-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-550 font-light italic">Rising (Lagna)</span>
         </h1>
 
         <VedicNote />

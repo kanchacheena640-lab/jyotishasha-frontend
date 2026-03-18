@@ -85,7 +85,7 @@ export default async function JupiterTransitHousePage({
 
         {/* H1 - High Authority */}
         <h1 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] text-slate-950 tracking-tight">
-          Jupiter in <span className="text-amber-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-300 font-light italic">Rising</span>
+          Jupiter in <span className="text-amber-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-550 font-light italic">Rising (Lagna)</span>
         </h1>
 
         <VedicNote />

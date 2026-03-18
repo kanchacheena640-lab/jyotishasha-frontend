@@ -85,7 +85,7 @@ export default async function SunTransitHousePage({
 
         {/* H1 - Solar Authority */}
         <h1 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] text-slate-950 tracking-tight text-balance">
-          Sun in <span className="text-amber-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-300 font-light italic text-2xl md:text-4xl block md:inline">Rising</span>
+          Sun in <span className="text-amber-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-550 font-light italic text-2xl md:text-4xl block md:inline">Rising</span>
         </h1>
 
         <VedicNote />

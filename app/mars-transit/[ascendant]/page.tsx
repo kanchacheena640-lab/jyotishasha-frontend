@@ -98,7 +98,7 @@ export default async function MarsTransitAscendantPage({ params, searchParams }:
         {/* Header Section */}
         <header className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b pb-6">
           <h1 className="text-3xl md:text-5xl font-black leading-tight text-slate-950 tracking-tight">
-            Mars Transit {currentYear} for <span className="text-red-600">{ascName}</span> <span className="text-slate-300 font-light italic text-2xl md:text-3xl block md:inline">Rising</span>
+            Mars Transit {currentYear} for <span className="text-red-600">{ascName}</span> <span className="text-slate-550 font-light italic text-2xl md:text-3xl block md:inline">Rising</span>
           </h1>
           <Link href="/mars-transit" className="text-sm font-bold text-red-700 uppercase tracking-widest hover:underline flex items-center gap-1">
             ← Back to Mars Hub

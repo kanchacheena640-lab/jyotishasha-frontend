@@ -62,7 +62,7 @@ export default function AscendantTransitCards({
 
                 {/* Visible Rising Text Fix */}
                 <h3 className="font-black text-2xl mb-3 text-slate-900 group-hover:text-blue-700 transition-colors">
-                  {asc} <span className="text-slate-500 font-medium italic">Rising</span>
+                  {asc} <span className="text-slate-500 font-medium italic">Rising (Lagna)</span>
                 </h3>
 
                 {/* Pure English Content */}

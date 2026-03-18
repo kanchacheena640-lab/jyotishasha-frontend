@@ -85,7 +85,7 @@ export default async function MoonTransitHousePage({
 
         {/* H1 - Intuitive Authority */}
         <h1 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] text-slate-950 tracking-tight">
-          Moon in <span className="text-indigo-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-300 font-light italic">Rising</span>
+          Moon in <span className="text-indigo-600">{houseNum} House</span> for {ascTitle} <span className="text-slate-550 font-light italic">Rising (Lagna)</span>
         </h1>
 
         <VedicNote />
