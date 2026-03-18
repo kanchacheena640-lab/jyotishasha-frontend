@@ -211,6 +211,16 @@ export default async function KetuTransitAscendantPage({
         {/* Global Trust Box */}
         <VedicNote />
 
+        {/* ✅ Visual Chart Integration - Snapshot Section se pehle */}
+        <div className="my-10">
+          <DynamicTransitChart 
+            ascendant={ascendant} 
+            activePlanet="ketu" 
+            house={currentHouse} // Yeh current house positions se calculate ho raha hai
+            size={340}
+          />
+        </div>
+
         {/* ✅ STEP 2: INTRO REPLACEMENT (Keyword Density Boost) */}
         <div className="prose prose-slate max-w-none mb-10">
           <p className="text-lg text-slate-700 leading-relaxed font-medium mb-4">
@@ -235,15 +245,7 @@ export default async function KetuTransitAscendantPage({
         </p>
         </div>
 
-        {/* ✅ Visual Chart Integration - Snapshot Section se pehle */}
-        <div className="my-10">
-          <DynamicTransitChart 
-            ascendant={ascendant} 
-            activePlanet="ketu" 
-            house={currentHouse} // Yeh current house positions se calculate ho raha hai
-            size={340}
-          />
-        </div>
+        
 
         {/* Snapshot Section */}
         <section className="bg-slate-900 rounded-2xl p-8 mb-16 text-white shadow-xl relative overflow-hidden">

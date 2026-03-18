@@ -111,6 +111,12 @@ export default async function KetuTransitHousePage({
         {/* Vedic Disclaimer (For USA Traffic) */}
         <VedicNote />
 
+        <DynamicTransitChart 
+          ascendant={params.ascendant} 
+          activePlanet="ketu" 
+          house={houseNum} 
+        />
+
         {/* ✅ STEP 2: Intro Replacement (Modern & Balanced Tone) */}
         <div className="mb-10">
           <p className="text-lg leading-relaxed text-slate-700">
@@ -119,12 +125,6 @@ export default async function KetuTransitHousePage({
             This phase often changes how you perceive situations, respond emotionally, and engage with this domain, pushing you toward clarity beyond surface-level attachments.
           </p>
         </div>
-        
-        <DynamicTransitChart 
-          ascendant={params.ascendant} 
-          activePlanet="ketu" 
-          house={houseNum} 
-        />
 
         {/* SECTIONS */}
         <div className="space-y-10">
