@@ -212,10 +212,16 @@ export default async function KetuTransitAscendantPage({
 
         {/* ✅ STEP 2: INTRO REPLACEMENT (Keyword Density Boost) */}
         <div className="prose prose-slate max-w-none mb-10">
-          <p className="text-lg text-slate-700 leading-relaxed font-medium">
+          <p className="text-lg text-slate-700 leading-relaxed font-medium mb-4">
             Ketu transit {currentYear} (South Node transit) for {ascName} ascendant marks a subtle yet meaningful shift in your life direction.
+          </p>
 
-            In this phase, Ketu — the planet of intuition and detachment — is moving from {previousRashi} to {currentRashi}, shifting from your {previousHouse} house to the {currentHouse} house.
+          <h2 className="text-2xl font-bold text-blue-900 mb-4">
+            Ketu Transit Shift: {previousRashi} → {currentRashi}
+          </h2>
+
+          <p className="text-lg text-slate-700 leading-relaxed font-medium">
+            In this phase, Ketu — the planet of intuition and detachment — is moving from {previousRashi} to {currentRashi}, shifting from your {previousHouse} house to the {currentHouse} house. 
 
             As a result, patterns related to <strong>{KETU_HOUSE_TRAITS[previousHouse]}</strong> begin to fade, while themes connected to <strong>{KETU_HOUSE_TRAITS[currentHouse]}</strong> become more prominent in your experience.
 
@@ -268,16 +274,6 @@ export default async function KetuTransitAscendantPage({
         {/* CURRENT TRANSIT + INSIGHT */}
         <section className="mb-12 p-8 bg-slate-50 rounded-2xl">
 
-          {/* SEO HEADING */}
-          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-blue-900 mb-4">
-              Ketu in {currentRashi} for {ascName} Ascendant
-            </h2>
-
-            <p className="text-slate-700 leading-relaxed">
-              {initialData?.summary}
-            </p>
-          </div>
 
           {/* WHY BLOCK */}
           <h2 className="text-2xl font-bold mb-4">
