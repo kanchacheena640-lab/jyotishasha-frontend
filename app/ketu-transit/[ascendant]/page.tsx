@@ -246,7 +246,7 @@ export default async function KetuTransitAscendantPage({
 
             <div>
               <p className="text-slate-500 uppercase font-bold text-[10px] tracking-widest mb-1">Current Sign</p>
-              <p className="text-lg">{ketuPos?.rashi || "-"}</p>
+              <p className="text-lg">{currentRashi}</p>
             </div>
 
             <div>
@@ -281,11 +281,15 @@ export default async function KetuTransitAscendantPage({
 
           {/* WHY BLOCK */}
           <h2 className="text-2xl font-bold mb-4">
-            Why This Ketu Transit Matters
+            Ketu in {currentRashi} for {ascName} Ascendant – What It Means
           </h2>
 
           <p className="text-slate-700 leading-relaxed">
-            Ketu transit effects are deeply psychological. For {ascName} ascendant, this phase may reduce external clarity but increase inner awareness. It is a time to release patterns, detach from unnecessary noise, and focus on meaningful growth.
+            For {ascName} ascendant, Ketu in {currentRashi} primarily influences the {currentHouse} house of your chart.
+
+            This placement highlights themes related to <strong>{KETU_HOUSE_TRAITS[currentHouse]}</strong>, bringing a sense of detachment, internal shift, and karmic realignment in this area of life.
+
+            Rather than creating direct external results, Ketu operates subtly — helping you release control, rethink priorities, and develop a deeper understanding of your experiences.
           </p>
 
         </section>
