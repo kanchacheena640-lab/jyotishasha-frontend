@@ -71,12 +71,12 @@ export default function AscendantTransitCards({
                 </p>
               </div>
 
-              {/* Modern CTA - Optimized for Ascendant Hub Navigation */}
+              {/* Modern Dynamic CTA - User ko uske specific House ke liye attract karne ke liye */}
               <Link
-                href={`/${planetSlug}/${slug}`}
+                href={`/${planetSlug}/${slug}/house/${house}`}
                 className="w-full text-center py-4 bg-white border-2 border-slate-900 text-slate-900 text-[11px] font-black rounded-2xl hover:bg-slate-900 hover:text-white transition-all duration-300 uppercase tracking-[0.2em] relative z-10"
               >
-                Full {asc} Forecast →
+                Check House {house} Impact →
               </Link>
             </article>
           );
