@@ -1,0 +1,408 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
+import VedicNote from "@/components/VedicNote";
+import DynamicTransitChart from "@/components/DynamicTransitChart";
+
+export const revalidate = 3600;
+
+const currentYear = new Date().getFullYear();
+
+/* ---------------- Configuration ---------------- */
+const ASCENDANTS = [
+  "aries", "taurus", "gemini", "cancer", "leo", "virgo",
+  "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces",
+] as const;
+
+type AscendantSlug = (typeof ASCENDANTS)[number];
+
+const RASHI_HI_MAP: Record<string, string> = {
+  Aries: "मेष",
+  Taurus: "वृषभ",
+  Gemini: "मिथुन",
+  Cancer: "कर्क",
+  Leo: "सिंह",
+  Virgo: "कन्या",
+  Libra: "तुला",
+  Scorpio: "वृश्चिक",
+  Sagittarius: "धनु",
+  Capricorn: "मकर",
+  Aquarius: "कुंभ",
+  Pisces: "मीन",
+};
+
+const SUN_HOUSE_TRAITS_EN: Record<number, string> = {
+  1: "confidence boost, physical vitality, leadership focus",
+  2: "financial authority, family leadership, authoritative speech",
+  3: "courageous initiatives, effective communication, short travels for work",
+  4: "domestic leadership, focus on home and property, inner strength",
+  5: "creative recognition, romantic confidence, focus on progeny",
+  6: "victory over hurdles, disciplined health, professional authority",
+  7: "focus on partnerships, social recognition, dynamic public image",
+  8: "deep self-discovery, sudden transformations, occult research",
+  9: "spiritual leadership, higher learning, travel for purpose",
+  10: "career peak, public status, high-level professional authority",
+  11: "social influence, networking with authority, gain fulfillment",
+  12: "subconscious clarity, spiritual solitude, foreign recognition",
+};
+
+const SUN_HOUSE_TRAITS_HI: Record<number, string> = {
+  1: "आत्मविश्वास वृद्धि, शारीरिक ऊर्जा, नेतृत्व फोकस",
+  2: "वित्तीय अधिकार, पारिवारिक नेतृत्व, प्रामाणिक वाणी",
+  3: "साहसिक पहल, प्रभावी संचार, कार्य के लिए छोटी यात्राएँ",
+  4: "घरेलू नेतृत्व, घर और संपत्ति पर फोकस, आंतरिक शक्ति",
+  5: "रचनात्मक मान्यता, रोमांटिक आत्मविश्वास, संतान पर फोकस",
+  6: "बाधाओं पर विजय, अनुशासित स्वास्थ्य, व्यावसायिक अधिकार",
+  7: "साझेदारी पर फोकस, सामाजिक मान्यता, गतिशील सार्वजनिक छवि",
+  8: "गहन आत्म-खोज, अचानक परिवर्तन, गूढ़ अनुसंधान",
+  9: "आध्यात्मिक नेतृत्व, उच्च शिक्षा, उद्देश्य के लिए यात्रा",
+  10: "करियर चरम, सार्वजनिक स्थिति, उच्च-स्तरीय व्यावसायिक अधिकार",
+  11: "सामाजिक प्रभाव, अधिकार के साथ नेटवर्किंग, लाभ पूर्ति",
+  12: "अवचेतन स्पष्टता, आध्यात्मिक एकांत, विदेशी मान्यता",
+};
+
+const RASHI_INDEX: Record<string, number> = {
+  Aries: 1, Taurus: 2, Gemini: 3, Cancer: 4, Leo: 5, Virgo: 6,
+  Libra: 7, Scorpio: 8, Sagittarius: 9, Capricorn: 10, Aquarius: 11, Pisces: 12,
+};
+
+const RASHIS = ["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+
+function isValidAscendant(a: string): a is AscendantSlug {
+  return ASCENDANTS.includes(a as AscendantSlug);
+}
+
+function titleCase(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function getHouse(asc: string, rashi: string) {
+  const ascIndex = RASHI_INDEX[titleCase(asc)] || 1;
+  const rashiIndex = RASHI_INDEX[rashi] || 1;
+  return ((rashiIndex - ascIndex + 12) % 12) + 1;
+}
+
+function getRashiName(rashi: string | undefined, rashi_hi: string | null | undefined, isHi: boolean) {
+  if (!rashi) return isHi ? "अज्ञात" : "Unknown";
+  if (!isHi) return rashi; // English: Aries
+  return rashi_hi || RASHI_HI_MAP[rashi] || rashi; // Hindi: मेष
+}
+
+function getMotion(motion: string | undefined, isHi: boolean) {
+  if (!motion) return isHi ? "मार्गी" : "Direct";
+  if (!isHi) return motion;
+  if (motion === "Direct") return "मार्गी";
+  if (motion === "Retrograde") return "वक्री";
+  return motion;
+}
+
+function formatDate(dateStr?: string) {
+  if (!dateStr) return "-";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+/* ---------------- Data Fetch ---------------- */
+async function fetchSunCurrent(lang: string) {
+  const res = await fetch(
+    `https://jyotishasha-backend.onrender.com/api/transit/current?lang=${lang}`,
+    { next: { revalidate: 3600 } }
+  );
+  if (!res.ok) return null;
+  return res.json();
+}
+
+async function fetchTransitContent({
+  ascendant,
+  planet,
+  house,
+  lang,
+}: {
+  ascendant: string;
+  planet: string;
+  house: number;
+  lang: "en" | "hi";
+}) {
+  const url = `https://jyotishasha-backend.onrender.com/api/transit?ascendant=${encodeURIComponent(ascendant)}&planet=${encodeURIComponent(planet)}&house=${house}&lang=${lang}`;
+  const res = await fetch(url, { next: { revalidate: 3600 } });
+  return res.ok ? res.json() : null;
+}
+
+export async function generateStaticParams() {
+  return ASCENDANTS.map((ascendant) => ({ ascendant }));
+}
+
+/* ---------------- Metadata ---------------- */
+export async function generateMetadata({
+  params,
+}: {
+  params: { ascendant: string; locale?: string };
+}): Promise<Metadata> {
+  const asc = params.ascendant?.toLowerCase();
+  if (!asc || !isValidAscendant(asc)) {
+    return { title: "Not Found", robots: { index: false } };
+  }
+  const ascName = titleCase(asc);
+  const locale = params.locale || "en";
+  const isHi = locale === "hi";
+
+  return {
+    title: isHi
+      ? `सूर्य गोचर ${currentYear} ${ascName} लग्न के लिए – जीवन ऊर्जा और नेतृत्व`
+      : `Sun Transit ${currentYear} for ${ascName} Rising – Vitality & Leadership`,
+    description: isHi
+      ? `${ascName} लग्न के लिए सूर्य गोचर ${currentYear} में आत्मविश्वास, करियर और जीवन ऊर्जा पर घर-वार विस्तृत वैदिक विश्लेषण।`
+      : `Detailed house-wise effects of Sun (Surya) transit ${currentYear} for ${ascName} Rising. Vedic insights on confidence, leadership, vitality, and authority.`,
+    alternates: {
+      canonical: `https://www.jyotishasha.com/sun-transit/${asc}`,
+    },
+  };
+}
+
+/* ---------------- Page ---------------- */
+export default async function SunTransitAscendantPage({
+  params,
+  searchParams,
+}: {
+  params: { ascendant: string; locale?: string };
+  searchParams?: { lang?: string; house?: string };
+}) {
+  const ascendant = params.ascendant?.toLowerCase();
+  if (!ascendant || !isValidAscendant(ascendant)) notFound();
+
+  const locale = params.locale || "en";
+  const lang: "en" | "hi" = locale === "hi" ? "hi" : "en";
+  const isHi = lang === "hi";
+
+  const rawHouse = searchParams?.house ? Number(searchParams.house) : 1;
+  const initialHouse = rawHouse >= 1 && rawHouse <= 12 ? rawHouse : 1;
+
+  const current = await fetchSunCurrent(lang);
+  if (!current) notFound();
+
+  const sunPos = current.positions?.Sun;
+  if (!sunPos) notFound();
+
+  const sunFuture = current.future_transits?.Sun || [];
+  const currentTransit = sunFuture[0];
+
+  const rashiName = getRashiName(sunPos.rashi, sunPos.rashi_hi, isHi);
+  const motion = getMotion(sunPos.motion, isHi);
+
+  const ascName = titleCase(ascendant);
+  const currentRashi = sunPos.rashi || "Aries";
+  const currentHouse = getHouse(ascName, currentRashi);
+
+  const currentIndex = Math.max(0, RASHIS.indexOf(currentRashi));
+  const previousRashi =
+    currentIndex === 0 ? RASHIS[11] : RASHIS[currentIndex - 1];
+
+  const previousHouse = getHouse(ascName, previousRashi);
+
+  const initialData = await fetchTransitContent({
+    ascendant,
+    planet: "sun",
+    house: initialHouse,
+    lang,
+  });
+
+  const houseTraits = isHi ? SUN_HOUSE_TRAITS_HI : SUN_HOUSE_TRAITS_EN;
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: isHi
+          ? `सूर्य गोचर ${currentYear} ${ascName} लग्न को कैसे प्रभावित करेगा?`
+          : `How does Sun transit ${currentYear} affect ${ascName} Ascendant?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: isHi
+            ? `${ascName} लग्न के लिए सूर्य का ${currentRashi} में गोचर ${currentHouse}वें भाव में आत्मविश्वास और नेतृत्व को सक्रिय करता है।`
+            : `For ${ascName} Rising, the Sun in ${currentRashi} activates the ${currentHouse} house of your chart, focusing on leadership and self-expression.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: isHi ? "सूर्य गोचर कितने समय तक रहता है?" : "How long does Sun transit last?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: isHi
+            ? "सूर्य हर राशि में लगभग एक महीना रहता है। यह मासिक आत्म-शक्ति और सामाजिक स्थिति को प्रभावित करता है।"
+            : "The Sun stays in one sign for approximately one month. It influences monthly self-power, authority, and social status.",
+        },
+      },
+    ],
+  };
+
+  return (
+    <div className="bg-gradient-to-b from-slate-900 to-amber-950/20 py-16 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 border border-slate-100 overflow-hidden relative">
+
+        {/* Header */}
+        <header className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b pb-6">
+          <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-950 tracking-tight">
+            {isHi ? (
+              <>
+                सूर्य गोचर {currentYear} {ascName} लग्न के लिए –{" "}
+                <span className="text-amber-600">जीवन ऊर्जा और नेतृत्व</span>
+              </>
+            ) : (
+              <>
+                Sun Transit {currentYear} for {ascName} Rising –{" "}
+                <span className="text-amber-600">Vitality & Leadership</span>
+              </>
+            )}
+          </h1>
+          <Link
+            href={`/${isHi ? "hi/" : ""}sun-transit`}
+            className="text-sm font-bold text-amber-700 uppercase tracking-widest hover:underline flex items-center gap-1"
+          >
+            ← {isHi ? "सूर्य हब" : "Sun Hub"}
+          </Link>
+        </header>
+
+        <VedicNote lang={lang} />
+
+        {/* Dynamic Chart */}
+        <div className="my-12 flex justify-center">
+          <DynamicTransitChart
+            ascendant={ascendant}
+            activePlanet="sun"
+            house={currentHouse}
+            size={340}
+          />
+        </div>
+
+        {/* Intro */}
+        <div className="prose prose-slate max-w-none mb-10">
+          <p className="text-lg text-slate-700 leading-relaxed font-medium mb-4">
+            {isHi ? (
+              <>सूर्य गोचर {currentYear} ({ascName} लग्न) में <strong>नेतृत्व और जीवन ऊर्जा</strong> का शक्तिशाली मासिक चक्र आता है।</>
+            ) : (
+              <>The Sun transit {currentYear} ({ascName} Rising) marks a powerful month of <strong>leadership and vital energy</strong>.</>
+            )}
+          </p>
+
+          <h2 className="text-2xl font-bold text-amber-900 mb-4">
+            {isHi ? "सौर शिफ्ट" : "Solar Shift"}: {previousRashi} → {currentRashi}
+          </h2>
+
+          <p className="text-lg text-slate-700 leading-relaxed font-medium">
+            {isHi ? (
+              <>
+                सूर्य {previousRashi} से {currentRashi} की ओर जा रहा है, जिससे प्रभाव {previousHouse}वें भाव से <strong>{currentHouse}वें भाव</strong> में शिफ्ट हो रहा है।
+                <br /><br />
+                पहले {SUN_HOUSE_TRAITS_HI[previousHouse]} पर फोकस था, अब <strong>{SUN_HOUSE_TRAITS_HI[currentHouse]}</strong> से जुड़े विषय प्रमुख होंगे। यह समय चमकने और जिम्मेदारी लेने का है।
+              </>
+            ) : (
+              <>
+                The Sun moves from your {previousHouse} house to the <strong>{currentHouse} house</strong>.
+                <br /><br />
+                Your path of self-expression shifts from <strong>{SUN_HOUSE_TRAITS_EN[previousHouse]}</strong> toward the core themes of <strong>{SUN_HOUSE_TRAITS_EN[currentHouse]}</strong>. This is your time to shine and take responsibility.
+              </>
+            )}
+          </p>
+        </div>
+
+        {/* Snapshot */}
+        <section className="bg-slate-900 rounded-[2rem] p-8 mb-16 text-white shadow-xl relative overflow-hidden border border-white/5">
+          <div className="absolute top-0 right-0 p-4 opacity-5">
+            <span className="text-8xl font-black italic">Surya</span>
+          </div>
+
+          <h2 className="text-xl font-bold mb-6 text-amber-400 flex items-center gap-2 uppercase tracking-tighter">
+            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+            {isHi ? "सूर्य गोचर स्थिति" : "Solar Transit Snapshot"}
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm relative z-10 font-medium">
+            <div>
+              <p className="text-slate-500 uppercase font-bold text-[10px] tracking-widest mb-1">
+                {isHi ? "वर्तमान राशि" : "Transit Sign"}
+              </p>
+              <p className="text-lg font-bold">{currentRashi}</p>
+            </div>
+
+            <div>
+              <p className="text-slate-500 uppercase font-bold text-[10px] tracking-widest mb-1">
+                {isHi ? "प्रभावित भाव" : "Impact House"}
+              </p>
+              <p className="text-lg text-amber-400 font-bold">House {currentHouse}</p>
+            </div>
+
+            <div>
+              <p className="text-slate-500 uppercase font-bold text-[10px] tracking-widest mb-1">
+                {isHi ? "डिग्री" : "Exact Degree"}
+              </p>
+              <p className="text-lg">{sunPos?.degree ? `${sunPos.degree}°` : "-"}</p>
+            </div>
+
+            <div>
+              <p className="text-slate-500 uppercase font-bold text-[10px] tracking-widest mb-1">
+                {isHi ? "समय अवधि" : "Period"}
+              </p>
+              <p className="text-[11px] font-bold text-slate-200">
+                {formatDate(currentTransit?.entering_date)} – {formatDate(currentTransit?.exit_date)}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Client Component */}
+        <div className="mb-20">
+          <AscendantSunTransitClient
+            ascendant={ascendant}
+            planet="sun"
+            lang={lang}
+            initialHouse={initialHouse}
+            initialData={initialData}
+          />
+        </div>
+
+        {/* House Grid */}
+        <section className="mt-20 border-t pt-12">
+          <h2 className="text-3xl font-black mb-8 text-slate-950">
+            {isHi ? `${ascName} लग्न के लिए हर भाव का फल` : `${ascName} Rising Solar Path for Every House`}
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
+              <Link
+                key={h}
+                href={`/sun-transit/${ascendant}?house=${h}`}
+                className="group p-5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-amber-500 hover:bg-white transition-all shadow-sm"
+              >
+                <p className="text-[10px] font-black text-amber-600 uppercase mb-1 tracking-tighter">
+                  {isHi ? "भाव" : "Vitality Focus"} {h}
+                </p>
+                <p className="text-xl font-black text-slate-800 group-hover:text-amber-700 tracking-tight">
+                  {isHi ? "प्रभाव देखें" : "House"} {h}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer Silos */}
+        <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-amber-700 font-bold text-sm uppercase tracking-wider">
+          <Link href="/moon-transit" className="hover:underline">Moon Transit →</Link>
+          <Link href="/mars-transit" className="hover:underline">Mars Transit →</Link>
+          <Link href="/jupiter-transit" className="hover:underline">Jupiter Transit →</Link>
+        </footer>
+      </article>
+    </div>
+  );
+}

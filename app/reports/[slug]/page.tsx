@@ -4,9 +4,38 @@ import { useParams } from "next/navigation";
 import { reportsData, Report } from "../../data/reportsData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+import { useTranslation, initReactI18next } from "react-i18next";
+import i18n from "i18next";
+
+
+// Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
+if (!i18n.isInitialized) {
+  i18n.use(initReactI18next).init({
+    fallbackLng: 'en',
+    lng: 'en', // Default English
+    resources: {
+      en: { translation: {} },
+      hi: { translation: {} }
+    }
+  });
+}
+
+
+// 🚀 Helper Function: Razorpay Script Load karne ke liye
+const loadScript = (src: string) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
 
 export default function ReportCheckout() {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language?.startsWith('hi') ? 'hi' : 'en';
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -16,113 +45,93 @@ export default function ReportCheckout() {
     pob: "",
     latitude: "",
     longitude: "",
-    language: "en", // ✅ Default English
+    language: currentLang,
   });
 
+  const [isProcessing, setIsProcessing] = useState(false); // 🚨 Button state ke liye
   const placeRef = useRef<HTMLInputElement | null>(null);
-
-  // 🌍 Google Places Autocomplete for POB
-      useEffect(() => {
-      if (!placeRef.current) return;
-
-      const interval = setInterval(() => {
-        if ((window as any).google?.maps) {
-          clearInterval(interval);
-
-          const input = placeRef.current!;
-          const autocomplete = new (window as any).google.maps.places.Autocomplete(input, {
-            types: ["(cities)"],
-          });
-
-          autocomplete.addListener("place_changed", () => {
-            const place = autocomplete.getPlace();
-            setForm((prev) => ({
-              ...prev,
-              pob: place.name || "",
-              latitude: place.geometry?.location?.lat()?.toString() || "",
-              longitude: place.geometry?.location?.lng()?.toString() || "",
-            }));
-          });
-        }
-      }, 300);
-
-      return () => clearInterval(interval);
-    }, [placeRef]);
-
-  // ⏳ Warmup ping to wake backend
-  useEffect(() => {
-    fetch("https://jyotishasha-backend.onrender.com/ping").catch(() => {});
-  }, []);
-
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  // 🔎 Slug + Product Info
   const params = useParams();
-  const rawSlug = params?.slug;
-  const productId = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug?.toLowerCase();
+  const productId = params?.slug as string;
   const currentReport = reportsData.find((r: Report) => r.slug === productId);
   const price = currentReport?.price || 0;
-  const displaySlug = Array.isArray(rawSlug)
-    ? rawSlug.join(" ")
-    : rawSlug?.replace(/-/g, " ") ?? "your report";
 
-  // 💳 Razorpay Checkout (LIVE version logic)
+  // 🌍 Google Places Autocomplete logic
+  useEffect(() => {
+    if (!placeRef.current) return;
+    const interval = setInterval(() => {
+      if ((window as any).google?.maps) {
+        clearInterval(interval);
+        const autocomplete = new (window as any).google.maps.places.Autocomplete(placeRef.current!, {
+          types: ["(cities)"],
+        });
+        autocomplete.addListener("place_changed", () => {
+          const place = autocomplete.getPlace();
+          setForm((prev) => ({
+            ...prev,
+            pob: place.name || "",
+            latitude: place.geometry?.location?.lat()?.toString() || "",
+            longitude: place.geometry?.location?.lng()?.toString() || "",
+          }));
+        });
+      }
+    }, 300);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleChange = (e: any) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  // 💰 The Real Razorpay Logic connected to Flask Backend
   const handleSubmit = async () => {
-    if (!form.email || !form.dob || !form.tob || !form.pob) {
-      alert("❗ Please fill all required fields (Email, DOB, TOB, POB)");
+    if (!form.email || !form.dob || !form.tob || !form.pob || !form.name || !form.phone) {
+      alert(currentLang === 'hi' ? "❗ कृपया सभी अनिवार्य जानकारी भरें" : "❗ Please fill all required fields");
       return;
     }
-    if (!form.latitude || !form.longitude) {
-      alert("❗ Please select Place of Birth from suggestions");
-      return;
-    }
+
+    setIsProcessing(true); // Button ko disable/loading state me daalo
 
     try {
-      if (!productId) {
-        alert("❗ Product not specified in URL. Please try again.");
+      // Step 1: Load Razorpay SDK
+      const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+      if (!res) {
+        alert(currentLang === 'hi' ? "पेमेंट गेटवे लोड नहीं हो सका। कृपया इंटरनेट जांचें।" : "Failed to load Razorpay SDK. Check your internet.");
+        setIsProcessing(false);
         return;
       }
 
-      // ✅ Backend decides amount
-      const res = await fetch(
-        "https://jyotishasha-backend.onrender.com/api/razorpay-order",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product: productId }),
-        }
-      );
+      // Step 2: Create Order via Flask Backend (Port 5000)
+      const base = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+      
+      const orderResponse = await fetch(`${base}/api/razorpay-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // 🚨 Sirf 'product' bhej rahe hain (amount Flask khud handle karega)
+        body: JSON.stringify({ product: productId }), 
+      });
 
-      const orderData = await res.json();
+      const orderData = await orderResponse.json();
 
-      if (!res.ok || !orderData.order_id) {
-        alert("❌ Failed to create Razorpay order");
+      // 🚨 Flask 'order_id' bhej raha hai, 'id' nahi
+      if (!orderData.order_id) {
+        alert(`Server error: ${orderData.error || "Order ID not generated!"}`);
+        setIsProcessing(false);
         return;
       }
 
+      // Step 3: Open Razorpay Popup
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: orderData.amount * 100, // ✅ paise me convert
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // 🚨 Test key aapki .env me honi chahiye
+        amount: orderData.amount * 100, // Razorpay ko paise (paise) mein chahiye hota hai
         currency: orderData.currency,
         name: "Jyotishasha",
-        description: `Payment for ${productId}`,
-        order_id: orderData.order_id,
+        description: `${currentReport?.title?.en || "Astrology"} Report`,
+        order_id: orderData.order_id, // 🚨 Updated parameter
         handler: async function (response: any) {
-          await fetch("https://jyotishasha-backend.onrender.com/webhook", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              ...form,
-              product: productId,
-              payment_id: response.razorpay_payment_id,
-              order_id: response.razorpay_order_id,
-            }),
-          });
-
-          // ✅ Direct thank-you page
-          window.location.href = "/thank-you";
+          // Payment Success hone ke baad ka logic
+          alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+          console.log("Save this to DB:", { ...form, paymentId: response.razorpay_payment_id });
+          
+          // Redirect to success page:
+          // window.location.href = "/payment-success";
         },
         prefill: {
           name: form.name,
@@ -130,99 +139,69 @@ export default function ReportCheckout() {
           contact: form.phone,
         },
         theme: {
-          color: "#7c3aed",
+          color: "#7e22ce", // Purple theme
         },
       };
 
-      const razorpay = new (window as any).Razorpay(options);
-      razorpay.open();
+      const paymentObject = new (window as any).Razorpay(options);
+      
+      paymentObject.on('payment.failed', function (response: any) {
+        alert("Payment Failed. Reason: " + response.error.description);
+      });
+
+      paymentObject.open();
+
     } catch (error) {
-      console.error("Payment error:", error);
-      alert("Something went wrong while processing payment.");
+      console.error("Payment Error:", error);
+      alert("Something went wrong during payment initialization.");
+    } finally {
+      setIsProcessing(false);
     }
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
-        Fill Your Details for {displaySlug}
+    <div className="max-w-xl mx-auto px-4 py-10 font-sans">
+      <h2 className="text-2xl font-bold mb-8 text-center text-purple-800">
+        {currentLang === 'hi' 
+          ? `${currentReport?.title?.hi || "रिपोर्ट"} के लिए विवरण भरें` 
+          : `Fill Details for ${currentReport?.title?.en || "Report"}`}
       </h2>
 
-      {/* 👤 Personal Info */}
-      <div className="bg-white p-5 rounded-xl shadow mb-4">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">
-          👤 Personal Details
+      {/* 👤 Personal Details Section */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-50 mb-6">
+        <h3 className="text-lg font-bold mb-4 text-purple-700 border-b pb-2">
+          👤 {currentLang === 'hi' ? "व्यक्तिगत विवरण" : "Personal Details"}
         </h3>
-        <div className="space-y-3">
-          <input
-            name="name"
-            type="text"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Full Name"
-            className="inputStyle placeholderStyle"
-          />
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Email Address"
-            className="inputStyle placeholderStyle"
-            required
-          />
-          <input
-            name="phone"
-            type="tel"
-            value={form.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="inputStyle placeholderStyle"
-          />
+        <div className="space-y-4">
+          <input name="name" value={form.name} onChange={handleChange} placeholder={currentLang === 'hi' ? "पूरा नाम *" : "Full Name *"} className="inputStyle" required />
+          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email Address *" className="inputStyle" required />
+          <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder={currentLang === 'hi' ? "फ़ोन नंबर *" : "Phone Number *"} className="inputStyle" required />
         </div>
       </div>
 
-      {/* 🔮 Birth Info */}
-      <div className="bg-white p-5 rounded-xl shadow mb-5">
-        <h3 className="text-lg font-semibold mb-3 text-purple-700">
-          🔮 Birth Details
+      {/* 🔮 Birth Details Section */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-50 mb-8">
+        <h3 className="text-lg font-bold mb-4 text-purple-700 border-b pb-2">
+          🔮 {currentLang === 'hi' ? "जन्म विवरण" : "Birth Details"}
         </h3>
-        <div className="space-y-3">
+        <div className="space-y-4">
+          
           {/* Date of Birth */}
-          <div className="relative mb-3">
-            <label className="block mb-1 text-sm font-semibold text-gray-700">
-              Date of Birth *
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">
+              {currentLang === 'hi' ? "जन्म तिथि *" : "Date of Birth *"}
             </label>
             <DatePicker
               selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
               onChange={(date: Date | null) => {
                 if (date) {
-                  const year = date.getFullYear();
-                  const month = String(date.getMonth() + 1).padStart(2, "0");
-                  const day = String(date.getDate()).padStart(2, "0");
-                  const formatted = `${year}-${month}-${day}`;
-                  setForm((prev) => ({ ...prev, dob: formatted }));
-                } else {
-                  setForm((prev) => ({ ...prev, dob: "" }));
+                  const formatted = date.toISOString().split('T')[0];
+                  setForm(prev => ({ ...prev, dob: formatted }));
                 }
               }}
-              customInput={
-                <div className="relative">
-                  <input
-                    readOnly
-                    value={form.dob}
-                    className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
-                  />
-                  {!form.dob && (
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">
-                      DD-MM-YYYY
-                    </span>
-                  )}
-                </div>
-              }
               dateFormat="dd-MM-yyyy"
-              isClearable
-              withPortal
+              className="inputStyle text-gray-900 w-full bg-white px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholderText="DD-MM-YYYY"
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"
@@ -230,89 +209,60 @@ export default function ReportCheckout() {
           </div>
 
           {/* Time of Birth */}
-          <div className="relative mb-3">
-            <label className="block mb-1 text-sm font-semibold text-gray-700">
-              Time of Birth *
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">
+              {currentLang === 'hi' ? "जन्म का समय *" : "Time of Birth *"}
             </label>
-            <input
-              type="time"
-              name="tob"
-              value={form.tob}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-300"
-              required
-            />
-            {!form.tob && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">
-                HH:MM
-              </span>
-            )}
+            <input type="time" name="tob" value={form.tob} onChange={handleChange} className="inputStyle" required />
           </div>
 
           {/* Place of Birth */}
-          <div className="relative mb-3">
-            <label className="block mb-1 text-sm font-semibold text-gray-700">
-              Place of Birth *
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">
+              {currentLang === 'hi' ? "जन्म स्थान *" : "Place of Birth *"}
             </label>
-            <input
-              name="pob"
-              type="text"
-              ref={placeRef}
-              value={form.pob}
-              onChange={handleChange}
-              placeholder="Select City"
-              className="inputStyle placeholderStyle"
-              required
-            />
+            <input ref={placeRef} name="pob" value={form.pob} onChange={handleChange} placeholder={currentLang === 'hi' ? "शहर चुनें" : "Search City"} className="inputStyle text-gray-900" required />
           </div>
 
-          {/* Language */}
-          <div className="relative mb-3">
-            <label className="block mb-1 text-sm font-semibold text-gray-700">
-              Language
+          {/* Report Language Selection */}
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">
+              {currentLang === 'hi' ? "रिपोर्ट की भाषा" : "Report Language"}
             </label>
-            <select
-              name="language"
-              value={form.language}
-              onChange={handleChange}
-              className="inputStyle"
-            >
+            <select name="language" value={form.language} onChange={handleChange} className="inputStyle">
               <option value="en">English</option>
               <option value="hi">हिंदी</option>
             </select>
           </div>
         </div>
-        <p className="text-xs text-gray-500 mt-2">
-          🔄 Change details if you're looking for other birth info
-        </p>
       </div>
 
-      
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-purple-700 text-white py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+      <button 
+        onClick={handleSubmit} 
+        disabled={isProcessing}
+        className={`w-full text-white py-4 rounded-xl font-bold text-lg shadow-xl transition-all active:scale-95 ${
+          isProcessing ? "bg-purple-400 cursor-not-allowed" : "bg-purple-700 hover:bg-purple-800"
+        }`}
       >
-        Proceed to Pay ₹{price}
+        {isProcessing 
+          ? (currentLang === 'hi' ? "प्रोसेस हो रहा है..." : "Processing...") 
+          : (currentLang === 'hi' ? `भुगतान करें ₹${price}` : `Proceed to Pay ₹${price}`)}
       </button>
 
       <style jsx>{`
         .inputStyle {
           width: 100%;
-          padding: 10px 12px;
-          font-size: 15px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
+          padding: 12px 16px;
+          border-radius: 12px;
+          border: 1.5px solid #e2e8f0;
           outline: none;
-          background-color: #fff;
-          color: #333;
+          transition: all 0.2s;
+          background: #fff;
+          color: #1a202c;
         }
         .inputStyle:focus {
-          border-color: #a855f7;
-          box-shadow: 0 0 0 2px #ddd6fe;
-        }
-        .placeholderStyle::placeholder {
-          color: #9ca3af !important;
-          opacity: 1;
+          border-color: #7c3aed;
+          box-shadow: 0 0 0 3px #ddd6fe;
         }
       `}</style>
     </div>

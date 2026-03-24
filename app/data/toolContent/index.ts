@@ -71,4 +71,21 @@ export const toolContentMap: Record<string, any> = {
   "business-path": businessPathContent,
   "government-job": governmentJobContent,
   "love-life": loveLifeContent,
+
+  // ✅ New: Common Metadata for /tools page
+  "all-tools": {
+    en: {
+      seo: {
+        title: "Free Astrology Tools | Jyotishasha",
+        description: "Explore free Vedic astrology tools for career, marriage, love, numerology, Panchang and life guidance.",
+      }
+    },
+    hi: {
+      seo: {
+        title: "फ्री ज्योतिष टूल्स | ज्‍योतिष आशा",
+        description: "करियर, विवाह, प्रेम, अंकज्योतिष, पंचांग और जीवन मार्गदर्शन के लिए मुफ्त वैदिक ज्योतिष टूल्स का उपयोग करें।",
+      }
+    }
+  }
+
 };

@@ -42,23 +42,23 @@ async function fetchTransitClient(args: {
 }
 
 export default function AscendantSunTransitClient(props: {
-  ascendant: string; // slug: pisces
+  ascendant: string;
   planet: string;
   lang: "en" | "hi";
   initialHouse: number;
   initialData: TransitData | null;
 }) {
+  const isHi = props.lang === "hi";
+
   const [house, setHouse] = useState<number>(props.initialHouse);
   const [data, setData] = useState<TransitData | null>(props.initialData);
   const [loading, setLoading] = useState(false);
 
   const houses = useMemo(() => Array.from({ length: 12 }, (_, i) => i + 1), []);
 
-  // If initialData is null (missing file), still allow switching houses
   useEffect(() => {
     setHouse(props.initialHouse);
     setData(props.initialData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.initialHouse, props.lang, props.ascendant]);
 
   async function onHouseChange(h: number) {
@@ -81,7 +81,9 @@ export default function AscendantSunTransitClient(props: {
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-3">
-        {titleCase(props.ascendant)} Ascendant – House-wise Effects ({titleCase(props.planet)} Transit)
+        {isHi
+          ? `${titleCase(props.ascendant)} लग्न – भाव अनुसार प्रभाव (${titleCase(props.planet)} गोचर)`
+          : `${titleCase(props.ascendant)} Ascendant – House-wise Effects (${titleCase(props.planet)} Transit)`}
       </h2>
 
       {/* House Tabs */}
@@ -95,9 +97,8 @@ export default function AscendantSunTransitClient(props: {
                 ? "bg-blue-700 text-white border-blue-700"
                 : "bg-white text-gray-800 border-gray-200 hover:border-blue-400"
             }`}
-            aria-pressed={h === house}
           >
-            House {h}
+            {isHi ? `भाव ${h}` : `House ${h}`}
           </button>
         ))}
       </div>
@@ -105,14 +106,18 @@ export default function AscendantSunTransitClient(props: {
       {/* Loading */}
       {loading && (
         <div className="bg-gray-50 border rounded-xl p-4 mb-6 text-sm text-gray-600">
-          Loading House {house} effects…
+          {isHi
+            ? `भाव ${house} का डेटा लोड हो रहा है...`
+            : `Loading House ${house} effects…`}
         </div>
       )}
 
       {/* No data */}
       {!loading && !data && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-5 text-sm text-yellow-900">
-          Content for <strong>House {house}</strong> is not available yet.
+          {isHi
+            ? `भाव ${house} का कंटेंट उपलब्ध नहीं है`
+            : `Content for House ${house} is not available yet.`}
         </div>
       )}
 
@@ -141,7 +146,9 @@ export default function AscendantSunTransitClient(props: {
           {/* Strengths / Challenges */}
           <div className="grid md:grid-cols-2 gap-4">
             <section className="border rounded-2xl p-6">
-              <h4 className="text-lg font-semibold mb-3">Strengths</h4>
+              <h4 className="text-lg font-semibold mb-3">
+                {isHi ? "ताकत" : "Strengths"}
+              </h4>
               <ul className="list-disc pl-6 space-y-1 text-gray-800">
                 {data.strengths.map((s, i) => (
                   <li key={i}>{s}</li>
@@ -150,7 +157,9 @@ export default function AscendantSunTransitClient(props: {
             </section>
 
             <section className="border rounded-2xl p-6">
-              <h4 className="text-lg font-semibold mb-3">Challenges</h4>
+              <h4 className="text-lg font-semibold mb-3">
+                {isHi ? "चुनौतियाँ" : "Challenges"}
+              </h4>
               <ul className="list-disc pl-6 space-y-1 text-gray-800">
                 {data.challenges.map((c, i) => (
                   <li key={i}>{c}</li>
@@ -161,7 +170,9 @@ export default function AscendantSunTransitClient(props: {
 
           {/* Closing */}
           <section className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
-            <h4 className="text-lg font-semibold mb-2">Key takeaway</h4>
+            <h4 className="text-lg font-semibold mb-2">
+              {isHi ? "मुख्य निष्कर्ष" : "Key takeaway"}
+            </h4>
             <p className="text-gray-900">{data.closing}</p>
           </section>
         </div>

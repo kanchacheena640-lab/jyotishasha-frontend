@@ -15,11 +15,18 @@ export interface TransitResponse {
   >;
 }
 
-export async function getTransit(): Promise<TransitResponse | null> {
+// 1. Function mein locale accept karo (default 'en')
+export async function getTransit(locale: string = 'en'): Promise<TransitResponse | null> {
   try {
-    const res = await fetch(`${BACKEND}/api/transit/current`, {
+    // 2. URL mein ?lang=${locale} jodo
+    const res = await fetch(`${BACKEND}/api/transit/current?lang=${locale}`, {
       method: "GET",
       next: { revalidate: 21600 }, // 6 hour cache
+      headers: {
+        // 3. Headers bhi update kar diye safety ke liye
+        'x-jyotishasha-lang': locale,
+        'Accept-Language': locale
+      }
     });
 
     if (!res.ok) return null;

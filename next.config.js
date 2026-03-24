@@ -1,28 +1,16 @@
-const { i18n } = require('./next-i18next.config');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  i18n,
+  // ❌ Yahan se i18n hata diya gaya hai taaki App Router ([locale]) chal sake
 
   async rewrites() {
     return [
       // ✅ Backend API proxy
       {
-        source: '/api/:path*',
-        destination: 'http://127.0.0.1:5000/api/:path*',
+        source: '/api/:path*', 
+        destination: 'https://jyotishasha-backend.onrender.com/api/:path*', 
       },
-
       // ✅ Planet → Ascendant → House rewrite (ALL planets)
-      {
-        source: '/:planet-transit/:ascendant/house-:house(\\d+)',
-        destination: '/:planet-transit/:ascendant/house/:house',
-      },
-      // ✅ Holi year rewrite
-      {
-        source: '/holi-:year',
-        destination: '/holi/:year',
-      },
-
+     
     ];
   },
 

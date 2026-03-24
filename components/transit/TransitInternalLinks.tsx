@@ -5,12 +5,16 @@ export default function TransitInternalLinks({
   planetSlug,
   ascendant,
   currentHouse,
+  lang,
 }: {
-  planetName: string;     // Mercury
-  planetSlug: string;     // mercury-transit
-  ascendant: string;      // aries
-  currentHouse: number;   // 2
+  planetName: string;
+  planetSlug: string;
+  ascendant: string;
+  currentHouse: number;
+  lang: "en" | "hi";
 }) {
+  const isHi = lang === "hi";
+
   const otherHouses = Array.from({ length: 12 }, (_, i) => i + 1).filter(
     (h) => h !== currentHouse
   );
@@ -20,43 +24,49 @@ export default function TransitInternalLinks({
 
   return (
     <section className="mt-12 border-t pt-6 space-y-6">
+      
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500">
-        <Link href={`/${planetSlug}`} className="hover:underline">
+        <Link href={`/${isHi ? "hi/" : ""}${planetSlug}`} className="hover:underline">
           {planetName} Transit
         </Link>
         {" › "}
         <Link
-          href={`/${planetSlug}/${ascendant}`}
+          href={`/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`}
           className="hover:underline"
         >
-          {ascTitle} Ascendant
+          {isHi ? `${ascTitle} लग्न` : `${ascTitle} Ascendant`}
         </Link>
-        {" › "}House {currentHouse}
+        {" › "}
+        {isHi ? `भाव ${currentHouse}` : `House ${currentHouse}`}
       </div>
 
       {/* Ascendant hub link */}
       <Link
-        href={`/${planetSlug}/${ascendant}`}
+        href={`/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`}
         className="block font-semibold text-blue-700 hover:underline"
       >
-        View all {planetName} transit effects for {ascTitle} Ascendant →
+        {isHi
+          ? `${ascTitle} लग्न के लिए सभी ${planetName} गोचर देखें →`
+          : `View all ${planetName} transit effects for ${ascTitle} Ascendant →`}
       </Link>
 
       {/* Sibling houses */}
       <div>
         <h3 className="font-semibold mb-3">
-          Other {planetName} Transit Houses for {ascTitle} Ascendant
+          {isHi
+            ? `${ascTitle} लग्न के लिए अन्य ${planetName} गोचर भाव`
+            : `Other ${planetName} Transit Houses for ${ascTitle} Ascendant`}
         </h3>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 text-sm">
           {otherHouses.map((h) => (
             <Link
               key={h}
-              href={`/${planetSlug}/${ascendant}/house-${h}`}
+              href={`/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${h}`}
               className="text-blue-700 hover:underline"
             >
-              House {h}
+              {isHi ? `भाव ${h}` : `House ${h}`}
             </Link>
           ))}
         </div>
@@ -64,11 +74,29 @@ export default function TransitInternalLinks({
 
       {/* Planet hub */}
       <p className="text-sm text-gray-600">
-        Explore complete{" "}
-        <Link href={`/${planetSlug}`} className="underline">
-          {planetName} Transit
-        </Link>{" "}
-        effects for all ascendants and houses.
+        {isHi ? (
+          <>
+            सभी लग्न और भाव के लिए{" "}
+            <Link
+              href={`/${isHi ? "hi/" : ""}${planetSlug}`}
+              className="underline"
+            >
+              {planetName} गोचर
+            </Link>{" "}
+            के प्रभाव देखें।
+          </>
+        ) : (
+          <>
+            Explore complete{" "}
+            <Link
+              href={`/${isHi ? "hi/" : ""}${planetSlug}`}
+              className="underline"
+            >
+              {planetName} Transit
+            </Link>{" "}
+            effects for all ascendants and houses.
+          </>
+        )}
       </p>
     </section>
   );

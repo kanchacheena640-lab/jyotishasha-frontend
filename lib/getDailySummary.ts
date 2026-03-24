@@ -10,14 +10,19 @@ interface HoroscopeResponse {
   }>;
 }
 
-export async function getDailySummary(): Promise<HoroscopeResponse | null> {
+// 1. Function mein locale accept karo
+export async function getDailySummary(locale: string = 'en'): Promise<HoroscopeResponse | null> {
   try {
     const res = await fetch(
-      `${BACKEND}/api/daily-horoscope-summary`,
+      // 2. URL ke peeche query parameter jodo
+      `${BACKEND}/api/daily-horoscope-summary?lang=${locale}`,
       { 
         next: { revalidate: 1800 }, // 30 मिनट का कैशिंग
         headers: {
           'Content-Type': 'application/json',
+          // 3. Header mein bhi bhasha bhej do (Safety ke liye)
+          'x-jyotishasha-lang': locale,
+          'Accept-Language': locale
         }
       }
     );

@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 type Lang = "en" | "hi";
 
@@ -10,8 +10,24 @@ interface LangCtx {
 
 const LanguageContext = createContext<LangCtx | null>(null);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>("en");
+// ✅ Badlav: Ab ye initialLocale (props) accept karega
+export function LanguageProvider({ 
+  children, 
+  initialLocale = "en" 
+}: { 
+  children: React.ReactNode; 
+  initialLocale?: string; // 👈 Error yahan se solve hoga
+}) {
+  // ✅ Logic: Agar URL mein 'hi' hai, toh wahi default set hoga
+  const [lang, setLang] = useState<Lang>((initialLocale === "hi" ? "hi" : "en") as Lang);
+
+  // Sync logic (Optional): Agar URL change ho toh state update ho jaye
+  useEffect(() => {
+    if (initialLocale === "hi" || initialLocale === "en") {
+      setLang(initialLocale as Lang);
+    }
+  }, [initialLocale]);
+
   return (
     <LanguageContext.Provider value={{ lang, setLang }}>
       {children}

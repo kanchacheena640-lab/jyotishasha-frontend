@@ -10,6 +10,8 @@ interface Props {
   panchang: any;
   transitData: any;
   events: any;
+  dict: any;   // 👈 New Prop
+  lang: string; // 👈 New Prop
 }
 
 export default function HomeAstroSlider({
@@ -17,14 +19,16 @@ export default function HomeAstroSlider({
   panchang,
   transitData,
   events,
+  dict,
+  lang,
 }: Props) {
-
   const [slide, setSlide] = useState(0);
 
+  // ✅ Wiring: Saare sub-components ko dict aur lang pass kiya
   const slides = [
-    <HomeDailyHoroscope key="horoscope" data={summary} />,
-    <HomePanchang key="panchang" data={panchang} events={events} />,
-    <HomeTransit key="transit" data={transitData} />,
+    <HomeDailyHoroscope key="horoscope" data={summary} dict={dict} lang={lang} />,
+    <HomePanchang key="panchang" data={panchang} events={events} dict={dict} lang={lang} />,
+    <HomeTransit key="transit" data={transitData} dict={dict} lang={lang} />,
   ];
 
   const nextSlide = () => {
@@ -37,7 +41,6 @@ export default function HomeAstroSlider({
 
   return (
     <div className="w-full relative">
-
       {/* Slider */}
       <div className="overflow-hidden rounded-xl">
         <div
@@ -55,11 +58,12 @@ export default function HomeAstroSlider({
       {/* LEFT ARROW */}
       <button
         onClick={prevSlide}
+        aria-label="Previous Slide"
         className="absolute left-2 top-1/2 -translate-y-1/2
-        bg-[#1e1b4b] border border-purple-700
+        bg-[#1e1b4b]/80 border border-purple-700
         text-white w-8 h-8 rounded-full
         flex items-center justify-center
-        hover:bg-[#2a2565]"
+        hover:bg-[#2a2565] z-10 transition-colors"
       >
         ‹
       </button>
@@ -67,11 +71,12 @@ export default function HomeAstroSlider({
       {/* RIGHT ARROW */}
       <button
         onClick={nextSlide}
+        aria-label="Next Slide"
         className="absolute right-2 top-1/2 -translate-y-1/2
-        bg-[#1e1b4b] border border-purple-700
+        bg-[#1e1b4b]/80 border border-purple-700
         text-white w-8 h-8 rounded-full
         flex items-center justify-center
-        hover:bg-[#2a2565]"
+        hover:bg-[#2a2565] z-10 transition-colors"
       >
         ›
       </button>
@@ -82,13 +87,12 @@ export default function HomeAstroSlider({
           <button
             key={i}
             onClick={() => setSlide(i)}
-            className={`h-2 w-2 rounded-full ${
-              slide === i ? "bg-yellow-400" : "bg-gray-500"
+            className={`h-2 w-2 rounded-full transition-all ${
+              slide === i ? "bg-yellow-400 w-4" : "bg-gray-500"
             }`}
           />
         ))}
       </div>
-
     </div>
   );
 }

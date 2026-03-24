@@ -1,6 +1,7 @@
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function getPanchang() {
+// 1. Function mein locale accept karo (default 'en' rakho)
+export async function getPanchang(locale: string = "en") {
   const res = await fetch(`${BACKEND}/api/panchang`, {
     method: "POST",
     headers: {
@@ -10,7 +11,8 @@ export async function getPanchang() {
       latitude: 28.6139,
       longitude: 77.2090,
       date: new Date().toISOString().split("T")[0],
-      language: "en",
+      // 2. Hardcoded "en" ki jagah locale variable pass karo
+      language: locale, 
     }),
     next: { revalidate: 3600 },
   });

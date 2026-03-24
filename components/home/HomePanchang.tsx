@@ -1,211 +1,89 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
-
-type EventItem = {
-  name: string;
-  date: string;
-  slug: string;
-};
-
-type Props = {
+interface Props {
   data: any;
-  events?: EventItem[];
-};
-
-function formatDate(dateStr: string) {
-  const date = new Date(dateStr);
-
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  events: any;
+  dict: any;
+  lang: string;
 }
 
-export default function HomePanchang({ data, events }: Props) {
+export default function HomePanchang({ data, events, dict, lang }: Props) {
+  if (!data || !dict) return null;
 
-  if (!data) return null;
-
-  const [activeTab, setActiveTab] = useState<"today" | "tomorrow" | "upcoming">("today");
-
-  const p =
-    activeTab === "today"
-      ? data.selected_date
-      : activeTab === "tomorrow"
-      ? data.next_date
-      : null;
+  // Backend se data nikal rahe hain
+  const p = data.selected_date ?? data;
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-6 md:py-12">
-
-      {/* Heading */}
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold text-white tracking-wide">
-          Today’s Panchang
-        </h2>
-      </div>
-
-      <div className="bg-gradient-to-br from-[#1e1b4b] to-[#312e81] rounded-2xl p-6 shadow-xl border border-purple-700 flex flex-col justify-between min-h-[320px]">
-
-        {/* Tabs */}
-        <div className="flex justify-center mb-6">
-          <div className="flex gap-5 text-sm font-medium">
-
-            <button
-              onClick={() => setActiveTab("today")}
-              className={`pb-1 ${
-                activeTab === "today"
-                  ? "text-green-400 border-b-2 border-green-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Today
-            </button>
-
-            <button
-              onClick={() => setActiveTab("tomorrow")}
-              className={`pb-1 ${
-                activeTab === "tomorrow"
-                  ? "text-green-400 border-b-2 border-green-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Tomorrow
-            </button>
-
-            <button
-              onClick={() => setActiveTab("upcoming")}
-              className={`pb-1 ${
-                activeTab === "upcoming"
-                  ? "text-green-400 border-b-2 border-green-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Upcoming
-            </button>
-
-          </div>
+    <div className="bg-[#111827] p-6 rounded-xl border border-gray-800 h-full flex flex-col justify-between">
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-white">{dict.panchang?.heading || "Panchang"}</h2>
+          <Link href={`/${lang}/panchang`} className="text-xs text-purple-400 hover:underline">
+            {dict.panchang?.viewFull || "View Full"} →
+          </Link>
         </div>
 
-        {/* UPCOMING EVENTS */}
-{activeTab === "upcoming" && events && (
-
-  <div className="grid grid-cols-2 gap-3 text-sm">
-
-    {events
-      .filter((event) => event.name !== "Maha Shivratri")
-      .slice(0, 6)
-      .map((event) => {
-
-        const isEkadashi = event.slug.includes("ekadashi");
-
-        return (
-          <div
-            key={event.slug}
-            className="bg-[#1a1740] px-4 py-4 rounded-xl border border-purple-800 text-center flex flex-col gap-2"
-          >
-
-            {/* Date */}
-            <div className="text-xs text-purple-400">
-              {formatDate(event.date)}
-            </div>
-
-            {/* Panchang style sentence */}
-            <div className="text-white text-sm leading-relaxed">
-              ✨ The upcoming festival is{" "}
-              <span className="font-semibold">
-                {event.name}{isEkadashi ? " Ekadashi" : ""}
-              </span>.
-            </div>
-
-            {/* Link only for Ekadashi */}
-            {isEkadashi && (
-  <Link
-    href={`/ekadashi/${event.slug.split("/").pop()?.replace(/-?ekadashi$/, "")}-ekadashi`}
-    className="text-green-400 text-xs hover:underline"
-  >
-    Know Details →
-  </Link>
-)}
-
+        {/* 🗓️ HINDU MONTH (Exact key used: month_name) */}
+        {p.month_name && (
+          <div className="mb-5">
+            <span className="bg-orange-500/10 text-orange-400 text-xs px-3 py-1.5 rounded-full border border-orange-500/30 font-medium">
+              🗓️ {p.month_name} Month
+            </span>
           </div>
-        );
-      })}
+        )}
 
-  </div>
+        {/* 4 GRID BOXES */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          
+          {/* SUNRISE */}
+          <div className="bg-[#020617] p-3 rounded-lg border border-gray-800">
+            <p className="text-[10px] text-gray-500 uppercase">{dict.panchang?.sunrise || "Sunrise"}</p>
+            <p className="text-sm text-yellow-500 font-semibold">{p.sunrise || '--:--'}</p>
+          </div>
+          
+          {/* SUNSET */}
+          <div className="bg-[#020617] p-3 rounded-lg border border-gray-800">
+            <p className="text-[10px] text-gray-500 uppercase">{dict.panchang?.sunset || "Sunset"}</p>
+            <p className="text-sm text-orange-500 font-semibold">{p.sunset || '--:--'}</p>
+          </div>
+          
+          {/* TITHI (Object se Paksha aur Name nikal rahe hain) */}
+          <div className="bg-[#020617] p-3 rounded-lg border border-gray-800">
+            <p className="text-[10px] text-gray-500 uppercase">{dict.panchang?.tithi || "Tithi"}</p>
+            <p className="text-xs md:text-sm text-white line-clamp-2" title={`${p.tithi?.paksha} ${p.tithi?.name}`}>
+              {p.tithi?.paksha} {p.tithi?.name}
+            </p>
+          </div>
+          
+          {/* NAKSHATRA (Object se Name nikal rahe hain) */}
+          <div className="bg-[#020617] p-3 rounded-lg border border-gray-800">
+            <p className="text-[10px] text-gray-500 uppercase">{dict.panchang?.nakshatra || "Nakshatra"}</p>
+            <p className="text-xs md:text-sm text-white line-clamp-2" title={p.nakshatra?.name}>
+              {p.nakshatra?.name}
+            </p>
+          </div>
 
-)}
-
-        {/* TODAY / TOMORROW PANCHANG */}
-{activeTab !== "upcoming" && (
-
-  <div className="space-y-4 text-center">
-
-    <ul className="space-y-3 text-sm md:text-base text-gray-200 leading-relaxed">
-
-      <li>
-        🌙 The Month is <span className="font-semibold">{p.month_name.name}</span> and the
-        Tithi is <span className="font-semibold">{p.tithi.name}</span>.
-      </li>
-
-      <li>
-        🌗 The Moon is in its dark phase, so the Paksha is{" "}
-        <span className="font-semibold">{p.tithi.paksha}</span>.
-      </li>
-
-      <li>
-        ✨ The Nakshatra is <span className="font-semibold">{p.nakshatra.name}</span>{" "}
-        (Pada {p.nakshatra.pada}).
-      </li>
-
-      <li>
-        🔮 Today’s Yoga is <span className="font-semibold">{p.yoga.name}</span> and
-        the Karan is <span className="font-semibold">{p.karan.name}</span>.
-      </li>
-
-    </ul>
-
-    <ul className="space-y-3 text-sm md:text-base text-gray-200 leading-relaxed">
-
-      <li>
-        🕉 Abhijit Muhurta:{" "}
-        <span className="font-semibold">
-          {p.abhijit_muhurta.start} – {p.abhijit_muhurta.end}
-        </span>
-      </li>
-
-      <li>
-        ⏳ Rahu Kaal:{" "}
-        <span className="font-semibold">
-          {p.rahu_kaal.start} – {p.rahu_kaal.end}
-        </span>
-      </li>
-
-    </ul>
-
-    {/* CTA */}
-    <div className="mt-8 pt-4 border-t border-purple-800">
-
-      <a
-        href="/panchang"
-        className="inline-block px-5 py-2 text-sm font-medium
-        bg-purple-600 hover:bg-purple-500
-        rounded-full transition"
-      >
-        View Detailed Panchang →
-      </a>
-
-    </div>
-
-  </div>
-
-)}
-
+        </div>
       </div>
 
+      {/* 🌸 UPCOMING EVENTS (Agar Parent Component se Events aa rahe hain toh) */}
+      <div className="mt-auto border-t border-gray-800 pt-4">
+        <p className="text-xs font-semibold text-indigo-300 mb-2">{dict.panchang?.upcomingEvents || "Upcoming Festivals"}</p>
+        
+        {events && events.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {events.slice(0, 3).map((ev: any, i: number) => (
+              <span key={i} className="text-[10px] bg-purple-900/30 text-purple-300 px-2 py-1 rounded border border-purple-800">
+                {lang === 'hi' ? (ev.name_hi || ev.name) : (ev.name_en || ev.name)} ({ev.date})
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="text-[10px] text-gray-500 italic">No upcoming events right now.</p>
+        )}
+      </div>
     </div>
   );
 }
