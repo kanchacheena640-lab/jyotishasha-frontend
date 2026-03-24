@@ -1,70 +1,49 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionaries";
 
-
-/**
- * CONFIG
- * -----------------------------------
- * Backend API should return:
- * {
- *   title,
- *   theme,
- *   career_money,
- *   love_relationships,
- *   health_lifestyle,
- *   key_dates: string[],
- *   monthly_advice,
- *   cta
- * }
- */
-const API_BASE =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.jyotishasha.com";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://jyotishasha.com";
+const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.jyotishasha.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jyotishasha.com";
 
 const VALID_SIGNS = [
-  "aries", "taurus", "gemini", "cancer",
-  "leo", "virgo", "libra", "scorpio",
-  "sagittarius", "capricorn", "aquarius", "pisces"
-];
+  "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra",
+  "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
+] as const;
+
+type ValidSign = typeof VALID_SIGNS[number];
 
 type PageProps = {
-  params: { sign: string };
+  params: Promise<{ locale: string; sign: string }>;
 };
 
 // -----------------------------
-// SEO (Evergreen + Social)
+// SEO + Metadata
 // -----------------------------
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
-  const sign = params.sign.toLowerCase();
-  if (!VALID_SIGNS.includes(sign)) return {};
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale, sign } = await params;
+  const lang = locale === "hi" ? "hi" : "en";
+  const signLower = sign.toLowerCase() as ValidSign;
 
-  const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
-  const canonicalUrl = `${SITE_URL}/monthly-horoscope/${sign}`;
+  if (!VALID_SIGNS.includes(signLower)) return {};
+
+  const dict = await getDictionary(lang);
+
+  const signName = dict.horoscope?.zodiacNames?.[signLower] 
+    ?? (signLower.charAt(0).toUpperCase() + signLower.slice(1));
+
+  const canonicalUrl = `${SITE_URL}/${lang === "hi" ? "hi/" : ""}monthly-horoscope/${signLower}`;
 
   return {
-    title: `${signName} Monthly Horoscope | Jyotishasha`,
-    description: `Read the monthly horoscope for ${signName}. Career, love, health, money and practical guidance based on Vedic astrology.`,
+    title: lang === "hi" 
+      ? `${signName} मासिक राशिफल | ज्योतिषाशा` 
+      : `${signName} Monthly Horoscope | Jyotishasha`,
+    
+    description: lang === "hi"
+      ? `${signName} का मासिक राशिफल - करियर, प्रेम, स्वास्थ्य, धन और उपाय सहित।`
+      : `Read the monthly horoscope for ${signName}. Career, love, health, money and practical guidance.`,
+
     alternates: {
       canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: `${signName} Monthly Horoscope | Jyotishasha`,
-      description: `Read the monthly horoscope for ${signName}. Career, love, health, money and practical guidance based on Vedic astrology.`,
-      url: canonicalUrl,
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${signName} Monthly Horoscope | Jyotishasha`,
-      description: `Read the monthly horoscope for ${signName}. Career, love, health, money and practical guidance based on Vedic astrology.`,
-    },
-    robots: {
-      index: true,
-      follow: true,
     },
   };
 }
@@ -73,87 +52,88 @@ export async function generateMetadata(
 // Data Fetch
 // -----------------------------
 async function getMonthlyHoroscope(sign: string) {
-  const res = await fetch(
-    `${API_BASE}/api/monthly-horoscope?sign=${sign}`,
-    {
-      next: { revalidate: 60 * 60 * 6 }, // 6 hours
-    }
-  );
+  const res = await fetch(`${API_BASE}/api/monthly-horoscope?sign=${sign}`, {
+    next: { revalidate: 60 * 60 * 6 },
+  });
 
   if (!res.ok) return null;
   return res.json();
 }
 
 // -----------------------------
-// Page
+// Page Component
 // -----------------------------
 export default async function MonthlyHoroscopePage({ params }: PageProps) {
-  const sign = params.sign.toLowerCase();
-  if (!VALID_SIGNS.includes(sign)) notFound();
+  const { locale, sign } = await params;
+  const lang = locale === "hi" ? "hi" : "en";
+  const signLower = sign.toLowerCase() as ValidSign;
 
-  const signName = sign.charAt(0).toUpperCase() + sign.slice(1);
-  const data = await getMonthlyHoroscope(sign);
+  if (!VALID_SIGNS.includes(signLower)) notFound();
+
+  const dict = await getDictionary(lang);
+  const data = await getMonthlyHoroscope(signLower);
+
   if (!data) notFound();
 
-  return (
-    <main className="mx-auto max-w-3xl px-4 py-10 text-gray-900">
+  const signName = dict.horoscope?.zodiacNames?.[signLower] 
+    ?? (signLower.charAt(0).toUpperCase() + signLower.slice(1));
 
-      {/* HERO TITLE */}
-      <div className="mb-8 rounded-2xl bg-gradient-to-r from-purple-800 to-indigo-800 px-6 py-6">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-white">
-          {data.title}
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      {/* HERO */}
+      <div className="mb-10 rounded-3xl bg-gradient-to-r from-purple-700 to-indigo-700 px-8 py-10 text-white">
+        <h1 className="text-4xl md:text-5xl font-bold text-center">
+          {lang === "hi" ? `${signName} मासिक राशिफल` : data.title}
         </h1>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
 
         {/* THEME */}
-        <section className="rounded-2xl bg-white border shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
-            {signName} Monthly Horoscope Theme
+        <section className="rounded-2xl bg-white border shadow p-7">
+          <h2 className="text-2xl font-semibold mb-4">
+            {lang === "hi" ? "मासिक थीम" : "Monthly Theme"}
           </h2>
-          <p className="leading-relaxed text-gray-800">
-            {data.theme}
-          </p>
+          <p className="leading-relaxed text-gray-700">{data.theme}</p>
         </section>
 
-        {/* CAREER */}
-        <section className="rounded-2xl bg-white border shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
-            {signName} Career & Money
+        {/* CAREER & MONEY */}
+        <section className="rounded-2xl bg-white border shadow p-7">
+          <h2 className="text-2xl font-semibold mb-4">
+            {lang === "hi" ? "करियर और धन" : "Career & Money"}
           </h2>
-          <p className="whitespace-pre-line leading-relaxed text-gray-800">
+          <p className="whitespace-pre-line leading-relaxed text-gray-700">
             {data.career_money}
           </p>
         </section>
 
         {/* LOVE */}
-        <section className="rounded-2xl bg-white border shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
-            {signName} Love & Relationships
+        <section className="rounded-2xl bg-white border shadow p-7">
+          <h2 className="text-2xl font-semibold mb-4">
+            {lang === "hi" ? "प्रेम और संबंध" : "Love & Relationships"}
           </h2>
-          <p className="whitespace-pre-line leading-relaxed text-gray-800">
+          <p className="whitespace-pre-line leading-relaxed text-gray-700">
             {data.love_relationships}
           </p>
         </section>
 
         {/* HEALTH */}
-        <section className="rounded-2xl bg-white border shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
-            {signName} Health & Lifestyle
+        <section className="rounded-2xl bg-white border shadow p-7">
+          <h2 className="text-2xl font-semibold mb-4">
+            {lang === "hi" ? "स्वास्थ्य और जीवनशैली" : "Health & Lifestyle"}
           </h2>
-          <p className="whitespace-pre-line leading-relaxed text-gray-800">
+          <p className="whitespace-pre-line leading-relaxed text-gray-700">
             {data.health_lifestyle}
           </p>
         </section>
 
         {/* KEY DATES */}
         {Array.isArray(data.key_dates) && data.key_dates.length > 0 && (
-          <section className="rounded-2xl bg-purple-50 border border-purple-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">
-              {signName} Important Dates
+          <section className="rounded-2xl bg-purple-50 border border-purple-200 p-7">
+            <h2 className="text-2xl font-semibold mb-4">
+              {lang === "hi" ? "महत्वपूर्ण तिथियाँ" : "Important Dates"}
             </h2>
-            <ul className="list-disc pl-5 space-y-1 text-gray-800">
+            <ul className="list-disc pl-6 space-y-2 text-gray-700">
               {data.key_dates.map((d: string, i: number) => (
                 <li key={i}>{d}</li>
               ))}
@@ -161,52 +141,29 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
           </section>
         )}
 
-        {/* ADVICE */}
-        <section className="rounded-2xl bg-yellow-50 border border-yellow-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
-            {signName} Monthly Advice
+        {/* MONTHLY ADVICE */}
+        <section className="rounded-2xl bg-amber-50 border border-amber-200 p-7">
+          <h2 className="text-2xl font-semibold mb-4">
+            {lang === "hi" ? "मासिक सलाह" : "Monthly Advice"}
           </h2>
-          <p className="font-medium text-gray-900">
-            {data.monthly_advice}
-          </p>
+          <p className="font-medium text-gray-800">{data.monthly_advice}</p>
         </section>
 
-        {/* 🔎 Authority note (EEAT – indirect) */}
-        <p className="text-sm text-gray-500 leading-relaxed">
-          This monthly horoscope is prepared using classical Vedic astrology principles,
-          planetary transits, and Jyotishasha research methodology.
-        </p>
-
-        {/* INTERNAL LINKS */}
-        <div className="flex items-center justify-between gap-4">
+        {/* Internal Links */}
+        <div className="flex flex-wrap gap-4 pt-6">
           <a
-            href={`/daily-horoscope/${sign}`}
-            className="rounded-xl bg-white border border-purple-300 px-4 py-2 font-semibold text-gray-900 shadow-sm hover:bg-purple-100 hover:text-purple-900"
+            href={`/${lang}/daily-horoscope/${signLower}`}
+            className="flex-1 text-center rounded-2xl bg-white border border-purple-300 py-3 font-semibold hover:bg-purple-50 transition"
           >
-            🔮 Daily Horoscope
+            {lang === "hi" ? "🔮 दैनिक राशिफल" : "🔮 Daily Horoscope"}
           </a>
-
           <a
-            href={`/yearly-horoscope/${sign}`}
-            className="rounded-xl bg-white border border-indigo-300 px-4 py-2 font-semibold text-gray-900 shadow-sm hover:bg-indigo-100 hover:text-indigo-900"
+            href={`/${lang}/yearly-horoscope/${signLower}`}
+            className="flex-1 text-center rounded-2xl bg-white border border-indigo-300 py-3 font-semibold hover:bg-indigo-50 transition"
           >
-            📅 Yearly Horoscope
+            {lang === "hi" ? "📅 वार्षिक राशिफल" : "📅 Yearly Horoscope"}
           </a>
         </div>
-
-        {/* APP CTA */}
-        <section className="rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 p-6 text-center text-white">
-          <p className="text-lg font-semibold mb-4">
-            {data.cta}
-          </p>
-
-          <a
-            href="/app"
-            className="inline-block rounded-xl bg-yellow-400 px-6 py-3 font-bold text-purple-900 hover:bg-yellow-300"
-          >
-            📱 Get Jyotishasha App
-          </a>
-        </section>        
       </div>
     </main>
   );
