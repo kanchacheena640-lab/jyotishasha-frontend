@@ -79,9 +79,16 @@ export default function HomeTransit({ data, dict, lang }: Props) {
             </ul>
           </div>
           <div className="mt-6 text-right">
-            <a href={`/${lang}/${activePlanet.toLowerCase()}-transit`} className="text-purple-300 hover:text-white underline text-sm">
-              {dict.transit.readMore} →
-            </a>
+            <a
+  href={
+    lang === "hi"
+      ? `/hi/${activePlanet.toLowerCase()}-transit`
+      : `/${activePlanet.toLowerCase()}-transit`
+  }
+  className="text-purple-300 hover:text-white underline text-sm"
+>
+  {dict.transit.readMore} →
+</a>
           </div>
         </div>
 
