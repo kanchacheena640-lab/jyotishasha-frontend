@@ -1,92 +1,89 @@
 import { NextResponse } from 'next/server'
 
-// 1. In bots ko block rakhenge
 const blockedBots = [
-  'Bytespider', 'ClaudeBot', 'GPTBot', 'PetalBot', 'Amazonbot', 'CCBot',
-  'SemrushBot', 'AhrefsBot', 'DotBot', 'YandexBot', 'Sogou'
+  'Bytespider','ClaudeBot','GPTBot','PetalBot','Amazonbot',
+  'CCBot','SemrushBot','AhrefsBot','DotBot','YandexBot','Sogou'
 ]
 
-const locales = ['en', 'hi'];
-const defaultLocale = 'en';
+const locales = ['en','hi']
+const defaultLocale = 'en'
 
 export function middleware(request) {
-  const userAgent = request.headers.get('user-agent') || ''
   const { pathname } = request.nextUrl
 
-  // ✅ KAAM 1: Bot Blocking (Security)
-  const isGoodBot = userAgent.includes('Googlebot') || userAgent.includes('bingbot');
-  if (!isGoodBot && blockedBots.some(bot => userAgent.includes(bot))) {
-    return new NextResponse('Blocked by Jyotishasha Security', { status: 403 })
-  }
-
-  // ✅ KAAM 2: Static Files & API Bypass (Inhe redirect mat karo)
+  // 🔥 FAST EXIT (most important)
   if (
-    pathname.startsWith('/_next') || 
-    pathname.startsWith('/api') || 
-    pathname.startsWith('/admin') || 
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/admin') ||
     pathname.startsWith('/reports') ||
-    pathname.includes('.') // favicon.ico, sitemap.xml etc.
+    pathname.includes('.')
   ) {
-    return NextResponse.next();
+    return NextResponse.next()
   }
 
-  // 🔥 KAAM 2.5: Holi clean URL fix
-  const holiMatch = pathname.match(/^\/(hi\/)?holi-(\d{4})$/);
+  const userAgent = request.headers.get('user-agent') || ''
 
-  if (holiMatch) {
-    const isHindi = !!holiMatch[1];
-    const year = holiMatch[2];
+  // 🔥 Bot check (only once)
+  if (
+    !userAgent.includes('Googlebot') &&
+    !userAgent.includes('bingbot') &&
+    blockedBots.some(bot => userAgent.includes(bot))
+  ) {
+    return new NextResponse('Blocked', { status: 403 })
+  }
+
+  // 🔥 LIGHT CHECK instead of regex
+  if (pathname.includes('holi-')) {
+    const parts = pathname.split('holi-')
+    const year = parts[1]
+    const isHindi = pathname.startsWith('/hi')
 
     return NextResponse.rewrite(
-      new URL(`/${isHindi ? "hi" : "en"}/holi/${year}`, request.url)
-    );
+      new URL(`/${isHindi ? 'hi' : 'en'}/holi/${year}`, request.url)
+    )
   }
 
-  // 🔥 FIX: house-2.5.1 clean URL (like Holi)
-  const houseMatch = pathname.match(/^\/(hi\/)?([a-z-]+)\/([a-z]+)\/house-(\d+)$/);
+  if (pathname.includes('house-')) {
+    const isHindi = pathname.startsWith('/hi')
+    const parts = pathname.split('/')
 
-  if (houseMatch) {
-    const isHindi = !!houseMatch[1];
-    const planet = houseMatch[2];
-    const ascendant = houseMatch[3];
-    const house = houseMatch[4];
+    const planet = parts[1]
+    const ascendant = parts[2]
+    const house = parts[3]?.replace('house-', '')
 
     return NextResponse.rewrite(
-      new URL(`/${isHindi ? "hi" : "en"}/${planet}/${ascendant}/house/${house}`, request.url)
-    );
+      new URL(`/${isHindi ? 'hi' : 'en'}/${planet}/${ascendant}/house/${house}`, request.url)
+    )
   }
 
-  // ✅ KAAM 3: Language Detection & Routing (The 404 Fix)
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
+  // 🔥 Locale check
+  const hasLocale = locales.some(
+    l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
+  )
 
-  // Request headers copy karo backend ke liye
-  const requestHeaders = new Headers(request.headers);
+  const headers = new Headers(request.headers)
 
-  if (!pathnameHasLocale) {
-    // Agar URL mein locale nahi hai (e.g. /love), toh cookie check karo ya default 'en'
-    const lang = request.cookies.get('NEXT_LOCALE')?.value || defaultLocale;
-    
-    // Backend ko bhasha ka signal bhejo
-    requestHeaders.set('x-jyotishasha-lang', lang);
+  if (!hasLocale) {
+    const lang = request.cookies.get('NEXT_LOCALE')?.value || defaultLocale
+    headers.set('x-jyotishasha-lang', lang)
 
-    // URL Rewrite: User ko /love dikhega, par Next load karega /[locale]/love
     return NextResponse.rewrite(
       new URL(`/${lang}${pathname}`, request.url),
-      { request: { headers: requestHeaders } }
-    );
+      { request: { headers } }
+    )
   }
 
-  // Agar URL mein pehle se locale hai (e.g. /hi/love)
-  const currentLocale = pathname.startsWith('/hi') ? 'hi' : 'en';
-  requestHeaders.set('x-jyotishasha-lang', currentLocale);
+  const currentLocale = pathname.startsWith('/hi') ? 'hi' : 'en'
+  headers.set('x-jyotishasha-lang', currentLocale)
 
   return NextResponse.next({
-    request: { headers: requestHeaders },
-  });
+    request: { headers }
+  })
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    '/((?!_next|api|favicon.ico|.*\\..*).*)',
+  ],
 }
