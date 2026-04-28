@@ -20,6 +20,14 @@ export function middleware(request) {
     pathname.includes('.')
   ) {
     return NextResponse.next()
+    }
+
+    if (
+    pathname === '/privacy-policy' ||
+    pathname === '/terms' ||
+    pathname === '/refund-policy'
+  ) {
+    return NextResponse.next()
   }
 
   const userAgent = request.headers.get('user-agent') || ''
