@@ -25,7 +25,8 @@ export function middleware(request) {
     if (
     pathname === '/privacy-policy' ||
     pathname === '/terms' ||
-    pathname === '/refund-policy'
+    pathname === '/refund-policy'||
+    pathname === '/account-deletion'
   ) {
     return NextResponse.next()
   }
