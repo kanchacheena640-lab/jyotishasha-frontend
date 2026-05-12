@@ -6,7 +6,7 @@ const blockedBots = [
 ]
 
 const locales = ['en','hi']
-
+const defaultLocale = 'en'
 
 export function middleware(request) {
   const { pathname } = request.nextUrl
@@ -49,7 +49,7 @@ export function middleware(request) {
     const isHindi = pathname.startsWith('/hi')
 
     return NextResponse.rewrite(
-      new URL(`${isHindi ? '/hi' : ''}/holi/${year}`, request.url)
+      new URL(`/${isHindi ? 'hi' : 'en'}/holi/${year}`, request.url)
     )
   }
 
@@ -62,7 +62,7 @@ export function middleware(request) {
     const house = parts[3]?.replace('house-', '')
 
     return NextResponse.rewrite(
-      new URL(`${isHindi ? '/hi' : ''}/${planet}/${ascendant}/house/${house}`, request.url)
+      new URL(`/${isHindi ? 'hi' : 'en'}/${planet}/${ascendant}/house/${house}`, request.url)
     )
   }
 
@@ -71,16 +71,24 @@ export function middleware(request) {
     l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   )
 
-  
+  const headers = new Headers(request.headers)
 
   if (!hasLocale) {
+    const lang = request.cookies.get('NEXT_LOCALE')?.value || defaultLocale
+    headers.set('x-jyotishasha-lang', lang)
+
     return NextResponse.rewrite(
-      new URL(`/en${pathname}`, request.url)
+      new URL(`/${lang}${pathname}`, request.url),
+      { request: { headers } }
     )
   }
 
-  
-  return NextResponse.next()
+  const currentLocale = pathname.startsWith('/hi') ? 'hi' : 'en'
+  headers.set('x-jyotishasha-lang', currentLocale)
+
+  return NextResponse.next({
+    request: { headers }
+  })
 }
 
 export const config = {
