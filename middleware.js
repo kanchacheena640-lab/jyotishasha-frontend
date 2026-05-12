@@ -49,7 +49,7 @@ export function middleware(request) {
     const isHindi = pathname.startsWith('/hi')
 
     return NextResponse.rewrite(
-      new URL(`/${isHindi ? 'hi' : 'en'}/holi/${year}`, request.url)
+      new URL(`${isHindi ? '/hi' : ''}/holi/${year}`, request.url)
     )
   }
 
@@ -62,7 +62,7 @@ export function middleware(request) {
     const house = parts[3]?.replace('house-', '')
 
     return NextResponse.rewrite(
-      new URL(`/${isHindi ? 'hi' : 'en'}/${planet}/${ascendant}/house/${house}`, request.url)
+      new URL(`${isHindi ? '/hi' : ''}/${planet}/${ascendant}/house/${house}`, request.url)
     )
   }
 
@@ -74,13 +74,11 @@ export function middleware(request) {
   const headers = new Headers(request.headers)
 
   if (!hasLocale) {
-    const lang = request.cookies.get('NEXT_LOCALE')?.value || defaultLocale
-    headers.set('x-jyotishasha-lang', lang)
+    headers.set('x-jyotishasha-lang', 'en')
 
-    return NextResponse.rewrite(
-      new URL(`/${lang}${pathname}`, request.url),
-      { request: { headers } }
-    )
+    return NextResponse.next({
+      request: { headers }
+    })
   }
 
   const currentLocale = pathname.startsWith('/hi') ? 'hi' : 'en'
