@@ -112,8 +112,7 @@ export default async function Page({
 
         {/* H1 */}
         <h1 className="text-xl md:text-3xl font-extrabold mb-6">
-          {t(content.name.en, content.name.hi)} {selectedYear}{" "}
-          <LocationText />:{" "}
+          {t(content.name.en, content.name.hi)} {selectedYear}:{" "}
           {t("Vrat Date, Muhurat & Katha", "व्रत तिथि, मुहूर्त और कथा")}
         </h1>
 
