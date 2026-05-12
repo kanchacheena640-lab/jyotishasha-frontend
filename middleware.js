@@ -1,17 +1,11 @@
 import { NextResponse } from 'next/server'
 
-const blockedBots = [
-  'Bytespider','ClaudeBot','GPTBot','PetalBot','Amazonbot',
-  'CCBot','SemrushBot','AhrefsBot','DotBot','YandexBot','Sogou'
-]
-
-const locales = ['en','hi']
-const defaultLocale = 'en'
+const locales = ['en', 'hi']
 
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
-  // 🔥 FAST EXIT (most important)
+  // FAST EXIT
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -20,41 +14,30 @@ export function middleware(request) {
     pathname.includes('.')
   ) {
     return NextResponse.next()
-    }
+  }
 
-    if (
+  // Public pages
+  if (
     pathname === '/privacy-policy' ||
     pathname === '/terms' ||
-    pathname === '/refund-policy'||
+    pathname === '/refund-policy' ||
     pathname === '/account-deletion'
   ) {
     return NextResponse.next()
   }
 
-  const userAgent = request.headers.get('user-agent') || ''
-
-  // 🔥 Bot check (only once)
-  if (
-    !userAgent.includes('Googlebot') &&
-    !userAgent.includes('bingbot') &&
-    blockedBots.some(bot => userAgent.includes(bot))
-  ) {
-    return new NextResponse('Blocked', { status: 403 })
-  }
-
-  // 🔥 LIGHT CHECK instead of regex
+  // Holi rewrite
   if (pathname.includes('holi-')) {
     const parts = pathname.split('holi-')
     const year = parts[1]
-    const isHindi = pathname.startsWith('/hi')
 
     return NextResponse.rewrite(
-      new URL(`/${isHindi ? 'hi' : 'en'}/holi/${year}`, request.url)
+      new URL(`/en/holi/${year}`, request.url)
     )
   }
 
+  // House rewrite
   if (pathname.includes('house-')) {
-    const isHindi = pathname.startsWith('/hi')
     const parts = pathname.split('/')
 
     const planet = parts[1]
@@ -62,11 +45,14 @@ export function middleware(request) {
     const house = parts[3]?.replace('house-', '')
 
     return NextResponse.rewrite(
-      new URL(`/${isHindi ? 'hi' : 'en'}/${planet}/${ascendant}/house/${house}`, request.url)
+      new URL(
+        `/en/${planet}/${ascendant}/house/${house}`,
+        request.url
+      )
     )
   }
 
-  // 🔥 Locale check
+  // Locale check
   const hasLocale = locales.some(
     l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   )
@@ -74,16 +60,20 @@ export function middleware(request) {
   const headers = new Headers(request.headers)
 
   if (!hasLocale) {
-    const lang = request.cookies.get('NEXT_LOCALE')?.value || defaultLocale
-    headers.set('x-jyotishasha-lang', lang)
+    headers.set('x-jyotishasha-lang', 'en')
 
     return NextResponse.rewrite(
-      new URL(`/${lang}${pathname}`, request.url),
-      { request: { headers } }
+      new URL(`/en${pathname}`, request.url),
+      {
+        request: { headers }
+      }
     )
   }
 
-  const currentLocale = pathname.startsWith('/hi') ? 'hi' : 'en'
+  const currentLocale = pathname.startsWith('/hi')
+    ? 'hi'
+    : 'en'
+
   headers.set('x-jyotishasha-lang', currentLocale)
 
   return NextResponse.next({
