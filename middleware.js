@@ -6,7 +6,7 @@ const blockedBots = [
 ]
 
 const locales = ['en','hi']
-const defaultLocale = 'en'
+
 
 export function middleware(request) {
   const { pathname } = request.nextUrl
@@ -71,22 +71,16 @@ export function middleware(request) {
     l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   )
 
-  const headers = new Headers(request.headers)
+  
 
   if (!hasLocale) {
-    headers.set('x-jyotishasha-lang', 'en')
-
-    return NextResponse.next({
-      request: { headers }
-    })
+    return NextResponse.rewrite(
+      new URL(`/en${pathname}`, request.url)
+    )
   }
 
-  const currentLocale = pathname.startsWith('/hi') ? 'hi' : 'en'
-  headers.set('x-jyotishasha-lang', currentLocale)
-
-  return NextResponse.next({
-    request: { headers }
-  })
+  
+  return NextResponse.next()
 }
 
 export const config = {

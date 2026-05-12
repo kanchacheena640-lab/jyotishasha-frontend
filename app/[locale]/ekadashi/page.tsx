@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import EkadashiCard from "@/components/EkadashiCard";
+export const revalidate = 86400 // 24 hours
 
 const BACKEND_URL = "https://jyotishasha-backend.onrender.com";
 
@@ -26,7 +27,9 @@ async function getAllEkadashiData(year: number, locale: string) {
   try {
     const res = await fetch(
       `${BACKEND_URL}/api/ekadashi/all?year=${year}&lang=${locale}`,
-      { cache: "no-store" }
+      {
+        next: { revalidate: 86400 }
+      }
     );
     if (!res.ok) return [];
     const result = await res.json();
