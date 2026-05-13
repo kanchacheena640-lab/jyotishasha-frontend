@@ -7,7 +7,9 @@ import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
 
-
+// ==================== नई लाइन जोड़ो ====================
+const currentYear = new Date().getFullYear();
+// =======================================================
 
 /* ---------------- Configuration ---------------- */
 const ASCENDANTS = [
@@ -139,76 +141,67 @@ export async function generateStaticParams() {
 
 /* ---------------- Metadata ---------------- */
 export async function generateMetadata({
-  params,
-}: {
-  params: { ascendant: string; locale?: string };
-}): Promise<Metadata> {
+    params,
+  }: {
+    params: { ascendant: string; locale?: string };
+  }): Promise<Metadata> {
 
-  const currentYear = new Date().getFullYear();
+    const asc = params.ascendant?.toLowerCase();
 
-  const asc = params.ascendant?.toLowerCase();
+    if (!asc || !isValidAscendant(asc)) {
+      return { 
+        title: "Not Found", 
+        robots: { index: false } 
+      };
+    }
 
-  if (!asc || !isValidAscendant(asc)) {
+    const ascName = titleCase(asc);
+    const locale = params.locale || "en";
+    const isHi = locale === "hi";
+
+    const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/venus-transit/${asc}`;
+
     return {
-      title: "Not Found",
-      robots: { index: false },
+      title: isHi
+        ? `शुक्र गोचर ${currentYear} ${ascName} लग्न के लिए – प्रेम और समृद्धि`
+        : `Venus Transit ${currentYear} for ${ascName} Rising – Love & Abundance`,
+
+      description: isHi
+        ? `${ascName} लग्न के लिए शुक्र गोचर ${currentYear} में रिश्ते, वित्त, सौंदर्य और विलासिता पर घर-वार विस्तृत वैदिक विश्लेषण।`
+        : `Detailed house-wise effects of Venus (Shukra) transit ${currentYear} for ${ascName} Rising.`,
+
+      alternates: {
+        canonical,
+        languages: {
+          en: `https://www.jyotishasha.com/venus-transit/${asc}`,
+          hi: `https://www.jyotishasha.com/hi/venus-transit/${asc}`,
+        },
+      },
+
+      openGraph: {
+        title: isHi
+          ? `शुक्र गोचर ${currentYear} ${ascName} लग्न`
+          : `Venus Transit ${currentYear} for ${ascName} Rising`,
+        description: isHi
+          ? `${ascName} लग्न के लिए शुक्र गोचर का विस्तृत विश्लेषण।`
+          : `Detailed Venus transit analysis for ${ascName} Rising.`,
+        url: canonical,
+        type: "article",
+        locale: isHi ? "hi_IN" : "en_US",
+        siteName: "Jyotishasha",
+      },
+
+      twitter: {
+        card: "summary_large_image",
+        title: isHi
+          ? `शुक्र गोचर ${currentYear} ${ascName} लग्न`
+          : `Venus Transit ${currentYear} for ${ascName} Rising`,
+        description: isHi
+          ? `${ascName} लग्न के लिए शुक्र गोचर का विस्तृत विश्लेषण।`
+          : `Detailed Venus transit analysis for ${ascName} Rising.`,
+      },
     };
   }
-
-  const ascName = titleCase(asc);
-
-  const locale =
-    params?.locale === "hi"
-      ? "hi"
-      : "en";
-
-  const isHi = locale === "hi";
-
-  const canonical = `https://www.jyotishasha.com${
-    isHi ? "/hi" : ""
-  }/venus-transit/${asc}`;
-
-  return {
-    title: isHi
-      ? `शुक्र गोचर ${currentYear} ${ascName} लग्न के लिए – प्रेम और समृद्धि`
-      : `Venus Transit ${currentYear} for ${ascName} Rising – Love & Abundance`,
-
-    description: isHi
-      ? `${ascName} लग्न के लिए शुक्र गोचर ${currentYear} में रिश्ते, वित्त, सौंदर्य और विलासिता पर घर-वार विस्तृत वैदिक विश्लेषण।`
-      : `Detailed house-wise effects of Venus (Shukra) transit ${currentYear} for ${ascName} Rising. Vedic insights on relationships, finances, beauty, and luxury.`,
-
-    alternates: {
-      canonical,
-      languages: {
-        en: `https://www.jyotishasha.com/venus-transit/${asc}`,
-        hi: `https://www.jyotishasha.com/hi/venus-transit/${asc}`,
-      },
-    },
-
-    openGraph: {
-      title: isHi
-        ? `शुक्र गोचर ${currentYear} ${ascName} लग्न`
-        : `Venus Transit ${currentYear} for ${ascName} Rising`,
-      description: isHi
-        ? `${ascName} लग्न के लिए शुक्र गोचर का विस्तृत विश्लेषण।`
-        : `Detailed Venus transit analysis for ${ascName} Rising.`,
-      url: canonical,
-      type: "article",
-      locale: isHi ? "hi_IN" : "en_US",
-      siteName: "Jyotishasha",
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title: isHi
-        ? `शुक्र गोचर ${currentYear} ${ascName} लग्न`
-        : `Venus Transit ${currentYear} for ${ascName} Rising`,
-      description: isHi
-        ? `${ascName} लग्न के लिए शुक्र गोचर का विस्तृत विश्लेषण।`
-        : `Detailed Venus transit analysis for ${ascName} Rising.`,
-    },
-  };
-}
 
 /* ---------------- Page ---------------- */
 export default async function VenusTransitAscendantPage({
@@ -232,10 +225,14 @@ export default async function VenusTransitAscendantPage({
   const initialHouse = rawHouse >= 1 && rawHouse <= 12 ? rawHouse : 1;
 
   const current = await fetchVenusCurrent(lang);
-  if (!current) notFound();
+    if (!current) notFound();
 
-  const venusPos = current.positions?.Venus;
-  if (!venusPos) notFound();
+    // ==================== 3rd Change ====================
+    const venusPos = current.positions?.Venus;
+    if (!venusPos || !venusPos.rashi) {
+      console.error("Venus position data missing:", current?.positions);
+      notFound();
+    }
 
   const venusFuture = current.future_transits?.Venus || [];
   const currentTransit = venusFuture[0];
@@ -354,13 +351,13 @@ export default async function VenusTransitAscendantPage({
               <>
                 शुक्र, सौंदर्य का ग्रह, {previousRashi} से {currentRashi} की ओर जा रहा है, जिससे प्रभाव {previousHouse}वें भाव से <strong>{currentHouse}वें भाव</strong> में शिफ्ट हो रहा है।
                 <br /><br />
-                पहले {VENUS_HOUSE_TRAITS_HI[previousHouse]} पर फोकस था, अब <strong>{VENUS_HOUSE_TRAITS_HI[currentHouse]}</strong> से जुड़े नए अवसर खुल रहे हैं। यह समय शालीनता और विलासिता पर फोकस करने का है।
+                पहले {VENUS_HOUSE_TRAITS_HI[previousHouse] || "पिछला भाव"} पर फोकस था, अब <strong>{VENUS_HOUSE_TRAITS_HI[currentHouse] || "नया भाव"}</strong> से जुड़े नए अवसर खुल रहे हैं। यह समय शालीनता और विलासिता पर फोकस करने का है।
               </>
             ) : (
               <>
                 Venus, the planet of beauty, moves from your {previousHouse} house to the <strong>{currentHouse} house</strong>.
                 <br /><br />
-                Your path of pleasure and abundance shifts from <strong>{VENUS_HOUSE_TRAITS_EN[previousHouse]}</strong> toward the core themes of <strong>{VENUS_HOUSE_TRAITS_EN[currentHouse]}</strong>. This is a time to cultivate grace and focus on luxury.
+                Your path of pleasure and abundance shifts from <strong>{VENUS_HOUSE_TRAITS_EN[previousHouse] || "previous house"}</strong> toward the core themes of <strong>{VENUS_HOUSE_TRAITS_EN[currentHouse] || "current house"}</strong>. This is a time to cultivate grace and focus on luxury.
               </>
             )}
           </p>
