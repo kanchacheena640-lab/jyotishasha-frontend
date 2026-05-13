@@ -7,7 +7,7 @@ import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
 
-const currentYear = new Date().getFullYear();
+
 
 /* ---------------- Configuration ---------------- */
 const ASCENDANTS = [
@@ -143,23 +143,69 @@ export async function generateMetadata({
 }: {
   params: { ascendant: string; locale?: string };
 }): Promise<Metadata> {
+
+  const currentYear = new Date().getFullYear();
+
   const asc = params.ascendant?.toLowerCase();
+
   if (!asc || !isValidAscendant(asc)) {
-    return { title: "Not Found", robots: { index: false } };
+    return {
+      title: "Not Found",
+      robots: { index: false },
+    };
   }
+
   const ascName = titleCase(asc);
-  const locale = params.locale || "en";
+
+  const locale =
+    params?.locale === "hi"
+      ? "hi"
+      : "en";
+
   const isHi = locale === "hi";
+
+  const canonical = `https://www.jyotishasha.com${
+    isHi ? "/hi" : ""
+  }/venus-transit/${asc}`;
 
   return {
     title: isHi
       ? `शुक्र गोचर ${currentYear} ${ascName} लग्न के लिए – प्रेम और समृद्धि`
       : `Venus Transit ${currentYear} for ${ascName} Rising – Love & Abundance`,
+
     description: isHi
       ? `${ascName} लग्न के लिए शुक्र गोचर ${currentYear} में रिश्ते, वित्त, सौंदर्य और विलासिता पर घर-वार विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Venus (Shukra) transit ${currentYear} for ${ascName} Rising. Vedic insights on relationships, finances, beauty, and luxury.`,
+
     alternates: {
-      canonical: `https://www.jyotishasha.com/venus-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/venus-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/venus-transit/${asc}`,
+      },
+    },
+
+    openGraph: {
+      title: isHi
+        ? `शुक्र गोचर ${currentYear} ${ascName} लग्न`
+        : `Venus Transit ${currentYear} for ${ascName} Rising`,
+      description: isHi
+        ? `${ascName} लग्न के लिए शुक्र गोचर का विस्तृत विश्लेषण।`
+        : `Detailed Venus transit analysis for ${ascName} Rising.`,
+      url: canonical,
+      type: "article",
+      locale: isHi ? "hi_IN" : "en_US",
+      siteName: "Jyotishasha",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: isHi
+        ? `शुक्र गोचर ${currentYear} ${ascName} लग्न`
+        : `Venus Transit ${currentYear} for ${ascName} Rising`,
+      description: isHi
+        ? `${ascName} लग्न के लिए शुक्र गोचर का विस्तृत विश्लेषण।`
+        : `Detailed Venus transit analysis for ${ascName} Rising.`,
     },
   };
 }
@@ -172,6 +218,9 @@ export default async function VenusTransitAscendantPage({
   params: { ascendant: string; locale?: string };
   searchParams?: { lang?: string; house?: string };
 }) {
+
+  const currentYear = new Date().getFullYear();
+
   const ascendant = params.ascendant?.toLowerCase();
   if (!ascendant || !isValidAscendant(ascendant)) notFound();
 
