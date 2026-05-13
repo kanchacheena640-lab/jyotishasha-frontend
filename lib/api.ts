@@ -8,9 +8,9 @@ export async function apiGet(path: string, lang: string = 'en', init?: RequestIn
   const separator = path.includes('?') ? '&' : '?';
   const url = `${BASE}${path}${separator}lang=${lang}`;
 
-  const res = await fetch(url, { 
-    ...init, 
-    cache: 'no-store' 
+  const res = await fetch(url, {
+    next: { revalidate: 3600 }, // 1 hour ISR cache
+    ...init,
   });
 
   if (!res.ok) throw new Error(`HTTP ${res.status}`);

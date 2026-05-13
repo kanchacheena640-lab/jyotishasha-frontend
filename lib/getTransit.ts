@@ -21,12 +21,7 @@ export async function getTransit(locale: string = 'en'): Promise<TransitResponse
     // 2. URL mein ?lang=${locale} jodo
     const res = await fetch(`${BACKEND}/api/transit/current?lang=${locale}`, {
       method: "GET",
-      next: { revalidate: 21600 }, // 6 hour cache
-      headers: {
-        // 3. Headers bhi update kar diye safety ke liye
-        'x-jyotishasha-lang': locale,
-        'Accept-Language': locale
-      }
+      next: { revalidate: 21600 }, // 6 hour ISR
     });
 
     if (!res.ok) return null;

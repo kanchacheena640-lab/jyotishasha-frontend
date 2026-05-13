@@ -20,9 +20,6 @@ export async function getDailySummary(locale: string = 'en'): Promise<HoroscopeR
         next: { revalidate: 1800 }, // 30 मिनट का कैशिंग
         headers: {
           'Content-Type': 'application/json',
-          // 3. Header mein bhi bhasha bhej do (Safety ke liye)
-          'x-jyotishasha-lang': locale,
-          'Accept-Language': locale
         }
       }
     );

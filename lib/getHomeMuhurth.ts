@@ -6,7 +6,6 @@ async function fetchEvent(activity: string, locale: string = "en") {
     method: "POST",
     headers: { 
       "Content-Type": "application/json",
-      "x-jyotishasha-lang": locale 
     },
     body: JSON.stringify({
       activity,
@@ -14,8 +13,7 @@ async function fetchEvent(activity: string, locale: string = "en") {
       longitude: 77.2090,
       days: 1,
       top_k: 1,
-      // 2. Hardcoded "en" ki jagah locale variable
-      language: locale, 
+      language: locale,
     }),
     next: { revalidate: 3600 },
   });

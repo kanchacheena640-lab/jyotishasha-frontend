@@ -22,13 +22,19 @@
     return {
       title,
       description,
-      alternates: { canonical },
+      alternates: {
+        canonical,
+        languages: {
+          en: `https://www.jyotishasha.com/panchang/muhurat-articles`,
+          hi: `https://www.jyotishasha.com/hi/panchang/muhurat-articles`,
+        },
+      },
       openGraph: {
         title,
         description,
         url: canonical,
         images: ["https://www.jyotishasha.com/og/muhurat-base.jpg"],
-        type: "article",
+        type: "website",
       },
     };
   }
@@ -37,7 +43,11 @@
     const isHi = params.locale === "hi";
     const langPath = isHi ? "/hi" : "";
     
-    const now = new Date();
+    const today = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Kolkata",
+    }).format(new Date());
+
+    const now = new Date(today);
     const month = now.toLocaleString(isHi ? "hi-IN" : "en-US", { month: "long" });
     const year = now.getFullYear();
 

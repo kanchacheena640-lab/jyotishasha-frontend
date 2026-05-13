@@ -1,21 +1,18 @@
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-// 1. Function mein locale accept karo
 export async function getUpcomingEvents(locale: string = "en") {
   try {
     const res = await fetch(`${BACKEND}/api/events/home-upcoming`, {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
-        "x-jyotishasha-lang": locale 
       },
       body: JSON.stringify({
-        latitude: 26.8467,
-        longitude: 80.9462,
-        // 2. Backend ko bhasha bhej di
-        language: locale, 
+        latitude: 28.6139,
+        longitude: 77.2090,
+        language: locale,
       }),
-      next: { revalidate: 3600 }, // cache 1 hour
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {

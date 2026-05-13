@@ -57,28 +57,13 @@ export function middleware(request) {
     l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   )
 
-  const headers = new Headers(request.headers)
-
   if (!hasLocale) {
-    headers.set('x-jyotishasha-lang', 'en')
-
     return NextResponse.rewrite(
-      new URL(`/en${pathname}`, request.url),
-      {
-        request: { headers }
-      }
+      new URL(`/en${pathname}`, request.url)
     )
   }
 
-  const currentLocale = pathname.startsWith('/hi')
-    ? 'hi'
-    : 'en'
-
-  headers.set('x-jyotishasha-lang', currentLocale)
-
-  return NextResponse.next({
-    request: { headers }
-  })
+  return NextResponse.next()
 }
 
 export const config = {

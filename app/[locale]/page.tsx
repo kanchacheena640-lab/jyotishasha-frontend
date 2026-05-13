@@ -23,9 +23,9 @@ import { getUpcomingEvents } from "@/lib/getUpcomingEvents";
 export default async function HomePage({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale: rawLocale } = await params;
+  const rawLocale = params.locale;
   const locale = rawLocale === "hi" ? "hi" : "en";
 
   const dict = await getDictionary(locale);
