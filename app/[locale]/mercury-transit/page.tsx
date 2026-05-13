@@ -58,9 +58,23 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Mercury", "mercury-transit");
-}
+export async function generateMetadata({
+    params,
+  }: {
+    params: { locale?: string };
+  }): Promise<Metadata> {
+
+    const locale =
+      params?.locale === "hi"
+        ? "hi"
+        : "en";
+
+    return getTransitMetadata(
+      "Mercury",
+      "mercury-transit",
+      locale
+    );
+  }
 
 /* ---------------- Helpers ---------------- */
 function formatDate(dateStr?: string) {
