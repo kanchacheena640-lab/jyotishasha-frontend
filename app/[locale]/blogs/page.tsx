@@ -20,7 +20,7 @@ const PLANET_CARDS = [
   { key: "Sun", name: { en: "Sun", hi: "सूर्य" }, emoji: "☀️", href: "/sun-transit", tag: { en: "Authority • Career", hi: "अधिकार • करियर" } },
   { key: "Moon", name: { en: "Moon", hi: "चंद्र" }, emoji: "🌙", href: "/moon-transit", tag: { en: "Mind • Emotions", hi: "मन • भावनाएं" } },
   { key: "Mars", name: { en: "Mars", hi: "मंगल" }, emoji: "🔴", href: "/mars-transit", tag: { en: "Energy • Action", hi: "ऊर्जा • साहस" } },
-  { key: "Mercury", name: { en: "Mercury", hi: "बुध" }, emoji: "🟢", slug: "/mercury-transit", tag: { en: "Intellect • Business", hi: "बुद्धि • व्यापार" } },
+  { key: "Mercury", name: { en: "Mercury", hi: "बुध" }, emoji: "🟢", href: "/mercury-transit", tag: { en: "Intellect • Business", hi: "बुद्धि • व्यापार" } },
   { key: "Jupiter", name: { en: "Jupiter", hi: "गुरु" }, emoji: "🟡", href: "/jupiter-transit", tag: { en: "Growth • Wisdom", hi: "वृद्धि • ज्ञान" } },
   { key: "Venus", name: { en: "Venus", hi: "शुक्र" }, emoji: "💗", href: "/venus-transit", tag: { en: "Love • Comfort", hi: "प्रेम • विलासिता" } },
   { key: "Saturn", name: { en: "Saturn", hi: "शनि" }, emoji: "🪐", href: "/saturn-transit", tag: { en: "Karma • Discipline", hi: "कर्म • अनुशासन" } },
