@@ -6,10 +6,7 @@ import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
-
-// ==================== नई लाइन जोड़ो ====================
 const currentYear = new Date().getFullYear();
-// =======================================================
 
 /* ---------------- Configuration ---------------- */
 const ASCENDANTS = [
@@ -205,12 +202,10 @@ export async function generateMetadata({
 
 /* ---------------- Page ---------------- */
 export default async function VenusTransitAscendantPage({
-  params,
-  searchParams,
-}: {
-  params: { ascendant: string; locale?: string };
-  searchParams?: { lang?: string; house?: string };
-}) {
+    params,
+  }: {
+    params: { ascendant: string; locale?: string };
+  }) {
 
   const currentYear = new Date().getFullYear();
 
@@ -221,7 +216,7 @@ export default async function VenusTransitAscendantPage({
   const lang: "en" | "hi" = locale === "hi" ? "hi" : "en";
   const isHi = lang === "hi";
 
-  const rawHouse = searchParams?.house ? Number(searchParams.house) : 1;
+  const rawHouse = 1;
   const initialHouse = rawHouse >= 1 && rawHouse <= 12 ? rawHouse : 1;
 
   const current = await fetchVenusCurrent(lang);
