@@ -6,6 +6,8 @@ import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
+
 
 const currentYear = new Date().getFullYear();
 
@@ -360,32 +362,6 @@ export default async function JupiterTransitAscendantPage({
             initialHouse={initialHouse}
             initialData={initialData}
           />
-        </section>
-
-        {/* House Grid Links */}
-        <section className="mt-20 border-t pt-12">
-          <h2 className="text-3xl font-black mb-8 text-slate-950">
-            {isHi
-              ? `${ascName} लग्न के भाव-वार फल`
-              : `${ascName} Rising House-by-House Forecast`}
-          </h2>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
-              <Link
-                key={h}
-                href={`/${isHi ? "hi/" : ""}jupiter-transit/${ascendant}?house=${h}`}
-                className="group p-6 bg-slate-50 border border-slate-100 rounded-2xl hover:border-yellow-500 hover:bg-white transition-all shadow-sm hover:shadow-md"
-              >
-                <p className="text-xs font-black text-yellow-600 uppercase mb-2 tracking-wider">
-                  {isHi ? "भाव" : "House"} {h}
-                </p>
-                <p className="text-lg font-bold text-slate-800 group-hover:text-yellow-700">
-                  {isHi ? "प्रभाव देखें" : "View Impact"}
-                </p>
-              </Link>
-            ))}
-          </div>
         </section>
 
         {/* Footer */}

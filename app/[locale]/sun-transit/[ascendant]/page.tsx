@@ -6,6 +6,7 @@ import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 const currentYear = new Date().getFullYear();
 
@@ -166,12 +167,13 @@ export async function generateMetadata({
 
 /* ---------------- Page ---------------- */
 export default async function SunTransitAscendantPage({
-  params,
-  searchParams,
-}: {
-  params: { ascendant: string; locale?: string };
-  searchParams?: { lang?: string; house?: string };
-}) {
+    params,
+    searchParams,
+  }: {
+    params: { ascendant: string; locale?: string };
+    searchParams?: { house?: string };
+  }) {
+
   const ascendant = params.ascendant?.toLowerCase();
   if (!ascendant || !isValidAscendant(ascendant)) notFound();
 
@@ -364,6 +366,7 @@ export default async function SunTransitAscendantPage({
         {/* Client Component */}
         <div className="mb-20">
           <AscendantSunTransitClient
+            key={`${ascendant}-${initialHouse}`}
             ascendant={ascendant}
             planet="sun"
             lang={lang}
@@ -371,30 +374,6 @@ export default async function SunTransitAscendantPage({
             initialData={initialData}
           />
         </div>
-
-        {/* House Grid */}
-        <section className="mt-20 border-t pt-12">
-          <h2 className="text-3xl font-black mb-8 text-slate-950">
-            {isHi ? `${ascName} लग्न के लिए हर भाव का फल` : `${ascName} Rising Solar Path for Every House`}
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
-              <Link
-                key={h}
-                href={`/sun-transit/${ascendant}?house=${h}`}
-                className="group p-5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-amber-500 hover:bg-white transition-all shadow-sm"
-              >
-                <p className="text-[10px] font-black text-amber-600 uppercase mb-1 tracking-tighter">
-                  {isHi ? "भाव" : "Vitality Focus"} {h}
-                </p>
-                <p className="text-xl font-black text-slate-800 group-hover:text-amber-700 tracking-tight">
-                  {isHi ? "प्रभाव देखें" : "House"} {h}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
 
         {/* Footer Silos */}
         <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-amber-700 font-bold text-sm uppercase tracking-wider">

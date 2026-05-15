@@ -6,6 +6,8 @@ import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
+
 
 const currentYear = new Date().getFullYear();
 
@@ -371,30 +373,6 @@ export default async function SaturnTransitAscendantPage({
             initialData={initialData}
           />
         </div>
-
-        {/* House Grid */}
-        <section className="mt-20 border-t pt-12">
-          <h2 className="text-3xl font-black mb-8 text-slate-950">
-            {isHi ? `${ascName} लग्न के लिए हर भाव का फल` : `${ascName} Rising Karmic Map for Every House`}
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
-              <Link
-                key={h}
-                href={`/saturn-transit/${ascendant}?house=${h}`}
-                className="group p-5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-500 hover:bg-white transition-all shadow-sm"
-              >
-                <p className="text-[10px] font-black text-slate-400 uppercase mb-1 tracking-tighter">
-                  {isHi ? "भाव" : "Audit Scope"} {h}
-                </p>
-                <p className="text-xl font-black text-slate-800 group-hover:text-slate-900 tracking-tight">
-                  {isHi ? "प्रभाव देखें" : "House"} {h}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
 
         {/* Footer Silos */}
         <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-blue-700 font-bold text-sm uppercase tracking-wider">
