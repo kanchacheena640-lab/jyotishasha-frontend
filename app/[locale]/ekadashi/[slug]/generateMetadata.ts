@@ -6,11 +6,12 @@ export async function generateMetadata({
   searchParams,
 }: {
   params: { slug: string; locale: string };
-  searchParams: { year?: string };
+  searchParams: Promise<{ year?: string }>;
 }): Promise<Metadata> {
 
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const sp = await searchParams;
 
   const t = (en: any, hi: any) => (isHi ? hi : en);
 
@@ -18,13 +19,13 @@ export async function generateMetadata({
   if (!content) return {};
 
   const currentYear = new Date().getFullYear();
-  const displayYear = searchParams.year
-    ? searchParams.year
+  const displayYear = sp?.year
+    ? sp?.year
     : currentYear.toString();
 
   // ✅ Locale URL
   const baseUrl = `https://www.jyotishasha.com/${locale}/ekadashi/${params.slug}`;
-  const url = `${baseUrl}${searchParams.year ? `?year=${searchParams.year}` : ""}`;
+  const url = `${baseUrl}${sp?.year ? `?year=${sp?.year}` : ""}`;
 
   // ✅ Bilingual Title + Description
   const title = t(
@@ -42,7 +43,7 @@ export async function generateMetadata({
     description,
 
     alternates: {
-      canonical: baseUrl, // ✅ locale-based canonical
+      canonical: url, // ✅ locale-based canonical
     },
 
     openGraph: {

@@ -6,7 +6,6 @@ import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 
 export const revalidate = 3600;
-export const dynamic = "force-dynamic";
 
 
 const currentYear = new Date().getFullYear();

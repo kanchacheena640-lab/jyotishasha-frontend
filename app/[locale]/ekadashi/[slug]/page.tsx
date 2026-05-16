@@ -4,7 +4,8 @@ import {
   getEkadashiContent,
   getAllEkadashiSlugs,
 } from "@/app/data/ekadashi";
-import LocationText from "@/components/location/LocationText";
+
+export const revalidate = 86400;
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -36,17 +37,28 @@ async function getEkadashiDynamicData(
         next: { revalidate: 86400 },
       }
     );
-    if (!res.ok) return null;
+
+    if (!res.ok) {
+      console.error(`API Error: ${res.status} for ${slug} year ${year}`);
+      return null;
+    }
+
     const result = await res.json();
     return result.data;
-  } catch {
+  } catch (e) {
+    console.error("Fetch error for", slug, e);
     return null;
   }
 }
 
+
 export async function generateStaticParams() {
   const slugs = getAllEkadashiSlugs();
-  return slugs.map((slug) => ({ slug }));
+
+  return slugs.map((slug) => ({
+    locale: "hi",
+    slug,
+  }));
 }
 
 /* ---------------- PAGE ---------------- */
@@ -57,45 +69,49 @@ export default async function Page({
   params: { slug: string; locale: string };
   searchParams: { year?: string };
 }) {
-  const locale = params.locale || "en";
+
+  const { slug, locale } = params;
+  const sp = searchParams;
+
   const isHi = locale === "hi";
 
   const t = (en: any, hi: any) => (isHi ? hi : en);
 
-  const content = getEkadashiContent(params.slug);
+  const content = getEkadashiContent(slug);
   if (!content) notFound();
 
-  const currentYear = new Date().getFullYear();
-  const selectedYear = searchParams.year
-    ? parseInt(searchParams.year)
-    : currentYear;
+  const parsedYear = Number(sp?.year);
+
+  // Final Year Logic
+  const selectedYear =
+    !isNaN(parsedYear) && parsedYear > 2000
+      ? parsedYear
+      : new Date().getFullYear();
+
+  console.log(
+    `🔍 DEBUG → Slug: ${slug} | Query Year: ${sp?.year} | Selected Year: ${selectedYear}`
+  );
 
   const dynamic = await getEkadashiDynamicData(
-    params.slug,
+    slug,
     selectedYear,
     locale
   );
 
-  const currentUrl = `https://www.jyotishasha.com/${locale}/ekadashi/${params.slug}`;
+  console.log(
+    `📦 Data Received for ${selectedYear}:`,
+    dynamic ? "✅ Yes" : "❌ No"
+  );
 
   const displayDate = formatDate(dynamic?.vrat_date);
+
   const displayParanaTime = dynamic
-    ? `${formatTimeOnly(dynamic.parana.start)} - ${formatTimeOnly(
-        dynamic.parana.end
+    ? `${formatTimeOnly(dynamic.parana?.start)} - ${formatTimeOnly(
+        dynamic.parana?.end
       )}`
     : "TBA";
+
   const displayParanaDate = formatDate(dynamic?.parana?.parana_date);
-
-  const tithiStart = dynamic?.tithi?.start || "TBA";
-  const tithiEnd = dynamic?.tithi?.end || "TBA";
-
-  const shareText = `✨ *${t(
-    content.name.en,
-    content.name.hi
-  )} ${selectedYear}* ✨
-📅 ${t("Date", "तारीख")}: ${displayDate}
-⏳ ${t("Parana", "पारण")}: ${displayParanaTime}
-🔗 ${currentUrl}`;
 
   return (
     <div className="bg-gradient-to-b from-orange-900 to-orange-800 py-6 md:py-16 min-h-screen">
@@ -115,23 +131,6 @@ export default async function Page({
           {t(content.name.en, content.name.hi)} {selectedYear}:{" "}
           {t("Vrat Date, Muhurat & Katha", "व्रत तिथि, मुहूर्त और कथा")}
         </h1>
-
-        {/* Year Tabs */}
-        <div className="flex gap-4 mb-8 border-b pb-2">
-          {[2026, 2027].map((y) => (
-            <Link
-              key={y}
-              href={`/${locale}/ekadashi/${params.slug}?year=${y}`}
-              className={
-                selectedYear === y
-                  ? "text-orange-700 border-b-4 border-orange-700 pb-2"
-                  : "text-gray-400"
-              }
-            >
-              {y}
-            </Link>
-          ))}
-        </div>
 
         {/* Top Cards */}
         <section className="grid md:grid-cols-2 gap-4 mb-6">
@@ -207,7 +206,7 @@ export default async function Page({
               return (
                 <Link
                   key={slug}
-                  href={`/${locale}/ekadashi/${slug}`}
+                  href={`/${locale}/ekadashi/${slug}?year=${selectedYear}`}
                   className="p-2 bg-gray-100 rounded text-xs"
                 >
                   {t(other?.name.en, other?.name.hi)}

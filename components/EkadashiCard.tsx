@@ -56,7 +56,9 @@ export default function EkadashiCard({ item, idx, locale, isToday }: any) {
 const langPath = locale === 'en' ? '' : `/${locale}`;
 const slugPath = item.slug?.includes("ekadashi") ? item.slug : `${item.slug}-ekadashi`;
 
-const href = `${langPath}/ekadashi/${slugPath}`;
+const year = item.vrat_date?.split("-")[0];
+
+const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
 
   return (
     <Link href={href} className="group block">

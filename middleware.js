@@ -58,9 +58,10 @@ export function middleware(request) {
   )
 
   if (!hasLocale) {
-    return NextResponse.rewrite(
-      new URL(`/en${pathname}`, request.url)
-    )
+    const url = request.nextUrl.clone()
+    url.pathname = `/en${pathname}`
+
+    return NextResponse.rewrite(url)
   }
 
   return NextResponse.next()
