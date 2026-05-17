@@ -36,8 +36,9 @@ export function middleware(request) {
     )
   }
 
-  // House rewrite
+  // Public SEO URL: /house-9
   if (pathname.includes('house-')) {
+
     const parts = pathname.split('/')
 
     const planet = parts[1]
@@ -49,6 +50,24 @@ export function middleware(request) {
         `/en/${planet}/${ascendant}/house/${house}`,
         request.url
       )
+    )
+  }
+
+  // Redirect internal route to SEO URL
+  if (pathname.includes('/house/')) {
+
+    const parts = pathname.split('/')
+
+    const planet = parts[2]
+    const ascendant = parts[3]
+    const house = parts[5]
+
+    return NextResponse.redirect(
+      new URL(
+        `/${planet}/${ascendant}/house-${house}`,
+        request.url
+      ),
+      301
     )
   }
 
