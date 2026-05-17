@@ -5,7 +5,7 @@ import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitC
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 
 const currentYear = new Date().getFullYear();
@@ -94,7 +94,7 @@ function getRashiName(rashi: string | undefined, rashi_hi: string | null | undef
 async function fetchKetuCurrent(lang: string) {
   const res = await fetch(
     `https://jyotishasha-backend.onrender.com/api/transit/current?lang=${lang}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 86400 } }
   );
   if (!res.ok) return null;
   return res.json();
@@ -112,7 +112,7 @@ async function fetchTransitContent({
   lang: "en" | "hi";
 }) {
   const url = `https://jyotishasha-backend.onrender.com/api/transit?ascendant=${encodeURIComponent(ascendant)}&planet=${encodeURIComponent(planet)}&house=${house}&lang=${lang}`;
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await fetch(url, { next: { revalidate: 86400 } });
   return res.ok ? res.json() : null;
 }
 

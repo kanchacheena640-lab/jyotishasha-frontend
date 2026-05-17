@@ -16,7 +16,7 @@ async function fetchTransit(
 ) {
   const res = await fetch(
     `${BACKEND}/api/transit?ascendant=${ascendant}&planet=jupiter&house=${house}&lang=${lang}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 86400 } }
   );
   if (!res.ok) return null;
   return res.json();

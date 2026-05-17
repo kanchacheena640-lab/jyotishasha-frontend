@@ -4,7 +4,7 @@ import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
 import { getTransitMetadata } from "@/lib/seo/transitSeo";
 import VedicNote from "@/components/VedicNote";
 
-export const revalidate = 3600; // Moon fast changes, but cache 1hr ok
+export const revalidate = 86400; // Moon fast changes, but cache 1hr ok
 
 const currentYear = new Date().getFullYear();
 
@@ -77,7 +77,7 @@ function formatDate(dateStr?: string) {
 async function fetchMoonTransit(lang: string) {
   const res = await fetch(
     `https://jyotishasha-backend.onrender.com/api/transit/current?lang=${lang}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 86400 } }
   );
   if (!res.ok) throw new Error("Failed to fetch Moon transit data");
   return res.json();
