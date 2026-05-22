@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTransitHouse } from "@/components/transit/useTransitHouse";
 
 type TransitSection = { title: string; points: string[] };
 type TransitData = {
@@ -50,16 +51,28 @@ export default function AscendantSunTransitClient(props: {
 }) {
   const isHi = props.lang === "hi";
 
-  const [house, setHouse] = useState<number>(props.initialHouse);
+  const queryHouse = useTransitHouse(props.initialHouse);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const safeInitialHouse = mounted
+    ? queryHouse
+    : props.initialHouse;
+
+  const [house, setHouse] = useState<number>(safeInitialHouse);
   const [data, setData] = useState<TransitData | null>(props.initialData);
   const [loading, setLoading] = useState(false);
 
   const houses = useMemo(() => Array.from({ length: 12 }, (_, i) => i + 1), []);
 
   useEffect(() => {
-    setHouse(props.initialHouse);
+    setHouse(safeInitialHouse);
     setData(props.initialData);
-  }, [props.initialHouse, props.lang, props.ascendant]);
+  }, [safeInitialHouse, props.lang, props.ascendant]);
 
   async function onHouseChange(h: number) {
     if (h === house) return;
