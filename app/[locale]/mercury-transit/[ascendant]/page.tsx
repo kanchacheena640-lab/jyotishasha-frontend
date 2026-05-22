@@ -110,12 +110,30 @@ function formatDate(dateStr?: string) {
 
 /* ---------------- Data Fetch ---------------- */
 async function fetchMercuryCurrent(lang: string) {
-  const res = await fetch(
-    `https://jyotishasha-backend.onrender.com/api/transit/current?lang=${lang}`,
-    { next: { revalidate: 86400 } }
-  );
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const res = await fetch(
+      `https://jyotishasha-backend.onrender.com/api/transit/current?lang=${lang}`,
+      {
+        next: { revalidate: 86400 },
+      }
+    );
+
+    if (!res.ok) {
+      console.error(
+        "Mercury current fetch failed:",
+        res.status
+      );
+      return null;
+    }
+
+    return await res.json();
+  } catch (e) {
+    console.error(
+      "Mercury current API error:",
+      e
+    );
+    return null;
+  }
 }
 
 async function fetchTransitContent({
@@ -129,15 +147,44 @@ async function fetchTransitContent({
   house: number;
   lang: "en" | "hi";
 }) {
-  const url = `https://jyotishasha-backend.onrender.com/api/transit?ascendant=${encodeURIComponent(ascendant)}&planet=${encodeURIComponent(planet)}&house=${house}&lang=${lang}`;
-  const res = await fetch(url, { next: { revalidate: 86400 } });
-  return res.ok ? res.json() : null;
+  try {
+    const url =
+      `https://jyotishasha-backend.onrender.com/api/transit` +
+      `?ascendant=${encodeURIComponent(ascendant)}` +
+      `&planet=${encodeURIComponent(planet)}` +
+      `&house=${house}` +
+      `&lang=${lang}`;
+
+    const res = await fetch(url, {
+      next: { revalidate: 86400 },
+    });
+
+    if (!res.ok) {
+      console.error(
+        "Transit content fetch failed:",
+        res.status
+      );
+      return null;
+    }
+
+    return await res.json();
+  } catch (e) {
+    console.error(
+      "Transit content API error:",
+      e
+    );
+    return null;
+  }
 }
 
 export async function generateStaticParams() {
-  return ASCENDANTS.map((ascendant) => ({ ascendant }));
+  return ["en", "hi"].flatMap((locale) =>
+    ASCENDANTS.map((ascendant) => ({
+      locale,
+      ascendant,
+    }))
+  );
 }
-
 /* ---------------- Metadata ---------------- */
 export async function generateMetadata({
   params,
@@ -168,42 +215,79 @@ export async function generateMetadata({
 /* ---------------- Page ---------------- */
 export default async function MercuryTransitAscendantPage({
   params,
-  searchParams,
 }: {
   params: { ascendant: string; locale?: string };
-  searchParams?: { lang?: string; house?: string };
 }) {
   const ascendant = params.ascendant?.toLowerCase();
-  if (!ascendant || !isValidAscendant(ascendant)) notFound();
+
+  if (!ascendant || !isValidAscendant(ascendant)) {
+    notFound();
+  }
 
   const locale = params.locale || "en";
-  const lang: "en" | "hi" = locale === "hi" ? "hi" : "en";
+
+  const lang: "en" | "hi" =
+    locale === "hi" ? "hi" : "en";
+
   const isHi = lang === "hi";
 
-  const rawHouse = searchParams?.house ? Number(searchParams.house) : 1;
-  const initialHouse = rawHouse >= 1 && rawHouse <= 12 ? rawHouse : 1;
+  // IMPORTANT:
+  // searchParams removed from server component
+  // to keep page fully ISR/static compatible
+  const initialHouse = 1;
 
   const current = await fetchMercuryCurrent(lang);
-  if (!current) notFound();
+
+  if (!current) {
+    notFound();
+  }
 
   const mercuryPos = current.positions?.Mercury;
-  if (!mercuryPos) notFound();
 
-  const mercuryFuture = current.future_transits?.Mercury || [];
+  if (!mercuryPos) {
+    notFound();
+  }
+
+  const mercuryFuture =
+    current.future_transits?.Mercury || [];
+
   const currentTransit = mercuryFuture[0];
 
-  const rashiName = getRashiName(mercuryPos.rashi, mercuryPos.rashi_hi, isHi);
-  const motion = getMotion(mercuryPos.motion, isHi);
+  const rashiName = getRashiName(
+    mercuryPos.rashi,
+    mercuryPos.rashi_hi,
+    isHi
+  );
+
+  const motion = getMotion(
+    mercuryPos.motion,
+    isHi
+  );
 
   const ascName = titleCase(ascendant);
-  const currentRashi = mercuryPos.rashi || "Aries";
-  const currentHouse = getHouse(ascName, currentRashi);
 
-  const currentIndex = Math.max(0, RASHIS.indexOf(currentRashi));
+  const currentRashi =
+    mercuryPos.rashi || "Aries";
+
+  const currentHouse = getHouse(
+    ascName,
+    currentRashi
+  );
+
+  const currentIndex = Math.max(
+    0,
+    RASHIS.indexOf(currentRashi)
+  );
+
   const previousRashi =
-    currentIndex === 0 ? RASHIS[11] : RASHIS[currentIndex - 1];
+    currentIndex === 0
+      ? RASHIS[11]
+      : RASHIS[currentIndex - 1];
 
-  const previousHouse = getHouse(ascName, previousRashi);
+  const previousHouse = getHouse(
+    ascName,
+    previousRashi
+  );
 
   const initialData = await fetchTransitContent({
     ascendant,
@@ -212,7 +296,9 @@ export default async function MercuryTransitAscendantPage({
     lang,
   });
 
-  const houseTraits = isHi ? MERCURY_HOUSE_TRAITS_HI : MERCURY_HOUSE_TRAITS_EN;
+  const houseTraits = isHi
+    ? MERCURY_HOUSE_TRAITS_HI
+    : MERCURY_HOUSE_TRAITS_EN;
 
   const faqSchema = {
     "@context": "https://schema.org",
