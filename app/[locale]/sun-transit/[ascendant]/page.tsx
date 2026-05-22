@@ -168,10 +168,8 @@ export async function generateMetadata({
 /* ---------------- Page ---------------- */
 export default async function SunTransitAscendantPage({
     params,
-    searchParams,
   }: {
     params: { ascendant: string; locale?: string };
-    searchParams?: { house?: string };
   }) {
 
   const ascendant = params.ascendant?.toLowerCase();
@@ -181,7 +179,7 @@ export default async function SunTransitAscendantPage({
   const lang: "en" | "hi" = locale === "hi" ? "hi" : "en";
   const isHi = lang === "hi";
 
-  const rawHouse = searchParams?.house ? Number(searchParams.house) : 1;
+  const rawHouse = 1;
   const initialHouse = rawHouse >= 1 && rawHouse <= 12 ? rawHouse : 1;
 
   const current = await fetchSunCurrent(lang);

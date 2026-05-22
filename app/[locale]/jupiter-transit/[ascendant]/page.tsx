@@ -170,11 +170,10 @@ export async function generateMetadata({
 /* ---------------- Page ---------------- */
 export default async function JupiterTransitAscendantPage({
   params,
-  searchParams,
 }: {
   params: { ascendant: string; locale?: string };
-  searchParams?: { lang?: string; house?: string };
 }) {
+
   const ascendant = params.ascendant?.toLowerCase();
   if (!ascendant || !isValidAscendant(ascendant)) notFound();
 
@@ -182,7 +181,7 @@ export default async function JupiterTransitAscendantPage({
   const lang: "en" | "hi" = locale === "hi" ? "hi" : "en";
   const isHi = lang === "hi";
 
-  const rawHouse = searchParams?.house ? Number(searchParams.house) : 1;
+  const rawHouse = 1;
   const initialHouse = rawHouse >= 1 && rawHouse <= 12 ? rawHouse : 1;
 
   const currentData = await fetchJupiterCurrent(lang);
