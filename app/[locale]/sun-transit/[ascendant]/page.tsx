@@ -278,6 +278,7 @@ export default async function SunTransitAscendantPage({
         <VedicNote lang={lang} />
 
         {/* Dynamic Chart */}
+        <Suspense fallback={<div>Loading...</div>}>
         <div className="mb-20">
           <Suspense fallback={<div className="py-10 text-center">Loading...</div>}>
             <AscendantSunTransitClient
@@ -290,6 +291,7 @@ export default async function SunTransitAscendantPage({
             />
           </Suspense>
         </div>
+        </Suspense>
 
         {/* Intro */}
         <div className="prose prose-slate max-w-none mb-10">
