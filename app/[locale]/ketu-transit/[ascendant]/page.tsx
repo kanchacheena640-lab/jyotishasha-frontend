@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
+import { Suspense } from "react";
 
 export const revalidate = 86400;
 
@@ -265,13 +266,17 @@ export default async function KetuTransitAscendantPage({
         <VedicNote lang={lang} />
 
         {/* Dynamic Chart */}
-        <div className="my-10 flex justify-center">
-          <DynamicTransitChart
-            ascendant={ascendant}
-            activePlanet="ketu"
-            house={currentHouse}
-            size={340}
-          />
+        <div className="mb-20">
+          <Suspense fallback={<div className="py-10 text-center">Loading...</div>}>
+            <AscendantSunTransitClient
+              key={`${ascendant}-${initialHouse}`}
+              ascendant={ascendant}
+              planet="ketu"
+              lang={lang}
+              initialHouse={initialHouse}
+              initialData={initialData}
+            />
+          </Suspense>
         </div>
 
         {/* Intro */}
