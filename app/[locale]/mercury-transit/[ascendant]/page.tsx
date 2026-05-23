@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
+import { Suspense } from "react";
 
 export const revalidate = 86400;
 
@@ -448,13 +449,15 @@ export default async function MercuryTransitAscendantPage({
 
         {/* Client Component */}
         <div className="mb-20">
-          <AscendantSunTransitClient
-            ascendant={ascendant}
-            planet="mercury"
-            lang={lang}
-            initialHouse={initialHouse}
-            initialData={initialData}
-          />
+          <Suspense fallback={<div className="py-10 text-center">Loading...</div>}>
+            <AscendantSunTransitClient
+              ascendant={ascendant}
+              planet="mercury"
+              lang={lang}
+              initialHouse={initialHouse}
+              initialData={initialData}
+            />
+          </Suspense>
         </div>
 
 
