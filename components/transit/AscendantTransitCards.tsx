@@ -131,7 +131,7 @@
 
                 {/* Modern Dynamic CTA - User ko uske specific House ke liye attract karne ke liye */}
                 <Link
-                  href={`/${lang === "hi" ? "hi/" : ""}${planetSlug}/${slug}/house/${house}`}
+                  href={`/${lang ==="hi" ? "hi/" : ""}${planetSlug}/${slug}/house-${house}`}
                   className="w-full text-center py-4 bg-white border-2 border-slate-900 text-slate-900 text-[11px] font-black rounded-2xl hover:bg-slate-900 hover:text-white transition-all duration-300 uppercase tracking-[0.2em] relative z-10"
                 >
                   {lang === "hi" ? `भाव ${house} का प्रभाव देखें →` : `Check House ${house} Impact →`}
