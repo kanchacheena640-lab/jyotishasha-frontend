@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Rahu", "rahu-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Rahu",
+    planetHi: "राहु",
+    slug: "rahu-transit",
+    locale: "en",
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function RahuTransitPage({
 
   const rahuPos = data.positions?.Rahu;
   const rahuFuture = data.future_transits?.Rahu || [];
-  const currentTransit = rahuFuture[0];
+  const currentTransit = rahuFuture?.[0];
 
   const rashiName = getRashiName(
     rahuPos?.rashi,
@@ -109,33 +121,88 @@ export default async function RahuTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How does Rahu transit ${currentYear} influence ambition and sudden changes?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Rahu, the shadow planet of desire and illusion, drives intense ambition, unconventional opportunities, and sudden breakthroughs or disruptions. Its transit often brings foreign connections, technological advances, or obsessive pursuits that accelerate karmic lessons.",
-        },
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में राहु गोचर महत्वाकांक्षा और अचानक बदलावों को कैसे प्रभावित करता है?`
+        : `How does Rahu transit ${currentYear} influence ambition and sudden changes?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "राहु इच्छा, भ्रम और असामान्य महत्वाकांक्षा का छाया ग्रह है। इसका गोचर अचानक अवसर, विदेशी संबंध, तकनीकी प्रगति और अप्रत्याशित बदलाव ला सकता है। यह व्यक्ति को तेज़ी से कर्मिक अनुभवों और नई दिशाओं की ओर धकेलता है।"
+          : "Rahu, the shadow planet of desire and illusion, drives intense ambition, unconventional opportunities, and sudden breakthroughs or disruptions. Its transit often brings foreign connections, technological advances, or obsessive pursuits that accelerate karmic lessons.",
       },
-      {
-        "@type": "Question",
-        name: "What is the spiritual meaning of Rahu Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, Rahu represents unresolved desires, illusion (Maya), and material cravings from past karma. Its transit pushes one toward worldly experiences to ultimately learn detachment, discernment between real and fake, and spiritual evolution through overcoming obsessions.",
-        },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "राहु गोचर का आध्यात्मिक अर्थ क्या है?"
+        : "What is the spiritual meaning of Rahu Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से राहु अधूरी इच्छाओं, माया और भौतिक आकर्षण का प्रतीक है। इसका गोचर व्यक्ति को सांसारिक अनुभवों की ओर ले जाता है ताकि वह भ्रम और वास्तविकता के बीच अंतर समझ सके तथा आसक्ति पर विजय पाकर आध्यात्मिक विकास कर सके।"
+          : "Spiritually, Rahu represents unresolved desires, illusion (Maya), and material cravings from past karma. Its transit pushes one toward worldly experiences to ultimately learn detachment, discernment between real and fake, and spiritual evolution through overcoming obsessions.",
       },
-    ],
-  };
+    },
+  ],
+};
+  const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isHi ? "गोचर" : "Transits",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isHi ? "राहु गोचर" : "Rahu Transit",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}rahu-transit`,
+    },
+  ],
+};
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+
+  name: isHi
+    ? `राहु गोचर ${currentYear}`
+    : `Rahu Transit ${currentYear}`,
+
+  description: isHi
+    ? `${currentYear} में राहु गोचर का महत्वाकांक्षा, भ्रम, विदेशी संबंधों और अचानक बदलावों पर प्रभाव`
+    : `Effects of Rahu transit on ambition, illusion, foreign connections, obsessions, and sudden life changes.`,
+
+  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}rahu-transit`,
+
+  inLanguage: isHi ? "hi-IN" : "en-US",
+};
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-indigo-950/30 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -204,7 +271,7 @@ export default async function RahuTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({rahuPos?.degree}°)
+                {rashiName} ({rahuPos?.degree ?? "-"}°)
               </p>
             </div>
 

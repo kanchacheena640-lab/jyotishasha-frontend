@@ -20,6 +20,7 @@ Disallow: /
 # Allow all normal crawlers
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Sitemap
-Sitemap: https://jyotishasha.com/sitemap.xml
+Sitemap: https://www.jyotishasha.com/sitemap.xml

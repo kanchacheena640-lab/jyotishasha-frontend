@@ -66,7 +66,9 @@ export default function TransitInternalLinks({
               href={`/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${h}`}
               className="text-blue-700 hover:underline"
             >
-              {isHi ? `भाव ${h}` : `House ${h}`}
+              {isHi
+                ? `${planetName} ${h}वें भाव में`
+                : `${planetName} in ${h} House`}
             </Link>
           ))}
         </div>

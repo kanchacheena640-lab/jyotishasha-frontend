@@ -238,12 +238,36 @@ export default async function JupiterTransitAscendantPage({
       },
     ],
   };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Venus Transit",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: isHi
+          ? `${ascName} लग्न`
+          : `${ascName} Ascendant`,
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit/${ascendant}`,
+      },
+    ],
+  };
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-yellow-950/10 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">

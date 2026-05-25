@@ -329,12 +329,36 @@ export default async function MercuryTransitAscendantPage({
       },
     ],
   };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Venus Transit",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: isHi
+          ? `${ascName} लग्न`
+          : `${ascName} Ascendant`,
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit/${ascendant}`,
+      },
+    ],
+  };
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-emerald-950/20 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 border border-slate-100 overflow-hidden relative">
@@ -463,9 +487,9 @@ export default async function MercuryTransitAscendantPage({
 
         {/* Footer Silos */}
         <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-emerald-700 font-bold text-sm uppercase tracking-wider">
-          <Link href="/jupiter-transit" className="hover:underline">Jupiter Transit →</Link>
           <Link href="/venus-transit" className="hover:underline">Venus Transit →</Link>
-          <Link href="/mars-transit" className="hover:underline">Mars Transit →</Link>
+          <Link href="/moon-transit" className="hover:underline">Moon Transit →</Link>
+          <Link href="/jupiter-transit" className="hover:underline">Jupiter Transit →</Link>
         </footer>
       </article>
     </div>

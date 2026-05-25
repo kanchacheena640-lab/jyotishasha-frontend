@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Ketu", "ketu-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Ketu",
+    planetHi: "केतु",
+    slug: "ketu-transit",
+    locale,
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function KetuTransitPage({
 
   const ketuPos = data.positions?.Ketu;
   const ketuFuture = data.future_transits?.Ketu || [];
-  const currentTransit = ketuFuture[0];
+  const currentTransit = ketuFuture?.[0];
 
   const rashiName = getRashiName(
     ketuPos?.rashi,
@@ -109,33 +121,83 @@ export default async function KetuTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How does Ketu transit ${currentYear} affect spirituality and detachment?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Ketu, the south node, represents detachment, past-life karma, spirituality, and liberation. Its transit often brings sudden spiritual awakenings, detachment from material desires, intuitive insights, or losses that lead to higher wisdom.",
-        },
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में केतु गोचर आध्यात्मिकता और वैराग्य को कैसे प्रभावित करता है?`
+        : `How does Ketu transit ${currentYear} affect spirituality and detachment?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "केतु वैराग्य, पूर्व जन्म के कर्म, आध्यात्मिकता और मोक्ष का ग्रह है। इसका गोचर अचानक आध्यात्मिक जागरण, भौतिक इच्छाओं से दूरी, गहरी अंतर्ज्ञान शक्ति और ऐसे अनुभव ला सकता है जो व्यक्ति को उच्च ज्ञान की ओर ले जाएँ।"
+          : "Ketu, the south node, represents detachment, past-life karma, spirituality, and liberation. Its transit often brings sudden spiritual awakenings, detachment from material desires, intuitive insights, or losses that lead to higher wisdom.",
       },
-      {
-        "@type": "Question",
-        name: "What is the spiritual meaning of Ketu Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, Ketu signifies moksha (liberation), renunciation, and dissolution of ego. Its transit pushes one toward introspection, karmic resolution, occult knowledge, and letting go of attachments for soul evolution.",
-        },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "केतु गोचर का आध्यात्मिक अर्थ क्या है?"
+        : "What is the spiritual meaning of Ketu Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से केतु मोक्ष, त्याग और अहंकार के विघटन का प्रतीक है। इसका गोचर आत्मचिंतन, कर्मिक समाधान, गूढ़ ज्ञान और आत्मा की उन्नति के लिए आसक्तियों को छोड़ने की प्रेरणा देता है।"
+          : "Spiritually, Ketu signifies moksha (liberation), renunciation, and dissolution of ego. Its transit pushes one toward introspection, karmic resolution, occult knowledge, and letting go of attachments for soul evolution.",
       },
-    ],
-  };
+    },
+  ],
+};
+  const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isHi ? "गोचर" : "Transits",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isHi ? "केतु गोचर" : "Ketu Transit",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}ketu-transit`,
+    },
+  ],
+};
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+
+  name: isHi
+    ? `केतु गोचर ${currentYear}`
+    : `Ketu Transit ${currentYear}`,
+
+  description: isHi
+    ? `${currentYear} में केतु गोचर का आध्यात्मिकता, वैराग्य और मोक्ष पर प्रभाव`
+    : `Effects of Ketu transit on spirituality, detachment, and liberation.`,
+
+  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}ketu-transit`,
+
+  inLanguage: isHi ? "hi-IN" : "en-US",
+};
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-purple-950/20 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -204,7 +266,7 @@ export default async function KetuTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({ketuPos?.degree}°)
+                {rashiName} ({ketuPos?.degree ?? "-"}°)
               </p>
             </div>
 

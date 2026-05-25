@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Jupiter", "jupiter-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Jupiter",
+    planetHi: "बृहस्पति",
+    slug: "jupiter-transit",
+    locale,
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function JupiterTransitPage({
 
   const jupiterPos = data.positions?.Jupiter;
   const jupiterFuture = data.future_transits?.Jupiter || [];
-  const currentTransit = jupiterFuture[0];
+  const currentTransit = jupiterFuture?.[0];
 
   const rashiName = getRashiName(
     jupiterPos?.rashi,
@@ -109,33 +121,83 @@ export default async function JupiterTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How does Jupiter transit ${currentYear} influence growth and fortune?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Jupiter, the planet of expansion and wisdom, brings opportunities for growth, higher learning, financial prosperity, and spiritual development. Its transit often signifies luck, generosity, teaching, and blessings in life.",
-        },
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में गुरु गोचर वृद्धि और भाग्य को कैसे प्रभावित करता है?`
+        : `How does Jupiter transit ${currentYear} influence growth and fortune?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "गुरु (बृहस्पति) विस्तार, ज्ञान और सौभाग्य का ग्रह है। इसका गोचर जीवन में विकास, उच्च शिक्षा, आर्थिक समृद्धि, आध्यात्मिक उन्नति और नए अवसरों को बढ़ावा देता है। यह भाग्य, उदारता और आशीर्वाद का संकेत माना जाता है।"
+          : "Jupiter, the planet of expansion and wisdom, brings opportunities for growth, higher learning, financial prosperity, and spiritual development. Its transit often signifies luck, generosity, teaching, and blessings in life.",
       },
-      {
-        "@type": "Question",
-        name: "What is the spiritual meaning of Guru Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, Jupiter represents dharma, knowledge, and divine grace. Its transit encourages ethical living, pursuit of wisdom, generosity, and connection to higher purpose and teachers/gurus.",
-        },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "गुरु गोचर का आध्यात्मिक अर्थ क्या है?"
+        : "What is the spiritual meaning of Guru Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से गुरु धर्म, ज्ञान और दिव्य कृपा का प्रतीक है। इसका गोचर नैतिक जीवन, ज्ञान की खोज, उदारता और उच्च उद्देश्य तथा गुरुजनों से जुड़ाव को प्रोत्साहित करता है।"
+          : "Spiritually, Jupiter represents dharma, knowledge, and divine grace. Its transit encourages ethical living, pursuit of wisdom, generosity, and connection to higher purpose and teachers/gurus.",
       },
-    ],
-  };
+    },
+  ],
+};
+  const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isHi ? "गोचर" : "Transits",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isHi ? "बृहस्पति गोचर" : "Jupiter Transit",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}jupiter-transit`,
+    },
+  ],
+};
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+
+  name: isHi
+    ? `बृहस्पति गोचर ${currentYear}`
+    : `Jupiter Transit ${currentYear}`,
+
+  description: isHi
+    ? `${currentYear} में बृहस्पति गोचर का विस्तार, ज्ञान और भाग्य पर प्रभाव`
+    : `Effects of Jupiter transit on expansion, wisdom, and fortune.`,
+
+  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}jupiter-transit`,
+
+  inLanguage: isHi ? "hi-IN" : "en-US",
+};
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-yellow-950/10 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">

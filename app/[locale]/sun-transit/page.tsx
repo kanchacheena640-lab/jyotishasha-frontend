@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Sun", "sun-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Sun",
+    planetHi: "सूर्य",
+    slug: "sun-transit",
+    locale,
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function SunTransitPage({
 
   const sunPos = data.positions?.Sun;
   const sunFuture = data.future_transits?.Sun || [];
-  const currentTransit = sunFuture[0];
+  const currentTransit = sunFuture?.[0];
 
   const rashiName = getRashiName(
     sunPos?.rashi,
@@ -109,26 +121,68 @@ export default async function SunTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में सूर्य गोचर करियर को कैसे प्रभावित करता है?`
+        : `How does the Sun transit ${currentYear} affect my career?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "सूर्य अधिकार, नेतृत्व और पहचान का ग्रह है। इसका गोचर करियर में प्रतिष्ठा, उच्च अधिकारियों से संबंध और निर्णय लेने की क्षमता को प्रभावित करता है।"
+          : "The Sun represents authority and leadership. Its transit influences your professional recognition, relationship with superiors, and overall confidence in making executive decisions.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "सूर्य गोचर का आध्यात्मिक अर्थ क्या है?"
+        : "What is the spiritual meaning of Sun Transit (Surya Gochar)?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से सूर्य आत्मा (Atma) का प्रतीक है। इसका गोचर बताता है कि जीवन के किस क्षेत्र में आपको जिम्मेदारी लेनी है, आत्मविश्वास दिखाना है और अपने उच्च उद्देश्य के साथ जुड़ना है।"
+          : "Spiritually, the Sun represents the Atma (Soul). Its transit indicates where you need to shine your light, take responsibility, and align with your higher purpose.",
+      },
+    },
+  ],
+};
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
+    "@type": "BreadcrumbList",
+    itemListElement: [
       {
-        "@type": "Question",
-        name: `How does the Sun transit ${currentYear} affect my career?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "The Sun represents authority and leadership. Its transit influences your professional recognition, relationship with superiors, and overall confidence in making executive decisions."
-        }
+        "@type": "ListItem",
+        position: 1,
+        name: isHi ? "गोचर" : "Transits",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
       },
       {
-        "@type": "Question",
-        name: "What is the spiritual meaning of Sun Transit (Surya Gochar)?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, the Sun represents the Atma (Soul). Its transit indicates where you need to shine your light, take responsibility, and align with your higher purpose."
-        }
-      }
-    ]
+        "@type": "ListItem",
+        position: 2,
+        name: isHi ? "सूर्य गोचर" : "Sun Transit",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}sun-transit`,
+      },
+    ],
+  };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+
+    name: isHi
+      ? `सूर्य गोचर ${currentYear}`
+      : `Sun Transit ${currentYear}`,
+
+    description: isHi
+      ? `${currentYear} में सूर्य गोचर का करियर, आत्मविश्वास और पहचान पर प्रभाव`
+      : `Effects of Sun transit on career, confidence, authority, and recognition.`,
+
+    url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}sun-transit`,
+
+    inLanguage: isHi ? "hi-IN" : "en-US",
   };
 
   return (
@@ -137,6 +191,18 @@ export default async function SunTransitPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -205,7 +271,7 @@ export default async function SunTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({sunPos?.degree}°)
+                {rashiName} ({sunPos?.degree ?? "-"}°)
               </p>
             </div>
 

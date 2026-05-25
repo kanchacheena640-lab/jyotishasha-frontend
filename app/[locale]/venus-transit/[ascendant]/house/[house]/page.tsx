@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+import { getTransitMetadata } from "@/lib/seo/transitSeo";
+
+
+function titleCase(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 const currentYear = new Date().getFullYear();
@@ -24,46 +30,26 @@ export async function generateMetadata({
 }: {
   params: { ascendant: string; house: string; locale: string };
 }): Promise<Metadata> {
+
   const houseNum = Number(params.house);
+
   if (isNaN(houseNum) || houseNum < 1 || houseNum > 12) {
-    return { title: "Not Found", robots: { index: false } };
+    return {
+      title: "Not Found",
+      robots: { index: false },
+    };
   }
 
-  const asc = titleCase(params.ascendant);
   const locale = params.locale || "en";
-  const isHi = locale === "hi";
 
-  return {
-    title: isHi
-      ? `शुक्र गोचर ${currentYear} ${houseNum}वें भाव में ${asc} लग्न के लिए – प्रेम और विलासिता`
-      : `Venus Transit ${currentYear} in ${houseNum} House for ${asc} Rising – Love & Luxury`,
-    description: isHi
-      ? `${asc} लग्न के लिए ${houseNum}वें भाव में शुक्र गोचर ${currentYear} का सरल विश्लेषण – रिश्ते, धन और सुख में बदलाव।`
-      : `Simple Vedic analysis of Venus transit ${currentYear} in House ${houseNum} for ${asc} Rising – relationships, wealth, beauty, and luxury shifts.`,
-    alternates: {
-      canonical: `https://www.jyotishasha.com/venus-transit/${params.ascendant}/house/${houseNum}`,
-    },
-  };
-}
-
-function titleCase(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-export async function generateStaticParams() {
-  const ascendants = [
-    "aries","taurus","gemini","cancer","leo","virgo",
-    "libra","scorpio","sagittarius","capricorn","aquarius","pisces"
-  ];
-
-  const houses = Array.from({ length: 12 }, (_, i) => String(i + 1));
-
-  return ascendants.flatMap((asc) =>
-    houses.flatMap((house) => [
-      { locale: "en", ascendant: asc, house },
-      { locale: "hi", ascendant: asc, house },
-    ])
-  );
+  return getTransitMetadata({
+    planetEn: "Venus",
+    planetHi: "शुक्र",
+    slug: `venus-transit/${params.ascendant}/house-${houseNum}`,
+    locale,
+    ascendant: titleCase(params.ascendant),
+    houseNum,
+  });
 }
 
 /* ---------------- PAGE COMPONENT ---------------- */
@@ -94,6 +80,9 @@ export default async function VenusTransitHousePage({
     ? `${ascTitle} लग्न के लिए ${houseNum}वें भाव में शुक्र से प्यार और सुख बढ़ता है।`
     : `For ${ascTitle} ascendant, Venus in the ${houseNum} house brings harmony and material comfort.`;
 
+  const planetSlug = "venus-transit";
+  const planetName = "Venus";
+  
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -111,11 +100,44 @@ export default async function VenusTransitHousePage({
     ],
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: `${planetName} Transit`,
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `${ascTitle} Ascendant`,
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: isHi
+          ? `${houseNum}वाँ भाव`
+          : `${houseNum} House`,
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${houseNum}`,
+      },
+    ],
+  };
+
   return (
     <div className="bg-gradient-to-b from-slate-900 to-rose-950/20 py-12 md:py-20 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-16 py-16 shadow-2xl text-slate-900 relative border border-slate-100">

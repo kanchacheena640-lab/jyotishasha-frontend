@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Saturn", "saturn-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Saturn",
+    planetHi: "शनि",
+    slug: "saturn-transit",
+    locale,
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function SaturnTransitPage({
 
   const saturnPos = data.positions?.Saturn;
   const saturnFuture = data.future_transits?.Saturn || [];
-  const currentTransit = saturnFuture[0];
+  const currentTransit = saturnFuture?.[0];
 
   const rashiName = getRashiName(
     saturnPos?.rashi,
@@ -109,26 +121,68 @@ export default async function SaturnTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में शनि गोचर करियर और जिम्मेदारियों को कैसे प्रभावित करता है?`
+        : `How does Saturn transit ${currentYear} affect career and responsibilities?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "शनि कर्म, अनुशासन और धैर्य का ग्रह है। इसका गोचर करियर में मेहनत, जिम्मेदारियों और लंबे समय की स्थिर सफलता को प्रभावित करता है। यह प्रमोशन, कठिन परिश्रम और जीवन में संरचना बनाने के अवसर दे सकता है।"
+          : "Saturn, the planet of karma and discipline, influences long-term career growth, authority, and hard work. Its transit often brings promotions through effort, increased responsibilities, or lessons in patience and structure.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "शनि गोचर का आध्यात्मिक महत्व क्या है?"
+        : "What is the spiritual significance of Shani Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से शनि कर्म, न्याय और परिपक्वता का प्रतीक है। इसका गोचर विनम्रता, धैर्य और लगातार प्रयास का महत्व सिखाता है तथा पुराने कर्मों को संतुलित कर भविष्य की मजबूत नींव तैयार करता है।"
+          : "Spiritually, Saturn represents karma, justice, and maturity. Its transit teaches detachment, humility, and the value of consistent effort, helping clear past karmic debts and build a stronger foundation for the future.",
+      },
+    },
+  ],
+};
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
+    "@type": "BreadcrumbList",
+    itemListElement: [
       {
-        "@type": "Question",
-        name: `How does Saturn transit ${currentYear} affect career and responsibilities?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Saturn, the planet of karma and discipline, influences long-term career growth, authority, and hard work. Its transit often brings promotions through effort, increased responsibilities, or lessons in patience and structure.",
-        },
+        "@type": "ListItem",
+        position: 1,
+        name: isHi ? "गोचर" : "Transits",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
       },
       {
-        "@type": "Question",
-        name: "What is the spiritual significance of Shani Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, Saturn represents karma, justice, and maturity. Its transit teaches detachment, humility, and the value of consistent effort, helping clear past karmic debts and build a stronger foundation for the future.",
-        },
+        "@type": "ListItem",
+        position: 2,
+        name: isHi ? "शनि गोचर" : "Saturn Transit",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}saturn-transit`,
       },
     ],
+  };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+
+    name: isHi
+      ? `शनि गोचर ${currentYear}`
+      : `Saturn Transit ${currentYear}`,
+
+    description: isHi
+      ? `${currentYear} में शनि गोचर का करियर, कर्म, जिम्मेदारियों और जीवन की स्थिरता पर प्रभाव`
+      : `Effects of Saturn transit on career, karma, discipline, responsibilities, and long-term stability.`,
+
+    url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}saturn-transit`,
+
+    inLanguage: isHi ? "hi-IN" : "en-US",
   };
 
   return (
@@ -136,6 +190,18 @@ export default async function SaturnTransitPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -204,7 +270,7 @@ export default async function SaturnTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({saturnPos?.degree}°)
+                {rashiName} ({saturnPos?.degree ?? "-"}°)
               </p>
             </div>
 

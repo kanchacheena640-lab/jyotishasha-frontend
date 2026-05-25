@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Venus", "venus-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Venus",
+    planetHi: "शुक्र",
+    slug: "venus-transit",
+    locale,
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function VenusTransitPage({
 
   const venusPos = data.positions?.Venus;
   const venusFuture = data.future_transits?.Venus || [];
-  const currentTransit = venusFuture[0];
+  const currentTransit = venusFuture?.[0];
 
   const rashiName = getRashiName(
     venusPos?.rashi,
@@ -109,26 +121,70 @@ export default async function VenusTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में शुक्र गोचर प्रेम और विवाह को कैसे प्रभावित करता है?`
+        : `How does Venus transit ${currentYear} influence love and marriage?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "शुक्र रिश्तों, प्रेम और वैवाहिक सुख का मुख्य कारक माना जाता है। इसका गोचर आकर्षण बढ़ाता है, भावनात्मक जुड़ाव को गहरा करता है और नए रिश्तों या वर्तमान संबंधों में सामंजस्य ला सकता है।"
+          : "Venus is the primary significator of relationships, romance, and marital harmony. Its transit enhances attraction, fosters deeper emotional bonds, and can trigger new romantic beginnings or strengthen existing partnerships.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "शुक्र गोचर धन, विलासिता और सौंदर्य को कैसे प्रभावित करता है?"
+        : `What is the impact of Shukra Gochar on wealth, luxury, and beauty?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "शुक्र भौतिक सुख, कला, सौंदर्य और आर्थिक आनंद का ग्रह है। शुभ शुक्र गोचर विलासिता, रचनात्मक सफलता, आकर्षण और जीवन में समृद्धि के अवसर प्रदान कर सकता है।"
+          : "Venus governs material comforts, artistic expression, and financial pleasures. A supportive transit often brings opportunities for luxury, creative success, aesthetic improvements, and overall abundance in life.",
+      },
+    },
+  ],
+};
+
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
+    "@type": "BreadcrumbList",
+    itemListElement: [
       {
-        "@type": "Question",
-        name: `How does Venus transit ${currentYear} influence love and marriage?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Venus is the primary significator of relationships, romance, and marital harmony. Its transit enhances attraction, fosters deeper emotional bonds, and can trigger new romantic beginnings or strengthen existing partnerships.",
-        },
+        "@type": "ListItem",
+        position: 1,
+        name: isHi ? "गोचर" : "Transits",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
       },
       {
-        "@type": "Question",
-        name: `What is the impact of Shukra Gochar on wealth, luxury, and beauty?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Venus governs material comforts, artistic expression, and financial pleasures. A supportive transit often brings opportunities for luxury, creative success, aesthetic improvements, and overall abundance in life.",
-        },
+        "@type": "ListItem",
+        position: 2,
+        name: isHi ? "शुक्र गोचर" : "Venus Transit",
+        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit`,
       },
     ],
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+
+    name: isHi
+      ? `शुक्र गोचर ${currentYear}`
+      : `Venus Transit ${currentYear}`,
+
+    description: isHi
+      ? `${currentYear} में शुक्र गोचर का प्रेम, सौंदर्य और धन पर प्रभाव`
+      : `Effects of Venus transit on love, beauty, and wealth.`,
+
+    url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit`,
+
+    inLanguage: isHi ? "hi-IN" : "en-US",
   };
 
   return (
@@ -136,6 +192,18 @@ export default async function VenusTransitPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -204,7 +272,7 @@ export default async function VenusTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({venusPos?.degree}°)
+                {rashiName} ({venusPos?.degree ?? "-"}°)
               </p>
             </div>
 

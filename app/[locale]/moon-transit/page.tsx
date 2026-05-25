@@ -58,9 +58,21 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Moon", "moon-transit");
-}
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Moon",
+    planetHi: "चंद्र",
+    slug: "moon-transit",
+    locale,
+  });
+}                                                                                                                                                                                                                                                                                                                                                                                          
 
 /* ---------------- Helpers ---------------- */
 function formatDate(dateStr?: string) {
@@ -96,7 +108,7 @@ export default async function MoonTransitPage({
 
   const moonPos = data.positions?.Moon;
   const moonFuture = data.future_transits?.Moon || [];
-  const currentTransit = moonFuture[0];
+  const currentTransit = moonFuture?.[0];
 
   const rashiName = getRashiName(
     moonPos?.rashi,
@@ -109,26 +121,69 @@ export default async function MoonTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में चंद्र गोचर भावनाओं और दैनिक मनोदशा को कैसे प्रभावित करता है?`
+        : `How does Moon transit ${currentYear} affect emotions and daily mood?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "चंद्रमा मन, भावनाओं, अंतर्ज्ञान और मातृत्व का कारक ग्रह है। इसका तेज़ गोचर हर 2-3 दिन में मानसिक स्थिति, भावनात्मक संवेदनशीलता, शांति और दैनिक प्रतिक्रियाओं को प्रभावित करता है।"
+          : "The Moon governs the mind, emotions, intuition, and mother. Its quick transit influences daily mood swings, emotional sensitivity, mental peace, and instinctive reactions, shifting every 2-3 days.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "चंद्र गोचर का आध्यात्मिक महत्व क्या है?"
+        : "What is the spiritual significance of Chandra Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से चंद्रमा आंतरिक मन, पोषण और अवचेतन का प्रतीक है। इसका गोचर भावनात्मक उपचार, अंतर्ज्ञान की वृद्धि, परिवार और माता से जुड़ाव तथा भावनाओं के प्रवाह को उजागर करता है।"
+          : "Spiritually, the Moon represents the inner self, nurturing, and subconscious. Its transit highlights emotional healing, intuition development, connection to mother/family, and the flow of feelings in daily life.",
+      },
+    },
+  ],
+};
+  const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isHi ? "गोचर" : "Transits",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isHi ? "चंद्र गोचर" : "Moon Transit",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}moon-transit`,
+    },
+  ],
+};
+
+  const webPageSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How does Moon transit ${currentYear} affect emotions and daily mood?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "The Moon governs the mind, emotions, intuition, and mother. Its quick transit influences daily mood swings, emotional sensitivity, mental peace, and instinctive reactions, shifting every 2-3 days.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What is the spiritual significance of Chandra Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, the Moon represents the inner self, nurturing, and subconscious. Its transit highlights emotional healing, intuition development, connection to mother/family, and the flow of feelings in daily life.",
-        },
-      },
-    ],
+    "@type": "WebPage",
+
+    name: isHi
+      ? `चंद्र गोचर ${currentYear}`
+      : `Moon Transit ${currentYear}`,
+
+    description: isHi
+      ? `${currentYear} में चंद्र गोचर का मन, भावनाएँ और अंतर्ज्ञान पर प्रभाव`
+      : `Effects of Moon transit on mind, emotions, and intuition.`,
+
+    url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}moon-transit`,
+
+    inLanguage: isHi ? "hi-IN" : "en-US",
   };
 
   return (
@@ -136,6 +191,18 @@ export default async function MoonTransitPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -204,7 +271,7 @@ export default async function MoonTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({moonPos?.degree}°)
+                {rashiName} ({moonPos?.degree ?? "-"}°)
               </p>
             </div>
 

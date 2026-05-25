@@ -58,8 +58,20 @@ function getMotion(motion: string, isHi: boolean) {
 }
 
 /* ---------------- METADATA ---------------- */
-export async function generateMetadata(): Promise<Metadata> {
-  return getTransitMetadata("Mars", "mars-transit");
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
+
+  const locale = params?.locale || "en";
+
+  return getTransitMetadata({
+    planetEn: "Mars",
+    planetHi: "मंगल",
+    slug: "mars-transit",
+    locale,
+  });
 }
 
 /* ---------------- Helpers ---------------- */
@@ -96,7 +108,7 @@ export default async function MarsTransitPage({
 
   const marsPos = data.positions?.Mars;
   const marsFuture = data.future_transits?.Mars || [];
-  const currentTransit = marsFuture[0];
+  const currentTransit = marsFuture?.[0];
 
   const rashiName = getRashiName(
     marsPos?.rashi,
@@ -109,33 +121,87 @@ export default async function MarsTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How does Mars transit ${currentYear} affect energy and courage?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Mars, the planet of action and vitality, influences courage, ambition, physical energy, and assertiveness. Its transit boosts drive, competitiveness, and initiative—but can also trigger conflicts, anger, or accidents if unmanaged.",
-        },
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में मंगल गोचर ऊर्जा और साहस को कैसे प्रभावित करता है?`
+        : `How does Mars transit ${currentYear} affect energy and courage?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "मंगल ऊर्जा, साहस और कार्यशक्ति का ग्रह है। इसका गोचर महत्वाकांक्षा, प्रतिस्पर्धा और पहल करने की क्षमता को बढ़ाता है। यदि ऊर्जा सही दिशा में न जाए तो यह क्रोध, विवाद या दुर्घटनाओं का कारण भी बन सकता है।"
+          : "Mars, the planet of action and vitality, influences courage, ambition, physical energy, and assertiveness. Its transit boosts drive, competitiveness, and initiative—but can also trigger conflicts, anger, or accidents if unmanaged.",
       },
-      {
-        "@type": "Question",
-        name: "What is the spiritual significance of Mangal Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, Mars represents willpower, discipline through action, and transformation via courage. Its transit teaches lessons in controlled aggression, leadership, protection of dharma, and channeling raw energy for higher purpose.",
-        },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "मंगल गोचर का आध्यात्मिक महत्व क्या है?"
+        : "What is the spiritual significance of Mangal Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से मंगल इच्छाशक्ति, कर्म और साहस का प्रतीक है। इसका गोचर अनुशासित ऊर्जा, नेतृत्व, धर्म की रक्षा और सही दिशा में शक्ति के उपयोग का पाठ सिखाता है।"
+          : "Spiritually, Mars represents willpower, discipline through action, and transformation via courage. Its transit teaches lessons in controlled aggression, leadership, protection of dharma, and channeling raw energy for higher purpose.",
       },
-    ],
-  };
+    },
+  ],
+};
+  const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isHi ? "गोचर" : "Transits",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isHi ? "मंगल गोचर" : "Mars Transit",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}mars-transit`,
+    },
+  ],
+};
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+
+  name: isHi
+    ? `मंगल गोचर ${currentYear}`
+    : `Mars Transit ${currentYear}`,
+
+  description: isHi
+    ? `${currentYear} में मंगल गोचर का ऊर्जा, साहस, प्रतिस्पर्धा, क्रोध और कार्यक्षमता पर प्रभाव`
+    : `Effects of Mars transit on energy, courage, ambition, competition, aggression, and physical drive.`,
+
+  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}mars-transit`,
+
+  inLanguage: isHi ? "hi-IN" : "en-US",
+};
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-red-950/20 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -204,7 +270,7 @@ export default async function MarsTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({marsPos?.degree}°)
+                {rashiName} ({marsPos?.degree ?? "-"}°)
               </p>
             </div>
 

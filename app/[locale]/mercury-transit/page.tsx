@@ -59,22 +59,20 @@ function getMotion(motion: string, isHi: boolean) {
 
 /* ---------------- METADATA ---------------- */
 export async function generateMetadata({
-    params,
-  }: {
-    params: { locale?: string };
-  }): Promise<Metadata> {
+  params,
+}: {
+  params: { locale?: string };
+}): Promise<Metadata> {
 
-    const locale =
-      params?.locale === "hi"
-        ? "hi"
-        : "en";
+  const locale = params?.locale || "en";
 
-    return getTransitMetadata(
-      "Mercury",
-      "mercury-transit",
-      locale
-    );
-  }
+  return getTransitMetadata({
+    planetEn: "Mercury",
+    planetHi: "बुध",
+    slug: "mercury-transit",
+    locale,
+  });
+}
 
 /* ---------------- Helpers ---------------- */
 function formatDate(dateStr?: string) {
@@ -110,7 +108,7 @@ export default async function MercuryTransitPage({
 
   const mercuryPos = data.positions?.Mercury;
   const mercuryFuture = data.future_transits?.Mercury || [];
-  const currentTransit = mercuryFuture[0];
+  const currentTransit = mercuryFuture?.[0];
 
   const rashiName = getRashiName(
     mercuryPos?.rashi,
@@ -123,33 +121,88 @@ export default async function MercuryTransitPage({
 
   /* FAQ Schema */
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How does Mercury transit ${currentYear} affect communication and intellect?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Mercury governs speech, logic, learning, and commerce. Its transit sharpens mental agility, influences business decisions, writing, negotiations, and short travels—often causing quick thinking or occasional miscommunications during retrograde.",
-        },
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: isHi
+        ? `${currentYear} में बुध गोचर बुद्धि और संचार को कैसे प्रभावित करता है?`
+        : `How does Mercury transit ${currentYear} affect communication and intellect?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "बुध वाणी, तर्क, शिक्षा और व्यापार का ग्रह है। इसका गोचर मानसिक तेज़ी बढ़ाता है, व्यापारिक निर्णयों, लेखन, बातचीत और छोटे यात्राओं को प्रभावित करता है। वक्री अवस्था में गलतफहमियाँ या संचार संबंधी समस्याएँ भी हो सकती हैं।"
+          : "Mercury governs speech, logic, learning, and commerce. Its transit sharpens mental agility, influences business decisions, writing, negotiations, and short travels—often causing quick thinking or occasional miscommunications during retrograde.",
       },
-      {
-        "@type": "Question",
-        name: "What is the spiritual significance of Budh Gochar?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Spiritually, Mercury represents discernment, wit, and adaptability. Its transit encourages intellectual growth, clear expression, ethical commerce, and learning lessons through communication and curiosity.",
-        },
+    },
+    {
+      "@type": "Question",
+      name: isHi
+        ? "बुध गोचर का आध्यात्मिक महत्व क्या है?"
+        : "What is the spiritual significance of Budh Gochar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isHi
+          ? "आध्यात्मिक रूप से बुध विवेक, बुद्धिमत्ता और अनुकूलन क्षमता का प्रतीक है। इसका गोचर स्पष्ट अभिव्यक्ति, नैतिक व्यापार, सीखने की क्षमता और जिज्ञासा के माध्यम से मानसिक विकास को बढ़ावा देता है।"
+          : "Spiritually, Mercury represents discernment, wit, and adaptability. Its transit encourages intellectual growth, clear expression, ethical commerce, and learning lessons through communication and curiosity.",
       },
-    ],
-  };
+    },
+  ],
+};
+  const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isHi ? "गोचर" : "Transits",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isHi ? "बुध गोचर" : "Mercury Transit",
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}mercury-transit`,
+    },
+  ],
+};
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+
+  name: isHi
+    ? `बुध गोचर ${currentYear}`
+    : `Mercury Transit ${currentYear}`,
+
+  description: isHi
+    ? `${currentYear} में चंद्र गोचर का भावनाओं, मानसिक स्थिति, परिवार और दैनिक जीवन पर प्रभाव`
+    : `Effects of Moon transit on emotions, mental state, intuition, family life, and daily mood patterns.`,
+
+  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}moon-transit`,
+
+  inLanguage: isHi ? "hi-IN" : "en-US",
+};
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-emerald-950/20 py-16 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
       />
 
       <article className="max-w-5xl mx-auto bg-white rounded-[2.5rem] px-6 md:px-12 py-16 shadow-2xl text-slate-900 overflow-hidden relative border border-slate-100">
@@ -218,7 +271,7 @@ export default async function MercuryTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({mercuryPos?.degree}°)
+                {rashiName} ({mercuryPos?.degree ?? "-"}°)
               </p>
             </div>
 
