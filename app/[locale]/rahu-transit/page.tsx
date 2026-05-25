@@ -40,6 +40,7 @@ const RASHI_HI_MAP: any = {
   Pisces: "मीन",
 };
 
+
 function getRashiName(rashi: string, rashi_hi: string | null, isHi: boolean) {
   if (!isHi) return rashi;
   return rashi_hi || RASHI_HI_MAP[rashi] || rashi;

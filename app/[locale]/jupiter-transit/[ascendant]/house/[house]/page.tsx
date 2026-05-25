@@ -34,7 +34,9 @@ export async function generateMetadata({
   params: { ascendant: string; house: string; locale: string };
 }): Promise<Metadata> {
 
-  const houseNum = Number(params.house);
+  const houseNum = Number(
+  params.house.replace("house-", "")
+);
 
   if (isNaN(houseNum) || houseNum < 1 || houseNum > 12) {
     return {
@@ -63,7 +65,9 @@ export default async function JupiterTransitHousePage({
   params: { ascendant: string; house: string; locale: string };
   searchParams?: { lang?: string };
 }) {
-  const houseNum = Number(params.house);
+  const houseNum = Number(
+  params.house.replace("house-", "")
+);
   if (isNaN(houseNum) || houseNum < 1 || houseNum > 12) notFound();
 
   const ascendant = params.ascendant.toLowerCase();

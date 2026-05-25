@@ -33,6 +33,20 @@ const RASHI_HI_MAP: Record<string, string> = {
   Aquarius: "कुंभ",
   Pisces: "मीन",
 };
+const RASHI_EN: Record<string, string> = {
+  मेष: "Aries",
+  वृषभ: "Taurus",
+  मिथुन: "Gemini",
+  कर्क: "Cancer",
+  सिंह: "Leo",
+  कन्या: "Virgo",
+  तुला: "Libra",
+  वृश्चिक: "Scorpio",
+  धनु: "Sagittarius",
+  मकर: "Capricorn",
+  कुंभ: "Aquarius",
+  मीन: "Pisces",
+};
 
 const KETU_HOUSE_TRAITS_EN: Record<number, string> = {
   1: "identity confusion, self-detachment, inner rediscovery",
@@ -172,7 +186,8 @@ export default async function KetuTransitAscendantPage({
   if (!ketuPos) notFound();
 
   const ascName = titleCase(ascendant);
-  const currentRashi = ketuPos.rashi || "Aries";
+  const currentRashi =
+    RASHI_EN[ketuPos.rashi] || ketuPos.rashi || "Aries";
   const currentHouse = getHouse(ascName, currentRashi);
 
   const currentIndex = Math.max(0, RASHIS.indexOf(currentRashi));

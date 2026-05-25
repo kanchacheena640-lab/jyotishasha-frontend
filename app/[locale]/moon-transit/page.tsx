@@ -271,7 +271,7 @@ export default async function MoonTransitPage({
                 {isHi ? "गोचर राशि" : "Transit Sign"}
               </p>
               <p className="text-2xl font-black">
-                {rashiName} ({moonPos?.degree ?? "-"}°)
+                {rashiName} ({moonPos?.degree}°)
               </p>
             </div>
 

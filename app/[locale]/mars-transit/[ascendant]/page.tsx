@@ -33,6 +33,20 @@ const RASHI_HI_MAP: Record<string, string> = {
   Aquarius: "कुंभ",
   Pisces: "मीन",
 };
+const RASHI_EN: Record<string, string> = {
+  मेष: "Aries",
+  वृषभ: "Taurus",
+  मिथुन: "Gemini",
+  कर्क: "Cancer",
+  सिंह: "Leo",
+  कन्या: "Virgo",
+  तुला: "Libra",
+  वृश्चिक: "Scorpio",
+  धनु: "Sagittarius",
+  मकर: "Capricorn",
+  कुंभ: "Aquarius",
+  मीन: "Pisces",
+};
 
 const MARS_HOUSE_TRAITS_EN: Record<number, string> = {
   1: "intense energy, physical drive, impulsive decisions",
@@ -196,7 +210,8 @@ export default async function MarsTransitAscendantPage({
   const motion = getMotion(marsPos.motion, isHi);
 
   const ascName = titleCase(ascendant);
-  const currentRashi = marsPos.rashi || "Aries";
+  const currentRashi =
+    RASHI_EN[marsPos.rashi] || marsPos.rashi || "Aries";
   const currentHouse = getHouse(ascName, currentRashi);
 
   const currentIndex = Math.max(0, RASHIS.indexOf(currentRashi));
