@@ -39,15 +39,17 @@ export function middleware(request) {
   // Public SEO URL: /house-9
   if (pathname.includes('house-')) {
 
-    const parts = pathname.split('/')
+    const parts = pathname.split('/').filter(Boolean)
 
-    const planet = parts[1]
-    const ascendant = parts[2]
-    const house = parts[3]?.replace('house-', '')
+    const isHi = parts[0] === 'hi'
+
+    const planet = isHi ? parts[1] : parts[0]
+    const ascendant = isHi ? parts[2] : parts[1]
+    const house = (isHi ? parts[3] : parts[2])?.replace('house-', '')
 
     return NextResponse.rewrite(
       new URL(
-        `/en/${planet}/${ascendant}/house/${house}`,
+        `${isHi ? '/hi' : '/en'}/${planet}/${ascendant}/house/${house}`,
         request.url
       )
     )
@@ -56,15 +58,17 @@ export function middleware(request) {
   // Redirect internal route to SEO URL
   if (pathname.includes('/house/')) {
 
-    const parts = pathname.split('/')
+    const parts = pathname.split('/').filter(Boolean)
 
-    const planet = parts[2]
-    const ascendant = parts[3]
-    const house = parts[5]
+    const isHi = parts[0] === 'hi'
+
+    const planet = isHi ? parts[1] : parts[0]
+    const ascendant = isHi ? parts[2] : parts[1]
+    const house = isHi ? parts[4] : parts[3]
 
     return NextResponse.redirect(
       new URL(
-        `/${planet}/${ascendant}/house-${house}`,
+        `${isHi ? '/hi' : ''}/${planet}/${ascendant}/house-${house}`,
         request.url
       ),
       301
