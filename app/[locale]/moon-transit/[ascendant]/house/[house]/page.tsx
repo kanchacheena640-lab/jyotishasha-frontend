@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
-import { getTransitMetadata } from "@/lib/seo/transitSeo";
+import {
+  getTransitMetadata,
+  buildFAQSchema,
+  buildBreadcrumbSchema,
+} from "@/lib/seo/transitSeo";
 
 function titleCase(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -86,48 +90,61 @@ export default async function MoonTransitHousePage({
   const planetSlug = "moon-transit";
   const planetName = "Moon";
   
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: isHi
-          ? `${houseNum}वें भाव में चंद्र का क्या असर होता है?`
-          : `How does Moon transit in ${houseNum} house affect ${ascTitle} rising?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faqText,
-        },
-      },
-    ],
-  };
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: `${planetName} Transit`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: `${ascTitle} Ascendant`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: isHi
-  ? `${houseNum}वाँ भाव`
-  : `${houseNum} House`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${houseNum}`,
-      },
-    ],
-  };
+  const faqSchema = buildFAQSchema([
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में चंद्र का क्या असर होता है?`
+      : `How does Moon transit in ${houseNum} house affect ${ascTitle} rising?`,
+
+    answer: faqText,
+  },
+
+  {
+    question: isHi
+      ? `${ascTitle} लग्न के लिए चंद्र गोचर शुभ है क्या?`
+      : `Is Moon transit beneficial for ${ascTitle} ascendant?`,
+
+    answer: isHi
+      ? `चंद्रमा का गोचर मन, भावनाओं, मानसिक स्थिति, परिवार, आराम और दैनिक अनुभवों से जुड़ा माना जाता है। इसका प्रभाव भाव और जन्म कुंडली की स्थिति पर निर्भर करता है।`
+      : `Moon transit is associated with emotions, mental state, family, comfort, mood and daily experiences. Its effects depend on house placement and natal chart strength.`,
+  },
+
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में चंद्र किन जीवन क्षेत्रों को प्रभावित करता है?`
+      : `Which life areas are activated by Moon transit in ${houseNum} house?`,
+
+    answer: isHi
+      ? `यह गोचर मानसिक शांति, परिवार, रिश्ते, भावनात्मक संतुलन, यात्रा, नींद और दैनिक जीवन के अनुभवों को प्रभावित कर सकता है।`
+      : `This transit may influence emotions, family life, relationships, emotional balance, travel, sleep and everyday experiences depending on the activated house.`,
+  },
+]);
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  {
+    name: `${planetName} Transit`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}`,
+  },
+
+  {
+    name: `${ascTitle} Ascendant`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}`,
+  },
+
+  {
+    name: isHi
+      ? `${houseNum}वाँ भाव`
+      : `${houseNum} House`,
+
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}/house-${houseNum}`,
+  },
+]);
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-indigo-950/20 py-12 md:py-20 px-4">

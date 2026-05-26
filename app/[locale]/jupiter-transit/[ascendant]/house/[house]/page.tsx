@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
-import { getTransitMetadata } from "@/lib/seo/transitSeo";
+import {
+  getTransitMetadata,
+  buildFAQSchema,
+  buildBreadcrumbSchema,
+} from "@/lib/seo/transitSeo";
 
 function titleCase(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -92,50 +96,61 @@ export default async function JupiterTransitHousePage({
   const planetName = "Jupiter";
   
 
-  const faqSchema = {
-    
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: isHi
-          ? `${houseNum} भाव में बृहस्पति का प्रभाव क्या है?`
-          : `How does Jupiter transit in ${houseNum} house affect ${ascTitle} rising?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faqText,
-        },
-      },
-    ],
-  };
+  const faqSchema = buildFAQSchema([
+  {
+    question: isHi
+      ? `${houseNum} भाव में बृहस्पति का प्रभाव क्या है?`
+      : `How does Jupiter transit in ${houseNum} house affect ${ascTitle} rising?`,
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: `${planetName} Transit`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: `${ascTitle} Ascendant`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: isHi
-  ? `${houseNum}वाँ भाव`
-  : `${houseNum} House`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${houseNum}`,
-      },
-    ],
-  };
+    answer: faqText,
+  },
+
+  {
+    question: isHi
+      ? `${ascTitle} लग्न के लिए बृहस्पति गोचर शुभ है क्या?`
+      : `Is Jupiter transit beneficial for ${ascTitle} ascendant?`,
+
+    answer: isHi
+      ? `बृहस्पति का गोचर ज्ञान, विस्तार, अवसर और आध्यात्मिक विकास से जुड़ा माना जाता है। इसका प्रभाव भाव और कुंडली की स्थिति पर निर्भर करता है।`
+      : `Jupiter transit is associated with growth, wisdom, opportunities and expansion. Its results depend on house placement and natal chart strength.`,
+  },
+
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में बृहस्पति से किन क्षेत्रों पर असर पड़ता है?`
+      : `Which life areas are activated by Jupiter transit in ${houseNum} house?`,
+
+    answer: isHi
+      ? `यह गोचर करियर, शिक्षा, धन, संबंध, आध्यात्मिकता और जीवन के महत्वपूर्ण निर्णयों को प्रभावित कर सकता है।`
+      : `This transit may influence career, learning, finances, relationships, spirituality and major life decisions depending on the activated house.`,
+  },
+]);
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  {
+    name: `${planetName} Transit`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}`,
+  },
+
+  {
+    name: `${ascTitle} Ascendant`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}`,
+  },
+
+  {
+    name: isHi
+      ? `${houseNum}वाँ भाव`
+      : `${houseNum} House`,
+
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}/house-${houseNum}`,
+  },
+]);
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-amber-950/20 py-12 md:py-20 px-4">

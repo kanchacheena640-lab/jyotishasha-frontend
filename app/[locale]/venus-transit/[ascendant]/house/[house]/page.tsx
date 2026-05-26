@@ -99,9 +99,29 @@ export default async function VenusTransitHousePage({
 
     answer: faqText,
   },
+
+  {
+    question: isHi
+      ? `${ascTitle} लग्न के लिए शुक्र गोचर शुभ है क्या?`
+      : `Is Venus transit beneficial for ${ascTitle} ascendant?`,
+
+    answer: isHi
+      ? `शुक्र का गोचर प्रेम, सौंदर्य, रिश्ते, विवाह, विलासिता, कला और भौतिक सुखों से जुड़ा माना जाता है। इसका प्रभाव भाव और जन्म कुंडली की स्थिति पर निर्भर करता है।`
+      : `Venus transit is associated with love, beauty, relationships, marriage, luxury, creativity and material comforts. Its effects depend on house placement and natal chart strength.`,
+  },
+
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में शुक्र किन जीवन क्षेत्रों को प्रभावित करता है?`
+      : `Which life areas are activated by Venus transit in ${houseNum} house?`,
+
+    answer: isHi
+      ? `यह गोचर प्रेम संबंध, विवाह, सामाजिक जीवन, कला, धन, आकर्षण और भावनात्मक संतुलन को प्रभावित कर सकता है।`
+      : `This transit may influence relationships, marriage, finances, social life, attraction, creativity and emotional harmony depending on the activated house.`,
+  },
 ]);
 
-  const breadcrumbSchema = buildBreadcrumbSchema([
+const breadcrumbSchema = buildBreadcrumbSchema([
   {
     name: `${planetName} Transit`,
     item: `https://www.jyotishasha.com/${

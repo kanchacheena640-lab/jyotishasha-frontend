@@ -4,7 +4,11 @@
   import VedicNote from "@/components/VedicNote";
   import DynamicTransitChart from "@/components/DynamicTransitChart";
   import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
-  import { getTransitMetadata } from "@/lib/seo/transitSeo";
+  import {
+    getTransitMetadata,
+    buildFAQSchema,
+    buildBreadcrumbSchema,
+  } from "@/lib/seo/transitSeo";
 
   function titleCase(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -86,50 +90,61 @@
     const planetSlug = "rahu-transit";
     const planetName = "Rahu";
 
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: isHi
-            ? `${houseNum}वें भाव में राहु का क्या असर होता है?`
-            : `How does Rahu transit in ${houseNum} house affect ${ascTitle} rising?`,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faqText,
-          },
-        },
-      ],
-    };
+    const faqSchema = buildFAQSchema([
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में राहु का क्या असर होता है?`
+      : `How does Rahu transit in ${houseNum} house affect ${ascTitle} rising?`,
 
-    const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: `${planetName} Transit`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: `${ascTitle} Ascendant`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: isHi
-  ? `${houseNum}वाँ भाव`
-  : `${houseNum} House`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${houseNum}`,
-      },
-    ],
-  };
+    answer: faqText,
+  },
 
+  {
+    question: isHi
+      ? `${ascTitle} लग्न के लिए राहु गोचर शुभ है क्या?`
+      : `Is Rahu transit beneficial for ${ascTitle} ascendant?`,
+
+    answer: isHi
+      ? `राहु का गोचर महत्वाकांक्षा, अचानक बदलाव, भ्रम, विदेशी संबंध, तकनीक, भौतिक इच्छाओं और असामान्य अनुभवों से जुड़ा माना जाता है। इसका प्रभाव भाव और जन्म कुंडली की स्थिति पर निर्भर करता है।`
+      : `Rahu transit is associated with ambition, sudden changes, illusion, foreign connections, technology, material desires and unconventional experiences. Its effects depend on house placement and natal chart strength.`,
+  },
+
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में राहु किन जीवन क्षेत्रों को प्रभावित करता है?`
+      : `Which life areas are activated by Rahu transit in ${houseNum} house?`,
+
+    answer: isHi
+      ? `यह गोचर करियर, मानसिक स्थिति, विदेशी अवसर, सामाजिक छवि, भ्रम, महत्वाकांक्षा और अप्रत्याशित घटनाओं को प्रभावित कर सकता है।`
+      : `This transit may influence career, mental state, foreign opportunities, social image, ambitions, confusion and unexpected events depending on the activated house.`,
+  },
+]);
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  {
+    name: `${planetName} Transit`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}`,
+  },
+
+  {
+    name: `${ascTitle} Ascendant`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}`,
+  },
+
+  {
+    name: isHi
+      ? `${houseNum}वाँ भाव`
+      : `${houseNum} House`,
+
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}/house-${houseNum}`,
+  },
+]);
     return (
       <div className="bg-gradient-to-b from-slate-900 to-indigo-950/40 py-12 md:py-20 px-4">
         <script

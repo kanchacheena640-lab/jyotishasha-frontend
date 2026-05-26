@@ -93,13 +93,34 @@ export default async function MarsTransitHousePage({
   const faqSchema = buildFAQSchema([
   {
     question: isHi
-      ? `${houseNum}वें भाव में शुक्र का क्या असर होता है?`
-      : `How does Venus transit in ${houseNum} house affect ${ascTitle} rising?`,
+      ? `${houseNum}वें भाव में मंगल का क्या असर होता है?`
+      : `How does Mars transit in ${houseNum} house affect ${ascTitle} rising?`,
 
     answer: faqText,
   },
+
+  {
+    question: isHi
+      ? `${ascTitle} लग्न के लिए मंगल गोचर शुभ है क्या?`
+      : `Is Mars transit beneficial for ${ascTitle} ascendant?`,
+
+    answer: isHi
+      ? `मंगल का गोचर ऊर्जा, साहस, प्रतियोगिता, क्रोध, कार्यक्षमता और निर्णय क्षमता से जुड़ा माना जाता है। इसका प्रभाव भाव और जन्म कुंडली की स्थिति पर निर्भर करता है।`
+      : `Mars transit is associated with energy, courage, aggression, competition, ambition and action. Its effects depend on house placement and natal chart strength.`,
+  },
+
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में मंगल किन जीवन क्षेत्रों को प्रभावित करता है?`
+      : `Which life areas are activated by Mars transit in ${houseNum} house?`,
+
+    answer: isHi
+      ? `यह गोचर करियर, आत्मविश्वास, संघर्ष, रिश्ते, स्वास्थ्य, निर्णय क्षमता और जीवन की सक्रियता को प्रभावित कर सकता है।`
+      : `This transit may influence career, confidence, conflicts, relationships, health, decision making and overall activity depending on the activated house.`,
+  },
 ]);
-  const breadcrumbSchema = buildBreadcrumbSchema([
+
+const breadcrumbSchema = buildBreadcrumbSchema([
   {
     name: `${planetName} Transit`,
     item: `https://www.jyotishasha.com/${
