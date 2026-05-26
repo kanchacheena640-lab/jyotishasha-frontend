@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
-import { getTransitMetadata } from "@/lib/seo/transitSeo";
+import {
+  getTransitMetadata,
+  buildFAQSchema,
+  buildBreadcrumbSchema,
+} from "@/lib/seo/transitSeo";
 
 
 function titleCase(s: string) {
@@ -87,49 +91,41 @@ export default async function VenusTransitHousePage({
   const planetSlug = "venus-transit";
   const planetName = "Venus";
   
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: isHi
-          ? `${houseNum}वें भाव में शुक्र का क्या असर होता है?`
-          : `How does Venus transit in ${houseNum} house affect ${ascTitle} rising?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faqText,
-        },
-      },
-    ],
-  };
+  const faqSchema = buildFAQSchema([
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में शुक्र का क्या असर होता है?`
+      : `How does Venus transit in ${houseNum} house affect ${ascTitle} rising?`,
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: `${planetName} Transit`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: `${ascTitle} Ascendant`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: isHi
-          ? `${houseNum}वाँ भाव`
-          : `${houseNum} House`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${houseNum}`,
-      },
-    ],
-  };
+    answer: faqText,
+  },
+]);
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+  {
+    name: `${planetName} Transit`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}`,
+  },
+
+  {
+    name: `${ascTitle} Ascendant`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}`,
+  },
+
+  {
+    name: isHi
+      ? `${houseNum}वाँ भाव`
+      : `${houseNum} House`,
+
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}/house-${houseNum}`,
+  },
+]);
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-rose-950/20 py-12 md:py-20 px-4">

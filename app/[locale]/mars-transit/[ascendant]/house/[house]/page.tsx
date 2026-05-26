@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
-import { getTransitMetadata } from "@/lib/seo/transitSeo";
+import {
+  getTransitMetadata,
+  buildFAQSchema,
+  buildBreadcrumbSchema,
+} from "@/lib/seo/transitSeo";
 
 function titleCase(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -86,48 +90,40 @@ export default async function MarsTransitHousePage({
   const planetSlug = "mars-transit";
   const planetName = "Mars";
   
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: isHi
-          ? `${houseNum}वें भाव में मंगल का क्या असर होता है?`
-          : `How does Mars transit in ${houseNum} house affect ${ascTitle} rising?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faqText,
-        },
-      },
-    ],
-  };
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: `${planetName} Transit`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: `${ascTitle} Ascendant`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: isHi
-  ? `${houseNum}वाँ भाव`
-  : `${houseNum} House`,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}/house-${houseNum}`,
-      },
-    ],
-  };
+  const faqSchema = buildFAQSchema([
+  {
+    question: isHi
+      ? `${houseNum}वें भाव में शुक्र का क्या असर होता है?`
+      : `How does Venus transit in ${houseNum} house affect ${ascTitle} rising?`,
+
+    answer: faqText,
+  },
+]);
+  const breadcrumbSchema = buildBreadcrumbSchema([
+  {
+    name: `${planetName} Transit`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}`,
+  },
+
+  {
+    name: `${ascTitle} Ascendant`,
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}`,
+  },
+
+  {
+    name: isHi
+      ? `${houseNum}वाँ भाव`
+      : `${houseNum} House`,
+
+    item: `https://www.jyotishasha.com/${
+      isHi ? "hi/" : ""
+    }${planetSlug}/${ascendant}/house-${houseNum}`,
+  },
+]);
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-red-950/20 py-12 md:py-20 px-4">
