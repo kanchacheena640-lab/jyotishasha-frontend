@@ -90,9 +90,6 @@ export async function generateMetadata({ params }: { params: { locale: string, s
       description: metaDesc,
       images: [GLOBAL_OG_IMAGE],
     },
-    other: {
-      "script:ld+json": JSON.stringify(jsonLd),
-      "script:ld+json-2": JSON.stringify(breadcrumbLd),
-    },
+    
   };
 }

@@ -2,6 +2,7 @@ import { muhurthTopics } from "../../muhurat/muhurth_topics";
 import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
 import { faq_muhurth } from "@/app/data/faq_muhurth";
 import Link from "next/link";
+import Script from "next/script";
 
 // 🧩 Importing Our New "Tunch" Components
 import { DynamicHero } from "@/components/muhurat/DynamicHero";
@@ -14,28 +15,81 @@ import { MuhurthArtFaq } from "@/components/muhurat/MuhurthArtFaq";
 export const revalidate = 86400;
 
 // 🔍 SEO & Metadata (Ranking Priority)
-export async function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string; slug: string };
+}) {
+
   const isHi = params.locale === "hi";
+
   const topic = muhurthTopics[params.slug];
+
   const now = new Date();
-  const month = now.toLocaleString(isHi ? "hi-IN" : "en-US", { month: "long" });
+
+  const month = now.toLocaleString(
+    isHi ? "hi-IN" : "en-US",
+    {
+      month: "long",
+    }
+  );
+
   const year = now.getFullYear();
-  
-  if (!topic) return { title: "Not Found" };
-  
-  const title = isHi ? `${topic.title_hi} – ${month} ${year}` : `${topic.title} – ${month} ${year}`;
-  
+
+  if (!topic) {
+    return {
+      title: "Not Found",
+    };
+  }
+
+  const title = isHi
+    ? `${topic.title_hi} – ${month} ${year}`
+    : `${topic.title} – ${month} ${year}`;
+
+  const description = isHi
+    ? topic.description_hi
+    : topic.description;
+
+  const canonical =
+    `https://www.jyotishasha.com${
+      isHi ? "/hi" : ""
+    }/panchang/muhurat/${params.slug}`;
+
   return {
     title,
-    description: isHi ? topic.description_hi : topic.description,
+
+    description,
+
     keywords: topic.keywords || [],
-    alternates: { canonical: topic.canonical },
-    openGraph: { 
-      title, 
-      description: isHi ? topic.description_hi : topic.description, 
-      url: topic.canonical, 
-      images: ["/og/muhurat-base.jpg"], 
-      type: "article" 
+
+    alternates: {
+      canonical,
+    },
+
+    openGraph: {
+      title,
+
+      description,
+
+      url: canonical,
+
+      images: [
+        "/og/muhurat-base.jpg",
+      ],
+
+      type: "article",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+
+      title,
+
+      description,
+
+      images: [
+        "/og/muhurat-base.jpg",
+      ],
     },
   };
 }
@@ -64,6 +118,97 @@ export default async function MuhuratPage({ params }: { params: { locale: string
   const now = new Date();
   const monthName = now.toLocaleString(isHi ? "hi-IN" : "en-US", { month: "long" });
   const year = now.getFullYear();
+  const currentCanonical =
+    `https://www.jyotishasha.com${
+      isHi ? "/hi" : ""
+    }/panchang/muhurat/${slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+
+    "@type": "Article",
+
+    headline: isHi
+      ? topic.title_hi
+      : topic.title,
+
+    description: isHi
+      ? topic.description_hi
+      : topic.description,
+
+    image:
+      "https://www.jyotishasha.com/og/muhurat-base.jpg",
+
+    author: {
+      "@type": "Organization",
+
+      name: "Jyotishasha",
+    },
+
+    publisher: {
+      "@type": "Organization",
+
+      name: "Jyotishasha",
+
+      logo: {
+        "@type": "ImageObject",
+
+        url: "https://www.jyotishasha.com/logo.png",
+      },
+    },
+
+    mainEntityOfPage: currentCanonical,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+
+    "@type": "BreadcrumbList",
+
+    itemListElement: [
+      {
+        "@type": "ListItem",
+
+        position: 1,
+
+        name: isHi
+          ? "पंचांग"
+          : "Panchang",
+
+        item:
+          `https://www.jyotishasha.com${
+            isHi ? "/hi" : ""
+          }/panchang`,
+      },
+
+      {
+        "@type": "ListItem",
+
+        position: 2,
+
+        name: isHi
+          ? "मुहूर्त"
+          : "Muhurat",
+
+        item:
+          `https://www.jyotishasha.com${
+            isHi ? "/hi" : ""
+          }/panchang/muhurat`,
+      },
+
+      {
+        "@type": "ListItem",
+
+        position: 3,
+
+        name: isHi
+          ? topic.title_hi
+          : topic.title,
+
+        item: currentCanonical,
+      },
+    ],
+  };
 
   // Helper for PrimeDates Summary
   const getSummary = (score: number) => {
@@ -73,6 +218,23 @@ export default async function MuhuratPage({ params }: { params: { locale: string
   };
 
   return (
+    <>
+  <Script
+    id="muhurat-article-schema"
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(jsonLd),
+    }}
+  />
+
+  <Script
+    id="muhurat-breadcrumb-schema"
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(breadcrumbLd),
+    }}
+  />
+
     <article className="max-w-6xl mx-auto px-4 py-10 text-white leading-relaxed">
       
       {/* 1️⃣ SEO Dynamic Hero */}
@@ -171,5 +333,6 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         </div>
       </footer>
     </article>
-  );
+</>
+);
 }

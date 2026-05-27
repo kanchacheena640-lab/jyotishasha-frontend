@@ -1,6 +1,7 @@
   import { muhurthTopics } from "@/app/[locale]/panchang/muhurat/muhurth_topics"; // ✅ Path updated
   import Link from "next/link";
   import Script from "next/script";
+  import Image from "next/image";
   import AppDownloadCTA from "@/components/AppDownloadCTA";
 
   export const revalidate = 86400;
@@ -35,6 +36,21 @@
         url: canonical,
         images: ["https://www.jyotishasha.com/og/muhurat-base.jpg"],
         type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+
+        title,
+
+        description,
+
+        images: [
+          "https://www.jyotishasha.com/og/muhurat-base.jpg",
+        ],
+      },
+      robots: {
+        index: true,
+        follow: true,
       },
     };
   }
@@ -80,7 +96,7 @@
 
         {/* 🧭 Cards Grid */}
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {topics.map((topic: any) => {
+          {topics.map((topic) => {
               const displayTitle = isHi ? (topic.title_hi || topic.title).split(" – ")[0] : topic.title.split(" – ")[0];
               const displayDesc = isHi ? (topic.description_hi || topic.description) : topic.description;
 
@@ -90,19 +106,21 @@
                   href={`${langPath}/panchang/muhurat/${topic.slug}`}
                   className="group relative rounded-2xl overflow-hidden border border-white/10 hover:border-purple-400/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-[#161b2e]"
                 >
-                  <div className="relative h-44 md:h-52">
-                    <img
+                  <div className="relative h-44 md:h-52 overflow-hidden">
+                    <Image
                       src="/og/muhurat-base.jpg"
                       alt={`${displayTitle} - ${month} ${year}`}
-                      className="object-cover w-full h-full opacity-60 group-hover:opacity-80 transition-opacity"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover opacity-60 group-hover:opacity-80 transition-opacity"
                     />
+
                     <div className="absolute inset-0 bg-gradient-to-t from-[#161b2e] via-transparent to-transparent flex items-end p-4">
                       <h2 className="text-lg md:text-xl font-bold text-purple-100 uppercase tracking-wide drop-shadow-md">
                         {displayTitle}
                       </h2>
                     </div>
                   </div>
-
                   <div className="p-4">
                     <p className="text-purple-300 text-[10px] font-bold uppercase mb-2 tracking-wider">
                       {isHi ? "अपडेटेड" : "Updated"} – {month} {year}
@@ -147,7 +165,7 @@
             "@type": "ItemList",
             name: isHi ? "सभी शुभ मुहूर्त लेख" : "All Shubh Muhurat Articles",
             url: `https://www.jyotishasha.com${langPath}/panchang/muhurat-articles`,
-            itemListElement: topics.map((topic: any, i) => ({
+            itemListElement: topics.map((topic, i) => ({
               "@type": "ListItem",
               position: i + 1,
               url: `https://www.jyotishasha.com${langPath}/panchang/muhurat/${topic.slug}`,
