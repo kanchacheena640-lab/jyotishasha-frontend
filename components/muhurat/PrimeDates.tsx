@@ -30,11 +30,15 @@ export const PrimeDates = ({ dates, isHi, monthName, getSummary }: PrimeDatesPro
 
       {/* Top 3 Dates List */}
       <div className="p-4 space-y-3">
-        {topDates.map((d) => (
+        {topDates.map((d, i) => (
           <Link 
             key={d.date} 
             href="#all-dates" 
-            className="group flex items-center gap-4 bg-white/5 p-3 rounded-2xl border border-white/5 hover:bg-purple-500/10 transition-all active:scale-95"
+            className={`group flex items-center gap-4 p-3 rounded-2xl border transition-all active:scale-95 ${
+              i === 0
+                ? "bg-gradient-to-r from-purple-500/20 to-indigo-500/10 border-yellow-400/20 shadow-[0_0_25px_rgba(168,85,247,0.18)]"
+                : "bg-white/5 border-white/5 hover:bg-purple-500/10"
+            }`}
           >
             {/* Date Badge */}
             <div className="text-center bg-gradient-to-br from-purple-600 to-indigo-700 min-w-[60px] py-2 rounded-xl shadow-lg group-hover:scale-105 transition-transform">
@@ -51,6 +55,11 @@ export const PrimeDates = ({ dates, isHi, monthName, getSummary }: PrimeDatesPro
               <p className="text-sm font-bold text-gray-100 truncate">
                 {d.nakshatra} • {d.tithi}
               </p>
+              {i === 0 && (
+                <p className="text-[9px] uppercase tracking-[0.2em] text-yellow-300 font-black mb-1">
+                  {isHi ? "सबसे शुभ" : "Most Powerful"}
+                </p>
+              )}
               <p className="text-[11px] text-purple-300 italic truncate opacity-90">
                 {getSummary(d.score)}
               </p>
