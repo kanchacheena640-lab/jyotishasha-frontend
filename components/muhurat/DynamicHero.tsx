@@ -39,10 +39,17 @@ export const DynamicHero = ({ title, month, year, isHi, locale }: HeroProps) => 
         </p>
         
         {/* Freshness Tag for Google Bot */}
-        <div className="mt-3 flex items-center gap-2">
-          <span className="flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
-          <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">
-            {isHi ? `अंतिम अपडेट: 1 ${month} ${year}` : `Last Updated: 1st ${month} ${year}`}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-300 text-[10px] md:text-xs border border-green-500/20 backdrop-blur-sm">
+            {isHi ? "दैनिक अपडेट" : "Updated Daily"}
+          </span>
+
+          <span className="px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 text-[10px] md:text-xs border border-purple-500/20 backdrop-blur-sm">
+            {isHi ? "वैदिक पंचांग आधारित" : "Based on Vedic Panchang"}
+          </span>
+
+          <span className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-300 text-[10px] md:text-xs border border-yellow-500/20 backdrop-blur-sm">
+            {isHi ? "नक्षत्र विश्लेषण" : "Nakshatra Analyzed"}
           </span>
         </div>
       </div>
