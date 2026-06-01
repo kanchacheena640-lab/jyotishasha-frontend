@@ -1,12 +1,64 @@
 export interface Report {
-  id: string; 
+  id: string;
   slug: string;
   price: number;
   image: string;
-  category: { en: string; hi: string };
-  title: { en: string; hi: string };
-  description: { en: string; hi: string };
-  fullDescription: { en: string; hi: string };
+
+  category: {
+    en: string;
+    hi: string;
+  };
+
+  title: {
+    en: string;
+    hi: string;
+  };
+
+  description: {
+    en: string;
+    hi: string;
+  };
+
+  fullDescription: {
+    en: string;
+    hi: string;
+  };
+
+  seoTitle?: {
+    en: string;
+    hi: string;
+  };
+
+  seoDescription?: {
+    en: string;
+    hi: string;
+  };
+
+  keywords?: string[];
+
+  benefits?: {
+    en: string[];
+    hi: string[];
+  };
+
+  includes?: {
+    en: string[];
+    hi: string[];
+  };
+
+  faq?: {
+    question: {
+      en: string;
+      hi: string;
+    };
+    answer: {
+      en: string;
+      hi: string;
+    };
+  }[];
+
+  reportLength?: string;
+  deliveryTime?: string;
 }
 
 export const reportsData: Report[] = [
