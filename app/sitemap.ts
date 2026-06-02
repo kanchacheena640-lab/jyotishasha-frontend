@@ -64,9 +64,6 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/reports/${report.slug}`, 0.75)
   );
 
-  const reportUrlsHi = reportsData.map((report) =>
-    createUrl(`${baseUrl}/hi/reports/${report.slug}`, 0.7)
-  );
 
   // ---------------- FREE KUNDALI ----------------
   const kundaliUrls = [
@@ -147,7 +144,6 @@ export default async function sitemap() {
     ...toolUrls,
     ...toolUrlsHi,
     ...reportUrls,
-    ...reportUrlsHi,
     ...kundaliUrls,
     ...transitUrls,
     ...holiUrls,
