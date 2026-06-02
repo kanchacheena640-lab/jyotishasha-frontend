@@ -18,6 +18,42 @@ function buildFaqJsonLd(faq: { q: string; a: string }[]) {
   };
 }
 
+function buildBreadcrumbJsonLd(
+  toolTitle: string,
+  toolId: string,
+  lang: string
+) {
+  const base =
+    lang === "hi"
+      ? "https://www.jyotishasha.com/hi"
+      : "https://www.jyotishasha.com";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: base,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Tools",
+        item: `${base}/tools`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: toolTitle,
+        item: `${base}/tools/${toolId}`,
+      },
+    ],
+  };
+}
+
 // 🔹 Metadata Generator: SEO Titles aur Descriptions handle karega
 export function generateMetadata(
   { params }: { params: { toolId: string; locale?: string } }
@@ -28,33 +64,67 @@ export function generateMetadata(
   const lang = params.locale === 'hi' ? 'hi' : 'en';
   const tool = toolRaw ? toolRaw[lang] : null;
 
-  if (!tool) {
+    if (!tool) {
+      return {
+        title: "Free Astrology Tool | Jyotishasha",
+        description: "Accurate Vedic astrology tools for life guidance.",
+      };
+    }
+
     return {
-      title: "Free Astrology Tool | Jyotishasha",
-      description: "Accurate Vedic astrology tools for life guidance.",
+      title: tool.seo.title,
+      description: tool.seo.description,
+      keywords: tool.seo.keywords,
+      alternates: {
+        canonical: `https://www.jyotishasha.com/${lang === 'hi' ? 'hi/' : ''}tools/${params.toolId}`,
+      },
     };
   }
 
-  return {
-    title: tool.seo.title,
-    description: tool.seo.description,
-    keywords: tool.seo.keywords,
-    alternates: {
-      canonical: `https://www.jyotishasha.com/${lang === 'hi' ? 'hi/' : ''}tools/${params.toolId}`,
-    },
-  };
-}
-
-export default function ToolPage({ params }: { params: { toolId: string; locale?: string } }) {
-  const toolRaw = toolContentMap[params.toolId];
-  
-  // Language determination
-  const lang = params.locale === 'hi' ? 'hi' : 'en';
-  const tool = toolRaw ? toolRaw[lang] : null;
+  export default function ToolPage({ params }: { params: { toolId: string; locale?: string } }) {
+    const toolRaw = toolContentMap[params.toolId];
+    
+    // Language determination
+    const lang = params.locale === 'hi' ? 'hi' : 'en';
+    const tool = toolRaw ? toolRaw[lang] : null;
 
   if (!tool) {
-    return <div className="text-white text-center py-20">Tool Content Not Found</div>;
+    return (
+      <div className="text-white text-center py-20">
+        Tool Content Not Found
+      </div>
+    );
   }
+
+  const breadcrumbSchema = buildBreadcrumbJsonLd(
+    tool.seo.title,
+    params.toolId,
+    lang
+  );
+
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+
+    name: tool.seo.title,
+
+    description: tool.seo.description,
+
+    applicationCategory: "AstrologyApplication",
+
+    operatingSystem: "Any",
+
+    url:
+      lang === "hi"
+        ? `https://www.jyotishasha.com/hi/tools/${params.toolId}`
+        : `https://www.jyotishasha.com/tools/${params.toolId}`,
+
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "INR",
+    },
+  };
 
   return (
     <>
@@ -118,16 +188,33 @@ export default function ToolPage({ params }: { params: { toolId: string; locale?
           </div>
         )}
 
-        {/* ✅ FAQ SCHEMA (Google Rich Snippets ke liye) */}
-        {tool.faq && tool.faq.length > 0 && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(buildFaqJsonLd(tool.faq)),
-            }}
-          />
-        )}
-      </div>
-    </>
-  );
+                {/* ✅ FAQ SCHEMA (Google Rich Snippets ke liye) */}
+                {tool.faq && tool.faq.length > 0 && (
+                  <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(buildFaqJsonLd(tool.faq)),
+                    }}
+                  />
+                )}
+
+                {/* ✅ Breadcrumb Schema */}
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(breadcrumbSchema),
+                  }}
+                />
+
+                {/* ✅ WebApplication Schema */}
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(webAppSchema),
+                  }}
+                />
+              </div>
+            </>
+          );
+
 }

@@ -75,7 +75,11 @@ export default function ToolsPage() {
         {filteredTools.map((tool) => (
           <Link
             key={tool.slug}
-            href={`/${currentLang}/tools/${tool.slug}`}
+            href={
+                currentLang === "hi"
+                  ? `/hi/tools/${tool.slug}`
+                  : `/tools/${tool.slug}`
+              }
             className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all p-6 flex flex-col justify-between border border-gray-100"
           >
             <div className="text-5xl mb-4">{tool.emoji}</div>

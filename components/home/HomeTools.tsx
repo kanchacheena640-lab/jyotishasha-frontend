@@ -39,7 +39,11 @@ export default function HomeTools() {
           <Link
             key={tool.slug}
             // ✅ Link mein currentLang add karna zaroori hai
-            href={`/${currentLang}/tools/${tool.slug}`}
+            href={
+                currentLang === "hi"
+                  ? `/hi/tools/${tool.slug}`
+                  : `/tools/${tool.slug}`
+              }
             className="group bg-gradient-to-br from-[#1e1b4b] to-[#312e81]
             border border-purple-900/50 rounded-2xl p-6
             hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 
@@ -67,7 +71,11 @@ export default function HomeTools() {
       {/* CTA */}
       <div className="text-center mt-12">
         <Link
-          href={`/${currentLang}/tools`}
+          href={
+            currentLang === "hi"
+              ? "/hi/tools"
+              : "/tools"
+          }
           className="inline-block px-8 py-3 text-sm font-bold text-white
           bg-purple-600 hover:bg-purple-500 shadow-lg shadow-purple-600/30
           rounded-full transition-all active:scale-95"
