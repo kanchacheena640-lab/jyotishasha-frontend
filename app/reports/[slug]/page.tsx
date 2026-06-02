@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import ReportCheckout from "@/components/reports/ReportCheckout";
-import { reportsData } from "@/app/data/reportsData";
-import { reportSeoContent } from "@/app/data/reportSeoContent";
 import ReportSeoSchema from "@/components/reports/ReportSeoSchema";
 import ReportContent from "@/components/reports/ReportContent";
 import ReportContentDetails from "@/components/reports/ReportContentDetails";
+import RelatedReports from "@/components/reports/RelatedReports";
 
+import { reportsData } from "@/app/data/reportsData";
+import { reportSeoContent } from "@/app/data/reportSeoContent";
+import { reportRelations } from "@/app/data/reportRelations";
 
 type Props = {
   params: {
@@ -23,7 +25,6 @@ export async function generateMetadata({ params }: Props) {
       title: "Report Not Found | Jyotishasha",
     };
   }
-
 
   const seo =
     reportSeoContent[
@@ -77,24 +78,30 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-
 export default function ReportPage({ params }: Props) {
   const report = reportsData.find(
     (r) => r.slug === params.slug
   );
 
-  const seo =
-    reportSeoContent[
-      params.slug as keyof typeof reportSeoContent
-  ];
-
   if (!report) {
     notFound();
   }
 
+  const seo =
+    reportSeoContent[
+      params.slug as keyof typeof reportSeoContent
+    ];
+
+  const relatedSlugs =
+    reportRelations[report.slug] ?? [];
+
+  const relatedReports =
+    reportsData.filter((r) =>
+      relatedSlugs.includes(r.slug)
+    );
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-
       <ReportContent
         report={report}
         seo={seo}
@@ -107,11 +114,14 @@ export default function ReportPage({ params }: Props) {
         seo={seo}
       />
 
+      <RelatedReports
+        reports={relatedReports}
+      />
+
       <ReportSeoSchema
         report={report}
         seoContent={seo}
       />
-
     </div>
   );
 }
