@@ -10,25 +10,48 @@ export default function ReportSeoSchema({
   seoContent,
 }: Props) {
   const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: report.title?.en || report.title,
-    description:
-      seoContent?.seoDescription ||
-      report.shortDescription?.en ||
-      "",
-    brand: {
-      "@type": "Brand",
-      name: "Jyotishasha",
+  "@context": "https://schema.org",
+  "@type": "Product",
+
+  name: report.title?.en || report.title,
+
+  image: [report.image],
+
+  description:
+    seoContent?.seoDescription?.en ||
+    report.shortDescription?.en ||
+    report.description?.en ||
+    "",
+
+  brand: {
+    "@type": "Brand",
+    name: "Jyotishasha",
+  },
+
+  offers: {
+    "@type": "Offer",
+    url: `https://www.jyotishasha.com/reports/${report.slug}`,
+    price: report.price,
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: "INR",
+      },
     },
-    offers: {
-      "@type": "Offer",
-      url: `https://www.jyotishasha.com/reports/${report.slug}`,
-      price: report.price,
-      priceCurrency: "INR",
-      availability: "https://schema.org/InStock",
+
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "IN",
+      returnPolicyCategory:
+        "https://schema.org/MerchantReturnNotPermitted",
     },
-  };
+  },
+};
 
   const faqSchema = {
     "@context": "https://schema.org",
