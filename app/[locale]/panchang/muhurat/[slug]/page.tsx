@@ -247,15 +247,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         locale={locale} 
       />
 
-      <UpcomingMonths
-        locale={locale}
-        slug={slug}
-        title={
-          isHi
-            ? (topic.title_hi || topic.title)
-            : topic.title
-        }
-      />
+      
 
       {/* 🚀 2️⃣ Side-by-Side Grid: Prime Dates + Quick Actions + more */}
       <section className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -280,6 +272,16 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         </div>
 
       </section>
+
+      <UpcomingMonths
+        locale={locale}
+        slug={slug}
+        title={
+          isHi
+            ? (topic.title_hi || topic.title)
+            : topic.title
+        }
+      />
 
       {/* 3️⃣ Zodiac Scroll (Full Width) */}
       <div className="my-4">
