@@ -250,6 +250,11 @@ export default async function MuhuratPage({ params }: { params: { locale: string
       <UpcomingMonths
         locale={locale}
         slug={slug}
+        title={
+          isHi
+            ? (topic.title_hi || topic.title)
+            : topic.title
+        }
       />
 
       {/* 🚀 2️⃣ Side-by-Side Grid: Prime Dates + Quick Actions */}
