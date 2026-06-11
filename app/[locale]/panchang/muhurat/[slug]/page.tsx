@@ -257,7 +257,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         }
       />
 
-      {/* 🚀 2️⃣ Side-by-Side Grid: Prime Dates + Quick Actions */}
+      {/* 🚀 2️⃣ Side-by-Side Grid: Prime Dates + Quick Actions + more */}
       <section className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* Left: Top 3 Dates (7 cols on Desktop) */}
