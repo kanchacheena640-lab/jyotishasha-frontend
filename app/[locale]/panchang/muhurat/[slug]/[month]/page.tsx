@@ -1,8 +1,9 @@
-import { muhurthTopics } from "../../muhurat/muhurth_topics";
+import { muhurthTopics } from "@/app/[locale]/panchang/muhurat/muhurth_topics";
 import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
 import { faq_muhurth } from "@/app/data/faq_muhurth";
 import Link from "next/link";
 import Script from "next/script";
+import { notFound } from "next/navigation";
 
 // 🧩 Importing Our New "Tunch" Components
 import { DynamicHero } from "@/components/muhurat/DynamicHero";
@@ -12,6 +13,10 @@ import { ZodiacVibeScroll } from "@/components/muhurat/ZodiacVibeScroll";
 import { ExpandableDates } from "@/components/muhurat/ExpandableDates";
 import { MuhurthArtFaq } from "@/components/muhurat/MuhurthArtFaq";
 import UpcomingMonths from "@/components/muhurat/UpcomingMonths";
+import {
+  getMonthNumber,
+  getTargetYear,
+} from "@/lib/months";
 
 export const revalidate = 86400;
 
@@ -19,42 +24,43 @@ export const revalidate = 86400;
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: { locale: string; slug: string; month: string };
 }) {
 
   const isHi = params.locale === "hi";
 
   const topic = muhurthTopics[params.slug];
 
-  const now = new Date();
-
-  const month = now.toLocaleString(
-    isHi ? "hi-IN" : "en-US",
-    {
-      month: "long",
-    }
-  );
-
-  const year = now.getFullYear();
-
-  if (!topic) {
+    if (!topic) {
     return {
-      title: "Not Found",
+        title: "Not Found",
     };
-  }
+    }
+
+  const month = params.month;
+
+const monthNumber =
+  getMonthNumber(params.month);
+
+if (!monthNumber) {
+  notFound();
+}
+
+const year =
+  getTargetYear(monthNumber);
 
   const title = isHi
-    ? `${topic.title_hi} – ${month} ${year}`
+    ? `${topic.title_hi || topic.title} – ${month} ${year}`
     : `${topic.title} – ${month} ${year}`;
 
   const description = isHi
-    ? topic.description_hi
+    ? (topic.description_hi || topic.description)
     : topic.description;
 
   const canonical =
     `https://www.jyotishasha.com${
-      isHi ? "/hi" : ""
-    }/panchang/muhurat/${params.slug}`;
+    isHi ? "/hi" : ""
+    }/panchang/muhurat/${params.slug}/${params.month}`;
 
   return {
     title,
@@ -96,33 +102,76 @@ export async function generateMetadata({
 }
 
 // 📡 Data Fetching from Backend
-async function getMuhurth(activity: string, lang: string) {
-  if (activity === "grahpravesh-muhurat") activity = "grahpravesh";
-  const res = await fetch("https://jyotishasha-backend.onrender.com/api/muhurth/list", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ activity, latitude: 26.8467, longitude: 80.9462, days: 60, lang }),
-    next: { revalidate: 86400 },
-  });
+async function getMonthMuhurth(
+  activity: string,
+  month: number,
+  lang: string
+) {
+
+  if (activity === "grahpravesh-muhurat") {
+    activity = "grahpravesh";
+  }
+
+  const res = await fetch(
+    "https://jyotishasha-backend.onrender.com/api/muhurth/month",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        activity,
+        month,
+        year: getTargetYear(month),
+        latitude: 26.8467,
+        longitude: 80.9462,
+        language: lang,
+      }),
+
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
+
   const data = await res.json();
-  return data.results?.slice(0, 30) || [];
+
+  return data.results || [];
 }
 
-export default async function MuhuratPage({ params }: { params: { locale: string; slug: string } }) {
-  const { locale, slug } = params;
+export default async function MuhuratPage({ params }: { params: { locale: string; slug: string; month: string } }) {
+  const { locale, slug, month } = params;
   const isHi = locale === "hi";
   const topic = muhurthTopics[slug];
   
   if (!topic) return null;
 
-  const dates = await getMuhurth(topic.activity, locale);
-  const now = new Date();
-  const monthName = now.toLocaleString(isHi ? "hi-IN" : "en-US", { month: "long" });
-  const year = now.getFullYear();
+  const monthNumber = getMonthNumber(month);
+
+    if (!monthNumber) {
+    notFound();
+    }
+
+    const dates = await getMonthMuhurth(
+    topic.activity,
+    monthNumber,
+    locale
+    );
+
+
+  const monthName =
+    month.charAt(0).toUpperCase() +
+    month.slice(1);
+
+  const year =
+    getTargetYear(monthNumber);
+
   const currentCanonical =
     `https://www.jyotishasha.com${
-      isHi ? "/hi" : ""
-    }/panchang/muhurat/${slug}`;
+    isHi ? "/hi" : ""
+    }/panchang/muhurat/${slug}/${month}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -130,11 +179,11 @@ export default async function MuhuratPage({ params }: { params: { locale: string
     "@type": "Article",
 
     headline: isHi
-      ? topic.title_hi
-      : topic.title,
+        ? (topic.title_hi || topic.title)
+        : topic.title,
 
     description: isHi
-      ? topic.description_hi
+      ? (topic.description_hi || topic.description)
       : topic.description,
 
     image:
@@ -240,17 +289,13 @@ export default async function MuhuratPage({ params }: { params: { locale: string
       
       {/* 1️⃣ SEO Dynamic Hero */}
       <DynamicHero 
-        title={isHi ? topic.title_hi : topic.title} 
+        title={isHi ? (topic.title_hi || topic.title) : topic.title} 
         month={monthName} 
         year={year} 
         isHi={isHi} 
         locale={locale} 
       />
 
-      <UpcomingMonths
-        locale={locale}
-        slug={slug}
-      />
 
       {/* 🚀 2️⃣ Side-by-Side Grid: Prime Dates + Quick Actions */}
       <section className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -276,6 +321,16 @@ export default async function MuhuratPage({ params }: { params: { locale: string
 
       </section>
 
+      <UpcomingMonths
+        locale={locale}
+        slug={slug}
+        title={
+          isHi
+            ? (topic.title_hi || topic.title)
+            : topic.title
+        }
+      />
+
       {/* 3️⃣ Zodiac Scroll (Full Width) */}
       <div className="my-4">
         <ZodiacVibeScroll locale={locale} isHi={isHi} />
@@ -295,7 +350,9 @@ export default async function MuhuratPage({ params }: { params: { locale: string
            {isHi ? `${topic.title_hi.split(" – ")[0]} का महत्व और शास्त्र` : `Significance of ${topic.title.split(" – ")[0]}`}
         </h2>
         <div className="text-gray-300 text-sm md:text-base space-y-5 leading-loose">
-           {isHi ? topic.description_hi : topic.description}
+           {isHi
+            ? (topic.description_hi || topic.description)
+            : topic.description}
         </div>
       </section>
 
@@ -323,12 +380,12 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
            {Object.values(muhurthTopics)
-            .filter(t => t.slug !== slug)
+            .filter((t: any) => t.slug !== slug)
             .slice(0, 6)
-            .map(t => (
+            .map((t: any) => (
              <Link 
                 key={t.slug} 
-                href={`/${locale}/panchang/muhurat/${t.slug}`} 
+                href={`/${locale}/panchang/muhurat/${t.slug}/${month}`} 
                 className="bg-white/5 p-4 rounded-2xl border border-white/10 text-center hover:bg-white/10 hover:border-purple-500/30 transition-all group shadow-sm"
              >
                 <span className="text-xs font-bold text-purple-300 group-hover:text-white">
