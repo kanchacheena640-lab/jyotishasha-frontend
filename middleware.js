@@ -5,6 +5,22 @@ const locales = ['en', 'hi']
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
+  // Legacy Muhurat URL Fixes
+
+  if (pathname === '/panchang/muhurat/grahpravesh-muhurat') {
+    return NextResponse.redirect(
+      new URL('/panchang/muhurat/grah-pravesh-muhurat', request.url),
+      301
+    )
+  }
+
+  if (pathname === '/hi/panchang/muhurat/grahpravesh-muhurat') {
+    return NextResponse.redirect(
+      new URL('/hi/panchang/muhurat/grah-pravesh-muhurat', request.url),
+      301
+    )
+  }
+
   // FAST EXIT
   if (
     pathname.startsWith('/_next') ||
