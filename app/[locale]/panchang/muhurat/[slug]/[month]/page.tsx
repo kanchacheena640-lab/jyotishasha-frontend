@@ -310,23 +310,6 @@ export default async function MuhuratPage({ params }: { params: { locale: string
           />
         </div>
 
-        {dates.length > 0 && (
-          <section className="mt-10">
-            <h2 className="text-2xl font-bold mb-6">
-              {isHi
-                ? `${monthName} ${year} के सभी शुभ मुहूर्त`
-                : `All ${monthName} ${year} Muhurat Dates`}
-            </h2>
-
-            <ExpandableDates
-              dates={dates}
-              isHi={isHi}
-              monthName={monthName}
-              year={year}
-            />
-          </section>
-        )}
-
         {/* Right: Personal Intent CTA (5 cols on Desktop) */}
         <div className="lg:col-span-5">
           <QuickActionGrid 
@@ -353,6 +336,13 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         <ZodiacVibeScroll locale={locale} isHi={isHi} />
       </div>
 
+      {/* 4️⃣ Full Expandable Dates Table (Default Closed) */}
+      <ExpandableDates 
+        dates={dates} 
+        isHi={isHi} 
+        monthName={monthName} 
+        year={year} 
+      />
 
       {/* 📝 Ranking Content (SEO Insight) */}
       <section className="my-16 prose prose-invert max-w-none">
