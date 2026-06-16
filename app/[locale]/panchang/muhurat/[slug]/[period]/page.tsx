@@ -17,6 +17,8 @@ import {
   getMonthNumber,
   getTargetYear,
 } from "@/lib/months";
+import AnnualMuhuratPage from "@/components/muhurat/AnnualMuhuratPage";
+
 
 export const revalidate = 86400;
 
@@ -24,30 +26,43 @@ export const revalidate = 86400;
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: string; month: string };
+  params: {
+    locale: string;
+    slug: string;
+    period: string;
+  };
 }) {
 
   const isHi = params.locale === "hi";
 
   const topic = muhurthTopics[params.slug];
 
-    if (!topic) {
+  if (!topic) {
     return {
-        title: "Not Found",
+      title: "Not Found",
     };
-    }
+  }
 
-  const month = params.month;
+  const isYear = /^\d{4}$/.test(params.period);
 
-const monthNumber =
-  getMonthNumber(params.month);
+  if (isYear) {
+    return {
+      title: `${topic.title} ${params.period}`,
+      description: topic.description,
+    };
+  }
 
-if (!monthNumber) {
-  notFound();
-}
+  const monthNumber =
+    getMonthNumber(params.period);
 
-const year =
-  getTargetYear(monthNumber);
+  if (!monthNumber) {
+    notFound();
+  }
+
+  const year =
+    getTargetYear(monthNumber);
+
+  const month = params.period;
 
   const title = isHi
     ? `${topic.title_hi || topic.title} – ${month} ${year}`
@@ -59,8 +74,8 @@ const year =
 
   const canonical =
     `https://www.jyotishasha.com${
-    isHi ? "/hi" : ""
-    }/panchang/muhurat/${params.slug}/${params.month}`;
+      isHi ? "/hi" : ""
+    }/panchang/muhurat/${params.slug}/${params.period}`;
 
   return {
     title,
@@ -141,14 +156,37 @@ async function getMonthMuhurth(
   return data.results || [];
 }
 
-export default async function MuhuratPage({ params }: { params: { locale: string; slug: string; month: string } }) {
-  const { locale, slug, month } = params;
+export default async function MuhuratPage({
+  params,
+}: {
+  params: {
+    locale: string;
+    slug: string;
+    period: string;
+  };
+}) {
+  const { locale, slug, period } = params;
+
+  const isYear = /^\d{4}$/.test(period);
+
+
   const isHi = locale === "hi";
   const topic = muhurthTopics[slug];
   
   if (!topic) return null;
 
-  const monthNumber = getMonthNumber(month);
+  if (isYear) {
+    return (
+      <AnnualMuhuratPage
+        slug={slug}
+        locale={locale}
+        year={Number(period)}
+        topic={topic}
+      />
+    );
+  }
+
+  const monthNumber = getMonthNumber(period);
 
     if (!monthNumber) {
     notFound();
@@ -162,8 +200,8 @@ export default async function MuhuratPage({ params }: { params: { locale: string
 
 
   const monthName =
-    month.charAt(0).toUpperCase() +
-    month.slice(1);
+    period.charAt(0).toUpperCase() +
+    period.slice(1);
 
   const year =
     getTargetYear(monthNumber);
@@ -171,7 +209,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
   const currentCanonical =
     `https://www.jyotishasha.com${
     isHi ? "/hi" : ""
-    }/panchang/muhurat/${slug}/${month}`;
+    }/panchang/muhurat/${slug}/${period}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -385,7 +423,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
             .map((t: any) => (
              <Link 
                 key={t.slug} 
-                href={`/${locale}/panchang/muhurat/${t.slug}/${month}`} 
+                href={`/${locale}/panchang/muhurat/${t.slug}/${period}`} 
                 className="bg-white/5 p-4 rounded-2xl border border-white/10 text-center hover:bg-white/10 hover:border-purple-500/30 transition-all group shadow-sm"
              >
                 <span className="text-xs font-bold text-purple-300 group-hover:text-white">
