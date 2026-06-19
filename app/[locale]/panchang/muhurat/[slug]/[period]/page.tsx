@@ -46,9 +46,63 @@ export async function generateMetadata({
   const isYear = /^\d{4}$/.test(params.period);
 
   if (isYear) {
+
+    const canonical =
+      `https://www.jyotishasha.com${
+        isHi ? "/hi" : ""
+      }/panchang/muhurat/${
+        params.slug
+      }/${params.period}`;
+
     return {
-      title: `${topic.title} ${params.period}`,
-      description: topic.description,
+
+      title: isHi
+        ? `${topic.title_hi || topic.title} ${params.period}`
+        : `${topic.title} ${params.period}`,
+
+      description: isHi
+        ? `${params.period} के लिए ${topic.title_hi || topic.title} कैलेंडर, शुभ तिथियाँ, मासिक मुहूर्त और पंचांग आधारित मार्गदर्शन।`
+        : `${topic.title} ${params.period} calendar with auspicious dates, monthly Muhurat guides, Panchang analysis and yearly planning.`,
+
+      keywords: topic.keywords || [],
+
+      alternates: {
+        canonical,
+      },
+
+      openGraph: {
+        title: isHi
+          ? `${topic.title_hi || topic.title} ${params.period}`
+          : `${topic.title} ${params.period}`,
+
+        description: isHi
+          ? `${params.period} के लिए वार्षिक मुहूर्त कैलेंडर।`
+          : `${params.period} annual Muhurat calendar.`,
+
+        url: canonical,
+
+        images: [
+          "/og/muhurat-base.jpg",
+        ],
+
+        type: "website",
+      },
+
+      twitter: {
+        card: "summary_large_image",
+
+        title: isHi
+          ? `${topic.title_hi || topic.title} ${params.period}`
+          : `${topic.title} ${params.period}`,
+
+        description: isHi
+          ? `${params.period} के लिए वार्षिक मुहूर्त कैलेंडर।`
+          : `${params.period} annual Muhurat calendar.`,
+
+        images: [
+          "/og/muhurat-base.jpg",
+        ],
+      },
     };
   }
 

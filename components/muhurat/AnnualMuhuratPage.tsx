@@ -7,10 +7,25 @@ import {
 
 import {
   MONTH_MAP,
-  getTargetYear,
 } from "@/lib/months";
 
 import AnnualMonthCalendar from "./AnnualMonthCalendar";
+
+import AnnualSEOContent from "./AnnualSEOContent";
+import AnnualFAQ from "./AnnualFAQ";
+import AnnualMuhuratSchemas
+  from "./AnnualMuhuratSchemas";
+import RelatedMuhurat
+  from "./RelatedMuhurat";
+import AnnualFAQSchema
+  from "./AnnualFAQSchema";
+
+import {
+  getAnnualFaqs,
+} from "@/app/data/annualFaqs";
+
+import OtherYears
+  from "./OtherYears";
 
 
 type Props = {
@@ -35,39 +50,15 @@ export default function AnnualMuhuratPage({
 
   const [auspiciousDates, setAuspiciousDates] =
     useState<number[]>([]);
-
-  const currentMonth =
-  new Date().getMonth() + 1;
-
-    const currentYear =
-    new Date().getFullYear();
-
-    const monthEntries =
-    Object.entries(MONTH_MAP);
-
-    const months = [
-
-    ...monthEntries
-        .filter(([_, num]) =>
-        num >= currentMonth
-        )
-        .map(([month, num]) => ({
-        month,
-        year: currentYear,
-        monthNumber: num,
-        })),
-
-    ...monthEntries
-        .filter(([_, num]) =>
-        num < currentMonth
-        )
-        .map(([month, num]) => ({
-        month,
-        year: currentYear + 1,
-        monthNumber: num,
-        })),
-
-    ];
+  
+    const months =
+      Object.entries(MONTH_MAP).map(
+        ([month, num]) => ({
+          month,
+          year,
+          monthNumber: num,
+        })
+      );
 
   useEffect(() => {
 
@@ -141,6 +132,7 @@ export default function AnnualMuhuratPage({
       setAuspiciousDates(
         dates
       );
+      
 
     } catch (err) {
 
@@ -170,19 +162,52 @@ export default function AnnualMuhuratPage({
             i * 3 + 3
             )
         );
+    const faqs =
+      getAnnualFaqs(
+        slug,
+        locale,
+        year
+      );
 
   return (
+  <>
+    <AnnualMuhuratSchemas
+      title={
+        locale === "hi"
+          ? topic.title_hi
+          : topic.title
+      }
+      year={year}
+      locale={locale}
+      slug={slug}
+    />
+
+    <AnnualFAQSchema
+      faqs={faqs}
+    />
+
     <article className="max-w-6xl mx-auto px-4 py-10 text-white">
 
       <h1 className="text-4xl font-bold mb-3">
-        {topic.title} {year}
+        {locale === "hi"
+          ? topic.title_hi
+          : topic.title}{" "}
+        {year}
       </h1>
 
-      <p className="text-gray-400 mb-8">
-        Select a month to view auspicious dates
+      <p className="text-gray-400 mb-4">
+        {locale === "hi"
+          ? `${year} के लिए पंचांग गणनाओं पर आधारित।`
+          : `Based on Panchang calculations for ${year}.`}
       </p>
 
-      <div className="space-y-6">
+    <p className="text-gray-300 leading-7 mb-8 max-w-4xl">
+      {locale === "hi"
+        ? topic.description_hi
+        : topic.description}
+    </p>
+
+    <div className="space-y-6">
 
   {monthRows.map((row, rowIndex) => {
 
@@ -229,7 +254,9 @@ export default function AnnualMuhuratPage({
 
         </div>
 
+
         {selectedInRow && (
+          <>
 
           <AnnualMonthCalendar
             month={selectedInRow.month}
@@ -238,7 +265,8 @@ export default function AnnualMuhuratPage({
             locale={locale}
             auspiciousDates={auspiciousDates}
           />
-
+    
+          </>
         )}
 
       </div>
@@ -248,7 +276,31 @@ export default function AnnualMuhuratPage({
   })}
 
 </div>
+        <OtherYears
+          slug={slug}
+          locale={locale}
+          year={year}
+        />
+
+  <AnnualSEOContent
+    slug={slug}
+    locale={locale}
+    year={year}
+  />
+
+  <AnnualFAQ
+    activityName={topic.title}
+    slug={slug}
+    year={year}
+    locale={locale}
+  />
+
+  <RelatedMuhurat
+    locale={locale}
+    year={year}
+  />
 
     </article>
-  );
+  </>
+);
 }
