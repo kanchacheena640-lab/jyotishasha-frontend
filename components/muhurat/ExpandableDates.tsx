@@ -9,7 +9,7 @@ interface ExpandableDatesProps {
   year: number;
 }
 
-export const ExpandableDates = ({ dates, isHi, monthName, year }: ExpandableDatesProps) => {
+export const ExpandableDates = ({ dates, isHi, monthName }: ExpandableDatesProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // ✅ Client-side par hi summary logic handle kar rahe hain (Error Fix)
@@ -30,6 +30,10 @@ export const ExpandableDates = ({ dates, isHi, monthName, year }: ExpandableDate
   const initialLimit = 6;
   const hasMore = dates.length > initialLimit;
 
+  const visibleDates = isExpanded
+    ? dates
+    : dates.slice(0, initialLimit);
+
   return (
     <section id="all-dates" className="scroll-mt-20 mb-10">
       <div className="bg-white/10 rounded-3xl border border-purple-400/20 overflow-hidden shadow-xl">
@@ -39,16 +43,14 @@ export const ExpandableDates = ({ dates, isHi, monthName, year }: ExpandableDate
           </h2>
 
           <div className="space-y-0">
-            {dates.map((d, index) => {
-              const isHidden = !isExpanded && index >= initialLimit;
+            {visibleDates.map((d, index) => {
+              
               const formattedDate = new Date(d.date).toLocaleDateString(isHi ? "hi-IN" : "en-GB");
 
               return (
                 <div 
                   key={d.date} 
-                  className={`border-b border-white/5 last:border-0 transition-all duration-500 overflow-hidden ${
-                    isHidden ? "max-h-0 opacity-0 py-0" : "max-h-60 opacity-100 py-5"
-                  }`}
+                  className="border-b border-white/5 last:border-0 py-5"
                 >
                   <div className="flex justify-between items-start gap-4">
                     <div className="space-y-1">

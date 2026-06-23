@@ -11,7 +11,7 @@ export default function TithiCard({
 }) {
   return (
     <Link
-      href={`/${locale}/panchang/tithi/${tithi.slug}`}
+      href={`${isHi ? "/hi" : ""}/panchang/tithi/${tithi.slug}`}
       className="block rounded-2xl border p-5 hover:scale-[1.02] transition-all"
       style={{
         borderColor: tithi.color,

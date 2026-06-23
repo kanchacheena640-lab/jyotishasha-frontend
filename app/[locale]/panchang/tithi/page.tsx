@@ -1,7 +1,15 @@
-import Link from "next/link";
+
 import { tithiData } from "@/app/data/tithiData";
 import TithiCard from "@/components/TithiCard";
 import TodayTithiHero from "@/components/TodayTithiHero";
+import TithiOverview from "@/components/tithi/TithiOverview";
+import PakshaSection from "@/components/tithi/PakshaSection";
+import TithiActivities from "@/components/tithi/TithiActivities";
+import ImportantTithis from "@/components/tithi/ImportantTithis";
+import TithiMuhuratSection from "@/components/tithi/TithiMuhuratSection";
+import TithiTools from "@/components/tithi/TithiTools";
+import TithiFaq from "@/components/tithi/TithiFaq";
+import TithiSchema from "@/components/tithi/TithiSchema";
 
 
 async function getTodayPanchang(
@@ -72,12 +80,17 @@ export default async function TithiPage({
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-10">
-        <TodayTithiHero
-            panchang={panchang}
-            currentTithi={currentTithi}
-            isHi={isHi}
-        />
+
+      <TithiSchema locale={params.locale} />
+
+      <TodayTithiHero
+        panchang={panchang}
+        currentTithi={currentTithi}
+        isHi={isHi}
+      />
+
       <section className="text-center mb-12">
+
         <h1 className="text-4xl font-bold">
           {isHi
             ? "हिंदू पंचांग की 16 तिथियाँ"
@@ -89,11 +102,10 @@ export default async function TithiPage({
             ? "प्रत्येक तिथि का महत्व, देवता, शुभ कार्य और ज्योतिषीय प्रभाव जानें।"
             : "Explore the meaning, deity, best activities and astrological significance of every Tithi."}
         </p>
+
       </section>
 
-      
-
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
 
         {tithiData.map((tithi) => (
           <TithiCard
@@ -105,6 +117,20 @@ export default async function TithiPage({
         ))}
 
       </section>
+
+      <TithiOverview locale={params.locale} />
+
+      <PakshaSection locale={params.locale} />
+
+      <TithiActivities locale={params.locale} />
+
+      <ImportantTithis locale={params.locale} />
+
+      <TithiMuhuratSection locale={params.locale} />
+
+      <TithiTools locale={params.locale} />
+
+      <TithiFaq locale={params.locale} />
 
     </main>
   );
