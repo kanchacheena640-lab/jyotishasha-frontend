@@ -9,6 +9,7 @@ import ImportantTithis from "@/components/tithi/ImportantTithis";
 import TithiMuhuratSection from "@/components/tithi/TithiMuhuratSection";
 import TithiTools from "@/components/tithi/TithiTools";
 import TithiFaq from "@/components/tithi/TithiFaq";
+import { tithiSeoContent } from "@/app/data/tithiSeoContent";
 import TithiSchema from "@/components/tithi/TithiSchema";
 
 
@@ -76,6 +77,15 @@ export default async function TithiPage({
       (t) => t.slug === slugMap[tithiName]
     ) || null;
 
+  const faq = [
+    tithiSeoContent.pratipada.faq[0],
+    tithiSeoContent.chaturthi.faq[1],
+    tithiSeoContent.panchami.faq[2],
+    tithiSeoContent.ekadashi.faq[0],
+    tithiSeoContent.purnima.faq[1],
+    tithiSeoContent.amavasya.faq[2],
+  ];
+
   
 
   return (
@@ -130,7 +140,10 @@ export default async function TithiPage({
 
       <TithiTools locale={params.locale} />
 
-      <TithiFaq locale={params.locale} />
+      <TithiFaq
+        locale={params.locale}
+        faq={faq}
+      />
 
     </main>
   );
