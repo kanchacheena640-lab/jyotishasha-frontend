@@ -24,9 +24,9 @@ function extractTime(dateTimeStr: string | undefined) {
   return match ? match[0] : dateTimeStr;
 }
 
-export default function EkadashiCard({ item, idx, locale, isToday }: any) {
+export default function EkadashiCard({ item, idx, locale }: any) {
   const isHi = locale === "hi";
-  const isUpcoming = !isToday && idx === 0;
+  const isUpcoming = idx === 0;
 
   // Name & Date Logic
     // 1. Name nikaalne ka sabse majboot tarika
@@ -70,10 +70,12 @@ const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
       >
         <div className="relative z-10 space-y-6">
           {/* Badge & Arrow */}
-          <div className="flex items-center justify-between">
-            <span className="rounded-full bg-purple-600 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-purple-200">
-              {isHi ? "अगली एकादशी" : "Next Up"}
-            </span>
+          <div className={`flex items-center ${isUpcoming ? "justify-between" : "justify-end"}`}>
+            {isUpcoming && (
+              <span className="rounded-full bg-purple-600 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-purple-200">
+                {isHi ? "अगली एकादशी" : "Next Up"}
+              </span>
+            )}
             <div className="h-10 w-10 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </div>

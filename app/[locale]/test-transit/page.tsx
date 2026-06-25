@@ -26,7 +26,6 @@ export default function TestTransitPage() {
 
       const data = await res.json();
       setKundaliData(data);
-      console.log('✅ Fetched Kundali:', data);
     };
 
     fetchKundali();

@@ -24,7 +24,6 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
       const mangalData = parsed?.data?.mangal_dosh || parsed?.mangal_dosh;
       setData(mangalData);
     } catch (e) {
-      console.error("Mangal Dosh Parse Error", e);
       router.replace(`/${locale}/love`);
     }
   }, [router, locale]);

@@ -29,7 +29,7 @@ const DAILY_SLUGS: Record<Zodiac, string> = {
 
 // STEP-1: 12 category IDs (always fetched from English categories)
 export async function fetchDailyCategoryMap(lang: Lang = "en"): Promise<Record<Zodiac, number>> {
-  const res = await fetch(`${WP_BASE}/categories?per_page=100&lang=en`, { cache: "no-store" });
+  const res = await fetch(`${WP_BASE}/categories?per_page=100&lang=en`, { next: { revalidate: 86400 } });
   if (!res.ok) throw new Error(`Category fetch failed`);
   const data = (await res.json()) as WPCategory[];
 
@@ -47,7 +47,7 @@ export async function fetchDailyCategoryMap(lang: Lang = "en"): Promise<Record<Z
 export async function fetchLatestDailyPost(catId: number, lang: Lang): Promise<WPPost | null> {
   const res = await fetch(
     `${WP_BASE}/posts?per_page=5&categories=${catId}&orderby=date&order=desc&_embed=1`,
-    { cache: "no-store" }
+    { next: { revalidate: 86400 } }
   );
   if (!res.ok) return null;
   const arr = (await res.json()) as WPPost[];

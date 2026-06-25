@@ -240,7 +240,6 @@ export default async function VenusTransitAscendantPage({
     // ==================== 3rd Change ====================
     const venusPos = current.positions?.Venus;
     if (!venusPos || !venusPos.rashi) {
-      console.error("Venus position data missing:", current?.positions);
       notFound();
     }
 

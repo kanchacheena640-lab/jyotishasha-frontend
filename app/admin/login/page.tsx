@@ -10,18 +10,32 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (localStorage.getItem('isAdmin') === 'true') {
-      router.push('/admin');
-    }
-  }, []);
+    fetch('/api/admin/auth')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.authenticated) {
+          router.push('/admin');
+        }
+      })
+      .catch(() => {});
+  }, [router]);
 
-  const handleLogin = () => {
-    const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD!; // ✅ use env variable
-    if (password === correctPassword) {
-      localStorage.setItem('isAdmin', 'true');
-      router.push('/admin');
-    } else {
-      setError('Incorrect password');
+  const handleLogin = async () => {
+    setError('');
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json();
+      if (res.ok && data?.success) {
+        router.push('/admin');
+      } else {
+        setError(data?.error || 'Incorrect password');
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
     }
   };
 

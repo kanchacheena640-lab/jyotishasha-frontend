@@ -41,7 +41,6 @@ export default function OrderList() {
         const data = await res.json();
         setOrders(data);
       } catch (error) {
-        console.error("Failed to fetch orders:", error);
       } finally {
         setLoading(false);
       }
@@ -69,7 +68,6 @@ export default function OrderList() {
         alert("Failed to update order.");
       }
     } catch (error) {
-      console.error("Update error:", error);
       alert("Error while updating.");
     }
   };
@@ -155,7 +153,6 @@ export default function OrderList() {
                           alert("Failed to resend report.");
                         }
                       } catch (error) {
-                        console.error("Resend error:", error);
                         alert("Error while resending.");
                       }
                     }}

@@ -19,11 +19,6 @@ export default function ReportsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [modalReport, setModalReport] = useState<null | Report>(null);
 
-  if (!ready) return null;
-
-  // 1. "All" label translation
-  const allLabel = currentLang === 'hi' ? "सभी" : "All";
-
   // 2. Categories extraction (Logic English 'en' par based rahega)
   const categories = useMemo(
     () => ["All", ...Array.from(new Set(reportsData.map((r) => r.category.en)))],
@@ -36,6 +31,11 @@ export default function ReportsPage() {
       ? reportsData
       : reportsData.filter((r) => r.category.en === selectedCategory);
   }, [selectedCategory]);
+
+  if (!ready) return null;
+
+  // 1. "All" label translation
+  const allLabel = currentLang === 'hi' ? "सभी" : "All";
 
   const handleBuyNow = (slug: string) => {
     // Dual / partner-based reports (Redirecting with locale for better SEO)

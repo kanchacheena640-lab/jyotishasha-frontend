@@ -136,8 +136,6 @@ export default function AnnualMuhuratPage({
 
     } catch (err) {
 
-      console.error(err);
-
       setAuspiciousDates([]);
 
     }

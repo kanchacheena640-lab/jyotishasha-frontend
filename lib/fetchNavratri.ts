@@ -90,13 +90,12 @@ export async function fetchNavratri({
         longitude: 80.9462,
         type
       }),
-      cache: "no-store"
+      next: { revalidate: 86400 }
     }
   )
 
   if (!res.ok) {
-    const text = await res.text()
-    console.error("Navratri API Error:", text)
+    await res.text()
     throw new Error("Failed to fetch Navratri data")
   }
 

@@ -67,7 +67,6 @@ export default function ShubhDates({ params }: ShubhDatesProps) {
         const json = await res.json();
         setResults(json?.results || []);
       } catch (err) {
-        console.error("❌ Error fetching Shubh Muhurtha:", err);
       } finally {
         setLoading(false);
       }

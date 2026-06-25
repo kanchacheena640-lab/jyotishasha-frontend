@@ -59,7 +59,6 @@ export async function POST(req: NextRequest) {
     const sanitized = sanitizeKundali(raw); // 🔒 contract enforced here
     return NextResponse.json(sanitized);
   } catch (e: any) {
-    console.error("full-kundali proxy error:", e);
     return new NextResponse("Proxy error", { status: 500 });
   }
 }

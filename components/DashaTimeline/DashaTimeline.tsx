@@ -29,8 +29,6 @@ interface Props {
 export default function DashaTimeline({ mahadashas, current }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  console.log("📊 DashaTimeline data:", mahadashas);
-
   if (!mahadashas?.length)
     return (
       <p className="text-gray-400 text-center italic py-4">

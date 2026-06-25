@@ -25,13 +25,11 @@ export async function getDailySummary(locale: string = 'en'): Promise<HoroscopeR
     );
 
     if (!res.ok) {
-      console.error("API Fetch Error:", res.statusText);
       return null;
     }
 
     return await res.json();
   } catch (error) {
-    console.error("Network Error:", error);
     return null;
   }
 }

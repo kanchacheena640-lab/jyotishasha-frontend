@@ -37,7 +37,7 @@ export default function LocationProvider({
           localStorage.setItem("user-city", data.city); // Save it for next time
         }
       })
-      .catch((err) => console.error("Location fetch failed:", err));
+      .catch(() => {});
   }, []);
 
   return (

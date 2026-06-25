@@ -26,8 +26,6 @@ export default function ToolsPage() {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  if (!ready) return null;
-
   // 🔹 Category List (English 'en' key se logic chalega)
   const categories = useMemo(() => {
     const uniqueCats = Array.from(new Set(toolsData.map((t: any) => t.category.en)));
@@ -40,6 +38,8 @@ export default function ToolsPage() {
       ? (toolsData as Tool[])
       : (toolsData as Tool[]).filter((t) => t.category.en === selectedCategory);
   }, [selectedCategory]);
+
+  if (!ready) return null;
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">

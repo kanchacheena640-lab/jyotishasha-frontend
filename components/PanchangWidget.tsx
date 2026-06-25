@@ -27,7 +27,6 @@ export default function PanchangWidget() {
         const data = await res.json();
         setP(data?.selected_date || {});
       } catch (err) {
-        console.error("❌ Panchang fetch failed:", err);
       } finally {
         setLoading(false);
       }

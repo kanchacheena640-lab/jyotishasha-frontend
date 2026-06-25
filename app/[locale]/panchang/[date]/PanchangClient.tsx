@@ -116,7 +116,6 @@ export default function PanchangClient({
       .then((data) => setPanchang(data?.selected_date || {}))
       .catch((err) => {
         if (err.name !== "AbortError") {
-          console.error(err);
           setError(lang === "hi" ? "डेटा लोड करने में समस्या हुई" : "Failed to load Panchang");
         }
       })

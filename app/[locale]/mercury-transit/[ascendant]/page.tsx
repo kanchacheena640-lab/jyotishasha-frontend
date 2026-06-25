@@ -134,19 +134,11 @@ async function fetchMercuryCurrent(lang: string) {
     );
 
     if (!res.ok) {
-      console.error(
-        "Mercury current fetch failed:",
-        res.status
-      );
       return null;
     }
 
     return await res.json();
   } catch (e) {
-    console.error(
-      "Mercury current API error:",
-      e
-    );
     return null;
   }
 }
@@ -175,19 +167,11 @@ async function fetchTransitContent({
     });
 
     if (!res.ok) {
-      console.error(
-        "Transit content fetch failed:",
-        res.status
-      );
       return null;
     }
 
     return await res.json();
   } catch (e) {
-    console.error(
-      "Transit content API error:",
-      e
-    );
     return null;
   }
 }

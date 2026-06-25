@@ -21,7 +21,6 @@ export default function ToolDynamicPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
-    console.log(`📨 Fetching ${toolId} in ${currentLang} language...`);
     if (!toolId) return;
 
     // 🔹 API ko bhasha batana zaroori hai taaki result Hindi mein aaye
@@ -49,7 +48,6 @@ export default function ToolDynamicPage() {
       setResult(parsed);
       setSubmitted(true);
     } catch (error) {
-      console.error("❌ Data fetching error:", error);
       // Yahan aap koi error message state set kar sakte hain
     }
   };

@@ -28,7 +28,6 @@ export async function getTransit(locale: string = 'en'): Promise<TransitResponse
 
     return res.json();
   } catch (error) {
-    console.error("Transit API error:", error);
     return null;
   }
 }

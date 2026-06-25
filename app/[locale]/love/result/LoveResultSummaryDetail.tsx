@@ -30,7 +30,6 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
       setSummary(parsedSummary.data || parsedSummary);
       setTools(parsedTools);
     } catch (e) {
-      console.error("Dashboard Parsing Error", e);
       router.replace(`/${locale}/love`);
     }
   }, [router, locale]);

@@ -29,7 +29,6 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
       
       setData(td);
     } catch (e) {
-      console.error("Truth or Dare Parse Error");
       router.replace(`/${locale}/love`);
     }
   }, [router, locale]);

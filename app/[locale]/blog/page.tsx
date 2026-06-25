@@ -22,7 +22,6 @@ export default function BlogListPage() {
 
         setBlogs(Array.isArray(data?.data) ? data.data : []);
       } catch (err) {
-        console.error("Error fetching blogs:", err);
         setBlogs([]);
       } finally {
         setLoading(false);

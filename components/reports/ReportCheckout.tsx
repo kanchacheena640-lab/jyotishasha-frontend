@@ -128,8 +128,7 @@ export default function ReportCheckout() {
         handler: async function (response: any) {
           // Payment Success hone ke baad ka logic
           alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-          console.log("Save this to DB:", { ...form, paymentId: response.razorpay_payment_id });
-          
+
           // Redirect to success page:
           // window.location.href = "/payment-success";
         },
@@ -152,7 +151,6 @@ export default function ReportCheckout() {
       paymentObject.open();
 
     } catch (error) {
-      console.error("Payment Error:", error);
       alert("Something went wrong during payment initialization.");
     } finally {
       setIsProcessing(false);

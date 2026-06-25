@@ -33,7 +33,6 @@ export default function BlogDetailPage({ params }: BlogProps) {
             : null;
         setBlog(single);
       } catch (err) {
-        console.error("Error fetching blog:", err);
         setBlog(null);
       } finally {
         setLoading(false);

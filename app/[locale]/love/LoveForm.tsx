@@ -86,7 +86,6 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
       router.push(`/${locale}/love/result`);
     } catch (e: any) {
       if (e.name === 'AbortError') return;
-      console.error("Submission Error:", e);
       alert(isHi ? "सर्वर धीमा है, कृपया पुनः प्रयास करें" : "Server is slow, please try again");
     } finally {
       setLoading(false);

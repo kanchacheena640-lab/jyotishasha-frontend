@@ -48,7 +48,6 @@ export default function YearlyHoroscope({ zodiac }: { zodiac: string }) {
         );
         setData(matched);
       } catch (err) {
-        console.error("Error loading yearly data:", err);
         setData(null);
       } finally {
         setLoading(false);

@@ -7,6 +7,10 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import LocationProvider from "@/components/location/LocationProvider";
 import StickyAppDownloadCTA from "@/components/StickyAppDownloadCTA";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "hi" }];
+}
+
 export default function LocaleLayout({
   children,
   params,

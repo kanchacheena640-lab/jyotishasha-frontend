@@ -48,7 +48,6 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
           }
         }));
       } catch (e) {
-        console.error("Session storage parse error", e);
       }
     }
   }, []);

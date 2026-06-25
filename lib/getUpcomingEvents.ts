@@ -16,7 +16,6 @@ export async function getUpcomingEvents(locale: string = "en") {
     });
 
     if (!res.ok) {
-      console.error("Upcoming API failed:", res.status);
       return [];
     }
 
@@ -24,7 +23,6 @@ export async function getUpcomingEvents(locale: string = "en") {
     return json?.events ?? [];
 
   } catch (error) {
-    console.error("Upcoming events fetch error:", error);
     return [];
   }
 }

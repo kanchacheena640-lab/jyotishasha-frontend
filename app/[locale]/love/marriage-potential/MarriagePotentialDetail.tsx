@@ -30,7 +30,6 @@ export default function MarriagePotentialDetail({ locale }: { locale: string }) 
       
       setData(mp);
     } catch (e) {
-      console.error("Data Parse Error");
       router.replace(`/${locale}/love`);
     }
   }, [locale, router]);

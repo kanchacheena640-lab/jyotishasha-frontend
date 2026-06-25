@@ -54,7 +54,7 @@ async function fetchHoli(year: number): Promise<HoliApiResponse | null> {
         longitude: DEFAULT_LON,
         year,
       }),
-      cache: "no-store",
+      next: { revalidate: 86400 },
     });
 
     if (!res.ok) return null;

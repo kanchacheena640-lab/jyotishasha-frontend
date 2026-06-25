@@ -39,14 +39,12 @@ async function getEkadashiDynamicData(
     );
 
     if (!res.ok) {
-      console.error(`API Error: ${res.status} for ${slug} year ${year}`);
       return null;
     }
 
     const result = await res.json();
     return result.data;
   } catch (e) {
-    console.error("Fetch error for", slug, e);
     return null;
   }
 }
@@ -88,19 +86,10 @@ export default async function Page({
       ? parsedYear
       : new Date().getFullYear();
 
-  console.log(
-    `🔍 DEBUG → Slug: ${slug} | Query Year: ${sp?.year} | Selected Year: ${selectedYear}`
-  );
-
   const dynamic = await getEkadashiDynamicData(
     slug,
     selectedYear,
     locale
-  );
-
-  console.log(
-    `📦 Data Received for ${selectedYear}:`,
-    dynamic ? "✅ Yes" : "❌ No"
   );
 
   const displayDate = formatDate(dynamic?.vrat_date);

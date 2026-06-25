@@ -32,10 +32,11 @@ function formatDate(dateStr: string | undefined, lang: string) {
 }
 
 export default function HomeTransit({ data, dict, lang }: Props) {
+  const [activePlanet, setActivePlanet] = useState("Sun");
+
   if (!data || !dict) return null;
 
   const { positions, future_transits } = data;
-  const [activePlanet, setActivePlanet] = useState("Sun");
 
   // Rashi ka naam backend se dynamic aayega
   const rashi = positions?.[activePlanet]?.rashi;

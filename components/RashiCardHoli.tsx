@@ -39,7 +39,6 @@ ${text}
         alert(isHi ? "कॉपी हो गया!" : "Copied!");
       }
     } catch (err) {
-      console.error(err);
     }
   };
 

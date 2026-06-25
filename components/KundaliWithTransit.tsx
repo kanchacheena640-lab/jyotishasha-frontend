@@ -34,7 +34,6 @@ export default function KundaliWithTransit({ name, dob, tob, latitude, longitude
             }));
         setPlanets([...natal, ...transiting]);
       } catch (error) {
-        console.error("Error loading kundali or transits", error);
       }
     };
 

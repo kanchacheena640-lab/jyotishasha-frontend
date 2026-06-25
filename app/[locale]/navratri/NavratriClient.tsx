@@ -80,7 +80,6 @@ export default function NavratriClient({
       const res = await fetchNavratri({ year: newYear, type: newType })
       setData(res)
     } catch (err) {
-      console.error("Navratri update error:", err)
     } finally {
       setLoading(false)
     }

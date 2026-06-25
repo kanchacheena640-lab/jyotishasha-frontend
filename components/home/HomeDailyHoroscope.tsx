@@ -32,10 +32,11 @@ const zodiacOrder = [
 ];
 
 export default function HomeDailyHoroscope({ data, dict, lang }: Props) {
+  const [activeSign, setActiveSign] = useState("aries");
+
   if (!data || !dict) return null;
 
   const { date, data: signs } = data;
-  const [activeSign, setActiveSign] = useState("aries");
   const activeData = signs[activeSign];
 
   return (

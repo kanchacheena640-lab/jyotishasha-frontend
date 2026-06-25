@@ -10,7 +10,7 @@ export async function getYearlyHoroscope(
   try {
     const res = await fetch(
       `${API_BASE}/api/yearly-horoscope?year=${year}&sign=${sign}&lang=${lang}`,
-      { cache: "no-store" }
+      { next: { revalidate: 86400 } }
     );
 
     if (!res.ok) return null;

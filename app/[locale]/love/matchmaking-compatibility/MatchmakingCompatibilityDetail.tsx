@@ -25,7 +25,6 @@ export default function MatchmakingCompatibilityDetail({ locale }: { locale: str
         const mainData = parsed?.data || parsed;
         setData(mainData);
       } catch (e) {
-        console.error("Matchmaking Parse Error", e);
         router.replace(`/${locale}/love`);
       }
     }
