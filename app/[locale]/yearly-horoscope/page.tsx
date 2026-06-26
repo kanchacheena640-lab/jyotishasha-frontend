@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
 
 const YEAR = "2026";
+const SITE_URL = "https://www.jyotishasha.com";
 
 const ZODIACS = [
   { sign: "aries", img: "/zodiac/aries.png" },
@@ -19,13 +21,42 @@ const ZODIACS = [
   { sign: "pisces", img: "/zodiac/pisces.png" },
 ] as const;
 
-export default async function YearlyHoroscopePage({
-  params,
-}: {
+type PageProps = {
   params: Promise<{ locale: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const lang = locale === "hi" ? "hi" : "en";
+  const langPath = lang === "hi" ? "/hi" : "";
+  const canonicalUrl = `${SITE_URL}${langPath}/yearly-horoscope`;
+
+  const title = lang === "hi"
+    ? `वार्षिक राशिफल ${YEAR} - सभी 12 राशियाँ | ज्योतिष आशा`
+    : `Yearly Horoscope ${YEAR} - All 12 Zodiac Signs | Jyotishasha`;
+
+  const description = lang === "hi"
+    ? `अपनी राशि चुनें और जानें ${YEAR} में करियर, प्रेम, धन और स्वास्थ्य की भविष्यवाणी।`
+    : `Select your zodiac sign and read the detailed yearly horoscope for ${YEAR} - career, love, finance and health predictions.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+      siteName: "Jyotishasha",
+    },
+  };
+}
+
+export default async function YearlyHoroscopePage({ params }: PageProps) {
+  const { locale } = await params;
+  const lang = locale === "hi" ? "hi" : "en";
+  const langPath = lang === "hi" ? "/hi" : "";
 
   const dict = await getDictionary(lang);
 
@@ -53,7 +84,7 @@ export default async function YearlyHoroscopePage({
           return (
             <Link
               key={z.sign}
-              href={`/${lang}/yearly-horoscope/${z.sign}`}
+              href={`${langPath}/yearly-horoscope/${z.sign}`}
               className="group rounded-2xl bg-white border p-6 text-center shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               <Image
@@ -86,7 +117,7 @@ export default async function YearlyHoroscopePage({
               : "Get today’s horoscope with love, finance and planetary guidance."}
           </p>
           <Link
-            href={`/${lang}/daily-horoscope/aries`}
+            href={`${langPath}/daily-horoscope/aries`}
             className="inline-block rounded-xl border border-purple-300 px-5 py-2.5 font-semibold text-gray-900 hover:bg-purple-50 transition"
           >
             {lang === "hi" ? "🔮 दैनिक राशिफल पढ़ें" : "🔮 Read Daily Horoscope"}
@@ -104,7 +135,7 @@ export default async function YearlyHoroscopePage({
               : "See how this month shapes your career, love and health."}
           </p>
           <Link
-            href={`/${lang}/monthly-horoscope/aries`}
+            href={`${langPath}/monthly-horoscope/aries`}
             className="inline-block rounded-xl border border-indigo-300 px-5 py-2.5 font-semibold text-gray-900 hover:bg-indigo-50 transition"
           >
             {lang === "hi" ? "📅 मासिक राशिफल देखें" : "📅 View Monthly Horoscope"}
@@ -114,7 +145,7 @@ export default async function YearlyHoroscopePage({
         {/* App CTA */}
         <div className="rounded-2xl border bg-white p-6 hover:shadow-md transition">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">
-            {lang === "hi" ? "ज्योतिषाशा ऐप" : "Jyotishasha App"}
+            {lang === "hi" ? "ज्योतिष आशा ऐप" : "Jyotishasha App"}
           </h3>
           <p className="text-sm text-gray-600 mb-5">
             {lang === "hi"
@@ -122,7 +153,7 @@ export default async function YearlyHoroscopePage({
               : "Personalized horoscope, Panchang & Ask One Question — free."}
           </p>
           <Link
-            href={`/${lang}/app`}
+            href={`${langPath}/app`}
             className="inline-block rounded-xl border border-yellow-300 px-5 py-2.5 font-semibold text-gray-900 hover:bg-yellow-50 transition"
           >
             {lang === "hi" ? "📱 ऐप डाउनलोड करें" : "📱 Download App"}

@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: lang === "hi" 
-      ? `${signName} वार्षिक राशिफल ${YEAR} | ज्योतिषाशा` 
+      ? `${signName} वार्षिक राशिफल ${YEAR} | ज्योतिष आशा` 
       : `${signName} Horoscope ${YEAR} | Vedic Predictions | Jyotishasha`,
     
     description: lang === "hi"
@@ -221,7 +221,7 @@ export default async function YearlySignPage({ params }: PageProps) {
 
         <p className="text-sm text-gray-500 leading-relaxed">
           {lang === "hi" 
-            ? "यह वार्षिक राशिफल शास्त्रीय वैदिक ज्योतिष सिद्धांतों, ग्रह गोचर और ज्योतिषाशा रिसर्च मेथडोलॉजी का उपयोग करके तैयार किया गया है।"
+            ? "यह वार्षिक राशिफल शास्त्रीय वैदिक ज्योतिष सिद्धांतों, ग्रह गोचर और ज्योतिष आशा रिसर्च मेथडोलॉजी का उपयोग करके तैयार किया गया है।"
             : "This yearly horoscope is prepared using classical Vedic astrology principles, planetary transits, and Jyotishasha research methodology."}
         </p>
 

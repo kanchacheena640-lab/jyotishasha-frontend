@@ -27,7 +27,6 @@ export default async function sitemap() {
     "/panchang/muhurat",
     "/tools",
     "/reports",
-    "/about",
     "/contact",
     "/privacy-policy",
     "/terms",
@@ -135,6 +134,70 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/ekadashi/${slug}`, 0.65)
   );
 
+  const ekadashiIndexUrls = [
+    createUrl(`${baseUrl}/ekadashi`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/ekadashi`, 0.75, "weekly"),
+  ];
+
+  // ---------------- HOROSCOPE (DAILY / MONTHLY / YEARLY) ----------------
+  const dailyHoroscopeUrls: any[] = [];
+  const monthlyHoroscopeUrls: any[] = [];
+  const yearlyHoroscopeUrls: any[] = [];
+
+  ascendants.forEach((sign) => {
+    dailyHoroscopeUrls.push(createUrl(`${baseUrl}/daily-horoscope/${sign}`, 0.75, "daily"));
+    dailyHoroscopeUrls.push(createUrl(`${baseUrl}/hi/daily-horoscope/${sign}`, 0.7, "daily"));
+
+    monthlyHoroscopeUrls.push(createUrl(`${baseUrl}/monthly-horoscope/${sign}`, 0.7, "monthly"));
+    monthlyHoroscopeUrls.push(createUrl(`${baseUrl}/hi/monthly-horoscope/${sign}`, 0.65, "monthly"));
+
+    yearlyHoroscopeUrls.push(createUrl(`${baseUrl}/yearly-horoscope/${sign}`, 0.7, "yearly"));
+    yearlyHoroscopeUrls.push(createUrl(`${baseUrl}/hi/yearly-horoscope/${sign}`, 0.65, "yearly"));
+  });
+
+  // ---------------- BLOG ----------------
+  const blogUrls = [
+    createUrl(`${baseUrl}/blog`, 0.7, "daily"),
+    createUrl(`${baseUrl}/hi/blog`, 0.65, "daily"),
+    createUrl(`${baseUrl}/blogs`, 0.7, "daily"),
+    createUrl(`${baseUrl}/hi/blogs`, 0.65, "daily"),
+  ];
+
+  // ---------------- LOVE ----------------
+  const loveSubPaths = [
+    "",
+    "/mangal-dosh",
+    "/marriage-potential",
+    "/matchmaking-compatibility",
+    "/report/relationship_future_report",
+    "/result",
+    "/truth-or-dare",
+  ];
+
+  const loveUrls = loveSubPaths.map((path) =>
+    createUrl(`${baseUrl}/love${path}`, path === "" ? 0.75 : 0.6, "monthly")
+  );
+
+  const loveUrlsHi = loveSubPaths.map((path) =>
+    createUrl(`${baseUrl}/hi/love${path}`, path === "" ? 0.7 : 0.55, "monthly")
+  );
+
+  // ---------------- MISC TOOL / UTILITY PAGES ----------------
+  const miscUrls = [
+    createUrl(`${baseUrl}/gemstone-consult`, 0.6, "monthly"),
+    createUrl(`${baseUrl}/hi/gemstone-consult`, 0.55, "monthly"),
+    createUrl(`${baseUrl}/birth-chart`, 0.7, "monthly"),
+    createUrl(`${baseUrl}/hi/birth-chart`, 0.65, "monthly"),
+    createUrl(`${baseUrl}/today-panchang`, 0.8, "daily"),
+    createUrl(`${baseUrl}/hi/today-panchang`, 0.75, "daily"),
+    createUrl(`${baseUrl}/vedic-panchang`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/vedic-panchang`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/rahu-kaal`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/rahu-kaal`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/astrology-methodology`, 0.5, "yearly"),
+    createUrl(`${baseUrl}/hi/astrology-methodology`, 0.45, "yearly"),
+  ];
+
   // ---------------- FINAL ----------------
   return [
     ...staticUrls,
@@ -149,6 +212,14 @@ export default async function sitemap() {
     ...holiUrls,
     ...ekadashiUrls,
     ...ekadashiUrlsHi,
+    ...ekadashiIndexUrls,
+    ...dailyHoroscopeUrls,
+    ...monthlyHoroscopeUrls,
+    ...yearlyHoroscopeUrls,
+    ...blogUrls,
+    ...loveUrls,
+    ...loveUrlsHi,
+    ...miscUrls,
     ...navratriUrls,
     ...navdurgaUrls,
     ...navdurgaUrlsHi,

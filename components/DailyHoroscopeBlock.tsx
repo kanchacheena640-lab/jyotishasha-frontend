@@ -23,12 +23,12 @@ export default function DailyHoroscopeBlock({ sign, lang = "en" }: Props) {
       .catch(() => setLoading(false));
   }, [sign, lang]);
 
-  if (loading) return <p>Loading today’s horoscope…</p>;
-  if (!data || data.error) return <p>Horoscope not available.</p>;
+  if (loading) return <p className="text-gray-700">Loading today’s horoscope…</p>;
+  if (!data || data.error) return <p className="text-gray-700">Horoscope not available.</p>;
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-semibold">{data.heading}</h3>
+      <h3 className="text-xl font-semibold text-gray-800">{data.heading}</h3>
 
       <p className="text-gray-800">{data.intro}</p>
 

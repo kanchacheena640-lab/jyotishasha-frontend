@@ -83,7 +83,7 @@ const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
 
           {/* Title Section */}
           <div className="space-y-1">
-            <p className="text-xs font-bold text-purple-400 uppercase tracking-widest">
+            <p className="text-sm font-bold text-purple-600 uppercase tracking-widest">
               {formatWesternDate(item.vrat_date, locale)}
             </p>
             <h2 className="text-3xl font-black tracking-tight text-gray-950">
@@ -101,11 +101,11 @@ const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
                 {isHi ? "पारण का समय" : "Parana Details"}
               </p>
               {/* Step 1: Date dikhao */}
-              <p className="text-sm font-bold text-gray-900 tracking-tight">
+              <p className="text-sm font-bold text-purple-600 uppercase tracking-widest">
                 {paranaFormattedDate}
               </p>
               {/* Step 2: Time to Time dikhao */}
-              <p className="text-lg font-black text-purple-600 leading-none">
+              <p className="text-2xl font-black text-gray-950 leading-none">
                 {startTime} — {endTime}
               </p>
             </div>

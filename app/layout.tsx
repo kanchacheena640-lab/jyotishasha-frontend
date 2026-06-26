@@ -1,7 +1,9 @@
 import "./globals.css";
 import Script from "next/script";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.jyotishasha.com"),
   title: "Jyotishasha",
   description: "Astrology Reports and Tools",
   icons: { icon: "/favicon.ico" },

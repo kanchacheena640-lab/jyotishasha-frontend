@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: lang === "hi" 
-      ? `${signName} मासिक राशिफल | ज्योतिषाशा` 
+      ? `${signName} मासिक राशिफल | ज्योतिष आशा` 
       : `${signName} Monthly Horoscope | Jyotishasha`,
     
     description: lang === "hi"
@@ -51,8 +51,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // -----------------------------
 // Data Fetch
 // -----------------------------
-async function getMonthlyHoroscope(sign: string) {
-  const res = await fetch(`${API_BASE}/api/monthly-horoscope?sign=${sign}`, {
+async function getMonthlyHoroscope(sign: string, lang: string) {
+  const res = await fetch(`${API_BASE}/api/monthly-horoscope?sign=${sign}&lang=${lang}`, {
     next: { revalidate: 60 * 60 * 6 },
   });
 
@@ -70,20 +70,16 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
 
   if (!VALID_SIGNS.includes(signLower)) notFound();
 
-  const dict = await getDictionary(lang);
-  const data = await getMonthlyHoroscope(signLower);
+  const data = await getMonthlyHoroscope(signLower, lang);
 
   if (!data) notFound();
 
-  const signName = dict.horoscope?.zodiacNames?.[signLower] 
-    ?? (signLower.charAt(0).toUpperCase() + signLower.slice(1));
-
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
+    <main className="mx-auto max-w-3xl px-4 py-10 text-gray-900">
       {/* HERO */}
       <div className="mb-10 rounded-3xl bg-gradient-to-r from-purple-700 to-indigo-700 px-8 py-10 text-white">
         <h1 className="text-4xl md:text-5xl font-bold text-center">
-          {lang === "hi" ? `${signName} मासिक राशिफल` : data.title}
+          {data.title}
         </h1>
       </div>
 
