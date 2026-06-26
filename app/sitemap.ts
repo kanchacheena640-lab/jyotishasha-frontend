@@ -157,8 +157,6 @@ export default async function sitemap() {
 
   // ---------------- BLOG ----------------
   const blogUrls = [
-    createUrl(`${baseUrl}/blog`, 0.7, "daily"),
-    createUrl(`${baseUrl}/hi/blog`, 0.65, "daily"),
     createUrl(`${baseUrl}/blogs`, 0.7, "daily"),
     createUrl(`${baseUrl}/hi/blogs`, 0.65, "daily"),
   ];

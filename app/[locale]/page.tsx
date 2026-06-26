@@ -1,5 +1,6 @@
 // app/[locale]/page.tsx
 
+import type { Metadata } from "next";
 import Link from "next/link";
 
 // Components
@@ -19,6 +20,41 @@ import { getPanchang } from "@/lib/getPanchang";
 import { getHomeMuhurth } from "@/lib/getHomeMuhurth";
 import { getTransit } from "@/lib/getTransit";
 import { getUpcomingEvents } from "@/lib/getUpcomingEvents";
+
+const SITE_URL = "https://www.jyotishasha.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const locale = params.locale === "hi" ? "hi" : "en";
+  const langPath = locale === "hi" ? "/hi" : "";
+  const canonicalUrl = `${SITE_URL}${langPath}`;
+
+  const title =
+    locale === "hi"
+      ? "ज्योतिष आशा - वैदिक ज्योतिष, कुंडली और पंचांग"
+      : "Jyotishasha - Vedic Astrology, Kundali & Panchang";
+
+  const description =
+    locale === "hi"
+      ? "मुफ्त वैदिक ज्योतिष टूल्स, दैनिक राशिफल, कुंडली, पंचांग, मुहूर्त"
+      : "Free Vedic astrology tools, daily horoscope, kundali, panchang, muhurat and transit reports";
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+      siteName: "Jyotishasha",
+    },
+  };
+}
 
 export default async function HomePage({
   params,
@@ -42,6 +78,13 @@ export default async function HomePage({
   return (
     <div className="min-h-screen bg-[#0b1120] pt-12 text-white">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
+
+        {/* H1 */}
+        <h1 className="text-3xl md:text-4xl font-bold pt-4 mb-8">
+          {locale === "hi"
+            ? "ज्योतिष आशा - वैदिक ज्योतिष, कुंडली और पंचांग"
+            : "Jyotishasha - Vedic Astrology, Kundali & Panchang"}
+        </h1>
 
         {/* Top Bar */}
         <div className="flex flex-col lg:flex-row gap-6 mb-10">

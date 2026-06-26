@@ -71,7 +71,7 @@ export async function generateMetadata({
     planetEn: "Rahu",
     planetHi: "राहु",
     slug: "rahu-transit",
-    locale: "en",
+    locale,
   });
 }
 
