@@ -3,6 +3,7 @@ import { toolsData } from "@/app/data/toolsData";
 import { reportsData } from "@/app/data/reportsData";
 import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
 import { NAVDURGA_LIST } from "@/lib/navratri";
+import { getAllNakshatraSlugs } from "@/lib/nakshatra";
 
 export default async function sitemap() {
   const baseUrl = "https://www.jyotishasha.com";
@@ -139,6 +140,22 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/ekadashi`, 0.75, "weekly"),
   ];
 
+  // ---------------- NAKSHATRA ----------------
+  const nakshatraSlugs = getAllNakshatraSlugs();
+
+  const nakshatraUrls = nakshatraSlugs.map((slug) =>
+    createUrl(`${baseUrl}/nakshatra/${slug}`, 0.7)
+  );
+
+  const nakshatraUrlsHi = nakshatraSlugs.map((slug) =>
+    createUrl(`${baseUrl}/hi/nakshatra/${slug}`, 0.65)
+  );
+
+  const nakshatraIndexUrls = [
+    createUrl(`${baseUrl}/nakshatra`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/nakshatra`, 0.75, "weekly"),
+  ];
+
   // ---------------- HOROSCOPE (DAILY / MONTHLY / YEARLY) ----------------
   const dailyHoroscopeUrls: any[] = [];
   const monthlyHoroscopeUrls: any[] = [];
@@ -211,6 +228,9 @@ export default async function sitemap() {
     ...ekadashiUrls,
     ...ekadashiUrlsHi,
     ...ekadashiIndexUrls,
+    ...nakshatraUrls,
+    ...nakshatraUrlsHi,
+    ...nakshatraIndexUrls,
     ...dailyHoroscopeUrls,
     ...monthlyHoroscopeUrls,
     ...yearlyHoroscopeUrls,
