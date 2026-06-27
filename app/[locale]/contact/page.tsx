@@ -1,4 +1,33 @@
+import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/articleSchema";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const isHi = params.locale === "hi";
+
+  const title = isHi ? "संपर्क करें | ज्योतिष आशा" : "Contact Us | Jyotishasha";
+  const description = isHi
+    ? "ज्योतिष परामर्श, रिपोर्ट और सहायता के लिए ज्योतिष आशा से संपर्क करें।"
+    : "Get in touch with Jyotishasha for astrology consultations, reports and support.";
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/contact`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Jyotishasha",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+    },
+  };
+}
 
 export default function ContactPage({
   params,

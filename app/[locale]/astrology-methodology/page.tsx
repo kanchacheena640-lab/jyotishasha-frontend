@@ -1,5 +1,6 @@
 // app/[locale]/astrology-methodology/page.tsx
 import type { Metadata } from "next";
+import { buildFAQPageSchema } from "@/lib/seo/articleSchema";
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
@@ -35,10 +36,18 @@ export default function AstrologyMethodologyPage({ params }: { params: { locale:
     }
   ];
 
+  const faqSchema = buildFAQPageSchema(faqs);
+
   return (
     <section className="min-h-screen py-12 px-4 text-white bg-gradient-to-b from-[#0f0a1e] to-[#1a1435]">
+      {/* JSON-LD Schema (FAQPage) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-indigo-500/20">
-        
+
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-black text-indigo-300 mb-4 uppercase tracking-tighter">
           {isHi ? "ज्योतिष पद्धति: ज्योतिष आशा का विज्ञान" : "Methodology: The Science of Jyotishasha"}

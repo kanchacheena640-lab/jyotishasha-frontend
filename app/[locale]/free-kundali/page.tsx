@@ -1,4 +1,36 @@
+import type { Metadata } from "next";
 import FreeKundaliClient from "./FreeKundaliClient";
+import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/articleSchema";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isHi = locale === "hi";
+
+  const title = isHi
+    ? "मुफ्त कुंडली - अपनी वैदिक जन्म कुंडली बनाएं | ज्योतिष आशा"
+    : "Free Kundali - Generate Your Vedic Birth Chart | Jyotishasha";
+  const description = isHi
+    ? "तुरंत अपनी मुफ्त वैदिक कुंडली बनाएं। ग्रह स्थिति, भाव और भविष्यवाणी के साथ विस्तृत जन्म चार्ट।"
+    : "Generate your free Vedic kundali instantly. Get detailed birth chart with planetary positions, houses and predictions.";
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/free-kundali`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Jyotishasha",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+    },
+  };
+}
 
 export default async function FreeKundaliPage({ params }: { params: any }) {
   const { locale } = await params;
