@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { zodiacData, type ZodiacSign } from "@/lib/zodiac";
 import DailyHoroscopeBlock from "@/components/DailyHoroscopeBlock";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 interface Props {
   params: { locale: string; sign: string };
@@ -25,15 +26,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 
-  const title = isHi 
+  const title = isHi
     ? `${signName} दैनिक राशिफल – ${today} | स्वभाव, प्रेम और करियर`
     : `${signName} Daily Horoscope – ${today} | Traits, Love & Compatibility`;
+  const description = isHi ? `${signName} के लिए आज का राशिफल। जानें अपना स्वभाव, प्रेम जीवन और भाग्य।` : `Read ${signName} daily horoscope for ${today}.`;
 
   return {
     title,
-    description: isHi ? `${signName} के लिए आज का राशिफल। जानें अपना स्वभाव, प्रेम जीवन और भाग्य।` : `Read ${signName} daily horoscope for ${today}.`,
+    description,
     alternates: {
       canonical: `https://jyotishasha.com${isHi ? '/hi' : ''}/daily-horoscope/${sign}`,
+    },
+    openGraph: {
+      title,
+      description,
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
   };
 }
@@ -61,12 +68,13 @@ export default function DailyHoroscopePage({ params }: Props) {
     headline: isHi
       ? `${signName} दैनिक राशिफल – ${today}`
       : `${signName} Daily Horoscope – ${today}`,
-    datePublished: new Date().toISOString().split("T")[0],
-    author: { "@type": "Organization", name: "Jyotishasha" },
+    datePublished: toISTDatePublished(),
+    image: DEFAULT_OG_IMAGE,
+    author: { "@type": "Organization", name: "Jyotishasha", url: SITE_URL },
     publisher: {
       "@type": "Organization",
       name: "Jyotishasha",
-      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
+      logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
     },
     description: isHi
       ? `${signName} के लिए आज का राशिफल। जानें अपना स्वभाव, प्रेम जीवन और भाग्य।`

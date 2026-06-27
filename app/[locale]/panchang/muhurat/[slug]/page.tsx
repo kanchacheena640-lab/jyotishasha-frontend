@@ -1,4 +1,5 @@
 import { muhurthTopics } from "../../muhurat/muhurth_topics";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 import { CtaMuhurth, CtaKundali, CtaReport } from "@/components/cta";
 import { faq_muhurth } from "@/app/data/faq_muhurth";
 import Link from "next/link";
@@ -140,10 +141,14 @@ export default async function MuhuratPage({ params }: { params: { locale: string
     image:
       "https://www.jyotishasha.com/og/muhurat-base.jpg",
 
+    datePublished: toISTDatePublished(),
+
     author: {
       "@type": "Organization",
 
       name: "Jyotishasha",
+
+      url: SITE_URL,
     },
 
     publisher: {
@@ -154,7 +159,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
       logo: {
         "@type": "ImageObject",
 
-        url: "https://www.jyotishasha.com/logo.png",
+        url: DEFAULT_OG_IMAGE,
       },
     },
 

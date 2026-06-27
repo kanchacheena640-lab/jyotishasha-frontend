@@ -2,6 +2,7 @@
 
 import { format } from "date-fns";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 
 const BACKEND_URL =
@@ -113,13 +114,23 @@ function JsonLd({ schema }: { schema: object }) {
 export async function generateMetadata() {
   const p = await getTodayPanchang();
 
+  const title = `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(
+    p.date
+  )} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`;
+  const description = `Today Panchang with ${p.tithi.name} Tithi, ${p.nakshatra.name} Nakshatra, Chaughadiya timings, Rahu Kaal and Panchak. Updated daily.`;
+
   return {
-    title: `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(
-      p.date
-    )} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`,
-    description: `Today Panchang with ${p.tithi.name} Tithi, ${p.nakshatra.name} Nakshatra, Chaughadiya timings, Rahu Kaal and Panchak. Updated daily.`,
+    title,
+    description,
     alternates: {
       canonical: "https://www.jyotishasha.com/today-panchang",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.jyotishasha.com/today-panchang",
+      siteName: "Jyotishasha",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
   };
 }
@@ -135,9 +146,10 @@ export default async function TodayPanchangPage() {
     headline: `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(p.date)}`,
     description:
       "Daily updated Hindu Panchang with Tithi, Nakshatra, Chaughadiya, Rahu Kaal and Panchak.",
-    datePublished: p.date,
-    dateModified: p.date,
-    author: { "@type": "Organization", name: "Jyotishasha" },
+    datePublished: toISTDatePublished(p.date),
+    dateModified: toISTDatePublished(p.date),
+    image: DEFAULT_OG_IMAGE,
+    author: { "@type": "Organization", name: "Jyotishasha", url: SITE_URL },
     publisher: { "@type": "Organization", name: "Jyotishasha" },
   };
 

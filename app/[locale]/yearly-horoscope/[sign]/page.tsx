@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
+import { DEFAULT_OG_IMAGE, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 const YEAR = 2026;
 const SITE_URL = "https://www.jyotishasha.com";
@@ -58,6 +59,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: canonicalUrl,
       type: "article",
       siteName: "Jyotishasha",
+      images: [{
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: lang === "hi" ? `${signName} वार्षिक राशिफल ${YEAR}` : `${signName} Horoscope ${YEAR}`,
+      }],
     },
   };
 };
@@ -107,12 +114,13 @@ export default async function YearlySignPage({ params }: PageProps) {
     headline: lang === "hi"
       ? `${signName} वार्षिक राशिफल ${YEAR}`
       : `${signName} Horoscope ${YEAR}`,
-    datePublished: new Date().toISOString().split("T")[0],
-    author: { "@type": "Organization", name: "Jyotishasha" },
+    datePublished: toISTDatePublished(),
+    image: DEFAULT_OG_IMAGE,
+    author: { "@type": "Organization", name: "Jyotishasha", url: SITE_URL },
     publisher: {
       "@type": "Organization",
       name: "Jyotishasha",
-      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
+      logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
     },
     description: data.tagline
       ?? (lang === "hi"

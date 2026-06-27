@@ -18,6 +18,7 @@ import {
   getTargetYear,
 } from "@/lib/months";
 import AnnualMuhuratPage from "@/components/muhurat/AnnualMuhuratPage";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 
 export const revalidate = 86400;
@@ -281,10 +282,14 @@ export default async function MuhuratPage({
     image:
       "https://www.jyotishasha.com/og/muhurat-base.jpg",
 
+    datePublished: toISTDatePublished(),
+
     author: {
       "@type": "Organization",
 
       name: "Jyotishasha",
+
+      url: SITE_URL,
     },
 
     publisher: {
@@ -295,7 +300,7 @@ export default async function MuhuratPage({
       logo: {
         "@type": "ImageObject",
 
-        url: "https://www.jyotishasha.com/logo.png",
+        url: DEFAULT_OG_IMAGE,
       },
     },
 

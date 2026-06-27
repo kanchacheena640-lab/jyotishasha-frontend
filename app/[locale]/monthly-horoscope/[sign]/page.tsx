@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
+import { DEFAULT_OG_IMAGE, SITE_URL as ORG_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.jyotishasha.com";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jyotishasha.com";
@@ -33,17 +34,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonicalUrl = `${SITE_URL}/${lang === "hi" ? "hi/" : ""}monthly-horoscope/${signLower}`;
 
-  return {
-    title: lang === "hi" 
-      ? `${signName} मासिक राशिफल | ज्योतिष आशा` 
-      : `${signName} Monthly Horoscope | Jyotishasha`,
-    
-    description: lang === "hi"
-      ? `${signName} का मासिक राशिफल - करियर, प्रेम, स्वास्थ्य, धन और उपाय सहित।`
-      : `Read the monthly horoscope for ${signName}. Career, love, health, money and practical guidance.`,
+  const title = lang === "hi"
+    ? `${signName} मासिक राशिफल | ज्योतिष आशा`
+    : `${signName} Monthly Horoscope | Jyotishasha`;
+  const description = lang === "hi"
+    ? `${signName} का मासिक राशिफल - करियर, प्रेम, स्वास्थ्य, धन और उपाय सहित।`
+    : `Read the monthly horoscope for ${signName}. Career, love, health, money and practical guidance.`;
 
+  return {
+    title,
+    description,
     alternates: {
       canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
   };
 }
@@ -83,12 +90,13 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: data.title,
-    datePublished: new Date().toISOString().split("T")[0],
-    author: { "@type": "Organization", name: "Jyotishasha" },
+    datePublished: toISTDatePublished(),
+    image: DEFAULT_OG_IMAGE,
+    author: { "@type": "Organization", name: "Jyotishasha", url: ORG_URL },
     publisher: {
       "@type": "Organization",
       name: "Jyotishasha",
-      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
+      logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
     },
     description: data.theme,
     mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },

@@ -2,6 +2,7 @@
 
 import PanchangClient from "./PanchangClient";
 import { format } from "date-fns";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 /* ---------------- LANGUAGE ---------------- */
 function getLang(locale?: string) {
@@ -56,6 +57,7 @@ export async function generateMetadata({
         : `Daily Hindu Panchang for ${displayDate}`,
       url: lang === "hi" ? `/hi/panchang/${date}` : `/panchang/${date}`,
       siteName: "Jyotishasha",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `Panchang for ${displayDate}` }],
     },
   };
 }
@@ -190,17 +192,19 @@ export default function PanchangPage({
             headline: isHindi
               ? `${displayDate} का पंचांग`
               : `Hindu Panchang for ${displayDate}`,
-            datePublished: date,
+            datePublished: toISTDatePublished(date),
+            image: DEFAULT_OG_IMAGE,
             author: {
               "@type": "Organization",
               name: "Jyotishasha",
+              url: SITE_URL,
             },
             publisher: {
               "@type": "Organization",
               name: "Jyotishasha",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.jyotishasha.com/logo.png",
+                url: DEFAULT_OG_IMAGE,
               },
             },
             description: isHindi
