@@ -229,9 +229,9 @@ type PhaseKey = typeof keys[number];
     <div className="min-h-screen bg-[#FEF9F4] px-4 py-10 sm:px-6 md:px-12">
 
       {/* 🌟 Title */}
-      <h1 className="text-3xl sm:text-4xl font-bold text-center text-primary mb-4">
+      <h2 className="text-3xl sm:text-4xl font-bold text-center text-primary mb-4">
         {result.title}
-      </h1>
+      </h2>
 
       {/* 📄 User Info */}
       <p className="text-sm text-center font-mono text-gray-700 mb-6">

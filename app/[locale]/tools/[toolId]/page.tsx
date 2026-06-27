@@ -134,10 +134,10 @@ export function generateMetadata(
       {/* 🔹 SEO & TEXT CONTENT (Bilingual Support) */}
       <div className="max-w-5xl mx-auto px-4 py-12 text-white space-y-8">
         
-        {/* Title: H2 SEO ke liye best hai */}
-        <h2 className="text-3xl font-bold text-purple-300 border-b border-purple-900/40 pb-4">
+        {/* Main page title */}
+        <h1 className="text-3xl font-bold text-purple-300 border-b border-purple-900/40 pb-4">
           {tool.seo.title}
-        </h2>
+        </h1>
 
         {/* Content Paragraphs */}
         <div className="space-y-6 text-gray-200 text-lg leading-relaxed">
