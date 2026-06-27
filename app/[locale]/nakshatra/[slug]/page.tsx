@@ -220,7 +220,7 @@ export default function NakshatraDetailPage({
           <Link href={`${langPath}/${planetTransitSlug}`} className="text-xs font-bold px-4 py-2 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition">
             {t(`${data.ruling_planet} Transit`, `${data.ruling_planet_hi} गोचर`)} →
           </Link>
-          <Link href={`${langPath}/birth-chart`} className="text-xs font-bold px-4 py-2 rounded-full bg-slate-700 text-white hover:bg-slate-800 transition">
+          <Link href={`${langPath}/free-kundali`} className="text-xs font-bold px-4 py-2 rounded-full bg-slate-700 text-white hover:bg-slate-800 transition">
             {t("Generate Your Birth Chart", "अपनी जन्म कुंडली बनाएं")} →
           </Link>
           <Link href={`${langPath}/tools`} className="text-xs font-bold px-4 py-2 rounded-full bg-slate-700 text-white hover:bg-slate-800 transition">
