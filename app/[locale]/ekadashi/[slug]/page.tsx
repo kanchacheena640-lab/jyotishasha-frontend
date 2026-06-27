@@ -1,13 +1,62 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   getEkadashiContent,
   getAllEkadashiSlugs,
 } from "@/app/data/ekadashi";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 export const revalidate = 86400;
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
+const YEAR = 2026;
+
+function stripEkadashiSuffix(name: string) {
+  return name.replace(/\s*(Ekadashi|एकादशी)\s*$/u, "").trim();
+}
+
+/* ---------------- METADATA ---------------- */
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string; locale: string };
+}): Promise<Metadata> {
+  const { slug, locale } = params;
+  const isHi = locale === "hi";
+
+  const content = getEkadashiContent(slug);
+  if (!content) {
+    return { title: isHi ? "एकादशी | ज्योतिष आशा" : "Ekadashi | Jyotishasha" };
+  }
+
+  const baseNameEn = stripEkadashiSuffix(content.name.en);
+  const baseNameHi = stripEkadashiSuffix(content.name.hi);
+
+  const title = isHi
+    ? `${baseNameHi} एकादशी ${YEAR} - व्रत, पारण समय और महत्व | ज्योतिष आशा`
+    : `${baseNameEn} Ekadashi ${YEAR} - Vrat, Parana Time & Significance | Jyotishasha`;
+
+  const description = isHi
+    ? `${baseNameHi} एकादशी ${YEAR} की संपूर्ण जानकारी - व्रत तिथि, पारण समय, पूजा विधि, लाभ और आध्यात्मिक महत्व।`
+    : `Complete guide to ${baseNameEn} Ekadashi ${YEAR} - vrat date, parana time, puja vidhi, benefits and spiritual significance.`;
+
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/ekadashi/${slug}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Jyotishasha",
+      type: "article",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+    },
+  };
+}
 
 /* --- Date Formatter --- */
 function formatDate(dateStr: string | undefined) {
@@ -53,10 +102,10 @@ async function getEkadashiDynamicData(
 export async function generateStaticParams() {
   const slugs = getAllEkadashiSlugs();
 
-  return slugs.map((slug) => ({
-    locale: "hi",
-    slug,
-  }));
+  return slugs.flatMap((slug) => [
+    { locale: "en", slug },
+    { locale: "hi", slug },
+  ]);
 }
 
 /* ---------------- PAGE ---------------- */
@@ -102,8 +151,52 @@ export default async function Page({
 
   const displayParanaDate = formatDate(dynamic?.parana?.parana_date);
 
+  const canonicalUrl = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/ekadashi/${slug}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: t(
+      `${content.name.en} ${selectedYear} - Vrat Date, Muhurat & Katha`,
+      `${content.name.hi} ${selectedYear} - व्रत तिथि, मुहूर्त और कथा`
+    ),
+    description: t(content.significance.en, content.significance.hi),
+    image: DEFAULT_OG_IMAGE,
+    datePublished: toISTDatePublished(),
+    author: { "@type": "Organization", name: "Jyotishasha", url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: "Jyotishasha",
+      logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+  };
+
+  const faqList = t(content.faq.en, content.faq.hi);
+  const faqSchema = faqList?.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqList.map((f: { q: string; a: string }) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  } : null;
+
   return (
     <div className="bg-gradient-to-b from-orange-900 to-orange-800 py-6 md:py-16 min-h-screen">
+      {/* JSON-LD Schema (Article + FAQPage) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <article className="max-w-5xl mx-auto bg-white rounded-3xl px-4 md:px-10 py-8 md:py-14 shadow-2xl text-black">
 
         {/* Breadcrumb */}
