@@ -50,9 +50,9 @@ export default function MatchmakingCompatibilityDetail({ locale }: { locale: str
       
       {/* 🧿 Header */}
       <div className="text-center space-y-2">
-        <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-300">
+        <h2 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-300">
           🧿 {isHi ? "अष्टकूट मिलान" : "Matchmaking Compatibility"}
-        </h1>
+        </h2>
         <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">
           {isHi ? "वैदिक अष्टकूट विवाह विश्लेषण" : "Vedic Ashtakoot Marriage Analysis"}
         </p>

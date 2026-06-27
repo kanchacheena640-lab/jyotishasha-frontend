@@ -51,9 +51,9 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
       
       {/* 🔮 Header */}
       <div className="text-center space-y-2">
-        <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-orange-300 uppercase tracking-tighter">
+        <h2 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-orange-300 uppercase tracking-tighter">
           {isHi ? "ट्रुथ या डेयर" : "Truth or Dare"}
-        </h1>
+        </h2>
         <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">
           {isHi ? "रिलेशनशिप रियलिटी चेक" : "Relationship Reality Check"}
         </p>

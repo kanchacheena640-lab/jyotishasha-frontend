@@ -12,6 +12,14 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default function MangalDoshPage({ params }: { params: { locale: string } }) {
-  // Locale ko direct child mein bhej rahe hain
-  return <MangalDoshDetail locale={params.locale} />;
+  const isHi = params.locale === "hi";
+  return (
+    <>
+      <h1 className="text-3xl md:text-5xl font-black text-center text-red-500 uppercase bg-[#0f0a1e] pt-10 pb-2 px-4">
+        🔥 {isHi ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
+      </h1>
+      {/* Locale ko direct child mein bhej rahe hain */}
+      <MangalDoshDetail locale={params.locale} />
+    </>
+  );
 }

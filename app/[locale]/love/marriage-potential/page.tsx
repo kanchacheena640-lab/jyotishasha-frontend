@@ -10,5 +10,13 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default function MarriagePotentialPage({ params }: { params: { locale: string } }) {
-  return <MarriagePotentialDetail locale={params.locale} />;
+  const isHi = params.locale === "hi";
+  return (
+    <>
+      <h1 className="text-3xl md:text-5xl font-black text-center text-emerald-400 bg-[#0f0a1e] pt-10 pb-2 px-4">
+        💍 {isHi ? "विवाह संभावना" : "Marriage Potential"}
+      </h1>
+      <MarriagePotentialDetail locale={params.locale} />
+    </>
+  );
 }

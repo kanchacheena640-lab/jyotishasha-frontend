@@ -49,9 +49,9 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
       
       {/* 🏁 Header & Signal Section */}
       <div className="text-center space-y-4">
-        <h1 className="text-3xl md:text-5xl font-black text-red-500 uppercase">
+        <h2 className="text-3xl md:text-5xl font-black text-red-500 uppercase">
           🔥 {isHi ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
-        </h1>
+        </h2>
         <div className={`inline-block px-8 py-3 rounded-full border-2 font-black tracking-widest ${
           data?.signal === "GREEN" ? "bg-green-500/10 border-green-500/50 text-green-400" : "bg-red-500/10 border-red-500/50 text-red-400"
         }`}>

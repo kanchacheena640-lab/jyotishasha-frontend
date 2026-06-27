@@ -46,9 +46,9 @@ export default function MarriagePotentialDetail({ locale }: { locale: string }) 
 
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-10 bg-[#0f0a1e] min-h-screen text-white">
-      <h1 className="text-3xl md:text-5xl font-black text-center text-emerald-400">
+      <h2 className="text-3xl md:text-5xl font-black text-center text-emerald-400">
         💍 {isHi ? "विवाह संभावना" : "Marriage Potential"}
-      </h1>
+      </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* User Card: Ravi */}

@@ -58,9 +58,9 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
       
       {/* 💑 Header */}
       <div className="text-center space-y-3 pt-6">
-        <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-orange-300">
+        <h2 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-orange-300">
           {isHi ? "मिलान परिणाम" : "Matchmaking Result"}
-        </h1>
+        </h2>
         <p className="text-gray-500 text-sm italic">
           {isHi ? "आपके वैदिक विश्लेषण का सारांश" : "Summary of your Vedic analysis"}
         </p>

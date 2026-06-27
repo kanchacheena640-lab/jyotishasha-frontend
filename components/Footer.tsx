@@ -1,10 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 
 
 export default function Footer() {
+  const params = useParams();
+  const currentLang = params?.locale === "hi" ? "hi" : "en";
+  const langPath = currentLang === "hi" ? "/hi" : "";
+
   return (
     <footer className="bg-[#0f0c29] text-white pt-10 pb-6">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -23,6 +28,10 @@ export default function Footer() {
           <ul className="space-y-2 text-gray-300">
             <li><Link href="/">Home</Link></li>
             <li><Link href="/tools">Tools</Link></li>
+            <li><Link href={`${langPath}/panchang`}>{currentLang === "hi" ? "पंचांग" : "Panchang"}</Link></li>
+            <li><Link href={`${langPath}/ekadashi`}>{currentLang === "hi" ? "एकादशी" : "Ekadashi"}</Link></li>
+            <li><Link href={`${langPath}/navratri`}>{currentLang === "hi" ? "नवरात्रि" : "Navratri"}</Link></li>
+            <li><Link href={`${langPath}/rahu-kaal`}>{currentLang === "hi" ? "राहु काल" : "Rahu Kaal"}</Link></li>
             <li><Link href="/reports">Reports</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/astrology-methodology">Methodology</Link></li>
