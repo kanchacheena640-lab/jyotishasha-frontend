@@ -97,11 +97,57 @@ export default async function YearlySignPage({ params }: PageProps) {
 
   if (!data) notFound();
 
-  const signName = dict.horoscope?.zodiacNames?.[signLower] 
+  const signName = dict.horoscope?.zodiacNames?.[signLower]
     ?? (signLower.charAt(0).toUpperCase() + signLower.slice(1));
+  const canonicalUrl = `${SITE_URL}/${lang === "hi" ? "hi/" : ""}yearly-horoscope/${signLower}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: lang === "hi"
+      ? `${signName} वार्षिक राशिफल ${YEAR}`
+      : `${signName} Horoscope ${YEAR}`,
+    datePublished: new Date().toISOString().split("T")[0],
+    author: { "@type": "Organization", name: "Jyotishasha" },
+    publisher: {
+      "@type": "Organization",
+      name: "Jyotishasha",
+      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
+    },
+    description: data.tagline
+      ?? (lang === "hi"
+        ? `${signName} का वार्षिक राशिफल ${YEAR} – करियर, प्रेम, धन, स्वास्थ्य और उपाय।`
+        : `${signName} yearly horoscope ${YEAR} – career, love, finance, health and remedies.`),
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+  };
+
+  const faqSchema = data.faqs?.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: data.faqs.map((f: { question: string; answer: string }) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.answer,
+      },
+    })),
+  } : null;
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-10 bg-gray-50 text-gray-900">
+
+      {/* JSON-LD Schema (Article + FAQPage) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       {/* HERO */}
       <section className="mb-10 flex items-center gap-5 rounded-3xl bg-gradient-to-r from-purple-800 to-indigo-800 px-6 py-8 text-white">

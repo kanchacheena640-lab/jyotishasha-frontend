@@ -74,8 +74,67 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
 
   if (!data) notFound();
 
+  const dict = await getDictionary(lang);
+  const signName = dict.horoscope?.zodiacNames?.[signLower]
+    ?? (signLower.charAt(0).toUpperCase() + signLower.slice(1));
+  const canonicalUrl = `${SITE_URL}/${lang === "hi" ? "hi/" : ""}monthly-horoscope/${signLower}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: data.title,
+    datePublished: new Date().toISOString().split("T")[0],
+    author: { "@type": "Organization", name: "Jyotishasha" },
+    publisher: {
+      "@type": "Organization",
+      name: "Jyotishasha",
+      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
+    },
+    description: data.theme,
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: lang === "hi"
+          ? `${signName} का मासिक राशिफल क्या दर्शाता है?`
+          : `What does ${signName}'s monthly horoscope cover?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: lang === "hi"
+            ? `${signName} का मासिक राशिफल करियर, धन, प्रेम, स्वास्थ्य और महत्वपूर्ण तिथियों पर वैदिक ज्योतिष आधारित मार्गदर्शन देता है।`
+            : `${signName}'s monthly horoscope offers Vedic astrology guidance on career, money, love, health and key dates for the month.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: lang === "hi" ? "मासिक राशिफल कितना सटीक है?" : "How accurate is the monthly horoscope?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: lang === "hi"
+            ? "मासिक राशिफल ग्रहों के गोचर पर आधारित सामान्य मार्गदर्शन है, जो व्यक्तिगत जन्म कुंडली के साथ अधिक सटीक होता है।"
+            : "Monthly horoscopes offer general guidance based on planetary transits; predictions are more precise when combined with your personal birth chart.",
+        },
+      },
+    ],
+  };
+
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 text-gray-900">
+      {/* JSON-LD Schema (Article + FAQPage) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* HERO */}
       <div className="mb-10 rounded-3xl bg-gradient-to-r from-purple-700 to-indigo-700 px-8 py-10 text-white">
         <h1 className="text-4xl md:text-5xl font-bold text-center">

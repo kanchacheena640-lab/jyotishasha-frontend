@@ -53,9 +53,68 @@ export default function DailyHoroscopePage({ params }: Props) {
   });
 
   const signName = isHi ? (data.name_hi || data.name) : data.name;
+  const canonicalUrl = `https://www.jyotishasha.com${langPath}/daily-horoscope/${sign}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: isHi
+      ? `${signName} दैनिक राशिफल – ${today}`
+      : `${signName} Daily Horoscope – ${today}`,
+    datePublished: new Date().toISOString().split("T")[0],
+    author: { "@type": "Organization", name: "Jyotishasha" },
+    publisher: {
+      "@type": "Organization",
+      name: "Jyotishasha",
+      logo: { "@type": "ImageObject", url: "https://www.jyotishasha.com/logo.png" },
+    },
+    description: isHi
+      ? `${signName} के लिए आज का राशिफल। जानें अपना स्वभाव, प्रेम जीवन और भाग्य।`
+      : `Daily horoscope for ${signName} covering nature, love and career for ${today}.`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: isHi
+          ? `${signName} का आज का राशिफल कैसा है?`
+          : `What does today's horoscope say for ${signName}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: isHi
+            ? `${signName} का आज का राशिफल स्वभाव, प्रेम जीवन, करियर और अनुकूलता पर आधारित वैदिक ज्योतिष विश्लेषण देता है।`
+            : `${signName}'s daily horoscope is based on classical Vedic astrology principles and covers nature, love, career and compatibility for the day.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: isHi ? "दैनिक राशिफल कितना सटीक है?" : "How accurate is the daily horoscope?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: isHi
+            ? "दैनिक राशिफल ग्रहों की वर्तमान स्थिति और गोचर पर आधारित सामान्य मार्गदर्शन है, जो व्यक्तिगत जन्म कुंडली के साथ अधिक सटीक होता है।"
+            : "Daily horoscopes offer general guidance based on current planetary positions and transits; predictions are more precise when combined with your personal birth chart.",
+        },
+      },
+    ],
+  };
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+      {/* JSON-LD Schema (Article + FAQPage) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* 🔵 HERO SECTION */}
       <div className="rounded-3xl bg-gradient-to-br from-indigo-700 via-blue-800 to-indigo-900 p-8 md:p-12 mb-10 text-white shadow-2xl relative overflow-hidden">
         <div className="relative z-10">
