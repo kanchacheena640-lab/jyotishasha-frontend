@@ -14,17 +14,17 @@ export default function KundaliProfileHeader({ profile, moonTraits, language }: 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between mb-8 gap-6">
       <div className="text-center sm:text-left">
-        <h1 className="text-3xl font-bold text-indigo-300 drop-shadow-sm">
+        <h1 className="text-3xl font-bold drop-shadow-sm bg-gradient-to-r from-purple-300 to-yellow-300 bg-clip-text text-transparent">
           {isHi ? "🪐 ऑनलाइन जन्म कुंडली रिपोर्ट" : "🪐 Janma Kundali Report"}
         </h1>
-        <div className="mt-2 text-gray-200">
+        <div className="mt-2">
           <p className="text-lg">
-            {isHi ? "नाम:" : "Prepared for"} <strong className="text-white">{profile?.name}</strong>
+            {isHi ? "नाम:" : "Prepared for"} <strong className="text-white font-bold">{profile?.name}</strong>
           </p>
-          <p className="text-sm opacity-90">
+          <p className="text-sm text-purple-300/70">
             {profile?.dob} | {profile?.tob}
           </p>
-          <p className="text-sm text-indigo-200 italic">
+          <p className="text-sm text-purple-300/70 italic">
             {profile?.place}
           </p>
         </div>

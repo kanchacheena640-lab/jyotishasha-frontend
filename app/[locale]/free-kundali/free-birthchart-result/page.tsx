@@ -7,10 +7,13 @@ import Script from "next/script";
 
 // ✅ Modular Components (Jo humne abhi banaye)
 import KundaliProfileHeader from "@/components/kundali/KundaliProfileHeader";
+import KundaliChartPanel from "@/components/kundali/KundaliChartPanel";
+import KundaliQuickInfoGrid from "@/components/kundali/KundaliQuickInfoGrid";
 import KundaliChartSection from "@/components/kundali/KundaliChartSection";
 import PlanetDataTable from "@/components/kundali/PlanetDataTable";
 import DashaSection from "@/components/kundali/DashaSection";
 import LifeInsights from "@/components/kundali/LifeInsights";
+import JanmaNakshatraCard from "@/components/kundali/JanmaNakshatraCard";
 
 export default function FreeBirthChartResultPage() {
   return (
@@ -86,28 +89,54 @@ function KundaliPageContent() {
   const lagnaRashi = lagnaMap[ascendantSign] || 1;
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] py-10 px-4 text-white">
-      <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl p-6 sm:p-10 border border-indigo-500/30">
-        
-        {/* 1. Profile Header */}
-        <KundaliProfileHeader profile={data.profile} moonTraits={data.moon_traits} language={language} />
+    <section className="min-h-screen bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] py-6 sm:py-10 px-3 sm:px-4 text-white">
+      <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl p-4 sm:p-10 border border-indigo-500/30">
 
-        {/* 2. Chart & Snippet */}
-        <KundaliChartSection data={data} lagnaRashi={lagnaRashi} language={language} />
+        {/* HERO WRAPPER: Profile Header + Chart + Quick Info */}
+        <div className="relative rounded-3xl p-6 mb-8 bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-purple-800/20 border border-purple-500/20 backdrop-blur-sm overflow-hidden">
+          {/* Glow decorations */}
+          <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" />
 
-        {/* 3. Dasha Analysis */}
+          <div className="relative z-10">
+            {/* Profile Header (Name / DOB / Place) - TOP */}
+            <KundaliProfileHeader profile={data.profile} moonTraits={data.moon_traits} language={language} />
+
+            {/* 1. HERO: Chart (left) + Quick Info (right) */}
+            <div className="flex flex-col md:flex-row gap-6 items-start mt-6">
+              <div className="w-full md:w-[300px] md:shrink-0">
+                <KundaliChartPanel data={data} lagnaRashi={lagnaRashi} isHi={isHi} />
+              </div>
+              <div className="w-full md:flex-1">
+                <KundaliQuickInfoGrid data={data} isHi={isHi} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Lagna Trait / Birthchart Snippet */}
+        <div className="mt-8">
+          <KundaliChartSection data={data} language={language} />
+        </div>
+
+        {/* 3. Janma Nakshatra Highlight */}
+        <div className="mt-8">
+          <JanmaNakshatraCard data={data} isHi={isHi} />
+        </div>
+
+        {/* 4-5. Current Dasha + Full Timeline */}
         <DashaSection dasha={data.dasha_summary} isHi={isHi} />
 
-        {/* 4. Planetary Table */}
+        {/* 6. Planetary Table - House Wise */}
         <PlanetDataTable data={data} isHi={isHi} lagnaRashi={lagnaRashi} />
 
-        {/* 5. Life Aspects & Yogas */}
+        {/* 7. Key Life Insights & Yogas */}
         <LifeInsights data={data} isHi={isHi} />
 
         {/* 💎 Gemstone Recommendation (Original Footer Logic) */}
         {data.gemstone_suggestion && (
           <div className="mt-12 bg-yellow-500/10 p-6 rounded-2xl border border-yellow-300/30 text-center">
-            <h2 className="text-xl font-bold text-yellow-300 mb-2">💎 Recommended Gemstone</h2>
+            <h2 className="text-xl font-bold text-yellow-300 mb-2">💎 {isHi ? "अनुशंसित रत्न" : "Recommended Gemstone"}</h2>
             <p className="text-gray-200 text-sm mb-3">{data.gemstone_suggestion.paragraph}</p>
             <div className="inline-block bg-yellow-500 text-black px-6 py-2 rounded-full font-bold">
               {data.gemstone_suggestion.gemstone}
