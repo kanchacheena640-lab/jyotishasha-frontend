@@ -52,12 +52,12 @@ const baseTopics: Record<string, MuhurthTopic> = {
   },
   "child-birth-muhurat": {
     title: "Child Birth Muhurat – Auspicious Delivery & Ritual Dates",
-    title_hi: "जन्म मुहूर्त – प्रसव और धार्मिक अनुष्ठान के शुभ दिन",
+    title_hi: "बच्चे के जन्म का शुभ मुहूर्त – Hindu Panchang के अनुसार",
     slug: "child-birth-muhurat",
     activity: "childbirth",
-    description: "Explore month-wise Child Birth Muhurat dates. View auspicious childbirth dates identified through Panchang analysis of Tithi, Nakshatra, Yoga, Karana and weekday combinations.",
-    description_hi: "हिंदू पंचांग के अनुसार बच्चे के जन्म और उससे जुड़े अनुष्ठानों के लिए शुभ मुहूर्त और तिथियां खोजें।",
-    keywords: ["child birth muhurat", "janm muhurat"],
+    description: "Child Birth Muhurat holds deep significance in Vedic astrology, as the moment of birth is believed to shape a newborn's destiny, health, and life path. While the exact timing of delivery cannot always be controlled, classical Jyotish texts emphasize choosing auspicious Muhurats for related rituals such as Jatakarma, the first welcoming ceremony, Naamkaran or formal naming, and other early Samskaras performed shortly after birth. These rites are traditionally timed using careful analysis of Tithi, Nakshatra, Yoga, Karana, and weekday, ensuring the ceremony aligns harmoniously with favorable planetary positions. Performing these rituals during a well-chosen Muhurat is believed to strengthen the child's horoscope, reduce inauspicious influences, and invite blessings of health, longevity, and prosperity. Families often consult a Panchang or astrologer to identify the most beneficial dates, avoiding inauspicious Tithis like Chaturthi, Ashtami, and Amavasya. Many parents also use this guidance to plan medically scheduled deliveries, such as elective C-sections, aligning the baby's birth chart with favorable cosmic timing for a strong start in life.",
+    description_hi: "वैदिक ज्योतिष में शिशु के जन्म का मुहूर्त अत्यंत महत्वपूर्ण माना जाता है, क्योंकि जन्म का क्षण बच्चे के भाग्य, स्वास्थ्य और जीवन-मार्ग को आकार देता है। यद्यपि वास्तविक प्रसव का समय पूरी तरह नियंत्रित नहीं किया जा सकता, शास्त्रों में जातकर्म, नामकरण और अन्य प्रारंभिक संस्कारों के लिए शुभ मुहूर्त चुनने पर विशेष बल दिया जाता है। ये संस्कार तिथि, नक्षत्र, योग, करण और वार के सावधानीपूर्वक विश्लेषण के आधार पर निश्चित किए जाते हैं, ताकि अनुष्ठान ग्रहों की अनुकूल स्थिति के साथ सामंजस्य में हों। उचित मुहूर्त में ये संस्कार करने से बच्चे की कुंडली मजबूत होती है, अशुभ प्रभाव कम होते हैं, और स्वास्थ्य, दीर्घायु व समृद्धि का आशीर्वाद मिलता है। माता-पिता और परिवार अक्सर सबसे शुभ तिथि व समय जानने के लिए पंचांग या ज्योतिषी से सलाह लेते हैं, विशेष रूप से चतुर्थी, अष्टमी और अमावस्या जैसी अशुभ तिथियों से बचते हुए। आधुनिक समय में कई परिवार नियोजित प्रसव, जैसे सिजेरियन डिलीवरी, के लिए भी जन्म मुहूर्त का मार्गदर्शन लेते हैं ताकि बच्चे की कुंडली शुभ समय के साथ संरेखित हो सके।",
+    keywords: ["child birth muhurat", "janm muhurat", "बच्चे के जन्म का शुभ मुहूर्त"],
     canonical: "https://www.jyotishasha.com/panchang/muhurat/child-birth-muhurat",
   },
   "gold-buying-muhurat": {

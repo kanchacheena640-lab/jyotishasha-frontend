@@ -5,6 +5,8 @@ import React, { useState } from "react";
 interface FAQItem {
   q: string;
   a: string;
+  q_hi?: string;
+  a_hi?: string;
 }
 
 interface MuhurthArtFaqProps {
@@ -18,16 +20,19 @@ export const MuhurthArtFaq = ({ faqs, isHi, activityName }: MuhurthArtFaqProps) 
 
   if (!faqs || faqs.length === 0) return null;
 
+  const tQ = (f: FAQItem) => (isHi ? f.q_hi || f.q : f.q);
+  const tA = (f: FAQItem) => (isHi ? f.a_hi || f.a : f.a);
+
   // 📝 JSON-LD Schema for Google Rich Snippets (SEO Magic)
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map((f) => ({
       "@type": "Question",
-      "name": f.q,
+      "name": tQ(f),
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": f.a
+        "text": tA(f)
       }
     }))
   };
@@ -55,7 +60,7 @@ export const MuhurthArtFaq = ({ faqs, isHi, activityName }: MuhurthArtFaqProps) 
               className="w-full p-4 flex justify-between items-center text-left hover:bg-white/5 transition-colors focus:outline-none"
             >
               <span className="text-sm font-bold text-gray-100 pr-4 leading-tight">
-                {index + 1}. {faq.q}
+                {index + 1}. {tQ(faq)}
               </span>
               <span className={`text-purple-400 text-xs transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}>
                 ▼
@@ -68,7 +73,7 @@ export const MuhurthArtFaq = ({ faqs, isHi, activityName }: MuhurthArtFaqProps) 
               }`}
             >
               <div className="p-4 pt-0 text-[13px] text-gray-400 leading-relaxed border-t border-white/5 mt-2">
-                {faq.a}
+                {tA(faq)}
               </div>
             </div>
           </div>
