@@ -42,11 +42,17 @@ export default async function sitemap() {
   );
 
   // ---------------- MUHURAT ----------------
-  const muhuratUrls = Object.keys(muhurthTopics).map((slug) =>
+  // Exclude "grahpravesh-muhurat" — it's a legacy redirect alias (301 → grah-pravesh-muhurat),
+  // not a real page, so it shouldn't be submitted to the sitemap.
+  const muhuratSlugs = Object.keys(muhurthTopics).filter(
+    (slug) => slug !== "grahpravesh-muhurat"
+  );
+
+  const muhuratUrls = muhuratSlugs.map((slug) =>
     createUrl(`${baseUrl}/panchang/muhurat/${slug}`, 0.7)
   );
 
-  const muhuratUrlsHi = Object.keys(muhurthTopics).map((slug) =>
+  const muhuratUrlsHi = muhuratSlugs.map((slug) =>
     createUrl(`${baseUrl}/hi/panchang/muhurat/${slug}`, 0.65)
   );
 
