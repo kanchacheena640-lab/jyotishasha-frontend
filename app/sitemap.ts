@@ -211,6 +211,8 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/birth-chart`, 0.65, "monthly"),
     createUrl(`${baseUrl}/today-panchang`, 0.8, "daily"),
     createUrl(`${baseUrl}/hi/today-panchang`, 0.75, "daily"),
+    createUrl(`${baseUrl}/choghadiya`, 0.8, "daily"),
+    createUrl(`${baseUrl}/hi/choghadiya`, 0.75, "daily"),
     createUrl(`${baseUrl}/vedic-panchang`, 0.7, "weekly"),
     createUrl(`${baseUrl}/hi/vedic-panchang`, 0.65, "weekly"),
     createUrl(`${baseUrl}/rahu-kaal`, 0.7, "weekly"),

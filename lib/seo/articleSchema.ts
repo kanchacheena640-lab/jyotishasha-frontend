@@ -1,6 +1,30 @@
 export const SITE_URL = "https://www.jyotishasha.com";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og/jyotishasha-og-banner.jpg`;
 
+export type BreadcrumbItem = {
+  name: string;
+  url: string;
+};
+
+/**
+ * Generates Schema.org BreadcrumbList JSON-LD.
+ * Reusable across all SEO pages.
+ */
+export function buildBreadcrumbSchema(
+  items: BreadcrumbItem[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.url}`,
+    })),
+  };
+}
+
 export function toISTDatePublished(date: Date | string = new Date()): string {
   if (typeof date === "string") {
     const ddmmyyyy = date.match(/^(\d{2})-(\d{2})-(\d{4})$/);
