@@ -1,15 +1,15 @@
 import { format } from "date-fns";
 import type { Metadata } from "next";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/articleSchema";
-import { getRahuKaalSchemas } from "@/lib/seo/rahuKaalSchema";
+import { getAbhijitMuhuratSchemas } from "@/lib/seo/abhijitMuhuratSchema";
 
-import RahuKaalHero from "@/components/rahu-kaal/RahuKaalHero";
-import TodayRahuKaal from "@/components/rahu-kaal/TodayRahuKaal";
-import RahuKaalDosDonts from "@/components/rahu-kaal/RahuKaalDosDonts";
-import RahuKaalIntro from "@/components/rahu-kaal/RahuKaalIntro";
-import RahuKaalCalculation from "@/components/rahu-kaal/RahuKaalCalculation";
-import RahuKaalUsage from "@/components/rahu-kaal/RahuKaalUsage";
-import RahuKaalFAQ from "@/components/rahu-kaal/RahuKaalFAQ";
+import AbhijitHero from "@/components/abhijit-muhurat/AbhijitHero";
+import TodayAbhijitMuhurat from "@/components/abhijit-muhurat/TodayAbhijitMuhurat";
+import AbhijitBenefits from "@/components/abhijit-muhurat/AbhijitBenefits";
+import AbhijitIntro from "@/components/abhijit-muhurat/AbhijitIntro";
+import AbhijitCalculation from "@/components/abhijit-muhurat/AbhijitCalculation";
+import AbhijitUsage from "@/components/abhijit-muhurat/AbhijitUsage";
+import AbhijitFAQ from "@/components/abhijit-muhurat/AbhijitFAQ";
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
@@ -43,15 +43,15 @@ async function getTodayPanchang(lang: "en" | "hi") {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const isHi = params.locale === "hi";
-  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/rahu-kaal`;
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/abhijit-muhurat`;
 
   const title = isHi
-    ? "आज का राहु काल | शुभ कार्यों के लिए वर्जित समय"
-    : "Rahu Kaal Today | Inauspicious Time for Important Tasks";
+    ? "आज का अभिजीत मुहूर्त | अत्यंत शुभ और शक्तिशाली समय"
+    : "Abhijit Muhurat Today | Highly Auspicious and Powerful Time";
 
   const description = isHi
-  ? "आज का सटीक राहु काल देखें। राहु काल के दौरान किसी भी नए कार्य की शुरुआत करने से बचें। पंचांग आधारित दैनिक राहु काल समय।"
-  : "Check today's accurate Rahu Kaal. Avoid starting important tasks during Rahu Kaal. Daily updated Rahu Kaal timings based on Panchang.";
+  ? "आज का सटीक अभिजीत मुहूर्त देखें। पंचांग के अनुसार यह मुहूर्त अत्यंत शुभ है, जो नए कार्यों की शुरुआत के लिए सर्वश्रेष्ठ है।"
+  : "Check today's accurate Abhijit Muhurat. According to Panchang, this is a highly auspicious period, ideal for starting new tasks.";
 
   return {
     title,
@@ -67,12 +67,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RahuKaalPage({ params }: PageProps) {
+export default async function AbhijitMuhuratPage({ params }: PageProps) {
   const isHi = params.locale === "hi";
   const lang = isHi ? "hi" : "en";
   const p = await getTodayPanchang(lang);
 
-  const { faqSchema, breadcrumbSchema } = getRahuKaalSchemas(isHi);
+  const { faqSchema, breadcrumbSchema } = getAbhijitMuhuratSchemas(isHi);
 
   return (
     <main className="container mx-auto px-4 py-8 lg:px-8">
@@ -85,19 +85,19 @@ export default async function RahuKaalPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <RahuKaalHero isHi={isHi} />
+      <AbhijitHero isHi={isHi} />
 
-      <TodayRahuKaal isHi={isHi} rahuKaal={p?.rahu_kaal} />
+      <TodayAbhijitMuhurat isHi={isHi} abhijitMuhurat={p?.abhijit_muhurta} />
 
-      <RahuKaalDosDonts isHi={isHi} />
+      <AbhijitBenefits isHi={isHi} />
 
-      <RahuKaalIntro isHi={isHi} />
+      <AbhijitIntro isHi={isHi} />
 
-      <RahuKaalCalculation isHi={isHi} />
+      <AbhijitCalculation isHi={isHi} />
 
-      <RahuKaalUsage isHi={isHi} />
+      <AbhijitUsage isHi={isHi} />
 
-      <RahuKaalFAQ isHi={isHi} />
+      <AbhijitFAQ isHi={isHi} />
     </main>
   );
 }
