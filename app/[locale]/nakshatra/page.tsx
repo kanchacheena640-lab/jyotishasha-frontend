@@ -29,6 +29,12 @@ export async function generateMetadata({
       siteName: "Jyotishasha",
       images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [DEFAULT_OG_IMAGE],
+    },
   };
 }
 
