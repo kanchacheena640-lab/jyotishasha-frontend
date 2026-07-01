@@ -56,7 +56,7 @@ export default function AnnualMonthCalendar({
       <div className="mt-6">
 
         <Link
-          href={`/${locale}/panchang/muhurat/${slug}/${month}`}
+          href={`${locale === "hi" ? "/hi" : ""}/panchang/muhurat/${slug}/${month}`}
           className="inline-block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-xl font-semibold"
         >
           View Full Details →

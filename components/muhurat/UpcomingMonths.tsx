@@ -64,7 +64,7 @@ export default function UpcomingMonths({
       return (
         <Link
           key={month}
-          href={`/${locale}/panchang/muhurat/${slug}/${month}`}
+          href={`${locale === "hi" ? "/hi" : ""}/panchang/muhurat/${slug}/${month}`}
           className={`rounded-xl p-3 hover:bg-white/5 transition-all
           ${
             isCurrent

@@ -1,20 +1,24 @@
 import LoveFormPage from "./LoveForm";
 import { Metadata } from "next";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/love`;
+
   return {
-    title: isHi 
-      ? "फ्री कुंडली मिलान: शादी के लिए 36 गुण और लव कंपैटिबिलिटी" 
+    title: isHi
+      ? "फ्री कुंडली मिलान: शादी के लिए 36 गुण और लव कंपैटिबिलिटी"
       : "Free Kundli Matching for Marriage | Love Compatibility & Guna Milan",
     description: isHi
       ? "वैदिक ज्योतिष के अनुसार वर-वधू की कुंडली का मिलान करें। अष्टकूट गुण मिलान, मांगलिक दोष और प्रेम संबंधों की गहराई जानें।"
       : "Check free kundli matching for marriage using Vedic astrology. Analyze Ashtakoot Guna Milan, Mangal Dosh, and love compatibility for a successful life.",
     alternates: {
-      canonical: `https://jyotishasha.com/${params.locale}/love`,
+      canonical: canonicalUrl,
       languages: {
-        'en': 'https://jyotishasha.com/en/love',
-        'hi': 'https://jyotishasha.com/hi/love',
+        en: `${SITE_URL}/love`,
+        hi: `${SITE_URL}/hi/love`,
+        "x-default": `${SITE_URL}/love`,
       },
     },
   };

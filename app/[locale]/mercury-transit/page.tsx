@@ -178,10 +178,10 @@ const webPageSchema = {
     : `Mercury Transit ${currentYear}`,
 
   description: isHi
-    ? `${currentYear} में चंद्र गोचर का भावनाओं, मानसिक स्थिति, परिवार और दैनिक जीवन पर प्रभाव`
-    : `Effects of Moon transit on emotions, mental state, intuition, family life, and daily mood patterns.`,
+    ? `${currentYear} में बुध गोचर का बुद्धि, संचार, व्यापार और दैनिक निर्णयों पर प्रभाव`
+    : `Effects of Mercury transit on intellect, communication, business decisions, and daily mental clarity.`,
 
-  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}moon-transit`,
+  url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}mercury-transit`,
 
   inLanguage: isHi ? "hi-IN" : "en-US",
 };

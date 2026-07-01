@@ -1,15 +1,53 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import EkadashiCard from "@/components/EkadashiCard";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 export const revalidate = 86400 // 24 hours
 
 const BACKEND_URL = "https://jyotishasha-backend.onrender.com";
 
-export const metadata: Metadata = {
-  title: "Ekadashi Vrat Calendar 2026-2027",
-  description:
-    "Complete Ekadashi calendar with accurate dates and Parana timings.",
-};
+/* ---------------- Metadata ---------------- */
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const locale = params.locale || "en";
+  const isHi = locale === "hi";
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/ekadashi`;
+
+  const title = isHi
+    ? "एकादशी व्रत कैलेंडर 2026-2027 | तिथि और पारण समय | ज्योतिष आशा"
+    : "Ekadashi Vrat Calendar 2026-2027 | Dates & Parana Timings | Jyotishasha";
+
+  const description = isHi
+    ? "2026-2027 के लिए संपूर्ण एकादशी व्रत कैलेंडर, सटीक तिथियों और पारण समय के साथ। हर एकादशी का महत्व और शुभ मुहूर्त जानें।"
+    : "Complete Ekadashi Vrat calendar for 2026-2027 with accurate dates and Parana timings. Discover the significance and auspicious timing of every Ekadashi.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/ekadashi`,
+        hi: `${SITE_URL}/hi/ekadashi`,
+        "x-default": `${SITE_URL}/ekadashi`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 function formatDate(dateStr: string | undefined) {
   if (!dateStr || dateStr === "TBA") return "TBA";
@@ -65,8 +103,26 @@ export default async function EkadashiDirectoryPage({
   const combinedData = [...upcoming2026, ...upcoming2027].slice(0, 24);
   const nextEkadashi = combinedData[0];
 
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/ekadashi`;
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: isHi
+      ? "एकादशी व्रत कैलेंडर 2026-2027"
+      : "Ekadashi Vrat Calendar 2026-2027",
+    description: isHi
+      ? "2026-2027 के लिए संपूर्ण एकादशी व्रत कैलेंडर, सटीक तिथियों और पारण समय के साथ।"
+      : "Complete Ekadashi Vrat calendar for 2026-2027 with accurate dates and Parana timings.",
+    url: canonicalUrl,
+    inLanguage: isHi ? "hi-IN" : "en-US",
+  };
+
   return (
     <main className="min-h-screen bg-[#FDFCFE] pb-20 text-gray-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
 
       {/* HERO */}
       <section className="bg-white border-b border-[#EDE9FE] py-12 md:py-20 px-4">

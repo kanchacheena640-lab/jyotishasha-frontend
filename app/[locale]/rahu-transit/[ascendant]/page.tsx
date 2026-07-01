@@ -5,6 +5,7 @@ import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitC
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import { Suspense } from "react";
+import { buildBreadcrumbSchema } from "@/lib/seo/transitSeo";
 
 export const revalidate = 86400;
 
@@ -258,26 +259,20 @@ export default async function RahuTransitAscendantPage({
     ],
   };
 
-  const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
+  const planetSlug = "rahu-transit";
+  const planetNameEn = "Rahu";
+  const planetNameHi = "राहु";
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
     {
-      "@type": "ListItem",
-      position: 1,
-      name: "Venus Transit",
-      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit`,
+      name: isHi ? `${planetNameHi} गोचर` : `${planetNameEn} Transit`,
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}`,
     },
     {
-      "@type": "ListItem",
-      position: 2,
-      name: isHi
-        ? `${ascName} लग्न`
-        : `${ascName} Ascendant`,
-      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}venus-transit/${ascendant}`,
+      name: isHi ? `${ascName} लग्न` : `${ascName} Ascendant`,
+      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${planetSlug}/${ascendant}`,
     },
-  ],
-};
+  ]);
 
   return (
     <div className="bg-gradient-to-b from-slate-900 to-indigo-950/40 py-16 px-4">

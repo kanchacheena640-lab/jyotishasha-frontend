@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
       currentLang = i18n.language?.startsWith('hi') ? 'hi' : 'en';
     } else {
       // Normal pages: Agar '/hi' hai toh Hindi, baaki sab kuch English
-      currentLang = pathname.startsWith('/hi') ? 'hi' : 'en';
+      currentLang = (pathname === '/hi' || pathname.startsWith('/hi/')) ? 'hi' : 'en';
     }
 
     setLanguage(currentLang);

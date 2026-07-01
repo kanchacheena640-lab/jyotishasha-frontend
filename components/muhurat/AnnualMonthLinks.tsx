@@ -40,7 +40,7 @@ export default function AnnualMonthLinks({
 
           <Link
             key={month}
-            href={`/${locale}/panchang/muhurat/${slug}/${month}`}
+            href={`${locale === "hi" ? "/hi" : ""}/panchang/muhurat/${slug}/${month}`}
             className="rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10"
           >
             <div className="capitalize">

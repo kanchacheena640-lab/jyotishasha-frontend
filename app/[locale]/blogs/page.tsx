@@ -1,6 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import HoroscopeTabs from "@/components/blogs/HoroscopeTabs";
 import { muhurthTopics } from "@/app/[locale]/panchang/muhurat/muhurth_topics";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 export const revalidate = 3600;
 
@@ -37,6 +39,49 @@ async function fetchTransit(isHi: boolean) {
   );
   if (!res.ok) return null;
   return res.json();
+}
+
+/* ---------------- Metadata ---------------- */
+export async function generateMetadata({
+  params,
+}: {
+  params: any;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isHi = locale === "hi";
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/blogs`;
+
+  const title = isHi
+    ? "ज्योतिष अपडेट और दैनिक अंतर्दृष्टि | ज्योतिष आशा"
+    : "Astrology Updates & Daily Insights | Jyotishasha";
+
+  const description = isHi
+    ? "दैनिक राशिफल, मुहूर्त, पंचांग और लाइव ग्रह गोचर — सटीक वैदिक ज्योतिष गणना के साथ। ज्योतिष आशा से रोज़ाना अपडेट पाएं।"
+    : "Fresh daily horoscope, muhurat, panchang and live planetary transits — prepared using Vedic astrology. Stay updated daily with Jyotishasha.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/blogs`,
+        hi: `${SITE_URL}/hi/blogs`,
+        "x-default": `${SITE_URL}/blogs`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function BlogsHubPage({ params }: { params: any }) {

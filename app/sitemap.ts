@@ -4,6 +4,9 @@ import { reportsData } from "@/app/data/reportsData";
 import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
 import { NAVDURGA_LIST } from "@/lib/navratri";
 import { getAllNakshatraSlugs } from "@/lib/nakshatra";
+import { varaData } from "@/lib/data/varaData";
+import { tithiData } from "@/app/data/tithiData";
+import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
 
 export default async function sitemap() {
   const baseUrl = "https://www.jyotishasha.com";
@@ -22,15 +25,13 @@ export default async function sitemap() {
   });
 
   // ---------------- STATIC ----------------
+  // Localized paths that exist under both the English and /hi [locale] tree.
+  // "/panchang/muhurat" was removed — no page.tsx exists at that route (404).
   const staticPaths = [
     "",
     "/panchang",
-    "/panchang/muhurat",
     "/tools",
-    "/reports",
     "/contact",
-    "/privacy-policy",
-    "/terms",
   ];
 
   const staticUrls = staticPaths.map((path) =>
@@ -39,6 +40,15 @@ export default async function sitemap() {
 
   const staticUrlsHi = staticPaths.map((path) =>
     createUrl(`${baseUrl}/hi${path || ""}`, 0.85, "weekly")
+  );
+
+  // English-only paths that live outside the [locale] segment — no /hi
+  // counterpart exists for these (see middleware.js public-page exemptions
+  // and the standalone app/reports route), so no Hindi URL is generated.
+  const englishOnlyStaticPaths = ["/reports", "/privacy-policy", "/terms"];
+
+  const englishOnlyStaticUrls = englishOnlyStaticPaths.map((path) =>
+    createUrl(`${baseUrl}${path}`, 0.9, "weekly")
   );
 
   // ---------------- MUHURAT ----------------
@@ -113,11 +123,14 @@ export default async function sitemap() {
       transitUrls.push(createUrl(`${baseUrl}/hi/${planet}-transit/${asc}`, 0.75));
 
       for (let house = 1; house <= 12; house++) {
+        // Canonical SEO URL uses a dash ("house-N"); next.config.js / middleware.js
+        // 301-redirect the slash form ("house/N") here, so emit the canonical
+        // form directly instead of relying on that redirect.
         transitUrls.push(
-          createUrl(`${baseUrl}/${planet}-transit/${asc}/house/${house}`, 0.7)
+          createUrl(`${baseUrl}/${planet}-transit/${asc}/house-${house}`, 0.7)
         );
         transitUrls.push(
-          createUrl(`${baseUrl}/hi/${planet}-transit/${asc}/house/${house}`, 0.65)
+          createUrl(`${baseUrl}/hi/${planet}-transit/${asc}/house-${house}`, 0.65)
         );
       }
     });
@@ -221,10 +234,77 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/astrology-methodology`, 0.45, "yearly"),
   ];
 
+  // ---------------- AUTHORITY HUBS ----------------
+  const authorityHubUrls = [
+    createUrl(`${baseUrl}/abhijit-muhurat`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/abhijit-muhurat`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/yoga`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/yoga`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/panchak`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/panchak`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/bhadra`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/bhadra`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/karana`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/karana`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/paksha`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/paksha`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/vara`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/vara`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/panchang/tithi`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/panchang/tithi`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/daily-horoscope`, 0.8, "daily"),
+    createUrl(`${baseUrl}/hi/daily-horoscope`, 0.75, "daily"),
+    createUrl(`${baseUrl}/monthly-horoscope`, 0.75, "monthly"),
+    createUrl(`${baseUrl}/hi/monthly-horoscope`, 0.7, "monthly"),
+    createUrl(`${baseUrl}/yearly-horoscope`, 0.75, "yearly"),
+    createUrl(`${baseUrl}/hi/yearly-horoscope`, 0.7, "yearly"),
+    createUrl(`${baseUrl}/hindu-months`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/hindu-months`, 0.75, "weekly"),
+  ];
+
+  // ---------------- VARA (Weekday) DETAIL PAGES ----------------
+  const varaDaySlugs = Object.keys(varaData);
+
+  const varaDayUrls = varaDaySlugs.map((day) =>
+    createUrl(`${baseUrl}/vara/${day}`, 0.7)
+  );
+
+  const varaDayUrlsHi = varaDaySlugs.map((day) =>
+    createUrl(`${baseUrl}/hi/vara/${day}`, 0.65)
+  );
+
+  // ---------------- TITHI DETAIL PAGES ----------------
+  const tithiSlugs = tithiData.map((tithi) => tithi.slug);
+
+  const tithiUrls = tithiSlugs.map((slug) =>
+    createUrl(`${baseUrl}/panchang/tithi/${slug}`, 0.7)
+  );
+
+  const tithiUrlsHi = tithiSlugs.map((slug) =>
+    createUrl(`${baseUrl}/hi/panchang/tithi/${slug}`, 0.65)
+  );
+
+  // ---------------- HINDU MONTHS DETAIL PAGES ----------------
+  const monthSlugs = Object.keys(hinduMonthsData);
+
+  const monthUrls = monthSlugs.map((slug) =>
+    createUrl(`${baseUrl}/hindu-months/${slug}`, 0.7)
+  );
+
+  const monthUrlsHi = monthSlugs.map((slug) =>
+    createUrl(`${baseUrl}/hi/hindu-months/${slug}`, 0.65)
+  );
+
   // ---------------- FINAL ----------------
-  return [
+  const allUrls = [
     ...staticUrls,
     ...staticUrlsHi,
+    ...englishOnlyStaticUrls,
+    ...authorityHubUrls,
+    ...varaDayUrls,
+    ...varaDayUrlsHi,
+    ...tithiUrls,
+    ...tithiUrlsHi,
     ...muhuratUrls,
     ...muhuratUrlsHi,
     ...toolUrls,
@@ -249,5 +329,16 @@ export default async function sitemap() {
     ...navratriUrls,
     ...navdurgaUrls,
     ...navdurgaUrlsHi,
+    ...monthUrls,
+    ...monthUrlsHi,
   ];
+
+  // De-duplicate by URL (keep first occurrence) as a safety net against
+  // duplicate entries from upstream data sources (e.g. duplicate slugs).
+  const seenUrls = new Set<string>();
+  return allUrls.filter((entry) => {
+    if (seenUrls.has(entry.url)) return false;
+    seenUrls.add(entry.url);
+    return true;
+  });
 }

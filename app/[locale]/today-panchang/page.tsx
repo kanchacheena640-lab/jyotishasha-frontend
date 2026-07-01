@@ -20,7 +20,7 @@ type ChaughadiyaItem = {
 };
 
 /* ---------------- DATA FETCH ---------------- */
-async function getTodayPanchang() {
+async function getTodayPanchang(lang: "en" | "hi") {
   const today = format(new Date(), "yyyy-MM-dd");
 
   const res = await fetch(`${BACKEND_URL}/api/panchang`, {
@@ -30,7 +30,7 @@ async function getTodayPanchang() {
       date: today,
       latitude: 26.8467,
       longitude: 80.9462,
-      language: "en",
+      language: lang,
     }),
     next: { revalidate: 3600 }, // 🔑 freshness
   });
@@ -111,33 +111,57 @@ function JsonLd({ schema }: { schema: object }) {
 }
 
 /* ---------------- SEO META ---------------- */
-export async function generateMetadata() {
-  const p = await getTodayPanchang();
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const isHindi = params.locale === "hi";
+  const p = await getTodayPanchang(isHindi ? "hi" : "en");
 
-  const title = `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(
-    p.date
-  )} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`;
-  const description = `Today Panchang with ${p.tithi.name} Tithi, ${p.nakshatra.name} Nakshatra, Chaughadiya timings, Rahu Kaal and Panchak. Updated daily.`;
+  const title = isHindi
+    ? `आज का पंचांग – ${p.weekday}, ${formatDDMMYYYY(
+        p.date
+      )} | तिथि, नक्षत्र, चौघड़िया, राहु काल`
+    : `Today Panchang – ${p.weekday}, ${formatDDMMYYYY(
+        p.date
+      )} | Tithi, Nakshatra, Chaughadiya, Rahu Kaal`;
+
+  const description = isHindi
+    ? `आज का पंचांग ${p.tithi.name} तिथि, ${p.nakshatra.name} नक्षत्र, चौघड़िया समय, राहु काल और पंचक के साथ। प्रतिदिन अपडेट होता है।`
+    : `Today Panchang with ${p.tithi.name} Tithi, ${p.nakshatra.name} Nakshatra, Chaughadiya timings, Rahu Kaal and Panchak. Updated daily.`;
+
+  const canonicalUrl = `${SITE_URL}${isHindi ? "/hi" : ""}/today-panchang`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: "https://www.jyotishasha.com/today-panchang",
+      canonical: canonicalUrl,
     },
     openGraph: {
       title,
       description,
-      url: "https://www.jyotishasha.com/today-panchang",
+      url: canonicalUrl,
       siteName: "Jyotishasha",
       images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }
 
-export default async function TodayPanchangPage() {
-  const p = await getTodayPanchang();
-  const isHindi = p.language === "hi";
+export default async function TodayPanchangPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const isHindi = params.locale === "hi";
+  const p = await getTodayPanchang(isHindi ? "hi" : "en");
 
   /* ---------------- ARTICLE SCHEMA ---------------- */
   const articleSchema = {

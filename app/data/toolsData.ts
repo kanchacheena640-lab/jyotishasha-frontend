@@ -19,17 +19,6 @@ export const toolsData = [
     badge: { en: "🔥 Trending", hi: "🔥 ट्रेंडिंग" }
   },
   {
-    slug: "rashi-finder",
-    category: "Basic",
-    emoji: "♈",
-    title: { en: "Rashi Finder", hi: "राशि कैलकुलेटर" },
-    description: {
-      en: "Identify your authentic Moon Sign (Chandra Rashi) based on precise birth details to unlock your emotional and mental blueprint.",
-      hi: "अपने भावनात्मक और मानसिक स्वभाव को समझने के लिए अपनी सटीक चंद्र राशि की पहचान करें।"
-    },
-    badge: { en: "🔥 Trending", hi: "🔥 ट्रेंडिंग" }
-  },
-  {
     slug: "lagna-finder",
     category: "Basic",
     emoji: "🌅",
