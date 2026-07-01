@@ -260,6 +260,12 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/yearly-horoscope`, 0.7, "yearly"),
     createUrl(`${baseUrl}/hindu-months`, 0.8, "weekly"),
     createUrl(`${baseUrl}/hi/hindu-months`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/ayana`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/ayana`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/gulika-kaal`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/gulika-kaal`, 0.65, "weekly"),
+    createUrl(`${baseUrl}/yamaganda`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/hi/yamaganda`, 0.65, "weekly"),
   ];
 
   // ---------------- VARA (Weekday) DETAIL PAGES ----------------
