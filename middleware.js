@@ -23,11 +23,8 @@ export function middleware(request) {
 
   // FAST EXIT
   if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
     pathname.startsWith('/admin') ||
-    pathname.startsWith('/reports') ||
-    pathname.includes('.')
+    pathname.startsWith('/reports')
   ) {
     return NextResponse.next()
   }
@@ -89,6 +86,14 @@ export function middleware(request) {
       ),
       301
     )
+  }
+
+  // 410 Gone: legacy numeric blog pagination (/blog/1, /en/blog/2, /hi/blog/999)
+  if (/^(?:\/(?:en|hi))?\/blog\/\d+$/.test(pathname)) {
+    return new NextResponse(null, {
+      status: 410,
+      headers: { 'X-Robots-Tag': 'noindex' },
+    })
   }
 
   // Locale check
