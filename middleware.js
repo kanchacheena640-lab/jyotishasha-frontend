@@ -88,6 +88,11 @@ export function middleware(request) {
     )
   }
 
+  // 301: legacy /blog listing -> /blogs
+  if (pathname === '/blog' || pathname === '/en/blog' || pathname === '/hi/blog') {
+    return NextResponse.redirect(new URL(pathname + 's', request.url), 301)
+  }
+
   // 410 Gone: legacy numeric blog pagination (/blog/1, /en/blog/2, /hi/blog/999)
   if (/^(?:\/(?:en|hi))?\/blog\/\d+$/.test(pathname)) {
     return new NextResponse(null, {
