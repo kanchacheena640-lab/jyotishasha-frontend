@@ -1,15 +1,8 @@
-"use client";
-
 import Link from "next/link";
-import { useParams } from "next/navigation"; // ✅ URL se locale lene ke liye
 import { toolsData } from "@/app/data/toolsData";
 
-export default function HomeTools() {
-  const params = useParams();
-  
-  // 🔹 Hook ke bajaye URL param se current language fix karo
-  // Isse rendering ekdam instant hogi, koi lag nahi aayega
-  const currentLang = (params?.locale === 'hi') ? 'hi' : 'en';
+export default function HomeTools({ locale }: { locale: string }) {
+  const currentLang = locale === 'hi' ? 'hi' : 'en';
 
   const previewTools = toolsData.slice(1, 7);
 

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
+import { Search, Menu, X } from 'lucide-react';
 
 // Language switcher ko dynamic rakha hai taaki hydration issue na aaye
 const LanguageSwitcher = dynamic(() => import('./LanguageSwitcher'), { ssr: false });
@@ -56,7 +57,7 @@ export default function Header() {
 
           {!showSearch ? (
             <button onClick={() => setShowSearch(true)} className="text-white hover:text-purple-400 transition">
-              <i className="fas fa-search text-lg"></i>
+              <Search size={20} />
             </button>
           ) : (
             <form onSubmit={handleSearch} className="relative flex items-center">
@@ -73,10 +74,10 @@ export default function Header() {
           )}
 
           <button
-            className="md:hidden text-white text-2xl"
+            className="md:hidden text-white"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>

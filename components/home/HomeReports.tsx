@@ -1,15 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { reportsData } from "@/app/data/reportsData";
 
-export default function HomeReports() {
-  const params = useParams();
-  
-  // 🔹 Current Language set karo (Home Page ke text ke liye)
-  const currentLang = (params?.locale === 'hi') ? 'hi' : 'en';
-  const langKey = currentLang as 'en' | 'hi'; 
+export default function HomeReports({ locale }: { locale: string }) {
+  const currentLang = locale === 'hi' ? 'hi' : 'en';
+  const langKey = currentLang as 'en' | 'hi';
 
   // 🔹 Top 6 Reports
   const previewReports = reportsData.slice(0, 6);

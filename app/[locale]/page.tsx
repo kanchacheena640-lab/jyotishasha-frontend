@@ -143,8 +143,8 @@ export default async function HomePage({
         </section>
 
         {/* Tools & Reports */}
-        <HomeTools />
-        <HomeReports />
+        <HomeTools locale={locale} />
+        <HomeReports locale={locale} />
 
         {/* Footer Note */}
         <div className="text-center text-sm text-gray-400 py-12 border-t border-purple-900/50 mt-10">

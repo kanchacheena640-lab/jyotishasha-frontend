@@ -1,6 +1,6 @@
 import "./globals.css";
-import Script from "next/script";
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jyotishasha.com"),
@@ -27,14 +27,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        {/* ✅ Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2039377363616016"
-          crossOrigin="anonymous"
-        />
-      </head>
+      <head />
       <body>
         {/* ✅ Google Tag Manager (noscript) */}
         <noscript>
@@ -57,6 +50,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
 
         {children}
+        {/* Google AdSense — lazyOnload keeps it out of the critical path */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2039377363616016"
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );

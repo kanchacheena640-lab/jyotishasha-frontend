@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 // ✅ Date Formatter (e.g., 30 March 2026)
 function formatWesternDate(dateStr: string | undefined, locale: string) {
@@ -62,9 +59,8 @@ const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
 
   return (
     <Link href={href} className="group block">
-      <motion.div
-        whileHover={{ y: -4 }}
-        className={`relative overflow-hidden rounded-[3rem] border p-8 transition-all duration-500 ${
+      <div
+        className={`relative overflow-hidden rounded-[3rem] border p-8 transition-all duration-500 group-hover:-translate-y-1 ${
           isUpcoming ? "border-purple-200 bg-white shadow-2xl shadow-purple-100" : "border-gray-100 bg-white"
         }`}
       >
@@ -116,7 +112,7 @@ const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
             {isHi ? "पूरी जानकारी" : "View Full Details"}
           </div>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 }

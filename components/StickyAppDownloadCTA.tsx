@@ -1,5 +1,3 @@
-"use client";
-
 type UTM = {
   source: string;
   medium?: string;
