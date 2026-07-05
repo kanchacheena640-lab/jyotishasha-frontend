@@ -52,7 +52,14 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/nakshatra/${slug}`,
+        hi: `${SITE_URL}/hi/nakshatra/${slug}`,
+        "x-default": `${SITE_URL}/nakshatra/${slug}`,
+      },
+    },
     openGraph: {
       title,
       description,
