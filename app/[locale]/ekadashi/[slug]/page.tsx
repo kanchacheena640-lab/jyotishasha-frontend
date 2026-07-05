@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
@@ -53,7 +53,7 @@ export async function generateMetadata({
       url: canonicalUrl,
       siteName: "Jyotishasha",
       type: "article",
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: title }],
     },
   };
 }

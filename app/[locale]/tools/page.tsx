@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import ToolsPageClient from "./ToolsPageClient";
 
 const SITE_URL = "https://www.jyotishasha.com";
@@ -32,6 +32,7 @@ export async function generateMetadata({
       url: canonicalUrl,
       type: "website",
       siteName: "Jyotishasha",
+      images: [{ url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg", width: 1730, height: 909, alt: "Jyotishasha – Free Kundali, Panchang & Muhurat" }],
     },
   };
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import HoroscopeTabs from "@/components/blogs/HoroscopeTabs";
 import { muhurthTopics } from "@/app/[locale]/panchang/muhurat/muhurth_topics";
@@ -75,6 +75,7 @@ export async function generateMetadata({
       description,
       url: canonicalUrl,
       type: "website",
+      images: [{ url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg", width: 1730, height: 909, alt: "Jyotishasha – Free Kundali, Panchang & Muhurat" }],
     },
     twitter: {
       card: "summary_large_image",

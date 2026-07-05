@@ -7,6 +7,21 @@ export const metadata: Metadata = {
   title: "Jyotishasha",
   description: "Astrology Reports and Tools",
   icons: { icon: "/favicon.ico" },
+  openGraph: {
+    siteName: "Jyotishasha",
+    images: [
+      {
+        url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg",
+        width: 1730,
+        height: 909,
+        alt: "Jyotishasha – Free Kundali, Panchang & Muhurat",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

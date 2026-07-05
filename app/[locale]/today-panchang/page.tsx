@@ -1,4 +1,4 @@
-// app/today-panchang/page.tsx
+﻿// app/today-panchang/page.tsx
 
 import { format } from "date-fns";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
@@ -144,7 +144,7 @@ export async function generateMetadata({
       description,
       url: canonicalUrl,
       siteName: "Jyotishasha",
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: title }],
     },
     twitter: {
       card: "summary_large_image",

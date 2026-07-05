@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AscendantSunTransitClient from "@/components/transit/AscendantSunTransitClient";
@@ -201,6 +201,7 @@ export async function generateMetadata({
         type: "article",
         locale: isHi ? "hi_IN" : "en_US",
         siteName: "Jyotishasha",
+        images: [{ url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg", width: 1730, height: 909, alt: "Jyotishasha – Free Kundali, Panchang & Muhurat" }],
       },
 
       twitter: {

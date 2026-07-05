@@ -307,20 +307,6 @@ export default async function JupiterTransitAscendantPage({
 
         <VedicNote lang={lang} />
 
-        {/* Dynamic Chart */}
-        <div className="mb-20">
-          <Suspense fallback={<div className="py-10 text-center">Loading...</div>}>
-            <AscendantSunTransitClient
-              key={`${ascendant}-${initialHouse}`}
-              ascendant={ascendant}
-              planet="jupiter"
-              lang={lang}
-              initialHouse={initialHouse}
-              initialData={initialData}
-            />
-          </Suspense>
-        </div>
-
         {/* Intro */}
         <div className="prose prose-slate max-w-none text-lg text-slate-700 leading-relaxed mb-12 font-medium">
           {isHi ? (

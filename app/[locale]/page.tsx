@@ -1,4 +1,4 @@
-// app/[locale]/page.tsx
+﻿// app/[locale]/page.tsx
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -52,6 +52,7 @@ export async function generateMetadata({
       url: canonicalUrl,
       type: "website",
       siteName: "Jyotishasha",
+      images: [{ url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg", width: 1730, height: 909, alt: "Jyotishasha – Free Kundali, Panchang & Muhurat" }],
     },
   };
 }

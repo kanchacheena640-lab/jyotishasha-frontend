@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
 import { DEFAULT_OG_IMAGE, SITE_URL as ORG_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description,
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: title }],
     },
   };
 }

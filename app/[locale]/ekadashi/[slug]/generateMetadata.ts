@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { getEkadashiContent } from "@/app/data/ekadashi";
 
 export async function generateMetadata({
@@ -55,8 +55,8 @@ export async function generateMetadata({
       images: [
         {
           url: "https://www.jyotishasha.com/og-image.jpg",
-          width: 1200,
-          height: 630,
+          width: 1730,
+          height: 909,
           alt: `${t(content.name.en, content.name.hi)} ${displayYear}`,
         },
       ],

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import FreeKundaliClient from "./FreeKundaliClient";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/articleSchema";
 
@@ -27,7 +27,7 @@ export async function generateMetadata({
       description,
       url: canonicalUrl,
       siteName: "Jyotishasha",
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: title }],
     },
   };
 }

@@ -1,4 +1,4 @@
-// app/[locale]/birth-chart/page.tsx
+﻿// app/[locale]/birth-chart/page.tsx
 import BirthChartPage from "./BirthChartPage";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo/articleSchema";
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       title: isHi ? "आपकी जन्म कुंडली" : "Your Birth Chart",
       description: isHi ? "सटीक वैदिक विश्लेषण" : "Precise Vedic Analysis",
       type: "website",
+      images: [{ url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg", width: 1730, height: 909, alt: "Jyotishasha – Free Kundali, Panchang & Muhurat" }],
     }
   };
 }

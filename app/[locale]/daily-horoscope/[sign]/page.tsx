@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { zodiacData, type ZodiacSign } from "@/lib/zodiac";
 import DailyHoroscopeBlock from "@/components/DailyHoroscopeBlock";
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: title }],
     },
   };
 }

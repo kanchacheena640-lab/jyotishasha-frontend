@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 const SITE_URL = "https://www.jyotishasha.com";
 
@@ -201,8 +201,8 @@ export function getTransitMetadata({
         {
           url: finalOg,
 
-          width: 1200,
-          height: 630,
+          width: 1730,
+          height: 909,
 
           alt: title,
         },

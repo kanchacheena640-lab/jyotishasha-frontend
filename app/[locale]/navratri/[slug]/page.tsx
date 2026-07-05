@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getNavdurgaBySlug, NAVDURGA_LIST } from "@/lib/navratri"
 import { fetchNavratri } from "@/lib/fetchNavratri"
@@ -62,8 +62,8 @@ export async function generateMetadata({
       images: [
         {
           url: `https://www.jyotishasha.com/images/navratri/${params.slug}.jpg`,
-          width: 1200,
-          height: 630,
+          width: 1730,
+          height: 909,
           alt: content.title,
         },
       ],

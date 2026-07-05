@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 
 import { tithiData } from "@/app/data/tithiData";
@@ -71,8 +71,8 @@ export async function generateMetadata({
         images: [
             {
             url: "https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg",
-            width: 1200,
-            height: 630,
+            width: 1730,
+            height: 909,
             alt: "Jyotishasha",
             },
         ],

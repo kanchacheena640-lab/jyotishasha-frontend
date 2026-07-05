@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Your Free Kundali Report | Online Janma Kundali Result | Jyotishasha",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og/free-kundali-result-og.jpg",
-        width: 1200,
-        height: 630,
+        width: 1730,
+        height: 909,
         alt: "Free Janma Kundali Report - Jyotishasha",
       },
     ],

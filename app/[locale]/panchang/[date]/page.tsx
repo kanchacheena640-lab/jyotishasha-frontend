@@ -1,4 +1,4 @@
-// app/[locale]/panchang/[date]/page.tsx
+﻿// app/[locale]/panchang/[date]/page.tsx
 
 import PanchangClient from "./PanchangClient";
 import { format } from "date-fns";
@@ -57,7 +57,7 @@ export async function generateMetadata({
         : `Daily Hindu Panchang for ${displayDate}`,
       url: lang === "hi" ? `/hi/panchang/${date}` : `/panchang/${date}`,
       siteName: "Jyotishasha",
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `Panchang for ${displayDate}` }],
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: `Panchang for ${displayDate}` }],
     },
   };
 }

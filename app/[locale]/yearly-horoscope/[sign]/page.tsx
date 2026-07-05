@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -61,8 +61,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "Jyotishasha",
       images: [{
         url: DEFAULT_OG_IMAGE,
-        width: 1200,
-        height: 630,
+        width: 1730,
+        height: 909,
         alt: lang === "hi" ? `${signName} वार्षिक राशिफल ${YEAR}` : `${signName} Horoscope ${YEAR}`,
       }],
     },

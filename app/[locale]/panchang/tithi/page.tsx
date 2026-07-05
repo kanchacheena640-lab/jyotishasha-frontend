@@ -1,4 +1,5 @@
 
+import type { Metadata } from "next";
 import { tithiData } from "@/app/data/tithiData";
 import TithiCard from "@/components/TithiCard";
 import TodayTithiHero from "@/components/TodayTithiHero";
@@ -12,6 +13,37 @@ import TithiFaq from "@/components/tithi/TithiFaq";
 import { tithiSeoContent } from "@/app/data/tithiSeoContent";
 import TithiSchema from "@/components/tithi/TithiSchema";
 
+const SITE_URL = "https://www.jyotishasha.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const isHi = params.locale === "hi";
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/panchang/tithi`;
+
+  const title = isHi
+    ? "तिथि क्या है – पंचांग की 16 तिथियाँ और उनका महत्व | ज्योतिष आशा"
+    : "Tithi in Hindu Panchang – All 16 Lunar Days Explained | Jyotishasha";
+
+  const description = isHi
+    ? "हिंदू पंचांग की सभी 16 तिथियों का वैदिक महत्व, देवता, शुभ-अशुभ कर्म और मुहूर्त में उपयोग जानें – प्रतिपदा से अमावस्या तक संपूर्ण मार्गदर्शन।"
+    : "Explore all 16 Tithis of Hindu Panchang – Pratipada to Amavasya. Learn each Tithi's deity, significance, auspicious activities, and role in Muhurat selection.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/panchang/tithi`,
+        hi: `${SITE_URL}/hi/panchang/tithi`,
+        "x-default": `${SITE_URL}/panchang/tithi`,
+      },
+    },
+  };
+}
 
 async function getTodayPanchang(
   language: string
