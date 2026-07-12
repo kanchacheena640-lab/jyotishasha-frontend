@@ -3,6 +3,7 @@
 import PanchangClient from "./PanchangClient";
 import { format } from "date-fns";
 import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
+import { resolveDate } from "@/lib/panchang/resolveDate";
 
 /* ---------------- LANGUAGE ---------------- */
 function getLang(locale?: string) {
@@ -19,15 +20,8 @@ export async function generateMetadata({
 }) {
   const { date, locale } = params;
   const lang = getLang(locale);
-
-  // Convert to dd-MM-yyyy for display
-  let displayDate = date;
-  try {
-    const parsed = new Date(date);
-    if (!isNaN(parsed.getTime())) {
-      displayDate = format(parsed, "dd-MM-yyyy");
-    }
-  } catch {}
+  const resolvedDate = resolveDate(date);
+  const displayDate = format(new Date(resolvedDate), "dd-MM-yyyy");
 
   return {
     title:
@@ -43,11 +37,11 @@ export async function generateMetadata({
     alternates: {
       canonical:
         lang === "hi"
-          ? `https://www.jyotishasha.com/hi/panchang/${date}`
-          : `https://www.jyotishasha.com/panchang/${date}`,
+          ? `https://www.jyotishasha.com/hi/panchang/${resolvedDate}`
+          : `https://www.jyotishasha.com/panchang/${resolvedDate}`,
       languages: {
-        "en-US": `/panchang/${date}`,
-        "hi-IN": `/hi/panchang/${date}`,
+        "en-US": `/panchang/${resolvedDate}`,
+        "hi-IN": `/hi/panchang/${resolvedDate}`,
       },
     },
     openGraph: {
@@ -55,7 +49,7 @@ export async function generateMetadata({
       description: lang === "hi"
         ? `${displayDate} का दैनिक पंचांग देखें`
         : `Daily Hindu Panchang for ${displayDate}`,
-      url: lang === "hi" ? `/hi/panchang/${date}` : `/panchang/${date}`,
+      url: lang === "hi" ? `/hi/panchang/${resolvedDate}` : `/panchang/${resolvedDate}`,
       siteName: "Jyotishasha",
       images: [{ url: DEFAULT_OG_IMAGE, width: 1730, height: 909, alt: `Panchang for ${displayDate}` }],
     },
@@ -70,15 +64,8 @@ export default function PanchangPage({
 }) {
   const { date, locale } = params;
   const lang = getLang(locale);
-
-  // Convert date to dd-MM-yyyy for display
-  let displayDate = date;
-  try {
-    const parsed = new Date(date);
-    if (!isNaN(parsed.getTime())) {
-      displayDate = format(parsed, "dd-MM-yyyy");
-    }
-  } catch {}
+  const resolvedDate = resolveDate(date);
+  const displayDate = format(new Date(resolvedDate), "dd-MM-yyyy");
 
   const isHindi = lang === "hi";
 
@@ -99,7 +86,7 @@ export default function PanchangPage({
       </div>
 
       {/* Client Component */}
-      <PanchangClient params={params} />
+      <PanchangClient params={{ date: resolvedDate, locale }} />
 
       {/* FAQ Section - SEO Gold */}
       <div className="mt-20 max-w-4xl mx-auto">
@@ -192,7 +179,7 @@ export default function PanchangPage({
             headline: isHindi
               ? `${displayDate} का पंचांग`
               : `Hindu Panchang for ${displayDate}`,
-            datePublished: toISTDatePublished(date),
+            datePublished: toISTDatePublished(resolvedDate),
             image: DEFAULT_OG_IMAGE,
             author: {
               "@type": "Organization",
@@ -213,8 +200,8 @@ export default function PanchangPage({
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": isHindi
-                ? `https://www.jyotishasha.com/hi/panchang/${date}`
-                : `https://www.jyotishasha.com/panchang/${date}`,
+                ? `https://www.jyotishasha.com/hi/panchang/${resolvedDate}`
+                : `https://www.jyotishasha.com/panchang/${resolvedDate}`,
             },
           }),
         }}

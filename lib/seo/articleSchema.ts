@@ -34,6 +34,12 @@ export function toISTDatePublished(date: Date | string = new Date()): string {
     }
   }
   const d = typeof date === "string" ? new Date(date) : date;
+  if (isNaN(d.getTime())) {
+    throw new TypeError(
+      `toISTDatePublished received "${String(date)}" which is not a valid date. ` +
+      `Resolve semantic route values with resolveDate() in the route before calling this helper.`
+    );
+  }
   const datePart = d.toISOString().split("T")[0];
   return `${datePart}T00:00:00+05:30`;
 }
