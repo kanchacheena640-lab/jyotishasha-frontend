@@ -101,6 +101,18 @@ export function middleware(request) {
     })
   }
 
+  // /panchang/today → 307 to today's ISO date URL (IST).
+  // Must live in middleware (not the page) so ISR cache never serves a stale redirect target.
+  // 307 (not 308): Google re-evaluates daily since the destination changes each day.
+  if (pathname === '/panchang/today' || pathname === '/en/panchang/today') {
+    const today = new Date(Date.now() + 5.5 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    return NextResponse.redirect(new URL(`/panchang/${today}`, request.url), 307)
+  }
+  if (pathname === '/hi/panchang/today') {
+    const today = new Date(Date.now() + 5.5 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    return NextResponse.redirect(new URL(`/hi/panchang/${today}`, request.url), 307)
+  }
+
   // Locale check
   const hasLocale = locales.some(
     l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
