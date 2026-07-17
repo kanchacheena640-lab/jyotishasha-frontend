@@ -160,6 +160,22 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/ekadashi`, 0.75, "weekly"),
   ];
 
+  // ---------------- RETROGRADE PLANETS ----------------
+  const retrogradeUrls = [
+    createUrl(`${baseUrl}/retrograde-planets`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/retrograde-planets`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/retrograde-mercury`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/hi/retrograde-mercury`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/retrograde-venus`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/hi/retrograde-venus`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/retrograde-mars`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/hi/retrograde-mars`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/retrograde-jupiter`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/hi/retrograde-jupiter`, 0.7, "weekly"),
+    createUrl(`${baseUrl}/retrograde-saturn`, 0.75, "weekly"),
+    createUrl(`${baseUrl}/hi/retrograde-saturn`, 0.7, "weekly"),
+  ]
+
   // ---------------- PLANET IN HOUSE ----------------
   const planetInHouseSlugs = getAllPlanetInHouseSlugs();
 
@@ -339,6 +355,7 @@ export default async function sitemap() {
     ...ekadashiUrls,
     ...ekadashiUrlsHi,
     ...ekadashiIndexUrls,
+    ...retrogradeUrls,
     ...planetInHouseHubUrls,
     ...planetInHouseUrls,
     ...planetInHouseUrlsHi,
