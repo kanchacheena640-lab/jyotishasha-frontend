@@ -4,6 +4,7 @@ import { reportsData } from "@/app/data/reportsData";
 import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
 import { NAVDURGA_LIST } from "@/lib/navratri";
 import { getAllNakshatraSlugs } from "@/lib/nakshatra";
+import { getAllPlanetInHouseSlugs } from "@/lib/planetInHouse";
 import { varaData } from "@/lib/data/varaData";
 import { tithiData } from "@/app/data/tithiData";
 import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
@@ -158,6 +159,22 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/ekadashi`, 0.8, "weekly"),
     createUrl(`${baseUrl}/hi/ekadashi`, 0.75, "weekly"),
   ];
+
+  // ---------------- PLANET IN HOUSE ----------------
+  const planetInHouseSlugs = getAllPlanetInHouseSlugs();
+
+  const planetInHouseHubUrls = [
+    createUrl(`${baseUrl}/planet-in-house`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/planet-in-house`, 0.75, "weekly"),
+  ];
+
+  const planetInHouseUrls = planetInHouseSlugs.map((slug) =>
+    createUrl(`${baseUrl}/planet-in-house/${slug}`, 0.7)
+  );
+
+  const planetInHouseUrlsHi = planetInHouseSlugs.map((slug) =>
+    createUrl(`${baseUrl}/hi/planet-in-house/${slug}`, 0.65)
+  );
 
   // ---------------- NAKSHATRA ----------------
   const nakshatraSlugs = getAllNakshatraSlugs();
@@ -322,6 +339,9 @@ export default async function sitemap() {
     ...ekadashiUrls,
     ...ekadashiUrlsHi,
     ...ekadashiIndexUrls,
+    ...planetInHouseHubUrls,
+    ...planetInHouseUrls,
+    ...planetInHouseUrlsHi,
     ...nakshatraUrls,
     ...nakshatraUrlsHi,
     ...nakshatraIndexUrls,

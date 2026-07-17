@@ -1,0 +1,760 @@
+# Planet in House — Editorial Guide
+
+**Internal handbook for Jyotishasha content writers.**  
+This document is the single source of truth for writing every Planet in House article. If this guide conflicts with any previous instruction, this guide wins.
+
+---
+
+## Table of Contents
+
+1. [Overall Editorial Philosophy](#1-overall-editorial-philosophy)
+2. [Article Structure](#2-article-structure)
+3. [Editorial Rules](#3-editorial-rules)
+4. [SEO Rules](#4-seo-rules)
+5. [Hindi Writing Guide](#5-hindi-writing-guide)
+6. [Quality Checklist](#6-quality-checklist)
+7. [Forbidden Writing](#7-forbidden-writing)
+8. [Planet Identity](#8-planet-identity)
+
+---
+
+## 1. Overall Editorial Philosophy
+
+### Writing Objective
+
+Every article has one job: to describe a placement so accurately that the person reading it feels personally understood, and so usefully that they leave with something they didn't have before. Not entertainment. Not generic information they could find anywhere. Practical psychological and behavioral insight that is specific to this planet, this house, and this reader.
+
+The article should read as if written by an astrologer with twenty years of chart consultations behind them — someone who has watched this placement across hundreds of real lives and knows the difference between what the textbooks say and what actually happens.
+
+### Reader-First Philosophy
+
+The reader is not a student of Jyotish theory. They are a person who found their Mars is in the 3rd house and wants to understand what that means for their life — their actual career, their actual relationships, their actual tendencies.
+
+Write to that person. They do not need to know Sanskrit terms before they need to understand the behavior pattern. They do not need a historical overview of Vedic astrology before they need to know what this placement feels like from the inside. Give them the lived experience first, the classical framework second.
+
+Assume the reader is intelligent, curious, and skeptical. They will not be impressed by mystical vagueness or reassured by empty praise. They will stay if the writing is specific enough to surprise them.
+
+### Google-First Philosophy
+
+Google rewards pages that answer the actual question completely, keep readers on the page, and earn trust through specificity. The enemy is generic filler — content that exists to fill space rather than inform.
+
+Every paragraph should give a reader a reason to keep reading. If a paragraph could be removed without losing anything the reader needed, remove it. If a paragraph could appear on any astrology site without modification, rewrite it.
+
+### Balance Between UX and SEO
+
+SEO keywords belong in the article because the article genuinely covers what those keywords represent, not because they were inserted to satisfy a crawl. Keywords that appear naturally in genuine answers do more SEO work than keywords stuffed into awkward sentences.
+
+Long-form content (2,000+ words per article) ranks well for this topic cluster because the questions people ask about planetary placements are genuinely complex. The length is earned by depth, not by repetition.
+
+Internal links appear because readers naturally want to explore related placements. FAQs cover what people actually search for. Every SEO choice should also be the right UX choice.
+
+### Human Writing Principles
+
+**Specificity over generality.** "They remember the handshake that was slightly firmer than expected" says more than "they have a strong physical presence."
+
+**Behavior over prediction.** Show what a person with this placement does, thinks, feels, and struggles with. Show the mechanism. Let the reader recognize themselves.
+
+**Mechanism over statement.** Do not say what happens; show why it happens. "The conflict triggers their old family pattern" is a statement. "The dynamic they learned when money was the subject no one could discuss directly" is a mechanism.
+
+**The contrarian observation.** Every section should contain at least one thing most articles on this subject don't say. The observation that experienced practitioners notice and rarely publish. This is what makes the article worth reading.
+
+**Shadow alongside strength.** Every strength contains its shadow. Every challenge rests on a legitimate need. Write both sides of every quality.
+
+**Sentences that move.** Use active voice. Subject acts on object. Avoid passive constructions that drain energy from the prose. "Mars in the 1st house creates" not "is created by."
+
+### Anti-AI Writing Principles
+
+AI writing has a recognizable pattern: it announces what it is about to say, says it, then summarizes what it said. It uses introductory phrases like "It is important to understand that..." It reaches for the nearest metaphor. It makes the same observation twice with different words. It resolves every tension with a reassuring note.
+
+Avoid all of this. Cut the announcement. Cut the summary. Cut the reassurance. If a sentence could have been generated by autocomplete, rewrite it from a specific detail that autocomplete could not have known.
+
+The test: read a paragraph and ask whether a reader who had lived with this placement for thirty years would nod in recognition or feel they'd read nothing new. If the latter, rewrite.
+
+---
+
+## 2. Article Structure
+
+Every article contains the following fields. Each has a specific purpose, specific requirements, and specific things that must never appear.
+
+---
+
+### Meta Title
+
+**Why it exists:** Browser tab, SERP headline. The first signal to Google about what this page covers. The deciding factor for whether someone clicks.
+
+**Format:**  
+`[Planet] in [Nth] House in Vedic Astrology: [Core Theme] | Jyotishasha`
+
+**What must be written:**
+- Planet name + house number + "in Vedic Astrology" as anchor
+- A 3-6 word thematic phrase that captures the dominant quality of this specific placement (not a generic list)
+- The brand name at the end: `| Jyotishasha`
+- Total character count: 55–65 characters (Google's display limit)
+
+**What must never be written:**
+- Generic themes that apply to any planet ("Personality & Effects")
+- Superlatives ("The Most Powerful Placement")
+- Redundant filler ("Complete Guide to...")
+- Repeating the brand name mid-title
+
+**Hindi format:**  
+`[संख्यावाचक] भाव में [ग्रह] — [थीम] | ज्योतिष आशा`
+
+---
+
+### Meta Description
+
+**Why it exists:** SERP snippet. The sentence that convinces a skeptical reader to click instead of moving on.
+
+**What must be written:**
+- One sentence that describes what this specific placement does — behaviorally, not abstractly
+- A signal about what the reader will find (the primary value of the article)
+- 140–160 characters
+
+**What must never be written:**
+- "In this article we will explore..."
+- The same text as another article with the planet name swapped
+- Claims that apply to any placement ("Discover what Vedic astrology says about this powerful position")
+- Hype ("Amazing insights," "life-changing knowledge")
+
+**The test:** Could this description appear under a different placement's article with only the planet/house name changed? If yes, rewrite it. Every meta description should be specific enough that it could only describe this placement.
+
+---
+
+### Keywords (English)
+
+**Why it exists:** Signals topical coverage to search engines. Also constrains the article's semantic focus.
+
+**What must be written:**
+- 5 keywords
+- The primary keyword: exact match `[planet] in [nth] house` (e.g., "mars in 3rd house")
+- One Vedic-specific variant: `[planet] in [nth] house vedic astrology`
+- One Sanskrit transliteration: e.g., `mangal tritiya bhav`
+- Two thematic variants covering the house's dominant topics (e.g., "mars 3rd house courage", "mars 3rd house siblings")
+
+**What must never be written:**
+- Keyword phrases that don't appear organically in the article
+- Fabricated search terms that nobody uses
+- More than 5 keywords (over-optimization signal)
+
+---
+
+### Keywords (Hindi)
+
+**Why it exists:** Hindi search traffic is substantial. Keywords here support Hindi-language SERP visibility.
+
+**What must be written:**
+- 3 Hindi keywords
+- The primary: `[ordinal] भाव में [planet name in Hindi]`
+- One or two thematic variants in natural Hindi search language
+- Use the terms a Hindi speaker would actually type, not formal Jyotish terminology
+
+---
+
+### H1 Title
+
+**Why it exists:** The page headline. The SEO anchor that also orients the reader.
+
+**What must be written:**
+- Usually matches or closely mirrors the meta title without the brand name
+- Can be slightly more expansive if the meta title needed compression
+- Must contain the primary keyword
+
+**What must never be written:**
+- A creative headline that sacrifices the keyword
+- Questions ("What does Mars in the 3rd house mean?")
+- Vague thematic titles that don't name the placement explicitly
+
+**Hindi H1:**  
+`[संख्यावाचक] भाव में [ग्रह]: [थीम]`  
+Should read naturally in Hindi — not a translation of the English title.
+
+---
+
+### Overview
+
+**Why it exists:** First contact between the article and the reader. Sets the planet's voice, establishes the house context, and gives one observation specific enough to earn trust in the first 30 seconds.
+
+**What must be written:**
+
+*Paragraph 1 (80–120 words):*  
+Open with the planet-house dynamic stated behaviorally. Do not begin with "Sun in the 3rd house is..." Begin with what the placement does to a person's experience. The first sentence should be specific enough that a person with this placement will recognize it immediately. Establish the planet's dominant mode in this house.
+
+*Paragraph 2 (80–120 words):*  
+Deepen the first paragraph's signal. Move from the most visible quality to a second quality that is less obvious but equally consistent. Show how the two interact. Begin to establish what makes this placement different from the same planet in other houses or the same house with other planets.
+
+*Paragraph 3 (80–120 words):*  
+The practitioner-level observation. This is the paragraph that most articles on this subject do not contain. Something an experienced astrologer observes across many charts — the surprising consistency, the unexpected pattern, the thing that takes years of watching placements to notice. This is the paragraph that earns reader loyalty. It must be genuinely specific to this planet + house combination and not transferable to any other article.
+
+**What must never be written:**
+- Opening with "In Vedic astrology..." or "According to classical Jyotish..."
+- Defining the planet before describing the effect
+- Summarizing classical texts
+- Generic house descriptions that don't engage with the planet
+- The word "powerful" in the first paragraph
+
+**Ideal paragraph count:** 3  
+**Ideal word count:** 250–360 total
+
+---
+
+### Personality
+
+**Why it exists:** Describes the behavioral and psychological character of a person born with this placement. The section readers use to recognize themselves or someone they know.
+
+**What must be written:**
+
+*Paragraph 1 (90–120 words):*  
+The defining personality trait stated clearly and behaviorally. Not an adjective list. A description of how this trait expresses in real, daily, observable behavior. How other people experience this person before they can articulate why.
+
+*Paragraph 2 (90–120 words):*  
+A second layer — a quality that surprises people once they know the person better, or an unexpected place where the defining trait surfaces. The competitive impulse that appears at dinner parties. The withdrawal pattern that shows up in conflict. The tendency that contradicts the surface impression.
+
+*Paragraph 3 (90–120 words):*  
+The practitioner's observation. One thing that experienced Jyotishis consistently notice in charts with this placement that is not found in textbook descriptions. Often a biographical pattern: the sibling dynamic, the father relationship, the recurring professional situation.
+
+*Paragraph 4 (60–90 words):*  
+The shadow. Every defining quality has a shadow. Name it specifically. Do not moralize. Do not reassure. State it as a pattern with a mechanism: what happens when this quality operates in the wrong context or without the maturity to modulate it.
+
+**What must never be written:**
+- Adjective lists without behavioral grounding ("They are brave, assertive, independent...")
+- Empty psychological claims ("They have a deep inner world")
+- Qualities that apply to any fire-planet placement without differentiating this specific one
+- The shadow without acknowledging the legitimate need underneath it
+
+**Ideal paragraph count:** 3–4  
+**Ideal word count:** 300–420 total
+
+---
+
+### Career
+
+**Why it exists:** The professional applications of the placement. Readers use this to validate their career direction or understand their professional patterns.
+
+**What must be written:**
+
+*Paragraph 1 (90–130 words):*  
+The primary professional domain of this placement. Named fields — not categories. "Journalism, military service, emergency medicine" not "careers involving action." Explain why these fields suit this placement — the mechanism, not the label.
+
+*Paragraph 2 (90–120 words):*  
+A second cluster of careers with a different reason for suitability. Show the full range of the placement's professional expression without repeating the same logic.
+
+*Paragraph 3 (80–110 words):*  
+The career arc. This placement develops differently at different life stages. What works at 25 may differ from what works at 45. Name the trajectory: where the native typically starts, what friction they encounter mid-career, and what the most effective professional form looks like at maturity.
+
+*Paragraph 4 (70–100 words):*  
+The derailment pattern. What specific quality of this placement — a strength in most contexts — becomes the source of professional friction? Be specific. "Their directness costs them a promotion they deserved" is more useful than "they may struggle with authority."
+
+**What must never be written:**
+- Career lists without explanation of suitability
+- "Any creative field" or "any helping profession" (too vague)
+- Claiming this placement guarantees success in named careers
+- Ignoring the shadow side of professional life
+
+**Ideal paragraph count:** 4  
+**Ideal word count:** 330–460 total
+
+---
+
+### Relationships
+
+**Why it exists:** The most-read section for most readers. How the placement shapes intimacy, attraction, partnership, and the recurring patterns in close relationships.
+
+**What must be written:**
+
+*Paragraph 1 (90–120 words):*  
+The primary relationship dynamic — how this placement shapes the nature of attraction and early partnership. What draws people to this native, or what this native is drawn to, and the mechanism that creates either connection or conflict.
+
+*Paragraph 2 (90–120 words):*  
+The friction point. What specific quality of this placement creates the most consistent tension in partnerships? Name the mechanism. "The silence in conflict that the partner reads as punishment" is a mechanism. "Communication issues" is a label.
+
+*Paragraph 3 (90–120 words):*  
+What the relationship needs to work. What conditions — in a partner, in the structure of the relationship — allow this placement to express well? What the native needs from intimacy that they may not know how to ask for.
+
+*Paragraph 4 (80–110 words):*  
+The practitioner's observation. Something that most relationship descriptions of this placement omit. Often involves the family-of-origin dynamic that replicates in partnership, or the specific vulnerability beneath the surface quality.
+
+**What must never be written:**
+- Compatibility claims about specific sun signs or other placements
+- Predicting marriage timing
+- "This placement is difficult for marriage" without showing the mechanism
+- Neglecting the native's genuine relational gifts alongside the challenges
+
+**Ideal paragraph count:** 4  
+**Ideal word count:** 350–450 total
+
+---
+
+### Health
+
+**Why it exists:** Maps the planetary and house significations to the physical body. Readers use this to understand their specific constitutional patterns.
+
+**What must be written:**
+
+*Paragraph 1 (80–110 words):*  
+The primary body areas governed by this house, and how this planet's energy expresses through them. Named systems and body parts. The nature of this placement's typical health signature: is the immunity strong? Does heat accumulate? Is the nervous system overactive?
+
+*Paragraph 2 (80–110 words):*  
+The mechanism of the specific health vulnerabilities. Not just "watch the heart" but why the heart is vulnerable for this placement — the mechanism by which the planet's characteristic energy, in excess or without outlet, produces this physical pattern.
+
+*Paragraph 3 (70–100 words):*  
+A long-term or life-stage observation. How do the health patterns of this placement evolve over time? What is the native unlikely to notice until it becomes a problem? What is the most effective preventive approach for this specific placement's constitution?
+
+**What must never be written:**
+- Medical diagnosis or treatment claims
+- Generic health advice that applies to everyone
+- Predicting serious illness
+- Health sections that could be copied from any Mars article regardless of house
+
+**Ideal paragraph count:** 3  
+**Ideal word count:** 230–320 total
+
+---
+
+### Spirituality
+
+**Why it exists:** How this placement shapes the native's relationship to spiritual practice, dharma, and the sacred. The deepest layer of the article.
+
+**What must be written:**
+
+*Paragraph 1 (80–110 words):*  
+The character of this placement's spiritual orientation. How does this planet find the divine? Through devotion, through action, through surrender, through discipline? Show the mechanism: why this mode is natural given the planet's character and the house's domain.
+
+*Paragraph 2 (80–110 words):*  
+The specific practices that resonate with this placement. Not generic spirituality. Named traditions, deities, mantras, or practices that are specifically suited to the energy of this planet in this house.
+
+*Paragraph 3 (70–100 words):*  
+The spiritual shadow or the deeper task. What is the specific ego pattern or attachment that this placement must work through on the spiritual path? Every planet has a characteristic spiritual obstacle. Name it precisely.
+
+**What must never be written:**
+- Generic spirituality applicable to any placement
+- Claiming this placement gives spiritual gifts without showing the mechanism
+- Ignoring the shadow side of spiritual development
+- Naming only one tradition (Vedic astrology serves practitioners from multiple paths)
+
+**Ideal paragraph count:** 3  
+**Ideal word count:** 230–320 total
+
+---
+
+### Strengths
+
+**Why it exists:** A specific list of this placement's genuine advantages. Readers use it to understand what they carry that is valuable. Also serves as a standalone scan-able SEO element.
+
+**What must be written:**
+- 7 items
+- Each item is a complete sentence (not a phrase or bullet fragment)
+- Each strength is specific enough that it could only describe this placement, not any Mars placement or any 3rd-house placement
+- Each strength names a behavior, capacity, or quality and adds one sentence of elaboration that explains why it is unusual or valuable
+- Strengths should span multiple domains: professional, relational, physical, temperamental
+
+**Format (for each item):**  
+*Quality named specifically* — *One or two sentences explaining why it matters, how it expresses, or what makes it rare.*
+
+**What must never be written:**
+- Generic traits ("natural leader," "strong willpower," "creative mind")
+- Strengths that apply to every placement of this planet regardless of house
+- Strengths that are simply the absence of a weakness
+- More than 7 items
+
+---
+
+### Challenges
+
+**Why it exists:** The shadow side. Readers use it to understand their recurring friction patterns. Also the most psychologically honest section — it builds trust.
+
+**What must be written:**
+- 6 items
+- Each item is a complete sentence that names the challenge and shows its mechanism
+- Each challenge traces back to a genuine strength that has overextended or expressed in the wrong context
+- Challenges should be specific to this placement — not generic personality flaws
+- Include at least one challenge related to relationships, one to career, and one that is internal/psychological
+
+**Format (for each item):**  
+*The specific pattern named* — *The mechanism by which it creates friction, and/or the gap in perception between the native and the people affected.*
+
+**What must never be written:**
+- Moral judgments ("they can be selfish," "they are arrogant")
+- Challenges without the underlying legitimate need
+- Challenges that could be written about any person regardless of their chart
+- More than 6 items
+
+---
+
+### FAQs
+
+**Why it exists:** Answers the actual questions people type into search engines about this placement. The FAQ section is the most important SEO real estate in the article after the overview. Each FAQ targets a specific search query.
+
+**What must be written:**
+- 10 questions and answers minimum
+- Each question matches something people genuinely search for (confirmed by the structure of real search queries)
+- Each answer is 4–8 substantive sentences
+- Each answer gives a real answer — not "it depends on many factors" as a complete response
+- The qualification is always followed by: what it depends on, and what the most common cases look like
+- Hindi versions of each Q&A must be independently written condensations of the English — never sentence-by-sentence translations
+
+**Question types to cover (adapt to each placement):**
+1. Is this placement good or bad? (the most common query)
+2. The most specific relationship question for this placement
+3. Career question
+4. The Manglik/dosha question if applicable
+5. How it affects the relevant family figure (father, mother, siblings depending on house)
+6. Lagna-specific variations (which ascendant benefits most)
+7. A strong vs. weak planet question
+8. Physical appearance or health
+9. Remedies
+10. The most specific experiential question ("why do I always...?")
+
+**What must never be written:**
+- One-sentence answers
+- "It is impossible to say without seeing your full chart" as a complete answer (say it, then give the most common case)
+- Questions that don't match actual search behavior
+- Repeating the same information already covered in the body sections without adding new specificity
+- Hindi FAQs that are word-for-word translations of English FAQs
+
+**Hindi FAQ format:**  
+The question should be in natural spoken Hindi. The answer should contain the core insight of the English answer, condensed to the most practical 3-5 sentences. Write the Hindi version independently after writing the English, asking: what does a Hindi-speaking reader need from this answer?
+
+---
+
+## 3. Editorial Rules
+
+### Behavior first, astrology second
+
+The placement is the explanation. The behavior is the story. Always open with what a person with this placement does, thinks, or experiences — then explain it astrologically if needed. Never open with "This house governs..." as the first sentence.
+
+### Mechanism, not prediction
+
+Explain why something happens, not just that it happens. "The Sun aspects the 7th house, which means their solar pride flows directly into their closest partnerships" is a mechanism. "Sun in 1st may create problems in marriage" is a prediction with no information value.
+
+### The practitioner observation is mandatory
+
+Every section in every article must contain at least one observation that experienced practitioners notice and generic articles omit. If you cannot identify this observation for a section, you have not gone deep enough into the placement. This is the layer that earns trust and return visits.
+
+### Every planet has its own vocabulary
+
+Sun writes like someone with authority and dignity at stake. Moon writes like someone processing emotion and cycles. Mars writes like someone in motion before the decision is complete. Mercury writes like a mind assessing all angles. Jupiter writes like a teacher who has seen this before and knows how it ends. Saturn writes like someone who has been made to wait and understands why. Each article should feel tonally different because the planets are genuinely different.
+
+### Every house must have a different psychological identity
+
+Mars in the 1st house is not Mars in the 3rd house with different keywords. The house shapes how the planet's energy is directed, what life domain it operates in, and what the native's lived experience of the energy feels like. Sun in the 2nd house is about building something that outlasts you. Sun in the 3rd house is about saying things that need to be said. The difference is not cosmetic.
+
+### Never repeat the same insight across planets
+
+If the Moon-in-1st article says "people with this placement find it difficult to separate their own emotions from the room's emotions," the Mars-in-1st article must never say anything structurally similar. Every observation is specific to its planet. If you find yourself writing something that sounds like what you wrote for a different planet, it is not specific enough.
+
+### Never repeat the same insight across houses
+
+If Mars-in-1st says "they compete even when the situation doesn't call for it," Mars-in-3rd cannot say the same thing reworded. Each house produces a different expression of the same planet. Find the distinction.
+
+### Specific over symbolic
+
+"They have fire in their eyes" is a symbol. "They don't look away first in eye contact" is an observation. Write observations, not symbols. Metaphors are permitted when they add precision; avoid them when they replace precision.
+
+### No reassurance endings
+
+Do not end sections with reassuring summaries: "But with awareness, this placement can be a source of great strength." Either the section has already shown how strength emerges from challenge, or it hasn't. Telling the reader it will be fine at the end of a section is the most common AI writing habit to eliminate.
+
+### The shadow is not the whole story; neither is the light
+
+Every placement is both asset and liability, sometimes simultaneously. Write the tension. The mature expression and the immature expression. The gift and the cost of the gift. Readers distrust articles that only praise and articles that only warn.
+
+---
+
+## 4. SEO Rules
+
+### Natural keyword integration
+
+The primary keyword (`mars in 3rd house`) should appear in: the H1, the first paragraph of the overview, at least once in the body, and in the FAQ questions. It should never appear in a sentence that was constructed around the keyword — it should appear in sentences that would have been written anyway.
+
+### Semantic coverage
+
+Google's topical relevance assessment rewards comprehensive coverage of a subject. Cover the full range of what people want to know about a placement: personality, career, relationships, health, spirituality, sibling/family dynamics specific to the house, lagna variations, remedies, and the most common experiential questions. Thin coverage on any of these reduces topical authority.
+
+### FAQ philosophy
+
+FAQs are the second tier of keyword targeting. Each FAQ question is a long-tail keyword. Write questions in the format people actually type them. "Does Mars in the 3rd house give courage?" is a real query. "How does Mars manifest in the third house with respect to valour?" is not. Keep question language natural, colloquial, and direct.
+
+### Internal linking philosophy
+
+Every article should generate natural anchor text opportunities for: the same planet in adjacent houses, other planets in the same house, and the planet's own hub page if one exists. Do not insert forced links. Links appear where a reader would genuinely want to go next.
+
+### Metadata philosophy
+
+Meta title and description are not summaries of the article. They are advertisements for it. The meta description should make a specific promise that the article delivers. "Explore how this Mangal placement shapes money, family, and speech" is a promise. "Learn about Mars in Vedic astrology" is not.
+
+### Content freshness signals
+
+Use specific, dateable language only when it will remain accurate. Avoid "as of today" or "recently." Astrological content should be written with the durability of reference material — it should be as useful five years from publication as on the day it was written.
+
+---
+
+## 5. Hindi Writing Guide
+
+### The core principle
+
+Hindi readers deserve the same quality of writing as English readers. They are not a secondary audience receiving a translated version of the main content. They are the primary audience for a large portion of Jyotishasha's traffic.
+
+Write the Hindi sections after the English sections are complete. Do not translate. Ask: what is the core insight of this paragraph, and how would an educated Hindi speaker who talks about astrology naturally express it?
+
+### Natural Hindi, not formal Hindi
+
+Hindi has multiple registers. Do not use the register of academic texts, government documents, or Sanskrit-inflected classical scholarship unless the sentence genuinely demands it. Use the register of an educated, thoughtful person explaining something clearly to another educated person.
+
+Good register: `इन लोगों को सुनते ही कुछ अलग लगता है — जैसे सामने वाले ने पहले से तय कर लिया हो कि क्या कहना है।`
+
+Over-formal: `इस ग्रहीय स्थिति के जातकों की वाणी में एक विशेष प्राधिकारिक गुण परिलक्षित होता है।`
+
+### No machine translation
+
+Sentences translated word-for-word from English produce unnatural Hindi. Every sentence that sounds like a translation is a failure. Read Hindi sentences aloud. If they sound like a document rather than a person, rewrite them.
+
+### Independent condensation for Hindi sections
+
+The Hindi body sections (overview_hi, personality_hi, etc.) are not required to cover every point in the English section. They are condensed independently to cover the most important observations in natural Hindi. A Hindi reader who reads only the Hindi sections should have a complete, coherent article — not a fragment of the English article.
+
+### Hindi FAQ answers
+
+Hindi FAQ answers should focus on the core practical answer. If the English answer is 6 sentences of which 2 carry the essential information, the Hindi answer can be 3 sentences covering those 2 essential points. Do not pad Hindi answers to match English length.
+
+### Vocabulary choices
+
+- Use widely understood Jyotish terms in Hindi: `भाव` (house), `लग्न` (ascendant), `ग्रह` (planet), `राशि` (sign), `दशा` (period), `उच्च` (exalted), `नीच` (debilitated). These are familiar to Hindi-speaking astrology readers.
+- Avoid Sanskrit-heavy terms that most readers will not understand without explanation.
+- When naming specific deities, mantras, or practices, use their commonly known Hindi forms, not Sanskrit transliterations that readers won't recognize.
+- Numbers and ordinals: use `प्रथम`, `द्वितीय`, `तृतीय`, etc. for house numbers in formal references; use `पहले`, `दूसरे`, `तीसरे` in conversational sentences.
+
+### Emotional accuracy in Hindi
+
+Some English psychological concepts do not translate directly into Hindi. Do not force them. Find the Hindi frame for the same emotional reality. The English might say "emotional permeability" — find the Hindi phrase that captures the experience, not the technical term.
+
+---
+
+## 6. Quality Checklist
+
+Run every completed article against this checklist before considering it done.
+
+**Voice and Originality**
+- [ ] The article sounds like an experienced astrologer, not a textbook
+- [ ] The article could only describe this specific planet in this specific house
+- [ ] No section could be lifted and reused in a different planet's article
+- [ ] At least one observation per section exists that is not found on generic astrology sites
+- [ ] No metaphor or observation is repeated from any other planet's article in this cluster
+
+**Behavior and Mechanism**
+- [ ] Every major quality is shown through behavior, not just named
+- [ ] The mechanism of each pattern is explained (why it happens, not just that it happens)
+- [ ] The shadow side of the primary qualities is written with the same specificity as the strengths
+- [ ] The relationship section explains what the friction actually feels like from both sides
+
+**Completeness**
+- [ ] Overview: 3 paragraphs, practitioner observation present in paragraph 3
+- [ ] Personality: 3–4 paragraphs, shadow included
+- [ ] Career: 4 paragraphs including arc and derailment
+- [ ] Relationships: 4 paragraphs including the thing most articles omit
+- [ ] Health: 3 paragraphs, mechanism explained
+- [ ] Spirituality: 3 paragraphs, shadow included
+- [ ] Strengths: 7 items, each a complete sentence with elaboration
+- [ ] Challenges: 6 items, each showing mechanism not just label
+- [ ] FAQs: 10 Q&As, each answer substantive (4+ sentences)
+
+**SEO**
+- [ ] Primary keyword in H1 and first paragraph of overview
+- [ ] Meta description makes a specific promise unique to this placement
+- [ ] FAQ questions match actual search query language
+- [ ] No keyword appears in an obviously forced sentence construction
+
+**Hindi**
+- [ ] Hindi sections read like original writing, not translations
+- [ ] Hindi FAQ answers are independent condensations, not word-for-word translations
+- [ ] Hindi sentences pass the "read aloud" test (they sound like a person, not a document)
+- [ ] Vocabulary is accessible to a general educated Hindi reader
+
+**Format and Cleanliness**
+- [ ] No section ends with a reassuring summary ("with awareness, this can become a strength")
+- [ ] No paragraph begins with "It is important to understand..."
+- [ ] No forbidden phrases (see Section 7)
+- [ ] Active voice throughout — no passive sentences where active is available
+
+---
+
+## 7. Forbidden Writing
+
+These phrases, patterns, and constructions are banned from every article. Their presence indicates either AI generation, generic content, or insufficient depth.
+
+### Forbidden opening phrases
+- "In Vedic astrology..."
+- "According to classical Jyotish..."
+- "This placement is powerful."
+- "This is a very important placement."
+- "It is important to understand that..."
+- "One thing to note is..."
+- "One important thing to mention is..."
+- "Overall, [planet] in the [nth] house..."
+- "In conclusion..."
+- "To summarize..."
+
+### Forbidden mid-article patterns
+- Announcing what the paragraph will say before saying it ("In this section, we will explore...")
+- Summarizing a paragraph at the end of the same paragraph
+- "But with awareness / mindfulness / inner work, this can be transformed into a strength."
+- "Every individual is different and results may vary."
+- "A qualified astrologer should be consulted for personalized readings." (This may appear once in the FAQ context of gemstone or remedy advice — not as a generic disclaimer throughout)
+- Repeating the placement name in every paragraph where the context already makes it clear
+- Ending with "The [planet] in [house] native ultimately..." (lazy conclusion signal)
+
+### Forbidden content patterns
+- Lists of traits without behavioral grounding ("They are brave, creative, and disciplined.")
+- Predictions without mechanisms ("This placement often leads to success in career.")
+- Empty psychological claims ("They have a rich inner life." / "They feel deeply.")
+- Generic filler ("Astrology is a complex and ancient system that...")
+- Balancing every negative with an immediate positive so aggressively that the shadow is never fully named
+- Writing the same relationship advice regardless of which planet is in which house
+- Health sections that say "watch these areas" without explaining the astrological mechanism
+
+### Forbidden structural habits
+- Three-section articles disguised as more (overview that is actually three repetitions of the same point)
+- FAQ answers that restate the question before answering it
+- Strengths and Challenges sections that are mirrors of generic personality traits not specific to this placement
+- Hindi sections that are truncated translations rather than independent condensations
+- Career sections that name industries without explaining why those industries suit this specific placement
+
+### Specific phrases to delete on sight
+- "This powerful placement..."
+- "Native of this placement..."
+- "The effects of [planet] in [house]..."
+- "This combination..."
+- "As we have seen..."
+- "It goes without saying..."
+- "Needless to say..."
+- "At the end of the day..."
+- "This is a double-edged sword." (already used once across the cluster — do not repeat)
+- "Needless to say, this is a complex placement."
+
+---
+
+## 8. Planet Identity
+
+Every planet must read differently from every other planet. The vocabulary, the psychological texture, the behavioral description, the tone of the shadow — all should be specific to that planet's nature.
+
+A reader who has read three Sun articles and three Moon articles should be able to identify which planet an article is about from its prose style alone, before they have read any explicit statement of the planet's name.
+
+---
+
+### Sun — Being
+
+**Psychological core:** Identity, authority, dignity, and the need for recognition that is continuous but rarely admitted. The Sun's question is: *Who am I?* And the answer is always individual, always singular.
+
+**Behavioral signature:** The person who occupies their own position in a room without needing to announce it. Who measures every situation against their internal standard of what is worthy of them. Who gives fully when respected and withdraws when disrespected, and experiences the withdrawal as dignity rather than sulking.
+
+**Writing vocabulary:** radiance, dignity, authority, pride, recognition, lineage, the father, ego, the will to shine, solar — but also the withdrawal, the brittleness under humiliation, the gap between how they appear and how they need to be acknowledged
+
+**Shadow vocabulary:** pride hardening into rigidity, dignity becoming inaccessibility, authority becoming control, recognition-need becoming performance
+
+**What makes Sun writing distinctive:** The emphasis on identity as the core theme. How everything in the Sun article connects back to the question of who this person believes themselves to be, what reflects on them, and what does not.
+
+---
+
+### Moon — Feeling
+
+**Psychological core:** Emotional reception, memory, belonging, and the need to be held and to hold. The Moon's question is: *Where do I belong?* And the answer changes with the tides.
+
+**Behavioral signature:** The person who reads the room before they read the situation. Whose mood is a live barometer of the surrounding emotional atmosphere. Who nurtures as instinctively as they breathe, and who requires nurturing in return in ways they often cannot articulate.
+
+**Writing vocabulary:** receive, absorb, reflect, cycle, tide, nourish, hold, memory, belonging, the mother, emotional hunger, the fluid self
+
+**Shadow vocabulary:** absorption without boundary, the emotional hangover, the childhood conditioning mistaken for the adult self, the need that swallows the need of others
+
+**What makes Moon writing distinctive:** The emphasis on receptivity and cycle. Moon articles describe a person who is affected by everything — the lunar rhythm, the mother's mood, the partner's silence. Where Sun articles emphasize what the native projects, Moon articles emphasize what the native receives.
+
+---
+
+### Mars — Doing
+
+**Psychological core:** Kinetic force, desire that converts to action with near-zero gap, physical courage, and the will to win, protect, or prevail. The Mars question is: *What do I want, and what stands in my way?*
+
+**Behavioral signature:** The person who acts while others are still deciding whether to act. Whose body moves before the mind has finished its assessment. Who experiences hesitation in others as a kind of failure, and who channels fear directly into forward movement rather than paralysis.
+
+**Writing vocabulary:** kinetic, velocity, trajectory, impulse, ignition, edge, blade, friction, target, conquest, force, pressure, impact — physical words, words that require a body to execute
+
+**Shadow vocabulary:** the competitive reflex in non-competitive settings, the anger that arrives before understanding, the manufactured opponent, the body that cannot rest, the energy that cuts inward when there is no external target
+
+**What makes Mars writing distinctive:** Active voice, forward momentum in every sentence. Mars articles describe action and its consequences — not states of being but states of doing. The sentences should move.
+
+---
+
+### Mercury — Thinking
+
+**Psychological core:** The mind in constant motion: assessing, connecting, communicating, adapting. Mercury's question is: *What is actually happening here, and how can I use that information?*
+
+**Behavioral signature:** The person who has processed the room before most people have finished entering it. Whose communication adapts instantly to the audience. Who collects information as a reflex and finds it genuinely difficult to commit to a single view when more data might be coming.
+
+**Writing vocabulary:** analysis, connection, communication, adaptability, curiosity, the messenger, quick mind, versatile, observant, networked — but also scattered, inconsistent, committed to no one position
+
+**Shadow vocabulary:** the brilliant surface without the depth beneath it, the perpetual option-keeper, the information-gatherer who never synthesizes, the adapter who has no stable self beneath the adaptations
+
+---
+
+### Jupiter — Wisdom
+
+**Psychological core:** Expansion, ethics, abundance, the teacher relationship, and the sense of being guided by something larger than ordinary cause-and-effect. Jupiter's question is: *What is the right and generous course here?*
+
+**Behavioral signature:** The person who gives more than was asked for. Who sees the larger pattern when others see only the immediate situation. Who attracts students, disciples, and people seeking guidance without always seeking them out. Who believes in systems — dharma, karma, the long arc of justice — and whose life tends to bear that belief out over time.
+
+**Writing vocabulary:** expand, generous, abundant, wise, ethical, philosophical, the teacher, the law, fortune, faith, the long arc, genuine optimism — but also inflation, excess, complacency, the benefic who fails to develop rigor
+
+**Shadow vocabulary:** the benefic that delivers too much of a good thing (weight, comfort, overconfidence), the preacher who hasn't done the work, the optimism that doesn't account for structural obstacles
+
+---
+
+### Venus — Love
+
+**Psychological core:** Beauty, pleasure, harmony, and the need for a life that feels beautiful to inhabit. Venus's question is: *How do I make this more beautiful, more connected, more pleasurable?*
+
+**Behavioral signature:** The person who creates atmosphere — who makes rooms feel different when they enter them, who gravitates toward beauty not as decoration but as necessity. Who builds relationships through pleasure and shared enjoyment. Who avoids conflict instinctively, sometimes past the point where conflict was the right response.
+
+**Writing vocabulary:** beauty, harmony, pleasure, refinement, luxury, art, love, connection, aesthetic, balance — but also avoidance, indulgence, the comfort that becomes a barrier, the desire to be loved that makes one difficult to love
+
+**Shadow vocabulary:** the conflict-avoider who accumulates resentment, the aesthete who has confused pleasure with purpose, the lover who loves the idea of a person rather than the person
+
+---
+
+### Saturn — Time
+
+**Psychological core:** Discipline, responsibility, delay, endurance, and the understanding that certain things only come through sustained effort over time. Saturn's question is: *Have I done the work?*
+
+**Behavioral signature:** The person who takes longer than others to trust, to succeed, to feel secure — and who, having arrived, is more durable than those who arrived faster. Who carries a weight others don't seem to feel. Who takes commitment seriously in a world that treats it casually. Who has usually earned their position through genuine difficulty rather than fortunate circumstance.
+
+**Writing vocabulary:** delay, restriction, structure, endurance, responsibility, the long road, earned, hard-won, karmic debt, the teacher through difficulty, discipline, maturity — but also contraction, isolation, the cold withholding that protects nothing
+
+**Shadow vocabulary:** fear masquerading as caution, rigidity as a response to past wounds, the ambition that is actually terror of being insufficient, the discipline that has forgotten what it is for
+
+---
+
+### Rahu — Obsession
+
+**Psychological core:** Insatiable hunger for experience and achievement in the domain it occupies. Rahu's question is: *How do I get more of this, faster, by any means available?*
+
+**Behavioral signature:** The person who is drawn compulsively toward the house and sign Rahu occupies — who can be brilliant in that domain and simultaneously unable to find peace there. Who achieves in worldly terms and finds the achievement hollow. Who can appear to have everything this domain has to offer and feel secretly like an outsider to it.
+
+**Writing vocabulary:** obsession, hunger, compulsion, the outsider who desperately wants in, illusion, ambition, disruption, unprecedented, taboo-crossing, the foreigner, the unconventional path — but also the confusion between desire and need, the achievement that reveals rather than satisfies
+
+**Shadow vocabulary:** the hunger that cannot be fed, the achievement that doesn't deliver its promise, the compulsion that the native calls passion until they are old enough to see the difference
+
+---
+
+### Ketu — Detachment
+
+**Psychological core:** Mastery acquired in past lives, expressed in this life as effortless competence alongside inexplicable disinterest. Ketu's question is: *What can I finally let go of?*
+
+**Behavioral signature:** The person who is exceptionally gifted in the domain Ketu occupies — and who does not particularly care. Who can do in an hour what others work years to approximate, and then walk away from it. Who experiences the things others most desire in that house as slightly hollow, already seen, already known at some level that precedes this life.
+
+**Writing vocabulary:** mastery without attachment, the already-known, liberation, dissolution, the gift that feels like a burden, renunciation that arrives naturally rather than through effort, the spiritual inheritance — but also the neglected domain, the area where brilliance is present and care is absent
+
+**Shadow vocabulary:** the competence without engagement, the liberation that is actually avoidance, the spiritual disinterest that is sometimes depression by another name, the past-life mastery that needs one more life of conscious engagement before it can truly release
+
+---
+
+*End of editorial guide.*
+
+*This document should be updated whenever a new planet completes its module and its distinctive voice becomes fully established. The Planet Identity section in particular will sharpen with each completed module.*
