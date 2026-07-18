@@ -28,9 +28,9 @@ const hi = {
 
   kundaliCompact: {
     freeBadge: "मुफ्त",
-    title: "NASA-ग्रेड वैदिक कुंडली",
-    subtitle: "सटीक और पढ़ने में आसान",
-    cta: "प्राप्‍त करें"
+    title: "संपूर्ण जन्म कुंडली",
+    subtitle: "लग्न • ग्रह • भाव • दोष • योग",
+    cta: "बनाएं →"
   },
 
   horoscope: {

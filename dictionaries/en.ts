@@ -29,9 +29,9 @@ const en = {
 
   kundaliCompact: {
     freeBadge: "FREE",
-    title: "NASA-grade Vedic Kundali",
-    subtitle: "Most accurate and easy to read",
-    cta: "Generate"
+    title: "Complete Birth Chart",
+    subtitle: "Lagna • Planets • Houses • Dosha • Yogas",
+    cta: "Generate →"
   },
 
   horoscope: {

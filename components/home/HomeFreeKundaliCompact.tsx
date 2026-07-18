@@ -27,7 +27,7 @@ export default function HomeFreeKundaliCompact({ dict, lang }: Props) {
             </span>
             
             <span className="text-xs font-medium text-indigo-200">
-              NASA GRADE
+              {dict.kundaliCompact.title}
             </span>
           </div>
 
