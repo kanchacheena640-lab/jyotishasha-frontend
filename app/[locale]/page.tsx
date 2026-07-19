@@ -12,6 +12,7 @@ import HomeTransit from "@/components/home/HomeTransits";
 import HomeMuhurth from "@/components/home/HomeMuhurth";
 import HomeTools from "@/components/home/HomeTools";
 import HomeReports from "@/components/home/HomeReports";
+import HomeFinancialAstrology from "@/components/home/HomeFinancialAstrology";
 
 // Data
 import { featuredLinks } from "@/app/data/featuredLinks";
@@ -154,15 +155,18 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* 4. Reports — core business product */}
+        {/* 4. Financial Astrology — career & income cluster */}
+        <HomeFinancialAstrology locale={locale} />
+
+        {/* 5. Reports — core business product */}
         <HomeReports locale={locale} />
 
-        {/* 5. Daily Horoscope — heading managed by component */}
+        {/* 6. Daily Horoscope — heading managed by component */}
         <section className="mb-16">
           <HomeDailyHoroscope data={summary} dict={dict} lang={locale} />
         </section>
 
-        {/* 6. Today's Panchang — heading managed by component */}
+        {/* 7. Today's Panchang — heading managed by component */}
         <section className="mb-16">
           <HomePanchang
             data={panchang}
@@ -172,20 +176,20 @@ export default async function HomePage({
           />
         </section>
 
-        {/* 7. Planetary Transits — heading managed by component */}
+        {/* 8. Planetary Transits — heading managed by component */}
         <section className="mb-16">
           <HomeTransit data={transitData} dict={dict} lang={locale} />
         </section>
 
-        {/* 8. Muhurth */}
+        {/* 9. Muhurth */}
         <section className="mb-16">
           <HomeMuhurth data={muhurth} dict={dict} lang={locale} />
         </section>
 
-        {/* 9. Free Astrology Tools */}
+        {/* 10. Free Astrology Tools */}
         <HomeTools locale={locale} />
 
-        {/* 10. Featured Authority Links — manually configured strategic internal links */}
+        {/* 11. Featured Authority Links — manually configured strategic internal links */}
         <section className="mb-16" aria-labelledby="explore-more-heading">
           <div className="flex items-center gap-3 mb-5">
             <h2 id="explore-more-heading" className="text-xl font-semibold">
@@ -206,7 +210,7 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* 11. Blog Footer */}
+        {/* 12. Blog Footer */}
         <div className="text-center text-sm text-gray-400 py-12 border-t border-purple-900/50 mt-10">
           {dict.footer.blogText}{" "}
           <Link
