@@ -60,7 +60,7 @@ export default function HomeFinancialAstrology({ locale }: { locale: string }) {
         {TOPICS.map((topic) => (
           <Link
             key={topic.href}
-            href={`/${locale}${topic.href}`}
+            href={`${locale === 'hi' ? '/hi' : ''}${topic.href}`}
             className="group bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-amber-900/40 rounded-2xl p-4 hover:border-amber-500/60 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 flex flex-col"
           >
             <div className="text-2xl mb-2">{topic.icon}</div>
@@ -79,7 +79,7 @@ export default function HomeFinancialAstrology({ locale }: { locale: string }) {
 
       <div>
         <Link
-          href={`/${locale}/financial-astrology`}
+          href={`${locale === 'hi' ? '/hi' : ''}/financial-astrology`}
           className="inline-block px-6 py-2.5 text-sm font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-lg shadow-amber-600/30 rounded-full transition-all active:scale-95"
         >
           {isHi ? "वित्त ज्योतिष देखें →" : "Explore Financial Astrology →"}

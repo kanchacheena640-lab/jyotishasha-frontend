@@ -20,7 +20,7 @@ import type { AuthorityDomain } from './types'
 
 export const DOMAIN_MANIFEST = [
   'financial-astrology',
-  // 'marriage-astrology',
+  'marriage-astrology',
   // 'health-astrology',
   // 'property-astrology',
   // 'education-astrology',
@@ -34,12 +34,12 @@ export type DomainSlug = typeof DOMAIN_MANIFEST[number]
 // without creating the corresponding lib/domains/<slug>/_index.ts file.
 
 import { financialAstrologyDomain } from '@/lib/domains/financial-astrology/_index'
-// import { marriageAstrologyDomain }  from '@/lib/domains/marriage-astrology/_index'
+import { marriageAstrologyDomain }  from '@/lib/domains/marriage-astrology/_index'
 
 // ─── Registry ─────────────────────────────────────────────────────────────────
 // Record<DomainSlug, AuthorityDomain> — TypeScript errors if any slug is missing.
 
 export const authorityRegistry: Record<DomainSlug, AuthorityDomain> = {
   'financial-astrology': financialAstrologyDomain,
-  // 'marriage-astrology':  marriageAstrologyDomain,
+  'marriage-astrology':  marriageAstrologyDomain,
 }

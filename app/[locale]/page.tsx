@@ -13,6 +13,7 @@ import HomeMuhurth from "@/components/home/HomeMuhurth";
 import HomeTools from "@/components/home/HomeTools";
 import HomeReports from "@/components/home/HomeReports";
 import HomeFinancialAstrology from "@/components/home/HomeFinancialAstrology";
+import HomeMarriageAstrology from "@/components/home/HomeMarriageAstrology";
 
 // Data
 import { featuredLinks } from "@/app/data/featuredLinks";
@@ -138,7 +139,7 @@ export default async function HomePage({
             {LEARN_LINKS.map((link) => (
               <Link
                 key={link.href}
-                href={`/${locale}${link.href}`}
+                href={`${locale === 'hi' ? '/hi' : ''}${link.href}`}
                 className="group bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-purple-900/50 rounded-2xl p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 flex flex-col"
               >
                 <div className="font-semibold text-white text-sm md:text-base mb-1">
@@ -155,10 +156,7 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* 4. Financial Astrology — career & income cluster */}
-        <HomeFinancialAstrology locale={locale} />
-
-        {/* 5. Reports — core business product */}
+        {/* 4. Reports — core business product */}
         <HomeReports locale={locale} />
 
         {/* 6. Daily Horoscope — heading managed by component */}
@@ -201,7 +199,7 @@ export default async function HomePage({
             {featuredLinks.map((link) => (
               <Link
                 key={link.path}
-                href={`/${locale}${link.path}`}
+                href={`${locale === 'hi' ? '/hi' : ''}${link.path}`}
                 className="text-sm text-purple-300 hover:text-white bg-[#1e1b4b] hover:bg-[#2a2565] border border-purple-900/50 hover:border-purple-500 px-4 py-2 rounded-lg transition-all"
               >
                 {locale === "hi" ? link.title_hi : link.title}
@@ -210,11 +208,17 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* 12. Blog Footer */}
+        {/* 12. Financial Astrology — career & income cluster */}
+        <HomeFinancialAstrology locale={locale} />
+
+        {/* 13. Marriage Astrology — relationship & compatibility cluster */}
+        <HomeMarriageAstrology locale={locale} />
+
+        {/* 14. Blog Footer */}
         <div className="text-center text-sm text-gray-400 py-12 border-t border-purple-900/50 mt-10">
           {dict.footer.blogText}{" "}
           <Link
-            href={`/${locale}/blogs`}
+            href={`${locale === 'hi' ? '/hi' : ''}/blogs`}
             className="text-yellow-400 hover:text-yellow-300 hover:underline"
           >
             {dict.footer.blogLink}
