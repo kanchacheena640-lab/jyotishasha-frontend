@@ -15,16 +15,18 @@ export default function ImportantEvents({
         { title: "अमावस्या", href: `${prefix}/panchang/amavasya` },
         { title: "पूर्णिमा", href: `${prefix}/panchang/purnima` },
         { title: "प्रदोष व्रत", href: `${prefix}/panchang/pradosh` },
-        { title: "संकष्टी चतुर्थी", href: `${prefix}/panchang/sankashti-chaturthi` },
-        { title: "संक्रांति", href: `${prefix}/panchang/sankranti` },
+        // Sankashti Chaturthi / Sankranti links removed: no dedicated page exists yet,
+        // and they were falling through to the /panchang/[date] catch-all (silently
+        // showing today's Panchang) instead of real content. Re-add once a real page exists.
       ]
     : [
         { title: "Ekadashi", href: `${prefix}/ekadashi` },
         { title: "Amavasya", href: `${prefix}/panchang/amavasya` },
         { title: "Purnima", href: `${prefix}/panchang/purnima` },
         { title: "Pradosh Vrat", href: `${prefix}/panchang/pradosh` },
-        { title: "Sankashti Chaturthi", href: `${prefix}/panchang/sankashti-chaturthi` },
-        { title: "Sankranti", href: `${prefix}/panchang/sankranti` },
+        // Sankashti Chaturthi / Sankranti links removed: no dedicated page exists yet,
+        // and they were falling through to the /panchang/[date] catch-all (silently
+        // showing today's Panchang) instead of real content. Re-add once a real page exists.
       ];
 
   return (

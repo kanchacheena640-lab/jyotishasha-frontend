@@ -4,7 +4,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import { DEFAULT_OG_IMAGE, SITE_URL as ORG_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.jyotishasha.com";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jyotishasha.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.jyotishasha.com";
 
 const VALID_SIGNS = [
   "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra",

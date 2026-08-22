@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: `https://jyotishasha.com${isHi ? '/hi' : ''}/daily-horoscope/${sign}`,
+      canonical: `https://www.jyotishasha.com${isHi ? '/hi' : ''}/daily-horoscope/${sign}`,
     },
     openGraph: {
       title,
