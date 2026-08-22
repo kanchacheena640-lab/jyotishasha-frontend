@@ -1,5 +1,10 @@
 import { redirect } from "next/navigation";
 
+// Must never be cached — the redirect target depends on "now" (IST). Without
+// this, Next.js can serve a stale, previously-computed date indefinitely.
+// Same reasoning already applied to the /panchang/today rule in middleware.js.
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: { locale: string };
 }
