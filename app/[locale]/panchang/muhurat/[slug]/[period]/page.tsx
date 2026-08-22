@@ -23,6 +23,15 @@ import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articl
 
 export const revalidate = 86400;
 
+// Bounds the /[period] "YYYY" (annual) format to a supported rolling window.
+// Same convention already used for yearly evergreen pages in app/sitemap.ts
+// (Holi: currentYear - 1 .. currentYear + 5), so this moves forward with the
+// calendar automatically and never needs a manual yearly code update.
+function isSupportedMuhuratYear(year: number): boolean {
+  const currentYear = new Date().getFullYear();
+  return year >= currentYear - 1 && year <= currentYear + 5;
+}
+
 // 🔍 SEO & Metadata (Ranking Priority)
 export async function generateMetadata({
   params,
@@ -45,6 +54,13 @@ export async function generateMetadata({
   }
 
   const isYear = /^\d{4}$/.test(params.period);
+
+  if (isYear && !isSupportedMuhuratYear(Number(params.period))) {
+    return {
+      title: "Not Found",
+      robots: { index: false },
+    };
+  }
 
   if (isYear) {
 
@@ -224,6 +240,9 @@ export default async function MuhuratPage({
 
   const isYear = /^\d{4}$/.test(period);
 
+  if (isYear && !isSupportedMuhuratYear(Number(period))) {
+    notFound();
+  }
 
   const isHi = locale === "hi";
   const topic = muhurthTopics[slug];
