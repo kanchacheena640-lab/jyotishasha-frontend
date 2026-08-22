@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
@@ -36,7 +36,10 @@ export default function Header() {
   const lp = currentLang === 'hi' ? '/hi' : '';
   const holiYear = new Date().getFullYear();
 
-  const navItems: NavItem[] = [
+  // Memoized: this array only depends on locale/year, not on menuOpen/openDropdown/
+  // showSearch/query. Without this, every mobile-only interaction (opening the
+  // hamburger, toggling search, typing a query) rebuilds this array from scratch.
+  const navItems: NavItem[] = useMemo(() => [
     { type: 'link', href: currentLang === 'hi' ? '/hi' : '/', label: { en: 'Home', hi: 'होम' } },
     { type: 'link', href: `${lp}/panchang`, label: { en: 'Panchang', hi: 'पंचांग' } },
     {
@@ -65,21 +68,23 @@ export default function Header() {
     { type: 'link', href: `${lp}/tools`, label: { en: 'Tools', hi: 'ज्योतिष टूल्स' } },
     { type: 'link', href: `${lp}/blogs`, label: { en: 'Blogs', hi: 'ब्लॉग्स' } },
     { type: 'link', href: '/reports', label: { en: 'Reports', hi: 'रिपोर्ट्स' } },
-  ];
+  ], [currentLang, lp, holiYear]);
 
   // Cancel any pending close and open the given dropdown immediately
-  const openItem = (key: string) => {
+  // useCallback keeps a stable function identity so the desktop-nav memo below
+  // isn't invalidated on every render by mobile-only state changes.
+  const openItem = useCallback((key: string) => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
     setOpenDropdown(key);
-  };
+  }, []);
 
   // Schedule close with a short delay so the cursor can travel from trigger to panel
-  const scheduleClose = () => {
+  const scheduleClose = useCallback(() => {
     closeTimerRef.current = setTimeout(() => setOpenDropdown(null), 200);
-  };
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -102,6 +107,143 @@ export default function Header() {
       window.location.href = `${searchPath}?query=${encodeURIComponent(query)}`;
     }
   };
+
+  // Desktop hover-driven dropdown nav, memoized. Mobile-only state (menuOpen,
+  // showSearch, query) changing must not rebuild this hover/timer-laden tree —
+  // it only needs to change when the nav data, dropdown state, or locale does.
+  const desktopNav = useMemo(() => (
+    <nav
+      className="hidden md:flex justify-center gap-8 text-[17px] text-gray-200 mt-4"
+      aria-label="Main navigation"
+    >
+      {navItems.map((item) => {
+        if (item.type === 'link') {
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="hover:text-purple-400 transition-colors duration-300 font-medium"
+            >
+              {item.label[currentLang]}
+            </Link>
+          );
+        }
+        return (
+          // Wrap label + chevron + panel in one hover zone; moving between them won't close the dropdown
+          <div
+            key={item.key}
+            className="relative flex items-center"
+            onMouseEnter={() => openItem(item.key)}
+            onMouseLeave={scheduleClose}
+          >
+            {/* Clicking the label navigates to the hub page */}
+            <Link
+              href={item.href}
+              className="hover:text-purple-400 transition-colors duration-300 font-medium"
+            >
+              {item.label[currentLang]}
+            </Link>
+
+            {/* Clicking the chevron toggles the dropdown */}
+            <button
+              className="ml-1 hover:text-purple-400 transition-colors duration-300 p-0.5"
+              onClick={() => setOpenDropdown(openDropdown === item.key ? null : item.key)}
+              aria-expanded={openDropdown === item.key}
+              aria-haspopup="true"
+              aria-label={`Toggle ${item.label[currentLang]} submenu`}
+            >
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${openDropdown === item.key ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            {openDropdown === item.key && (
+              // Panel re-enters the hover zone — keeps dropdown alive as cursor travels the gap
+              <div
+                className="absolute top-full left-0 mt-2 min-w-48 bg-[#1a1744] border border-purple-900/50 rounded-xl shadow-xl py-2 z-50"
+                onMouseEnter={() => openItem(item.key)}
+                onMouseLeave={scheduleClose}
+              >
+                {item.items.map((sub) => (
+                  <Link
+                    key={sub.href}
+                    href={sub.href}
+                    className="block px-4 py-2.5 text-sm text-gray-200 hover:text-purple-300 hover:bg-white/5 transition-colors"
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    {sub.label[currentLang]}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </nav>
+  ), [navItems, openDropdown, currentLang, openItem, scheduleClose]);
+
+  // Mobile tap-driven submenu, memoized separately. Desktop hover interactions
+  // (which never change menuOpen) must not force this tree to rebuild either.
+  const mobileMenu = useMemo(() => (
+    <div className="absolute top-full left-0 w-full bg-[#0f0c29]/95 p-5 flex flex-col gap-4 md:hidden">
+      {navItems.map((item) => {
+        if (item.type === 'link') {
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setMenuOpen(false)}
+              className="text-lg border-b border-white/5 pb-2 text-white"
+            >
+              {item.label[currentLang]}
+            </Link>
+          );
+        }
+        const isOpen = openDropdown === item.key;
+        return (
+          <div key={item.key} className="border-b border-white/5 pb-2">
+            <div className="flex items-center justify-between">
+              {/* Tapping the label navigates to the hub page */}
+              <Link
+                href={item.href}
+                className="text-lg text-white flex-1"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label[currentLang]}
+              </Link>
+              {/* Tapping the chevron expands sub-items inline */}
+              <button
+                className="text-white p-1"
+                onClick={() => setOpenDropdown(isOpen ? null : item.key)}
+                aria-expanded={isOpen}
+                aria-label={`${isOpen ? 'Close' : 'Open'} ${item.label[currentLang]} submenu`}
+              >
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+            </div>
+            {isOpen && (
+              <div className="mt-3 pl-3 flex flex-col gap-3">
+                {item.items.map((sub) => (
+                  <Link
+                    key={sub.href}
+                    href={sub.href}
+                    className="text-base text-purple-300 hover:text-purple-200 transition-colors"
+                    onClick={() => { setMenuOpen(false); setOpenDropdown(null); }}
+                  >
+                    {sub.label[currentLang]}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  ), [navItems, openDropdown, currentLang]);
 
   return (
     <header className="fixed top-0 left-0 w-full bg-[#0f0c29] px-4 py-3 z-50 shadow-md">
@@ -146,136 +288,10 @@ export default function Header() {
       </div>
 
       {/* Desktop Navigation */}
-      <nav
-        className="hidden md:flex justify-center gap-8 text-[17px] text-gray-200 mt-4"
-        aria-label="Main navigation"
-      >
-        {navItems.map((item) => {
-          if (item.type === 'link') {
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="hover:text-purple-400 transition-colors duration-300 font-medium"
-              >
-                {item.label[currentLang]}
-              </Link>
-            );
-          }
-          return (
-            // Wrap label + chevron + panel in one hover zone; moving between them won't close the dropdown
-            <div
-              key={item.key}
-              className="relative flex items-center"
-              onMouseEnter={() => openItem(item.key)}
-              onMouseLeave={scheduleClose}
-            >
-              {/* Clicking the label navigates to the hub page */}
-              <Link
-                href={item.href}
-                className="hover:text-purple-400 transition-colors duration-300 font-medium"
-              >
-                {item.label[currentLang]}
-              </Link>
-
-              {/* Clicking the chevron toggles the dropdown */}
-              <button
-                className="ml-1 hover:text-purple-400 transition-colors duration-300 p-0.5"
-                onClick={() => setOpenDropdown(openDropdown === item.key ? null : item.key)}
-                aria-expanded={openDropdown === item.key}
-                aria-haspopup="true"
-                aria-label={`Toggle ${item.label[currentLang]} submenu`}
-              >
-                <ChevronDown
-                  size={14}
-                  className={`transition-transform duration-200 ${openDropdown === item.key ? 'rotate-180' : ''}`}
-                />
-              </button>
-
-              {openDropdown === item.key && (
-                // Panel re-enters the hover zone — keeps dropdown alive as cursor travels the gap
-                <div
-                  className="absolute top-full left-0 mt-2 min-w-48 bg-[#1a1744] border border-purple-900/50 rounded-xl shadow-xl py-2 z-50"
-                  onMouseEnter={() => openItem(item.key)}
-                  onMouseLeave={scheduleClose}
-                >
-                  {item.items.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      className="block px-4 py-2.5 text-sm text-gray-200 hover:text-purple-300 hover:bg-white/5 transition-colors"
-                      onClick={() => setOpenDropdown(null)}
-                    >
-                      {sub.label[currentLang]}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </nav>
+      {desktopNav}
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#0f0c29]/95 p-5 flex flex-col gap-4 md:hidden">
-          {navItems.map((item) => {
-            if (item.type === 'link') {
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-lg border-b border-white/5 pb-2 text-white"
-                >
-                  {item.label[currentLang]}
-                </Link>
-              );
-            }
-            const isOpen = openDropdown === item.key;
-            return (
-              <div key={item.key} className="border-b border-white/5 pb-2">
-                <div className="flex items-center justify-between">
-                  {/* Tapping the label navigates to the hub page */}
-                  <Link
-                    href={item.href}
-                    className="text-lg text-white flex-1"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label[currentLang]}
-                  </Link>
-                  {/* Tapping the chevron expands sub-items inline */}
-                  <button
-                    className="text-white p-1"
-                    onClick={() => setOpenDropdown(isOpen ? null : item.key)}
-                    aria-expanded={isOpen}
-                    aria-label={`${isOpen ? 'Close' : 'Open'} ${item.label[currentLang]} submenu`}
-                  >
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                </div>
-                {isOpen && (
-                  <div className="mt-3 pl-3 flex flex-col gap-3">
-                    {item.items.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="text-base text-purple-300 hover:text-purple-200 transition-colors"
-                        onClick={() => { setMenuOpen(false); setOpenDropdown(null); }}
-                      >
-                        {sub.label[currentLang]}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {menuOpen && mobileMenu}
     </header>
   );
 }
