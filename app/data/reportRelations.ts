@@ -50,6 +50,8 @@ export const reportRelations: Record<string, string[]> = {
   marriage_report: [
     "love_marriage_report",
     "relationship_future_report",
+    "children_parenting_report",
+    "divorce_possibility_report",
     "gemstone_consultation",
   ],
 
@@ -68,10 +70,13 @@ export const reportRelations: Record<string, string[]> = {
   relationship_future_report: [
     "love_relationship_report",
     "marriage_report",
+    "children_parenting_report",
+    "second_marriage_report",
     "gemstone_consultation",
   ],
 
   problem_in_marriage_report: [
+    "divorce_possibility_report",
     "marriage_report",
     "relationship_future_report",
     "gemstone_consultation",
@@ -80,6 +85,7 @@ export const reportRelations: Record<string, string[]> = {
   divorce_possibility_report: [
     "problem_in_marriage_report",
     "relationship_future_report",
+    "second_marriage_report",
     "gemstone_consultation",
   ],
 

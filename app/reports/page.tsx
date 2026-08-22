@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ReportsPageClient from "./ReportsPageClient";
+import { reportsData } from "@/app/data/reportsData";
 
 const SITE_URL = "https://www.jyotishasha.com";
 
@@ -21,5 +23,20 @@ export const metadata: Metadata = {
 };
 
 export default function ReportsPage() {
-  return <ReportsPageClient />;
+  return (
+    <>
+      {/* Server-rendered, crawlable link list. ReportsPageClient's cards use
+          button+router.push() for navigation (no real <a href>), so without
+          this, no report detail page has a discoverable link in the initial
+          HTML. Visually hidden (sr-only) — does not change the visible UI. */}
+      <nav className="sr-only" aria-label="All reports">
+        {reportsData.map((report) => (
+          <Link key={report.slug} href={`/reports/${report.slug}`}>
+            {report.title.en}
+          </Link>
+        ))}
+      </nav>
+      <ReportsPageClient />
+    </>
+  );
 }
