@@ -6,17 +6,18 @@ export function middleware(request) {
   const { pathname } = request.nextUrl
 
   // Legacy Muhurat URL Fixes
-
-  if (pathname === '/panchang/muhurat/grahpravesh-muhurat') {
+  // Covers the hub page AND any month/year suffix under the old no-hyphen
+  // slug (e.g. /panchang/muhurat/grahpravesh-muhurat/october,
+  // /hi/panchang/muhurat/grahpravesh-muhurat/2026) -- not just the bare
+  // hub path, so no month/year variant of this alias stays a live duplicate.
+  const grahPraveshMatch = pathname.match(
+    /^(\/hi)?\/panchang\/muhurat\/grahpravesh-muhurat(\/.*)?$/
+  )
+  if (grahPraveshMatch) {
+    const localePrefix = grahPraveshMatch[1] || ''
+    const suffix = grahPraveshMatch[2] || ''
     return NextResponse.redirect(
-      new URL('/panchang/muhurat/grah-pravesh-muhurat', request.url),
-      301
-    )
-  }
-
-  if (pathname === '/hi/panchang/muhurat/grahpravesh-muhurat') {
-    return NextResponse.redirect(
-      new URL('/hi/panchang/muhurat/grah-pravesh-muhurat', request.url),
+      new URL(`${localePrefix}/panchang/muhurat/grah-pravesh-muhurat${suffix}`, request.url),
       301
     )
   }

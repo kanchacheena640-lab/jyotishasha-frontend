@@ -92,10 +92,14 @@ const baseTopics: Record<string, MuhurthTopic> = {
   },
 };
 
-// Handle aliases and exports
+// The "grahpravesh-muhurat" (no-hyphen) alias used to live here, which kept
+// it resolvable as a real topic even after the hub page redirect was added --
+// meaning its month/year sub-pages stayed live duplicates. middleware.js now
+// redirects every path under that legacy slug (hub, month, year) to the
+// canonical grah-pravesh-muhurat equivalent before this lookup ever runs, so
+// the alias is unreachable and has been removed.
 export const muhurthTopics: Record<string, MuhurthTopic> = {
   ...baseTopics,
-  "grahpravesh-muhurat": baseTopics["grah-pravesh-muhurat"],
 };
 
 export const GLOBAL_OG_IMAGE = "/og/muhurat-base.jpg";
