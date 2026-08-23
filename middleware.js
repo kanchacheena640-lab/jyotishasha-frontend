@@ -10,11 +10,16 @@ export function middleware(request) {
   // slug (e.g. /panchang/muhurat/grahpravesh-muhurat/october,
   // /hi/panchang/muhurat/grahpravesh-muhurat/2026) -- not just the bare
   // hub path, so no month/year variant of this alias stays a live duplicate.
+  // /en is matched too (and normalized to '', since English is canonically
+  // unprefixed) so an /en/ request lands on the corrected bare slug in one
+  // hop instead of falling through to the general /en/* rule below and
+  // chaining back into this same rule on a second pass.
   const grahPraveshMatch = pathname.match(
-    /^(\/hi)?\/panchang\/muhurat\/grahpravesh-muhurat(\/.*)?$/
+    /^(\/hi|\/en)?\/panchang\/muhurat\/grahpravesh-muhurat(\/.*)?$/
   )
   if (grahPraveshMatch) {
-    const localePrefix = grahPraveshMatch[1] || ''
+    const rawPrefix = grahPraveshMatch[1] || ''
+    const localePrefix = rawPrefix === '/en' ? '' : rawPrefix
     const suffix = grahPraveshMatch[2] || ''
     return NextResponse.redirect(
       new URL(`${localePrefix}/panchang/muhurat/grah-pravesh-muhurat${suffix}`, request.url),
@@ -56,6 +61,19 @@ export function middleware(request) {
     const parts = pathname.split('/').filter(Boolean)
 
     const isHi = parts[0] === 'hi'
+    const isEn = parts[0] === 'en'
+
+    // English is canonically unprefixed here, so an explicit /en/ segment
+    // isn't a locale to strip-and-rewrite the way /hi/ is -- treating it as
+    // one (like the branch below does) misparses "en" as the planet segment
+    // and 404s. Redirect straight to the bare dash-form URL instead; that
+    // request re-enters this same rule and is handled by the branch below.
+    if (isEn) {
+      return NextResponse.redirect(
+        new URL(`/${parts.slice(1).join('/')}`, request.url),
+        301
+      )
+    }
 
     const planet = isHi ? parts[1] : parts[0]
     const ascendant = isHi ? parts[2] : parts[1]
@@ -90,8 +108,11 @@ export function middleware(request) {
   }
 
   // 301: legacy /blog listing -> /blogs
+  // /en/blog must land on the bare canonical /blogs in one hop, not /en/blogs
+  // (which would then chain into the general /en/* rule below).
   if (pathname === '/blog' || pathname === '/en/blog' || pathname === '/hi/blog') {
-    return NextResponse.redirect(new URL(pathname + 's', request.url), 301)
+    const target = pathname === '/en/blog' ? '/blogs' : pathname + 's'
+    return NextResponse.redirect(new URL(target, request.url), 301)
   }
 
   // 410 Gone: legacy numeric blog pagination (/blog/1, /en/blog/2, /hi/blog/999)
@@ -112,6 +133,29 @@ export function middleware(request) {
   if (pathname === '/hi/panchang/today') {
     const today = new Date(Date.now() + 5.5 * 60 * 60 * 1000).toISOString().slice(0, 10)
     return NextResponse.redirect(new URL(`/hi/panchang/${today}`, request.url), 307)
+  }
+
+  // English pages are canonically served with no locale prefix (/path, not
+  // /en/path) -- only Hindi is meant to appear in the URL. Any request that
+  // explicitly includes /en/ is therefore a duplicate of the real, canonical
+  // URL and should permanently redirect to it. Everything above this point
+  // already has its own tailored handling (including any /en/ variant it
+  // needs to cover), so this only ever runs for paths nothing else matched.
+  // Routes outside the localized [locale] architecture (API, admin, the
+  // standalone /reports app) are explicitly excluded and keep prior behavior.
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    const isOutsideLocaleArchitecture =
+      pathname.startsWith('/en/api/') ||
+      pathname === '/en/admin' ||
+      pathname.startsWith('/en/admin/') ||
+      pathname === '/en/reports' ||
+      pathname.startsWith('/en/reports/')
+
+    if (!isOutsideLocaleArchitecture) {
+      const url = request.nextUrl.clone()
+      url.pathname = pathname === '/en' ? '/' : pathname.slice('/en'.length)
+      return NextResponse.redirect(url, 301)
+    }
   }
 
   // Locale check
