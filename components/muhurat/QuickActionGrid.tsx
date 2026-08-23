@@ -16,7 +16,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
         return {
           title: isHi ? "बच्चे की कुंडली में देखें सारे शुभ योग और दोष" : "Check all Yogas & Doshas in Baby's Kundali",
           desc: isHi ? "नामकरण से पहले जानें ग्रहों का आपके बच्चे के भाग्य पर क्या असर है।" : "Before naming, understand the impact of planets on destiny.",
-          link: `/${locale}/kundali`,
+          link: `${locale === "hi" ? "/hi" : ""}/free-kundali`,
           icon: "✨",
           color: "from-purple-900/60 to-indigo-900/60",
           border: "border-purple-400/30"
@@ -34,7 +34,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
         return {
           title: isHi ? "कुंडली से जानें: नए घर में सुख और कर्ज मुक्ति के योग" : "Know via Kundali: Home Comforts & Debt Freedom",
           desc: isHi ? "प्रवेश से पहले अपनी कुंडली के चतुर्थ भाव (सुख स्थान) का विश्लेषण करें।" : "Analyze your 4th house (house of happiness) before moving in.",
-          link: `/${locale}/kundali`,
+          link: `${locale === "hi" ? "/hi" : ""}/free-kundali`,
           icon: "🏠",
           color: "from-blue-900/60 to-cyan-900/60",
           border: "border-blue-400/30"
@@ -43,7 +43,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
         return {
           title: isHi ? "कुंडली से जानें वाहन सुख और सुरक्षा के योग" : "Know Vehicle Comfort & Safety Yogas via Kundali",
           desc: isHi ? "नया वाहन आपके भाग्य को कैसे प्रभावित करेगा? अभी चेक करें।" : "How will a new vehicle affect your destiny? Check now.",
-          link: `/${locale}/kundali`,
+          link: `${locale === "hi" ? "/hi" : ""}/free-kundali`,
           icon: "🚗",
           color: "from-slate-800 to-slate-900",
           border: "border-slate-500/40"
@@ -52,7 +52,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
         return {
           title: isHi ? "आपकी कुंडली का पूर्ण व्यक्तिगत विश्लेषण" : "Your Full Personalized Kundali Analysis",
           desc: isHi ? "मुहूर्त के साथ अपने व्यक्तिगत शुभ ग्रहों की स्थिति भी जानें।" : "Know your personal auspicious planetary positions.",
-          link: `/${locale}/kundali`,
+          link: `${locale === "hi" ? "/hi" : ""}/free-kundali`,
           icon: "🔮",
           color: "from-purple-800 to-indigo-900",
           border: "border-purple-500/30"
