@@ -39,15 +39,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ></iframe>
         </noscript>
 
-        {/* ✅ Google Maps & Razorpay */}
-        <Script
-          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&v=weekly`}
-          strategy="afterInteractive"
-        />
-        <Script
-          src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="afterInteractive"
-        />
+        {/* Google Maps and Razorpay are no longer loaded globally here.
+            Maps is loaded on demand by components/PlaceAutocompleteInput.tsx
+            (only on the routes that actually render a place-of-birth field).
+            Razorpay is loaded on demand by hooks/useReportPurchase.ts (only
+            when a purchase is actually initiated). Previously both scripts
+            executed on every page regardless of need. */}
 
         {children}
         {/* Google AdSense — lazyOnload keeps it out of the critical path */}

@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useTranslation, initReactI18next } from "react-i18next";
 import i18n from "i18next";
+import { loadGoogleMapsPlaces } from "@/components/PlaceAutocompleteInput";
 
 
 // Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
@@ -58,6 +59,12 @@ export default function ReportCheckout() {
   // 🌍 Google Places Autocomplete logic
   useEffect(() => {
     if (!placeRef.current) return;
+    // Google Maps used to load globally on every page via app/layout.tsx.
+    // It's now loaded on demand instead -- this triggers that same shared,
+    // idempotent load (safe to call even if another component on the page
+    // already triggered it). The polling loop below is unchanged: it just
+    // waits for window.google.maps to become available, however it got there.
+    loadGoogleMapsPlaces();
     const interval = setInterval(() => {
       if ((window as any).google?.maps) {
         clearInterval(interval);
