@@ -1,5 +1,13 @@
 'use client';
 
+// i18next is otherwise only initialized as a side effect of Header's lazy,
+// ssr:false LanguageSwitcher chunk, which loads well after this component's
+// first render -- useTranslation() below would subscribe before init() ever
+// ran, and i18next's later, out-of-render init events could then crash React
+// internals. Importing the init module directly here guarantees it runs
+// (via normal ES module evaluation order) before this component's own body
+// -- and therefore before useTranslation() -- ever executes.
+import '@/i18n';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next'; // 👈 Translation ke liye zaroori
