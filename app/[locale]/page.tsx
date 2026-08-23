@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 // Components
 import HomeTicker from "@/components/home/HomeTicker";
@@ -100,6 +101,19 @@ export default async function HomePage({
   params: { locale: string };
 }) {
   const rawLocale = params.locale;
+
+  // The only two values that legitimately reach this route are "en" (bare
+  // "/" rewritten internally by middleware) and "hi" (a real "/hi" request).
+  // Middleware's matcher excludes any path containing a dot, so a path like
+  // "/460685946.htm" skips the middleware entirely and lands here with
+  // rawLocale literally set to "460685946.htm" -- silently coercing that to
+  // "en" is what was rendering the homepage with a 200 for arbitrary,
+  // non-existent paths. Anything other than a real supported locale is a
+  // genuine 404, not the homepage.
+  if (rawLocale !== "en" && rawLocale !== "hi") {
+    notFound();
+  }
+
   const locale = rawLocale === "hi" ? "hi" : "en";
 
   const dict = await getDictionary(locale);
