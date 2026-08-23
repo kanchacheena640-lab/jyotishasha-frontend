@@ -55,7 +55,15 @@ const slugPath = item.slug?.includes("ekadashi") ? item.slug : `${item.slug}-eka
 
 const year = item.vrat_date?.split("-")[0];
 
-const href = `${langPath}/ekadashi/${slugPath}?year=${year}`;
+// Only append ?year= when this card's event is genuinely NOT the default
+// (current) year -- the bare canonical URL already renders default-year
+// content, so linking to "?year=<current year>" would just be a duplicate,
+// crawlable copy of the same page.
+const currentYear = String(new Date().getFullYear());
+const href =
+  year && year !== currentYear
+    ? `${langPath}/ekadashi/${slugPath}?year=${year}`
+    : `${langPath}/ekadashi/${slugPath}`;
 
   return (
     <Link href={href} className="group block">

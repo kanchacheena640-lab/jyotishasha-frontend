@@ -10,17 +10,36 @@ import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articl
 export const revalidate = 86400;
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
-const YEAR = 2026;
 
 function stripEkadashiSuffix(name: string) {
   return name.replace(/\s*(Ekadashi|एकादशी)\s*$/u, "").trim();
 }
 
+// The default year (no ?year= given) stays "this system year", exactly as
+// before -- computed fresh, so it keeps rolling forward on its own.
+// The supported range is "this year and next" for the same reason the hub
+// page (app/[locale]/ekadashi/page.tsx) only ever fetches those two years:
+// that's what the backend actually has real data for. A numeric ?year=
+// outside that range is genuinely invalid -- rendering it would be a
+// misleading thin page with no real data, not a legitimate different-year
+// variant -- while a missing/non-numeric ?year= just means "use the default
+// year" (unchanged behaviour).
+function resolveEkadashiYear(yearParam?: string): number | "invalid" {
+  const currentYear = new Date().getFullYear();
+  if (!yearParam) return currentYear;
+  const parsed = Number(yearParam);
+  if (!Number.isFinite(parsed)) return currentYear;
+  if (parsed < currentYear || parsed > currentYear + 1) return "invalid";
+  return parsed;
+}
+
 /* ---------------- METADATA ---------------- */
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: { slug: string; locale: string };
+  searchParams: { year?: string };
 }): Promise<Metadata> {
   const { slug, locale } = params;
   const isHi = locale === "hi";
@@ -30,16 +49,23 @@ export async function generateMetadata({
     return { title: isHi ? "एकादशी | ज्योतिष आशा" : "Ekadashi | Jyotishasha" };
   }
 
+  // Same resolution as the page body, so title/description never claim a
+  // year different from what's actually rendered. An invalid year renders a
+  // 404 in the page body -- its own metadata doesn't matter for indexing,
+  // so it's fine to fall back to the current year here too.
+  const resolvedYear = resolveEkadashiYear(searchParams?.year);
+  const metaYear = resolvedYear === "invalid" ? new Date().getFullYear() : resolvedYear;
+
   const baseNameEn = stripEkadashiSuffix(content.name.en);
   const baseNameHi = stripEkadashiSuffix(content.name.hi);
 
   const title = isHi
-    ? `${baseNameHi} एकादशी ${YEAR} - व्रत, पारण समय और महत्व | ज्योतिष आशा`
-    : `${baseNameEn} Ekadashi ${YEAR} - Vrat, Parana Time & Significance | Jyotishasha`;
+    ? `${baseNameHi} एकादशी ${metaYear} - व्रत, पारण समय और महत्व | ज्योतिष आशा`
+    : `${baseNameEn} Ekadashi ${metaYear} - Vrat, Parana Time & Significance | Jyotishasha`;
 
   const description = isHi
-    ? `${baseNameHi} एकादशी ${YEAR} की संपूर्ण जानकारी - व्रत तिथि, पारण समय, पूजा विधि, लाभ और आध्यात्मिक महत्व।`
-    : `Complete guide to ${baseNameEn} Ekadashi ${YEAR} - vrat date, parana time, puja vidhi, benefits and spiritual significance.`;
+    ? `${baseNameHi} एकादशी ${metaYear} की संपूर्ण जानकारी - व्रत तिथि, पारण समय, पूजा विधि, लाभ और आध्यात्मिक महत्व।`
+    : `Complete guide to ${baseNameEn} Ekadashi ${metaYear} - vrat date, parana time, puja vidhi, benefits and spiritual significance.`;
 
   const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/ekadashi/${slug}`;
 
@@ -127,13 +153,11 @@ export default async function Page({
   const content = getEkadashiContent(slug);
   if (!content) notFound();
 
-  const parsedYear = Number(sp?.year);
-
-  // Final Year Logic
-  const selectedYear =
-    !isNaN(parsedYear) && parsedYear > 2000
-      ? parsedYear
-      : new Date().getFullYear();
+  // Final Year Logic: an explicitly out-of-range ?year= is unsupported --
+  // 404 instead of rendering a thin page with no real date/parana data.
+  const resolvedYear = resolveEkadashiYear(sp?.year);
+  if (resolvedYear === "invalid") notFound();
+  const selectedYear = resolvedYear;
 
   const dynamic = await getEkadashiDynamicData(
     slug,
@@ -285,10 +309,18 @@ export default async function Page({
           <div className="grid grid-cols-2 gap-2">
             {getAllEkadashiSlugs().map((slug) => {
               const other = getEkadashiContent(slug);
+              // Only carry ?year= forward when it's genuinely a different
+              // year than default -- linking to the default year is
+              // identical content to the clean canonical URL, so there's no
+              // reason to expose a duplicate, crawlable query-string variant.
+              const otherHref =
+                selectedYear === new Date().getFullYear()
+                  ? `/${locale}/ekadashi/${slug}`
+                  : `/${locale}/ekadashi/${slug}?year=${selectedYear}`;
               return (
                 <Link
                   key={slug}
-                  href={`/${locale}/ekadashi/${slug}?year=${selectedYear}`}
+                  href={otherHref}
                   className="p-2 bg-gray-100 rounded text-xs"
                 >
                   {t(other?.name.en, other?.name.hi)}
