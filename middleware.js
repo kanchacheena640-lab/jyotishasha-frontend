@@ -135,6 +135,19 @@ export function middleware(request) {
     return NextResponse.redirect(new URL(`/hi/panchang/${today}`, request.url), 307)
   }
 
+  // Bare /en/panchang must land directly on today's dated bare-English URL
+  // in one hop. Without this, it falls through to the general /en/* rule
+  // below (-> /panchang, 301) and THEN into /panchang's own bare-hub
+  // redirect (-> /panchang/{date}, 307) -- a confirmed 2-hop chain. Same IST
+  // logic as the /panchang/today rule above; nextUrl.clone() (rather than
+  // `new URL(literal, request.url)`) preserves any query string.
+  if (pathname === '/en/panchang') {
+    const today = new Date(Date.now() + 5.5 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    const url = request.nextUrl.clone()
+    url.pathname = `/panchang/${today}`
+    return NextResponse.redirect(url, 307)
+  }
+
   // English pages are canonically served with no locale prefix (/path, not
   // /en/path) -- only Hindi is meant to appear in the URL. Any request that
   // explicitly includes /en/ is therefore a duplicate of the real, canonical
