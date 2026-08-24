@@ -167,6 +167,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/mars-transit/${asc}`;
 
   return {
     title: isHi
@@ -176,7 +177,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए मंगल गोचर ${currentYear} में घर-वार प्रभाव, करियर महत्वाकांक्षा, स्वास्थ्य और साहस का विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Mars (Mangal) transit ${currentYear} for ${ascName} Rising. Vedic insights on energy, ambition, conflicts, and vitality.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/mars-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/mars-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/mars-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/mars-transit/${asc}`,
+      },
     },
   };
 }

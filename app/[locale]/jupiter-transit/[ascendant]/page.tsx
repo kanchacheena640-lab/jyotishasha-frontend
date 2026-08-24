@@ -170,6 +170,8 @@ export async function generateMetadata({
     ? RASHI_HI_MAP[ascName] || ascName // Hindi में देवनागरी
     : ascName; // English में Roman
 
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/jupiter-transit/${asc}`;
+
   return {
     title: isHi
       ? `बृहस्पति गोचर ${currentYear} ${rashiForMeta} लग्न के लिए – प्रभाव और अर्थ`
@@ -178,7 +180,12 @@ export async function generateMetadata({
       ? `${rashiForMeta} लग्न के लिए बृहस्पति गोचर ${currentYear} में घर परिवर्तन, वित्तीय वृद्धि और आध्यात्मिक अवसरों का विस्तृत विश्लेषण।`
       : `How Jupiter transit ${currentYear} will affect ${ascName} Rising? Detailed house-wise Vedic effects, growth, and fortune.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/jupiter-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/jupiter-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/jupiter-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/jupiter-transit/${asc}`,
+      },
     },
   };
 }

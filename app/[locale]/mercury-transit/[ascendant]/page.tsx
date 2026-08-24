@@ -198,6 +198,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/mercury-transit/${asc}`;
 
   return {
     title: isHi
@@ -207,7 +208,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए बुध गोचर ${currentYear} में संचार, व्यापार, बुद्धि और शिक्षा पर घर-वार प्रभाव का विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Mercury (Budh) transit ${currentYear} for ${ascName} Rising. Vedic insights on communication, business, learning, and logic.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/mercury-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/mercury-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/mercury-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/mercury-transit/${asc}`,
+      },
     },
   };
 }

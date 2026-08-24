@@ -167,6 +167,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/sun-transit/${asc}`;
 
   return {
     title: isHi
@@ -176,7 +177,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए सूर्य गोचर ${currentYear} में आत्मविश्वास, करियर और जीवन ऊर्जा पर घर-वार विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Sun (Surya) transit ${currentYear} for ${ascName} Rising. Vedic insights on confidence, leadership, vitality, and authority.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/sun-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/sun-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/sun-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/sun-transit/${asc}`,
+      },
     },
   };
 }

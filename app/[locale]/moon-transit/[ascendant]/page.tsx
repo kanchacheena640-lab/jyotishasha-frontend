@@ -167,6 +167,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/moon-transit/${asc}`;
 
   return {
     title: isHi
@@ -176,7 +177,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए चंद्र गोचर ${currentYear} में भावनाओं, मन, माँ और दैनिक मूड पर घर-वार प्रभाव का विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Moon (Chandra) transit ${currentYear} for ${ascName} Rising. Vedic insights on moods, mind, intuition, and daily emotional shifts.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/moon-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/moon-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/moon-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/moon-transit/${asc}`,
+      },
     },
   };
 }

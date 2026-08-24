@@ -167,6 +167,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/rahu-transit/${asc}`;
 
   return {
     title: isHi
@@ -176,7 +177,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए राहु (उत्तर नोड) गोचर ${currentYear} में कर्मिक बदलाव, भौतिक इच्छाएँ और अचानक सफलता का विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Rahu (North Node) transit ${currentYear} for ${ascName} Rising. Vedic insights on karmic shifts, material desires, and sudden breakthroughs.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/rahu-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/rahu-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/rahu-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/rahu-transit/${asc}`,
+      },
     },
   };
 }

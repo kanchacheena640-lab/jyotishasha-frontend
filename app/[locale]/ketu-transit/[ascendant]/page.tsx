@@ -149,6 +149,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/ketu-transit/${asc}`;
 
   return {
     title: isHi
@@ -158,7 +159,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए केतु (दक्षिण नोड) गोचर ${currentYear} में कर्मिक अलगाव, आध्यात्मिक विकास और घर-वार प्रभाव का विस्तृत विश्लेषण।`
       : `Detailed house-wise effects of Ketu (South Node) transit ${currentYear} for ${ascName} Rising. Karmic shifts, detachment, and spiritual insights in Vedic astrology.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/ketu-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/ketu-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/ketu-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/ketu-transit/${asc}`,
+      },
     },
   };
 }

@@ -187,6 +187,7 @@ export async function generateMetadata({
         languages: {
           en: `https://www.jyotishasha.com/venus-transit/${asc}`,
           hi: `https://www.jyotishasha.com/hi/venus-transit/${asc}`,
+          "x-default": `https://www.jyotishasha.com/venus-transit/${asc}`,
         },
       },
 

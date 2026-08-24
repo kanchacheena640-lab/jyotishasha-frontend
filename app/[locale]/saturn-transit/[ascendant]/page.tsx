@@ -167,6 +167,7 @@ export async function generateMetadata({
   const ascName = titleCase(asc);
   const locale = params.locale || "en";
   const isHi = locale === "hi";
+  const canonical = `https://www.jyotishasha.com${isHi ? "/hi" : ""}/saturn-transit/${asc}`;
 
   return {
     title: isHi
@@ -176,7 +177,12 @@ export async function generateMetadata({
       ? `${ascName} लग्न के लिए शनि गोचर ${currentYear} में कर्मिक सबक, करियर बदलाव और साढ़ेसाती प्रभाव का घर-वार विस्तृत वैदिक विश्लेषण।`
       : `Detailed house-wise effects of Saturn (Shani) transit ${currentYear} for ${ascName} Rising. Vedic insights on karmic lessons, discipline, career restructuring, and Sade Sati impacts.`,
     alternates: {
-      canonical: `https://www.jyotishasha.com/saturn-transit/${asc}`,
+      canonical,
+      languages: {
+        en: `https://www.jyotishasha.com/saturn-transit/${asc}`,
+        hi: `https://www.jyotishasha.com/hi/saturn-transit/${asc}`,
+        "x-default": `https://www.jyotishasha.com/saturn-transit/${asc}`,
+      },
     },
   };
 }
