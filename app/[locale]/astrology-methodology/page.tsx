@@ -6,9 +6,12 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   const isHi = params.locale === "hi";
   return {
     title: isHi ? "ज्योतिष पद्धति | ज्योतिष आशा इंजन का विज्ञान" : "Astrology Methodology | The Science Behind Jyotishasha Engine",
-    description: isHi 
+    description: isHi
       ? "समझें कि ज्योतिष आशा कैसे उच्च-सटीक गणनाओं और वैदिक नियमों का उपयोग करके आपकी कुंडली तैयार करता है।"
       : "Understand how Jyotishasha calculates Kundali using precision computation and Vedic rules.",
+    alternates: {
+      canonical: `https://www.jyotishasha.com${isHi ? "/hi" : ""}/astrology-methodology`,
+    },
   };
 }
 
