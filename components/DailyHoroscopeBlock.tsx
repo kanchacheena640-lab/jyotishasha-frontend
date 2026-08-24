@@ -1,30 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import type { DailyHoroscopeResponse } from "@/lib/getDailyHoroscope";
 
 interface Props {
-  sign: string;
-  lang?: "en" | "hi";
+  data: DailyHoroscopeResponse | null;
 }
 
-export default function DailyHoroscopeBlock({ sign, lang = "en" }: Props) {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(
-      `https://jyotishasha-backend.onrender.com/api/daily-horoscope?sign=${sign}&lang=${lang}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [sign, lang]);
-
-  if (loading) return <p className="text-gray-700">Loading today’s horoscope…</p>;
-  if (!data || data.error) return <p className="text-gray-700">Horoscope not available.</p>;
+export default function DailyHoroscopeBlock({ data }: Props) {
+  if (!data) return <p className="text-gray-700">Horoscope not available.</p>;
 
   return (
     <div className="space-y-4">

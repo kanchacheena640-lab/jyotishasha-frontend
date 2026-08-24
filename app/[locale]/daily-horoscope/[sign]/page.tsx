@@ -4,6 +4,7 @@ import { zodiacData, type ZodiacSign } from "@/lib/zodiac";
 import DailyHoroscopeBlock from "@/components/DailyHoroscopeBlock";
 import Link from "next/link";
 import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
+import { getDailyHoroscope } from "@/lib/getDailyHoroscope";
 
 interface Props {
   params: { locale: string; sign: string };
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function DailyHoroscopePage({ params }: Props) {
+export default async function DailyHoroscopePage({ params }: Props) {
   const { locale, sign: rawSign } = params;
   const isHi = locale === "hi";
   const sign = rawSign.toLowerCase() as ZodiacSign;
@@ -54,6 +55,12 @@ export default function DailyHoroscopePage({ params }: Props) {
 
   const data = zodiacData[sign];
   const langPath = isHi ? "/hi" : "";
+
+  // Server-fetched so the actual prediction is present in the initial HTML
+  // instead of only appearing after DailyHoroscopeBlock's old client fetch
+  // resolved. Graceful null on any failure -- DailyHoroscopeBlock already
+  // renders its existing "not available" fallback for that case.
+  const horoscope = await getDailyHoroscope(sign, locale).catch(() => null);
   
   const today = new Date().toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
@@ -141,10 +148,7 @@ export default function DailyHoroscopePage({ params }: Props) {
         {/* Horoscope Content Block */}
         <div className="md:col-span-2 space-y-8">
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 md:p-8">
-            <DailyHoroscopeBlock 
-              sign={sign} 
-              lang={params.locale as "en" | "hi"} // Ye "as" lagane se error chala jayega
-            />
+            <DailyHoroscopeBlock data={horoscope} />
           </div>
           
           <p className="text-xs text-gray-400 italic px-2">
