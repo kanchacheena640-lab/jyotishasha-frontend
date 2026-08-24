@@ -311,22 +311,6 @@ export default async function SunTransitAscendantPage({
 
         <VedicNote lang={lang} />
 
-        {/* Dynamic Chart */}
-        <Suspense fallback={<div>Loading...</div>}>
-        <div className="mb-20">
-          <Suspense fallback={<div className="py-10 text-center">Loading...</div>}>
-            <AscendantSunTransitClient
-              key={`${ascendant}-${initialHouse}`}
-              ascendant={ascendant}
-              planet="sun"
-              lang={lang}
-              initialHouse={initialHouse}
-              initialData={initialData}
-            />
-          </Suspense>
-        </div>
-        </Suspense>
-
         {/* Intro */}
         <div className="prose prose-slate max-w-none mb-10">
           <p className="text-lg text-slate-700 leading-relaxed font-medium mb-4">
