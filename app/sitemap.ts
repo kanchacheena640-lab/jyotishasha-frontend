@@ -1,4 +1,5 @@
 import { muhurthTopics } from "@/app/[locale]/panchang/muhurat/muhurth_topics";
+import { MONTH_MAP } from "@/lib/months";
 import { toolsData } from "@/app/data/toolsData";
 import { reportsData } from "@/app/data/reportsData";
 import { getAllEkadashiSlugs } from "@/app/data/ekadashi";
@@ -66,6 +67,30 @@ export default async function sitemap() {
   const muhuratUrlsHi = muhuratSlugs.map((slug) =>
     createUrl(`${baseUrl}/hi/panchang/muhurat/${slug}`, 0.65)
   );
+
+  // Month/year period sub-pages -- every slug in muhurthTopics supports both
+  // period types uniformly (app/[locale]/panchang/muhurat/[slug]/[period]/page.tsx
+  // has no per-slug restriction). Month values are the exact lowercase names
+  // from lib/months.ts's MONTH_MAP (the same constant the route itself uses
+  // to validate a month period). Year bound mirrors the Holi rolling-window
+  // convention already used just below in this same file (currentYear - 1
+  // through currentYear + 5), matching the route's own isSupportedMuhuratYear().
+  const muhuratMonthSlugs = Object.keys(MONTH_MAP);
+
+  const muhuratMonthUrls: any[] = [];
+  const muhuratYearUrls: any[] = [];
+
+  muhuratSlugs.forEach((slug) => {
+    muhuratMonthSlugs.forEach((month) => {
+      muhuratMonthUrls.push(createUrl(`${baseUrl}/panchang/muhurat/${slug}/${month}`, 0.6, "monthly"));
+      muhuratMonthUrls.push(createUrl(`${baseUrl}/hi/panchang/muhurat/${slug}/${month}`, 0.55, "monthly"));
+    });
+
+    for (let year = currentYear - 1; year <= currentYear + 5; year++) {
+      muhuratYearUrls.push(createUrl(`${baseUrl}/panchang/muhurat/${slug}/${year}`, 0.6, "yearly"));
+      muhuratYearUrls.push(createUrl(`${baseUrl}/hi/panchang/muhurat/${slug}/${year}`, 0.55, "yearly"));
+    }
+  });
 
   // ---------------- TOOLS ----------------
   const toolUrls = toolsData.map((tool) =>
@@ -346,6 +371,8 @@ export default async function sitemap() {
     ...tithiUrlsHi,
     ...muhuratUrls,
     ...muhuratUrlsHi,
+    ...muhuratMonthUrls,
+    ...muhuratYearUrls,
     ...toolUrls,
     ...toolUrlsHi,
     ...reportUrls,
