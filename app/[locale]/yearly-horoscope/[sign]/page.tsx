@@ -178,7 +178,7 @@ export default async function YearlySignPage({ params }: PageProps) {
 
       <div className="space-y-8">
 
-        {data.introduction && (
+        {Array.isArray(data.introduction?.content) && (
           <CardSection title={lang === "hi" ? "परिचय" : data.introduction.heading}>
             {data.introduction.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
@@ -186,7 +186,7 @@ export default async function YearlySignPage({ params }: PageProps) {
           </CardSection>
         )}
 
-        {data.planetary_overview && (
+        {Array.isArray(data.planetary_overview?.content) && (
           <CardSection title={lang === "hi" ? "ग्रहों का अवलोकन" : data.planetary_overview.heading}>
             {data.planetary_overview.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
@@ -194,7 +194,7 @@ export default async function YearlySignPage({ params }: PageProps) {
           </CardSection>
         )}
 
-        {data.career_finance && (
+        {Array.isArray(data.career_finance?.content) && (
           <CardSection title={lang === "hi" ? "करियर और वित्त" : data.career_finance.heading}>
             {data.career_finance.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
@@ -209,7 +209,7 @@ export default async function YearlySignPage({ params }: PageProps) {
           </CardSection>
         )}
 
-        {data.love_relationships && (
+        {Array.isArray(data.love_relationships?.content) && (
           <CardSection title={lang === "hi" ? "प्रेम और संबंध" : data.love_relationships.heading}>
             {data.love_relationships.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
@@ -217,7 +217,7 @@ export default async function YearlySignPage({ params }: PageProps) {
           </CardSection>
         )}
 
-        {data.health_wellness && (
+        {Array.isArray(data.health_wellness?.content) && (
           <CardSection title={lang === "hi" ? "स्वास्थ्य और कल्याण" : data.health_wellness.heading}>
             {data.health_wellness.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
@@ -225,7 +225,7 @@ export default async function YearlySignPage({ params }: PageProps) {
           </CardSection>
         )}
 
-        {data.spirituality_remedies && (
+        {Array.isArray(data.spirituality_remedies?.content) && (
           <CardSection title={lang === "hi" ? "आध्यात्मिकता और उपाय" : data.spirituality_remedies.heading}>
             {data.spirituality_remedies.content.map((p: string, i: number) => (
               <p key={i}>{p}</p>
