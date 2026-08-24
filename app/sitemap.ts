@@ -9,9 +9,10 @@ import { getAllPlanetInHouseSlugs } from "@/lib/planetInHouse";
 import { varaData } from "@/lib/data/varaData";
 import { tithiData } from "@/app/data/tithiData";
 import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 export default async function sitemap() {
-  const baseUrl = "https://www.jyotishasha.com";
+  const baseUrl = SITE_URL;
   const now = new Date().toISOString();
   const currentYear = new Date().getFullYear();
 

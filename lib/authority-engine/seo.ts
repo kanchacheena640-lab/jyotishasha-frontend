@@ -4,8 +4,8 @@
 import type { Metadata } from 'next'
 import type { AuthorityDomain, AuthorityTopic, Locale } from './types'
 import { loc, locArr } from './i18n'
+import { SITE_URL } from '@/lib/seo/articleSchema'
 
-const SITE_URL = 'https://www.jyotishasha.com'
 const DEFAULT_OG = 'https://www.jyotishasha.com/og/jyotishasha-og-banner.jpg'
 
 function lp(locale: Locale): string {

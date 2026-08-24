@@ -1,6 +1,5 @@
 ﻿import type { Metadata } from "next";
-
-const SITE_URL = "https://www.jyotishasha.com";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 const DEFAULT_OG =
   `${SITE_URL}/og/jyotishasha-og-banner.jpg`;
