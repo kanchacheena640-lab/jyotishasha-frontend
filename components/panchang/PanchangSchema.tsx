@@ -1,3 +1,5 @@
+import { SITE_URL } from "@/lib/seo/articleSchema";
+
 interface Props {
   locale: string;
 }
@@ -19,7 +21,7 @@ export default function PanchangSchema({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.jyotishasha.com",
+        item: isHi ? `${SITE_URL}/hi` : SITE_URL,
       },
       {
         "@type": "ListItem",
