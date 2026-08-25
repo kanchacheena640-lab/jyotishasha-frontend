@@ -4,10 +4,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
 import { getYearlyHoroscope } from "@/lib/services/yearlyHoroscope";
-import { DEFAULT_OG_IMAGE, toISTDatePublished } from "@/lib/seo/articleSchema";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 const YEAR = 2026;
-const SITE_URL = "https://www.jyotishasha.com";
 
 const VALID_SIGNS = [
   "aries", "taurus", "gemini", "cancer", "leo", "virgo",
@@ -48,6 +47,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/yearly-horoscope/${signLower}`,
+        hi: `${SITE_URL}/hi/yearly-horoscope/${signLower}`,
+        "x-default": `${SITE_URL}/yearly-horoscope/${signLower}`,
+      },
     },
     openGraph: {
       title: lang === "hi" 

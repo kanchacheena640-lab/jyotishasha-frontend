@@ -2,8 +2,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
-
-const SITE_URL = "https://www.jyotishasha.com";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 const ZODIACS = [
   { sign: "aries", img: "/zodiac/aries.png", emoji: "♈" },
@@ -41,7 +40,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/monthly-horoscope`,
+        hi: `${SITE_URL}/hi/monthly-horoscope`,
+        "x-default": `${SITE_URL}/monthly-horoscope`,
+      },
+    },
     openGraph: {
       title,
       description,

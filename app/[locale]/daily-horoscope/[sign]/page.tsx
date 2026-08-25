@@ -37,6 +37,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical: `https://www.jyotishasha.com${isHi ? '/hi' : ''}/daily-horoscope/${sign}`,
+      languages: {
+        en: `${SITE_URL}/daily-horoscope/${sign}`,
+        hi: `${SITE_URL}/hi/daily-horoscope/${sign}`,
+        "x-default": `${SITE_URL}/daily-horoscope/${sign}`,
+      },
     },
     openGraph: {
       title,
