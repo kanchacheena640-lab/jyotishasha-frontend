@@ -1,10 +1,9 @@
 ﻿import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/dictionaries";
-import { DEFAULT_OG_IMAGE, SITE_URL as ORG_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
+import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 
 const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.jyotishasha.com";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.jyotishasha.com";
 
 const VALID_SIGNS = [
   "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra",
@@ -46,6 +45,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/monthly-horoscope/${signLower}`,
+        hi: `${SITE_URL}/hi/monthly-horoscope/${signLower}`,
+        "x-default": `${SITE_URL}/monthly-horoscope/${signLower}`,
+      },
     },
     openGraph: {
       title,
@@ -92,7 +96,7 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
     headline: data.title,
     datePublished: toISTDatePublished(),
     image: DEFAULT_OG_IMAGE,
-    author: { "@type": "Organization", name: "Jyotishasha", url: ORG_URL },
+    author: { "@type": "Organization", name: "Jyotishasha", url: SITE_URL },
     publisher: {
       "@type": "Organization",
       name: "Jyotishasha",
