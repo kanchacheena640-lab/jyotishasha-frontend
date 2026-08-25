@@ -9,6 +9,7 @@ import ImportantEvents from "@/components/panchang/ImportantEvents";
 import PanchangTools from "@/components/panchang/PanchangTools";
 import PanchangFaq from "@/components/panchang/PanchangFaq";
 import PanchangSchema from "@/components/panchang/PanchangSchema";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 export async function generateMetadata({
   params,
@@ -30,6 +31,11 @@ export async function generateMetadata({
       canonical: isHi
         ? "https://www.jyotishasha.com/hi/vedic-panchang"
         : "https://www.jyotishasha.com/vedic-panchang",
+      languages: {
+        en: `${SITE_URL}/vedic-panchang`,
+        hi: `${SITE_URL}/hi/vedic-panchang`,
+        "x-default": `${SITE_URL}/vedic-panchang`,
+      },
     },
   };
 }
