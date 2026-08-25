@@ -26,8 +26,7 @@ import { getPanchang } from "@/lib/getPanchang";
 import { getHomeMuhurth } from "@/lib/getHomeMuhurth";
 import { getTransit } from "@/lib/getTransit";
 import { getUpcomingEvents } from "@/lib/getUpcomingEvents";
-
-const SITE_URL = "https://www.jyotishasha.com";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 // Authority hub links — rendered as a 4-card grid for internal linking
 const LEARN_LINKS = [
@@ -83,7 +82,14 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: SITE_URL,
+        hi: `${SITE_URL}/hi`,
+        "x-default": SITE_URL,
+      },
+    },
     openGraph: {
       title,
       description,
