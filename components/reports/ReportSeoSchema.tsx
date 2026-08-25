@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 interface Props {
   report: any;
@@ -30,7 +31,7 @@ export default function ReportSeoSchema({
 
   offers: {
     "@type": "Offer",
-    url: `https://www.jyotishasha.com/reports/${report.slug}`,
+    url: `${SITE_URL}/reports/${report.slug}`,
     price: report.price,
     priceCurrency: "INR",
     availability: "https://schema.org/InStock",
@@ -75,19 +76,19 @@ export default function ReportSeoSchema({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.jyotishasha.com",
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Reports",
-        item: "https://www.jyotishasha.com/reports",
+        item: `${SITE_URL}/reports`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: report.title?.en || report.title,
-        item: `https://www.jyotishasha.com/reports/${report.slug}`,
+        item: `${SITE_URL}/reports/${report.slug}`,
       },
     ],
   };

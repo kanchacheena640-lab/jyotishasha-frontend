@@ -1,7 +1,6 @@
 import { nakshatraList } from "@/lib/nakshatra";
 import { nakshatraHubFaqs } from "@/lib/nakshatra/hubFaqData";
-
-const SITE_URL = "https://www.jyotishasha.com";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 interface Props {
   locale: string;

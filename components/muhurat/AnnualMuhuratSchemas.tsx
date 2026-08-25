@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 
 type Props = {
@@ -16,7 +17,7 @@ export default function AnnualMuhuratSchemas({
 }: Props) {
 
   const baseUrl =
-    `https://www.jyotishasha.com${
+    `${SITE_URL}${
       locale === "hi" ? "/hi" : ""
     }/panchang/muhurat/${slug}/${year}`;
 
@@ -30,7 +31,7 @@ export default function AnnualMuhuratSchemas({
         position: 1,
         name: "Panchang",
         item:
-          `https://www.jyotishasha.com${
+          `${SITE_URL}${
             locale === "hi" ? "/hi" : ""
           }/panchang`,
       },
@@ -39,7 +40,7 @@ export default function AnnualMuhuratSchemas({
         position: 2,
         name: "Muhurat",
         item:
-          `https://www.jyotishasha.com${
+          `${SITE_URL}${
             locale === "hi" ? "/hi" : ""
           }/panchang/muhurat`,
       },

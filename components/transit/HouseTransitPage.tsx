@@ -5,6 +5,7 @@ import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
 import { buildFAQSchema, buildBreadcrumbSchema } from "@/lib/seo/transitSeo";
 import type { HousePlanetConfig } from "@/lib/transit/planetConfig";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -81,15 +82,15 @@ export default async function HouseTransitPage({
   const breadcrumbSchema = buildBreadcrumbSchema([
     {
       name: `${config.planetEn} Transit`,
-      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${config.slug}`,
+      item: `${SITE_URL}/${isHi ? "hi/" : ""}${config.slug}`,
     },
     {
       name: `${ascTitle} Ascendant`,
-      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${config.slug}/${ascendant}`,
+      item: `${SITE_URL}/${isHi ? "hi/" : ""}${config.slug}/${ascendant}`,
     },
     {
       name: isHi ? `${houseNum}वाँ भाव` : `${houseNum} House`,
-      item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${config.slug}/${ascendant}/house-${houseNum}`,
+      item: `${SITE_URL}/${isHi ? "hi/" : ""}${config.slug}/${ascendant}/house-${houseNum}`,
     },
   ]);
 

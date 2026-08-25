@@ -2,6 +2,7 @@ import Link from "next/link";
 import AscendantTransitCards from "@/components/transit/AscendantTransitCards";
 import VedicNote from "@/components/VedicNote";
 import type { GlobalTransitHubConfig } from "@/lib/transit/transitHubConfig";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 const PLANET_HI: Record<string, string> = {
   Sun: "सूर्य",
@@ -118,13 +119,13 @@ export default async function GlobalTransitPage({
         "@type": "ListItem",
         position: 1,
         name: isHi ? "गोचर" : "Transits",
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}`,
+        item: `${SITE_URL}/${isHi ? "hi/" : ""}`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: isHi ? config.breadcrumbNameHi : config.breadcrumbNameEn,
-        item: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${config.slug}`,
+        item: `${SITE_URL}/${isHi ? "hi/" : ""}${config.slug}`,
       },
     ],
   };
@@ -134,7 +135,7 @@ export default async function GlobalTransitPage({
     "@type": "WebPage",
     name: isHi ? config.webPageNameHi(currentYear) : config.webPageNameEn(currentYear),
     description: isHi ? config.webPageDescHi(currentYear) : config.webPageDescEn,
-    url: `https://www.jyotishasha.com/${isHi ? "hi/" : ""}${config.slug}`,
+    url: `${SITE_URL}/${isHi ? "hi/" : ""}${config.slug}`,
     inLanguage: isHi ? "hi-IN" : "en-US",
   };
 
