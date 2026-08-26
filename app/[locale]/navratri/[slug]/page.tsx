@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { getNavdurgaBySlug, NAVDURGA_LIST } from "@/lib/navratri"
 import { fetchNavratri } from "@/lib/fetchNavratri"
 import NavdurgaDetailClient from "./NavdurgaDetailClient"
+import { SITE_URL } from "@/lib/seo/articleSchema"
 
 /* ---------------- LANGUAGE ---------------- */
 function getLang(locale?: string) {
@@ -173,7 +174,7 @@ export default async function NavdurgaDetailPage({ params }: Props) {
                 "@type": "ListItem",
                 position: 1,
                 name: lang === "hi" ? "होम" : "Home",
-                item: "https://www.jyotishasha.com",
+                item: lang === "hi" ? `${SITE_URL}/hi` : SITE_URL,
               },
               {
                 "@type": "ListItem",
