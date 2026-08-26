@@ -32,7 +32,7 @@ export const DynamicHero = ({ title, month, year, isHi, locale }: HeroProps) => 
           ) : (
             <>
               Get the most accurate <strong>{cleanTitle} auspicious dates</strong> for {month} {year} based on 
-              authentic <Link href={`/${locale}/panchang`} className="text-purple-300 underline underline-offset-4">Vedic Panchang</Link>. 
+              authentic <Link href={`${isHi ? "/hi" : ""}/panchang`} className="text-purple-300 underline underline-offset-4">Vedic Panchang</Link>.
               Our experts have analyzed Nakshatra alignments and Tithis for your success.
             </>
           )}

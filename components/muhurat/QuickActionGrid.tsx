@@ -25,7 +25,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
         return {
           title: isHi ? "बेस्ट मैच मेकिंग: अष्टकूट मिलान के 36 गुणों की जांच" : "Best Match Making: Check 8 Factors of Compatibility",
           desc: isHi ? "मुहूर्त के साथ-साथ आपसी तालमेल और मांगलिक दोष की जानकारी बहुत जरूरी है।" : "Compatibility and Manglik Dosha analysis is crucial.",
-          link: `/${locale}/love`,
+          link: `${locale === "hi" ? "/hi" : ""}/love`,
           icon: "❤️",
           color: "from-rose-900/60 to-pink-900/60",
           border: "border-pink-400/30"
@@ -93,7 +93,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
 
       {/* 📊 Static Quick Links Grid (Sober look) */}
       <div className="grid grid-cols-2 gap-3">
-        <Link href={`/${locale}/panchang`} className="bg-white/5 border border-white/10 p-3 rounded-2xl text-center active:bg-white/10 transition-all">
+        <Link href={`${locale === "hi" ? "/hi" : ""}/panchang`} className="bg-white/5 border border-white/10 p-3 rounded-2xl text-center active:bg-white/10 transition-all">
           <span className="block text-[10px] text-purple-300 mb-1 uppercase font-bold tracking-tighter">
             {isHi ? "आज का शुभ समय" : "Today's Time"}
           </span>
@@ -101,7 +101,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
             {isHi ? "चौघड़िया" : "Choghadiya"} →
           </span>
         </Link>
-        <Link href={`/${locale}/panchang`} className="bg-white/5 border border-white/10 p-3 rounded-2xl text-center active:bg-white/10 transition-all">
+        <Link href={`${locale === "hi" ? "/hi" : ""}/panchang`} className="bg-white/5 border border-white/10 p-3 rounded-2xl text-center active:bg-white/10 transition-all">
           <span className="block text-[10px] text-orange-300 mb-1 uppercase font-bold tracking-tighter">
             {isHi ? "ग्रहों की स्थिति" : "Planetary Status"}
           </span>

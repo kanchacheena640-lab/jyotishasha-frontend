@@ -35,7 +35,7 @@ export const ZodiacVibeScroll = ({ locale, isHi }: ZodiacProps) => {
         {zodiacs.map((s) => (
           <Link 
             key={s} 
-            href={`/${locale}/daily-horoscope/${s}`} 
+            href={`${isHi ? "/hi" : ""}/daily-horoscope/${s}`}
             className="group flex-shrink-0 flex flex-col items-center gap-2 active:scale-90 transition-all"
           >
             {/* Image Container */}
