@@ -4,6 +4,7 @@ import Link from "next/link";
 import LocationText from "@/components/location/LocationText";
 import HoliPujaVidhi from "@/components/HoliPujaVidhi";
 import RashiCardHoli from "@/components/RashiCardHoli";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 const BACKEND = "https://jyotishasha-backend.onrender.com";
 
@@ -99,6 +100,11 @@ export async function generateMetadata({
       : `Holi ${year} date, Holika Dahan muhurat and celebration details.`,
     alternates: {
       canonical: baseUrl,
+      languages: {
+        en: `${SITE_URL}/holi-${year}`,
+        hi: `${SITE_URL}/hi/holi-${year}`,
+        "x-default": `${SITE_URL}/holi-${year}`,
+      },
     },
     robots: { index: true, follow: true },
   };
