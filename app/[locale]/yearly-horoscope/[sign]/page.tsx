@@ -285,7 +285,7 @@ export default async function YearlySignPage({ params }: PageProps) {
 
         <div className="pt-4">
           <Link
-            href={`/${lang}/yearly-horoscope`}
+            href={`${lang === "hi" ? "/hi" : ""}/yearly-horoscope`}
             className="font-semibold text-purple-700 hover:underline"
           >
             ← {lang === "hi" ? "सभी राशियों पर वापस जाएँ" : "Back to all signs"}
