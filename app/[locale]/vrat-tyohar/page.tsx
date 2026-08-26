@@ -93,7 +93,7 @@ export default function VratTyoharPage({
           {FESTIVALS.map((festival) => (
             <Link
               key={festival.href}
-              href={`/${locale}${festival.href}`}
+              href={`${isHi ? "/hi" : ""}${festival.href}`}
               className="group bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-purple-900/50 rounded-2xl p-6 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
             >
               <h2 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
