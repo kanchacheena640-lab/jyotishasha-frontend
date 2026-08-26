@@ -40,8 +40,9 @@ export async function generateMetadata({
           ? `https://www.jyotishasha.com/hi/panchang/${resolvedDate}`
           : `https://www.jyotishasha.com/panchang/${resolvedDate}`,
       languages: {
-        "en-US": `/panchang/${resolvedDate}`,
-        "hi-IN": `/hi/panchang/${resolvedDate}`,
+        en: `https://www.jyotishasha.com/panchang/${resolvedDate}`,
+        hi: `https://www.jyotishasha.com/hi/panchang/${resolvedDate}`,
+        "x-default": `https://www.jyotishasha.com/panchang/${resolvedDate}`,
       },
     },
     openGraph: {

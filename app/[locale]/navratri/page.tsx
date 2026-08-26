@@ -36,8 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           ? "https://www.jyotishasha.com/hi/navratri"
           : "https://www.jyotishasha.com/navratri",
       languages: {
-        "en-US": "/navratri",
-        "hi-IN": "/hi/navratri",
+        en: "https://www.jyotishasha.com/navratri",
+        hi: "https://www.jyotishasha.com/hi/navratri",
+        "x-default": "https://www.jyotishasha.com/navratri",
       },
     },
 

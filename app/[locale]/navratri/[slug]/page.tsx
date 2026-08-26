@@ -47,8 +47,9 @@ export async function generateMetadata({
           ? `https://www.jyotishasha.com/hi/navratri/${params.slug}`
           : `https://www.jyotishasha.com/navratri/${params.slug}`,
       languages: {
-        "en-US": `/navratri/${params.slug}`,
-        "hi-IN": `/hi/navratri/${params.slug}`,
+        en: `https://www.jyotishasha.com/navratri/${params.slug}`,
+        hi: `https://www.jyotishasha.com/hi/navratri/${params.slug}`,
+        "x-default": `https://www.jyotishasha.com/navratri/${params.slug}`,
       },
     },
 
