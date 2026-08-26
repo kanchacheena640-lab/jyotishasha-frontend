@@ -25,15 +25,15 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-gray-300">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/tools">Tools</Link></li>
+            <li><Link href={currentLang === "hi" ? "/hi" : "/"}>Home</Link></li>
+            <li><Link href={`${langPath}/tools`}>Tools</Link></li>
             <li><Link href={`${langPath}/panchang`}>{currentLang === "hi" ? "पंचांग" : "Panchang"}</Link></li>
             <li><Link href={`${langPath}/ekadashi`}>{currentLang === "hi" ? "एकादशी" : "Ekadashi"}</Link></li>
             <li><Link href={`${langPath}/navratri`}>{currentLang === "hi" ? "नवरात्रि" : "Navratri"}</Link></li>
             <li><Link href={`${langPath}/rahu-kaal`}>{currentLang === "hi" ? "राहु काल" : "Rahu Kaal"}</Link></li>
             <li><Link href="/reports">Reports</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/astrology-methodology">Methodology</Link></li>
+            <li><Link href={`${langPath}/contact`}>Contact</Link></li>
+            <li><Link href={`${langPath}/astrology-methodology`}>Methodology</Link></li>
           </ul>
         </div>
 
