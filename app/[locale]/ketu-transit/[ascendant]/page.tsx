@@ -432,9 +432,9 @@ export default async function KetuTransitAscendantPage({
           </h3>
 
           <div className="flex flex-wrap gap-4 text-blue-700 font-semibold">
-            <Link href="/rahu-transit">{isHi ? "राहु गोचर →" : "Rahu Transit →"}</Link>
-            <Link href="/jupiter-transit">{isHi ? "बृहस्पति गोचर →" : "Jupiter Transit →"}</Link>
-            <Link href="/saturn-transit">{isHi ? "शनि गोचर →" : "Saturn Transit →"}</Link>
+            <Link href={`/${isHi ? "hi/" : ""}rahu-transit`}>{isHi ? "राहु गोचर →" : "Rahu Transit →"}</Link>
+            <Link href={`/${isHi ? "hi/" : ""}jupiter-transit`}>{isHi ? "बृहस्पति गोचर →" : "Jupiter Transit →"}</Link>
+            <Link href={`/${isHi ? "hi/" : ""}saturn-transit`}>{isHi ? "शनि गोचर →" : "Saturn Transit →"}</Link>
           </div>
         </section>
 

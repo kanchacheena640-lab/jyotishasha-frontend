@@ -404,9 +404,9 @@ export default async function RahuTransitAscendantPage({
 
         {/* Footer Silos */}
         <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-purple-700 font-bold text-sm uppercase tracking-wider">
-          <Link href="/ketu-transit" className="hover:underline">Ketu Transit →</Link>
-          <Link href="/saturn-transit" className="hover:underline">Saturn Transit →</Link>
-          <Link href="/mars-transit" className="hover:underline">Mars Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}ketu-transit`} className="hover:underline">Ketu Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}saturn-transit`} className="hover:underline">Saturn Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}mars-transit`} className="hover:underline">Mars Transit →</Link>
         </footer>
       </article>
     </div>

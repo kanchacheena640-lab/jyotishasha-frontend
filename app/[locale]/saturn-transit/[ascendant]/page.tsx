@@ -406,9 +406,9 @@ export default async function SaturnTransitAscendantPage({
 
         {/* Footer Silos */}
         <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-slate-700 font-bold text-sm uppercase tracking-wider">
-          <Link href="/rahu-transit" className="hover:underline">Rahu Transit →</Link>
-          <Link href="/mars-transit" className="hover:underline">Mars Transit →</Link>
-          <Link href="/jupiter-transit" className="hover:underline">Jupiter Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}rahu-transit`} className="hover:underline">Rahu Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}mars-transit`} className="hover:underline">Mars Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}jupiter-transit`} className="hover:underline">Jupiter Transit →</Link>
         </footer>
       </article>
     </div>

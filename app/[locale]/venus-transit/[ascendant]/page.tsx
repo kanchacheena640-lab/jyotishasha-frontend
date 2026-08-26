@@ -462,9 +462,9 @@ export default async function VenusTransitAscendantPage({
 
         {/* Footer Silos */}
         <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-wrap gap-6 text-rose-700 font-bold text-sm uppercase tracking-wider">
-          <Link href="/jupiter-transit" className="hover:underline">Jupiter Transit →</Link>
-          <Link href="/mars-transit" className="hover:underline">Mars Transit →</Link>
-          <Link href="/mercury-transit" className="hover:underline">Mercury Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}jupiter-transit`} className="hover:underline">Jupiter Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}mars-transit`} className="hover:underline">Mars Transit →</Link>
+          <Link href={`/${isHi ? "hi/" : ""}mercury-transit`} className="hover:underline">Mercury Transit →</Link>
         </footer>
       </article>
     </div>
