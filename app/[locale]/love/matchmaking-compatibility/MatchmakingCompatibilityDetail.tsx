@@ -15,7 +15,7 @@ export default function MatchmakingCompatibilityDetail({ locale }: { locale: str
     if (typeof window !== "undefined") {
       const s = sessionStorage.getItem("love_summary");
       if (!s) {
-        router.replace(`/${locale}/love`);
+        router.replace(`${isHi ? "/hi" : ""}/love`);
         return;
       }
 
@@ -25,7 +25,7 @@ export default function MatchmakingCompatibilityDetail({ locale }: { locale: str
         const mainData = parsed?.data || parsed;
         setData(mainData);
       } catch (e) {
-        router.replace(`/${locale}/love`);
+        router.replace(`${isHi ? "/hi" : ""}/love`);
       }
     }
   }, [router, locale]);
@@ -89,7 +89,7 @@ export default function MatchmakingCompatibilityDetail({ locale }: { locale: str
 
       {/* 🚀 Premium CTA */}
       <button
-        onClick={() => router.push(`/${locale}/love/report/relationship_future_report`)}
+        onClick={() => router.push(`${isHi ? "/hi" : ""}/love/report/relationship_future_report`)}
         className="w-full py-6 bg-white text-indigo-900 font-black text-xl rounded-2xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all"
       >
         {isHi ? "पूरी रिपोर्ट अनलॉक करें" : "Unlock Full Report"}

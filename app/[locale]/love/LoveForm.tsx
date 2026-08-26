@@ -83,7 +83,7 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
         marriage_potential: marriageJson.data || marriageJson,
       }));
 
-      router.push(`/${locale}/love/result`);
+      router.push(`${isHi ? "/hi" : ""}/love/result`);
     } catch (e: any) {
       if (e.name === 'AbortError') return;
       alert(isHi ? "सर्वर धीमा है, कृपया पुनः प्रयास करें" : "Server is slow, please try again");

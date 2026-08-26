@@ -13,7 +13,7 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
     setMounted(true);
     const tools = sessionStorage.getItem("love_tools");
     if (!tools) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
       return;
     }
 
@@ -29,7 +29,7 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
       
       setData(td);
     } catch (e) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
     }
   }, [router, locale]);
 
@@ -101,7 +101,7 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
         
         {/* 🚀 Premium CTA */}
         <button
-          onClick={() => router.push(`/${locale}/love/report/relationship_future_report`)}
+          onClick={() => router.push(`${isHi ? "/hi" : ""}/love/report/relationship_future_report`)}
           className="w-full py-6 bg-white text-rose-900 font-black text-xl rounded-2xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all"
         >
           {isHi ? "पूरी रिपोर्ट अनलॉक करें" : "Unlock Full Report"}

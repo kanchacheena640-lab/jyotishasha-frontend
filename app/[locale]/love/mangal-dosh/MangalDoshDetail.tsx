@@ -14,7 +14,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
     
     const s = sessionStorage.getItem("love_summary");
     if (!s) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
       return;
     }
 
@@ -24,7 +24,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
       const mangalData = parsed?.data?.mangal_dosh || parsed?.mangal_dosh;
       setData(mangalData);
     } catch (e) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
     }
   }, [router, locale]);
 
@@ -90,7 +90,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
 
       <div className="w-full md:w-auto text-center mt-12">
         <button
-          onClick={() => router.push(`/${locale}/love/report/relationship_future_report`)}
+          onClick={() => router.push(`${isHi ? "/hi" : ""}/love/report/relationship_future_report`)}
           className="w-full md:w-auto px-10 py-5 bg-white text-indigo-900 font-black text-lg rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-2xl"
         >
           {isHi ? "अभी पूरी रिपोर्ट प्राप्त करें" : "Unlock Full Report"}

@@ -17,7 +17,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
     const t = sessionStorage.getItem("love_tools");
 
     if (!s) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
       return;
     }
 
@@ -30,7 +30,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
       setSummary(parsedSummary.data || parsedSummary);
       setTools(parsedTools);
     } catch (e) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
     }
   }, [router, locale]);
 
@@ -51,7 +51,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
   const marriage = tools.marriage_potential?.data || tools.marriage_potential;
   const truthDare = tools.truth_or_dare?.data || tools.truth_or_dare;
 
-  const go = (path: string) => router.push(`/${locale}${path}`);
+  const go = (path: string) => router.push(`${isHi ? "/hi" : ""}${path}`);
 
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-8 bg-[#0f0a1e] min-h-screen text-white animate-in fade-in duration-500">

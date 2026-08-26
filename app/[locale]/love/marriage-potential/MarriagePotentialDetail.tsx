@@ -13,7 +13,7 @@ export default function MarriagePotentialDetail({ locale }: { locale: string }) 
     setMounted(true);
     const tools = sessionStorage.getItem("love_tools");
     if (!tools) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
       return;
     }
     try {
@@ -30,7 +30,7 @@ export default function MarriagePotentialDetail({ locale }: { locale: string }) 
       
       setData(mp);
     } catch (e) {
-      router.replace(`/${locale}/love`);
+      router.replace(`${isHi ? "/hi" : ""}/love`);
     }
   }, [locale, router]);
 
@@ -94,7 +94,7 @@ export default function MarriagePotentialDetail({ locale }: { locale: string }) 
       </div>
 
       <button
-        onClick={() => router.push(`/${locale}/love/report/relationship_future_report`)}
+        onClick={() => router.push(`${isHi ? "/hi" : ""}/love/report/relationship_future_report`)}
         className="w-full py-6 bg-white text-indigo-900 font-black text-xl rounded-2xl shadow-2xl transition-transform hover:scale-[1.01] active:scale-95"
       >
         {isHi ? "पूरी रिपोर्ट अनलॉक करें" : "Unlock Full Report"}
