@@ -12,7 +12,7 @@ export default function HomeFreeKundaliCompact({ dict, lang }: Props) {
 
   return (
     <Link
-      href={`/${lang}/free-kundali`}
+      href={`${isHindi ? "/hi" : ""}/free-kundali`}
       className="block w-full bg-gradient-to-r from-indigo-600 via-purple-700 to-blue-700 
                  text-white rounded-2xl shadow-lg hover:shadow-xl 
                  hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 overflow-hidden"

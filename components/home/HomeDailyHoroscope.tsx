@@ -67,7 +67,7 @@ export default function HomeDailyHoroscope({ data, dict, lang }: Props) {
             </ul>
           </div>
           <div className="mt-6 text-right">
-            <Link href={`/${lang}/daily-horoscope/${activeSign}`} className="text-purple-300 hover:text-white underline text-sm">
+            <Link href={`${lang === "hi" ? "/hi" : ""}/daily-horoscope/${activeSign}`} className="text-purple-300 hover:text-white underline text-sm">
               {dict.horoscope.readMore} →
             </Link>
           </div>

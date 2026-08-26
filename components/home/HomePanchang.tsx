@@ -18,7 +18,7 @@ export default function HomePanchang({ data, events, dict, lang }: Props) {
       <div>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-white">{dict.panchang?.heading || "Panchang"}</h2>
-          <Link href={`/${lang}/panchang`} className="text-xs text-purple-400 hover:underline">
+          <Link href={`${lang === "hi" ? "/hi" : ""}/panchang`} className="text-xs text-purple-400 hover:underline">
             {dict.panchang?.viewFull || "View Full"} →
           </Link>
         </div>
