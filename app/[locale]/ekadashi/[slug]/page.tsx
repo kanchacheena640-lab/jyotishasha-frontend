@@ -232,8 +232,8 @@ export default async function Page({
 
         {/* Breadcrumb */}
         <nav className="flex text-xs text-gray-500 mb-6 gap-2">
-          <Link href={`/${locale}`}>Home</Link> /
-          <Link href={`/${locale}/ekadashi`}>Ekadashi</Link> /
+          <Link href={isHi ? "/hi" : "/"}>Home</Link> /
+          <Link href={`${isHi ? "/hi" : ""}/ekadashi`}>Ekadashi</Link> /
           <span className="text-orange-700 font-bold">
             {t(content.name.en, content.name.hi)}
           </span>
@@ -322,8 +322,8 @@ export default async function Page({
               // reason to expose a duplicate, crawlable query-string variant.
               const otherHref =
                 selectedYear === new Date().getFullYear()
-                  ? `/${locale}/ekadashi/${slug}`
-                  : `/${locale}/ekadashi/${slug}?year=${selectedYear}`;
+                  ? `${isHi ? "/hi" : ""}/ekadashi/${slug}`
+                  : `${isHi ? "/hi" : ""}/ekadashi/${slug}?year=${selectedYear}`;
               return (
                 <Link
                   key={slug}
