@@ -1,4 +1,6 @@
+import { notFound } from "next/navigation";
 import ShubhDates from "@/components/ShubhDates";
+import { TOOL_MAP } from "@/lib/panchangToolsMap";
 
 interface Props {
   params: { locale: string; tool?: string };
@@ -9,12 +11,17 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const isHi = params.locale === "hi";
   const tool = params?.tool ?? "muhurta";
+
+  if (!(tool in TOOL_MAP)) {
+    return { title: "Not Found", robots: { index: false } };
+  }
+
   const nice = tool.replace(/-/g, " ");
-  
-  const title = isHi 
-    ? `शुभ ${nice} मुहूर्त | ज्‍योतिष आशा` 
+
+  const title = isHi
+    ? `शुभ ${nice} मुहूर्त | ज्‍योतिष आशा`
     : `Shubh ${nice} Muhurta | Jyotishasha`;
-    
+
   const description = isHi
     ? `पंचांग और वैदिक ज्योतिष पर आधारित आपके स्थान के लिए सर्वश्रेष्ठ ${nice} तिथियां।`
     : `Best ${nice} dates based on Panchang and Vedic astrology for your location.`;
@@ -22,8 +29,8 @@ export async function generateMetadata({ params }: Props) {
   return {
     title,
     description,
-    alternates: { 
-      canonical: `https://www.jyotishasha.com${isHi ? '/hi' : ''}/panchang/tools/${tool}` 
+    alternates: {
+      canonical: `https://www.jyotishasha.com${isHi ? '/hi' : ''}/panchang/tools/${tool}`
     },
   };
 }
@@ -31,6 +38,11 @@ export async function generateMetadata({ params }: Props) {
 export default function ToolMuhurthaPage({ params, searchParams }: Props) {
   const isHi = params.locale === "hi";
   const tool = params?.tool ?? "muhurta";
+
+  if (!(tool in TOOL_MAP)) {
+    notFound();
+  }
+
   const rawPlace = searchParams?.place ?? (isHi ? "लखनऊ" : "Lucknow");
   const place = decodeURIComponent(rawPlace);
 

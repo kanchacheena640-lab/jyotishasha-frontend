@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
+import { TOOL_MAP } from "@/lib/panchangToolsMap";
 
 interface MuhurthaItem {
   date: string;
@@ -21,20 +22,10 @@ interface ShubhDatesProps {
 export default function ShubhDates({ params }: ShubhDatesProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // 🌍 Locale Check
   const isHi = params?.locale === "hi";
   const langPath = isHi ? "/hi" : "";
-
-  const TOOL_MAP: Record<string, string> = {
-    naamkaran: "naamkaran",
-    marriage: "marriage",
-    grahpravesh: "grah_pravesh",
-    vehicle: "vehicle",
-    childbirth: "childbirth",
-    gold: "gold",
-    travel: "travel",
-  };
 
   const toolSlug = params?.tool || "naamkaran";
   const activity = TOOL_MAP[toolSlug] || "naamkaran";
