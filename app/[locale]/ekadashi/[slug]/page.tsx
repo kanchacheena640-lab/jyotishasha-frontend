@@ -72,7 +72,14 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/ekadashi/${slug}`,
+        hi: `${SITE_URL}/hi/ekadashi/${slug}`,
+        "x-default": `${SITE_URL}/ekadashi/${slug}`,
+      },
+    },
     openGraph: {
       title,
       description,

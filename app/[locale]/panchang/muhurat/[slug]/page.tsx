@@ -66,6 +66,11 @@ export async function generateMetadata({
 
     alternates: {
       canonical,
+      languages: {
+        en: `${SITE_URL}/panchang/muhurat/${params.slug}`,
+        hi: `${SITE_URL}/hi/panchang/muhurat/${params.slug}`,
+        "x-default": `${SITE_URL}/panchang/muhurat/${params.slug}`,
+      },
     },
 
     openGraph: {

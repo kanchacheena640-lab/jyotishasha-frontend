@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { toolContentMap } from "@/app/data/toolContent";
 import ToolDynamicPage from "./ToolDynamicPage";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 // 🔹 Question-Answer Schema (Google Search Results ke liye)
 function buildFaqJsonLd(faq: { q: string; a: string }[]) {
@@ -77,6 +78,11 @@ export function generateMetadata(
       keywords: tool.seo.keywords,
       alternates: {
         canonical: `https://www.jyotishasha.com/${lang === 'hi' ? 'hi/' : ''}tools/${params.toolId}`,
+        languages: {
+          en: `${SITE_URL}/tools/${params.toolId}`,
+          hi: `${SITE_URL}/hi/tools/${params.toolId}`,
+          "x-default": `${SITE_URL}/tools/${params.toolId}`,
+        },
       },
     };
   }

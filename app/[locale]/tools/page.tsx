@@ -1,7 +1,6 @@
 ﻿import type { Metadata } from "next";
 import ToolsPageClient from "./ToolsPageClient";
-
-const SITE_URL = "https://www.jyotishasha.com";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 export async function generateMetadata({
   params,
@@ -25,7 +24,14 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/tools`,
+        hi: `${SITE_URL}/hi/tools`,
+        "x-default": `${SITE_URL}/tools`,
+      },
+    },
     openGraph: {
       title,
       description,

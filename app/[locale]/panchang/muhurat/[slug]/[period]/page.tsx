@@ -85,6 +85,11 @@ export async function generateMetadata({
 
       alternates: {
         canonical,
+        languages: {
+          en: `${SITE_URL}/panchang/muhurat/${params.slug}/${params.period}`,
+          hi: `${SITE_URL}/hi/panchang/muhurat/${params.slug}/${params.period}`,
+          "x-default": `${SITE_URL}/panchang/muhurat/${params.slug}/${params.period}`,
+        },
       },
 
       openGraph: {
@@ -157,6 +162,11 @@ export async function generateMetadata({
 
     alternates: {
       canonical,
+      languages: {
+        en: `${SITE_URL}/panchang/muhurat/${params.slug}/${params.period}`,
+        hi: `${SITE_URL}/hi/panchang/muhurat/${params.slug}/${params.period}`,
+        "x-default": `${SITE_URL}/panchang/muhurat/${params.slug}/${params.period}`,
+      },
     },
 
     openGraph: {
