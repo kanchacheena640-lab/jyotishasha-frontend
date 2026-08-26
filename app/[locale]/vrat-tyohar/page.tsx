@@ -54,6 +54,7 @@ export async function generateMetadata({
       languages: {
         en: `${SITE_URL}/vrat-tyohar`,
         hi: `${SITE_URL}/hi/vrat-tyohar`,
+        "x-default": `${SITE_URL}/vrat-tyohar`,
       },
     },
     openGraph: {

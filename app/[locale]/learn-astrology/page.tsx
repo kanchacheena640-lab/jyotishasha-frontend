@@ -59,6 +59,7 @@ export async function generateMetadata({
       languages: {
         en: `${SITE_URL}/learn-astrology`,
         hi: `${SITE_URL}/hi/learn-astrology`,
+        "x-default": `${SITE_URL}/learn-astrology`,
       },
     },
     openGraph: {
