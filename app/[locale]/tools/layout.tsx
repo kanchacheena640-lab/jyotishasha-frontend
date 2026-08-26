@@ -9,9 +9,6 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   return {
     title: seoData.title,
     description: seoData.description,
-    alternates: {
-      canonical: `https://www.jyotishasha.com/${params.locale}/tools`,
-    },
   };
 }
 
