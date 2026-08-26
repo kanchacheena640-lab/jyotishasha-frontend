@@ -345,7 +345,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
             .map(t => (
              <Link 
                 key={t.slug} 
-                href={`/${locale}/panchang/muhurat/${t.slug}`} 
+                href={`${isHi ? "/hi" : ""}/panchang/muhurat/${t.slug}`}
                 className="bg-white/5 p-4 rounded-2xl border border-white/10 text-center hover:bg-white/10 hover:border-purple-500/30 transition-all group shadow-sm"
              >
                 <span className="text-xs font-bold text-purple-300 group-hover:text-white">
