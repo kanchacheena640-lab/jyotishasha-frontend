@@ -351,7 +351,7 @@ export default async function TodayPanchangPage({
               ].map((item) => (
                 <a
                   key={item.url}
-                  href={item.url}
+                  href={`${isHindi ? "/hi" : ""}${item.url}`}
                   className="
                     block text-center rounded-lg px-4 py-3
                     bg-purple-50 text-purple-700 font-medium
