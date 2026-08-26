@@ -18,7 +18,7 @@
       ? "विवाह, गृह प्रवेश, नामकरण, सोना खरीदने और अन्य शुभ कार्यों के लिए हिंदू पंचांग आधारित मुहूर्त गाइड।"
       : "Explore detailed Hindu Panchang-based Muhurat guides for Marriage, Grah Pravesh, Naamkaran, Gold Buying and more.";
 
-    const canonical = `https://www.jyotishasha.com${isHi ? '/hi' : ''}/panchang/muhurat-articles`;
+    const canonical = `https://www.jyotishasha.com${isHi ? '/hi' : ''}/panchang/muhurth-articles`;
 
     return {
       title,
@@ -26,8 +26,8 @@
       alternates: {
         canonical,
         languages: {
-          en: `https://www.jyotishasha.com/panchang/muhurat-articles`,
-          hi: `https://www.jyotishasha.com/hi/panchang/muhurat-articles`,
+          en: `https://www.jyotishasha.com/panchang/muhurth-articles`,
+          hi: `https://www.jyotishasha.com/hi/panchang/muhurth-articles`,
         },
       },
       openGraph: {
@@ -164,7 +164,7 @@
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: isHi ? "सभी शुभ मुहूर्त लेख" : "All Shubh Muhurat Articles",
-            url: `https://www.jyotishasha.com${langPath}/panchang/muhurat-articles`,
+            url: `https://www.jyotishasha.com${langPath}/panchang/muhurth-articles`,
             itemListElement: topics.map((topic, i) => ({
               "@type": "ListItem",
               position: i + 1,
