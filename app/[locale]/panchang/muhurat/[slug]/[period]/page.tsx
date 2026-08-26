@@ -48,9 +48,7 @@ export async function generateMetadata({
   const topic = muhurthTopics[params.slug];
 
   if (!topic) {
-    return {
-      title: "Not Found",
-    };
+    notFound();
   }
 
   const isYear = /^\d{4}$/.test(params.period);
@@ -257,7 +255,7 @@ export default async function MuhuratPage({
   const isHi = locale === "hi";
   const topic = muhurthTopics[slug];
   
-  if (!topic) return null;
+  if (!topic) notFound();
 
   if (isYear) {
     return (
