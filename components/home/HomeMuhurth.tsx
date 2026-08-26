@@ -45,7 +45,7 @@ export default function HomeMuhurth({ data, dict, lang }: Props) {
           return (
             <Link
               key={i}
-              href={`/${lang}/panchang/muhurat/${item.slug}`}
+              href={`${lang === "hi" ? "/hi" : ""}/panchang/muhurat/${item.slug}`}
               className="flex items-center justify-between h-full
               bg-[#1a1740] px-3 py-3 rounded-xl
               border border-purple-800
@@ -69,7 +69,7 @@ export default function HomeMuhurth({ data, dict, lang }: Props) {
       {/* Footer */}
       <div className="mt-6 pt-4 border-t border-purple-800 text-center">
         <Link
-          href={`/${lang}/panchang/muhurat`}
+          href={`${lang === "hi" ? "/hi" : ""}/panchang/muhurat`}
           className="text-purple-300 hover:text-white text-sm underline"
         >
           {dict.muhurth.viewAll} →
