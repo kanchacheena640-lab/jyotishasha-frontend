@@ -15,3 +15,19 @@ export const TOOL_MAP: Record<string, string> = {
   gold: "gold",
   travel: "travel",
 };
+
+// Maps Muhurat topic slugs (app/[locale]/panchang/muhurat/muhurth_topics.ts)
+// to their corresponding valid Panchang Tool slug (a TOOL_MAP key above),
+// for components/cta/CtaMuhurth.tsx. Derived by cross-referencing each
+// Muhurat topic's own `activity` field against TOOL_MAP's values -- verified
+// individually per topic, not a blind string transform. property-purchase-
+// muhurat is deliberately absent: it has no corresponding Panchang Tool.
+export const MUHURAT_TOPIC_TO_TOOL: Record<string, string> = {
+  "naamkaran-muhurat": "naamkaran",
+  "marriage-muhurat": "marriage",
+  "grah-pravesh-muhurat": "grahpravesh",
+  "vehicle-muhurat": "vehicle",
+  "child-birth-muhurat": "childbirth",
+  "gold-buying-muhurat": "gold",
+  "foreign-travel-muhurat": "travel",
+};

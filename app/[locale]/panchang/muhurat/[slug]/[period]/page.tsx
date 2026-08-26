@@ -495,7 +495,7 @@ export default async function MuhuratPage({
 
       {/* Standard Bottom CTAs */}
       <div className="space-y-6 mt-12">
-        <CtaMuhurth slug={slug} />
+        <CtaMuhurth slug={slug} isHi={isHi} />
         <CtaReport />
       </div>
 
