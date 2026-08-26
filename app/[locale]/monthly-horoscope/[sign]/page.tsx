@@ -219,13 +219,13 @@ export default async function MonthlyHoroscopePage({ params }: PageProps) {
         {/* Internal Links */}
         <div className="flex flex-wrap gap-4 pt-6">
           <a
-            href={`/${lang}/daily-horoscope/${signLower}`}
+            href={`${lang === "hi" ? "/hi" : ""}/daily-horoscope/${signLower}`}
             className="flex-1 text-center rounded-2xl bg-white border border-purple-300 py-3 font-semibold hover:bg-purple-50 transition"
           >
             {lang === "hi" ? "🔮 दैनिक राशिफल" : "🔮 Daily Horoscope"}
           </a>
           <a
-            href={`/${lang}/yearly-horoscope/${signLower}`}
+            href={`${lang === "hi" ? "/hi" : ""}/yearly-horoscope/${signLower}`}
             className="flex-1 text-center rounded-2xl bg-white border border-indigo-300 py-3 font-semibold hover:bg-indigo-50 transition"
           >
             {lang === "hi" ? "📅 वार्षिक राशिफल" : "📅 Yearly Horoscope"}
