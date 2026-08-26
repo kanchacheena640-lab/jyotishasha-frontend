@@ -225,7 +225,7 @@ export default function TithiDetailPage({
             return (
                 <Link
                 key={slug}
-                href={`/${params.locale}/panchang/tithi/${slug}`}
+                href={`${isHi ? "/hi" : ""}/panchang/tithi/${slug}`}
                 className="border rounded-xl p-4 hover:border-orange-500 transition"
                 >
                 <h3 className="font-semibold">
