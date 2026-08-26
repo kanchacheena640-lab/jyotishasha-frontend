@@ -22,7 +22,14 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/gemstone-consult`,
+        hi: `${SITE_URL}/hi/gemstone-consult`,
+        "x-default": `${SITE_URL}/gemstone-consult`,
+      },
+    },
     openGraph: {
       title,
       description,

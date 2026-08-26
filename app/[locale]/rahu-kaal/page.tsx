@@ -56,7 +56,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/rahu-kaal`,
+        hi: `${SITE_URL}/hi/rahu-kaal`,
+        "x-default": `${SITE_URL}/rahu-kaal`,
+      },
+    },
     openGraph: {
       title,
       description,

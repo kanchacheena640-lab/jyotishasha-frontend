@@ -138,6 +138,11 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}/today-panchang`,
+        hi: `${SITE_URL}/hi/today-panchang`,
+        "x-default": `${SITE_URL}/today-panchang`,
+      },
     },
     openGraph: {
       title,
