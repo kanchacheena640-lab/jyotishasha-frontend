@@ -20,7 +20,7 @@ export default function TithiBreadcrumb({
 
         <li>
           <Link
-            href={`/${locale}`}
+            href={isHi ? "/hi" : "/"}
             className="hover:text-orange-500"
           >
             {isHi ? "होम" : "Home"}
@@ -31,7 +31,7 @@ export default function TithiBreadcrumb({
 
         <li>
           <Link
-            href={`/${locale}/panchang`}
+            href={`${isHi ? "/hi" : ""}/panchang`}
             className="hover:text-orange-500"
           >
             {isHi ? "पंचांग" : "Panchang"}
@@ -42,7 +42,7 @@ export default function TithiBreadcrumb({
 
         <li>
           <Link
-            href={`/${locale}/panchang/tithi`}
+            href={`${isHi ? "/hi" : ""}/panchang/tithi`}
             className="hover:text-orange-500"
           >
             {isHi ? "तिथि" : "Tithi"}

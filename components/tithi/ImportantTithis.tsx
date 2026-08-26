@@ -15,14 +15,14 @@ export default function ImportantTithis({
       title_hi: "एकादशी",
       desc: "Fasting & Vishnu Worship",
       desc_hi: "व्रत एवं विष्णु पूजा",
-      href: `/${locale}/ekadashi`,
+      href: `${isHi ? "/hi" : ""}/ekadashi`,
     },
     {
       title: "Purnima",
       title_hi: "पूर्णिमा",
       desc: "Full Moon Observances",
       desc_hi: "पूर्णिमा व्रत एवं पर्व",
-      href: `/${locale}/panchang/tithi/purnima`,
+      href: `${isHi ? "/hi" : ""}/panchang/tithi/purnima`,
 
     },
     {
@@ -30,28 +30,28 @@ export default function ImportantTithis({
       title_hi: "अमावस्या",
       desc: "New Moon Observances",
       desc_hi: "अमावस्या एवं पितृ कार्य",
-      href: `/${locale}/panchang/tithi/amavasya`,
+      href: `${isHi ? "/hi" : ""}/panchang/tithi/amavasya`,
     },
     {
       title: "Pradosh",
       title_hi: "प्रदोष",
       desc: "Shiva Worship",
       desc_hi: "शिव पूजा",
-      href: `/${locale}/panchang/tithi`,
+      href: `${isHi ? "/hi" : ""}/panchang/tithi`,
     },
     {
       title: "Sankashti",
       title_hi: "संकष्टी",
       desc: "Ganesha Worship",
       desc_hi: "गणेश पूजा",
-      href: `/${locale}/panchang/tithi`,
+      href: `${isHi ? "/hi" : ""}/panchang/tithi`,
     },
     {
       title: "Chaturthi",
       title_hi: "चतुर्थी",
       desc: "Ganesha Related Observances",
       desc_hi: "गणेश संबंधित व्रत",
-      href: `/${locale}/panchang/tithi/chaturthi`,
+      href: `${isHi ? "/hi" : ""}/panchang/tithi/chaturthi`,
     },
   ];
 
