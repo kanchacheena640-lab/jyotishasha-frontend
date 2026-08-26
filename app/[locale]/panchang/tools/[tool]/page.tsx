@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import ShubhDates from "@/components/ShubhDates";
 import { TOOL_MAP } from "@/lib/panchangToolsMap";
+import { SITE_URL } from "@/lib/seo/articleSchema";
 
 interface Props {
   params: { locale: string; tool?: string };
@@ -30,7 +31,12 @@ export async function generateMetadata({ params }: Props) {
     title,
     description,
     alternates: {
-      canonical: `https://www.jyotishasha.com${isHi ? '/hi' : ''}/panchang/tools/${tool}`
+      canonical: `https://www.jyotishasha.com${isHi ? '/hi' : ''}/panchang/tools/${tool}`,
+      languages: {
+        en: `${SITE_URL}/panchang/tools/${tool}`,
+        hi: `${SITE_URL}/hi/panchang/tools/${tool}`,
+        "x-default": `${SITE_URL}/panchang/tools/${tool}`,
+      },
     },
   };
 }
