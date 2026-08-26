@@ -26,6 +26,7 @@ export function generateAuthorityHubMetadata(
       languages: {
         en: `${SITE_URL}${domain.basePath}`,
         hi: `${SITE_URL}/hi${domain.basePath}`,
+        "x-default": `${SITE_URL}${domain.basePath}`,
       },
     },
     openGraph: {
@@ -55,6 +56,7 @@ export function generateAuthorityTopicMetadata(
       languages: {
         en: `${SITE_URL}${topicPath}`,
         hi: `${SITE_URL}/hi${topicPath}`,
+        "x-default": `${SITE_URL}${topicPath}`,
       },
     },
     openGraph: {

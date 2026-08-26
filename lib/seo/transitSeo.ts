@@ -178,6 +178,7 @@ export function getTransitMetadata({
       languages: {
         en: `${SITE_URL}/${slug}`,
         hi: `${SITE_URL}/hi/${slug}`,
+        "x-default": `${SITE_URL}/${slug}`,
       },
     },
 
