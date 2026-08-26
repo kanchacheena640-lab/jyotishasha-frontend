@@ -49,9 +49,10 @@ export function middleware(request) {
   if (pathname.includes('holi-')) {
     const parts = pathname.split('holi-')
     const year = parts[1]
+    const isHi = pathname.startsWith('/hi/')
 
     return NextResponse.rewrite(
-      new URL(`/en/holi/${year}`, request.url)
+      new URL(`${isHi ? '/hi' : '/en'}/holi/${year}`, request.url)
     )
   }
 
