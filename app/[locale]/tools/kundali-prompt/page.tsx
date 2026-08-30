@@ -43,109 +43,133 @@ export default function KundaliPromptPage() {
 
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: any) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setError(null);
+
+    // Require real coordinates from an actual Places selection -- a typed
+    // string alone is not enough. "" (never selected, or invalidated by a
+    // manual edit after selection -- see the place field's onChange below)
+    // is checked directly rather than via truthiness, so a legitimate
+    // latitude/longitude of 0 is never mistaken for "absent".
+    if (form.lat === "" || form.lng === "") {
+      setError("Please select your place of birth from the suggestions list.");
+      return;
+    }
+
     setLoading(true);
 
-    /* -------- 1) Kundali API -------- */
-    const kundaliPayload = {
-      name: form.name,
-      dob: form.dob,
-      tob: form.tob,
-      place_name: form.place,
-      lat: Number(form.lat),
-      lng: Number(form.lng),
-      timezone: "+05:30",
-      ayanamsa: "Lahiri",
-      language: form.language,
-    };
+    try {
+      /* -------- 1) Kundali API -------- */
+      const kundaliPayload = {
+        name: form.name,
+        dob: form.dob,
+        tob: form.tob,
+        place_name: form.place,
+        lat: Number(form.lat),
+        lng: Number(form.lng),
+        timezone: "+05:30",
+        ayanamsa: "Lahiri",
+        language: form.language,
+      };
 
-    const kundaliRes = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/full-kundali-modern`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(kundaliPayload),
+      const kundaliRes = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/full-kundali-modern`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(kundaliPayload),
+        }
+      );
+      if (!kundaliRes.ok) {
+        throw new Error("Kundali generation failed. Please try again.");
       }
-    );
-    const kundali = await kundaliRes.json();
+      const kundali = await kundaliRes.json();
 
-    /* -------- 2) Transit API -------- */
-    const transitRes = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/transit/current`
-    );
-    const transit = await transitRes.json();
-
-    /* -------- 3) Prompt Build -------- */
-    const lines: string[] = [];
-
-    /* NAME ONLY */
-    lines.push(`Name: ${form.name}\n`);
-
-    /* ASCENDANT */
-    const lagnaRashi =
-      kundali?.chart_data?.ascendant || kundali?.lagna_sign || "";
-    lines.push(`This person is a ${lagnaRashi} Ascendant.\n`);
-
-    /* MOON NAKSHATRA */
-    const moon = kundali?.chart_data?.planets?.find(
-      (p: any) => p.name === "Moon"
-    );
-    if (moon?.nakshatra) {
-      lines.push(
-        `Moon Nakshatra: ${moon.nakshatra}${
-          moon.pada ? ` (Pada ${moon.pada})` : ""
-        }\n`
+      /* -------- 2) Transit API -------- */
+      const transitRes = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/transit/current`
       );
-    }
+      if (!transitRes.ok) {
+        throw new Error("Could not fetch current planetary transits. Please try again.");
+      }
+      const transit = await transitRes.json();
 
-    /* NATAL PLANETS */
-    kundali?.chart_data?.planets?.forEach((p: any) => {
-      if (!p?.name) return;
-      if (p.name.toLowerCase().includes("ascendant")) return;
-      lines.push(
-        `${p.name} is placed in ${p.house} house in ${p.sign} sign.`
+      /* -------- 3) Prompt Build -------- */
+      const lines: string[] = [];
+
+      /* NAME ONLY */
+      lines.push(`Name: ${form.name}\n`);
+
+      /* ASCENDANT */
+      const lagnaRashi =
+        kundali?.chart_data?.ascendant || kundali?.lagna_sign || "";
+      lines.push(`This person is a ${lagnaRashi} Ascendant.\n`);
+
+      /* MOON NAKSHATRA */
+      const moon = kundali?.chart_data?.planets?.find(
+        (p: any) => p.name === "Moon"
       );
-    });
+      if (moon?.nakshatra) {
+        lines.push(
+          `Moon Nakshatra: ${moon.nakshatra}${
+            moon.pada ? ` (Pada ${moon.pada})` : ""
+          }\n`
+        );
+      }
 
-    /* CURRENT DASHA (NAME ONLY) */
-    const dasha = kundali?.dasha_summary?.current_block;
-    if (dasha) {
-      lines.push(`\nCurrent Mahadasha: ${dasha.mahadasha || "—"}`);
-      lines.push(`Current Antardasha: ${dasha.antardasha || "—"}`);
-    }
+      /* NATAL PLANETS */
+      kundali?.chart_data?.planets?.forEach((p: any) => {
+        if (!p?.name) return;
+        if (p.name.toLowerCase().includes("ascendant")) return;
+        lines.push(
+          `${p.name} is placed in ${p.house} house in ${p.sign} sign.`
+        );
+      });
 
-    /* CURRENT TRANSITS (WITH HOUSE FROM LAGNA) */
-    const positions = transit?.positions || {};
-    const transitLines: string[] = [];
+      /* CURRENT DASHA (NAME ONLY) */
+      const dasha = kundali?.dasha_summary?.current_block;
+      if (dasha) {
+        lines.push(`\nCurrent Mahadasha: ${dasha.mahadasha || "—"}`);
+        lines.push(`Current Antardasha: ${dasha.antardasha || "—"}`);
+      }
 
-    Object.entries(positions).forEach(([planet, p]: any) => {
-      if (!p?.rashi) return;
-      const house = getHouseFromLagna(lagnaRashi, p.rashi);
-      if (!house) return;
-      transitLines.push(
-        `${planet} is transiting through ${house} house in ${p.rashi} sign.`
-      );
-    });
+      /* CURRENT TRANSITS (WITH HOUSE FROM LAGNA) */
+      const positions = transit?.positions || {};
+      const transitLines: string[] = [];
 
-    if (transitLines.length) {
-      lines.push(`\nCurrent planetary transits:`);
-      transitLines.forEach(l => lines.push(l));
-    }
+      Object.entries(positions).forEach(([planet, p]: any) => {
+        if (!p?.rashi) return;
+        const house = getHouseFromLagna(lagnaRashi, p.rashi);
+        if (!house) return;
+        transitLines.push(
+          `${planet} is transiting through ${house} house in ${p.rashi} sign.`
+        );
+      });
 
-    /* RULES */
-    lines.push(`
+      if (transitLines.length) {
+        lines.push(`\nCurrent planetary transits:`);
+        transitLines.forEach(l => lines.push(l));
+      }
+
+      /* RULES */
+      lines.push(`
 Analyze the above kundali strictly using Vedic astrology.
 Do not mention houses where no planet is present.
 Answer clearly and confidently.
 `);
 
-    setPrompt(lines.join("\n"));
-    setLoading(false);
+      setPrompt(lines.join("\n"));
+    } catch (err: any) {
+      setError(err?.message || "Something went wrong while generating the prompt. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -182,7 +206,19 @@ Answer clearly and confidently.
         <PlaceAutocompleteInput
           value={form.place}
           onChange={(v: string) =>
-            setForm((p) => ({ ...p, place: v }))
+            setForm((prev) => {
+              // PlaceAutocompleteInput calls onPlaceSelected then onChange
+              // with that same selected name right after -- prev.place
+              // already equals v at that point (React 18 batches both
+              // updates for the same place_changed event, applying them in
+              // order), so this is a no-op that leaves the coordinates just
+              // set intact. Any OTHER value here is a genuine keystroke --
+              // typing a fresh search or editing previously-selected text --
+              // and must invalidate any stale coordinates until a new real
+              // suggestion is chosen.
+              if (v === prev.place) return prev;
+              return { ...prev, place: v, lat: "", lng: "" };
+            })
           }
           onPlaceSelected={(p: any) =>
             setForm((prev) => ({
@@ -193,6 +229,10 @@ Answer clearly and confidently.
             }))
           }
         />
+
+        {error && (
+          <p className="text-sm text-red-400">{error}</p>
+        )}
 
         <button
           type="submit"
