@@ -33,6 +33,16 @@ const loadScript = (src: string) => {
   });
 };
 
+// Payment succeeding with Razorpay and the report actually being handed off
+// to the backend (via /webhook) are two separate events. This tracks the
+// case where Razorpay confirms the charge but /webhook could not be
+// confirmed successful -- kept minimal (just the two IDs a support agent
+// needs) rather than the full backend response shape.
+interface FulfillmentIssue {
+  orderId: string;
+  paymentId: string;
+}
+
 export default function ReportCheckout() {
   const { i18n } = useTranslation();
   const currentLang = i18n.language?.startsWith('hi') ? 'hi' : 'en';
@@ -50,6 +60,18 @@ export default function ReportCheckout() {
   });
 
   const [isProcessing, setIsProcessing] = useState(false); // 🚨 Button state ke liye
+  // See FulfillmentIssue above. Non-null replaces the form entirely (below)
+  // so a real charge can never be immediately followed by a second Pay
+  // click -- it must never be presented as a failed payment.
+  const [fulfillmentIssue, setFulfillmentIssue] = useState<FulfillmentIssue | null>(null);
+  // Once Razorpay's handler confirms a real payment, isProcessing must never
+  // be reset back to false by anything else again -- not modal.ondismiss
+  // (which Razorpay also fires after a *successful* payment closes the
+  // modal, not just on cancel) and not any other code path. A ref, not
+  // state, because it must be readable synchronously the instant the
+  // handler starts, before any await -- avoiding a race between modal
+  // dismissal, payment success, and webhook confirmation.
+  const paymentConfirmedRef = useRef(false);
   const placeRef = useRef<HTMLInputElement | null>(null);
   const params = useParams();
   const productId = params?.slug as string;
@@ -94,6 +116,7 @@ export default function ReportCheckout() {
       return;
     }
 
+    paymentConfirmedRef.current = false;
     setIsProcessing(true); // Button ko disable/loading state me daalo
 
     try {
@@ -107,12 +130,12 @@ export default function ReportCheckout() {
 
       // Step 2: Create Order via Flask Backend (Port 5000)
       const base = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
-      
+
       const orderResponse = await fetch(`${base}/api/razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // 🚨 Sirf 'product' bhej rahe hain (amount Flask khud handle karega)
-        body: JSON.stringify({ product: productId }), 
+        body: JSON.stringify({ product: productId }),
       });
 
       const orderData = await orderResponse.json();
@@ -133,11 +156,60 @@ export default function ReportCheckout() {
         description: `${currentReport?.title?.en || "Astrology"} Report`,
         order_id: orderData.order_id, // 🚨 Updated parameter
         handler: async function (response: any) {
-          // Payment Success hone ke baad ka logic
-          alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+          // Razorpay has confirmed the charge. Lock the CTA for good --
+          // synchronously, before any await -- so nothing (modal.ondismiss
+          // firing right after this as the modal closes, a stray re-render)
+          // can race it back open while /webhook is still pending below.
+          paymentConfirmedRef.current = true;
+          setIsProcessing(true);
 
-          // Redirect to success page:
-          // window.location.href = "/payment-success";
+          // That confirmation is NOT the same thing as the report being
+          // generated -- this call hands the payment off to the backend
+          // (POST /webhook), which independently verifies the Razorpay
+          // signature before dispatching report generation (see
+          // OrderService.create_paid_report_order()). If this call fails,
+          // the money has already been taken: the user must never be told
+          // the payment failed or be invited to pay again.
+          try {
+            const webhookRes = await fetch(`${base}/webhook`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                product: productId,
+                name: form.name,
+                email: form.email,
+                phone: form.phone,
+                dob: form.dob,
+                tob: form.tob,
+                pob: form.pob,
+                latitude: form.latitude,
+                longitude: form.longitude,
+                language: form.language,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+
+            if (!webhookRes.ok) {
+              setFulfillmentIssue({
+                orderId: response.razorpay_order_id,
+                paymentId: response.razorpay_payment_id,
+              });
+              return;
+            }
+
+            // Same destination the dedicated Relationship Future Report
+            // flow already redirects to on success -- not a new page.
+            window.location.href = `/${currentLang}/thank-you`;
+          } catch {
+            // Network failure reaching /webhook itself is the same
+            // "payment succeeded, fulfillment unconfirmed" case as a 4xx/5xx.
+            setFulfillmentIssue({
+              orderId: response.razorpay_order_id,
+              paymentId: response.razorpay_payment_id,
+            });
+          }
         },
         prefill: {
           name: form.name,
@@ -147,28 +219,73 @@ export default function ReportCheckout() {
         theme: {
           color: "#7e22ce", // Purple theme
         },
+        modal: {
+          // Fires when the checkout closes for any reason -- including
+          // right after a *successful* payment, not only on cancel. Only
+          // recover the CTA here if a real payment was never confirmed;
+          // otherwise this would race the lock the handler above just set.
+          ondismiss: function () {
+            if (!paymentConfirmedRef.current) {
+              setIsProcessing(false);
+            }
+          },
+        },
       };
 
       const paymentObject = new (window as any).Razorpay(options);
-      
+
       paymentObject.on('payment.failed', function (response: any) {
         alert("Payment Failed. Reason: " + response.error.description);
       });
 
       paymentObject.open();
+      // No finally-based reset here: once .open() succeeds without
+      // throwing, isProcessing must stay true until either modal.ondismiss
+      // recovers it (payment never confirmed) or the handler above takes
+      // over for good (payment confirmed) -- resetting it unconditionally
+      // here is exactly the race this fix closes.
 
     } catch (error) {
       alert("Something went wrong during payment initialization.");
-    } finally {
       setIsProcessing(false);
     }
   };
 
+  if (fulfillmentIssue) {
+    return (
+      <div className="max-w-xl mx-auto px-4 py-10 font-sans text-center">
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-amber-200">
+          <p className="text-4xl mb-4">⚠️</p>
+          <h2 className="text-xl font-bold text-amber-700 mb-3">
+            {currentLang === 'hi' ? 'भुगतान प्राप्त हो गया' : 'Payment Received'}
+          </h2>
+          <p className="text-gray-700 mb-4">
+            {currentLang === 'hi'
+              ? 'आपका भुगतान सफलतापूर्वक प्राप्त हो गया है, लेकिन हम आपकी रिपोर्ट प्रोसेसिंग की पुष्टि नहीं कर सके। कृपया नीचे दिए गए विवरण के साथ हमारी सहायता टीम से संपर्क करें। कृपया दोबारा भुगतान न करें।'
+              : "Your payment was received successfully, but we couldn't confirm that your report is being processed. Please contact our support team with the details below. Please do not pay again."}
+          </p>
+          <div className="bg-gray-50 rounded-xl p-4 text-left text-sm text-gray-600 mb-6 space-y-1">
+            <div><strong>{currentLang === 'hi' ? 'ऑर्डर आईडी' : 'Order ID'}:</strong> {fulfillmentIssue.orderId}</div>
+            <div><strong>{currentLang === 'hi' ? 'भुगतान आईडी' : 'Payment ID'}:</strong> {fulfillmentIssue.paymentId}</div>
+          </div>
+          <a
+            href="https://wa.me/917007012255"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all"
+          >
+            💬 {currentLang === 'hi' ? 'सहायता के लिए व्हाट्सएप पर चैट करें' : 'Chat with support on WhatsApp'}
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-xl mx-auto px-4 py-10 font-sans">
       <h2 className="text-2xl font-bold mb-8 text-center text-purple-800">
-        {currentLang === 'hi' 
-          ? `${currentReport?.title?.hi || "रिपोर्ट"} के लिए विवरण भरें` 
+        {currentLang === 'hi'
+          ? `${currentReport?.title?.hi || "रिपोर्ट"} के लिए विवरण भरें`
           : `Fill Details for ${currentReport?.title?.en || "Report"}`}
       </h2>
 
@@ -190,7 +307,7 @@ export default function ReportCheckout() {
           🔮 {currentLang === 'hi' ? "जन्म विवरण" : "Birth Details"}
         </h3>
         <div className="space-y-4">
-          
+
           {/* Date of Birth */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-1">
@@ -242,15 +359,15 @@ export default function ReportCheckout() {
         </div>
       </div>
 
-      <button 
-        onClick={handleSubmit} 
+      <button
+        onClick={handleSubmit}
         disabled={isProcessing}
         className={`w-full text-white py-4 rounded-xl font-bold text-lg shadow-xl transition-all active:scale-95 ${
           isProcessing ? "bg-purple-400 cursor-not-allowed" : "bg-purple-700 hover:bg-purple-800"
         }`}
       >
-        {isProcessing 
-          ? (currentLang === 'hi' ? "प्रोसेस हो रहा है..." : "Processing...") 
+        {isProcessing
+          ? (currentLang === 'hi' ? "प्रोसेस हो रहा है..." : "Processing...")
           : (currentLang === 'hi' ? `भुगतान करें ₹${price}` : `Proceed to Pay ₹${price}`)}
       </button>
 
