@@ -62,14 +62,24 @@ export function loadGoogleMapsPlaces(): Promise<void> {
 const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelected }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // onChange/onPlaceSelected are re-created on every render by the callers
+  // (inline arrow functions). Keeping them out of the effect's dependency
+  // array -- via refs updated on every render -- means the place_changed
+  // listener below always calls the latest versions without forcing the
+  // Autocomplete widget itself to be torn down and rebuilt on every render.
+  const onChangeRef = useRef(onChange);
+  const onPlaceSelectedRef = useRef(onPlaceSelected);
+  onChangeRef.current = onChange;
+  onPlaceSelectedRef.current = onPlaceSelected;
+
   useEffect(() => {
     let cancelled = false;
     let autocomplete: google.maps.places.Autocomplete | null = null;
 
     loadGoogleMapsPlaces()
       .then(() => {
-        // Component may have unmounted (or its deps changed) while the script
-        // was still loading -- don't touch a stale/removed input.
+        // Component may have unmounted while the script was still loading --
+        // don't touch a stale/removed input.
         if (cancelled || !inputRef.current || !window.google?.maps?.places) return;
 
         autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
@@ -83,8 +93,8 @@ const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelec
           const lng = place.geometry?.location?.lng();
 
           if (lat && lng && name) {
-            onPlaceSelected({ lat, lng, name });
-            onChange(name); // 👈 this keeps the input updated
+            onPlaceSelectedRef.current({ lat, lng, name });
+            onChangeRef.current(name); // 👈 this keeps the input updated
           }
         });
       })
@@ -100,7 +110,13 @@ const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelec
         window.google.maps.event.clearInstanceListeners(autocomplete);
       }
     };
-  }, [onPlaceSelected, onChange]);
+    // Intentionally mount-once: the widget must be created exactly once per
+    // mounted input, not re-created on every keystroke (which is what
+    // happened when onChange/onPlaceSelected -- new references on every
+    // parent render -- were in this array). Latest callbacks are read via
+    // the refs above instead.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <input
