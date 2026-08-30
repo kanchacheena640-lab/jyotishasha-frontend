@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import Link from "next/link";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
@@ -49,12 +49,31 @@ export default function PanchangClient({
   params: { date: string; locale?: string };
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { date, locale } = params;
   const lang = locale === "hi" ? "hi" : "en";
 
+  // A selected location is carried forward as ?lat&lng&place on date
+  // navigation (handleDateChange below) -- the same lat/lng/place query
+  // convention this page's own Muhurta-tool links already use below, and
+  // that components/ShubhDates.tsx already reads on the sibling
+  // /panchang/tools routes. Reading it back here on mount is what lets a
+  // selected location survive the full component remount Next.js performs
+  // when router.push() navigates to a new [date] segment -- without this,
+  // the fresh mount's useState calls always fall back to the Lucknow
+  // defaults below, discarding whatever the user had selected.
+  const paramLat = parseFloat(searchParams.get("lat") || "");
+  const paramLng = parseFloat(searchParams.get("lng") || "");
+  const paramPlace = searchParams.get("place");
+  const hasLocationParams = !isNaN(paramLat) && !isNaN(paramLng) && !!paramPlace;
+
   const [panchang, setPanchang] = useState<PanchangData | null>(null);
-  const [location, setLocation] = useState("Lucknow");
-  const [coordinates, setCoordinates] = useState({ lat: 26.8467, lng: 80.9462 });
+  const [location, setLocation] = useState(
+    hasLocationParams ? decodeURIComponent(paramPlace!) : "Lucknow"
+  );
+  const [coordinates, setCoordinates] = useState(
+    hasLocationParams ? { lat: paramLat, lng: paramLng } : { lat: 26.8467, lng: 80.9462 }
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -85,10 +104,18 @@ export default function PanchangClient({
   const handleDateChange = useCallback(
     (newDate: string) => {
       if (/^\d{4}-\d{2}-\d{2}$/.test(newDate)) {
-        router.push(`${lang === "hi" ? "/hi" : ""}/panchang/${newDate}`);
+        // Carry the currently selected location forward so the freshly
+        // mounted page for the new date reads it back on mount (see the
+        // searchParams read above) instead of resetting to Lucknow.
+        const locationParams = new URLSearchParams({
+          lat: String(coordinates.lat),
+          lng: String(coordinates.lng),
+          place: location,
+        });
+        router.push(`${lang === "hi" ? "/hi" : ""}/panchang/${newDate}?${locationParams.toString()}`);
       }
     },
-    [lang, router]
+    [lang, router, coordinates, location]
   );
 
   /* ===================== FETCH PANCHANG (Industry Standard) ===================== */
