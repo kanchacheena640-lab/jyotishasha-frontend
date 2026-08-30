@@ -109,10 +109,36 @@ export default function ReportCheckout() {
 
   const handleChange = (e: any) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  // The place field's own onChange only ever fires from genuine user typing:
+  // the Autocomplete widget's place_changed handler above sets pob directly
+  // via setForm, never through this input's onChange prop, so there is no
+  // "was this call just syncing a selection" ambiguity to guard against here
+  // (unlike components/PlaceAutocompleteInput.tsx, which does route a
+  // selection through its onChange). Any real edit to the text -- typing a
+  // fresh search or altering previously-selected text -- must invalidate
+  // whatever coordinates were captured, until a new real suggestion is chosen.
+  const handlePobChange = (e: any) => {
+    const val = e.target.value;
+    setForm((prev) => ({ ...prev, pob: val, latitude: "", longitude: "" }));
+  };
+
   // 💰 The Real Razorpay Logic connected to Flask Backend
   const handleSubmit = async () => {
     if (!form.email || !form.dob || !form.tob || !form.pob || !form.name || !form.phone) {
       alert(currentLang === 'hi' ? "❗ कृपया सभी अनिवार्य जानकारी भरें" : "❗ Please fill all required fields");
+      return;
+    }
+
+    // Require real coordinates from an actual Places selection -- typed
+    // text alone is not enough. "" (never selected, or invalidated by
+    // handlePobChange above after a manual edit) is checked directly
+    // rather than via truthiness, so a legitimate latitude/longitude of 0
+    // is never mistaken for "unresolved". Checked before any script
+    // loading or order creation.
+    if (form.latitude === "" || form.longitude === "") {
+      alert(currentLang === 'hi'
+        ? "❗ कृपया सूची में से अपना जन्म स्थान चुनें"
+        : "❗ Please select your place of birth from the suggestions list");
       return;
     }
 
@@ -343,7 +369,7 @@ export default function ReportCheckout() {
             <label className="block text-sm font-bold text-gray-700 mb-1">
               {currentLang === 'hi' ? "जन्म स्थान *" : "Place of Birth *"}
             </label>
-            <input ref={placeRef} name="pob" value={form.pob} onChange={handleChange} placeholder={currentLang === 'hi' ? "शहर चुनें" : "Search City"} className="inputStyle text-gray-900" required />
+            <input ref={placeRef} name="pob" value={form.pob} onChange={handlePobChange} placeholder={currentLang === 'hi' ? "शहर चुनें" : "Search City"} className="inputStyle text-gray-900" required />
           </div>
 
           {/* Report Language Selection */}
