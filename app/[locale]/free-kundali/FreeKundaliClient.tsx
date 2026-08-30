@@ -24,6 +24,7 @@ export default function FreeKundaliClient() {
     lng: "",
     language: Array.isArray(locale) ? locale[0] : (locale || "en"),
   });
+  const [placeError, setPlaceError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,6 +32,16 @@ export default function FreeKundaliClient() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.lat || !form.lng) {
+      setPlaceError(
+        isHi
+          ? "कृपया सूची में से अपना जन्म स्थान चुनें"
+          : "Please select your birth place from the suggestions list"
+      );
+      return;
+    }
+    setPlaceError(null);
 
     const formData: Record<string, string> = {
       ...form,
@@ -78,18 +89,26 @@ export default function FreeKundaliClient() {
         </div>
 
         {/* Place Input */}
-        <PlaceAutocompleteInput
-          value={form.place}
-          onChange={(val: string) => setForm((prev) => ({ ...prev, place: val }))}
-          onPlaceSelected={(place: any) =>
-            setForm((prev) => ({
-              ...prev,
-              place: place.name,
-              lat: place.lat.toString(),
-              lng: place.lng.toString(),
-            }))
-          }
-        />
+        <div>
+          <PlaceAutocompleteInput
+            value={form.place}
+            onChange={(val: string) =>
+              setForm((prev) => ({ ...prev, place: val }))
+            }
+            onPlaceSelected={(place: any) => {
+              setPlaceError(null);
+              setForm((prev) => ({
+                ...prev,
+                place: place.name,
+                lat: place.lat.toString(),
+                lng: place.lng.toString(),
+              }));
+            }}
+          />
+          {placeError && (
+            <p className="mt-2 text-sm text-red-400">{placeError}</p>
+          )}
+        </div>
 
         {/* Gender + Language Selection */}
         <div className="grid grid-cols-2 gap-4">

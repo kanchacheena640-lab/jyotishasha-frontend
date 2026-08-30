@@ -77,8 +77,17 @@ function KundaliPageContent() {
         setLoading(false);
       }
     }
-    if (lat && lng) fetchKundali();
-  }, [name, dob, tob, lat, lng, language]);
+    if (lat && lng) {
+      fetchKundali();
+    } else {
+      setLoading(false);
+      setError(
+        isHi
+          ? "जन्म स्थान की जानकारी उपलब्ध नहीं है। कृपया सूची में से अपना जन्म स्थान चुनकर पुनः प्रयास करें।"
+          : "Missing birth place location data. Please go back and reselect your birth place from the suggestions list."
+      );
+    }
+  }, [name, dob, tob, lat, lng, language, isHi]);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#0b1120] text-indigo-300">Calculating positions...</div>;
   if (error || !data) return <div className="min-h-screen flex items-center justify-center text-red-400">⚠️ Error: {error}</div>;
