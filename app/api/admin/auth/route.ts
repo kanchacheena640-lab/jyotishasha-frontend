@@ -1,32 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-
-const SESSION_COOKIE = "admin_session";
-const SESSION_TTL_MS = 8 * 60 * 60 * 1000; // 8 hours
+import {
+  ADMIN_SESSION_COOKIE as SESSION_COOKIE,
+  ADMIN_SESSION_TTL_MS as SESSION_TTL_MS,
+  signAdminSession,
+  isValidAdminSession as isValidSession,
+} from "@/lib/adminSession";
 
 function sha256(value: string) {
   return crypto.createHash("sha256").update(value).digest();
 }
 
 function sign(expiry: number, secret: string) {
-  return crypto.createHmac("sha256", secret).update(String(expiry)).digest("hex");
-}
-
-function isValidSession(token: string | undefined, secret: string): boolean {
-  if (!token) return false;
-  const dotIndex = token.indexOf(".");
-  if (dotIndex === -1) return false;
-
-  const expiry = Number(token.slice(0, dotIndex));
-  const signature = token.slice(dotIndex + 1);
-  if (!Number.isFinite(expiry) || Date.now() >= expiry) return false;
-
-  const expected = sign(expiry, secret);
-  const a = Buffer.from(signature);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-
-  return crypto.timingSafeEqual(a, b);
+  return signAdminSession(expiry, secret);
 }
 
 export async function POST(req: NextRequest) {
