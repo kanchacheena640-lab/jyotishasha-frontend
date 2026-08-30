@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from "react";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
-
-const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
+import { useReportPurchase } from "@/hooks/useReportPurchase";
 
 interface RelationshipFutureReportFormProps {
   locale: string;
 }
 
 export default function RelationshipFutureReportForm({ locale }: RelationshipFutureReportFormProps) {
-  const [loading, setLoading] = useState(false);
+  const { purchase, isProcessing: loading } = useReportPurchase();
   const [mounted, setMounted] = useState(false);
   const isHi = locale === "hi";
 
@@ -64,73 +63,59 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
   const inputClass = "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all";
   const labelClass = "block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider";
 
+  // Payment handled by the shared useReportPurchase hook (create order -> checkout ->
+  // capture verification fields -> POST /webhook -> redirect). Only what's specific to this
+  // report -- the two-person form, its validation, and its two-kundali payload shape -- lives here.
   const submit = async () => {
     if (!form.email || !form.email.includes("@")) {
       alert(isHi ? "कृपया सही ईमेल दर्ज करें।" : "Please enter a valid email.");
       return;
     }
 
-    setLoading(true);
-    try {
-      // 1. Order create call
-      const res = await fetch(`${BACKEND}/api/razorpay-order`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: "relationship_future_report" }),
-      });
-
-      const order = await res.json();
-      if (!order.order_id) throw new Error("Payment initiation failed");
-
-      // 2. Razorpay Window
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        order_id: order.order_id,
-        amount: order.amount,
-        currency: order.currency,
-        name: "Jyotishasha",
-        description: isHi ? "रिलेशनशिप भविष्य रिपोर्ट" : "Relationship Future Report",
-        image: "/logo.png",
-        handler: async function (response: any) {
-          // 3. Success -> Webhook call
-          await fetch(`${BACKEND}/webhook`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              product: "relationship_future_report",
-              email: form.email,
-              language: form.language,
-              name: form.boy.name,
-              dob: form.boy.dob,
-              tob: form.boy.tob,
-              pob: form.boy.pob,
-              latitude: form.boy.lat,
-              longitude: form.boy.lng,
-              boy_is_user: true,
-              partner: {
-                name: form.girl.name,
-                dob: form.girl.dob,
-                tob: form.girl.tob,
-                pob: form.girl.pob,
-                latitude: form.girl.lat,
-                longitude: form.girl.lng,
-              },
-              payment_id: response.razorpay_payment_id,
-              order_id: response.razorpay_order_id,
-            }),
-          });
-          window.location.href = `/${locale}/thank-you`;
-        },
-        theme: { color: "#7c3aed" },
-      };
-
-      const rz = new (window as any).Razorpay(options);
-      rz.open();
-    } catch (e) {
+    const genericFailureAlert = () => {
       alert(isHi ? "भुगतान विफल रहा। पुनः प्रयास करें।" : "Payment failed. Try again.");
-    } finally {
-      setLoading(false);
-    }
+    };
+
+    await purchase({
+      productSlug: "relationship_future_report",
+      description: isHi ? "रिलेशनशिप भविष्य रिपोर्ट" : "Relationship Future Report",
+      amountMultiplier: 1, // preserves this flow's existing pass-through amount (no rupees->paise conversion)
+      image: "/logo.png",
+      themeColor: "#7c3aed",
+      redirectTo: `/${locale}/thank-you`,
+      buildWebhookPayload: (fields) => ({
+        product: "relationship_future_report",
+        email: form.email,
+        language: form.language,
+        name: form.boy.name,
+        dob: form.boy.dob,
+        tob: form.boy.tob,
+        pob: form.boy.pob,
+        latitude: form.boy.lat,
+        longitude: form.boy.lng,
+        boy_is_user: true,
+        partner: {
+          name: form.girl.name,
+          dob: form.girl.dob,
+          tob: form.girl.tob,
+          pob: form.girl.pob,
+          latitude: form.girl.lat,
+          longitude: form.girl.lng,
+        },
+        payment_id: fields.razorpay_payment_id,
+        order_id: fields.razorpay_order_id,
+        razorpay_order_id: fields.razorpay_order_id,
+        razorpay_payment_id: fields.razorpay_payment_id,
+        razorpay_signature: fields.razorpay_signature,
+      }),
+      // This flow never had a script-load check or a payment.failed listener of its own --
+      // both previously fell through to the same generic catch-all alert, preserved here.
+      onScriptLoadError: genericFailureAlert,
+      onOrderCreationError: genericFailureAlert,
+      onUnexpectedError: genericFailureAlert,
+      // onPaymentFailed intentionally omitted: this flow never attached a payment.failed
+      // listener before, relying on Razorpay's own modal to surface a failed payment.
+    });
   };
 
   return (
