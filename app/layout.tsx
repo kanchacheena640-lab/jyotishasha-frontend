@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
+import ConditionalAdSense from "../components/ConditionalAdSense";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jyotishasha.com"),
@@ -47,12 +47,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             executed on every page regardless of need. */}
 
         {children}
-        {/* Google AdSense — lazyOnload keeps it out of the critical path */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2039377363616016"
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense — lazyOnload keeps it out of the critical path.
+            Suppressed on purchase-intent, payment, and legal/policy routes;
+            see components/ConditionalAdSense.tsx for the excluded list. */}
+        <ConditionalAdSense />
       </body>
     </html>
   );
