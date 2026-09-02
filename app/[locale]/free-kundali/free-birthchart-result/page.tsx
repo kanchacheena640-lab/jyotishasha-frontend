@@ -4,6 +4,10 @@ import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "next/navigation";
 import Image from "next/image";
 import Script from "next/script";
+import {
+  buildFullKundaliApiPayload,
+  resolveFreeKundaliPayload,
+} from "@/lib/freeKundaliSession";
 
 // ✅ Modular Components (Jo humne abhi banaye)
 import KundaliProfileHeader from "@/components/kundali/KundaliProfileHeader";
@@ -38,34 +42,23 @@ function KundaliPageContent() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [language, setLanguage] = useState<string>(isHi ? "hi" : "en");
 
-  // 📝 URL Params Extraction
-  const name = searchParams.get("name") || "";
-  const dob = searchParams.get("dob") || "";
-  const tob = searchParams.get("tob") || "";
-  const place = searchParams.get("place") || "";
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
-  const language = searchParams.get("language") || (isHi ? "hi" : "en");
+  // Task 2A.1 -- PII remediation: the URL carries only an opaque,
+  // non-guessable request id. The actual birth-detail payload (name, dob,
+  // tob, place, lat, lng, language) is looked up from sessionStorage,
+  // where FreeKundaliClient.tsx's submit handler wrote it. No birth data
+  // is ever read from, or expected in, the URL itself.
+  const rid = searchParams.get("rid");
 
   useEffect(() => {
-    async function fetchKundali() {
+    async function fetchKundali(apiPayload: ReturnType<typeof buildFullKundaliApiPayload>) {
       try {
         setLoading(true);
-        const payload = {
-          name, dob, tob, 
-          place_name: place,
-          lat: parseFloat(lat || "0"),
-          lng: parseFloat(lng || "0"),
-          timezone: "+05:30",
-          ayanamsa: "Lahiri",
-          language,
-        };
-
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/full-kundali-modern`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(apiPayload),
         });
 
         if (!res.ok) throw new Error("Backend connection failed");
@@ -77,9 +70,21 @@ function KundaliPageContent() {
         setLoading(false);
       }
     }
-    if (lat && lng) {
-      fetchKundali();
+
+    const resolved =
+      typeof window !== "undefined"
+        ? resolveFreeKundaliPayload(rid, window.sessionStorage)
+        : null;
+
+    if (resolved) {
+      setLanguage(resolved.language);
+      fetchKundali(buildFullKundaliApiPayload(resolved));
     } else {
+      // Covers: missing rid, invalid rid shape, no stored entry (e.g.
+      // direct open / bookmarked / shared link, or storage was cleared),
+      // malformed JSON, and missing/invalid fields -- every failure mode
+      // collapses to this exact same pre-existing "reselect birth place"
+      // fallback, never a partial/garbage call to the backend.
       setLoading(false);
       setError(
         isHi
@@ -87,7 +92,7 @@ function KundaliPageContent() {
           : "Missing birth place location data. Please go back and reselect your birth place from the suggestions list."
       );
     }
-  }, [name, dob, tob, lat, lng, language, isHi]);
+  }, [rid, isHi]);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#0b1120] text-indigo-300">Calculating positions...</div>;
   if (error || !data) return <div className="min-h-screen flex items-center justify-center text-red-400">⚠️ Error: {error}</div>;

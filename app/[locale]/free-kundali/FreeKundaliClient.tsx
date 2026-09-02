@@ -3,6 +3,13 @@
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import dynamic from "next/dynamic";
+import {
+  FreeKundaliPayload,
+  buildFreeKundaliResultPath,
+  buildFreeKundaliStorageKey,
+  generateFreeKundaliRid,
+  serializeFreeKundaliPayload,
+} from "@/lib/freeKundaliSession";
 
 const PlaceAutocompleteInput = dynamic(
   () => import("@/components/PlaceAutocompleteInput"),
@@ -43,14 +50,38 @@ export default function FreeKundaliClient() {
     }
     setPlaceError(null);
 
-    const formData: Record<string, string> = {
-      ...form,
+    // Task 2A.1 -- PII remediation: the birth-detail payload (name, dob,
+    // tob, place, lat, lng, language) no longer travels in the URL. It is
+    // written to sessionStorage under a fresh, opaque, request-scoped rid
+    // (never derived from the birth data itself), and only that rid
+    // appears in the navigation URL. `gender` is deliberately dropped
+    // here -- Task 2A proved the result page never reads it back.
+    const payload: FreeKundaliPayload = {
+      name: form.name,
+      dob: form.dob,
+      tob: form.tob,
+      place: form.place,
+      lat: form.lat,
+      lng: form.lng,
       language: Array.isArray(locale) ? locale[0] : (locale || "en"),
     };
 
-    const queryParams = new URLSearchParams(formData).toString();
-    const pathPrefix = isHi ? '/hi' : '';
-    router.push(`${pathPrefix}/free-kundali/free-birthchart-result/?${queryParams}`);
+    const rid = generateFreeKundaliRid();
+    try {
+      sessionStorage.setItem(buildFreeKundaliStorageKey(rid), serializeFreeKundaliPayload(payload));
+    } catch {
+      // sessionStorage unavailable (private browsing, disabled storage,
+      // quota) -- surface the same existing reselect-place error rather
+      // than navigating to a result page that could never load its data.
+      setPlaceError(
+        isHi
+          ? "कृपया सूची में से अपना जन्म स्थान चुनें"
+          : "Please select your birth place from the suggestions list"
+      );
+      return;
+    }
+
+    router.push(buildFreeKundaliResultPath(isHi, rid));
   };
 
   return (
