@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import LocationProvider from "@/components/location/LocationProvider";
 import StickyAppDownloadCTA from "@/components/StickyAppDownloadCTA";
+import WebsiteAnalyticsInit from "@/components/analytics/WebsiteAnalyticsInit";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "hi" }];
@@ -47,6 +48,10 @@ export default function LocaleLayout({
           style={{ display: "none", visibility: "hidden" }}
         />
       </noscript>
+
+      {/* Task 2C -- establishes the website analytics session_id and
+          first-touch attribution context only; emits no event. */}
+      <WebsiteAnalyticsInit />
 
       <LanguageProvider initialLocale={locale}>
         <LocationProvider>
