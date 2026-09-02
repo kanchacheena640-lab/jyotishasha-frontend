@@ -2,10 +2,11 @@
 
 import "@/i18n";
 import { useRouter, useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { reportsData, Report } from "../data/reportsData";
 import { useTranslation } from "react-i18next";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+import { WebsiteEvents } from "@/lib/websiteEvents";
 
 export default function ReportsPageClient() {
   const { i18n, ready } = useTranslation("reports");
@@ -18,6 +19,19 @@ export default function ReportsPageClient() {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [modalReport, setModalReport] = useState<null | Report>(null);
+
+  // Task 2D -- report_discovery_viewed fires once per mounted instance
+  // of this catalog page (the genuine "user is browsing the report
+  // catalog" fact), guarded against React Strict Mode's dev-only
+  // double-invoke and against re-firing on category-filter clicks
+  // (those are not a new discovery). No report_type is sent -- this
+  // page shows many report types at once, not one specific type.
+  const hasTrackedDiscoveryRef = useRef(false);
+  useEffect(() => {
+    if (hasTrackedDiscoveryRef.current) return;
+    hasTrackedDiscoveryRef.current = true;
+    WebsiteEvents.reportDiscoveryViewed();
+  }, []);
 
   // 2. Categories extraction (Logic English 'en' par based rahega)
   const categories = useMemo(
@@ -38,6 +52,17 @@ export default function ReportsPageClient() {
   const allLabel = currentLang === 'hi' ? "सभी" : "All";
 
   const handleBuyNow = (slug: string) => {
+    // Task 2D -- fire-and-forget, never awaited; navigation proceeds
+    // unconditionally either way. cta_id reuses the exact, already-
+    // frozen purchase-entry semantic id the backend analytics contract
+    // defines (PURCHASED_REPORT_ENTRY_CTA_ID = "report_catalog_buy_now",
+    // modules/activity_events/analytics_contract.py) -- this is the
+    // genuine catalog-entry moment that id names; the later checkout/
+    // payment form (components/reports/ReportCheckout.tsx) is a
+    // separate, already backend-tracked (payment_initiated/verified)
+    // moment and is deliberately not double-instrumented here.
+    WebsiteEvents.ctaClick("report_catalog_buy_now", "report_catalog");
+
     // Dual / partner-based reports (Redirecting with locale for better SEO)
     if (slug === "relationship_future_report") {
       router.push(`/${currentLang}/love/report/${slug}`);

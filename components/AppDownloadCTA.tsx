@@ -1,5 +1,7 @@
 "use client";
 
+import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
+
 type UTM = {
   source: string;
   medium?: string;
@@ -29,6 +31,14 @@ export default function AppDownloadCTA({ utm }: AppDownloadCTAProps) {
   const link = buildLink();
 
   const handleClick = () => {
+    // Task 1 found this call's guard (`window.gtag`) is very likely
+    // never satisfied -- the GTM snippet this site loads only ever
+    // defines window.dataLayer, not a window.gtag shim -- but that
+    // can't be proven from this repo alone (a GTM container tag could
+    // define one), and removing a call that might feed an existing GTM
+    // trigger risks silently breaking a live GTM configuration this
+    // repo can't see. Preserved exactly as-is, unmodified; the Task 2D
+    // first-party event below does NOT depend on it existing or firing.
     if (typeof window !== "undefined" && (window as any).gtag && utm) {
       (window as any).gtag("event", "app_download_click", {
         event_category: "app_cta",
@@ -37,6 +47,16 @@ export default function AppDownloadCTA({ utm }: AppDownloadCTAProps) {
         campaign: utm.campaign || "app_download",
       });
     }
+
+    // Task 2D -- fire-and-forget, never awaited; the outbound Play
+    // Store navigation (the <a href> below) proceeds unconditionally
+    // regardless of analytics delivery. cta_location is built only
+    // from the developer-authored utm.source/medium constants each
+    // call site already passes -- never from visible/localized button
+    // text. Only app_download_intent fires here, deliberately not also
+    // cta_click: for a single-purpose download CTA the two would name
+    // the exact same fact twice, not two distinct facts.
+    WebsiteEvents.appDownloadIntent(buildAppDownloadCtaLocation(utm, "app_download_cta", "organic"));
   };
 
   return (

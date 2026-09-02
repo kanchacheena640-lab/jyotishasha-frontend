@@ -10,6 +10,7 @@ import {
   generateFreeKundaliRid,
   serializeFreeKundaliPayload,
 } from "@/lib/freeKundaliSession";
+import { WebsiteEvents } from "@/lib/websiteEvents";
 
 const PlaceAutocompleteInput = dynamic(
   () => import("@/components/PlaceAutocompleteInput"),
@@ -80,6 +81,16 @@ export default function FreeKundaliClient() {
       );
       return;
     }
+
+    // Task 2D -- fire-and-forget, never awaited; navigation proceeds
+    // unconditionally regardless of analytics delivery. Mirrors the
+    // Flutter app's own frozen kundali_form_page.dart seam exactly:
+    // cta_click(kundali_form_generate) marks the tap/submit intent;
+    // the separate feature_used(kundali_generate) fired only on an
+    // actual successful result (free-birthchart-result/page.tsx) is
+    // the deliberately distinct "it actually worked" fact -- not
+    // duplicate counting of the same moment.
+    WebsiteEvents.ctaClick("kundali_form_generate", "kundali_form");
 
     router.push(buildFreeKundaliResultPath(isHi, rid));
   };

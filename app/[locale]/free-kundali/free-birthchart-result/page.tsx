@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams, useParams } from "next/navigation";
 import Image from "next/image";
 import Script from "next/script";
@@ -8,6 +8,7 @@ import {
   buildFullKundaliApiPayload,
   resolveFreeKundaliPayload,
 } from "@/lib/freeKundaliSession";
+import { WebsiteEvents } from "@/lib/websiteEvents";
 
 // ✅ Modular Components (Jo humne abhi banaye)
 import KundaliProfileHeader from "@/components/kundali/KundaliProfileHeader";
@@ -44,6 +45,14 @@ function KundaliPageContent() {
   const [error, setError] = useState<string | null>(null);
   const [language, setLanguage] = useState<string>(isHi ? "hi" : "en");
 
+  // Task 2D -- guards feature_used("kundali_generate") against firing
+  // more than once for the same mounted result page (React Strict
+  // Mode's dev-only double-invoke of this effect, or any other repeat
+  // execution) without touching the actual fetch/generation logic at
+  // all -- the API call itself is completely unguarded/unchanged, per
+  // Task 2A.1's "do not alter result-generation behavior" constraint.
+  const hasTrackedCompletionRef = useRef(false);
+
   // Task 2A.1 -- PII remediation: the URL carries only an opaque,
   // non-guessable request id. The actual birth-detail payload (name, dob,
   // tob, place, lat, lng, language) is looked up from sessionStorage,
@@ -64,6 +73,15 @@ function KundaliPageContent() {
         if (!res.ok) throw new Error("Backend connection failed");
         const json = await res.json();
         setData(json);
+        // Task 2D -- fired only on an actual successful generation
+        // (never on failure, never merely because the page rendered),
+        // mirroring the Flutter app's own frozen kundali_form_page.dart
+        // seam. Fire-and-forget, never awaited; result rendering below
+        // proceeds unconditionally either way.
+        if (!hasTrackedCompletionRef.current) {
+          hasTrackedCompletionRef.current = true;
+          WebsiteEvents.featureUsed("kundali_generate");
+        }
       } catch (err: any) {
         setError(err.message);
       } finally {

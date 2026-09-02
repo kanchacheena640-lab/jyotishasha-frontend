@@ -1,3 +1,12 @@
+"use client";
+
+// Task 2D -- promoted to a Client Component (it previously had none of
+// its own directive) solely to attach the onClick analytics handler
+// below; nothing else about it changes. The parent app/[locale]/
+// layout.tsx stays a Server Component -- this is the one small leaf
+// boundary needed, not a wholesale layout conversion.
+import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
+
 type UTM = {
   source: string;
   medium?: string;
@@ -27,6 +36,16 @@ export default function StickyAppDownloadCTA({
 
   const link = buildLink();
 
+  // Task 2D -- fire-and-forget, never awaited; the outbound Play Store
+  // navigation proceeds unconditionally regardless of analytics
+  // delivery (no preventDefault, no await before the anchor's own
+  // default navigation). cta_location is built only from the
+  // developer-authored utm.source/medium constants passed in, never
+  // from visible button text.
+  const handleClick = () => {
+    WebsiteEvents.appDownloadIntent(buildAppDownloadCtaLocation(utm, "sticky_app_download_cta", "sticky"));
+  };
+
   return (
     <div
       className="
@@ -39,6 +58,7 @@ export default function StickyAppDownloadCTA({
           href={link}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleClick}
           className="block w-full text-center rounded-xl bg-white text-purple-800 font-semibold py-3 text-sm"
         >
           📲 Download Jyotishasha App
