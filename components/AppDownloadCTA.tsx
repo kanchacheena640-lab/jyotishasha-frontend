@@ -1,6 +1,7 @@
 "use client";
 
 import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
+import { buildAppDownloadPlayStoreUrl } from "@/lib/playStoreAttribution";
 
 type UTM = {
   source: string;
@@ -15,18 +16,20 @@ type AppDownloadCTAProps = {
 export default function AppDownloadCTA({ utm }: AppDownloadCTAProps) {
   const base = "https://play.google.com/store/apps/details?id=com.jyotishasha.app";
 
-  const buildLink = () => {
-    if (!utm) return base;
-
-    const url = new URL(base);
-
-    // ✅ IMPORTANT: base already has id=..., so this will append using "&"
-    url.searchParams.set("utm_source", utm.source);
-    url.searchParams.set("utm_medium", utm.medium || "organic");
-    url.searchParams.set("utm_campaign", utm.campaign || "app_download");
-
-    return url.toString();
-  };
+  // ✅ IMPORTANT: base already has id=..., so buildAppDownloadPlayStoreUrl
+  // appends using "&". Task 5 -- also ADDS Google Play's official
+  // `referrer` parameter alongside the existing utm_* params (which are
+  // unchanged and continue to feed Play Console's own acquisition
+  // reports); `referrer` is the one value the installed app can
+  // actually recover via the Play Install Referrer API -- see
+  // lib/playStoreAttribution.ts's own docstring for why the plain
+  // utm_* params alone are not enough.
+  const buildLink = () =>
+    buildAppDownloadPlayStoreUrl(base, utm, {
+      defaultMedium: "organic",
+      defaultCampaign: "app_download",
+      ctaLocationFallback: "app_download_cta",
+    });
 
   const link = buildLink();
 

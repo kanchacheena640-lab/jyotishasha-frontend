@@ -6,6 +6,7 @@
 // layout.tsx stays a Server Component -- this is the one small leaf
 // boundary needed, not a wholesale layout conversion.
 import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
+import { buildAppDownloadPlayStoreUrl } from "@/lib/playStoreAttribution";
 
 type UTM = {
   source: string;
@@ -23,16 +24,17 @@ export default function StickyAppDownloadCTA({
   const base =
     "https://play.google.com/store/apps/details?id=com.jyotishasha.app";
 
-  const buildLink = () => {
-    if (!utm) return base;
-
-    const url = new URL(base);
-    url.searchParams.set("utm_source", utm.source);
-    url.searchParams.set("utm_medium", utm.medium || "sticky");
-    url.searchParams.set("utm_campaign", utm.campaign || "app_download");
-
-    return url.toString();
-  };
+  // Task 5 -- also ADDS Google Play's official `referrer` parameter
+  // alongside the existing utm_* params (unchanged, still feed Play
+  // Console's own acquisition reports). See lib/playStoreAttribution.ts's
+  // docstring for why this is the one value the installed app can
+  // actually recover post-install.
+  const buildLink = () =>
+    buildAppDownloadPlayStoreUrl(base, utm, {
+      defaultMedium: "sticky",
+      defaultCampaign: "app_download",
+      ctaLocationFallback: "sticky_app_download_cta",
+    });
 
   const link = buildLink();
 
