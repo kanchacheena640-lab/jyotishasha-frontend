@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
+import CookieSettingsLink from "@/components/consent/CookieSettingsLink";
 
 
 export default function Footer() {
@@ -44,6 +45,7 @@ export default function Footer() {
             <li><Link href="/privacy-policy">Privacy Policy</Link></li>
             <li><Link href="/terms">Terms & Conditions</Link></li>
             <li><Link href="/refund-policy">Refund Policy</Link></li>
+            <li><CookieSettingsLink /></li>
           </ul>
         </div>
 

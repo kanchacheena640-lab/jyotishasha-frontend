@@ -50,7 +50,13 @@ export default function LocaleLayout({
       </noscript>
 
       {/* Task 2C -- establishes the website analytics session_id and
-          first-touch attribution context only; emits no event. */}
+          first-touch attribution context only; emits no event.
+          Deliberately independent of marketing consent -- first-party
+          activity_events remains independent of it (Task 8's own
+          explicit rule; ConsentProvider itself now lives in the ROOT
+          layout, app/layout.tsx, since /reports is a separate route
+          tree outside this [locale] layout and still needs consent
+          context -- see that file for the provider/banner). */}
       <WebsiteAnalyticsInit />
 
       <LanguageProvider initialLocale={locale}>
@@ -62,12 +68,12 @@ export default function LocaleLayout({
       </LanguageProvider>
 
       {/* Sticky CTA */}
-      <StickyAppDownloadCTA 
-        utm={{ 
-          source: "site_global", 
-          medium: "sticky_cta", 
-          campaign: "app_download" 
-        }} 
+      <StickyAppDownloadCTA
+        utm={{
+          source: "site_global",
+          medium: "sticky_cta",
+          campaign: "app_download"
+        }}
       />
 
       {/* WhatsApp Floating Button */}
@@ -75,9 +81,9 @@ export default function LocaleLayout({
         href="https://wa.me/917007012255"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed right-4 z-50 bottom-[88px] md:bottom-4 
-                   bg-green-500 hover:bg-green-600 text-white 
-                   px-5 py-3.5 rounded-full shadow-xl flex items-center gap-2.5 
+        className="fixed right-4 z-50 bottom-[88px] md:bottom-4
+                   bg-green-500 hover:bg-green-600 text-white
+                   px-5 py-3.5 rounded-full shadow-xl flex items-center gap-2.5
                    transition-all hover:scale-105 active:scale-95"
         aria-label="Chat with us on WhatsApp"
       >
