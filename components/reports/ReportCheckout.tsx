@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useTranslation, initReactI18next } from "react-i18next";
 import i18n from "i18next";
 import { loadGoogleMapsPlaces } from "@/components/PlaceAutocompleteInput";
+import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
 
 
 // Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
@@ -157,11 +158,25 @@ export default function ReportCheckout() {
       // Step 2: Create Order via Flask Backend (Port 5000)
       const base = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
 
+      // Task 10A -- Task 2C's own already-immutable, first-touch campaign
+      // snapshot, attached at transaction CREATION time only (never resent
+      // at /webhook verification time below -- the backend retrieves its
+      // own durable snapshot from Razorpay's order.notes instead). Reuses
+      // the SAME function lib/anonymousActivityEventClient.ts already
+      // calls for every anonymous website event. Optional: omitted
+      // entirely when no attribution was ever captured for this visit.
+      const campaignContext = typeof window !== "undefined"
+        ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
+        : undefined;
+
       const orderResponse = await fetch(`${base}/api/razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // 🚨 Sirf 'product' bhej rahe hain (amount Flask khud handle karega)
-        body: JSON.stringify({ product: productId }),
+        body: JSON.stringify({
+          product: productId,
+          ...(campaignContext ? { campaign_context: campaignContext } : {}),
+        }),
       });
 
       const orderData = await orderResponse.json();

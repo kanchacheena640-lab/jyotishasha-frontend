@@ -2,6 +2,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
 
 const RAZORPAY_SCRIPT_SRC = "https://checkout.razorpay.com/v1/checkout.js";
 const DEFAULT_BACKEND_URL = "https://jyotishasha-backend.onrender.com";
@@ -93,10 +94,26 @@ export function useReportPurchase() {
 
       const backend = process.env.NEXT_PUBLIC_BACKEND_URL || DEFAULT_BACKEND_URL;
 
+      // Task 10A -- attaches Task 2C's own already-immutable, first-touch
+      // campaign snapshot to the transaction at CREATION time only (never
+      // resent at /webhook verification time -- the backend retrieves its
+      // own durable snapshot from Razorpay's order.notes instead, see
+      // modules/payments/campaign_attribution.py). Reuses the SAME
+      // function lib/anonymousActivityEventClient.ts already calls for
+      // every anonymous website event -- no new UTM-parsing logic here.
+      // Optional: omitted entirely (not sent as an empty object) when no
+      // attribution was ever captured for this visit.
+      const campaignContext = typeof window !== "undefined"
+        ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
+        : undefined;
+
       const orderRes = await fetch(`${backend}/api/razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: productSlug }),
+        body: JSON.stringify({
+          product: productSlug,
+          ...(campaignContext ? { campaign_context: campaignContext } : {}),
+        }),
       });
       const orderData = await orderRes.json();
 
