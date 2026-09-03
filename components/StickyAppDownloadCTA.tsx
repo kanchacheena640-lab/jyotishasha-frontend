@@ -7,6 +7,7 @@
 // boundary needed, not a wholesale layout conversion.
 import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
 import { buildAppDownloadPlayStoreUrl } from "@/lib/playStoreAttribution";
+import { pushGoogleAdsMeasurementEvent } from "@/lib/googleAdsMeasurementBridge";
 
 type UTM = {
   source: string;
@@ -45,7 +46,13 @@ export default function StickyAppDownloadCTA({
   // developer-authored utm.source/medium constants passed in, never
   // from visible button text.
   const handleClick = () => {
-    WebsiteEvents.appDownloadIntent(buildAppDownloadCtaLocation(utm, "sticky_app_download_cta", "sticky"));
+    const ctaLocation = buildAppDownloadCtaLocation(utm, "sticky_app_download_cta", "sticky");
+    WebsiteEvents.appDownloadIntent(ctaLocation);
+
+    // Task 6 -- SECONDARY GA4/GTM observation signal, decoupled from the
+    // first-party call above. Still an intent, not an install -- never
+    // claimed as a Google Ads conversion by this bridge.
+    pushGoogleAdsMeasurementEvent({ name: "jyotishasha_app_download_intent", ctaLocation });
   };
 
   return (

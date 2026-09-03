@@ -9,6 +9,7 @@ import {
   resolveFreeKundaliPayload,
 } from "@/lib/freeKundaliSession";
 import { WebsiteEvents } from "@/lib/websiteEvents";
+import { pushGoogleAdsMeasurementEvent } from "@/lib/googleAdsMeasurementBridge";
 
 // ✅ Modular Components (Jo humne abhi banaye)
 import KundaliProfileHeader from "@/components/kundali/KundaliProfileHeader";
@@ -81,6 +82,15 @@ function KundaliPageContent() {
         if (!hasTrackedCompletionRef.current) {
           hasTrackedCompletionRef.current = true;
           WebsiteEvents.featureUsed("kundali_generate");
+
+          // Task 6 -- SECONDARY GA4/GTM observation signal, decoupled
+          // from the first-party call above, guarded by the SAME ref
+          // (so it can never fire twice either). No birth data reaches
+          // this call -- it carries no arguments at all, unlike
+          // WebsiteEvents.featureUsed above, whose own argument is
+          // already just the fixed string "kundali_generate", never
+          // anything from `apiPayload`/`data`.
+          pushGoogleAdsMeasurementEvent({ name: "jyotishasha_kundali_generated" });
         }
       } catch (err: any) {
         setError(err.message);

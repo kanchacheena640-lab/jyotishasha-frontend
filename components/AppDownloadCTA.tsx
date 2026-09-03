@@ -2,6 +2,7 @@
 
 import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
 import { buildAppDownloadPlayStoreUrl } from "@/lib/playStoreAttribution";
+import { pushGoogleAdsMeasurementEvent } from "@/lib/googleAdsMeasurementBridge";
 
 type UTM = {
   source: string;
@@ -59,7 +60,13 @@ export default function AppDownloadCTA({ utm }: AppDownloadCTAProps) {
     // text. Only app_download_intent fires here, deliberately not also
     // cta_click: for a single-purpose download CTA the two would name
     // the exact same fact twice, not two distinct facts.
-    WebsiteEvents.appDownloadIntent(buildAppDownloadCtaLocation(utm, "app_download_cta", "organic"));
+    const ctaLocation = buildAppDownloadCtaLocation(utm, "app_download_cta", "organic");
+    WebsiteEvents.appDownloadIntent(ctaLocation);
+
+    // Task 6 -- SECONDARY GA4/GTM observation signal, decoupled from the
+    // first-party call above. Still an intent, not an install -- never
+    // claimed as a Google Ads conversion by this bridge.
+    pushGoogleAdsMeasurementEvent({ name: "jyotishasha_app_download_intent", ctaLocation });
   };
 
   return (
