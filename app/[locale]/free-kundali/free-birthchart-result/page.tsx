@@ -9,7 +9,7 @@ import {
   resolveFreeKundaliPayload,
 } from "@/lib/freeKundaliSession";
 import { WebsiteEvents } from "@/lib/websiteEvents";
-import { pushGoogleAdsMeasurementEvent } from "@/lib/googleAdsMeasurementBridge";
+import { pushMarketingMeasurementEvent } from "@/lib/marketingMeasurementBridge";
 
 // ✅ Modular Components (Jo humne abhi banaye)
 import KundaliProfileHeader from "@/components/kundali/KundaliProfileHeader";
@@ -90,7 +90,7 @@ function KundaliPageContent() {
           // WebsiteEvents.featureUsed above, whose own argument is
           // already just the fixed string "kundali_generate", never
           // anything from `apiPayload`/`data`.
-          pushGoogleAdsMeasurementEvent({ name: "jyotishasha_kundali_generated" });
+          pushMarketingMeasurementEvent({ name: "jyotishasha_kundali_generated" });
         }
       } catch (err: any) {
         setError(err.message);

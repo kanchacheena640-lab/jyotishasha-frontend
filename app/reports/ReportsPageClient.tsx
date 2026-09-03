@@ -7,7 +7,7 @@ import { reportsData, Report } from "../data/reportsData";
 import { useTranslation } from "react-i18next";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
 import { WebsiteEvents } from "@/lib/websiteEvents";
-import { pushGoogleAdsMeasurementEvent } from "@/lib/googleAdsMeasurementBridge";
+import { pushMarketingMeasurementEvent } from "@/lib/marketingMeasurementBridge";
 
 export default function ReportsPageClient() {
   const { i18n, ready } = useTranslation("reports");
@@ -66,9 +66,9 @@ export default function ReportsPageClient() {
 
     // Task 6 -- SECONDARY GA4/GTM observation signal, decoupled from the
     // first-party call above (independent, never awaited, never gates
-    // navigation). NOT a Google Ads PRIMARY conversion -- the actual
-    // purchase is confirmed later, backend-side, via payment_verified.
-    pushGoogleAdsMeasurementEvent({ name: "jyotishasha_report_purchase_intent" });
+    // navigation). NOT a PRIMARY conversion for any destination -- the
+    // actual purchase is confirmed later, backend-side, via payment_verified.
+    pushMarketingMeasurementEvent({ name: "jyotishasha_report_purchase_intent" });
 
     // Dual / partner-based reports (Redirecting with locale for better SEO)
     if (slug === "relationship_future_report") {
