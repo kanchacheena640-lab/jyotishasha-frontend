@@ -28,10 +28,14 @@
  *
  *   npx tsc --module commonjs --target es2020 --strict --skipLibCheck \
  *     --outDir .ts-test-out lib/analyticsSession.ts lib/analyticsAttribution.ts \
- *     lib/anonymousActivityEventClient.ts lib/websiteEvents.ts lib/websiteEvents.test.ts
+ *     lib/anonymousActivityEventClient.ts lib/pagePath.ts lib/websiteEvents.ts lib/websiteEvents.test.ts
  *   node .ts-test-out/websiteEvents.test.js
  *
  * (then remove .ts-test-out/ -- build output, never committed.)
+ *
+ * Task 9A -- sections R/S/T/U below cover its own 20 numbered frontend
+ * test requirements (S22) for page_path attachment; lib/pagePath.test.ts
+ * covers the normalizer itself (its own separate 10 numbered items).
  */
 
 import * as fs from "fs";
@@ -130,6 +134,9 @@ console.log("\n=== A. cta_click body ===");
   check("A4: properties.cta_id correct", asProperties(calls[0]?.body?.properties)?.cta_id === "kundali_form_generate");
   check("A5: properties.screen_name correct", asProperties(calls[0]?.body?.properties)?.screen_name === "kundali_form");
   check("A6: no forbidden top-level keys", ["platform", "environment", "firebase_uid"].every((k) => calls[0]?.body && !(k in calls[0].body)));
+  // Task 9A -- 13/19: page_path attached alongside the existing
+  // properties, which remain unchanged (not replaced/renamed).
+  check("A7 (Task 9A #13/#19): properties.page_path attached, cta_id/screen_name still both present", asProperties(calls[0]?.body?.properties)?.page_path === "/" && asProperties(calls[0]?.body?.properties)?.cta_id === "kundali_form_generate" && asProperties(calls[0]?.body?.properties)?.screen_name === "kundali_form");
   restore();
 }
 
@@ -143,7 +150,11 @@ console.log("\n=== C/D/E. app_download_intent ===");
   WebsiteEvents.appDownloadIntent("daily_panchang_primary_cta");
   check("C1: exactly one request sent", calls.length === 1);
   check("C2: event_name is app_download_intent", calls[0]?.body?.event_name === "app_download_intent");
-  check("C3: properties.cta_location correct, no other property keys", JSON.stringify(calls[0]?.body?.properties) === JSON.stringify({ cta_location: "daily_panchang_primary_cta" }));
+  // Task 9A #15: page_path (call-time current pathname) is now attached
+  // ALONGSIDE cta_location -- placement and page are two distinct,
+  // both-populated dimensions, neither replaces the other. installBrowserStubs()
+  // sets location.pathname to "/", a valid page_path.
+  check("C3: properties has exactly {cta_location, page_path}, cta_location correct", JSON.stringify(calls[0]?.body?.properties) === JSON.stringify({ cta_location: "daily_panchang_primary_cta", page_path: "/" }));
   restore();
 
   check("E1: cta_location built from utm.source+medium", buildAppDownloadCtaLocation({ source: "daily_panchang", medium: "primary_cta" }, "fallback", "organic") === "daily_panchang_primary_cta");
@@ -358,6 +369,105 @@ console.log("\n=== Q. no direct fetch bypass ===");
     const source = readSource(file);
     check(`Q: ${file} -- contains no direct "/api/activity-events" fetch`, !source.includes("/api/activity-events"));
   }
+}
+
+// ===========================================================================
+// R. featureUsed / reportDiscoveryViewed also carry page_path (Task 9A
+// #14/#16), and page_path is derived at CALL TIME, not once globally
+// (Task 9A #11/#12 -- SPA navigation between two calls)
+// ===========================================================================
+console.log("\n=== R. featureUsed/reportDiscoveryViewed page_path + call-time derivation ===");
+{
+  const { calls, restore } = installBrowserStubs();
+  const win = getGlobal("window") as { location: { pathname: string } };
+
+  win.location.pathname = "/free-kundali/free-birthchart-result/";
+  WebsiteEvents.featureUsed("kundali_generate");
+  check("R1 (#14): featureUsed properties.feature_name unchanged, plus page_path from the CURRENT pathname", asProperties(calls[0]?.body?.properties)?.feature_name === "kundali_generate" && asProperties(calls[0]?.body?.properties)?.page_path === "/free-kundali/free-birthchart-result/");
+
+  win.location.pathname = "/reports";
+  WebsiteEvents.reportDiscoveryViewed();
+  check("R2 (#16): reportDiscoveryViewed carries page_path (and no other property)", JSON.stringify(calls[1]?.body?.properties) === JSON.stringify({ page_path: "/reports" }));
+
+  // #11/#12: SPA navigation -- the SAME producer method, called twice
+  // with the pathname changed in between (no reload, no re-init),
+  // yields two DIFFERENT page_path values -- proves this is read live
+  // at call time, never cached/captured once.
+  win.location.pathname = "/en/panchang";
+  WebsiteEvents.ctaClick("x", "y");
+  win.location.pathname = "/en/muhurat";
+  WebsiteEvents.ctaClick("x", "y");
+  check("R3 (#11/#12): first ctaClick call captured the pathname AT THAT TIME (/en/panchang)", asProperties(calls[2]?.body?.properties)?.page_path === "/en/panchang");
+  check("R4 (#11/#12): second ctaClick call (after SPA navigation) captured the NEW pathname (/en/muhurat), not the first", asProperties(calls[3]?.body?.properties)?.page_path === "/en/muhurat");
+
+  restore();
+}
+
+// ===========================================================================
+// S. No query string / fragment ever enters the event payload, even if
+// window.location.pathname is fed something malformed (Task 9A #17/#18)
+// ===========================================================================
+console.log("\n=== S. no query/fragment enters payload ===");
+{
+  const { calls, restore } = installBrowserStubs();
+  const win = getGlobal("window") as { location: { pathname: string } };
+
+  win.location.pathname = "/free-kundali?rid=abc123&utm_source=fb";
+  WebsiteEvents.ctaClick("kundali_form_generate", "kundali_form");
+  const props1 = asProperties(calls[0]?.body?.properties);
+  check("S1 (#17): no '?' character anywhere in the sent page_path", typeof props1?.page_path === "string" && !(props1.page_path as string).includes("?"));
+  check("S1b (#17): rid never reaches the event payload at all", JSON.stringify(calls[0]?.body) .indexOf("rid") === -1);
+  check("S1c: page_path correctly stripped down to the bare pathname", props1?.page_path === "/free-kundali");
+
+  win.location.pathname = "/reports#pricing";
+  WebsiteEvents.reportDiscoveryViewed();
+  const props2 = asProperties(calls[1]?.body?.properties);
+  check("S2 (#18): no '#' character anywhere in the sent page_path", typeof props2?.page_path === "string" && !(props2.page_path as string).includes("#"));
+  check("S2b: page_path correctly stripped down to the bare pathname", props2?.page_path === "/reports");
+
+  restore();
+}
+
+// ===========================================================================
+// T. Delivery-failure semantics unchanged by the page_path addition
+// (Task 9A #20) -- neither a throwing fetch nor a throwing
+// window.location access can make any WebsiteEvents.* method throw.
+// ===========================================================================
+console.log("\n=== T. delivery-failure semantics unchanged ===");
+{
+  const originalWindow = getGlobal("window");
+  const originalDocument = getGlobal("document");
+  const originalFetch = globalThis.fetch;
+
+  // window.location itself throws on access -- getCurrentPagePath()
+  // must swallow this (pagePath.ts's own try/catch) and the whole
+  // producer call must still never throw, exactly like the pre-Task-9A
+  // fetch-throws case (test F) already proved for the network layer.
+  setGlobal("window", {
+    sessionStorage: new FakeStorage(),
+    get location(): never {
+      throw new Error("boom");
+    },
+  });
+  setGlobal("document", { referrer: "" });
+  globalThis.fetch = (() => {
+    return Promise.resolve(new Response("{}", { status: 201 }));
+  }) as unknown as typeof fetch;
+
+  let threw = false;
+  try {
+    WebsiteEvents.ctaClick("x", "y");
+    WebsiteEvents.featureUsed("kundali_generate");
+    WebsiteEvents.appDownloadIntent("test_location");
+    WebsiteEvents.reportDiscoveryViewed();
+  } catch {
+    threw = true;
+  }
+  check("T1 (#20): no WebsiteEvents.* method throws even when window.location access itself throws", !threw);
+
+  setGlobal("window", originalWindow);
+  setGlobal("document", originalDocument);
+  globalThis.fetch = originalFetch;
 }
 
 console.log("\n==================================================");
