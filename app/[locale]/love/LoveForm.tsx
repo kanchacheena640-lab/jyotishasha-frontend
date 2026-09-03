@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
+import { WebsiteEvents } from "@/lib/websiteEvents";
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
 
@@ -45,6 +46,16 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
       return;
     }
 
+    // Task 13E -- the meaningful Match Making generation attempt: fires
+    // only after required local validation has passed (both DOBs present,
+    // both places resolved to real coordinates) but before the actual
+    // calculation/API request begins. An incomplete form that returns
+    // above never reaches this line, so it is never counted as a
+    // generation attempt. Fixed, developer-controlled identifiers only --
+    // no name/dob/tob/pob/lat/lng ever passed here. page_path is attached
+    // automatically by WebsiteEvents itself (Task 9A).
+    WebsiteEvents.ctaClick("love_matchmaking_generate", "love");
+
     setLoading(true);
 
     const payload = {
@@ -82,6 +93,18 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
         truth_or_dare: truthJson.data || truthJson,
         marriage_potential: marriageJson.data || marriageJson,
       }));
+
+      // Task 13E -- successful completion ONLY: reached exclusively after
+      // all three API calls resolved without throwing, the primary
+      // report response was confirmed ok, and the usable result was
+      // safely prepared and stored in sessionStorage just above. Never
+      // fires from the catch block below, never on a validation/API
+      // failure, never on page load or a result-page render. One real
+      // submission that truly succeeds produces exactly one feature_used.
+      // No birth data, no API response, no calculated/compatibility data
+      // -- only the fixed feature identity, mirroring the /tools family's
+      // own "featureUsed only after successful generation" rule.
+      WebsiteEvents.featureUsed("love_matchmaking_generate");
 
       router.push(`${isHi ? "/hi" : ""}/love/result`);
     } catch (e: any) {
