@@ -16,6 +16,7 @@ import ToolResultSection from '@/components/ToolResultSection';
 import { fetchFullKundali } from '@/utils/fetchFullKundali';
 import { fetchLifeTool } from '@/utils/fetchLifeTool';
 import { parseToolResponse, ParsedResult } from '@/utils/parseToolResponse';
+import { WebsiteEvents } from '@/lib/websiteEvents';
 
 export default function ToolDynamicPage() {
   const { toolId, locale } = useParams() as { toolId: string; locale?: string };
@@ -30,6 +31,22 @@ export default function ToolDynamicPage() {
 
   const handleSubmit = async (formData: FormData) => {
     if (!toolId) return;
+
+    // Task 13B -- the meaningful Generate/submit action for THIS tool.
+    // Fires unconditionally on submit, before the API call and
+    // regardless of eventual success/failure -- mirrors Free Kundali's
+    // own cta_click placement (FreeKundaliClient.tsx: fires at submit,
+    // never gated on the result). `toolId` is a safe, stable,
+    // developer-defined slug (app/data/toolsData.ts) -- never user-
+    // entered text -- and is only ever reachable here because the
+    // server-rendered parent (app/[locale]/tools/[toolId]/page.tsx)
+    // already gated this whole component behind a known toolContentMap
+    // entry; an unrecognized toolId never reaches this form at all.
+    // Carries no birth data/PII -- only the tool identity, exactly like
+    // Free Kundali's own cta_id/screen_name. page_path is attached
+    // automatically by WebsiteEvents itself (Task 9A), no extra code
+    // needed here.
+    WebsiteEvents.ctaClick(`tools_${toolId}_generate`, `tools_${toolId}`);
 
     // 🔹 API ko bhasha batana zaroori hai taaki result Hindi mein aaye
     const requestData = { ...formData, toolId, lang: currentLang };
@@ -50,13 +67,30 @@ export default function ToolDynamicPage() {
       }
 
       setKundaliData(data);
-      
+
       // 🔹 Parser ko bhi bhasha batayein taaki headings/labels translate ho sakein
-      const parsed = await parseToolResponse(data, toolId, currentLang); 
+      const parsed = await parseToolResponse(data, toolId, currentLang);
       setResult(parsed);
       setSubmitted(true);
+
+      // Task 13B -- successful completion ONLY: reached exclusively
+      // after fetchFullKundali/fetchLifeTool resolved without throwing
+      // AND a usable parsed result was produced AND the success state
+      // was actually committed (setResult/setSubmitted just above).
+      // Never fires from the catch block below, never on a validation/
+      // API failure (fetchFullKundali throws for both -- see that
+      // file's own isValid check and `if (!res.ok) throw`), never on
+      // page load or result re-render. One real user submission that
+      // truly succeeds produces exactly one feature_used, mirroring
+      // Free Kundali's own "featureUsed only after successful
+      // generation" rule. No birth data, no calculated chart/planet
+      // data, no generated interpretation text -- only the tool
+      // identity, exactly like Free Kundali's own "kundali_generate".
+      WebsiteEvents.featureUsed(`tool_${toolId}_generate`);
     } catch (error) {
       // Yahan aap koi error message state set kar sakte hain
+      // (unchanged -- Task 13B adds no error-path analytics; a failed
+      // calculation deliberately produces no feature_used at all).
     }
   };
 
