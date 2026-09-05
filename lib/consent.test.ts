@@ -25,11 +25,13 @@
 import * as fs from "fs";
 import * as path from "path";
 
+import * as ConsentModule from "./consent";
 import {
   CONSENT_STORAGE_KEY,
   CONSENT_VERSION,
   ConsentStorageLike,
   pushConsentUpdate,
+  readConsentGeoPolicyCookie,
   readStoredConsent,
   toGoogleConsentMode,
   writeConsent,
@@ -330,6 +332,129 @@ console.log("\n=== 24. no Enhanced Conversions/Advanced Matching ===");
     const src = readSource(file).toLowerCase();
     check(`24: ${file} -- no Advanced Matching/Enhanced Conversions field`, forbidden.every((t) => !src.includes(t)));
   }
+}
+
+// ===========================================================================
+// 25. Geo-Aware Consent v1 Phase 2B: India-only diagnostic bypass fully removed
+// ===========================================================================
+console.log("\n=== 25. India-only diagnostic bypass fully removed ===");
+{
+  check("25a: isIndiaConsentBypassActive is no longer exported from lib/consent.ts",
+    !("isIndiaConsentBypassActive" in ConsentModule));
+  check("25b: INDIA_GEO_BYPASS_COOKIE is no longer exported from lib/consent.ts",
+    !("INDIA_GEO_BYPASS_COOKIE" in ConsentModule));
+
+  const rootLayout = readSource("app/layout.tsx");
+  check("25c: app/layout.tsx no longer contains the India-only bypass code (isIndiaBypass)",
+    !rootLayout.includes("isIndiaBypass"));
+  check("25d: app/layout.tsx no longer contains the exact removed bypass expression",
+    !rootLayout.includes('.trim() === "jyotishasha_geo_country=IN"'));
+
+  const contextSrc = readSource("context/ConsentContext.tsx");
+  check("25e: ConsentContext.tsx no longer imports isIndiaConsentBypassActive",
+    !contextSrc.includes("isIndiaConsentBypassActive"));
+}
+
+// ===========================================================================
+// 26. readConsentGeoPolicyCookie() -- the India bypass's policy-driven successor
+// ===========================================================================
+console.log("\n=== 26. readConsentGeoPolicyCookie() ===");
+{
+  check("26a: valid NORMAL cookie -> NORMAL", readConsentGeoPolicyCookie("jyotishasha_geo_policy=NORMAL") === "NORMAL");
+  check("26b: valid US_PRIVACY cookie -> US_PRIVACY", readConsentGeoPolicyCookie("jyotishasha_geo_policy=US_PRIVACY") === "US_PRIVACY");
+  check("26c: valid EUROPE_CONSENT cookie -> EUROPE_CONSENT", readConsentGeoPolicyCookie("jyotishasha_geo_policy=EUROPE_CONSENT") === "EUROPE_CONSENT");
+  check("26d: valid SAFE_FALLBACK cookie -> SAFE_FALLBACK", readConsentGeoPolicyCookie("jyotishasha_geo_policy=SAFE_FALLBACK") === "SAFE_FALLBACK");
+  check("26e: cookie among other cookies (realistic document.cookie shape)",
+    readConsentGeoPolicyCookie("jyotishasha_geo_country=IN; jyotishasha_geo_policy=NORMAL; other=x") === "NORMAL");
+  check("26f: missing cookie -> SAFE_FALLBACK", readConsentGeoPolicyCookie("other=1; another=2") === "SAFE_FALLBACK");
+  check("26g: empty string -> SAFE_FALLBACK", readConsentGeoPolicyCookie("") === "SAFE_FALLBACK");
+  check("26h: null -> SAFE_FALLBACK", readConsentGeoPolicyCookie(null) === "SAFE_FALLBACK");
+  check("26i: undefined -> SAFE_FALLBACK", readConsentGeoPolicyCookie(undefined) === "SAFE_FALLBACK");
+  check("26j: unrecognized value -> SAFE_FALLBACK (fails closed, never treated as NORMAL)",
+    readConsentGeoPolicyCookie("jyotishasha_geo_policy=NOT_A_REAL_POLICY") === "SAFE_FALLBACK");
+  check("26k: lowercase value is NOT accepted (exact match only -- middleware always writes the exact enum casing)",
+    readConsentGeoPolicyCookie("jyotishasha_geo_policy=normal") === "SAFE_FALLBACK");
+}
+
+// ===========================================================================
+// 27. app/layout.tsx bootstrap script -- Phase 2B per-policy contract
+// ===========================================================================
+console.log("\n=== 27. bootstrap script per-policy contract (structural) ===");
+{
+  const rootLayout = readSource("app/layout.tsx");
+
+  check("27a: script reads jyotishasha_geo_policy (not the old country cookie)",
+    rootLayout.includes('readCookie("jyotishasha_geo_policy")'));
+  check("27b: NORMAL and US_PRIVACY both return before issuing any gtag consent command",
+    /if \(policy === "NORMAL" \|\| policy === "US_PRIVACY"\) \{\s*return;\s*\}/.test(rootLayout));
+  check("27c: unrecognized/missing policy falls back to SAFE_FALLBACK, never NORMAL",
+    rootLayout.includes('VALID_POLICIES.indexOf(rawPolicy) !== -1 ? rawPolicy : "SAFE_FALLBACK"'));
+  check("27d: localStorage (stale Jyotishasha consent) is read ONLY inside the SAFE_FALLBACK branch",
+    /if \(policy === "SAFE_FALLBACK"\) \{\s*try \{\s*var raw = window\.localStorage\.getItem\("jyotishasha_consent_v1"\)/.test(rootLayout));
+  check("27e: exactly one localStorage.getItem call in the whole script (EUROPE_CONSENT never reads it)",
+    (rootLayout.match(/localStorage\.getItem\(/g) || []).length === 1);
+  check("27f: gtag('consent','default',...) is still the only consent command this script issues",
+    rootLayout.includes('window.gtag("consent", "default", consent)') &&
+    !rootLayout.includes('"consent", "update"'));
+}
+
+// ===========================================================================
+// 28. ConsentContext.tsx -- policy-aware, no fabricated consent, no
+// competing localStorage read for EUROPE_CONSENT
+// ===========================================================================
+console.log("\n=== 28. ConsentContext.tsx policy-awareness (structural) ===");
+{
+  const src = readSource("context/ConsentContext.tsx");
+
+  check("28a: imports readConsentGeoPolicyCookie", src.includes("readConsentGeoPolicyCookie"));
+  check("28b: exposes a policy value on the context", src.includes("policy:"));
+  check("28c: exposes bannerEligible on the context", src.includes("bannerEligible"));
+  check("28d: bannerEligible is derived from policy === SAFE_FALLBACK only",
+    src.includes('bannerEligible: policy === "SAFE_FALLBACK"'));
+  check("28e: EUROPE_CONSENT returns before any localStorage read (never restores a stale decision)",
+    /if \(resolvedPolicy === "EUROPE_CONSENT"\) \{\s*setChecked\(true\);\s*return;\s*\}/.test(src));
+  check("28f: no fabricated/synthesized consent object is ever constructed on mount (the old India-bypass's setConsent({version:1,...}) pattern is gone -- acceptAll's real, user-initiated applyChoice({analytics:true,advertising:true}) is untouched and unrelated)",
+    !/setConsent\(\{\s*version:\s*1,/.test(src));
+}
+
+// ===========================================================================
+// 29. ConsentBanner.tsx -- gated at context level, zero geo/country logic
+// of its own (Phase 2B requirement: "do not add country lists to
+// ConsentBanner", "prefer gating at ConsentContext/provider level")
+// ===========================================================================
+console.log("\n=== 29. ConsentBanner.tsx has zero geo logic of its own ===");
+{
+  const src = readSource("components/consent/ConsentBanner.tsx");
+
+  check("29a: render condition includes bannerEligible", /checked\s*&&\s*bannerEligible\s*&&\s*!hasChosen/.test(src));
+  check("29b: does not import lib/geo at all", !src.includes("lib/geo"));
+  check("29c: does not read document.cookie directly", !src.includes("document.cookie"));
+  check("29d: does not reference any geo policy or country-code literal",
+    !src.includes("NORMAL") && !src.includes("US_PRIVACY") && !src.includes("EUROPE_CONSENT") && !src.includes("jyotishasha_geo"));
+}
+
+// ===========================================================================
+// 30. Geo-Aware Consent v1 Phase 2C -- CookieSettingsLink/ConsentPreferences
+// are gated on bannerEligible, so a EUROPE_CONSENT visitor cannot use the
+// Jyotishasha "Cookie Settings" UI to compete with Google's certified CMP,
+// and NORMAL/US_PRIVACY get no unnecessary Jyotishasha consent UI either.
+// ===========================================================================
+console.log("\n=== 30. CookieSettingsLink/ConsentPreferences gated on bannerEligible ===");
+{
+  const linkSrc = readSource("components/consent/CookieSettingsLink.tsx");
+  check("30a: CookieSettingsLink destructures bannerEligible from useConsent", linkSrc.includes("bannerEligible"));
+  check("30b: CookieSettingsLink returns null when !bannerEligible", /if \(!bannerEligible\) return null;/.test(linkSrc));
+
+  const prefsSrc = readSource("components/consent/ConsentPreferences.tsx");
+  check("30c: ConsentPreferences destructures bannerEligible from useConsent", prefsSrc.includes("bannerEligible"));
+  check("30d: ConsentPreferences returns null when !bannerEligible (defense-in-depth alongside !isPreferencesOpen)",
+    /if \(!isPreferencesOpen \|\| !bannerEligible\) return null;/.test(prefsSrc));
+
+  // Footer.tsx itself must remain untouched -- the gate lives inside
+  // CookieSettingsLink, not in how/whether Footer renders it.
+  const footerSrc = readSource("components/Footer.tsx");
+  check("30e: Footer.tsx still unconditionally renders <CookieSettingsLink /> (gating is internal to the component)",
+    footerSrc.includes("<CookieSettingsLink"));
 }
 
 console.log("\n==================================================");

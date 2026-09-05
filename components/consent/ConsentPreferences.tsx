@@ -10,18 +10,26 @@
  * No pre-checked advertising, no dark patterns -- both toggles default
  * to their CURRENT stored state (or off, for a first-time visitor who
  * opened preferences directly instead of using Accept All/Reject).
+ *
+ * Geo-Aware Consent v1 Phase 2C: also gated on bannerEligible, as a
+ * defense-in-depth twin to CookieSettingsLink's own gate -- even if
+ * some future code path ever called openPreferences() for a
+ * non-SAFE_FALLBACK visitor, this panel still refuses to render rather
+ * than letting a Jyotishasha consent update compete with Google's
+ * certified CMP (EUROPE_CONSENT) or appear where no gate is needed
+ * (NORMAL/US_PRIVACY).
  */
 
 import { useState } from "react";
 import { useConsent } from "@/context/ConsentContext";
 
 export default function ConsentPreferences() {
-  const { consent, isPreferencesOpen, closePreferences, setPreferences } = useConsent();
+  const { consent, isPreferencesOpen, bannerEligible, closePreferences, setPreferences } = useConsent();
 
   const [analytics, setAnalytics] = useState(consent?.analytics ?? false);
   const [advertising, setAdvertising] = useState(consent?.advertising ?? false);
 
-  if (!isPreferencesOpen) return null;
+  if (!isPreferencesOpen || !bannerEligible) return null;
 
   return (
     <div

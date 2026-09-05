@@ -32,42 +32,66 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head />
       <body>
-        {/* Task 8 -- Google Consent Mode v2 default, established BEFORE
-            any other script (including the GTM container bootstrap in
-            app/[locale]/layout.tsx) can run. `strategy="beforeInteractive"`
-            is a hard Next.js guarantee (root-layout-only), not a JSX-order
-            assumption -- this is what makes the ordering structurally
-            correct rather than a race. See lib/consent.ts for the
-            TypeScript-side mirror of this exact contract (storage key,
-            version, and Google Consent Mode mapping); this inline script
-            necessarily duplicates that logic in plain JS because it must
-            run with zero bundled imports, before hydration -- keep both
-            in sync if the consent contract (jyotishasha_consent_v1,
-            version 1) ever changes.
-            Default for a visitor with no stored decision: everything
-            denied (ad_storage, analytics_storage, ad_user_data,
-            ad_personalization). A visitor with a valid stored decision
-            gets that decision reflected immediately, every load -- this
-            script does NOT reset a returning visitor's consent to denied
-            on every page view.
+        {/* Geo-Aware Consent v1, Phase 2B -- Google Consent Mode v2
+            bootstrap, established BEFORE any other script (including
+            the GTM container bootstrap in app/[locale]/layout.tsx) can
+            run. `strategy="beforeInteractive"` is a hard Next.js
+            guarantee (root-layout-only), not a JSX-order assumption --
+            this is what makes the ordering structurally correct rather
+            than a race.
 
-            TEMPORARY diagnostic (Sep 2026 GA4 investigation): for India
-            traffic only (middleware.js's Vercel-geolocation cookie,
-            jyotishasha_geo_country=IN), this script issues no consent
-            command at all, restoring exact pre-Sep-4 behavior (when this
-            script didn't exist) so Google's tags apply their own default
-            for comparison. Non-India behavior is completely unchanged.
-            Remove this "IN" branch and its two counterparts
-            (lib/consent.ts, context/ConsentContext.tsx) once the
-            diagnostic is complete. */}
+            This REPLACES the temporary India-only diagnostic bypass
+            (commit aa12e67, `jyotishasha_geo_country === "IN"`) with the
+            general, policy-driven behavior from lib/geo.ts /
+            middleware.js's jyotishasha_geo_policy cookie. See
+            lib/consent.ts::readConsentGeoPolicyCookie() for the
+            TypeScript-side mirror of the cookie-reading logic (this
+            inline script necessarily duplicates it in plain JS because
+            it must run with zero bundled imports, before hydration --
+            keep both in sync); see context/ConsentContext.tsx's own
+            docstring for the parallel per-policy rules that govern the
+            separate Jyotishasha custom banner (never Consent Mode
+            itself).
+
+            Per-policy behavior (Geo-Aware Consent v1 Phase 2B contract):
+              NORMAL / US_PRIVACY -- issues NO consent command at all.
+                Not a synthesized "granted" choice either -- simply
+                nothing, so Google's own tags apply their own default,
+                exactly restoring pre-Sep-4 measurement behavior. This is
+                the same mechanism the India-only bypass proved works in
+                production, now applied to its correct general case.
+              EUROPE_CONSENT -- explicit denied default on all four
+                signals, ALWAYS -- Google's certified Privacy & Messaging
+                CMP (published for jyotishasha.com) is the sole consent
+                authority for this region, so this deliberately never
+                reads jyotishasha_consent_v1 here; a stale/local decision
+                must never override the CMP.
+              SAFE_FALLBACK -- the original Task 8 behavior, unchanged:
+                explicit denied default, but a visitor's own valid stored
+                decision (jyotishasha_consent_v1) is honored immediately.
+            An unrecognized/missing policy cookie value safely falls back
+            to SAFE_FALLBACK (fail closed), never to NORMAL/US_PRIVACY's
+            no-command behavior. */}
         <Script id="consent-default" strategy="beforeInteractive">
           {`
             (function () {
               try {
-                var isIndiaBypass = document.cookie.split(";").some(function (c) {
-                  return c.trim() === "jyotishasha_geo_country=IN";
-                });
-                if (isIndiaBypass) return;
+                function readCookie(name) {
+                  var found = document.cookie.split(";").map(function (c) {
+                    return c.trim();
+                  }).find(function (c) {
+                    return c.indexOf(name + "=") === 0;
+                  });
+                  return found ? found.slice(name.length + 1) : null;
+                }
+
+                var VALID_POLICIES = ["NORMAL", "US_PRIVACY", "EUROPE_CONSENT", "SAFE_FALLBACK"];
+                var rawPolicy = readCookie("jyotishasha_geo_policy");
+                var policy = VALID_POLICIES.indexOf(rawPolicy) !== -1 ? rawPolicy : "SAFE_FALLBACK";
+
+                if (policy === "NORMAL" || policy === "US_PRIVACY") {
+                  return;
+                }
 
                 window.dataLayer = window.dataLayer || [];
                 if (typeof window.gtag !== "function") {
@@ -81,27 +105,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   ad_personalization: "denied"
                 };
 
-                try {
-                  var raw = window.localStorage.getItem("jyotishasha_consent_v1");
-                  if (raw) {
-                    var parsed = JSON.parse(raw);
-                    if (
-                      parsed &&
-                      parsed.version === 1 &&
-                      typeof parsed.analytics === "boolean" &&
-                      typeof parsed.advertising === "boolean"
-                    ) {
-                      consent = {
-                        analytics_storage: parsed.analytics ? "granted" : "denied",
-                        ad_storage: parsed.advertising ? "granted" : "denied",
-                        ad_user_data: parsed.advertising ? "granted" : "denied",
-                        ad_personalization: parsed.advertising ? "granted" : "denied"
-                      };
+                // Only SAFE_FALLBACK honors a stored Jyotishasha decision --
+                // EUROPE_CONSENT must never let a stale/local choice
+                // override Google's certified CMP for that region.
+                if (policy === "SAFE_FALLBACK") {
+                  try {
+                    var raw = window.localStorage.getItem("jyotishasha_consent_v1");
+                    if (raw) {
+                      var parsed = JSON.parse(raw);
+                      if (
+                        parsed &&
+                        parsed.version === 1 &&
+                        typeof parsed.analytics === "boolean" &&
+                        typeof parsed.advertising === "boolean"
+                      ) {
+                        consent = {
+                          analytics_storage: parsed.analytics ? "granted" : "denied",
+                          ad_storage: parsed.advertising ? "granted" : "denied",
+                          ad_user_data: parsed.advertising ? "granted" : "denied",
+                          ad_personalization: parsed.advertising ? "granted" : "denied"
+                        };
+                      }
                     }
+                  } catch (e) {
+                    // Malformed/blocked storage -- fall back to the safe
+                    // fully-denied default declared above.
                   }
-                } catch (e) {
-                  // Malformed/blocked storage -- fall back to the safe
-                  // fully-denied default declared above.
                 }
 
                 window.gtag("consent", "default", consent);

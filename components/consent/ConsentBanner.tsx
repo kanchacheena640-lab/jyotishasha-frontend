@@ -3,11 +3,15 @@
 /**
  * Task 8 -- the first-visit consent banner: Accept All / Reject
  * Non-Essential / Manage Preferences. Renders nothing until the initial
- * storage check has completed (`checked`, avoids a flash for returning
- * visitors who already decided) and nothing once a decision exists
- * (`hasChosen`). ConsentPreferences (the "Manage Preferences" panel)
- * is rendered separately/always-mounted so CookieSettingsLink (Footer)
- * can reopen it at any time after the banner itself is gone.
+ * check has completed (`checked`, avoids a flash for returning visitors
+ * who already decided), nothing once a decision exists (`hasChosen`),
+ * and nothing at all when this visitor's geo policy doesn't call for a
+ * Jyotishasha-driven gate (`bannerEligible` -- see ConsentContext.tsx's
+ * own docstring for the full per-policy rationale; this component has
+ * no geo/country logic of its own, by design). ConsentPreferences (the
+ * "Manage Preferences" panel) is rendered separately/always-mounted so
+ * CookieSettingsLink (Footer) can reopen it at any time after the
+ * banner itself is gone.
  *
  * No dark patterns: all three actions are equally sized and styled;
  * "Reject Non-Essential" is not visually de-emphasized relative to
@@ -18,11 +22,11 @@ import { useConsent } from "@/context/ConsentContext";
 import ConsentPreferences from "./ConsentPreferences";
 
 export default function ConsentBanner() {
-  const { checked, hasChosen, acceptAll, rejectNonEssential, openPreferences } = useConsent();
+  const { checked, hasChosen, bannerEligible, acceptAll, rejectNonEssential, openPreferences } = useConsent();
 
   return (
     <>
-      {checked && !hasChosen && (
+      {checked && bannerEligible && !hasChosen && (
         <div
           role="region"
           aria-label="Cookie and privacy consent"

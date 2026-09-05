@@ -1,38 +1,67 @@
 "use client";
 
 /**
- * Task 8 -- React state layer over lib/consent.ts, matching this
- * repo's own existing context/LanguageContext.tsx convention exactly
- * (plain createContext/useContext, no external state library).
+ * Task 8 / Geo-Aware Consent v1 Phase 2B -- React state layer over
+ * lib/consent.ts, matching this repo's own existing
+ * context/LanguageContext.tsx convention exactly (plain
+ * createContext/useContext, no external state library).
  *
- * Reads stored consent once on mount (client-only -- localStorage isn't
- * available during SSR); `checked` distinguishes "still checking
- * storage" from "checked, no decision found yet" so ConsentBanner never
- * flashes for a returning visitor who already has a stored choice (the
- * REAL Google Consent Mode default was already applied correctly by
- * app/layout.tsx's own beforeInteractive script before this component
- * ever mounts -- this state is purely about the banner's own
- * visibility, not consent correctness).
+ * Reads the geo policy cookie and (where relevant) stored consent once
+ * on mount (client-only -- localStorage/cookies aren't meaningfully
+ * read during SSR); `checked` distinguishes "still checking" from
+ * "checked, no decision found yet" so ConsentBanner never flashes for a
+ * returning visitor who already has a stored choice.
+ *
+ * POLICY-DRIVEN BEHAVIOR (replaces the removed India-only diagnostic
+ * bypass, commit aa12e67 -- see lib/geo.ts for the full policy
+ * classification and app/layout.tsx for the matching bootstrap-script
+ * behavior, which independently implements the same per-policy rules
+ * for the REAL Google Consent Mode default; this context only controls
+ * the Jyotishasha custom banner/preferences UI, never Consent Mode
+ * itself):
+ *
+ *   NORMAL / US_PRIVACY -- no Jyotishasha consent gate is relevant.
+ *     A genuinely stored prior decision (if the visitor ever explicitly
+ *     used Cookie Settings) is still restored -- never fabricated --
+ *     but bannerEligible is false, so the banner never auto-appears.
+ *
+ *   EUROPE_CONSENT -- Google's certified Privacy & Messaging CMP is the
+ *     sole consent authority for this region. This deliberately never
+ *     reads localStorage for this policy, so a stale Jyotishasha-only
+ *     decision can never become authoritative here; bannerEligible is
+ *     false so the Jyotishasha banner never competes with Google's CMP.
+ *
+ *   SAFE_FALLBACK -- the original, full custom banner/storage/update
+ *     mechanism (Task 8's own foundation), completely unchanged:
+ *     bannerEligible is true, a real stored decision is restored.
  */
 
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   ConsentChoice,
   ConsentState,
-  isIndiaConsentBypassActive,
+  readConsentGeoPolicyCookie,
   pushConsentUpdate,
   readStoredConsent,
   writeConsent,
 } from "@/lib/consent";
+import type { ConsentGeoPolicy } from "@/lib/geo";
 
 interface ConsentContextValue {
   /** null until a real decision has been made (or restored from storage). */
   consent: ConsentState | null;
   /** true once consent has been decided (fresh choice or restored). */
   hasChosen: boolean;
-  /** true once the initial storage read has completed -- gates whether
-   * the banner is safe to show/hide without a flash. */
+  /** true once the initial policy/storage read has completed -- gates
+   * whether the banner is safe to show/hide without a flash. */
   checked: boolean;
+  /** This visitor's resolved geo consent policy (lib/geo.ts). */
+  policy: ConsentGeoPolicy;
+  /** Whether the Jyotishasha custom banner is even a valid consent
+   * surface for this visitor -- false for NORMAL/US_PRIVACY (no gate
+   * needed) and EUROPE_CONSENT (Google's CMP is authoritative there);
+   * true only for SAFE_FALLBACK. See this file's own module docstring. */
+  bannerEligible: boolean;
   isPreferencesOpen: boolean;
   openPreferences: () => void;
   closePreferences: () => void;
@@ -47,35 +76,38 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
   const [consent, setConsent] = useState<ConsentState | null>(null);
   const [checked, setChecked] = useState(false);
   const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
+  const [policy, setPolicy] = useState<ConsentGeoPolicy>("SAFE_FALLBACK");
 
   useEffect(() => {
     if (typeof window === "undefined") {
       setChecked(true);
       return;
     }
-    // TEMPORARY diagnostic (Sep 2026 GA4 investigation): India traffic
-    // (per middleware.js's Vercel-geolocation cookie) skips the
-    // denied-by-default state and banner entirely -- an in-memory-only
-    // "fully granted" value that is never written to localStorage, so a
-    // real consent decision is unaffected once this bypass is removed.
-    // See lib/consent.ts's isIndiaConsentBypassActive for the full note.
-    if (isIndiaConsentBypassActive(document.cookie)) {
-      setConsent({
-        version: 1,
-        analytics: true,
-        advertising: true,
-        updatedAt: new Date().toISOString(),
-      });
+
+    const resolvedPolicy = readConsentGeoPolicyCookie(document.cookie);
+    setPolicy(resolvedPolicy);
+
+    // EUROPE_CONSENT: Google's certified Privacy & Messaging CMP is the
+    // sole consent authority for this region -- deliberately never
+    // reads localStorage here, so a stale/local Jyotishasha-only
+    // decision can never become authoritative for a European visitor.
+    if (resolvedPolicy === "EUROPE_CONSENT") {
       setChecked(true);
       return;
     }
+
+    // NORMAL / US_PRIVACY / SAFE_FALLBACK: restore a REAL prior decision
+    // if one exists (never fabricated) -- this is the same restoration
+    // this app has always done. Only bannerEligible (derived below)
+    // actually differs per policy; a genuine explicit choice, however
+    // it was made, is always honored.
     try {
       const stored = readStoredConsent(window.localStorage);
       if (stored) setConsent(stored);
     } catch {
       // Storage unavailable -- treat as "no decision yet"; the banner
-      // will show, and applyChoice() below already tolerates a failing
-      // write the same way.
+      // will show (SAFE_FALLBACK only), and applyChoice() below already
+      // tolerates a failing write the same way.
     } finally {
       setChecked(true);
     }
@@ -103,6 +135,8 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
     consent,
     hasChosen: consent !== null,
     checked,
+    policy,
+    bannerEligible: policy === "SAFE_FALLBACK",
     isPreferencesOpen,
     openPreferences: () => setIsPreferencesOpen(true),
     closePreferences: () => setIsPreferencesOpen(false),

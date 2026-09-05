@@ -43,6 +43,8 @@
  * the two deliberately use different storage.
  */
 
+import type { ConsentGeoPolicy } from "./geo";
+
 export const CONSENT_STORAGE_KEY = "jyotishasha_consent_v1";
 export const CONSENT_VERSION = 1;
 
@@ -177,23 +179,48 @@ export function pushConsentUpdate(choice: ConsentChoice): void {
 }
 
 /**
- * TEMPORARY diagnostic (Sep 2026 GA4 investigation): true only when
- * middleware.js has tagged this request's country as India via Vercel's
- * own edge geolocation header, surfaced to the client as this
- * non-httpOnly cookie. Used to bypass the denied-by-default consent
- * state and banner for India traffic only, to verify whether the
- * consent rollout caused the Sep 4 GA4 drop -- never written to
- * CONSENT_STORAGE_KEY, so a real stored consent decision is never
- * affected. Remove this constant/function and its two call sites
- * (context/ConsentContext.tsx, the inline script in app/layout.tsx)
- * once the diagnostic is complete.
+ * Geo-Aware Consent v1, Phase 2B: reads the ALREADY-CLASSIFIED geo
+ * policy cookie middleware.js writes (lib/geo.ts::resolveConsentGeoPolicy()
+ * computed it server-side from x-vercel-ip-country). This function does
+ * NOT re-derive a policy from a raw country code -- it only reads and
+ * validates the pre-computed value, so it never duplicates lib/geo.ts's
+ * country classification (its own EEA/UK/Switzerland list, the US
+ * special case, etc. are never referenced here).
+ *
+ * This replaces the removed India-only diagnostic bypass
+ * (isIndiaConsentBypassActive(), commit aa12e67) with its general,
+ * policy-driven successor -- context/ConsentContext.tsx and
+ * app/layout.tsx's bootstrap script both call this instead of checking
+ * a literal `jyotishasha_geo_country=IN` string.
+ *
+ * The cookie name literal below ("jyotishasha_geo_policy") must stay in
+ * sync with middleware.js's own GEO_POLICY_COOKIE constant -- the same
+ * documented-duplication pattern this file already uses for the
+ * consent-default contract shared with app/layout.tsx's inline script.
+ *
+ * Missing/malformed/unrecognized values safely fall back to
+ * SAFE_FALLBACK -- the same "fail closed" principle this module already
+ * applies to a malformed stored consent record.
  */
-export const INDIA_GEO_BYPASS_COOKIE = "jyotishasha_geo_country";
+const KNOWN_GEO_POLICIES: readonly ConsentGeoPolicy[] = [
+  "NORMAL",
+  "US_PRIVACY",
+  "EUROPE_CONSENT",
+  "SAFE_FALLBACK",
+];
 
-export function isIndiaConsentBypassActive(cookieString: string): boolean {
-  if (!cookieString) return false;
-  return cookieString
+export function readConsentGeoPolicyCookie(
+  cookieString: string | null | undefined
+): ConsentGeoPolicy {
+  if (!cookieString) return "SAFE_FALLBACK";
+  const prefix = "jyotishasha_geo_policy=";
+  const match = cookieString
     .split(";")
     .map((c) => c.trim())
-    .some((c) => c === `${INDIA_GEO_BYPASS_COOKIE}=IN`);
+    .find((c) => c.startsWith(prefix));
+  if (!match) return "SAFE_FALLBACK";
+  const value = match.slice(prefix.length);
+  return (KNOWN_GEO_POLICIES as readonly string[]).includes(value)
+    ? (value as ConsentGeoPolicy)
+    : "SAFE_FALLBACK";
 }
