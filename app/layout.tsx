@@ -49,11 +49,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             ad_personalization). A visitor with a valid stored decision
             gets that decision reflected immediately, every load -- this
             script does NOT reset a returning visitor's consent to denied
-            on every page view. */}
+            on every page view.
+
+            TEMPORARY diagnostic (Sep 2026 GA4 investigation): for India
+            traffic only (middleware.js's Vercel-geolocation cookie,
+            jyotishasha_geo_country=IN), this script issues no consent
+            command at all, restoring exact pre-Sep-4 behavior (when this
+            script didn't exist) so Google's tags apply their own default
+            for comparison. Non-India behavior is completely unchanged.
+            Remove this "IN" branch and its two counterparts
+            (lib/consent.ts, context/ConsentContext.tsx) once the
+            diagnostic is complete. */}
         <Script id="consent-default" strategy="beforeInteractive">
           {`
             (function () {
               try {
+                var isIndiaBypass = document.cookie.split(";").some(function (c) {
+                  return c.trim() === "jyotishasha_geo_country=IN";
+                });
+                if (isIndiaBypass) return;
+
                 window.dataLayer = window.dataLayer || [];
                 if (typeof window.gtag !== "function") {
                   window.gtag = function () { window.dataLayer.push(arguments); };

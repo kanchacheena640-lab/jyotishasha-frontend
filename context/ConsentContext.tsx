@@ -19,6 +19,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   ConsentChoice,
   ConsentState,
+  isIndiaConsentBypassActive,
   pushConsentUpdate,
   readStoredConsent,
   writeConsent,
@@ -49,6 +50,22 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (typeof window === "undefined") {
+      setChecked(true);
+      return;
+    }
+    // TEMPORARY diagnostic (Sep 2026 GA4 investigation): India traffic
+    // (per middleware.js's Vercel-geolocation cookie) skips the
+    // denied-by-default state and banner entirely -- an in-memory-only
+    // "fully granted" value that is never written to localStorage, so a
+    // real consent decision is unaffected once this bypass is removed.
+    // See lib/consent.ts's isIndiaConsentBypassActive for the full note.
+    if (isIndiaConsentBypassActive(document.cookie)) {
+      setConsent({
+        version: 1,
+        analytics: true,
+        advertising: true,
+        updatedAt: new Date().toISOString(),
+      });
       setChecked(true);
       return;
     }

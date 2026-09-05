@@ -2,8 +2,33 @@ import { NextResponse } from 'next/server'
 
 const locales = ['en', 'hi']
 
+// TEMPORARY diagnostic (Sep 2026 GA4 investigation) -- surfaces Vercel's
+// own edge-populated geolocation header to the client via a small,
+// non-httpOnly cookie, so app/layout.tsx and context/ConsentContext.tsx
+// can bypass the new denied-by-default consent state for India traffic
+// only, to verify whether that rollout caused the Sep 4 GA4 drop.
+// x-vercel-ip-country is Vercel's own documented, server-side, edge
+// request header (no client-side IP lookup, no new dependency) --
+// unlike components/location/LocationProvider.tsx's ipapi.co call, this
+// cannot be blocked by CORS/ad-blockers and needs no extra round trip.
+// Remove this constant, setCountryCookie(), and its call sites once the
+// diagnostic is complete.
+const GEO_COUNTRY_COOKIE = 'jyotishasha_geo_country'
+
+function setCountryCookie(response, country) {
+  if (country) {
+    response.cookies.set(GEO_COUNTRY_COOKIE, country, {
+      path: '/',
+      maxAge: 60 * 60 * 24,
+      sameSite: 'lax',
+    })
+  }
+  return response
+}
+
 export function middleware(request) {
   const { pathname } = request.nextUrl
+  const country = request.headers.get('x-vercel-ip-country') || ''
 
   // Legacy Muhurat URL Fixes
   // Covers the hub page AND any month/year suffix under the old no-hyphen
@@ -32,7 +57,7 @@ export function middleware(request) {
     pathname.startsWith('/admin') ||
     pathname.startsWith('/reports')
   ) {
-    return NextResponse.next()
+    return setCountryCookie(NextResponse.next(), country)
   }
 
   // Public pages
@@ -42,7 +67,7 @@ export function middleware(request) {
     pathname === '/refund-policy' ||
     pathname === '/account-deletion'
   ) {
-    return NextResponse.next()
+    return setCountryCookie(NextResponse.next(), country)
   }
 
   // Holi rewrite
@@ -51,9 +76,9 @@ export function middleware(request) {
     const year = parts[1]
     const isHi = pathname.startsWith('/hi/')
 
-    return NextResponse.rewrite(
+    return setCountryCookie(NextResponse.rewrite(
       new URL(`${isHi ? '/hi' : '/en'}/holi/${year}`, request.url)
-    )
+    ), country)
   }
 
   // Public SEO URL: /house-9
@@ -80,12 +105,12 @@ export function middleware(request) {
     const ascendant = isHi ? parts[2] : parts[1]
     const house = (isHi ? parts[3] : parts[2])?.replace('house-', '')
 
-    return NextResponse.rewrite(
+    return setCountryCookie(NextResponse.rewrite(
       new URL(
         `${isHi ? '/hi' : '/en'}/${planet}/${ascendant}/house/${house}`,
         request.url
       )
-    )
+    ), country)
   }
 
   // Redirect internal route to SEO URL
@@ -181,10 +206,10 @@ export function middleware(request) {
     const url = request.nextUrl.clone()
     url.pathname = `/en${pathname}`
 
-    return NextResponse.rewrite(url)
+    return setCountryCookie(NextResponse.rewrite(url), country)
   }
 
-  return NextResponse.next()
+  return setCountryCookie(NextResponse.next(), country)
 }
 
 export const config = {

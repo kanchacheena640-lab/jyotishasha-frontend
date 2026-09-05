@@ -175,3 +175,25 @@ export function pushConsentUpdate(choice: ConsentChoice): void {
     // Analytics/consent signaling must never throw into product code.
   }
 }
+
+/**
+ * TEMPORARY diagnostic (Sep 2026 GA4 investigation): true only when
+ * middleware.js has tagged this request's country as India via Vercel's
+ * own edge geolocation header, surfaced to the client as this
+ * non-httpOnly cookie. Used to bypass the denied-by-default consent
+ * state and banner for India traffic only, to verify whether the
+ * consent rollout caused the Sep 4 GA4 drop -- never written to
+ * CONSENT_STORAGE_KEY, so a real stored consent decision is never
+ * affected. Remove this constant/function and its two call sites
+ * (context/ConsentContext.tsx, the inline script in app/layout.tsx)
+ * once the diagnostic is complete.
+ */
+export const INDIA_GEO_BYPASS_COOKIE = "jyotishasha_geo_country";
+
+export function isIndiaConsentBypassActive(cookieString: string): boolean {
+  if (!cookieString) return false;
+  return cookieString
+    .split(";")
+    .map((c) => c.trim())
+    .some((c) => c === `${INDIA_GEO_BYPASS_COOKIE}=IN`);
+}
