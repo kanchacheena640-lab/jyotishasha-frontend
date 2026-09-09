@@ -16,6 +16,14 @@
 # next.js
 /.next/
 /out/
+/.next-u6b-build/
+/.next-u6b-dev/
+
+# Local Saved Audience verification output (scripts remain reviewable)
+/.u6b-*
+
+# N6 Notifications History/Monitor visual QA screenshots (scripts remain reviewable)
+/.n6-visual/
 
 # production
 /build

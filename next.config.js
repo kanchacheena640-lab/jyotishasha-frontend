@@ -4,13 +4,23 @@ const nextConfig = {
 
   async rewrites() {
     return [
-      // ✅ Backend API proxy
+      // ✅ Backend API proxy (legacy direct-to-Flask endpoints, e.g.
+      // /api/full-kundali). Explicitly excludes /api/admin/* -- those
+      // are the Next.js Admin BFF routes (app/api/admin/**/route.ts:
+      // auth, app-version, users), which must always be served by this
+      // app's own filesystem routes, never proxied straight to Flask
+      // (architecture requirement: browser -> BFF -> Flask, never
+      // browser -> Flask directly, for anything admin-gated). Users
+      // Module U2 found this rule's original unrestricted `/api/:path*`
+      // form was intercepting the new nested /api/admin/users/[id]
+      // route under local testing -- narrowed here, verified by direct
+      // reproduction of the bug and the fix.
       {
-        source: '/api/:path*', 
-        destination: 'https://jyotishasha-backend.onrender.com/api/:path*', 
+        source: '/api/:path((?!admin/).*)',
+        destination: 'https://jyotishasha-backend.onrender.com/api/:path',
       },
       // ✅ Planet → Ascendant → House rewrite (ALL planets)
-     
+
     ];
   },
 

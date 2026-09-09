@@ -1,16 +1,16 @@
-// app/admin/page.tsx
+// app/admin/users/page.tsx
 'use client';
 
 import AdminGuard from '@/components/AdminGuard';
 import AdminNav from '@/components/admin/AdminNav';
-import OrderList from '@/components/OrderList';
+import UsersPageClient from '@/components/admin/users/UsersPageClient';
 
-export default function AdminPage() {
+export default function AdminUsersPage() {
   return (
     <AdminGuard>
       <div className="p-4">
         <AdminNav />
-        <OrderList />
+        <UsersPageClient />
       </div>
     </AdminGuard>
   );
