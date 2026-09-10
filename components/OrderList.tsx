@@ -71,8 +71,12 @@ export default function OrderList() {
   const handleSave = async () => {
     if (!editingOrder) return;
     try {
+      // Admin Orders BFF Completion: routed through this app's own
+      // authenticated BFF route (app/api/admin/orders/[id]/route.ts)
+      // instead of fetching NEXT_PUBLIC_BACKEND_URL (production Flask)
+      // directly from the browser with no credential at all.
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/api/order/${editingOrder.id}`,
+        `/api/admin/orders/${editingOrder.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -172,8 +176,14 @@ export default function OrderList() {
                   <button
                     onClick={async () => {
                       try {
+                        // Admin Orders BFF Completion: routed through this
+                        // app's own authenticated BFF route
+                        // (app/api/admin/orders/[id]/resend/route.ts)
+                        // instead of fetching NEXT_PUBLIC_BACKEND_URL
+                        // (production Flask) directly from the browser
+                        // with no credential at all.
                         const res = await fetch(
-                          `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/api/resend/${order.id}`,
+                          `/api/admin/orders/${order.id}/resend`,
                           { method: "POST" }
                         );
                         if (res.ok) {
