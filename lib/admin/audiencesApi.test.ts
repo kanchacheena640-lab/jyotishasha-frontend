@@ -1,7 +1,7 @@
 // Standalone test convention used by lib/*.test.ts; compile with tsc, then run with Node.
 import { strict as assert } from "node:assert";
 import { readFileSync } from "node:fs";
-import { appliedFiltersToCriteria, criteriaToEditor, editedCriteria, criteriaSummary } from "./audiencesApi";
+import { appliedFiltersToCriteria, criteriaToEditor, editedCriteria, criteriaSummary, createFixedAudience } from "./audiencesApi";
 import { EMPTY_BASIC_FILTERS, buildUsersQuery } from "./usersApi";
 
 const empty = () => structuredClone(EMPTY_BASIC_FILTERS);
@@ -45,9 +45,13 @@ const source = readFileSync("components/admin/users/UsersPageClient.tsx", "utf8"
 // Audience before the debounce fires would otherwise silently save stale
 // (often empty) search criteria. See UsersPageClient.tsx's own comment on
 // this exact click handler for the full incident this guards against.
-assert(source.includes("setSaveCriteria(appliedFiltersToCriteria(searchInput, filters))"));
+assert(source.includes("appliedFiltersToCriteria(searchInput, filters)"));
 assert(!source.includes("appliedFiltersToCriteria(searchTerm, filters)"));
 assert(!source.includes("appliedFiltersToCriteria(searchTerm, draftFilters)"));
+// Saved Audience V2 -- fail-closed guard: visible search/filter state
+// that somehow serializes to empty criteria must block the save, never
+// silently open the Save Audience modal with filters={}.
+assert(source.includes("hasVisibleTargeting && Object.keys(criteria.filters).length === 0"));
 // The debounced searchTerm must still be flushed to searchInput's value at
 // the same moment, so the visible Users table converges to the same
 // criteria being saved (never a table showing stale results next to a
@@ -55,3 +59,24 @@ assert(!source.includes("appliedFiltersToCriteria(searchTerm, draftFilters)"));
 assert(source.includes("setSearchTerm(searchInput)"));
 console.log("PASS: all 25 filters match Users query; typed JSON, special characters, empty criteria, round trip, historical/false preservation, malformed state rejection, applied snapshot isolation.");
 console.log("PASS: Save Audience uses immediate searchInput (not debounced searchTerm) and flushes searchTerm to match -- Saved Audience Search Parity Fix.");
+
+// ============================================================
+// Saved Audience V2 -- FIXED audience creation (frontend contract)
+// ============================================================
+assert.throws(() => createFixedAudience("Name", "", []), /Select at least one user/);
+
+const usersSource = readFileSync("components/admin/users/UsersPageClient.tsx", "utf8");
+assert(usersSource.includes("Create Audience from Selected"));
+assert(usersSource.includes("disabled={!selectedIds.length}"), "Create Audience from Selected must be disabled with no selection");
+assert(usersSource.includes("CreateFixedAudienceModal"));
+assert(usersSource.includes("selectedUserIds={selectedIds}"));
+
+const fixedModalSource = readFileSync("components/admin/audiences/CreateFixedAudienceModal.tsx", "utf8");
+assert(fixedModalSource.includes("createFixedAudience(name.trim(), description, selectedUserIds)"));
+
+const audienceEditorSource = readFileSync("components/admin/audiences/AudienceEditor.tsx", "utf8");
+// A FIXED audience's criteria is always null and must never be offered
+// an "Edit criteria" flow (which assumes a real filters object).
+assert(audienceEditorSource.includes('audience.audience_type !== "fixed"'));
+
+console.log("PASS: Saved Audience V2 -- createFixedAudience() fails closed on empty selection; Create Audience from Selected is wired and disabled with no selection; Edit criteria is never offered for a FIXED audience.");

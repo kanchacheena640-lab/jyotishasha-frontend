@@ -13,8 +13,15 @@ export interface AudienceFilters {
 }
 export interface SavedAudienceCriteria { version: 1; filters: AudienceFilters }
 export interface AudienceBooleanFilters { askNowBuyer: "any" | "true" | "false"; activeSubscription: "any" | "true" | "false" }
+// Saved Audience V2 -- audience_type is the authoritative discriminator,
+// never inferred from criteria being null/empty. A FIXED audience's
+// criteria is always null (explicit users.id membership lives server-
+// side in saved_audience_members, never sent to/rendered on the client
+// as fake filter values).
+export type AudienceType = "dynamic" | "fixed";
 export interface SavedAudience {
-  id: number; name: string; description: string | null; criteria: SavedAudienceCriteria;
+  id: number; name: string; description: string | null;
+  audience_type: AudienceType; criteria: SavedAudienceCriteria | null;
   created_by: number | null; created_at: string | null; updated_at: string | null; is_active: boolean;
 }
 export interface SavedAudiencePreview {
@@ -22,6 +29,9 @@ export interface SavedAudiencePreview {
 }
 export interface AudiencesResponse { audiences: SavedAudience[] }
 export type AudienceInput = Pick<SavedAudience, "name" | "description" | "criteria">;
+export interface FixedAudienceInput {
+  name: string; description?: string; audience_type: "fixed"; member_user_ids: number[];
+}
 
 // Same field mapping as buildUsersQuery, retaining JSON types and array boundaries.
 const fields = {
@@ -115,3 +125,15 @@ export async function audienceRequest<T>(path = "", method = "GET", body?: unkno
   return data as T;
 }
 export const previewCriteria = (criteria: SavedAudienceCriteria) => audienceRequest<SavedAudiencePreview>("/preview", "POST", { criteria, page: 1, page_size: 5 });
+
+// Saved Audience V2 -- "Create Audience from Selected" (Admin Users
+// checkboxes). Explicit canonical users.id membership, never criteria --
+// see FixedAudienceInput's own contract. member_user_ids must be
+// non-empty; the backend fails closed (never silently) on any
+// nonexistent id.
+export function createFixedAudience(name: string, description: string, memberUserIds: number[]): Promise<SavedAudience> {
+  if (!memberUserIds.length) throw new Error("Select at least one user.");
+  return audienceRequest<SavedAudience>("", "POST", {
+    name, description, audience_type: "fixed", member_user_ids: memberUserIds,
+  } satisfies FixedAudienceInput);
+}

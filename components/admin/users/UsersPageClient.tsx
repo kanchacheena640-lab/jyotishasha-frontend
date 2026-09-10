@@ -61,6 +61,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import AudienceEditor from "../audiences/AudienceEditor";
+import CreateFixedAudienceModal from "../audiences/CreateFixedAudienceModal";
 import { SavedAudienceCriteria, appliedFiltersToCriteria } from "@/lib/admin/audiencesApi";
 import {
   BasicFilters,
@@ -79,6 +80,7 @@ interface Chip { key: string; label: string; clear: () => void; }
 
 export default function UsersPageClient() {
   const [saveCriteria, setSaveCriteria] = useState<SavedAudienceCriteria | null>(null);
+  const [showCreateFixed, setShowCreateFixed] = useState(false);
   const [audienceNotice, setAudienceNotice] = useState("");
   const [audienceError, setAudienceError] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -414,7 +416,15 @@ export default function UsersPageClient() {
           {tableState === "ready" && pagination ? `${pagination.total_count} users found` : " "}
           {selectedIds.length > 0 && <span className="ml-2 text-indigo-600 font-medium">· {selectedIds.length} selected</span>}
         </span>
-        <div className="flex items-center gap-3"><Link href="/admin/audiences" className="text-xs text-indigo-600 hover:underline">Saved Audiences</Link><button
+        <div className="flex items-center gap-3">
+          <Link href="/admin/audiences" className="text-xs text-indigo-600 hover:underline">Saved Audiences</Link>
+          <button
+            disabled={!selectedIds.length}
+            onClick={() => { setShowCreateFixed(true); setAudienceError(""); setAudienceNotice(""); }}
+            className="text-xs px-3 py-1.5 rounded-lg border border-purple-200 text-purple-700 hover:bg-purple-50 disabled:opacity-50 disabled:hover:bg-transparent"
+            title={selectedIds.length ? undefined : "Select one or more users first"}
+          >Create Audience from Selected{selectedIds.length > 0 ? ` (${selectedIds.length})` : ""}</button>
+          <button
           onClick={() => {
             try {
               // Saved Audience Search Parity Fix: build criteria from
@@ -432,7 +442,22 @@ export default function UsersPageClient() {
               // logical user set the active Users query currently shows.
               setSearchTerm(searchInput);
               setPage(1);
-              setSaveCriteria(appliedFiltersToCriteria(searchInput, filters));
+              const criteria = appliedFiltersToCriteria(searchInput, filters);
+              // Saved Audience V2 -- fail-closed guard: if the operator
+              // visibly has a search term or a non-default filter
+              // applied, the resulting criteria must never silently
+              // serialize to nothing. This is defense-in-depth beyond
+              // the debounce-race fix above -- ANY future bug that would
+              // otherwise drop visible targeting state is blocked here,
+              // rather than silently saving an (incorrect) All Users
+              // audience.
+              const hasVisibleTargeting = searchInput.trim().length > 0
+                || JSON.stringify(filters) !== JSON.stringify(EMPTY_BASIC_FILTERS);
+              if (hasVisibleTargeting && Object.keys(criteria.filters).length === 0) {
+                setAudienceError("Could not save your current search/filters as audience criteria. Please try again.");
+                return;
+              }
+              setSaveCriteria(criteria);
               setAudienceError(""); setAudienceNotice("");
             } catch (e) { setAudienceError(e instanceof Error ? e.message : "Invalid applied filters."); }
           }}
@@ -443,6 +468,11 @@ export default function UsersPageClient() {
       {audienceNotice && <p role="status" className="mb-2 text-sm text-green-700">{audienceNotice}</p>}
       {audienceError && <p role="alert" className="mb-2 text-sm text-red-700">{audienceError}</p>}
       {saveCriteria && <AudienceEditor initialCriteria={saveCriteria} onClose={() => setSaveCriteria(null)} onSaved={saved => { setSaveCriteria(null); setAudienceNotice(`Audience “${saved.name}” saved.`); }} />}
+      {showCreateFixed && <CreateFixedAudienceModal
+        selectedUserIds={selectedIds}
+        onClose={() => setShowCreateFixed(false)}
+        onSaved={saved => { setShowCreateFixed(false); setSelectedIds([]); setAudienceNotice(`Fixed audience “${saved.name}” saved with ${selectedIds.length} member(s).`); }}
+      />}
 
       <UsersTable
         state={tableState}
