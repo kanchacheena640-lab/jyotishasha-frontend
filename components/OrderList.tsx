@@ -21,6 +21,11 @@ interface Order {
 export default function OrderList() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  // Admin Orders BFF Auth Fix: previously the raw JSON body was trusted
+  // unconditionally (no res.ok check, no shape check), so an auth
+  // rejection ({"msg": "Missing Authorization Header"}, an object) was
+  // handed straight to setOrders() and crashed orders.map() below.
+  const [loadError, setLoadError] = useState("");
 
   // For modal edit
   const [editingOrder, setEditingOrder] = useState<Order | null>(null);
@@ -32,20 +37,34 @@ export default function OrderList() {
     longitude: "",
   });
 
-  useEffect(() => {
-    async function fetchOrders() {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/api/orders`
+  async function fetchOrders() {
+    setLoading(true);
+    setLoadError("");
+    try {
+      // Admin Orders BFF Auth Fix: routed through this app's own
+      // authenticated BFF route (app/api/admin/orders/route.ts) instead
+      // of fetching NEXT_PUBLIC_BACKEND_URL (production Flask) directly
+      // from the browser with no credential at all.
+      const res = await fetch("/api/admin/orders", { cache: "no-store" });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !Array.isArray(data)) {
+        setLoadError(
+          (data && !Array.isArray(data) && (data.message || data.error)) ||
+            `Couldn't load orders (${res.status}).`
         );
-        const data = await res.json();
-        setOrders(data);
-      } catch (error) {
-      } finally {
-        setLoading(false);
+        setOrders([]);
+        return;
       }
+      setOrders(data);
+    } catch {
+      setLoadError("Couldn't reach the admin API.");
+      setOrders([]);
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     fetchOrders();
   }, []);
 
@@ -78,6 +97,16 @@ export default function OrderList() {
 
       {loading ? (
         <p>Loading orders...</p>
+      ) : loadError ? (
+        <div className="text-sm">
+          <p className="text-red-600 mb-2">{loadError}</p>
+          <button
+            onClick={fetchOrders}
+            className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+          >
+            Retry
+          </button>
+        </div>
       ) : (
         <table className="w-full text-left border border-gray-300">
           <thead className="bg-gray-100 text-gray-900">
