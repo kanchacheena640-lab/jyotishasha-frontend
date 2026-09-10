@@ -39,6 +39,19 @@ assert.equal(criteria.filters.ask_now_concern?.includes("Unapplied"), false);
 applied.askNowConcern.push("After snapshot");
 assert.equal(criteria.filters.ask_now_concern?.includes("After snapshot"), false);
 const source = readFileSync("components/admin/users/UsersPageClient.tsx", "utf8");
-assert(source.includes("setSaveCriteria(appliedFiltersToCriteria(searchTerm, filters))"));
+// Saved Audience Search Parity Fix: Save Audience must build criteria from
+// searchInput (the box's immediate, un-debounced content), never searchTerm
+// (the 350ms-debounced value) -- a user who searches then clicks Save
+// Audience before the debounce fires would otherwise silently save stale
+// (often empty) search criteria. See UsersPageClient.tsx's own comment on
+// this exact click handler for the full incident this guards against.
+assert(source.includes("setSaveCriteria(appliedFiltersToCriteria(searchInput, filters))"));
+assert(!source.includes("appliedFiltersToCriteria(searchTerm, filters)"));
 assert(!source.includes("appliedFiltersToCriteria(searchTerm, draftFilters)"));
+// The debounced searchTerm must still be flushed to searchInput's value at
+// the same moment, so the visible Users table converges to the same
+// criteria being saved (never a table showing stale results next to a
+// correctly-saved audience).
+assert(source.includes("setSearchTerm(searchInput)"));
 console.log("PASS: all 25 filters match Users query; typed JSON, special characters, empty criteria, round trip, historical/false preservation, malformed state rejection, applied snapshot isolation.");
+console.log("PASS: Save Audience uses immediate searchInput (not debounced searchTerm) and flushes searchTerm to match -- Saved Audience Search Parity Fix.");
