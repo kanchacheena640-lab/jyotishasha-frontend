@@ -415,7 +415,27 @@ export default function UsersPageClient() {
           {selectedIds.length > 0 && <span className="ml-2 text-indigo-600 font-medium">· {selectedIds.length} selected</span>}
         </span>
         <div className="flex items-center gap-3"><Link href="/admin/audiences" className="text-xs text-indigo-600 hover:underline">Saved Audiences</Link><button
-          onClick={() => { try { setSaveCriteria(appliedFiltersToCriteria(searchTerm, filters)); setAudienceError(""); setAudienceNotice(""); } catch (e) { setAudienceError(e instanceof Error ? e.message : "Invalid applied filters."); } }}
+          onClick={() => {
+            try {
+              // Saved Audience Search Parity Fix: build criteria from
+              // searchInput (the box's literal current content), never
+              // searchTerm (the 350ms-debounced value used to drive the
+              // table fetch). A user who types a search and clicks Save
+              // Audience before the debounce fires would otherwise have
+              // their still-stale (often empty) searchTerm silently
+              // saved as the criteria -- exactly the production bug
+              // ("Production Canary - Internal" resolving as All Users
+              // despite a visible, isolating search). Flushing searchTerm
+              // (+ resetting to page 1) here too keeps the visible Users
+              // table in sync with what gets saved, satisfying the
+              // invariant that a SavedAudience represents the SAME
+              // logical user set the active Users query currently shows.
+              setSearchTerm(searchInput);
+              setPage(1);
+              setSaveCriteria(appliedFiltersToCriteria(searchInput, filters));
+              setAudienceError(""); setAudienceNotice("");
+            } catch (e) { setAudienceError(e instanceof Error ? e.message : "Invalid applied filters."); }
+          }}
           className="text-xs px-3 py-1.5 rounded-lg border border-indigo-200 text-indigo-700 hover:bg-indigo-50"
         >Save Audience</button></div>
       </div>
