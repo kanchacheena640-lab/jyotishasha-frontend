@@ -1,13 +1,13 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://jyotishasha-backend.onrender.com/api/$1"
+      "source": "/api/:path((?!admin/).*)",
+      "destination": "https://jyotishasha-backend.onrender.com/api/:path"
     }
   ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/:path((?!admin/).*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
