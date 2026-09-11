@@ -78,6 +78,10 @@ export default function ExecutionStatusPanel({ execution, onUpdated }: { executi
 
   async function handleCancel() {
     if (busy) return;
+    if (execution.state === "FROZEN" &&
+        !window.confirm("Cancel this campaign before it sends? This cannot be undone. No notification has been sent yet — every target will be released and the campaign will be marked Cancelled.")) {
+      return;
+    }
     setBusy(true); setError("");
     try {
       onUpdated(await cancelExecution(execution.id));
@@ -88,7 +92,18 @@ export default function ExecutionStatusPanel({ execution, onUpdated }: { executi
     }
   }
 
-  const canCancel = execution.state === "SCHEDULED" || execution.state === "PAUSED";
+  const canCancelPrefreeze = execution.state === "SCHEDULED" || execution.state === "PAUSED";
+  // P4.5 -- backend is the sole source of truth (it re-checks every
+  // delivery under a row lock at cancel time); this is only a UX
+  // pre-check so the button isn't shown for an execution that would
+  // obviously be refused. started_at null + every counted delivery
+  // still PENDING means "nothing has happened yet, as far as this
+  // snapshot shows" -- a real race (a worker claiming a delivery
+  // between this render and the click) is still safely caught server-side.
+  const canCancelFrozenUnsent =
+    execution.state === "FROZEN" && execution.started_at === null &&
+    execution.delivery_counts.PENDING === execution.target_count;
+  const canCancel = canCancelPrefreeze || canCancelFrozenUnsent;
   const canReschedule = execution.state === "SCHEDULED";
 
   return <div className="space-y-3 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm">
@@ -169,6 +184,11 @@ export default function ExecutionStatusPanel({ execution, onUpdated }: { executi
           Frozen: {execution.frozen_at ? new Date(execution.frozen_at).toLocaleString() : "—"} · Started: {execution.started_at ? new Date(execution.started_at).toLocaleString() : "—"} · Completed: {execution.completed_at ? new Date(execution.completed_at).toLocaleString() : "—"}
         </p>
         <p className="text-xs text-gray-500">&ldquo;Accepted by push provider&rdquo; confirms the provider accepted the request — it is not proof the message reached the device.</p>
+        {canCancelFrozenUnsent && (
+          <button className={audienceButton + " bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"} disabled={busy} onClick={handleCancel}>
+            {busy ? "Cancelling…" : "Cancel campaign"}
+          </button>
+        )}
       </>
     )}
   </div>;
