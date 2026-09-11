@@ -113,3 +113,24 @@ assert.equal(isAudienceAllUsers(dynamicAudience({})), true, "DYNAMIC with filter
 assert.equal(isAudienceAllUsers(dynamicAudience({ moon_sign: ["Aries"] })), false, "DYNAMIC with real filters is not All Users");
 
 console.log("PASS: Saved Audience V2 -- isAudienceAllUsers() is audience_type-aware: a FIXED audience (criteria always null) is never misread as All Users; DYNAMIC filters={} still means All Users, DYNAMIC with real filters does not.");
+
+// ============================================================
+// Audience Delete UX Correction (production regression: Delete
+// correctly soft-deactivated the audience, but the row stayed visible
+// as "Inactive" in the normal working list -- confusing, since the UI
+// action is labeled "Delete"). Root cause: AudiencesList.tsx fetched
+// the audiences list with no is_active filter at all (returning every
+// audience, active and inactive), while CampaignComposer.tsx's own
+// dropdown already correctly used "?is_active=true". No backend change
+// -- the backend already supports/returns active-only data; the
+// frontend simply wasn't asking for it on this one screen.
+// ============================================================
+const audiencesListSource = readFileSync("components/admin/audiences/AudiencesList.tsx", "utf8");
+assert(audiencesListSource.includes('audienceRequest<AudiencesResponse>("?is_active=true")'), "AudiencesList.tsx must fetch active-only audiences, same contract as the Composer dropdown");
+assert(!audiencesListSource.includes("audienceRequest<AudiencesResponse>()"), "AudiencesList.tsx must never fetch the unfiltered (active+inactive) audience list");
+assert(audiencesListSource.includes("prev.filter(r => r.id !== row.id)"), "a just-deactivated row must be removed from the active-only list immediately, not updated in place to show Inactive");
+
+const composerSourceForActiveFilter = readFileSync("components/admin/notifications/CampaignComposer.tsx", "utf8");
+assert(composerSourceForActiveFilter.includes('audienceRequest<AudiencesResponse>("?is_active=true")'), "Composer's own audience dropdown must still fetch active-only audiences (regression guard, unchanged)");
+
+console.log("PASS: Audience Delete UX Correction -- the normal Audiences list fetches active-only audiences (same contract as the Composer dropdown) and a just-deactivated row disappears immediately, no page reload.");

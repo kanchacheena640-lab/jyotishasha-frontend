@@ -21,7 +21,13 @@ export default function AudiencesList() {
   const [deleteError, setDeleteError] = useState("");
   useEffect(() => {
     let cancelled = false; setRows(null); setError("");
-    audienceRequest<AudiencesResponse>().then(data => { if (!cancelled) setRows(data.audiences); }).catch(e => { if (!cancelled) setError(e instanceof Error ? e.message : "Could not load audiences."); });
+    // Audience Delete UX Correction: the normal working list shows ACTIVE
+    // audiences only -- same "?is_active=true" contract the Notifications
+    // Composer's own audience dropdown already used (this file just wasn't
+    // using it), never a backend change. A deactivated audience remains
+    // fully readable/reactivatable from its own detail page
+    // (AudienceDetail.tsx) -- it just no longer clutters the working list.
+    audienceRequest<AudiencesResponse>("?is_active=true").then(data => { if (!cancelled) setRows(data.audiences); }).catch(e => { if (!cancelled) setError(e instanceof Error ? e.message : "Could not load audiences."); });
     return () => { cancelled = true; };
   }, [retry]);
 
@@ -30,8 +36,11 @@ export default function AudiencesList() {
     if (!window.confirm(`Deactivate audience “${row.name}”? It will no longer be selectable for new campaigns, but its history and preview remain available.`)) return;
     setDeletingId(row.id); setDeleteError("");
     try {
-      const updated = await audienceRequest<SavedAudience>(`/${row.id}`, "DELETE");
-      setRows(prev => prev && prev.map(r => (r.id === updated.id ? updated : r)));
+      await audienceRequest<SavedAudience>(`/${row.id}`, "DELETE");
+      // The list is active-only, so a just-deactivated row no longer
+      // belongs here -- remove it immediately (no reload/refetch needed)
+      // rather than updating it in place to show "Inactive".
+      setRows(prev => prev && prev.filter(r => r.id !== row.id));
     } catch (e) { setDeleteError(e instanceof Error ? e.message : "Could not deactivate audience."); } finally { setDeletingId(null); }
   }
 
