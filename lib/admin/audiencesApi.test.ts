@@ -1,7 +1,7 @@
 // Standalone test convention used by lib/*.test.ts; compile with tsc, then run with Node.
 import { strict as assert } from "node:assert";
 import { readFileSync } from "node:fs";
-import { appliedFiltersToCriteria, criteriaToEditor, editedCriteria, criteriaSummary, createFixedAudience } from "./audiencesApi";
+import { appliedFiltersToCriteria, criteriaToEditor, editedCriteria, criteriaSummary, createFixedAudience, isAudienceAllUsers, AudienceFilters, SavedAudience } from "./audiencesApi";
 import { EMPTY_BASIC_FILTERS, buildUsersQuery } from "./usersApi";
 
 const empty = () => structuredClone(EMPTY_BASIC_FILTERS);
@@ -80,3 +80,36 @@ const audienceEditorSource = readFileSync("components/admin/audiences/AudienceEd
 assert(audienceEditorSource.includes('audience.audience_type !== "fixed"'));
 
 console.log("PASS: Saved Audience V2 -- createFixedAudience() fails closed on empty selection; Create Audience from Selected is wired and disabled with no selection; Edit criteria is never offered for a FIXED audience.");
+
+// ============================================================
+// Saved Audience V2 -- FIXED audience All-Users misclassification
+// (production regression: a real FIXED audience with 1 canonical
+// member showed/resolved as "(All Users)" in the Notifications
+// Composer, because isAudienceAllUsers() checked only
+// criteria?.filters, never audience_type -- criteria is always null
+// for a FIXED audience, which the old check treated identically to an
+// intentionally empty DYNAMIC {filters: {}}).
+// ============================================================
+function fixedAudience(overrides: Partial<SavedAudience> = {}): SavedAudience {
+  return {
+    id: 1, name: "Production Canary", description: null,
+    audience_type: "fixed", criteria: null,
+    created_by: null, created_at: null, updated_at: null, is_active: true,
+    ...overrides,
+  };
+}
+function dynamicAudience(filters: AudienceFilters = {}): SavedAudience {
+  return {
+    id: 2, name: "Dynamic", description: null,
+    audience_type: "dynamic", criteria: { version: 1, filters },
+    created_by: null, created_at: null, updated_at: null, is_active: true,
+  };
+}
+
+assert.equal(isAudienceAllUsers(undefined), false, "undefined audience -> false");
+assert.equal(isAudienceAllUsers(fixedAudience()), false, "FIXED audience with null criteria must NEVER be All Users");
+assert.equal(isAudienceAllUsers(fixedAudience({ name: "Another fixed" })), false, "FIXED is never All Users regardless of other fields");
+assert.equal(isAudienceAllUsers(dynamicAudience({})), true, "DYNAMIC with filters={} IS intentionally All Users");
+assert.equal(isAudienceAllUsers(dynamicAudience({ moon_sign: ["Aries"] })), false, "DYNAMIC with real filters is not All Users");
+
+console.log("PASS: Saved Audience V2 -- isAudienceAllUsers() is audience_type-aware: a FIXED audience (criteria always null) is never misread as All Users; DYNAMIC filters={} still means All Users, DYNAMIC with real filters does not.");

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { audienceRequest, AudiencesResponse, SavedAudience } from "@/lib/admin/audiencesApi";
+import { audienceRequest, AudiencesResponse, SavedAudience, isAudienceAllUsers } from "@/lib/admin/audiencesApi";
 import { audienceButton } from "../audiences/AudienceEditor";
 import {
   APP_DEEP_LINK_LABELS, APP_DEEP_LINK_TARGETS, AppDeepLinkTarget, CampaignAction, CampaignDraft,
@@ -14,10 +14,6 @@ import SchedulePanel from "./SchedulePanel";
 
 const TITLE_LIMIT = 200;
 const BODY_LIMIT = 500;
-
-function isAudienceAllUsers(audience: SavedAudience | undefined): boolean {
-  return !!audience && Object.keys(audience.criteria?.filters ?? {}).length === 0;
-}
 
 export default function CampaignComposer({ id }: { id?: string }) {
   const router = useRouter();

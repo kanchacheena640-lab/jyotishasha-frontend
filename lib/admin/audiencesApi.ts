@@ -105,6 +105,26 @@ export function editedCriteria(search: string, filters: BasicFilters, original: 
   return next;
 }
 
+// Saved Audience V2 -- FIXED audience All-Users misclassification fix
+// (production regression). audience_type is the authoritative
+// discriminator and must be checked FIRST: a FIXED audience's criteria
+// is always null (explicit users.id membership, never filter-derived),
+// so a naive `Object.keys(criteria?.filters ?? {}).length === 0` check
+// unconditionally treated `criteria: null` the same as an intentionally
+// empty `criteria: {filters: {}}` -- every FIXED audience was shown as
+// "(All Users)" regardless of its actual (correct, non-empty)
+// membership. Absence of criteria is EXPECTED and NORMAL for a FIXED
+// audience; it must never be read as "no targeting criteria." This is a
+// separate, independent check from the backend's own authoritative
+// resolver.is_all_users (a live preview's own field, consumed correctly
+// elsewhere via preview?.is_all_users) -- this one labels the audience
+// from metadata alone, before any preview has loaded.
+export function isAudienceAllUsers(audience: SavedAudience | undefined): boolean {
+  if (!audience) return false;
+  if (audience.audience_type === "fixed") return false;
+  return Object.keys(audience.criteria?.filters ?? {}).length === 0;
+}
+
 export function criteriaSummary(criteria: SavedAudienceCriteria): string[] {
   if (!criteria || criteria.version !== 1 || !criteria.filters || Array.isArray(criteria.filters) || typeof criteria.filters !== "object") return ["Unsupported audience criteria"];
   const labels: Record<string, string> = { search: "Search", age_min: "Minimum age", age_max: "Maximum age", customer_type: "Customer", ask_now_concern: "Ask Now Concern", sade_sati_active: "Sade Sati active" };
