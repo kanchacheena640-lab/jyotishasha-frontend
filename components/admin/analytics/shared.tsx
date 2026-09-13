@@ -7,6 +7,7 @@
 // new visual language is introduced.
 
 import { ReactNode, useEffect, useState } from "react";
+import { PlatformFilter } from "@/lib/admin/analyticsApi";
 
 /** Each section fetches and owns its own loading/error/retry state --
  * matching CampaignMonitor.tsx's own per-panel (AttemptsPanel/
@@ -59,6 +60,45 @@ export function KpiCard({ label, value, hint }: { label: string; value: number |
 
 export function KpiGrid({ children }: { children: ReactNode }) {
   return <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">{children}</div>;
+}
+
+/** "Sessions" = COUNT(DISTINCT session_id) -- the SAME query and value
+ * regardless of platform (never changed here); only the LABEL adapts,
+ * since session_id is genuinely populated by both the app (one id per
+ * process lifetime) and the website (one id per browser tab/session,
+ * lib/analyticsSession.ts) -- calling it "App Sessions" under a Website
+ * filter was actively wrong, not just imprecise. Never called a "GA4
+ * session" or implied equivalent to one -- this is a first-party,
+ * differently-defined count. */
+export function sessionsLabel(platform: PlatformFilter): string {
+  if (platform === "website") return "Website Sessions";
+  if (platform === "app") return "App Sessions";
+  return "Sessions";
+}
+
+/** The backend has no concept of "not available" for these fields --
+ * count_distinct_users()/DAU/WAU/MAU are real integers, always 0 when
+ * genuinely 0. The distinction this makes is purely about what a real
+ * backend 0 for anonymous website traffic actually MEANS: website
+ * events never carry firebase_uid at all (anonymous_ingestion_service.py:
+ * "performs NO identity resolution at all... firebase_uid ... always
+ * literal None"), so this is not "0 people" but "identity not
+ * measurable here" -- shown as text, never as a fabricated non-zero
+ * number and never as a bare 0 that could be misread as real activity
+ * being absent. */
+export function identityMetricValue(platform: PlatformFilter, value: number): number | string {
+  return platform === "website" ? "Not available" : value;
+}
+
+export const WEBSITE_IDENTITY_LIMITATION_NOTE =
+  "Unique-user metrics require signed-in user identity and are not available for anonymous website activity.";
+
+/** Rendered once per section that has identity-dependent cards --
+ * never per card -- and only when Platform = Website (App/All keep
+ * their real backend values with no limitation note at all). */
+export function WebsiteIdentityNote({ platform }: { platform: PlatformFilter }) {
+  if (platform !== "website") return null;
+  return <p className="text-xs text-amber-700">{WEBSITE_IDENTITY_LIMITATION_NOTE}</p>;
 }
 
 export function SectionPanel({

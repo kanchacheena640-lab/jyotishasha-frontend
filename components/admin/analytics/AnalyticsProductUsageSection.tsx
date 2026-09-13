@@ -4,7 +4,8 @@ import {
   AnalyticsWindow, PlatformFilter, findMetric, getEngagement, websiteAnalyticsBatch,
 } from "@/lib/admin/analyticsApi";
 import {
-  EmptyNote, ErrorBlock, KpiCard, KpiGrid, LoadingBlock, RankingTable, SectionPanel, UnavailableNote, useAnalyticsSection,
+  EmptyNote, ErrorBlock, KpiCard, KpiGrid, LoadingBlock, RankingTable, SectionPanel, UnavailableNote, WebsiteIdentityNote,
+  identityMetricValue, useAnalyticsSection,
 } from "./shared";
 
 // Website-only marketing signals (Task 9 S11/S12 -- app_download_intent
@@ -33,10 +34,11 @@ export default function AnalyticsProductUsageSection({ window, platform }: { win
         <div className="space-y-3">
           <KpiGrid>
             <KpiCard label="CTA Clicks" value={engagement.data.cta_clicks_total} />
-            <KpiCard label="Unique CTA Users" value={engagement.data.cta_unique_users} />
+            <KpiCard label="Unique CTA Users" value={identityMetricValue(platform, engagement.data.cta_unique_users)} />
             <KpiCard label="Feature Uses" value={engagement.data.feature_usage_total} />
-            <KpiCard label="Unique Feature Users" value={engagement.data.feature_unique_users} />
+            <KpiCard label="Unique Feature Users" value={identityMetricValue(platform, engagement.data.feature_unique_users)} />
           </KpiGrid>
+          <WebsiteIdentityNote platform={platform} />
 
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div>
