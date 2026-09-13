@@ -12,8 +12,27 @@ const DELIVERY_LABELS: Record<DeliveryStatus, string> = {
   FAILED_PERMANENT: "Failed", UNKNOWN: "Unknown (no confirmed outcome)", SUPPRESSED: "Suppressed",
 };
 
+// Matches notifications/saved_audience_recipient_resolver.py's own
+// EXCLUSION_REASONS exactly (the only keys resolved_exclusion_counts can
+// ever contain). Never widened/guessed here.
+const EXCLUSION_REASON_LABELS: Record<string, string> = {
+  missing_identity_bridge: "Missing identity bridge",
+  missing_profile: "Missing profile",
+  missing_token: "Missing token",
+  preference_suppressed: "Preference suppressed",
+  duplicate_target: "Duplicate target",
+};
+
 function Rate({ value, label }: { value: number | "UNKNOWN"; label: string }) {
   return <span>{label}: <strong>{value === "UNKNOWN" ? "UNKNOWN / NOT AVAILABLE" : `${(value * 100).toFixed(1)}%`}</strong></span>;
+}
+
+function FunnelStep({ label, value }: { label: string; value: number }) {
+  return <span className="whitespace-nowrap">{label}: <strong>{value}</strong></span>;
+}
+
+function FunnelArrow() {
+  return <span aria-hidden className="text-gray-400">&rarr;</span>;
 }
 
 function AttemptsPanel({ deliveryId }: { deliveryId: string }) {
@@ -117,27 +136,88 @@ export default function CampaignMonitor({ campaignId }: { campaignId: string }) 
 
   const m = detail.metrics;
 
+  // Resolved (post-freeze, exact) audience numbers when available; a
+  // SCHEDULED execution not yet due only ever has the baseline (pre-
+  // freeze estimate) -- shown with an explicit "(estimated)" label
+  // rather than silently passing off an estimate as the exact figure.
+  const resolvedAvailable = detail.resolved.matched_user_count != null;
+  const matched = detail.resolved.matched_user_count ?? detail.baseline.matched_user_count;
+  const eligible = detail.resolved.eligible_recipient_count ?? detail.baseline.eligible_recipient_count;
+  const excluded = detail.resolved.excluded_recipient_count ?? 0;
+  const exclusionEntries = Object.entries(detail.resolved.exclusion_counts ?? {}).filter(([, n]) => n > 0);
+
   return <div className="space-y-4 text-gray-900">
     <div>
       <h1 className="text-xl font-semibold">{detail.campaign.title}</h1>
       <p className="text-xs text-gray-500">Campaign {detail.campaign.state} · Execution {detail.state}{detail.hold_reason ? ` (${detail.hold_reason})` : ""}</p>
     </div>
 
-    <div className="grid grid-cols-2 gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm sm:grid-cols-3">
-      <span>Targets: <strong>{m.target_count}</strong></span>
-      {(Object.keys(DELIVERY_LABELS) as DeliveryStatus[]).map(s => (
-        <span key={s}>{DELIVERY_LABELS[s]}: <strong>{m.delivery_counts[s] ?? 0}</strong></span>
-      ))}
+    {/* Audience funnel: Matched -> Eligible -> Targeted, with Excluded
+        visible alongside it rather than hidden inside the funnel arrow. */}
+    <div className="rounded-lg border border-gray-200 p-3 text-sm">
+      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Audience</h2>
+      <div className="flex flex-wrap items-center gap-2">
+        <FunnelStep label="Matched" value={matched} />
+        <FunnelArrow />
+        <FunnelStep label="Eligible" value={eligible} />
+        <FunnelArrow />
+        <FunnelStep label="Targeted" value={m.target_count} />
+        <span className="text-gray-400">·</span>
+        <FunnelStep label="Excluded" value={excluded} />
+      </div>
+      {!resolvedAvailable && (
+        <p className="mt-1 text-xs text-amber-700">Estimated pre-freeze figures -- this execution has not resolved/frozen its final targets yet.</p>
+      )}
+      {exclusionEntries.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600">
+          {exclusionEntries.map(([reason, count]) => (
+            <span key={reason}>{EXCLUSION_REASON_LABELS[reason] ?? reason}: <strong>{count}</strong></span>
+          ))}
+        </div>
+      )}
     </div>
-    <p className="text-xs text-gray-500">&ldquo;Accepted by push provider&rdquo; confirms the provider accepted the request -- it is not proof the message reached the device.</p>
 
-    <div className="grid grid-cols-1 gap-2 rounded-lg border border-gray-200 p-3 text-sm sm:grid-cols-2">
-      <span>Notification opened: <strong>{m.notification_opened_count}</strong></span>
-      <span>Destination opened: <strong>{m.destination_opened_count}</strong></span>
-      <Rate value={m.open_rate} label="Open rate (opened / accepted)" />
-      <Rate value={m.destination_rate} label="Destination rate (destination / opened)" />
-      <span>Conversions (24h last-click, Report/Ask Now/Subscription purchases only): <strong>{m.conversion_count}</strong></span>
-      <Rate value={m.conversion_rate} label="Conversion rate (conversions / accepted)" />
+    {/* Delivery funnel: Attempted -> Accepted by push provider, with the
+        non-accepted outcomes (never labeled "Delivered") visible alongside. */}
+    <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm">
+      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Delivery</h2>
+      <div className="flex flex-wrap items-center gap-2">
+        <FunnelStep label="Attempted" value={m.attempted_count} />
+        <FunnelArrow />
+        <FunnelStep label={DELIVERY_LABELS.ACCEPTED} value={m.delivery_counts.ACCEPTED} />
+      </div>
+      <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-600 sm:grid-cols-3">
+        <span>{DELIVERY_LABELS.PENDING}: <strong>{m.delivery_counts.PENDING}</strong></span>
+        <span>{DELIVERY_LABELS.FAILED_RETRYABLE}: <strong>{m.delivery_counts.FAILED_RETRYABLE}</strong></span>
+        <span>Failed -- retries exhausted: <strong>{m.retry_exhausted_count}</strong></span>
+        <span>Failed -- permanent (e.g. invalid token): <strong>{m.permanent_failure_count}</strong></span>
+        <span>{DELIVERY_LABELS.UNKNOWN}: <strong>{m.delivery_counts.UNKNOWN}</strong></span>
+        <span>{DELIVERY_LABELS.SUPPRESSED}: <strong>{m.delivery_counts.SUPPRESSED}</strong></span>
+      </div>
+      <p className="mt-2 text-xs text-gray-500">&ldquo;Accepted by push provider&rdquo; confirms the provider accepted the request -- it is not proof the message reached the device. No &ldquo;Delivered&rdquo; figure exists because no device-delivery receipt is ever recorded.</p>
+    </div>
+
+    {/* Engagement + conversion funnel: Opened -> Destination Opened -> Conversion. */}
+    <div className="rounded-lg border border-gray-200 p-3 text-sm">
+      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Engagement &amp; conversion</h2>
+      <div className="flex flex-wrap items-center gap-2">
+        <FunnelStep label="Opened" value={m.notification_opened_count} />
+        <FunnelArrow />
+        <FunnelStep label="Destination opened" value={m.destination_opened_count} />
+        <FunnelArrow />
+        <FunnelStep label="Conversions" value={m.conversion_count} />
+      </div>
+      <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <Rate value={m.open_rate} label="Open rate (opened / accepted)" />
+        <Rate value={m.destination_rate} label="Destination rate (destination / opened)" />
+        <Rate value={m.conversion_rate} label="Conversion rate (conversions / accepted)" />
+      </div>
+      <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600">
+        <span>Report: <strong>{m.report_conversion_count}</strong></span>
+        <span>Ask Now: <strong>{m.ask_now_conversion_count}</strong></span>
+        <span>Subscription: <strong>{m.subscription_conversion_count}</strong></span>
+      </div>
+      <p className="mt-2 text-xs text-gray-500">24h last-click attribution -- Report/Ask Now/Subscription purchases only; one user contributes to at most one conversion, ever.</p>
     </div>
 
     <p className="text-xs text-gray-500">

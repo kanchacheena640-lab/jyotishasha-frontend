@@ -197,15 +197,39 @@ export interface HistoryResponse { campaigns: HistoryRow[]; pagination: Campaign
  * mirrored here only as a type, never re-derived client-side. A rate is
  * the literal string "UNKNOWN" (never a fabricated 0%) when its
  * denominator is 0. ACCEPTED must never be rendered as "Delivered"
- * anywhere this type is consumed (N1's explicit prohibition). */
+ * anywhere this type is consumed (N1's explicit prohibition).
+ *
+ * Campaign C Analytics Hardening additions (same backend contract --
+ * see notifications/campaign_metrics_service.py's own module docstring
+ * for the exact formula of each):
+ *   attempted_count                = target_count - PENDING - SUPPRESSED
+ *     (every delivery that had at least one real transport attempt).
+ *   retry_exhausted_count          = of delivery_counts.FAILED_PERMANENT,
+ *     how many reached it only because retries ran out (never a
+ *     genuinely permanent rejection).
+ *   permanent_failure_count        = the remaining, genuinely permanent
+ *     FAILED_PERMANENT deliveries (e.g. an invalid token).
+ *     retry_exhausted_count + permanent_failure_count ==
+ *     delivery_counts.FAILED_PERMANENT, always.
+ *   report_conversion_count / ask_now_conversion_count /
+ *   subscription_conversion_count  = conversion_count split by the
+ *     purchase purpose each attributed user's own winning purchase
+ *     had. Their sum always equals conversion_count -- one user is
+ *     never counted in more than one bucket. */
 export interface CampaignMetrics {
   target_count: number;
+  attempted_count: number;
   delivery_counts: Record<DeliveryStatus, number>;
+  retry_exhausted_count: number;
+  permanent_failure_count: number;
   notification_opened_count: number;
   destination_opened_count: number;
   open_rate: number | "UNKNOWN";
   destination_rate: number | "UNKNOWN";
   conversion_count: number;
+  report_conversion_count: number;
+  ask_now_conversion_count: number;
+  subscription_conversion_count: number;
   conversion_rate: number | "UNKNOWN";
 }
 
