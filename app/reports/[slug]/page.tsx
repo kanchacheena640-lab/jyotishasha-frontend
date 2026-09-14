@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import ReportCheckout from "@/components/reports/ReportCheckout";
+import RelationshipReportRedirect from "@/components/reports/RelationshipReportRedirect";
 import ReportSeoSchema from "@/components/reports/ReportSeoSchema";
 import ReportContent from "@/components/reports/ReportContent";
 import ReportContentDetails from "@/components/reports/ReportContentDetails";
@@ -79,6 +80,10 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default function ReportPage({ params }: Props) {
+  if (params.slug === "relationship_future_report") {
+    return <RelationshipReportRedirect />;
+  }
+
   const report = reportsData.find(
     (r) => r.slug === params.slug
   );

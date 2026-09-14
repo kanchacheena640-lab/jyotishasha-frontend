@@ -64,8 +64,9 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
   const labelClass = "block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider";
 
   // Payment handled by the shared useReportPurchase hook (create order -> checkout ->
-  // capture verification fields -> POST /webhook -> redirect). Only what's specific to this
-  // report -- the two-person form, its validation, and its two-kundali payload shape -- lives here.
+  // capture verification fields -> POST /webhook -> redirect only on backend confirmation).
+  // Only what's specific to this report -- the two-person form, its validation, and its
+  // two-kundali payload shape -- lives here.
   const submit = async () => {
     if (!form.email || !form.email.includes("@")) {
       alert(isHi ? "कृपया सही ईमेल दर्ज करें।" : "Please enter a valid email.");
@@ -76,43 +77,65 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
       alert(isHi ? "भुगतान विफल रहा। पुनः प्रयास करें।" : "Payment failed. Try again.");
     };
 
+    // Paid Report Platform v1.0 -- R7. The COMPLETE primary + partner
+    // payload the new backend (R3) requires is now sent at ORDER-
+    // CREATION time (POST /api/razorpay-order), not resent later at
+    // /webhook -- the backend validates and persists it BEFORE ever
+    // contacting Razorpay. Field names/shape match the backend's own
+    // contract exactly: primary fields flat, partner fields nested
+    // under `partner` unchanged (Order.partner_payload's own existing
+    // shape) -- neither flattened nor renamed. `boy_is_user`/bare
+    // `payment_id`/`order_id` are dropped: confirmed unused by the
+    // backend (love_premium_task.py hard-codes boy_is_user=True itself;
+    // only razorpay_order_id/razorpay_payment_id/razorpay_signature are
+    // ever read from the callback), not a functional change.
+    const orderPayload = {
+      name: form.boy.name,
+      email: form.email,
+      dob: form.boy.dob,
+      tob: form.boy.tob,
+      pob: form.boy.pob,
+      latitude: form.boy.lat,
+      longitude: form.boy.lng,
+      language: form.language,
+      partner: {
+        name: form.girl.name,
+        dob: form.girl.dob,
+        tob: form.girl.tob,
+        pob: form.girl.pob,
+        latitude: form.girl.lat,
+        longitude: form.girl.lng,
+      },
+    };
+
     await purchase({
       productSlug: "relationship_future_report",
+      orderPayload,
       description: isHi ? "रिलेशनशिप भविष्य रिपोर्ट" : "Relationship Future Report",
-      amountMultiplier: 1, // preserves this flow's existing pass-through amount (no rupees->paise conversion)
       image: "/logo.png",
       themeColor: "#7c3aed",
       redirectTo: `/${locale}/thank-you`,
-      buildWebhookPayload: (fields) => ({
-        product: "relationship_future_report",
-        email: form.email,
-        language: form.language,
-        name: form.boy.name,
-        dob: form.boy.dob,
-        tob: form.boy.tob,
-        pob: form.boy.pob,
-        latitude: form.boy.lat,
-        longitude: form.boy.lng,
-        boy_is_user: true,
-        partner: {
-          name: form.girl.name,
-          dob: form.girl.dob,
-          tob: form.girl.tob,
-          pob: form.girl.pob,
-          latitude: form.girl.lat,
-          longitude: form.girl.lng,
-        },
-        payment_id: fields.razorpay_payment_id,
-        order_id: fields.razorpay_order_id,
-        razorpay_order_id: fields.razorpay_order_id,
-        razorpay_payment_id: fields.razorpay_payment_id,
-        razorpay_signature: fields.razorpay_signature,
-      }),
       // This flow never had a script-load check or a payment.failed listener of its own --
       // both previously fell through to the same generic catch-all alert, preserved here.
       onScriptLoadError: genericFailureAlert,
       onOrderCreationError: genericFailureAlert,
       onUnexpectedError: genericFailureAlert,
+      // R7 Section G -- payment succeeded but report generation is
+      // delayed: genuinely paid, never a failure, never "pay again".
+      onProcessingDelayed: () => {
+        alert(isHi
+          ? "आपका भुगतान प्राप्त हो गया है। रिपोर्ट तैयार होने में सामान्य से थोड़ा अधिक समय लग रहा है -- यह ईमेल पर भेज दी जाएगी।"
+          : "Your payment was received. Your report is taking a little longer than usual and will be emailed to you once ready.");
+      },
+      // R7 Section G -- /webhook itself rejected the payment (verification
+      // failed, amount/order mismatch, orphaned payment, manual-review
+      // conflict, ...) or could not be reached at all -- never redirect
+      // to success, never invite a second payment.
+      onFinalizationFailed: () => {
+        alert(isHi
+          ? "आपका भुगतान प्राप्त हो गया है, लेकिन हम रिपोर्ट प्रोसेसिंग की पुष्टि नहीं कर सके। कृपया सहायता टीम से संपर्क करें। कृपया दोबारा भुगतान न करें।"
+          : "Your payment was received, but we couldn't confirm that your report is being processed. Please contact support. Do not pay again.");
+      },
       // onPaymentFailed intentionally omitted: this flow never attached a payment.failed
       // listener before, relying on Razorpay's own modal to surface a failed payment.
     });

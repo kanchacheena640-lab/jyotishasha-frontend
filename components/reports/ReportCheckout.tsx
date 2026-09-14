@@ -39,9 +39,19 @@ const loadScript = (src: string) => {
 // case where Razorpay confirms the charge but /webhook could not be
 // confirmed successful -- kept minimal (just the two IDs a support agent
 // needs) rather than the full backend response shape.
+//
+// R7 -- `kind` distinguishes the backend's own two non-immediate-success
+// outcomes (R6 Section G): "unconfirmed" (the /webhook call itself
+// failed/network-errored/rejected -- the original case this screen was
+// built for) vs "processing_delayed" (payment genuinely PAID; report
+// generation just could not be queued immediately). Same screen, same
+// "do not pay again" guarantee, different copy -- never conflated,
+// since one is a genuine problem and the other is a normal, recoverable
+// delay.
 interface FulfillmentIssue {
   orderId: string;
   paymentId: string;
+  kind: "unconfirmed" | "processing_delayed";
 }
 
 export default function ReportCheckout() {
@@ -169,12 +179,25 @@ export default function ReportCheckout() {
         ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
         : undefined;
 
+      // R7 -- the COMPLETE report/customer payload the new backend (R3)
+      // requires is now sent HERE, at order-creation time, matching the
+      // new backend contract exactly. The backend validates and
+      // persists it BEFORE ever contacting Razorpay -- an incomplete
+      // {product}-only payload is no longer accepted.
       const orderResponse = await fetch(`${base}/api/razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // 🚨 Sirf 'product' bhej rahe hain (amount Flask khud handle karega)
         body: JSON.stringify({
           product: productId,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          dob: form.dob,
+          tob: form.tob,
+          pob: form.pob,
+          latitude: form.latitude,
+          longitude: form.longitude,
+          language: form.language,
           ...(campaignContext ? { campaign_context: campaignContext } : {}),
         }),
       });
@@ -183,7 +206,7 @@ export default function ReportCheckout() {
 
       // 🚨 Flask 'order_id' bhej raha hai, 'id' nahi
       if (!orderData.order_id) {
-        alert(`Server error: ${orderData.error || "Order ID not generated!"}`);
+        alert(`Server error: ${orderData.error || orderData.message || "Order ID not generated!"}`);
         setIsProcessing(false);
         return;
       }
@@ -191,7 +214,11 @@ export default function ReportCheckout() {
       // Step 3: Open Razorpay Popup
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // 🚨 Test key aapki .env me honi chahiye
-        amount: orderData.amount * 100, // Razorpay ko paise (paise) mein chahiye hota hai
+        // R7 -- orderData.amount is ALWAYS already in paise (Order.
+        // amount_paise, the registry-derived, immutable snapshot) --
+        // passed straight to Razorpay with NO client-side multiplication.
+        // Never derived from reportsData.ts's own display price.
+        amount: orderData.amount,
         currency: orderData.currency,
         name: "Jyotishasha",
         description: `${currentReport?.title?.en || "Astrology"} Report`,
@@ -212,20 +239,16 @@ export default function ReportCheckout() {
           // the money has already been taken: the user must never be told
           // the payment failed or be invited to pay again.
           try {
+            // R7 -- /webhook now receives ONLY the Razorpay verification
+            // fields (payment proof), never customer/birth/report data.
+            // The backend already owns the Order (created above at
+            // order-creation time) and resolves it entirely by
+            // razorpay_order_id -- there is nothing left here for it to
+            // trust from this payload.
             const webhookRes = await fetch(`${base}/webhook`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                product: productId,
-                name: form.name,
-                email: form.email,
-                phone: form.phone,
-                dob: form.dob,
-                tob: form.tob,
-                pob: form.pob,
-                latitude: form.latitude,
-                longitude: form.longitude,
-                language: form.language,
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
@@ -233,15 +256,34 @@ export default function ReportCheckout() {
             });
 
             if (!webhookRes.ok) {
+              // R7 Section G -- non-2xx: never redirect to success, never
+              // invite a second payment.
               setFulfillmentIssue({
                 orderId: response.razorpay_order_id,
                 paymentId: response.razorpay_payment_id,
+                kind: "unconfirmed",
               });
               return;
             }
 
-            // Same destination the dedicated Relationship Future Report
-            // flow already redirects to on success -- not a new page.
+            const webhookData = await webhookRes.json().catch(() => null);
+            if (webhookData?.status === "payment_confirmed_processing_delayed") {
+              // Payment is genuinely PAID; generation dispatch is
+              // delayed. Never a failure, never redirected as if the
+              // report were ready.
+              setFulfillmentIssue({
+                orderId: response.razorpay_order_id,
+                paymentId: response.razorpay_payment_id,
+                kind: "processing_delayed",
+              });
+              return;
+            }
+
+            // "success" / "already_processing" / "recovered_success" --
+            // the only backend-confirmed outcomes that mean it is safe
+            // to send the customer to the success page. Same destination
+            // the dedicated Relationship Future Report flow already
+            // redirects to on success -- not a new page.
             window.location.href = `/${currentLang}/thank-you`;
           } catch {
             // Network failure reaching /webhook itself is the same
@@ -249,6 +291,7 @@ export default function ReportCheckout() {
             setFulfillmentIssue({
               orderId: response.razorpay_order_id,
               paymentId: response.razorpay_payment_id,
+              kind: "unconfirmed",
             });
           }
         },
@@ -293,30 +336,41 @@ export default function ReportCheckout() {
   };
 
   if (fulfillmentIssue) {
+    // R7 -- "processing_delayed" is a genuinely PAID, normal, recoverable
+    // delay (never a failure, never "contact support" urgency); every
+    // other case keeps the original "contact support, do not pay again"
+    // copy and WhatsApp CTA unchanged.
+    const isDelayedOnly = fulfillmentIssue.kind === "processing_delayed";
     return (
       <div className="max-w-xl mx-auto px-4 py-10 font-sans text-center">
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-amber-200">
-          <p className="text-4xl mb-4">⚠️</p>
+          <p className="text-4xl mb-4">{isDelayedOnly ? "⏳" : "⚠️"}</p>
           <h2 className="text-xl font-bold text-amber-700 mb-3">
             {currentLang === 'hi' ? 'भुगतान प्राप्त हो गया' : 'Payment Received'}
           </h2>
           <p className="text-gray-700 mb-4">
-            {currentLang === 'hi'
-              ? 'आपका भुगतान सफलतापूर्वक प्राप्त हो गया है, लेकिन हम आपकी रिपोर्ट प्रोसेसिंग की पुष्टि नहीं कर सके। कृपया नीचे दिए गए विवरण के साथ हमारी सहायता टीम से संपर्क करें। कृपया दोबारा भुगतान न करें।'
-              : "Your payment was received successfully, but we couldn't confirm that your report is being processed. Please contact our support team with the details below. Please do not pay again."}
+            {isDelayedOnly
+              ? (currentLang === 'hi'
+                  ? 'आपका भुगतान सफलतापूर्वक प्राप्त हो गया है। आपकी रिपोर्ट तैयार होने में सामान्य से थोड़ा अधिक समय लग रहा है -- यह तैयार होते ही ईमेल पर भेज दी जाएगी। कृपया दोबारा भुगतान न करें।'
+                  : "Your payment was received successfully. Your report is taking a little longer than usual and will be emailed to you once ready. Please do not pay again.")
+              : (currentLang === 'hi'
+                  ? 'आपका भुगतान सफलतापूर्वक प्राप्त हो गया है, लेकिन हम आपकी रिपोर्ट प्रोसेसिंग की पुष्टि नहीं कर सके। कृपया नीचे दिए गए विवरण के साथ हमारी सहायता टीम से संपर्क करें। कृपया दोबारा भुगतान न करें।'
+                  : "Your payment was received successfully, but we couldn't confirm that your report is being processed. Please contact our support team with the details below. Please do not pay again.")}
           </p>
           <div className="bg-gray-50 rounded-xl p-4 text-left text-sm text-gray-600 mb-6 space-y-1">
             <div><strong>{currentLang === 'hi' ? 'ऑर्डर आईडी' : 'Order ID'}:</strong> {fulfillmentIssue.orderId}</div>
             <div><strong>{currentLang === 'hi' ? 'भुगतान आईडी' : 'Payment ID'}:</strong> {fulfillmentIssue.paymentId}</div>
           </div>
-          <a
-            href="https://wa.me/917007012255"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all"
-          >
-            💬 {currentLang === 'hi' ? 'सहायता के लिए व्हाट्सएप पर चैट करें' : 'Chat with support on WhatsApp'}
-          </a>
+          {!isDelayedOnly && (
+            <a
+              href="https://wa.me/917007012255"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all"
+            >
+              💬 {currentLang === 'hi' ? 'सहायता के लिए व्हाट्सएप पर चैट करें' : 'Chat with support on WhatsApp'}
+            </a>
+          )}
         </div>
       </div>
     );

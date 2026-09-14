@@ -28,32 +28,39 @@ export interface RazorpayVerificationFields {
 }
 
 export interface ReportPurchaseOptions {
-  /** Product slug sent to the shared backend as POST /api/razorpay-order { product } */
+  /** Product slug sent to the shared backend as POST /api/razorpay-order { product, ...orderPayload } */
   productSlug: string;
+  /**
+   * Paid Report Platform v1.0 -- R7. The COMPLETE report/customer payload
+   * the new backend (R3/R6) requires BEFORE it will create a Razorpay
+   * order at all -- name/email/dob/tob/pob/latitude/longitude/language,
+   * plus `partner` for relationship_future_report. Sent verbatim
+   * (merged with `product`/`campaign_context`) to POST /api/razorpay-order
+   * -- never resent to /webhook (the backend no longer needs or trusts
+   * customer/birth data at payment-verification time; see the module
+   * docstring on the /webhook call below).
+   */
+  orderPayload: Record<string, unknown>;
   /** Razorpay checkout "description" text shown in the payment modal */
   description: string;
-  /**
-   * Multiplies the backend's returned `amount` before handing it to Razorpay.
-   * The two report flows disagreed on this before unification (one treated the
-   * backend amount as rupees and converted to paise, the other passed it through
-   * unchanged) -- that discrepancy is preserved per-caller here, not resolved,
-   * since resolving it one way or the other would silently change what a real
-   * flow charges. See audit output for details.
-   */
-  amountMultiplier?: number;
   /** Optional Razorpay checkout `image` */
   image?: string;
   /** Optional Razorpay checkout `prefill` (name/email/contact) */
   prefill?: { name?: string; email?: string; contact?: string };
   /** Razorpay checkout modal theme color -- preserved per report type, not unified */
   themeColor: string;
-  /** Where to send the customer once the webhook call has been attempted (existing thank-you behaviour) */
+  /**
+   * Where to send the customer -- but ONLY once /webhook has returned a
+   * backend-CONFIRMED successful/idempotent result (R7 Section G).
+   * Razorpay's own client-side "payment succeeded" callback firing is
+   * never, by itself, enough to redirect here -- that was the exact
+   * class of gap that let a paid-but-never-fulfilled purchase (the
+   * Suresh incident) redirect straight to a thank-you page.
+   */
   redirectTo: string;
-  /** Builds the POST /webhook body; receives the Razorpay verification fields to fold in */
-  buildWebhookPayload: (fields: RazorpayVerificationFields) => Record<string, unknown>;
   /** Razorpay checkout.js itself failed to load */
   onScriptLoadError: () => void;
-  /** Backend didn't return an order_id */
+  /** Backend didn't return an order_id (rejected the payload before ever contacting Razorpay, or Razorpay itself failed) */
   onOrderCreationError: (backendMessage?: string) => void;
   /**
    * Razorpay's payment.failed event. Optional: only attached when supplied, so a
@@ -63,6 +70,22 @@ export interface ReportPurchaseOptions {
   onPaymentFailed?: (description?: string) => void;
   /** Any other thrown error during order creation / checkout setup */
   onUnexpectedError: () => void;
+  /**
+   * /webhook returned 200 with status="payment_confirmed_processing_delayed"
+   * (R6): the payment is genuinely PAID, but report generation could not
+   * be queued immediately. Must NEVER be presented as a failure or as an
+   * invitation to pay again -- and must NOT redirect to redirectTo,
+   * since the report is not confirmed queued.
+   */
+  onProcessingDelayed: () => void;
+  /**
+   * /webhook itself returned a non-2xx (verification failed, amount/
+   * order mismatch, orphaned payment, a manual-review conflict, ...).
+   * Never redirect to redirectTo and never auto-retry payment from here
+   * -- callers should show a safe "contact support, don't pay again"
+   * message, exactly like an unconfirmed-webhook-call failure.
+   */
+  onFinalizationFailed: (message?: string) => void;
 }
 
 export function useReportPurchase() {
@@ -71,17 +94,18 @@ export function useReportPurchase() {
   const purchase = useCallback(async (opts: ReportPurchaseOptions) => {
     const {
       productSlug,
+      orderPayload,
       description,
-      amountMultiplier = 1,
       image,
       prefill,
       themeColor,
       redirectTo,
-      buildWebhookPayload,
       onScriptLoadError,
       onOrderCreationError,
       onPaymentFailed,
       onUnexpectedError,
+      onProcessingDelayed,
+      onFinalizationFailed,
     } = opts;
 
     setIsProcessing(true);
@@ -107,25 +131,38 @@ export function useReportPurchase() {
         ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
         : undefined;
 
+      // R7 -- the COMPLETE report/customer payload (name/email/dob/tob/
+      // pob/latitude/longitude/language/partner) is sent HERE, at order-
+      // creation time, matching the new backend contract exactly. The
+      // backend validates it, persists an internal Order BEFORE ever
+      // contacting Razorpay, and rejects an incomplete payload with a
+      // 4xx before any charge is possible -- there is no longer a
+      // {product}-only path.
       const orderRes = await fetch(`${backend}/api/razorpay-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           product: productSlug,
+          ...orderPayload,
           ...(campaignContext ? { campaign_context: campaignContext } : {}),
         }),
       });
       const orderData = await orderRes.json();
 
       if (!orderData.order_id) {
-        onOrderCreationError(orderData.error);
+        onOrderCreationError(orderData.error || orderData.message);
         return;
       }
 
       await new Promise<void>((resolve) => {
         const options: Record<string, unknown> = {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-          amount: orderData.amount * amountMultiplier,
+          // R7 -- the backend's own `amount` is ALWAYS already in paise
+          // (Order.amount_paise, the registry-derived, immutable
+          // snapshot) -- passed straight to Razorpay with NO client-side
+          // multiplication/division. Never derived from reportsData.ts's
+          // own display price.
+          amount: orderData.amount,
           currency: orderData.currency,
           name: "Jyotishasha",
           description,
@@ -136,20 +173,41 @@ export function useReportPurchase() {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
             };
+            // R7 -- /webhook now receives ONLY the Razorpay verification
+            // fields (payment proof), never customer/birth/report data.
+            // The backend already owns the Order (created above) and
+            // resolves it entirely by razorpay_order_id -- there is
+            // nothing left here for it to trust from this payload.
             try {
-              await fetch(`${backend}/webhook`, {
+              const webhookRes = await fetch(`${backend}/webhook`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(buildWebhookPayload(fields)),
+                body: JSON.stringify(fields),
               });
-            } finally {
-              // Always redirect once the webhook attempt has settled -- the previous
-              // Relationship Future Report code had no try/finally here, so a network
-              // error on this fetch would silently strand the customer with no
-              // redirect and no message. Centralizing the call fixes that edge case
-              // as a side effect; the golden path is unchanged.
-              resolve();
+              const webhookData = await webhookRes.json().catch(() => null);
+
+              if (!webhookRes.ok) {
+                // R7 Section G -- never redirect to success on a non-2xx.
+                onFinalizationFailed(webhookData?.message);
+                return;
+              }
+              if (webhookData?.status === "payment_confirmed_processing_delayed") {
+                // Payment is genuinely PAID; generation dispatch is
+                // delayed. Never a failure, never redirected as if the
+                // report were ready.
+                onProcessingDelayed();
+                return;
+              }
+              // "success" / "already_processing" / "recovered_success" --
+              // the only backend-confirmed outcomes that mean it is safe
+              // to send the customer to the success page.
               window.location.href = redirectTo;
+            } catch {
+              // Network failure reaching /webhook itself -- same "payment
+              // succeeded, fulfillment unconfirmed" case as a 4xx/5xx.
+              onFinalizationFailed();
+            } finally {
+              resolve();
             }
           },
           theme: { color: themeColor },
