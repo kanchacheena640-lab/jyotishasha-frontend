@@ -8,6 +8,7 @@ import { useTranslation, initReactI18next } from "react-i18next";
 import i18n from "i18next";
 import { loadGoogleMapsPlaces } from "@/components/PlaceAutocompleteInput";
 import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
+import { formatCalendarDob } from "@/lib/formatCalendarDob";
 
 
 // Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
@@ -412,7 +413,7 @@ export default function ReportCheckout() {
               selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
               onChange={(date: Date | null) => {
                 if (date) {
-                  const formatted = date.toISOString().split('T')[0];
+                  const formatted = formatCalendarDob(date);
                   setForm(prev => ({ ...prev, dob: formatted }));
                 }
               }}
