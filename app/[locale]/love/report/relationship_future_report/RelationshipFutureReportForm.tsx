@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
 import { useReportPurchase } from "@/hooks/useReportPurchase";
 import { getReportSampleLabel, getReportSampleUrl } from "@/lib/reportSamples";
+import {
+  applyPlaceSelection,
+  applyPobEdit,
+  relationshipPlaceError,
+  restoreStoredPlace,
+  type SelectedPlace,
+} from "@/lib/relationshipPlaceValidation";
 
 interface RelationshipFutureReportFormProps {
   locale: string;
@@ -17,8 +24,9 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
   const [form, setForm] = useState({
     email: "",
     language: locale,
-    boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
-    girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
+    // placeSelected: true only after a real autocomplete suggestion was picked (typed text alone has no coordinates)
+    boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0, placeSelected: false },
+    girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0, placeSelected: false },
   });
 
   // Hydration Guard & Auto-fill
@@ -34,17 +42,14 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
             name: p.user?.name || "", 
             dob: p.user?.dob || "", 
             tob: p.user?.tob || "", 
-            pob: p.user?.pob || "", 
-            lat: p.user?.latitude || p.user?.lat || 0, 
-            lng: p.user?.longitude || p.user?.lng || 0 
+            // a place carried over from the free love-match form counts as resolved only if it has usable coordinates
+            ...restoreStoredPlace(p.user),
           },
           girl: { 
             name: p.partner?.name || "", 
             dob: p.partner?.dob || "", 
             tob: p.partner?.tob || "", 
-            pob: p.partner?.pob || "", 
-            lat: p.partner?.latitude || p.partner?.lat || 0, 
-            lng: p.partner?.longitude || p.partner?.lng || 0 
+            ...restoreStoredPlace(p.partner),
           }
         }));
       } catch (e) {
@@ -61,6 +66,15 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
     }));
   };
 
+  // Birth place: a place is valid only after the customer picks a suggestion (see lib/relationshipPlaceValidation.ts).
+  // Selecting stores name + coordinates together; any manual edit of the text drops the previous selection at once.
+  const selectPlace = (side: "boy" | "girl", place: SelectedPlace) => {
+    setForm((p) => ({ ...p, [side]: applyPlaceSelection(p[side], place) }));
+  };
+  const editPob = (side: "boy" | "girl", value: string) => {
+    setForm((p) => ({ ...p, [side]: applyPobEdit(p[side], value) }));
+  };
+
   const inputClass = "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all";
   const labelClass = "block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider";
 
@@ -71,6 +85,13 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
   const submit = async () => {
     if (!form.email || !form.email.includes("@")) {
       alert(isHi ? "कृपया सही ईमेल दर्ज करें।" : "Please enter a valid email.");
+      return;
+    }
+
+    // Both birth places must be genuinely selected BEFORE any order/payment request can start.
+    const placeError = relationshipPlaceError(form.boy, form.girl, isHi);
+    if (placeError) {
+      alert(placeError);
       return;
     }
 
@@ -205,12 +226,8 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
             <label className={labelClass}>{isHi ? "जन्म स्थान" : "POB"}</label>
             <PlaceAutocompleteInput
               value={form.boy.pob}
-              onChange={(v) => update("boy", "pob", v)}
-              onPlaceSelected={(p) => {
-                update("boy", "pob", p.name);
-                update("boy", "lat", p.lat);
-                update("boy", "lng", p.lng);
-              }}
+              onChange={(v) => editPob("boy", v)}
+              onPlaceSelected={(p) => selectPlace("boy", p)}
             />
           </div>
         </div>
@@ -236,12 +253,8 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
             <label className={labelClass}>{isHi ? "जन्म स्थान" : "POB"}</label>
             <PlaceAutocompleteInput
               value={form.girl.pob}
-              onChange={(v) => update("girl", "pob", v)}
-              onPlaceSelected={(p) => {
-                update("girl", "pob", p.name);
-                update("girl", "lat", p.lat);
-                update("girl", "lng", p.lng);
-              }}
+              onChange={(v) => editPob("girl", v)}
+              onPlaceSelected={(p) => selectPlace("girl", p)}
             />
           </div>
         </div>

@@ -191,6 +191,8 @@ function renderRelationship(locale: string) {
     "@/components/PlaceAutocompleteInput": { default: "PlaceAutocompleteInput" },
     "@/hooks/useReportPurchase": { useReportPurchase: () => ({ purchase: () => { throw new Error("purchase must not run"); }, isProcessing: false }) },
     "@/lib/reportSamples": samples,
+    // pure validation helpers the form now imports (no React/network/payment code)
+    "@/lib/relationshipPlaceValidation": load("lib/relationshipPlaceValidation.ts", {}),
   });
   return Form({ locale });
 }
