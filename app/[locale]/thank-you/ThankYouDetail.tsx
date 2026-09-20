@@ -50,7 +50,7 @@ export default function ThankYouDetail({ locale }: { locale: string }) {
       {/* Navigation CTA */}
       <div className="flex flex-col sm:flex-row gap-4">
         <Link
-          href={`/${currentLang}/reports`} // 👈 Dynamic Locale Path
+          href="/reports" // Reports hub lives at app/reports (not locale-prefixed); /{locale}/reports does not exist (404)
           className="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-600 px-8 py-4 text-white font-bold hover:bg-purple-500 shadow-lg shadow-purple-600/20 transition-all active:scale-95"
         >
           {content.cta}
