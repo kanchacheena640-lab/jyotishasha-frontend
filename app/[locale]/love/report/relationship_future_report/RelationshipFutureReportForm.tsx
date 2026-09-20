@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
 import { useReportPurchase } from "@/hooks/useReportPurchase";
+import { getReportSampleLabel, getReportSampleUrl } from "@/lib/reportSamples";
 
 interface RelationshipFutureReportFormProps {
   locale: string;
@@ -154,6 +155,18 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
             ? "विवाह की सफलता, ग्रहों के दोष और भविष्य की पूरी जानकारी सीधे ईमेल पर।" 
             : "Deep love analysis based on Vedic principles delivered instantly."}
         </p>
+        {/* Secondary, static sample PDF (public/report-samples). Plain anchor: no order, no payment, no backend request. */}
+        <div className="mt-6">
+          <a
+            href={getReportSampleUrl("relationship_future_report", isHi ? "hi" : "en")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-5 py-2 text-sm font-semibold text-purple-200 transition-colors hover:border-purple-300 hover:text-white"
+          >
+            {getReportSampleLabel(isHi ? "hi" : "en")}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
 
       {/* EMAIL */}

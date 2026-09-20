@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
+import { getReportSampleLabel, getReportSampleUrl } from "@/lib/reportSamples";
 
 interface Props {
   report: any;
@@ -70,6 +71,20 @@ export default function ReportContent({
             : "Email in 5 Minutes"}
         </span>
 
+      </div>
+
+      {/* Secondary, static sample PDF (public/report-samples). A plain anchor: no order, no payment,
+          no backend request. Follows the PAGE language, not the checkout's separate Report Language. */}
+      <div className="mb-10">
+        <a
+          href={getReportSampleUrl(report.slug, lang)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-4 py-1.5 text-sm font-medium text-purple-300 transition-colors hover:border-purple-300 hover:text-white"
+        >
+          {getReportSampleLabel(lang)}
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
 
       <div className="max-w-3xl mx-auto text-center">
