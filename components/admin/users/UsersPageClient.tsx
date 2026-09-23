@@ -74,7 +74,7 @@ import {
 import UsersFilterPanel from "./UsersFilterPanel";
 import UsersTable, { UsersTableState } from "./UsersTable";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE_OPTIONS = [8, 25, 50, 100, 200, 300];
 
 interface Chip { key: string; label: string; clear: () => void; }
 
@@ -91,6 +91,7 @@ export default function UsersPageClient() {
   // Users Visual QA Fix #1 note above. Never read by the fetch effect.
   const [draftFilters, setDraftFilters] = useState<BasicFilters>(EMPTY_BASIC_FILTERS);
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(8);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const [data, setData] = useState<RealUsersListResponse | null>(null);
@@ -109,7 +110,7 @@ export default function UsersPageClient() {
   useEffect(() => {
     let cancelled = false;
     setTableState("loading");
-    fetchAdminUsers(searchTerm, filters, page, PAGE_SIZE)
+    fetchAdminUsers(searchTerm, filters, page, pageSize)
       .then((res) => {
         if (cancelled) return;
         setData(res);
@@ -121,13 +122,13 @@ export default function UsersPageClient() {
         setTableState("error");
       });
     return () => { cancelled = true; };
-  }, [searchTerm, filters, page]);
+  }, [searchTerm, filters, page, pageSize]);
 
   function refetch() {
     // Re-triggers the effect above by touching a dependency-neutral
     // path: simplest is to re-run with the same args via a manual call.
     setTableState("loading");
-    fetchAdminUsers(searchTerm, filters, page, PAGE_SIZE)
+    fetchAdminUsers(searchTerm, filters, page, pageSize)
       .then((res) => { setData(res); setTableState("ready"); })
       .catch((err) => {
         setErrorMessage(err instanceof Error ? err.message : "Couldn't load users.");
@@ -414,7 +415,7 @@ export default function UsersPageClient() {
       <div className="flex items-center justify-between mb-2 text-sm">
         <span className="text-gray-600">
           {tableState === "ready" && pagination ? `${pagination.total_count} users found` : " "}
-          {selectedIds.length > 0 && <span className="ml-2 text-indigo-600 font-medium">· {selectedIds.length} selected</span>}
+          <span role="status" className="ml-2 text-indigo-600 font-medium">{selectedIds.length} users selected across pages</span>
         </span>
         <div className="flex items-center gap-3">
           <Link href="/admin/audiences" className="text-xs text-indigo-600 hover:underline">Saved Audiences</Link>
@@ -474,11 +475,29 @@ export default function UsersPageClient() {
         onSaved={saved => { setShowCreateFixed(false); setSelectedIds([]); setAudienceNotice(`Fixed audience “${saved.name}” saved with ${selectedIds.length} member(s).`); }}
       />}
 
+      <div className="mb-3 flex flex-wrap items-center gap-3 text-sm">
+        <label className="flex items-center gap-2">
+          Rows per page
+          <select
+            value={pageSize}
+            onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1); }}
+            className="rounded-lg border border-gray-300 bg-white px-2 py-1 text-gray-900"
+          >
+            {PAGE_SIZE_OPTIONS.map(size => <option key={size} value={size}>{size}</option>)}
+          </select>
+        </label>
+        <button type="button" onClick={() => setSelectedIds([])} disabled={!selectedIds.length}
+          className="text-indigo-600 hover:underline disabled:text-gray-400 disabled:no-underline">
+          Clear Selection
+        </button>
+        {selectedIds.length > 0 && <span className="text-xs text-gray-500">Selection includes users outside the current page or filters.</span>}
+      </div>
+
       <UsersTable
         state={tableState}
         rows={data?.users ?? []}
         page={page}
-        pageSize={PAGE_SIZE}
+        pageSize={pageSize}
         totalCount={pagination?.total_count ?? 0}
         onPageChange={setPage}
         selectedIds={selectedIds}

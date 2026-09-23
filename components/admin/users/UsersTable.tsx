@@ -42,6 +42,7 @@
  * View); min-width is reduced to match the narrower content.
  */
 
+import { useEffect, useMemo, useRef } from "react";
 import { RealUserRow } from "@/lib/admin/usersApi";
 
 export type UsersTableState = "loading" | "error" | "ready";
@@ -94,7 +95,13 @@ export default function UsersTable({
   selectedIds, onToggleSelect, onToggleSelectAllOnPage, onRetry, errorMessage,
 }: Props) {
   const pageIds = rows.map((r) => r.id);
-  const allOnPageSelected = pageIds.length > 0 && pageIds.every((id) => selectedIds.includes(id));
+  const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds]);
+  const allOnPageSelected = pageIds.length > 0 && pageIds.every((id) => selectedSet.has(id));
+  const someOnPageSelected = pageIds.some((id) => selectedSet.has(id));
+  const headerCheckbox = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (headerCheckbox.current) headerCheckbox.current.indeterminate = state === "ready" && someOnPageSelected && !allOnPageSelected;
+  }, [state, someOnPageSelected, allOnPageSelected]);
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 
   return (
@@ -106,6 +113,8 @@ export default function UsersTable({
               <th className={th}>
                 <input
                   type="checkbox"
+                  ref={headerCheckbox}
+                  aria-label="Select users on current page"
                   checked={allOnPageSelected}
                   onChange={(e) => onToggleSelectAllOnPage(pageIds, e.target.checked)}
                   disabled={state !== "ready" || pageIds.length === 0}
@@ -154,7 +163,7 @@ export default function UsersTable({
             {state === "ready" && rows.map((u) => (
               <tr key={u.id} className="hover:bg-gray-50">
                 <td className={td}>
-                  <input type="checkbox" checked={selectedIds.includes(u.id)} onChange={() => onToggleSelect(u.id)} />
+                  <input type="checkbox" aria-label={`Select user ${u.id}`} checked={selectedSet.has(u.id)} onChange={() => onToggleSelect(u.id)} />
                 </td>
                 <td className={td}>
                   <p className="font-medium text-gray-900">{u.name || "—"}</p>
