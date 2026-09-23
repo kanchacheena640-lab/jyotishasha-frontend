@@ -4,9 +4,8 @@
 // needed, locale comes from the route (params.locale), never re-detected.
 
 import Link from "next/link";
-import type { FocusedReportConfig } from "@/app/data/focusedReportsConfig";
+import { getFocusedReportSampleOrPreviewHref, type FocusedReportConfig } from "@/app/data/focusedReportsConfig";
 import type { Locale } from "@/lib/authority-engine/types";
-import { getReportSampleUrl } from "@/lib/reportSamples";
 
 interface Props {
   config: FocusedReportConfig;
@@ -17,9 +16,19 @@ interface Props {
 
 export default function FocusedReportHero({ config, title, question, locale }: Props) {
   const benefits = config.benefits[locale];
+  const hubHref = locale === "hi" ? "/hi/reports/focused" : "/reports/focused";
 
   return (
     <section className="max-w-4xl mx-auto text-center px-4 pt-12 pb-8">
+      {/* Reverse journey back to the hub -- subtle, doesn't compete with the
+          primary purchase CTA below. Present on every focused report page
+          since it lives in the Hero, which every one of the 63 renders. */}
+      <div className="text-left mb-6">
+        <Link href={hubHref} className="text-sm text-slate-400 hover:text-purple-300 transition-colors">
+          {locale === "hi" ? "← सभी रिपोर्ट्स देखें" : "← Explore All Reports"}
+        </Link>
+      </div>
+
       <p className="text-sm font-semibold tracking-wide uppercase text-purple-400 mb-3">
         {locale === "hi" ? "व्यक्तिगत ज्योतिष रिपोर्ट" : "Personalized Astrology Report"}
       </p>
@@ -61,21 +70,22 @@ export default function FocusedReportHero({ config, title, question, locale }: P
             : "Built from your own birth details, emailed to you within minutes of secure payment."}
         </p>
 
-        {/* Secondary "View Sample Report" link -- reuses the existing shared
-            sample-report infrastructure (lib/reportSamples.ts + public/
-            report-samples/), exactly like components/reports/ReportContent.tsx
-            already does for the 25 standard reports. config.questionKey (never
-            humanSlug/title) drives the URL, so #62 can only ever link to its
-            own sample and #63 to its own -- there is no code path for either
-            to open the other's PDF. Plain anchor: no order/payment/backend
-            request, no carousel/modal, no second sample architecture. */}
+        {/* Secondary "View Sample" link -- every one of the 63 gets one now.
+            config.questionKey (never humanSlug/title) drives which
+            destination it resolves to, via the ONE decision point
+            (getFocusedReportSampleOrPreviewHref): #62/#63 open their own
+            real, exact sample PDF (unchanged mechanism/URL); every other
+            product opens the shared, locale-aware Example Report preview
+            page -- never another product's real sample, never implied to
+            be this product's own content. Plain anchor: no order/payment/
+            backend request, no carousel/modal, no second sample architecture. */}
         <a
-          href={getReportSampleUrl(config.questionKey, locale)}
+          href={getFocusedReportSampleOrPreviewHref(config.questionKey, locale)}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-4 py-1.5 text-sm font-medium text-purple-300 transition-colors hover:border-purple-300 hover:text-white"
         >
-          {locale === "hi" ? "Sample Report देखें" : "View Sample Report"}
+          {locale === "hi" ? "Sample देखें" : "View Sample"}
           <span aria-hidden="true">↗</span>
         </a>
       </div>

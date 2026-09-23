@@ -215,17 +215,19 @@ export function middleware(request) {
   // needs to cover), so this only ever runs for paths nothing else matched.
   // Routes outside the localized [locale] architecture (API, admin, the
   // standalone /reports app) are explicitly excluded and keep prior behavior.
-  // P0.5: /en/reports/focused/* is the one /reports/* exception -- it DOES
-  // live inside [locale], so an explicit /en/ prefix there is exactly the
-  // duplicate-URL case this block exists to redirect away, not a route to
-  // leave alone.
+  // P0.5/P0.7: /en/reports/focused and /en/reports/focused/* are the one
+  // /reports/* exception -- they DO live inside [locale] (the hub's own
+  // bare page.tsx included, not just the [slug] pages under it), so an
+  // explicit /en/ prefix there is exactly the duplicate-URL case this
+  // block exists to redirect away, not a route to leave alone. Both the
+  // exact hub path (no trailing slash) and anything under it are covered.
   if (pathname === '/en' || pathname.startsWith('/en/')) {
     const isOutsideLocaleArchitecture =
       pathname.startsWith('/en/api/') ||
       pathname === '/en/admin' ||
       pathname.startsWith('/en/admin/') ||
       ((pathname === '/en/reports' || pathname.startsWith('/en/reports/')) &&
-        !pathname.startsWith('/en/reports/focused/'))
+        !(pathname === '/en/reports/focused' || pathname.startsWith('/en/reports/focused/')))
 
     if (!isOutsideLocaleArchitecture) {
       const url = request.nextUrl.clone()

@@ -3,6 +3,7 @@
 import "@/i18n";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { reportsData, Report } from "../data/reportsData";
 import { useTranslation } from "react-i18next";
 import EEATTrustSnippet from "@/components/EEATTrustSnippet";
@@ -84,6 +85,29 @@ export default function ReportsPageClient() {
       <h1 className="text-4xl font-bold text-center mb-8 text-white">
         {currentLang === 'hi' ? "व्यक्तिगत ज्योतिष रिपोर्ट" : "Personalized Reports"}
       </h1>
+
+      {/* Bridge into the focused-reports hub -- ONE discoverable entry, not
+          a redesign of this page and not a second promotional block.
+          currentLang already drives this page's client-side language
+          toggle (this route has no separate Hindi URL, unlike the
+          locale-scoped focused-reports route), so the link target itself
+          switches to the real Hindi URL when toggled. */}
+      <Link
+        href={currentLang === 'hi' ? '/hi/reports/focused' : '/reports/focused'}
+        className="mb-10 flex items-center justify-between gap-4 rounded-2xl border border-purple-400/30 bg-white/5 px-6 py-4 text-left hover:border-purple-400/60 hover:bg-white/10 transition-colors"
+      >
+        <div>
+          <p className="text-white font-bold">
+            {currentLang === 'hi' ? "फोकस्ड पर्सनलाइज़्ड रिपोर्ट्स" : "Focused Personalised Reports"}
+          </p>
+          <p className="text-slate-400 text-sm">
+            {currentLang === 'hi' ? "63 फोकस्ड सवाल • ₹51 प्रत्येक" : "63 focused questions • ₹51 each"}
+          </p>
+        </div>
+        <span className="text-purple-300 font-medium text-sm whitespace-nowrap">
+          {currentLang === 'hi' ? "देखें" : "Explore"}
+        </span>
+      </Link>
 
       {/* --- Category Filter --- */}
       <div className="sticky top-[72px] md:top-[80px] z-20 flex flex-wrap justify-center gap-3 mb-8 py-4 bg-black/10 backdrop-blur-md rounded-xl">

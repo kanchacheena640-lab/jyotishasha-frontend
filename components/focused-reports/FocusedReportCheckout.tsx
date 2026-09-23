@@ -21,6 +21,7 @@
 import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { User, Calendar, Clock, AlertTriangle, MessageCircle } from "lucide-react";
 import { loadGoogleMapsPlaces } from "@/components/PlaceAutocompleteInput";
 import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
 import { formatCalendarDob } from "@/lib/formatCalendarDob";
@@ -119,15 +120,15 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
 
   const handleSubmit = async () => {
     if (!form.email || !form.dob || !form.tob || !form.pob || !form.name || !form.phone) {
-      alert(currentLang === "hi" ? "❗ कृपया सभी अनिवार्य जानकारी भरें" : "❗ Please fill all required fields");
+      alert(currentLang === "hi" ? "कृपया सभी अनिवार्य जानकारी भरें" : "Please fill all required fields");
       return;
     }
 
     if (form.latitude === "" || form.longitude === "") {
       alert(
         currentLang === "hi"
-          ? "❗ कृपया सूची में से अपना जन्म स्थान चुनें"
-          : "❗ Please select your place of birth from the suggestions list",
+          ? "कृपया सूची में से अपना जन्म स्थान चुनें"
+          : "Please select your place of birth from the suggestions list",
       );
       return;
     }
@@ -263,7 +264,9 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
     return (
       <div className="max-w-xl mx-auto px-4 py-10 font-sans text-center">
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-amber-200">
-          <p className="text-4xl mb-4">{isDelayedOnly ? "⏳" : "⚠️"}</p>
+          <div className="flex justify-center mb-4">
+            {isDelayedOnly ? <Clock className="w-10 h-10 text-amber-600" aria-hidden="true" /> : <AlertTriangle className="w-10 h-10 text-amber-600" aria-hidden="true" />}
+          </div>
           <h2 className="text-xl font-bold text-amber-700 mb-3">
             {currentLang === "hi" ? "भुगतान प्राप्त हो गया" : "Payment Received"}
           </h2>
@@ -287,7 +290,8 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all"
             >
-              💬 {currentLang === "hi" ? "सहायता के लिए व्हाट्सएप पर चैट करें" : "Chat with support on WhatsApp"}
+              <MessageCircle className="w-5 h-5" aria-hidden="true" />
+              {currentLang === "hi" ? "सहायता के लिए व्हाट्सएप पर चैट करें" : "Chat with support on WhatsApp"}
             </a>
           )}
         </div>
@@ -302,8 +306,9 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
       </h2>
 
       <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-50 mb-6">
-        <h3 className="text-lg font-bold mb-4 text-purple-700 border-b pb-2">
-          👤 {currentLang === "hi" ? "व्यक्तिगत विवरण" : "Personal Details"}
+        <h3 className="flex items-center gap-2 text-lg font-bold mb-4 text-purple-700 border-b pb-2">
+          <User className="w-5 h-5" aria-hidden="true" />
+          {currentLang === "hi" ? "व्यक्तिगत विवरण" : "Personal Details"}
         </h3>
         <div className="space-y-4">
           <input name="name" value={form.name} onChange={handleChange} placeholder={currentLang === "hi" ? "पूरा नाम *" : "Full Name *"} className="inputStyle" required />
@@ -313,8 +318,9 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
       </div>
 
       <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-50 mb-8">
-        <h3 className="text-lg font-bold mb-4 text-purple-700 border-b pb-2">
-          🔮 {currentLang === "hi" ? "जन्म विवरण" : "Birth Details"}
+        <h3 className="flex items-center gap-2 text-lg font-bold mb-4 text-purple-700 border-b pb-2">
+          <Calendar className="w-5 h-5" aria-hidden="true" />
+          {currentLang === "hi" ? "जन्म विवरण" : "Birth Details"}
         </h3>
         <div className="space-y-4">
           <div>
@@ -390,6 +396,15 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
           transition: all 0.2s;
           background: #fff;
           color: #1a202c;
+          /* P0 contrast fix: keeps native date/time picker popups and the
+             report-language <select> dropdown light-themed regardless of
+             the visitor's OS/browser dark-mode setting -- the surrounding
+             card is always white, so these must never switch to a
+             dark-mode native rendering. */
+          color-scheme: light;
+        }
+        .inputStyle::placeholder {
+          color: #6b7280;
         }
         .inputStyle:focus {
           border-color: #7c3aed;

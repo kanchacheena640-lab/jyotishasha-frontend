@@ -6,7 +6,7 @@
  *
  * Run with (from the repo root, no new dependencies required):
  *
- *   npx tsc --module commonjs --target es2020 --strict --skipLibCheck \
+ *   npx tsc --module commonjs --target es2020 --strict --skipLibCheck --resolveJsonModule --esModuleInterop \
  *     --outDir .ts-test-out lib/reportSamples.test.ts
  *   node .ts-test-out/lib/reportSamples.test.js
  *
@@ -20,6 +20,7 @@ import * as vm from "vm";
 import * as ts from "typescript";
 import { reportsData } from "../app/data/reportsData";
 import * as samples from "./reportSamples";
+import { focusedReportHasSample, getFocusedReportSampleOrPreviewHref, GENERIC_EXAMPLE_PREVIEW_PATH } from "../app/data/focusedReportsConfig";
 
 const repo = process.cwd();
 let passed = 0;
@@ -236,29 +237,37 @@ check("relationship source: plain anchor, no Link, no download, payment + form u
   assert.ok(source.includes("useReportPurchase") && source.includes("partner: {"));
 });
 
-// ---- 5. focused-pilot CTA (FocusedReportHero, #62/#63) -------------------------------------------------------
+// ---- 5. sample-or-preview CTA (FocusedReportHero, ALL 63) -----------------------------------------------------
+// Sample Preview Strategy update: every one of the 63 now gets a "View
+// Sample" action. #62/#63 open their own real, exact sample PDF
+// (unchanged mechanism/URL); the other 61 open the ONE shared, locale-
+// aware Example Report preview page -- resolved through the single
+// function getFocusedReportSampleOrPreviewHref(), never a second/guessed
+// implementation.
 const FOCUSED_HERO = "components/focused-reports/FocusedReportHero.tsx";
-const EN_FOCUSED_LABEL = "View Sample Report"; // deliberately the SAME EN string as the standard/relationship CTAs
-const HI_FOCUSED_LABEL = "Sample Report देखें"; // deliberately DIFFERENT from HI_LABEL above -- this task's own explicit wording
+const EN_FOCUSED_LABEL = "View Sample";
+const HI_FOCUSED_LABEL = "Sample देखें";
 function renderFocusedHero(questionKey: string, locale: "en" | "hi") {
   const { default: FocusedReportHero } = load(FOCUSED_HERO, {
     "react/jsx-runtime": jsxRuntime,
     "next/link": { default: "Link" },
-    "@/lib/reportSamples": samples,
+    // The REAL implementation (not a duplicate/re-guessed one) -- see the
+    // top-level import above.
+    "@/app/data/focusedReportsConfig": { getFocusedReportSampleOrPreviewHref },
   });
   const config = { questionKey, priceRupees: 51, benefits: { en: ["b1"], hi: ["b1"] } };
   return FocusedReportHero({ config, title: "T", question: "Q", locale });
 }
-for (const [questionKey, locale, expectedFile, label] of [
-  ["major_kundali_obstacles", "en", "major_kundali_obstacles_en.pdf", EN_FOCUSED_LABEL],
-  ["major_kundali_obstacles", "hi", "major_kundali_obstacles_hi.pdf", HI_FOCUSED_LABEL],
-  ["major_kundali_strengths", "en", "major_kundali_strengths_en.pdf", EN_FOCUSED_LABEL],
-  ["major_kundali_strengths", "hi", "major_kundali_strengths_hi.pdf", HI_FOCUSED_LABEL],
+for (const [questionKey, locale, expectedFile] of [
+  ["major_kundali_obstacles", "en", "major_kundali_obstacles_en.pdf"],
+  ["major_kundali_obstacles", "hi", "major_kundali_obstacles_hi.pdf"],
+  ["major_kundali_strengths", "en", "major_kundali_strengths_en.pdf"],
+  ["major_kundali_strengths", "hi", "major_kundali_strengths_hi.pdf"],
 ] as const) {
-  check(`#${questionKey === "major_kundali_obstacles" ? "62" : "63"} ${locale}: exactly one sample link -> ${expectedFile}`, () => {
+  check(`#${questionKey === "major_kundali_obstacles" ? "62" : "63"} ${locale}: exactly one sample link -> real PDF ${expectedFile} (exact sample behavior unchanged)`, () => {
     const found = anchors(renderFocusedHero(questionKey, locale));
     assert.equal(found.length, 1);
-    assertSecondarySampleAnchor(found[0], `/report-samples/${expectedFile}`, label);
+    assertSecondarySampleAnchor(found[0], `/report-samples/${expectedFile}`, locale === "hi" ? HI_FOCUSED_LABEL : EN_FOCUSED_LABEL);
   });
 }
 check("#62 never resolves to #63's sample file and vice versa, for either language", () => {
@@ -283,12 +292,24 @@ check("FocusedReportHero source: driven by config.questionKey (never humanSlug/t
     .split("\n")
     .filter((line) => !/^\s*\/\//.test(line))
     .join("\n");
-  assert.ok(source.includes('from "@/lib/reportSamples"'));
-  assert.ok(source.includes("getReportSampleUrl(config.questionKey, locale)"));
+  assert.ok(source.includes("getFocusedReportSampleOrPreviewHref(config.questionKey, locale)"));
   assert.ok(!/config\.humanSlug/.test(source));
   assert.ok(!/\bdownload\b/.test(source));
   assert.ok(source.includes('target="_blank"') && source.includes('rel="noopener noreferrer"'));
   assert.ok(!/carousel|modal|Modal|Carousel/i.test(codeOnly));
+});
+check("a product with NO real sample PDF (e.g. promotion_timing, one of the other 61) STILL shows exactly one 'View Sample' link -- pointing at the shared generic Example Report preview, never absent, never a broken/fake per-product PDF", () => {
+  for (const locale of ["en", "hi"] as const) {
+    const found = anchors(renderFocusedHero("promotion_timing", locale));
+    assert.equal(found.length, 1, `promotion_timing/${locale} must render exactly one sample/preview link`);
+    const expectedHref = locale === "hi" ? `/hi${GENERIC_EXAMPLE_PREVIEW_PATH}` : GENERIC_EXAMPLE_PREVIEW_PATH;
+    assertSecondarySampleAnchor(found[0], expectedHref, locale === "hi" ? HI_FOCUSED_LABEL : EN_FOCUSED_LABEL);
+  }
+});
+check("the generic Example Report preview link is locale-correct for EVERY one of the 61 non-sample products, always resolving through getFocusedReportSampleOrPreviewHref (never a second implementation)", () => {
+  const source = read(FOCUSED_HERO);
+  assert.ok(source.includes("getFocusedReportSampleOrPreviewHref(config.questionKey, locale)"));
+  assert.ok(!/\{focusedReportHasSample/.test(source), "must no longer conditionally hide the link -- every product gets one now");
 });
 check("the 4 focused-pilot sample PDFs visibly identify themselves as samples (EN: SAMPLE REPORT, HI: उदाहरण रिपोर्ट)", () => {
   // Node's PDF.js/pypdf-equivalent text extraction isn't available here (no
@@ -302,7 +323,94 @@ check("the 4 focused-pilot sample PDFs visibly identify themselves as samples (E
   assert.ok(enText.includes("SAMPLE REPORT"), "EN sample PDF must contain the literal SAMPLE REPORT stamp");
 });
 
-// ---- 6. noindex header --------------------------------------------------------------------------------------------------
+// ---- 6. DUAL checkout contract (FocusedDualReportCheckout, the 9 focused_dual_v1 products) --------------------
+const FOCUSED_DUAL_CHECKOUT = "components/focused-reports/FocusedDualReportCheckout.tsx";
+function renderFocusedDualCheckout(questionKey: string, category: string, locale: "en" | "hi") {
+  const { default: FocusedDualReportCheckout } = load(FOCUSED_DUAL_CHECKOUT, {
+    "react/jsx-runtime": jsxRuntime,
+    // Same technique as renderRelationship() above: React itself is
+    // stubbed so useState/useEffect/useRef run without a real render
+    // context, reflecting the component's INITIAL state only (no
+    // interactivity exercised here -- see that function's own comment).
+    react: {
+      useState: (init: unknown) => [init, () => undefined],
+      useEffect: () => undefined,
+      useRef: (init: unknown) => ({ current: init }),
+    },
+    "@/components/PlaceAutocompleteInput": { default: "PlaceAutocompleteInput" },
+    "@/hooks/useReportPurchase": {
+      useReportPurchase: () => ({ purchase: () => { throw new Error("purchase must not run in this render-only test"); }, isProcessing: false }),
+    },
+    // The REAL, already-unit-tested pure validation module -- not re-mocked.
+    "@/lib/relationshipPlaceValidation": load("lib/relationshipPlaceValidation.ts", {}),
+    "@/lib/websiteEvents": { WebsiteEvents: { reportViewed() {}, formStarted() {}, formCompleted() {}, beginCheckout() {} } },
+    // P0 visual fix -- string-typed stand-ins (this harness never actually
+    // renders DOM, see jsxRuntime above: type is just stored, never invoked).
+    "lucide-react": { User: "User", Users: "Users", Clock: "Clock", AlertTriangle: "AlertTriangle", MessageCircle: "MessageCircle" },
+  });
+  const config = { questionKey, category, priceRupees: 51, title: { en: "T", hi: "टी" } };
+  return FocusedDualReportCheckout({ config, locale });
+}
+check("DUAL checkout renders exactly 2 PlaceAutocompleteInput instances (primary + partner) and NO phone field for either person", () => {
+  const tree = renderFocusedDualCheckout("relationship_lead_to_marriage", "relationship", "en");
+  const placeInputs: any[] = [];
+  walk(tree, (el) => { if (el.type === "PlaceAutocompleteInput") placeInputs.push(el); });
+  assert.equal(placeInputs.length, 2, "expected exactly one place field per person");
+  const allInputs: any[] = [];
+  walk(tree, (el) => { if (el.type === "input") allInputs.push(el); });
+  assert.ok(!allInputs.some((i) => i.props.type === "tel" || i.props.name === "phone"), "no phone input anywhere -- matches the proven relationship form's own contract");
+  assert.ok(allInputs.some((i) => i.props.type === "email"), "an email field must exist (required by LOVE_PREMIUM_PRIMARY_REQUIRED_FIELDS)");
+});
+check("DUAL checkout's order payload exactly matches the backend's focused_dual_v1 contract: primary flat, partner nested, no phone/email for partner", () => {
+  const source = read(FOCUSED_DUAL_CHECKOUT);
+  assert.ok(/productSlug:\s*config\.questionKey/.test(source), "product must be config.questionKey, never humanSlug/title");
+  assert.ok(!/config\.humanSlug/.test(source));
+  for (const field of ["name: primary.name", "dob: primary.dob", "tob: primary.tob", "pob: primary.pob", "latitude: primary.lat", "longitude: primary.lng"]) {
+    assert.ok(source.includes(field), field);
+  }
+  assert.ok(source.includes("email,"), "email must be sent (flat, primary only)");
+  assert.ok(!/primary\.phone|partner\.phone/.test(source), "phone must never appear for either person");
+  assert.ok(/partner:\s*\{/.test(source), "partner fields must be nested under `partner`");
+  for (const field of ["name: partner.name", "dob: partner.dob", "tob: partner.tob", "pob: partner.pob", "latitude: partner.lat", "longitude: partner.lng"]) {
+    assert.ok(source.includes(field), field);
+  }
+  assert.ok(!/partner\.email/.test(source), "partner must never have an email field, matching LOVE_PREMIUM_PARTNER_REQUIRED_FIELDS");
+});
+check("DUAL checkout's own header documents the exact backend contract it was built against (LOVE_PREMIUM_PRIMARY/PARTNER_REQUIRED_FIELDS, order_service.py) -- not guessed", () => {
+  const source = read(FOCUSED_DUAL_CHECKOUT);
+  assert.ok(source.includes("LOVE_PREMIUM_PRIMARY_REQUIRED_FIELDS"));
+  assert.ok(source.includes("LOVE_PREMIUM_PARTNER_REQUIRED_FIELDS"));
+  assert.ok(source.includes("order_service.py"));
+});
+check("DUAL checkout reuses lib/relationshipPlaceValidation.ts (applyPlaceSelection/applyPobEdit/relationshipPlaceError) -- no second/divergent place-validation implementation", () => {
+  const source = read(FOCUSED_DUAL_CHECKOUT);
+  assert.ok(source.includes('from "@/lib/relationshipPlaceValidation"'));
+  assert.ok(source.includes("applyPlaceSelection") && source.includes("applyPobEdit") && source.includes("relationshipPlaceError"));
+});
+check("DUAL checkout reuses hooks/useReportPurchase.ts for the entire Razorpay/webhook flow -- no hand-rolled duplicate of that logic", () => {
+  const source = read(FOCUSED_DUAL_CHECKOUT);
+  assert.ok(source.includes('from "@/hooks/useReportPurchase"'));
+  assert.ok(!/loadScript\(|checkout\.razorpay\.com/.test(source), "must not re-implement the SDK-loading logic FocusedReportCheckout.tsx has for SELF");
+});
+check("DUAL checkout's inactive-product handling never echoes the backend's raw error/message text (same P0.5 Part 6 fix as SELF)", () => {
+  const source = read(FOCUSED_DUAL_CHECKOUT);
+  const block = source.slice(source.indexOf("onOrderCreationError"), source.indexOf("onUnexpectedError"));
+  assert.ok(!/backendMessage/.test(block.split("=>")[1] || ""), "the backendMessage argument must never be interpolated into the alert");
+  assert.ok(/Please try again later|पुनः प्रयास करें/.test(block));
+});
+check("DUAL checkout fires exactly 4 analytics calls, all (config.questionKey, config.category, currentLang), never a form field", () => {
+  const source = read(FOCUSED_DUAL_CHECKOUT);
+  const calls = source.match(/WebsiteEvents\.\w+\([^)]*\)/g) || [];
+  assert.equal(calls.length, 4, `expected exactly 4 WebsiteEvents calls, found ${calls.length}`);
+  for (const call of calls) {
+    assert.ok(/\(config\.questionKey, config\.category, currentLang\)/.test(call), call);
+    for (const piiField of ["primary.name", "primary.dob", "partner.name", "partner.dob", "email"]) {
+      assert.ok(!call.includes(piiField), `${call} must never include ${piiField}`);
+    }
+  }
+});
+
+// ---- 7. noindex header --------------------------------------------------------------------------------------------------
 check("vercel.json: /report-samples/:path* -> X-Robots-Tag: noindex, nofollow (and nothing broader)", () => {
   const config = JSON.parse(read("vercel.json"));
   const rules = (config.headers as any[]).filter(h => h.headers.some((x: any) => x.key === "X-Robots-Tag"));

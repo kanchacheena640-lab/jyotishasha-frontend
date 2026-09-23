@@ -1,0 +1,254 @@
+{
+  "areas_needing_attention": {
+    "en": "Areas Needing Attention",
+    "hi": "ध्यान देने वाले जीवन क्षेत्र"
+  },
+  "best_business_periods": {
+    "en": "Business Opportunity Windows",
+    "hi": "बिज़नेस के अच्छे समय"
+  },
+  "best_career_years": {
+    "en": "Career Growth Years",
+    "hi": "करियर के अच्छे साल"
+  },
+  "best_period_to_switch": {
+    "en": "Job Switch Windows",
+    "hi": "नौकरी बदलने के अवसर"
+  },
+  "business_expansion_timing": {
+    "en": "Business Expansion",
+    "hi": "बिज़नेस बढ़ाने का समय"
+  },
+  "business_growth_timing": {
+    "en": "Business Growth",
+    "hi": "बिज़नेस की बढ़ोतरी"
+  },
+  "business_slowdown_easing": {
+    "en": "Business Slowdown",
+    "hi": "बिज़नेस की सुस्ती"
+  },
+  "business_start_timing": {
+    "en": "Starting a Business",
+    "hi": "बिज़नेस शुरू करने का समय"
+  },
+  "career_growth_delay_reason": {
+    "en": "Career Growth Delays",
+    "hi": "करियर की देरी"
+  },
+  "career_improvement_timing": {
+    "en": "Career Improvement",
+    "hi": "करियर में सुधार"
+  },
+  "conflict_areas": {
+    "en": "Understanding Conflict",
+    "hi": "टकराव को समझना"
+  },
+  "current_phase_meaning": {
+    "en": "Understanding Your Current Phase",
+    "hi": "मौजूदा समय को समझना"
+  },
+  "debt_pressure_easing": {
+    "en": "Debt Pressure",
+    "hi": "कर्ज के दबाव में राहत"
+  },
+  "emotional_communication_fit": {
+    "en": "Emotional and Communication Fit",
+    "hi": "भावनाओं और बातचीत का तालमेल"
+  },
+  "exam_preparation_period": {
+    "en": "Exam Preparation",
+    "hi": "परीक्षा की तैयारी"
+  },
+  "financial_improvement_timing": {
+    "en": "Financial Improvement",
+    "hi": "आर्थिक स्थिति में सुधार"
+  },
+  "financial_pressure_easing": {
+    "en": "Financial Pressure",
+    "hi": "आर्थिक दबाव में राहत"
+  },
+  "focus_to_use_strengths": {
+    "en": "Putting Strengths to Work",
+    "hi": "ताकतों का सही इस्तेमाल"
+  },
+  "foreign_plans_delay_reason": {
+    "en": "Overseas Plans Delayed",
+    "hi": "विदेश की योजना में देरी"
+  },
+  "foreign_settlement_timing": {
+    "en": "Settling Abroad",
+    "hi": "विदेश में बसना"
+  },
+  "foreign_work_timing": {
+    "en": "Working Abroad",
+    "hi": "विदेश में काम"
+  },
+  "going_abroad_timing": {
+    "en": "Going Abroad",
+    "hi": "विदेश जाने का समय"
+  },
+  "higher_education_timing": {
+    "en": "Higher Education",
+    "hi": "उच्च शिक्षा का समय"
+  },
+  "important_years_ahead": {
+    "en": "Important Years Ahead",
+    "hi": "आगे के महत्वपूर्ण साल"
+  },
+  "income_increase_timing": {
+    "en": "Income Growth",
+    "hi": "आमदनी में बढ़ोतरी"
+  },
+  "job_change_now": {
+    "en": "Job Change Timing",
+    "hi": "नौकरी बदलने का समय"
+  },
+  "job_gap_easing": {
+    "en": "Employment Gap",
+    "hi": "नौकरी के अंतराल में राहत"
+  },
+  "job_search_start_timing": {
+    "en": "Job Search Timing",
+    "hi": "नौकरी तलाशने का समय"
+  },
+  "kundali_match_for_marriage": {
+    "en": "Kundali Match for Marriage",
+    "hi": "शादी के लिए कुंडली मिलान"
+  },
+  "life_direction": {
+    "en": "Life Direction",
+    "hi": "जीवन की दिशा"
+  },
+  "long_term_compatibility": {
+    "en": "Long-Term Compatibility",
+    "hi": "लंबे समय का तालमेल"
+  },
+  "major_kundali_obstacles": {
+    "en": "Major Obstacles in Your Kundali",
+    "hi": "आपकी कुंडली की प्रमुख बाधाएँ"
+  },
+  "major_kundali_strengths": {
+    "en": "Major Strengths in Your Kundali",
+    "hi": "आपकी कुंडली की प्रमुख शक्तियाँ"
+  },
+  "major_turning_points": {
+    "en": "Major Life Phases",
+    "hi": "जीवन के बड़े बदलाव"
+  },
+  "marriage_chances_timing": {
+    "en": "Marriage Prospects",
+    "hi": "शादी की संभावनाओं का समय"
+  },
+  "marriage_delay_easing": {
+    "en": "Easing Marriage Delays",
+    "hi": "शादी की देरी में राहत"
+  },
+  "marriage_delay_reason": {
+    "en": "Marriage Delays",
+    "hi": "शादी में देरी"
+  },
+  "marriage_talks_current_period": {
+    "en": "Marriage Discussions",
+    "hi": "शादी की बातचीत"
+  },
+  "money_growth_periods": {
+    "en": "Financial Growth Windows",
+    "hi": "आर्थिक बढ़ोतरी के समय"
+  },
+  "natural_strengths": {
+    "en": "Natural Strengths",
+    "hi": "प्राकृतिक ताकतें"
+  },
+  "new_job_timing": {
+    "en": "New Job Opportunities",
+    "hi": "नई नौकरी के अवसर"
+  },
+  "new_venture_partnership_timing": {
+    "en": "New Venture or Partnership",
+    "hi": "नया काम या पार्टनरशिप"
+  },
+  "next_life_change_period": {
+    "en": "Next Phase Change",
+    "hi": "अगला जीवन बदलाव"
+  },
+  "next_strong_career_period": {
+    "en": "Next Career Opportunity",
+    "hi": "करियर का अगला मजबूत समय"
+  },
+  "own_home_timing": {
+    "en": "A Home of Your Own",
+    "hi": "अपना घर लेने का समय"
+  },
+  "promotion_timing": {
+    "en": "Promotion Report",
+    "hi": "प्रमोशन रिपोर्ट"
+  },
+  "property_current_period": {
+    "en": "Property Readiness Now",
+    "hi": "अभी प्रॉपर्टी की तैयारी"
+  },
+  "property_delay_reason": {
+    "en": "Property Purchase Delays",
+    "hi": "प्रॉपर्टी लेने में देरी"
+  },
+  "property_purchase_timing": {
+    "en": "Property Purchase Timing",
+    "hi": "प्रॉपर्टी खरीदने का समय"
+  },
+  "property_strongest_period": {
+    "en": "Property Opportunity Windows",
+    "hi": "प्रॉपर्टी के मजबूत समय"
+  },
+  "relationship_care_periods": {
+    "en": "Relationship Care Periods",
+    "hi": "रिश्ते में ध्यान देने के समय"
+  },
+  "relationship_lead_to_marriage": {
+    "en": "Relationship and Marriage",
+    "hi": "रिश्ता और शादी"
+  },
+  "relationship_strengths_risks": {
+    "en": "Relationship Strengths and Challenges",
+    "hi": "रिश्ते की ताकत और चुनौतियाँ"
+  },
+  "relationship_to_marriage_window": {
+    "en": "Relationship Towards Marriage",
+    "hi": "रिश्ते से शादी की ओर"
+  },
+  "relocation_timing": {
+    "en": "Relocation Timing",
+    "hi": "शिफ्ट होने का समय"
+  },
+  "right_time_to_consider_marriage": {
+    "en": "Considering Marriage Together",
+    "hi": "साथ शादी पर विचार"
+  },
+  "salary_growth_timing": {
+    "en": "Salary Growth",
+    "hi": "सैलरी में बढ़ोतरी"
+  },
+  "strengthen_relationship": {
+    "en": "Strengthening Your Relationship",
+    "hi": "रिश्ता मजबूत बनाना"
+  },
+  "strongest_marriage_periods": {
+    "en": "Marriage Windows",
+    "hi": "शादी के मजबूत समय"
+  },
+  "study_abroad": {
+    "en": "Study Abroad",
+    "hi": "विदेश में पढ़ाई"
+  },
+  "study_progress_improvement": {
+    "en": "Study Progress",
+    "hi": "पढ़ाई में प्रगति"
+  },
+  "study_strong_period": {
+    "en": "Study Support",
+    "hi": "पढ़ाई के अनुकूल समय"
+  },
+  "work_recognition_timing": {
+    "en": "Work Recognition",
+    "hi": "काम की पहचान"
+  }
+}

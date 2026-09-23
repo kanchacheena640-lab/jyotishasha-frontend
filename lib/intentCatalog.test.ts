@@ -182,12 +182,18 @@ check("the catalog is wired only through the approved P0.4 focused-reports entry
     }
   };
   for (const dir of ["app", "components", "hooks", "lib"]) walk(dir);
-  // P0.4 (focused-report pilot) intentionally wires the catalog through
-  // exactly two approved files: the frontend config layer, and the one
-  // dynamic route that consumes it. Everything else -- the old 25-report
-  // catalog, every other route/component/hook -- must stay untouched; any
-  // other importer showing up here is unapproved wiring, not progress.
-  const approved = new Set(["app/data/focusedReportsConfig.ts", "app/[locale]/reports/focused/[slug]/page.tsx"]);
+  // P0.4 wired the catalog through the frontend config layer and the one
+  // dynamic product route; P0.7 (all 63 routable + the hub) adds exactly
+  // one more approved importer, the hub page itself (it groups all 63 by
+  // category, so it needs intentCategories/intentQuestions directly).
+  // Everything else -- the old 25-report catalog, every other route/
+  // component/hook -- must stay untouched; any other importer showing up
+  // here is unapproved wiring, not progress.
+  const approved = new Set([
+    "app/data/focusedReportsConfig.ts",
+    "app/[locale]/reports/focused/[slug]/page.tsx",
+    "app/[locale]/reports/focused/page.tsx",
+  ]);
   const unexpected = importers.filter((f) => !approved.has(f));
   assert.deepEqual(unexpected, []);
   assert.ok(importers.includes("app/data/focusedReportsConfig.ts"));
