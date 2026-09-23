@@ -60,11 +60,18 @@ check("the helper is tiny and has no product table, network or analytics", () =>
   assert.ok(!/career_report|relationship_future_report/.test(source.replace(/\/\*[\s\S]*?\*\//, "")));
 });
 
-// ---- 2. the 50 static files ---------------------------------------------------------------------------------
+// ---- 2. the 50 standard/relationship files + 4 focused-pilot (#62/#63) files ---------------------------------
 const sampleDir = path.join(repo, "public/report-samples");
-check("exactly 50 files, every one a valid PDF named <slug>_<en|hi>.pdf", () => {
+// P0.6 (sample task) added exactly 4 files here: major_kundali_obstacles_{en,hi}.pdf,
+// major_kundali_strengths_{en,hi}.pdf -- the #62/#63 pilot samples. Nothing else in
+// this directory changed; the original 50 are still exactly the original 50.
+const FOCUSED_PILOT_SAMPLE_FILES = [
+  "major_kundali_obstacles_en.pdf", "major_kundali_obstacles_hi.pdf",
+  "major_kundali_strengths_en.pdf", "major_kundali_strengths_hi.pdf",
+];
+check("exactly 54 files (the original 50 + the 4 focused-pilot samples), every one a valid PDF named <slug>_<en|hi>.pdf", () => {
   const files = fs.readdirSync(sampleDir);
-  assert.equal(files.length, 50);
+  assert.equal(files.length, 54);
   for (const f of files) {
     assert.match(f, /^[a-z_]+_(en|hi)\.pdf$/);
     assert.equal(fs.readFileSync(path.join(sampleDir, f)).subarray(0, 5).toString("latin1"), "%PDF-");
@@ -79,12 +86,19 @@ check("every catalog slug (25) has both an EN and a HI sample at the helper's ex
     }
   }
 });
-check("24 standard EN + 24 standard HI + relationship EN + HI", () => {
+check("24 standard EN + 24 standard HI + relationship EN + HI (unchanged by the focused-pilot addition)", () => {
   const files = fs.readdirSync(sampleDir);
-  const standard = files.filter(f => !f.startsWith("relationship_future_report_"));
+  const standard = files.filter(
+    (f) => !f.startsWith("relationship_future_report_") && !FOCUSED_PILOT_SAMPLE_FILES.includes(f),
+  );
   assert.equal(standard.filter(f => f.endsWith("_en.pdf")).length, 24);
   assert.equal(standard.filter(f => f.endsWith("_hi.pdf")).length, 24);
   assert.ok(files.includes("relationship_future_report_en.pdf") && files.includes("relationship_future_report_hi.pdf"));
+});
+check("the 4 focused-pilot sample files exist, exactly these 4 and no others with that prefix", () => {
+  const files = fs.readdirSync(sampleDir);
+  const pilotFiles = files.filter((f) => f.startsWith("major_kundali_"));
+  assert.deepEqual(pilotFiles.sort(), [...FOCUSED_PILOT_SAMPLE_FILES].sort());
 });
 
 // ---- helpers to execute the REAL components in an isolated context -----------------------------------------------
@@ -222,7 +236,73 @@ check("relationship source: plain anchor, no Link, no download, payment + form u
   assert.ok(source.includes("useReportPurchase") && source.includes("partner: {"));
 });
 
-// ---- 5. noindex header --------------------------------------------------------------------------------------------------
+// ---- 5. focused-pilot CTA (FocusedReportHero, #62/#63) -------------------------------------------------------
+const FOCUSED_HERO = "components/focused-reports/FocusedReportHero.tsx";
+const EN_FOCUSED_LABEL = "View Sample Report"; // deliberately the SAME EN string as the standard/relationship CTAs
+const HI_FOCUSED_LABEL = "Sample Report देखें"; // deliberately DIFFERENT from HI_LABEL above -- this task's own explicit wording
+function renderFocusedHero(questionKey: string, locale: "en" | "hi") {
+  const { default: FocusedReportHero } = load(FOCUSED_HERO, {
+    "react/jsx-runtime": jsxRuntime,
+    "next/link": { default: "Link" },
+    "@/lib/reportSamples": samples,
+  });
+  const config = { questionKey, priceRupees: 51, benefits: { en: ["b1"], hi: ["b1"] } };
+  return FocusedReportHero({ config, title: "T", question: "Q", locale });
+}
+for (const [questionKey, locale, expectedFile, label] of [
+  ["major_kundali_obstacles", "en", "major_kundali_obstacles_en.pdf", EN_FOCUSED_LABEL],
+  ["major_kundali_obstacles", "hi", "major_kundali_obstacles_hi.pdf", HI_FOCUSED_LABEL],
+  ["major_kundali_strengths", "en", "major_kundali_strengths_en.pdf", EN_FOCUSED_LABEL],
+  ["major_kundali_strengths", "hi", "major_kundali_strengths_hi.pdf", HI_FOCUSED_LABEL],
+] as const) {
+  check(`#${questionKey === "major_kundali_obstacles" ? "62" : "63"} ${locale}: exactly one sample link -> ${expectedFile}`, () => {
+    const found = anchors(renderFocusedHero(questionKey, locale));
+    assert.equal(found.length, 1);
+    assertSecondarySampleAnchor(found[0], `/report-samples/${expectedFile}`, label);
+  });
+}
+check("#62 never resolves to #63's sample file and vice versa, for either language", () => {
+  assert.notEqual(
+    anchors(renderFocusedHero("major_kundali_obstacles", "en"))[0].props.href,
+    anchors(renderFocusedHero("major_kundali_strengths", "en"))[0].props.href,
+  );
+  assert.notEqual(
+    anchors(renderFocusedHero("major_kundali_obstacles", "hi"))[0].props.href,
+    anchors(renderFocusedHero("major_kundali_strengths", "hi"))[0].props.href,
+  );
+});
+check("FocusedReportHero source: driven by config.questionKey (never humanSlug/title), plain anchor, no Link/download, no carousel/modal", () => {
+  const source = read(FOCUSED_HERO);
+  // Strip comments first (including multi-line JSX {/* ... */} blocks) --
+  // this file's own explanatory comments are allowed to name what was
+  // deliberately NOT built; only actual code (a real import, component or
+  // class name) would be a violation.
+  const codeOnly = source
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .split("\n")
+    .filter((line) => !/^\s*\/\//.test(line))
+    .join("\n");
+  assert.ok(source.includes('from "@/lib/reportSamples"'));
+  assert.ok(source.includes("getReportSampleUrl(config.questionKey, locale)"));
+  assert.ok(!/config\.humanSlug/.test(source));
+  assert.ok(!/\bdownload\b/.test(source));
+  assert.ok(source.includes('target="_blank"') && source.includes('rel="noopener noreferrer"'));
+  assert.ok(!/carousel|modal|Modal|Carousel/i.test(codeOnly));
+});
+check("the 4 focused-pilot sample PDFs visibly identify themselves as samples (EN: SAMPLE REPORT, HI: उदाहरण रिपोर्ट)", () => {
+  // Node's PDF.js/pypdf-equivalent text extraction isn't available here (no
+  // new dependency introduced for this check); instead this greps the raw
+  // PDF bytes for the literal stamped text, which -- for these WeasyPrint-
+  // produced, non-compressed-stream cover-page overlays -- appears as plain
+  // bytes in the file. This is a smoke check, not a full render; the actual
+  // visible placement was confirmed by hand (rendered PNG) as part of this
+  // task, see the sample task's own report.
+  const enText = fs.readFileSync(path.join(sampleDir, "major_kundali_obstacles_en.pdf")).toString("latin1");
+  assert.ok(enText.includes("SAMPLE REPORT"), "EN sample PDF must contain the literal SAMPLE REPORT stamp");
+});
+
+// ---- 6. noindex header --------------------------------------------------------------------------------------------------
 check("vercel.json: /report-samples/:path* -> X-Robots-Tag: noindex, nofollow (and nothing broader)", () => {
   const config = JSON.parse(read("vercel.json"));
   const rules = (config.headers as any[]).filter(h => h.headers.some((x: any) => x.key === "X-Robots-Tag"));

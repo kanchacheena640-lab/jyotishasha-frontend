@@ -6,6 +6,7 @@
 import Link from "next/link";
 import type { FocusedReportConfig } from "@/app/data/focusedReportsConfig";
 import type { Locale } from "@/lib/authority-engine/types";
+import { getReportSampleUrl } from "@/lib/reportSamples";
 
 interface Props {
   config: FocusedReportConfig;
@@ -59,6 +60,24 @@ export default function FocusedReportHero({ config, title, question, locale }: P
             ? "आपकी जन्म जानकारी से तैयार, सुरक्षित भुगतान के बाद कुछ ही मिनटों में ईमेल पर।"
             : "Built from your own birth details, emailed to you within minutes of secure payment."}
         </p>
+
+        {/* Secondary "View Sample Report" link -- reuses the existing shared
+            sample-report infrastructure (lib/reportSamples.ts + public/
+            report-samples/), exactly like components/reports/ReportContent.tsx
+            already does for the 25 standard reports. config.questionKey (never
+            humanSlug/title) drives the URL, so #62 can only ever link to its
+            own sample and #63 to its own -- there is no code path for either
+            to open the other's PDF. Plain anchor: no order/payment/backend
+            request, no carousel/modal, no second sample architecture. */}
+        <a
+          href={getReportSampleUrl(config.questionKey, locale)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-4 py-1.5 text-sm font-medium text-purple-300 transition-colors hover:border-purple-300 hover:text-white"
+        >
+          {locale === "hi" ? "Sample Report देखें" : "View Sample Report"}
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </section>
   );
