@@ -1,0 +1,884 @@
+{
+  "schema_version": 1,
+  "price_rupees": 51,
+  "currency": "INR",
+  "categories": [
+    {
+      "category_id": "career",
+      "label_en": "Career & Job",
+      "label_hi": "करियर और नौकरी"
+    },
+    {
+      "category_id": "money_business",
+      "label_en": "Money & Business",
+      "label_hi": "पैसा और बिज़नेस"
+    },
+    {
+      "category_id": "marriage",
+      "label_en": "Marriage",
+      "label_hi": "शादी"
+    },
+    {
+      "category_id": "relationship",
+      "label_en": "Relationship (Two People)",
+      "label_hi": "रिश्ता (दो लोगों का)"
+    },
+    {
+      "category_id": "foreign",
+      "label_en": "Foreign & Relocation",
+      "label_hi": "विदेश और शिफ्टिंग"
+    },
+    {
+      "category_id": "education",
+      "label_en": "Education",
+      "label_hi": "शिक्षा"
+    },
+    {
+      "category_id": "property",
+      "label_en": "Property & Home",
+      "label_hi": "प्रॉपर्टी और घर"
+    },
+    {
+      "category_id": "life",
+      "label_en": "Life Direction",
+      "label_hi": "जीवन की दिशा"
+    }
+  ],
+  "intents": [
+    {
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "canonical_question_en": "When is my career likely to move forward, and what may be holding it back?",
+      "canonical_question_hi": "मेरा करियर कब आगे बढ़ सकता है, और क्या चीज़ें इसे रोक रही हो सकती हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "career_report"
+    },
+    {
+      "intent_slug": "job_change_timing",
+      "category": "career",
+      "person_mode": "single",
+      "canonical_question_en": "Is a job change favourable for me, and in which periods?",
+      "canonical_question_hi": "क्या मेरे लिए नौकरी बदलना अनुकूल है, और कौन-से समय में?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "career_report"
+    },
+    {
+      "intent_slug": "money_improvement_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "canonical_question_en": "When may my income and financial situation improve?",
+      "canonical_question_hi": "मेरी आमदनी और आर्थिक स्थिति कब बेहतर हो सकती है?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "financial_report"
+    },
+    {
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "canonical_question_en": "Which periods are most supportive for starting or growing a business?",
+      "canonical_question_hi": "बिज़नेस शुरू करने या बढ़ाने के लिए कौन-से समय सबसे अनुकूल हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "business_report"
+    },
+    {
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "canonical_question_en": "When are my strongest periods for marriage?",
+      "canonical_question_hi": "मेरी शादी के लिए सबसे मजबूत समय कब है?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "marriage_report"
+    },
+    {
+      "intent_slug": "relationship_marriage_potential",
+      "category": "relationship",
+      "person_mode": "dual",
+      "canonical_question_en": "Do our two charts support this relationship growing into a lasting marriage?",
+      "canonical_question_hi": "क्या हम दोनों के चार्ट इस रिश्ते के लंबी शादी में बदलने का साथ देते हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "relationship_future_report"
+    },
+    {
+      "intent_slug": "relationship_strengths_and_challenges",
+      "category": "relationship",
+      "person_mode": "dual",
+      "canonical_question_en": "Where do we fit well, and where are we likely to clash?",
+      "canonical_question_hi": "हम दोनों का तालमेल कहाँ अच्छा है, और टकराव कहाँ हो सकता है?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "relationship_future_report"
+    },
+    {
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "canonical_question_en": "Which periods are supportive for going or settling abroad?",
+      "canonical_question_hi": "विदेश जाने या वहाँ बसने के लिए कौन-से समय अनुकूल हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "foreign_travel_report"
+    },
+    {
+      "intent_slug": "study_exam_timing",
+      "category": "education",
+      "person_mode": "single",
+      "canonical_question_en": "Which periods are strongest for my studies, higher education and exam preparation?",
+      "canonical_question_hi": "मेरी पढ़ाई, उच्च शिक्षा और परीक्षा की तैयारी के लिए कौन-से समय सबसे मजबूत हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": null
+    },
+    {
+      "intent_slug": "property_timing",
+      "category": "property",
+      "person_mode": "single",
+      "canonical_question_en": "When is a good time to buy property or a home?",
+      "canonical_question_hi": "प्रॉपर्टी या घर खरीदने का अच्छा समय कब है?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "property_report"
+    },
+    {
+      "intent_slug": "life_turning_points",
+      "category": "life",
+      "person_mode": "single",
+      "canonical_question_en": "What are the major turning-point periods in my coming years?",
+      "canonical_question_hi": "आने वाले सालों में मेरे जीवन के बड़े turning-point वाले समय कौन-से हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": "sadhesati_report"
+    },
+    {
+      "intent_slug": "life_direction_and_strengths",
+      "category": "life",
+      "person_mode": "single",
+      "canonical_question_en": "What are my natural strengths and the life direction that suits me best?",
+      "canonical_question_hi": "मेरी प्राकृतिक ताकतें क्या हैं और मेरे लिए जीवन की कौन-सी दिशा सबसे सही है?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": null
+    },
+    {
+      "intent_slug": "kundali_obstacles",
+      "category": "life",
+      "person_mode": "single",
+      "canonical_question_en": "What are the major obstacles in my birth chart, what is affecting me currently, and what remedies can help?",
+      "canonical_question_hi": "मेरी जन्म कुंडली में प्रमुख बाधाएँ क्या हैं, वर्तमान समय में कौन-सी बाधाएँ सक्रिय हैं और उनके लिए क्या उपाय किए जा सकते हैं?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": null
+    },
+    {
+      "intent_slug": "kundali_strengths",
+      "category": "life",
+      "person_mode": "single",
+      "canonical_question_en": "What are the strongest areas of my birth chart, which strengths are active now, and how can I use them effectively?",
+      "canonical_question_hi": "मेरी जन्म कुंडली की प्रमुख शक्तियाँ क्या हैं, वर्तमान समय में कौन-सी शक्तियाँ सक्रिय हैं और उनका सर्वोत्तम उपयोग कैसे करूँ?",
+      "readiness": "contract_draft",
+      "activation": "inactive",
+      "upsell_slug": null
+    }
+  ],
+  "questions": [
+    {
+      "question_key": "promotion_timing",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "Is this a good time for my promotion?",
+      "question_hi": "क्या यह समय मेरे प्रमोशन के लिए अच्छा है?",
+      "answer_mode": "current_period",
+      "lens": "promotion",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "career_improvement_timing",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When is my career likely to start improving?",
+      "question_hi": "मेरा करियर कब सुधरना शुरू हो सकता है?",
+      "answer_mode": "when_begins",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "career_growth_delay_reason",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "Why is my career growth delayed?",
+      "question_hi": "मेरे करियर की ग्रोथ में देरी क्यों हो रही है?",
+      "answer_mode": "delay_reason",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "next_strong_career_period",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When is my next strong career period?",
+      "question_hi": "मेरे करियर का अगला मजबूत समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "salary_growth_timing",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When can I expect a good salary increase?",
+      "question_hi": "मेरी सैलरी में अच्छी बढ़ोतरी कब हो सकती है?",
+      "answer_mode": "when_begins",
+      "lens": "salary",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "work_recognition_timing",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When am I likely to get recognition at work?",
+      "question_hi": "मुझे ऑफिस में पहचान और सम्मान कब मिल सकता है?",
+      "answer_mode": "when_begins",
+      "lens": "recognition",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "best_career_years",
+      "intent_slug": "career_growth_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "Which coming years look best for my career growth?",
+      "question_hi": "आने वाले कौन-से साल मेरे करियर ग्रोथ के लिए सबसे अच्छे दिखते हैं?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "job_change_now",
+      "intent_slug": "job_change_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "Is this a good time to change my job?",
+      "question_hi": "क्या अभी नौकरी बदलने का सही समय है?",
+      "answer_mode": "current_period",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "new_job_timing",
+      "intent_slug": "job_change_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When am I likely to get a new job?",
+      "question_hi": "मुझे नई नौकरी मिलने के योग कब बन रहे हैं?",
+      "answer_mode": "when_begins",
+      "lens": "new_job",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "best_period_to_switch",
+      "intent_slug": "job_change_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "Which upcoming period is best for switching jobs?",
+      "question_hi": "नौकरी बदलने के लिए आने वाला सबसे अच्छा समय कौन-सा है?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "job_search_start_timing",
+      "intent_slug": "job_change_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When is the best time to start an active job search?",
+      "question_hi": "नौकरी की तलाश तेज़ करने का सही समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "job_search",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "job_gap_easing",
+      "intent_slug": "job_change_timing",
+      "category": "career",
+      "person_mode": "single",
+      "question_en": "When may my phase without a suitable job ease?",
+      "question_hi": "सही नौकरी न मिलने का यह दौर कब बदल सकता है?",
+      "answer_mode": "easing_period",
+      "lens": "job_gap",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "financial_improvement_timing",
+      "intent_slug": "money_improvement_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When will my financial situation improve?",
+      "question_hi": "मेरी आर्थिक स्थिति कब सुधरने के योग हैं?",
+      "answer_mode": "when_begins",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "income_increase_timing",
+      "intent_slug": "money_improvement_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When may my income increase?",
+      "question_hi": "मेरी आमदनी कब बढ़ सकती है?",
+      "answer_mode": "when_begins",
+      "lens": "income",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "money_growth_periods",
+      "intent_slug": "money_improvement_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "Which coming periods are best for money growth?",
+      "question_hi": "पैसों की बढ़ोतरी के लिए आने वाले कौन-से समय सबसे अच्छे हैं?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "financial_pressure_easing",
+      "intent_slug": "money_improvement_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When may my financial pressure ease?",
+      "question_hi": "मेरा आर्थिक दबाव कब कम हो सकता है?",
+      "answer_mode": "easing_period",
+      "lens": "pressure",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "debt_pressure_easing",
+      "intent_slug": "money_improvement_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When may the pressure of debt start to reduce?",
+      "question_hi": "कर्ज़ का दबाव कब हल्का होना शुरू हो सकता है?",
+      "answer_mode": "easing_period",
+      "lens": "debt",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "business_start_timing",
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When is a good time to start a business?",
+      "question_hi": "बिज़नेस शुरू करने का अच्छा समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "start",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "business_growth_timing",
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When may my business grow?",
+      "question_hi": "मेरा बिज़नेस कब बढ़ सकता है?",
+      "answer_mode": "when_begins",
+      "lens": "growth",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "best_business_periods",
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "Which coming periods are best for my business?",
+      "question_hi": "मेरे बिज़नेस के लिए आने वाले कौन-से समय सबसे अच्छे हैं?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "business_expansion_timing",
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When is a good time to expand my business?",
+      "question_hi": "अपना बिज़नेस बढ़ाने (expand करने) का सही समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "expansion",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "business_slowdown_easing",
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When may the slow phase in my business ease?",
+      "question_hi": "मेरे बिज़नेस की सुस्ती का दौर कब कम हो सकता है?",
+      "answer_mode": "easing_period",
+      "lens": "slowdown",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "new_venture_partnership_timing",
+      "intent_slug": "business_timing",
+      "category": "money_business",
+      "person_mode": "single",
+      "question_en": "When is a good time to begin a new venture or partnership?",
+      "question_hi": "नया काम या पार्टनरशिप शुरू करने का सही समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "partnership",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "strongest_marriage_periods",
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "question_en": "When are my strongest periods for marriage?",
+      "question_hi": "मेरी शादी के लिए सबसे मजबूत समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "marriage_chances_timing",
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "question_en": "When do the chances of my marriage begin to look favourable?",
+      "question_hi": "मेरी शादी के योग कब बनते दिख रहे हैं?",
+      "answer_mode": "when_begins",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "marriage_delay_reason",
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "question_en": "Why is my marriage getting delayed?",
+      "question_hi": "मेरी शादी में देरी क्यों हो रही है?",
+      "answer_mode": "delay_reason",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "marriage_delay_easing",
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "question_en": "When may the delay in my marriage ease?",
+      "question_hi": "मेरी शादी में हो रही देरी कब खत्म हो सकती है?",
+      "answer_mode": "easing_period",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "marriage_talks_current_period",
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "question_en": "Is the current period supportive for marriage talks?",
+      "question_hi": "क्या अभी का समय शादी की बातचीत के लिए अनुकूल है?",
+      "answer_mode": "current_period",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "relationship_to_marriage_window",
+      "intent_slug": "marriage_timing",
+      "category": "marriage",
+      "person_mode": "single",
+      "question_en": "When could my current relationship move towards marriage?",
+      "question_hi": "मेरा मौजूदा रिश्ता शादी की ओर कब बढ़ सकता है?",
+      "answer_mode": "when_begins",
+      "lens": "own_relationship",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "relationship_lead_to_marriage",
+      "intent_slug": "relationship_marriage_potential",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "Do our charts support our relationship leading to marriage?",
+      "question_hi": "क्या हमारे चार्ट बताते हैं कि हमारा रिश्ता शादी तक पहुँच सकता है?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "long_term_compatibility",
+      "intent_slug": "relationship_marriage_potential",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "How compatible are we in the long term?",
+      "question_hi": "लंबे समय के लिए हम दोनों की compatibility कैसी है?",
+      "answer_mode": "overview",
+      "lens": "long_term",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "kundali_match_for_marriage",
+      "intent_slug": "relationship_marriage_potential",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "Is our kundali match supportive for marriage?",
+      "question_hi": "क्या शादी के लिए हम दोनों की कुंडली का मिलान अनुकूल है?",
+      "answer_mode": "overview",
+      "lens": "kundali_match",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "right_time_to_consider_marriage",
+      "intent_slug": "relationship_marriage_potential",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "Is this a supportive period for us to think about marriage?",
+      "question_hi": "क्या यह समय हमारे शादी के बारे में सोचने के लिए अनुकूल है?",
+      "answer_mode": "current_period",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "relationship_strengths_risks",
+      "intent_slug": "relationship_strengths_and_challenges",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "What are the strengths and challenges in our relationship?",
+      "question_hi": "हमारे रिश्ते की ताकत और चुनौतियाँ क्या हैं?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "conflict_areas",
+      "intent_slug": "relationship_strengths_and_challenges",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "Where are we most likely to face conflicts?",
+      "question_hi": "हम दोनों के बीच टकराव की संभावना कहाँ ज़्यादा है?",
+      "answer_mode": "overview",
+      "lens": "conflict",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "emotional_communication_fit",
+      "intent_slug": "relationship_strengths_and_challenges",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "How well do our emotional needs and communication match?",
+      "question_hi": "हम दोनों की भावनात्मक ज़रूरतों और बातचीत का तालमेल कैसा है?",
+      "answer_mode": "overview",
+      "lens": "emotional_fit",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "strengthen_relationship",
+      "intent_slug": "relationship_strengths_and_challenges",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "What can we do to make our relationship stronger?",
+      "question_hi": "अपने रिश्ते को और मजबूत बनाने के लिए हम क्या कर सकते हैं?",
+      "answer_mode": "guidance",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "relationship_care_periods",
+      "intent_slug": "relationship_strengths_and_challenges",
+      "category": "relationship",
+      "person_mode": "dual",
+      "question_en": "Which periods need extra care in our relationship?",
+      "question_hi": "हमारे रिश्ते में कौन-से समय में ज़्यादा ध्यान रखने की ज़रूरत है?",
+      "answer_mode": "care_periods",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "going_abroad_timing",
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "question_en": "When are my chances of going abroad strongest?",
+      "question_hi": "मेरे विदेश जाने के योग कब सबसे मजबूत हैं?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "foreign_work_timing",
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "question_en": "When is a good time to go abroad for work?",
+      "question_hi": "विदेश में काम के लिए जाने का सही समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "work",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "study_abroad",
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "question_en": "Would studying abroad be good for me?",
+      "question_hi": "क्या विदेश में पढ़ाई करना मेरे लिए अच्छा रहेगा?",
+      "answer_mode": "guidance",
+      "lens": "study",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "foreign_settlement_timing",
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "question_en": "When may I be able to settle abroad?",
+      "question_hi": "मेरे विदेश में बसने के योग कब बन सकते हैं?",
+      "answer_mode": "when_begins",
+      "lens": "settlement",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "relocation_timing",
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "question_en": "When is a good time to relocate to another city or country?",
+      "question_hi": "दूसरे शहर या देश में शिफ्ट होने का सही समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "relocation",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "foreign_plans_delay_reason",
+      "intent_slug": "foreign_move_timing",
+      "category": "foreign",
+      "person_mode": "single",
+      "question_en": "Why are my plans to go abroad getting delayed?",
+      "question_hi": "मेरे विदेश जाने के प्लान में देरी क्यों हो रही है?",
+      "answer_mode": "delay_reason",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "study_strong_period",
+      "intent_slug": "study_exam_timing",
+      "category": "education",
+      "person_mode": "single",
+      "question_en": "Which periods are strongest for my studies?",
+      "question_hi": "मेरी पढ़ाई के लिए कौन-से समय सबसे मजबूत हैं?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "exam_preparation_period",
+      "intent_slug": "study_exam_timing",
+      "category": "education",
+      "person_mode": "single",
+      "question_en": "Which coming periods support my exam preparation?",
+      "question_hi": "मेरी परीक्षा की तैयारी के लिए आने वाले कौन-से समय अनुकूल हैं?",
+      "answer_mode": "best_windows",
+      "lens": "exam_preparation",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "higher_education_timing",
+      "intent_slug": "study_exam_timing",
+      "category": "education",
+      "person_mode": "single",
+      "question_en": "When is a good time to begin higher education?",
+      "question_hi": "उच्च शिक्षा (higher education) शुरू करने का सही समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "higher_education",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "study_progress_improvement",
+      "intent_slug": "study_exam_timing",
+      "category": "education",
+      "person_mode": "single",
+      "question_en": "When may my progress in studies improve?",
+      "question_hi": "मेरी पढ़ाई में प्रगति कब बेहतर हो सकती है?",
+      "answer_mode": "when_begins",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "property_purchase_timing",
+      "intent_slug": "property_timing",
+      "category": "property",
+      "person_mode": "single",
+      "question_en": "When is a good time to buy property?",
+      "question_hi": "प्रॉपर्टी खरीदने का अच्छा समय कब है?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "property_current_period",
+      "intent_slug": "property_timing",
+      "category": "property",
+      "person_mode": "single",
+      "question_en": "Is the current period supportive for buying property?",
+      "question_hi": "क्या अभी का समय प्रॉपर्टी खरीदने के लिए अनुकूल है?",
+      "answer_mode": "current_period",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "property_strongest_period",
+      "intent_slug": "property_timing",
+      "category": "property",
+      "person_mode": "single",
+      "question_en": "Which coming period is strongest for acquiring property?",
+      "question_hi": "प्रॉपर्टी लेने के लिए आने वाला सबसे मजबूत समय कौन-सा है?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "property_delay_reason",
+      "intent_slug": "property_timing",
+      "category": "property",
+      "person_mode": "single",
+      "question_en": "Why is my property purchase getting delayed?",
+      "question_hi": "मेरी प्रॉपर्टी खरीदने में देरी क्यों हो रही है?",
+      "answer_mode": "delay_reason",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "own_home_timing",
+      "intent_slug": "property_timing",
+      "category": "property",
+      "person_mode": "single",
+      "question_en": "When may I be able to buy a home of my own?",
+      "question_hi": "मेरा अपना घर लेने के योग कब बन सकते हैं?",
+      "answer_mode": "when_begins",
+      "lens": "own_home",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "major_turning_points",
+      "intent_slug": "life_turning_points",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "What are the major turning points in my coming years?",
+      "question_hi": "आने वाले सालों में मेरे जीवन के बड़े turning points कौन-से हैं?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "next_life_change_period",
+      "intent_slug": "life_turning_points",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "When is my next major phase change?",
+      "question_hi": "मेरे जीवन का अगला बड़ा बदलाव कब आ सकता है?",
+      "answer_mode": "when_begins",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "important_years_ahead",
+      "intent_slug": "life_turning_points",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "Which coming years are the most important for me?",
+      "question_hi": "आने वाले कौन-से साल मेरे लिए सबसे अहम हैं?",
+      "answer_mode": "best_windows",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "current_phase_meaning",
+      "intent_slug": "life_turning_points",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "What does my current life phase mean, and when does it change?",
+      "question_hi": "मेरा मौजूदा समय किस तरह का है और यह कब बदलेगा?",
+      "answer_mode": "current_period",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "areas_needing_attention",
+      "intent_slug": "life_turning_points",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "Which areas of life need attention in the coming years?",
+      "question_hi": "आने वाले सालों में जीवन के किन क्षेत्रों पर ध्यान देना ज़रूरी है?",
+      "answer_mode": "care_periods",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "natural_strengths",
+      "intent_slug": "life_direction_and_strengths",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "What are my natural strengths?",
+      "question_hi": "मेरी प्राकृतिक ताकतें क्या हैं?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "life_direction",
+      "intent_slug": "life_direction_and_strengths",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "Which life direction suits me best?",
+      "question_hi": "मेरे लिए जीवन की कौन-सी दिशा सबसे सही रहेगी?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "focus_to_use_strengths",
+      "intent_slug": "life_direction_and_strengths",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "What should I focus on to make the most of my strengths?",
+      "question_hi": "अपनी ताकतों का पूरा फायदा उठाने के लिए मुझे किस पर ध्यान देना चाहिए?",
+      "answer_mode": "guidance",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "major_kundali_obstacles",
+      "intent_slug": "kundali_obstacles",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "What are the major obstacles in my birth chart, what is affecting me currently, and what remedies can help?",
+      "question_hi": "मेरी जन्म कुंडली में प्रमुख बाधाएँ क्या हैं, वर्तमान समय में कौन-सी बाधाएँ सक्रिय हैं और उनके लिए क्या उपाय किए जा सकते हैं?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    },
+    {
+      "question_key": "major_kundali_strengths",
+      "intent_slug": "kundali_strengths",
+      "category": "life",
+      "person_mode": "single",
+      "question_en": "What are the strongest areas of my birth chart, which strengths are active now, and how can I use them effectively?",
+      "question_hi": "मेरी जन्म कुंडली की प्रमुख शक्तियाँ क्या हैं, वर्तमान समय में कौन-सी शक्तियाँ सक्रिय हैं और उनका सर्वोत्तम उपयोग कैसे करूँ?",
+      "answer_mode": "overview",
+      "lens": "",
+      "status": "wording_ready"
+    }
+  ]
+}

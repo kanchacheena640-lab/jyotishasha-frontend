@@ -97,6 +97,52 @@ export const WebsiteEvents = {
       properties: withPagePath({}),
     });
   },
+
+  /**
+   * P0.4 -- Focused Reports pre-purchase funnel (report_view / form_start /
+   * form_complete / begin_checkout). Same frozen-properties, one-method-
+   * per-event, fire-and-forget shape as every method above -- not a new
+   * pattern. Every method here takes the SAME 3 non-PII dimensions
+   * (question_key, category, locale) plus the fixed ₹51 price; nothing
+   * else. No name/email/phone/dob/tob/pob/latitude/longitude is ever
+   * accepted by these methods' own signatures, so a call site has no way
+   * to pass them even by mistake.
+   */
+  reportViewed(questionKey: string, category: string, locale: string): void {
+    void sendAnonymousActivityEvent({
+      eventName: "report_view",
+      properties: withPagePath({ question_key: questionKey, category, locale, price: 51 }),
+    });
+  },
+
+  /** `form_start` -- fired once, the first time the customer begins
+   * filling in the birth-detail form (not on every keystroke/re-render). */
+  formStarted(questionKey: string, category: string, locale: string): void {
+    void sendAnonymousActivityEvent({
+      eventName: "form_start",
+      properties: withPagePath({ question_key: questionKey, category, locale, price: 51 }),
+    });
+  },
+
+  /** `form_complete` -- fired once all required fields (including a real
+   * place selection) are present, at the moment the customer submits. */
+  formCompleted(questionKey: string, category: string, locale: string): void {
+    void sendAnonymousActivityEvent({
+      eventName: "form_complete",
+      properties: withPagePath({ question_key: questionKey, category, locale, price: 51 }),
+    });
+  },
+
+  /** `begin_checkout` -- fired right before the order-creation request is
+   * sent to the backend (i.e. the customer has committed to paying).
+   * Distinct from the existing `report_catalog_buy_now` cta_click, which
+   * fires one screen earlier for the OLD 25-report catalog grid. */
+  beginCheckout(questionKey: string, category: string, locale: string): void {
+    void sendAnonymousActivityEvent({
+      eventName: "begin_checkout",
+      properties: withPagePath({ question_key: questionKey, category, locale, price: 51 }),
+    });
+  },
 };
 
 /**

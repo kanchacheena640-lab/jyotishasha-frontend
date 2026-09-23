@@ -78,9 +78,17 @@ export function middleware(request) {
   }
 
   // FAST EXIT
+  // P0.5: /reports/focused/* (the new [locale]-scoped focused-report pilot
+  // route) is carved OUT of this exit. Unlike the old /reports/[slug] app
+  // (which lives outside the [locale] tree and needs every request left
+  // untouched), /reports/focused/[slug] lives INSIDE app/[locale]/... and
+  // needs the normal locale rewrite/redirect handling below -- otherwise
+  // the bare English URL (the site's own canonical form) 404s and /en/
+  // becomes a live, un-redirected duplicate. Every other /reports/* path
+  // (the frozen 25-report catalog) keeps today's exact behavior.
   if (
     pathname.startsWith('/admin') ||
-    pathname.startsWith('/reports')
+    (pathname.startsWith('/reports') && !pathname.startsWith('/reports/focused'))
   ) {
     return withGeoCookies(NextResponse.next(), country)
   }
@@ -207,13 +215,17 @@ export function middleware(request) {
   // needs to cover), so this only ever runs for paths nothing else matched.
   // Routes outside the localized [locale] architecture (API, admin, the
   // standalone /reports app) are explicitly excluded and keep prior behavior.
+  // P0.5: /en/reports/focused/* is the one /reports/* exception -- it DOES
+  // live inside [locale], so an explicit /en/ prefix there is exactly the
+  // duplicate-URL case this block exists to redirect away, not a route to
+  // leave alone.
   if (pathname === '/en' || pathname.startsWith('/en/')) {
     const isOutsideLocaleArchitecture =
       pathname.startsWith('/en/api/') ||
       pathname === '/en/admin' ||
       pathname.startsWith('/en/admin/') ||
-      pathname === '/en/reports' ||
-      pathname.startsWith('/en/reports/')
+      ((pathname === '/en/reports' || pathname.startsWith('/en/reports/')) &&
+        !pathname.startsWith('/en/reports/focused/'))
 
     if (!isOutsideLocaleArchitecture) {
       const url = request.nextUrl.clone()
