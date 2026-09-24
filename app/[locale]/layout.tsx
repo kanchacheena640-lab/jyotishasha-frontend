@@ -5,7 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import LocationProvider from "@/components/location/LocationProvider";
 import StickyAppDownloadCTA from "@/components/StickyAppDownloadCTA";
-import WebsiteAnalyticsInit from "@/components/analytics/WebsiteAnalyticsInit";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "hi" }];
@@ -49,15 +48,10 @@ export default function LocaleLayout({
         />
       </noscript>
 
-      {/* Task 2C -- establishes the website analytics session_id and
-          first-touch attribution context only; emits no event.
-          Deliberately independent of marketing consent -- first-party
-          activity_events remains independent of it (Task 8's own
-          explicit rule; ConsentProvider itself now lives in the ROOT
-          layout, app/layout.tsx, since /reports is a separate route
-          tree outside this [locale] layout and still needs consent
-          context -- see that file for the provider/banner). */}
-      <WebsiteAnalyticsInit />
+      {/* WebsiteAnalyticsInit (Task 2C session id + first-touch attribution,
+          Reports Ads P0.1 ad-attribution store) now mounts ONCE from the
+          ROOT layout (app/layout.tsx) -- deliberately NOT here as well, so
+          there is exactly one initialization per page load. */}
 
       <LanguageProvider initialLocale={locale}>
         <LocationProvider>

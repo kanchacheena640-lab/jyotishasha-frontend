@@ -255,14 +255,18 @@ console.log("\n=== T7-1. no Meta Pixel/fbq injection ===");
 }
 
 // ===========================================================================
-// T7-2. No fbclid/_fbc/_fbp capture or persistence anywhere
+// T7-2. No fbclid/_fbc/_fbp capture or persistence in the FILES SCANNED BELOW
+// (the analytics/measurement pipeline that existed at Task 7). Reports Ads
+// P0.1 deliberately introduces consent-gated click-ID capture, but ONLY in
+// lib/adAttribution.ts (covered by lib/adAttribution.test.ts) -- it is not
+// in this list, and none of these files may start capturing them.
 // ===========================================================================
-console.log("\n=== T7-2. no fbclid/_fbc/_fbp persistence ===");
+console.log("\n=== T7-2. no fbclid/_fbc/_fbp persistence (pre-P0.1 measurement files) ===");
 {
   // lib/marketingMeasurementBridge.ts itself is deliberately excluded --
-  // its own docstring legitimately DISCUSSES fbclid/_fbc/_fbp BY NAME to
-  // document that none of them are captured (a prose mention, not a
-  // capture); every file that could actually READ/STORE one is scanned.
+  // its own docstring legitimately DISCUSSES fbclid/_fbc/_fbp BY NAME
+  // (a prose mention, not a capture); every file that could actually
+  // READ/STORE one is scanned.
   const scannedFiles = [
     "lib/analyticsAttribution.ts",
     "lib/analyticsSession.ts",

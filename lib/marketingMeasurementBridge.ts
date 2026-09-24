@@ -57,8 +57,12 @@
  *
  * Never sends: PII, birth data, payment/order details, raw referrer,
  * website session_id, Firebase uid/profile_id, Ask Now content, report
- * content, fbclid/_fbc/_fbp (none of which this repository captures at
- * all -- see Task 7's own final report). Every parameter passed through
+ * content, and never any click identifier (gclid/gbraid/wbraid/fbclid/
+ * _fbc/_fbp) -- none is ever placed in the dataLayer by this bridge.
+ * (Reports Ads P0.1 does capture click identifiers, but only in
+ * lib/adAttribution.ts, consent-gated, and only into the first-party
+ * order attribution record; Task 7's earlier "this repository captures
+ * none" statement no longer holds.) Every parameter passed through
  * here is exactly one of the same non-sensitive, already-controlled
  * values `lib/websiteEvents.ts` itself already sends to the first-party
  * ledger -- nothing new is exposed to any third party that wasn't

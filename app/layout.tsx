@@ -4,6 +4,7 @@ import Script from "next/script";
 import ConditionalAdSense from "../components/ConditionalAdSense";
 import { ConsentProvider } from "@/context/ConsentContext";
 import ConsentBanner from "@/components/consent/ConsentBanner";
+import WebsiteAnalyticsInit from "@/components/analytics/WebsiteAnalyticsInit";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jyotishasha.com"),
@@ -167,6 +168,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             provider (and the banner, so every route -- not just
             locale-scoped ones -- gets the first-visit prompt) must wrap
             both trees at their common ancestor. */}
+
+        {/* Reports Ads P0.1 -- the ONE mount of the website analytics /
+            attribution initializer, at the common ancestor of the [locale]
+            tree AND the standalone /reports tree, so every landing route
+            (including focused reports) captures attribution exactly once
+            per page load. It was previously mounted from
+            app/[locale]/layout.tsx only (never covering /reports); that
+            mount was removed so this is not a second initialization. It
+            renders nothing and emits no event. */}
+        <WebsiteAnalyticsInit />
+
         <ConsentProvider>
           {children}
           {/* Google AdSense — lazyOnload keeps it out of the critical path.

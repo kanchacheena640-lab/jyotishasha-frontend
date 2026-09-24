@@ -238,6 +238,8 @@ function mount(locale: string, storedLovePayload?: unknown): Harness {
   const hook = loadModule("hooks/useReportPurchase.ts", {
     react,
     "@/lib/analyticsAttribution": { buildCampaignContextFromAttribution: () => undefined, readStoredAttribution: () => undefined },
+    // Reports Ads P0.1: the hook now also imports the ad-attribution snapshot builder.
+    "@/lib/adAttribution": { getBrowserOrderAttribution: () => undefined },
   }, globals);
   const Form = loadModule("app/[locale]/love/report/relationship_future_report/RelationshipFutureReportForm.tsx", {
     "react/jsx-runtime": jsxRuntime,

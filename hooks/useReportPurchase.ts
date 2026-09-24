@@ -3,6 +3,7 @@
 
 import { useCallback, useState } from "react";
 import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
+import { getBrowserOrderAttribution } from "@/lib/adAttribution";
 
 const RAZORPAY_SCRIPT_SRC = "https://checkout.razorpay.com/v1/checkout.js";
 const DEFAULT_BACKEND_URL = "https://jyotishasha-backend.onrender.com";
@@ -131,6 +132,11 @@ export function useReportPurchase() {
         ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
         : undefined;
 
+      // Reports Ads P0.1 -- consent-aware ad-attribution snapshot, sent as
+      // `attribution` and persisted by the backend against the internal
+      // Order. `campaign_context` above is unchanged (compatibility).
+      const orderAttribution = getBrowserOrderAttribution();
+
       // R7 -- the COMPLETE report/customer payload (name/email/dob/tob/
       // pob/latitude/longitude/language/partner) is sent HERE, at order-
       // creation time, matching the new backend contract exactly. The
@@ -145,6 +151,7 @@ export function useReportPurchase() {
           product: productSlug,
           ...orderPayload,
           ...(campaignContext ? { campaign_context: campaignContext } : {}),
+          ...(orderAttribution ? { attribution: orderAttribution } : {}),
         }),
       });
       const orderData = await orderRes.json();

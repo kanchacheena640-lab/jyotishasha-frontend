@@ -24,6 +24,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { User, Calendar, Clock, AlertTriangle, MessageCircle } from "lucide-react";
 import { loadGoogleMapsPlaces } from "@/components/PlaceAutocompleteInput";
 import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
+import { getBrowserOrderAttribution } from "@/lib/adAttribution";
 import { formatCalendarDob } from "@/lib/formatCalendarDob";
 import { WebsiteEvents } from "@/lib/websiteEvents";
 import type { FocusedReportConfig } from "@/app/data/focusedReportsConfig";
@@ -155,6 +156,13 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
           ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
           : undefined;
 
+      // Reports Ads P0.1 -- the consent-aware ad-attribution snapshot
+      // (full UTM set, click ids, landing page, referrer, consent state).
+      // Sent as `attribution` and persisted by the backend against the
+      // internal Order; `campaign_context` above is unchanged and kept
+      // for compatibility (Razorpay notes / payment_verified event).
+      const orderAttribution = getBrowserOrderAttribution();
+
       // begin_checkout: fired right before the order-creation request --
       // the customer has committed to paying.
       WebsiteEvents.beginCheckout(config.questionKey, config.category, currentLang);
@@ -172,6 +180,7 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
           latitude: form.latitude, longitude: form.longitude,
           language: form.language,
           ...(campaignContext ? { campaign_context: campaignContext } : {}),
+          ...(orderAttribution ? { attribution: orderAttribution } : {}),
         }),
       });
 

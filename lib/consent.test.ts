@@ -299,9 +299,12 @@ console.log("\n=== 22. no Meta Pixel/fbq introduced ===");
 }
 
 // ===========================================================================
-// 23. No gclid/fbclid/_fbc/_fbp persistence introduced
+// 23. No gclid/fbclid/_fbc/_fbp persistence introduced BY THE CONSENT LAYER
+// (the files listed below). Scope note: Reports Ads P0.1 deliberately adds
+// consent-gated click-ID capture in lib/adAttribution.ts, tested by
+// lib/adAttribution.test.ts; the consent layer itself must stay free of it.
 // ===========================================================================
-console.log("\n=== 23. no click-ID persistence introduced ===");
+console.log("\n=== 23. no click-ID persistence introduced by the consent layer ===");
 {
   const files = [
     "lib/consent.ts",
