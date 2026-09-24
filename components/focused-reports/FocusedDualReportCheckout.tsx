@@ -43,6 +43,7 @@ import {
   type SelectedPlace,
 } from "@/lib/relationshipPlaceValidation";
 import { WebsiteEvents } from "@/lib/websiteEvents";
+import { pushViewItem, pushBeginCheckout, type FunnelItemInput } from "@/lib/ecommerceMeasurement";
 import type { FocusedReportConfig } from "@/app/data/focusedReportsConfig";
 import type { Locale } from "@/lib/authority-engine/types";
 
@@ -73,9 +74,26 @@ export default function FocusedDualReportCheckout({ config, locale }: Props) {
   const [partner, setPartner] = useState<PersonState>(emptyPerson());
   const [fulfillmentIssue, setFulfillmentIssue] = useState<FulfillmentIssue | null>(null);
   const hasTrackedFormStartRef = useRef(false);
+  const viewItemSentRef = useRef(false);
+  const beginCheckoutSentRef = useRef(false);
+
+  // GA4-compatible funnel item for view_item / begin_checkout (catalog
+  // display values -- funnel events, never financial authority). The
+  // purchase itself is measured inside hooks/useReportPurchase.ts from the
+  // backend's verified /webhook response.
+  const funnelItem: FunnelItemInput = {
+    questionKey: config.questionKey, itemName: config.title.en, category: config.category,
+    price: config.priceRupees, reportType: "dual",
+  };
 
   useEffect(() => {
     WebsiteEvents.reportViewed(config.questionKey, config.category, currentLang);
+    // Reports Ads P0.2 -- GA4 view_item, once per mount (ref-guarded so
+    // React StrictMode's dev double-effect cannot send it twice).
+    if (!viewItemSentRef.current) {
+      viewItemSentRef.current = true;
+      pushViewItem(funnelItem);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -135,6 +153,14 @@ export default function FocusedDualReportCheckout({ config, locale }: Props) {
     // begin_checkout: fired right before the order-creation request --
     // the customer has committed to paying.
     WebsiteEvents.beginCheckout(config.questionKey, config.category, currentLang);
+    // GA4 begin_checkout: the customer genuinely started checkout (both
+    // places selected, order creation is next) -- not a page view. Once per
+    // page view, so a retry after a failed order creation does not
+    // double-count the same checkout.
+    if (!beginCheckoutSentRef.current) {
+      beginCheckoutSentRef.current = true;
+      pushBeginCheckout(funnelItem);
+    }
 
     await purchase({
       productSlug: config.questionKey,

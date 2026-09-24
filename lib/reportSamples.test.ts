@@ -344,6 +344,8 @@ function renderFocusedDualCheckout(questionKey: string, category: string, locale
     // The REAL, already-unit-tested pure validation module -- not re-mocked.
     "@/lib/relationshipPlaceValidation": load("lib/relationshipPlaceValidation.ts", {}),
     "@/lib/websiteEvents": { WebsiteEvents: { reportViewed() {}, formStarted() {}, formCompleted() {}, beginCheckout() {} } },
+    // Reports Ads P0.2: the DUAL checkout now also imports the GA4 funnel pushers.
+    "@/lib/ecommerceMeasurement": { pushViewItem() {}, pushBeginCheckout() {} },
     // P0 visual fix -- string-typed stand-ins (this harness never actually
     // renders DOM, see jsxRuntime above: type is just stored, never invoked).
     "lucide-react": { User: "User", Users: "Users", Clock: "Clock", AlertTriangle: "AlertTriangle", MessageCircle: "MessageCircle" },

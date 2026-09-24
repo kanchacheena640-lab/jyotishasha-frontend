@@ -345,9 +345,18 @@ console.log("\n=== 18-22. integration: initialization is single; SELF + DUAL wir
   const codeOnly = stripComments(readSource("lib/adAttribution.ts"));
   check("21: adAttribution.ts code never references customer/identity fields",
     !/\b(email|phone|dob|tob|pob|latitude|longitude|firebase|sessionId|session_id|userId|user_id)\b/i.test(codeOnly));
-  check("22: no purchase / ecommerce / pixel / CAPI code was added anywhere in this task's frontend files",
-    ["lib/adAttribution.ts", "components/analytics/WebsiteAnalyticsInit.tsx", "hooks/useReportPurchase.ts", "components/focused-reports/FocusedReportCheckout.tsx"]
+  // P0.1 scope: the attribution modules themselves never touch purchase /
+  // ecommerce / pixel code. (Reports Ads P0.2 later added the backend-
+  // confirmed purchase, view_item and begin_checkout to the checkouts and
+  // the purchase hook -- but only through lib/ecommerceMeasurement.ts,
+  // tested by lib/ecommerceMeasurement.test.ts -- so those two files are no
+  // longer asserted purchase-free here; they still must not contain pixel code.)
+  check("22: the P0.1 attribution modules contain no purchase / ecommerce / pixel / CAPI code",
+    ["lib/adAttribution.ts", "components/analytics/WebsiteAnalyticsInit.tsx"]
       .every((f) => !/fbq\(|gtag\(|dataLayer|ecommerce|purchase_event|["']purchase["']/i.test(stripComments(readSource(f)))));
+  check("22b: the checkouts / hook contain no pixel or raw gtag code (P0.2 measurement goes through lib/ecommerceMeasurement.ts only)",
+    ["hooks/useReportPurchase.ts", "components/focused-reports/FocusedReportCheckout.tsx", "components/focused-reports/FocusedDualReportCheckout.tsx"]
+      .every((f) => !/fbq\(|gtag\(|dataLayer|connect\.facebook/i.test(stripComments(readSource(f)))));
 }
 
 console.log("\n==================================================");

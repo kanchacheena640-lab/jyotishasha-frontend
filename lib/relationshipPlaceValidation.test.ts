@@ -240,6 +240,8 @@ function mount(locale: string, storedLovePayload?: unknown): Harness {
     "@/lib/analyticsAttribution": { buildCampaignContextFromAttribution: () => undefined, readStoredAttribution: () => undefined },
     // Reports Ads P0.1: the hook now also imports the ad-attribution snapshot builder.
     "@/lib/adAttribution": { getBrowserOrderAttribution: () => undefined },
+    // Reports Ads P0.2: the hook now also imports the verified-purchase tracker.
+    "@/lib/ecommerceMeasurement": { trackBackendVerifiedPurchase: (_raw: unknown, done?: () => void) => { if (done) done(); return false; } },
   }, globals);
   const Form = loadModule("app/[locale]/love/report/relationship_future_report/RelationshipFutureReportForm.tsx", {
     "react/jsx-runtime": jsxRuntime,

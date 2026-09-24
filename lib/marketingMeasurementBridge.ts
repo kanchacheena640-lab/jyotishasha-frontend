@@ -36,7 +36,10 @@
  * (payment_verified, subscription_started) remain entirely backend-
  * authoritative and are NEVER duplicated here (Task 6 S4 / Task 7 S9's
  * explicit prohibition against a browser-side "purchase success"
- * signal, for either Google or Meta).
+ * signal, for either Google or Meta). Reports Ads P0.2 adds a backend-
+ * CONFIRMED browser `purchase` for the focused reports, deliberately in
+ * lib/ecommerceMeasurement.ts and not in this bridge, which itself still
+ * never pushes a purchase.
  *
  * Uses `window.dataLayer.push(...)` -- NOT `window.gtag(...)`, NOT
  * `window.fbq(...)` -- because GTM (container GTM-WLP7T2DP,

@@ -4,6 +4,7 @@
 import { useCallback, useState } from "react";
 import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
 import { getBrowserOrderAttribution } from "@/lib/adAttribution";
+import { trackBackendVerifiedPurchase } from "@/lib/ecommerceMeasurement";
 
 const RAZORPAY_SCRIPT_SRC = "https://checkout.razorpay.com/v1/checkout.js";
 const DEFAULT_BACKEND_URL = "https://jyotishasha-backend.onrender.com";
@@ -198,17 +199,26 @@ export function useReportPurchase() {
                 onFinalizationFailed(webhookData?.message);
                 return;
               }
+              // Reports Ads P0.2 -- this 2xx response is the backend proving the
+              // payment verified and the Order PAID; the purchase is measured
+              // ONLY from its `purchase_measurement` object (present for the
+              // focused reports, absent for anything else -> nothing pushed).
               if (webhookData?.status === "payment_confirmed_processing_delayed") {
                 // Payment is genuinely PAID; generation dispatch is
                 // delayed. Never a failure, never redirected as if the
                 // report were ready.
+                trackBackendVerifiedPurchase(webhookData?.purchase_measurement);
                 onProcessingDelayed();
                 return;
               }
               // "success" / "already_processing" / "recovered_success" --
               // the only backend-confirmed outcomes that mean it is safe
               // to send the customer to the success page.
-              window.location.href = redirectTo;
+              // Navigate only after the browser tags had a chance to dispatch
+              // (immediately when GTM is absent or already measured).
+              trackBackendVerifiedPurchase(webhookData?.purchase_measurement, () => {
+                window.location.href = redirectTo;
+              });
             } catch {
               // Network failure reaching /webhook itself -- same "payment
               // succeeded, fulfillment unconfirmed" case as a 4xx/5xx.

@@ -27,6 +27,7 @@ import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/li
 import { getBrowserOrderAttribution } from "@/lib/adAttribution";
 import { formatCalendarDob } from "@/lib/formatCalendarDob";
 import { WebsiteEvents } from "@/lib/websiteEvents";
+import { pushViewItem, pushBeginCheckout, trackBackendVerifiedPurchase, type FunnelItemInput } from "@/lib/ecommerceMeasurement";
 import type { FocusedReportConfig } from "@/app/data/focusedReportsConfig";
 import type { Locale } from "@/lib/authority-engine/types";
 
@@ -67,12 +68,27 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
   const paymentConfirmedRef = useRef(false);
   const placeRef = useRef<HTMLInputElement | null>(null);
   const hasTrackedFormStartRef = useRef(false);
+  const viewItemSentRef = useRef(false);
+  const beginCheckoutSentRef = useRef(false);
+
+  // GA4-compatible funnel item for view_item / begin_checkout (catalog
+  // display values -- funnel events, never financial authority).
+  const funnelItem: FunnelItemInput = {
+    questionKey: config.questionKey, itemName: config.title.en, category: config.category,
+    price: config.priceRupees, reportType: "self",
+  };
 
   useEffect(() => {
     // report_view: this form is the customer's first real interaction with
     // this specific focused report (the hero above it is server-rendered,
     // no client event needed for it) -- fires once per mount.
     WebsiteEvents.reportViewed(config.questionKey, config.category, currentLang);
+    // Reports Ads P0.2 -- GA4 view_item, once per mount (ref-guarded so
+    // React StrictMode's dev double-effect cannot send it twice).
+    if (!viewItemSentRef.current) {
+      viewItemSentRef.current = true;
+      pushViewItem(funnelItem);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -166,6 +182,14 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
       // begin_checkout: fired right before the order-creation request --
       // the customer has committed to paying.
       WebsiteEvents.beginCheckout(config.questionKey, config.category, currentLang);
+      // GA4 begin_checkout: the customer genuinely started checkout (form
+      // complete, SDK loaded, order creation is next) -- not a page view.
+      // Once per page view, so a retry after a failed order creation does
+      // not double-count the same checkout.
+      if (!beginCheckoutSentRef.current) {
+        beginCheckoutSentRef.current = true;
+        pushBeginCheckout(funnelItem);
+      }
 
       // SECURITY: `product` is ALWAYS config.questionKey -- the trusted,
       // stable identity -- never the cosmetic SEO slug, never a visible
@@ -238,12 +262,25 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
             }
 
             const webhookData = await webhookRes.json().catch(() => null);
+            // Reports Ads P0.2 -- the ONLY place a purchase is measured: the
+            // backend has just verified the payment and the Order is PAID
+            // (2xx response). purchase_measurement is the backend's own
+            // canonical object; it is absent for anything unmeasurable and
+            // then nothing is pushed. Never fired for the "unconfirmed" /
+            // non-2xx branch above, nor from the Razorpay handler entry.
             if (webhookData?.status === "payment_confirmed_processing_delayed") {
+              // PAID, only report generation is delayed -- the money is real.
+              trackBackendVerifiedPurchase(webhookData?.purchase_measurement);
               setFulfillmentIssue({ orderId: response.razorpay_order_id, paymentId: response.razorpay_payment_id, kind: "processing_delayed" });
               return;
             }
 
-            window.location.href = `/${currentLang}/thank-you`;
+            // Navigate only after the browser tags had a chance to dispatch
+            // (immediately when GTM is absent or the event was already
+            // measured) -- see lib/ecommerceMeasurement.ts.
+            trackBackendVerifiedPurchase(webhookData?.purchase_measurement, () => {
+              window.location.href = `/${currentLang}/thank-you`;
+            });
           } catch {
             setFulfillmentIssue({ orderId: response.razorpay_order_id, paymentId: response.razorpay_payment_id, kind: "unconfirmed" });
           }
