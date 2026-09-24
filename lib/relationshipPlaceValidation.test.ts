@@ -221,6 +221,12 @@ function mount(locale: string, storedLovePayload?: unknown): Harness {
       return [store[slot], (value: any) => { store[slot] = typeof value === "function" ? value(store[slot]) : value; }];
     },
     useEffect: (effect: () => void) => { if (!effectRan) { effectRan = true; effect(); } },
+    // Reports Ads P0.2A: the form keeps its once-per-mount funnel guards in refs.
+    useRef: (init: unknown) => {
+      const slot = cursor++;
+      if (!(slot in store)) store[slot] = { current: init };
+      return store[slot];
+    },
     useCallback: (fn: unknown) => fn,
   };
   const jsxRuntime = { jsx: (type: any, props: any) => ({ type, props }), jsxs: (type: any, props: any) => ({ type, props }) };
@@ -248,6 +254,9 @@ function mount(locale: string, storedLovePayload?: unknown): Harness {
     react,
     "@/components/PlaceAutocompleteInput": { default: "PlaceAutocompleteInput" },
     "@/hooks/useReportPurchase": hook,
+    // Reports Ads P0.2A: the form now reads its catalog entry and pushes GA4 funnel events.
+    "@/app/data/reportsData": { reportsData: [{ slug: "relationship_future_report", price: 199, title: { en: "Relationship Future Report" }, category: { en: "Love" } }] },
+    "@/lib/ecommerceMeasurement": { pushViewItem() {}, pushBeginCheckout() {}, ORIGINAL_PRODUCT_FAMILY: "original_report" },
     "@/lib/reportSamples": { getReportSampleLabel: () => "sample", getReportSampleUrl: () => "/report-samples/x.pdf" },
     "@/lib/relationshipPlaceValidation": loadModule("lib/relationshipPlaceValidation.ts", {}),
   }, globals).default;

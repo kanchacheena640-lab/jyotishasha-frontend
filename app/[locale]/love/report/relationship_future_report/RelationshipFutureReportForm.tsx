@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
 import { useReportPurchase } from "@/hooks/useReportPurchase";
 import { getReportSampleLabel, getReportSampleUrl } from "@/lib/reportSamples";
+import { reportsData } from "@/app/data/reportsData";
+import { pushViewItem, pushBeginCheckout, ORIGINAL_PRODUCT_FAMILY, type FunnelItemInput } from "@/lib/ecommerceMeasurement";
 import {
   applyPlaceSelection,
   applyPobEdit,
@@ -20,6 +22,20 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
   const { purchase, isProcessing: loading } = useReportPurchase();
   const [mounted, setMounted] = useState(false);
   const isHi = locale === "hi";
+  const viewItemSentRef = useRef(false);
+  const beginCheckoutSentRef = useRef(false);
+
+  // Reports Ads P0.2A -- GA4-compatible funnel item (catalog display values:
+  // funnel events, never financial authority; the purchase itself is measured
+  // inside hooks/useReportPurchase.ts from the backend's verified /webhook
+  // response, which is why this form adds no purchase handling).
+  const catalogEntry = reportsData.find((r) => r.slug === "relationship_future_report");
+  const funnelItem: FunnelItemInput | null = catalogEntry
+    ? {
+        questionKey: catalogEntry.slug, itemName: catalogEntry.title.en, category: catalogEntry.category.en.toLowerCase(),
+        price: catalogEntry.price, reportType: "relationship", productFamily: ORIGINAL_PRODUCT_FAMILY,
+      }
+    : null;
 
   const [form, setForm] = useState({
     email: "",
@@ -55,6 +71,16 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
       } catch (e) {
       }
     }
+  }, []);
+
+  // GA4 view_item, once per mount (ref-guarded so React StrictMode's dev
+  // double-effect cannot send it twice). Declared before the early return
+  // below so hook order is stable.
+  useEffect(() => {
+    if (!funnelItem || viewItemSentRef.current) return;
+    viewItemSentRef.current = true;
+    pushViewItem(funnelItem);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!mounted) return null;
@@ -93,6 +119,14 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
     if (placeError) {
       alert(placeError);
       return;
+    }
+
+    // GA4 begin_checkout: both places selected and the email valid -- the
+    // customer genuinely starts checkout; order creation is next. Once per
+    // page view (a retry after a failed order does not double-count).
+    if (funnelItem && !beginCheckoutSentRef.current) {
+      beginCheckoutSentRef.current = true;
+      pushBeginCheckout(funnelItem);
     }
 
     const genericFailureAlert = () => {

@@ -9,6 +9,8 @@ import i18n from "i18next";
 import { loadGoogleMapsPlaces } from "@/components/PlaceAutocompleteInput";
 import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/lib/analyticsAttribution";
 import { formatCalendarDob } from "@/lib/formatCalendarDob";
+import { getBrowserOrderAttribution } from "@/lib/adAttribution";
+import { pushViewItem, pushBeginCheckout, trackBackendVerifiedPurchase, ORIGINAL_PRODUCT_FAMILY, type FunnelItemInput } from "@/lib/ecommerceMeasurement";
 
 
 // Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
@@ -85,10 +87,33 @@ export default function ReportCheckout() {
   // dismissal, payment success, and webhook confirmation.
   const paymentConfirmedRef = useRef(false);
   const placeRef = useRef<HTMLInputElement | null>(null);
+  const viewItemSentRef = useRef(false);
+  const beginCheckoutSentRef = useRef(false);
   const params = useParams();
   const productId = params?.slug as string;
   const currentReport = reportsData.find((r: Report) => r.slug === productId);
   const price = currentReport?.price || 0;
+
+  // Reports Ads P0.2A -- GA4-compatible funnel item (catalog display values:
+  // funnel events, never financial authority). item_id is the report slug,
+  // item_name the catalog title (identical to the backend registry name) and
+  // item_category the catalog category, lower-cased (matches the backend
+  // ORIGINAL_REPORT_CATEGORIES). The purchase itself comes from the backend.
+  const funnelItem: FunnelItemInput | null = currentReport
+    ? {
+        questionKey: currentReport.slug, itemName: currentReport.title.en, category: currentReport.category.en.toLowerCase(),
+        price: currentReport.price, reportType: "standard", productFamily: ORIGINAL_PRODUCT_FAMILY,
+      }
+    : null;
+
+  // GA4 view_item, once per mount (ref-guarded so React StrictMode's dev
+  // double-effect cannot send it twice).
+  useEffect(() => {
+    if (!funnelItem || viewItemSentRef.current) return;
+    viewItemSentRef.current = true;
+    pushViewItem(funnelItem);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // 🌍 Google Places Autocomplete logic
   useEffect(() => {
@@ -169,6 +194,15 @@ export default function ReportCheckout() {
       // Step 2: Create Order via Flask Backend (Port 5000)
       const base = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
 
+      // GA4 begin_checkout: the customer genuinely started checkout (form
+      // complete, SDK loaded, order creation is next) -- not a page view.
+      // Once per page view, so a retry after a failed order creation does
+      // not double-count the same checkout.
+      if (funnelItem && !beginCheckoutSentRef.current) {
+        beginCheckoutSentRef.current = true;
+        pushBeginCheckout(funnelItem);
+      }
+
       // Task 10A -- Task 2C's own already-immutable, first-touch campaign
       // snapshot, attached at transaction CREATION time only (never resent
       // at /webhook verification time below -- the backend retrieves its
@@ -179,6 +213,11 @@ export default function ReportCheckout() {
       const campaignContext = typeof window !== "undefined"
         ? buildCampaignContextFromAttribution(readStoredAttribution(window.sessionStorage))
         : undefined;
+
+      // Reports Ads P0.2A -- the same consent-aware P0.1 ad-attribution
+      // snapshot the focused checkouts send, persisted by the backend against
+      // the internal Order. campaign_context above is unchanged (compatibility).
+      const orderAttribution = getBrowserOrderAttribution();
 
       // R7 -- the COMPLETE report/customer payload the new backend (R3)
       // requires is now sent HERE, at order-creation time, matching the
@@ -200,6 +239,7 @@ export default function ReportCheckout() {
           longitude: form.longitude,
           language: form.language,
           ...(campaignContext ? { campaign_context: campaignContext } : {}),
+          ...(orderAttribution ? { attribution: orderAttribution } : {}),
         }),
       });
 
@@ -268,10 +308,16 @@ export default function ReportCheckout() {
             }
 
             const webhookData = await webhookRes.json().catch(() => null);
+            // Reports Ads P0.2A -- the ONLY place a purchase is measured: this 2xx
+            // response is the backend proving the payment verified and the Order
+            // PAID. purchase_measurement is the backend's own canonical object
+            // (absent -> nothing is pushed). Never from the handler entry, the
+            // non-2xx / "unconfirmed" branch above, or the thank-you page.
             if (webhookData?.status === "payment_confirmed_processing_delayed") {
               // Payment is genuinely PAID; generation dispatch is
               // delayed. Never a failure, never redirected as if the
               // report were ready.
+              trackBackendVerifiedPurchase(webhookData?.purchase_measurement);
               setFulfillmentIssue({
                 orderId: response.razorpay_order_id,
                 paymentId: response.razorpay_payment_id,
@@ -285,7 +331,12 @@ export default function ReportCheckout() {
             // to send the customer to the success page. Same destination
             // the dedicated Relationship Future Report flow already
             // redirects to on success -- not a new page.
-            window.location.href = `/${currentLang}/thank-you`;
+            // Navigate only after the browser tags had a chance to dispatch
+            // (immediately when GTM is absent or the event was already
+            // measured) -- see lib/ecommerceMeasurement.ts.
+            trackBackendVerifiedPurchase(webhookData?.purchase_measurement, () => {
+              window.location.href = `/${currentLang}/thank-you`;
+            });
           } catch {
             // Network failure reaching /webhook itself is the same
             // "payment succeeded, fulfillment unconfirmed" case as a 4xx/5xx.

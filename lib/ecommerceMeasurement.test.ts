@@ -277,7 +277,10 @@ async function main() {
       /ALLOWED_EVENT_NAMES[\s\S]{0,300}jyotishasha_kundali_generated[\s\S]{0,120}jyotishasha_app_download_intent[\s\S]{0,120}jyotishasha_report_purchase_intent/.test(bridge)
       && !/event: "purchase"/.test(stripComments(bridge)));
     const original = readSource("components/reports/ReportCheckout.tsx");
-    check("8d: scope -- the original-25 checkout does not use the new measurement", !original.includes("ecommerceMeasurement"));
+    // P0.2A supersedes the original P0.2 scope: the original-25 checkout now uses the SAME measurement module
+    // (its wiring is proven in lib/originalReportsMeasurement.test.ts).
+    check("8d: (P0.2A) the original-25 checkout reuses this one measurement module -- no second analytics architecture",
+      original.includes('from "@/lib/ecommerceMeasurement"') && !/dataLayer|gtag\(|fbq\(/.test(stripComments(original)));
     const attr = readSource("lib/adAttribution.ts");
     check("17: P0.1 is untouched -- adAttribution.ts does not reference the purchase module; checkouts still send attribution",
       !attr.includes("ecommerceMeasurement") && self.includes("attribution: orderAttribution") && hook.includes("attribution: orderAttribution"));

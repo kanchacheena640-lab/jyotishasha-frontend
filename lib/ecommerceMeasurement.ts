@@ -1,9 +1,12 @@
 // lib/ecommerceMeasurement.ts
 
 /**
- * Reports Ads P0.2 -- GA4-compatible ecommerce events for the focused
- * reports: `view_item`, `begin_checkout`, and the backend-CONFIRMED
- * `purchase`. All three are pushed to window.dataLayer; which
+ * Reports Ads P0.2 / P0.2A -- GA4-compatible ecommerce events for ALL paid
+ * web reports (the 63 focused reports and the original 25: 24 standard +
+ * relationship_future_report): `view_item`, `begin_checkout`, and the
+ * backend-CONFIRMED `purchase`. The four measured combinations are
+ * focused_report/self, focused_report/dual, original_report/standard and
+ * original_report/relationship. All three are pushed to window.dataLayer; which
  * destinations (GA4, Google Ads, later Meta) consume them is a GTM
  * console matter.
  *
@@ -58,7 +61,7 @@
  * fields; extras are dropped. No name/email/phone/birth data, payment ids,
  * click ids or UTMs ever enter an event. (Reports Ads P0.2 supersedes the
  * earlier "no browser-side purchase" rule of Task 6/7 -- but only in this
- * module, and only for backend-confirmed focused purchases.)
+ * module, and only for backend-confirmed report purchases.)
  */
 
 export interface PurchaseMeasurement {
@@ -279,17 +282,24 @@ export function pushPurchaseOnce(raw: unknown, options: PushPurchaseOptions): bo
 // ---------------------------------------------------------------------
 // view_item / begin_checkout (funnel events, not financial authority)
 // ---------------------------------------------------------------------
+export type ProductFamily = "focused_report" | "original_report";
+export type ReportType = "self" | "dual" | "standard" | "relationship";
+
 export interface FunnelItemInput {
+  /** The canonical item id: a focused question_key, or an original report slug. */
   questionKey: string;
   itemName?: string;
   category: string;
   /** catalog display price in major units (₹51 -> 51) */
   price: number;
   currency?: string;
-  reportType: "self" | "dual";
+  reportType: ReportType;
+  /** Defaults to "focused_report" (the P0.2 focused checkouts pass nothing). */
+  productFamily?: ProductFamily;
 }
 
-export const FOCUSED_PRODUCT_FAMILY = "focused_report";
+export const FOCUSED_PRODUCT_FAMILY: ProductFamily = "focused_report";
+export const ORIGINAL_PRODUCT_FAMILY: ProductFamily = "original_report";
 
 function buildFunnelEvent(eventName: "view_item" | "begin_checkout", input: FunnelItemInput): Record<string, unknown> {
   const currency = input.currency ?? "INR";
@@ -300,7 +310,7 @@ function buildFunnelEvent(eventName: "view_item" | "begin_checkout", input: Funn
       value: input.price,
       items: [itemFrom({ item_id: input.questionKey, item_name: input.itemName, item_category: input.category }, input.price)],
     },
-    product_family: FOCUSED_PRODUCT_FAMILY,
+    product_family: input.productFamily ?? FOCUSED_PRODUCT_FAMILY,
     report_type: input.reportType,
   };
 }

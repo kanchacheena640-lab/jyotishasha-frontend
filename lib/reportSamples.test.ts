@@ -202,10 +202,13 @@ function renderRelationship(locale: string) {
   const { default: Form } = load(RELATIONSHIP_FORM, {
     "react/jsx-runtime": jsxRuntime,
     // mounted (the only useState(false)) is true so the real hero renders; effects are not run
-    react: { useState: (init: unknown) => [init === false ? true : init, () => undefined], useEffect: () => undefined },
+    react: { useState: (init: unknown) => [init === false ? true : init, () => undefined], useEffect: () => undefined, useRef: (init: unknown) => ({ current: init }) },
     "@/components/PlaceAutocompleteInput": { default: "PlaceAutocompleteInput" },
     "@/hooks/useReportPurchase": { useReportPurchase: () => ({ purchase: () => { throw new Error("purchase must not run"); }, isProcessing: false }) },
     "@/lib/reportSamples": samples,
+    // Reports Ads P0.2A: the form now reads its catalog entry and pushes GA4 funnel events (effects are not run here).
+    "@/app/data/reportsData": { reportsData: [{ slug: "relationship_future_report", price: 199, title: { en: "Relationship Future Report" }, category: { en: "Love" } }] },
+    "@/lib/ecommerceMeasurement": { pushViewItem() {}, pushBeginCheckout() {}, ORIGINAL_PRODUCT_FAMILY: "original_report" },
     // pure validation helpers the form now imports (no React/network/payment code)
     "@/lib/relationshipPlaceValidation": load("lib/relationshipPlaceValidation.ts", {}),
   });
