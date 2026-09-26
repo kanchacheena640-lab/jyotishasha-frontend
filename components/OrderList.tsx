@@ -1,5 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
+import PlaceAutocompleteInput from "./PlaceAutocompleteInput";
+import { applyPlaceSelection, applyPobEdit, RelationshipPlaceState } from "@/lib/relationshipPlaceValidation";
+import { deliveryStatus, canResend } from "./orderListHelpers";
 
 interface Order {
   id: number;
@@ -10,12 +13,19 @@ interface Order {
   order_time: string;
   report_stage: string;
   pdf_url: string | null;
+  email_status?: string;
   language?: string;
   dob?: string;
   tob?: string;
   pob?: string;
   latitude?: string;
   longitude?: string;
+}
+
+function parseCoordinate(raw: string | null | undefined): number {
+  if (raw === null || raw === undefined || raw === "") return 0;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : 0;
 }
 
 export default function OrderList() {
@@ -29,13 +39,28 @@ export default function OrderList() {
 
   // For modal edit
   const [editingOrder, setEditingOrder] = useState<Order | null>(null);
-  const [formData, setFormData] = useState({
-    dob: "",
-    tob: "",
-    pob: "",
-    latitude: "",
-    longitude: "",
+  const [formData, setFormData] = useState({ dob: "", tob: "" });
+
+  // Admin Orders P0 fix: place/lat/long are no longer three independently
+  // editable fields. `placeState` drives the shared PlaceAutocompleteInput
+  // via the SAME resolved-place invariant the customer-facing relationship
+  // form already uses (lib/relationshipPlaceValidation.ts) -- a manual
+  // retype immediately invalidates the previous coordinates, and Save is
+  // gated on `placeSelected`.
+  const [placeState, setPlaceState] = useState<RelationshipPlaceState>({
+    pob: "", lat: 0, lng: 0, placeSelected: false,
   });
+  // True only after a genuine NEW autocomplete selection in this modal
+  // session -- distinct from `placeSelected` (which is also true for the
+  // untouched original value). NULL coordinate preservation fix: when this
+  // is false, handleSave OMITS latitude/longitude from the request body
+  // entirely rather than re-sending any client-side representation of the
+  // order's existing value -- update_order() already leaves an omitted
+  // field exactly as stored (data.get("latitude", order.latitude)), so
+  // this is the only way to guarantee a historical NULL stays NULL, an
+  // existing "" stays "", and existing real coordinates stay byte-for-byte
+  // untouched, without the client ever normalizing what it never resolved.
+  const [placeFreshlySelected, setPlaceFreshlySelected] = useState(false);
 
   async function fetchOrders() {
     setLoading(true);
@@ -68,9 +93,39 @@ export default function OrderList() {
     fetchOrders();
   }, []);
 
+  function openEdit(order: Order) {
+    setEditingOrder(order);
+    setFormData({ dob: order.dob || "", tob: order.tob || "" });
+    const pob = order.pob || "";
+    // The order's existing place counts as already-resolved -- an admin
+    // who touches nothing else must still be able to Save (dob/tob-only
+    // edits), regardless of whether historical lat/long happen to be
+    // present. Only a manual retype (applyPobEdit) invalidates this.
+    setPlaceState({
+      pob, lat: parseCoordinate(order.latitude), lng: parseCoordinate(order.longitude), placeSelected: true,
+    });
+    setPlaceFreshlySelected(false);
+  }
+
   const handleSave = async () => {
     if (!editingOrder) return;
+    if (!placeState.placeSelected) return; // Save button is disabled for this case too; defensive guard.
     try {
+      // NULL coordinate preservation fix: latitude/longitude are only
+      // included when a genuine fresh selection resolved them. Omitting
+      // the keys for an untouched place lets update_order()'s own
+      // data.get("latitude", order.latitude) default apply, which leaves
+      // the order's existing value -- NULL, "", or a real coordinate --
+      // exactly as it already was, with zero client-side normalization.
+      const payload: { dob: string; tob: string; pob: string; latitude?: string; longitude?: string } = {
+        dob: formData.dob,
+        tob: formData.tob,
+        pob: placeState.pob,
+      };
+      if (placeFreshlySelected) {
+        payload.latitude = String(placeState.lat);
+        payload.longitude = String(placeState.lng);
+      }
       // Admin Orders BFF Completion: routed through this app's own
       // authenticated BFF route (app/api/admin/orders/[id]/route.ts)
       // instead of fetching NEXT_PUBLIC_BACKEND_URL (production Flask)
@@ -80,7 +135,7 @@ export default function OrderList() {
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(payload),
         }
       );
       if (res.ok) {
@@ -88,7 +143,8 @@ export default function OrderList() {
         setEditingOrder(null);
         location.reload();
       } else {
-        alert("Failed to update order.");
+        const data = await res.json().catch(() => null);
+        alert(data?.message || "Failed to update order.");
       }
     } catch (error) {
       alert("Error while updating.");
@@ -127,81 +183,85 @@ export default function OrderList() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => (
-              <tr key={order.id}>
-                <td className="p-2 border">{index + 1}</td>
-                <td className="p-2 border">
-                  {order.name}
-                  <button
-                    className="ml-2 text-blue-600 underline text-xs"
-                    onClick={() => {
-                      setEditingOrder(order);
-                      setFormData({
-                        dob: order.dob || "",
-                        tob: order.tob || "",
-                        pob: order.pob || "",
-                        latitude: order.latitude || "",
-                        longitude: order.longitude || "",
-                      });
-                    }}
-                  >
-                    Edit
-                  </button>
-                </td>
-                <td className="p-2 border">{order.phone}</td>
-                <td className="p-2 border">{order.report_name}</td>
-                <td className="p-2 border">
-                  {order.language === "hi" ? "🇮🇳 Hindi" : "🇬🇧 English"}
-                </td>
-                <td className="p-2 border">{order.payment_status}</td>
-                <td className="p-2 border">{order.report_stage}</td>
-                <td className="p-2 border">
-                  {new Date(order.order_time).toLocaleString()}
-                </td>
-                <td className="p-2 border">
-                  {order.pdf_url ? (
-                    <a
-                      href={`${process.env.NEXT_PUBLIC_BACKEND_URL}${order.pdf_url}`}
-                      className="text-blue-600 underline mr-2"
-                      target="_blank"
+            {orders.map((order, index) => {
+              const status = deliveryStatus(order);
+              const resendEnabled = canResend(order);
+              return (
+                <tr key={order.id}>
+                  <td className="p-2 border">{index + 1}</td>
+                  <td className="p-2 border">
+                    {order.name}
+                    <button
+                      className="ml-2 text-blue-600 underline text-xs"
+                      onClick={() => openEdit(order)}
                     >
-                      Download
-                    </a>
-                  ) : (
-                    <span className="text-gray-500 italic mr-2">
-                      Not ready
-                    </span>
-                  )}
+                      Edit
+                    </button>
+                  </td>
+                  <td className="p-2 border">{order.phone}</td>
+                  <td className="p-2 border">{order.report_name}</td>
+                  <td className="p-2 border">
+                    {order.language === "hi" ? "🇮🇳 Hindi" : "🇬🇧 English"}
+                  </td>
+                  <td className="p-2 border">{order.payment_status}</td>
+                  <td className="p-2 border">{order.report_stage}</td>
+                  <td className="p-2 border">
+                    {new Date(order.order_time).toLocaleString()}
+                  </td>
+                  <td className="p-2 border">
+                    {status.kind === "download" ? (
+                      // Admin Orders P0 fix: routed through the authenticated
+                      // BFF route (app/api/admin/orders/[id]/download/route.ts)
+                      // instead of linking straight at NEXT_PUBLIC_BACKEND_URL
+                      // (production Flask) with no credential at all -- that
+                      // direct link 401'd on every click, PDF or not.
+                      <a
+                        href={`/api/admin/orders/${order.id}/download`}
+                        className="text-blue-600 underline mr-2"
+                        target="_blank"
+                      >
+                        Download
+                      </a>
+                    ) : (
+                      <span
+                        className={`italic mr-2 ${status.kind === "failed" ? "text-red-600" : "text-gray-500"}`}
+                      >
+                        {status.label}
+                      </span>
+                    )}
 
-                  <button
-                    onClick={async () => {
-                      try {
-                        // Admin Orders BFF Completion: routed through this
-                        // app's own authenticated BFF route
-                        // (app/api/admin/orders/[id]/resend/route.ts)
-                        // instead of fetching NEXT_PUBLIC_BACKEND_URL
-                        // (production Flask) directly from the browser
-                        // with no credential at all.
-                        const res = await fetch(
-                          `/api/admin/orders/${order.id}/resend`,
-                          { method: "POST" }
-                        );
-                        if (res.ok) {
-                          alert("Resend started!");
-                        } else {
-                          alert("Failed to resend report.");
+                    <button
+                      disabled={!resendEnabled}
+                      title={resendEnabled ? undefined : "Resend is only available for a Ready report whose email delivery failed."}
+                      onClick={async () => {
+                        try {
+                          // Admin Orders BFF Completion: routed through this
+                          // app's own authenticated BFF route
+                          // (app/api/admin/orders/[id]/resend/route.ts)
+                          // instead of fetching NEXT_PUBLIC_BACKEND_URL
+                          // (production Flask) directly from the browser
+                          // with no credential at all.
+                          const res = await fetch(
+                            `/api/admin/orders/${order.id}/resend`,
+                            { method: "POST" }
+                          );
+                          if (res.ok) {
+                            alert("Resend started!");
+                          } else {
+                            alert("Failed to resend report.");
+                          }
+                        } catch (error) {
+                          alert("Error while resending.");
                         }
-                      } catch (error) {
-                        alert("Error while resending.");
-                      }
-                    }}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600"
-                  >
-                    Resend
-                  </button>
-                </td>
-              </tr>
-            ))}
+                      }}
+                      className="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-yellow-500"
+                    >
+                      Resend
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
@@ -230,33 +290,19 @@ export default function OrderList() {
               }
                 className="w-full border p-2 mb-2 text-black"
             />
-            <input
-              type="text"
-              placeholder="Place of Birth"
-              value={formData.pob}
-              onChange={(e) =>
-                setFormData({ ...formData, pob: e.target.value })
-              }
-                className="w-full border p-2 mb-2 text-black"
+            <PlaceAutocompleteInput
+              value={placeState.pob}
+              onChange={(value) => setPlaceState((prev) => applyPobEdit(prev, value))}
+              onPlaceSelected={(place) => {
+                setPlaceState((prev) => applyPlaceSelection(prev, place));
+                setPlaceFreshlySelected(true);
+              }}
             />
-            <input
-              type="text"
-              placeholder="Latitude"
-              value={formData.latitude}
-              onChange={(e) =>
-                setFormData({ ...formData, latitude: e.target.value })
-              }
-                className="w-full border p-2 mb-2 text-black"
-            />
-            <input
-              type="text"
-              placeholder="Longitude"
-              value={formData.longitude}
-              onChange={(e) =>
-                setFormData({ ...formData, longitude: e.target.value })
-              }
-                className="w-full border p-2 mb-2 text-black"
-            />
+            <p className="text-xs text-gray-500 mb-2">
+              {placeState.placeSelected
+                ? `Lat/Lng: ${placeState.lat}, ${placeState.lng}`
+                : "Select a place from the suggestions to set coordinates."}
+            </p>
 
             <div className="flex justify-end space-x-2">
               <button
@@ -266,7 +312,9 @@ export default function OrderList() {
                 Cancel
               </button>
               <button
-                className="px-3 py-1 bg-green-600 text-white rounded"
+                className="px-3 py-1 bg-green-600 text-white rounded disabled:opacity-40 disabled:cursor-not-allowed"
+                disabled={!placeState.placeSelected}
+                title={placeState.placeSelected ? undefined : "Select a genuine place suggestion before saving."}
                 onClick={handleSave}
               >
                 Save
