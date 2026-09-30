@@ -1,10 +1,12 @@
 // components/focused-reports/FocusedReportHero.tsx
 // Above-the-fold: H1 (exact catalog question), value proposition, price,
-// 3-4 benefits, primary CTA, trust line. Server component -- no client JS
-// needed, locale comes from the route (params.locale), never re-detected.
+// 3-4 benefits, primary CTA, trust line. Server component -- its only client
+// island is FocusedSampleViewer (the View Sample modal); locale comes from the
+// route (params.locale), never re-detected.
 
 import Link from "next/link";
 import { getFocusedReportSampleOrPreviewHref, type FocusedReportConfig } from "@/app/data/focusedReportsConfig";
+import FocusedSampleViewer from "@/components/focused-reports/FocusedSampleViewer";
 import type { Locale } from "@/lib/authority-engine/types";
 
 interface Props {
@@ -70,24 +72,22 @@ export default function FocusedReportHero({ config, title, question, locale }: P
             : "Built from your own birth details, emailed to you within minutes of secure payment."}
         </p>
 
-        {/* Secondary "View Sample" link -- every one of the 63 gets one now.
-            config.questionKey (never humanSlug/title) drives which
-            destination it resolves to, via the ONE decision point
-            (getFocusedReportSampleOrPreviewHref): every one of the 63 opens
-            its own sample PDF (#62/#63: their original product-specific
-            samples; the other 61: a SAMPLE REPORT cover with this product's
-            question + a shared demonstration body the cover discloses as
-            sample analysis). Plain anchor: no order/payment/
-            backend request, no carousel/modal, no second sample architecture. */}
-        <a
+        {/* Secondary "View Sample" -- every one of the 63 gets one.
+            config.questionKey (never humanSlug/title) drives which PDF it
+            shows, via the ONE decision point (getFocusedReportSampleOrPreviewHref):
+            #62/#63 their original product-specific samples; the other 61 a
+            SAMPLE REPORT cover with this product's question + a shared
+            demonstration body the cover discloses as sample analysis.
+            FocusedSampleViewer opens that PDF in an on-page modal (the link
+            itself still points at the PDF for no-JS / new-tab clicks); its
+            purchase CTA only scrolls to this page's existing checkout form --
+            no order/payment/backend request, no second checkout. */}
+        <FocusedSampleViewer
           href={getFocusedReportSampleOrPreviewHref(config.questionKey, locale)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-4 py-1.5 text-sm font-medium text-purple-300 transition-colors hover:border-purple-300 hover:text-white"
-        >
-          {locale === "hi" ? "Sample देखें" : "View Sample"}
-          <span aria-hidden="true">↗</span>
-        </a>
+          locale={locale}
+          priceRupees={config.priceRupees}
+          title={title}
+        />
       </div>
     </section>
   );

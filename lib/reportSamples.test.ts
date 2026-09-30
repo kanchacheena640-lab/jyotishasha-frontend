@@ -266,8 +266,29 @@ check("relationship source: plain anchor, no Link, no download, payment + form u
 // guessed implementation. No catalog product reaches the generic Example
 // Report preview any more (that page/fallback is kept, retired separately).
 const FOCUSED_HERO = "components/focused-reports/FocusedReportHero.tsx";
+const SAMPLE_VIEWER = "components/focused-reports/FocusedSampleViewer.tsx";
 const EN_FOCUSED_LABEL = "View Sample";
 const HI_FOCUSED_LABEL = "Sample देखें";
+// The REAL FocusedSampleViewer with React's hooks stubbed (no DOM here): it reflects the INITIAL render --
+// modal closed -- unless `startOpen` forces the `open` state (its first useState, initial value false).
+function loadSampleViewer(startOpen = false) {
+  return load(SAMPLE_VIEWER, {
+    "react/jsx-runtime": jsxRuntime,
+    react: {
+      useState: (init: unknown) => [startOpen && init === false ? true : init, () => undefined],
+      useEffect: () => undefined,
+      useRef: (init: unknown) => ({ current: init }),
+      useCallback: (fn: unknown) => fn,
+    },
+  }).default;
+}
+// Expand function-component elements (the Hero's <FocusedSampleViewer/>) into what they render.
+function expand(node: any): any {
+  if (Array.isArray(node)) return node.map(expand);
+  if (!node || typeof node !== "object" || !("props" in node)) return node;
+  if (typeof node.type === "function") return expand(node.type(node.props));
+  return { ...node, props: { ...node.props, children: expand(node.props.children) } };
+}
 function renderFocusedHero(questionKey: string, locale: "en" | "hi") {
   const { default: FocusedReportHero } = load(FOCUSED_HERO, {
     "react/jsx-runtime": jsxRuntime,
@@ -275,9 +296,15 @@ function renderFocusedHero(questionKey: string, locale: "en" | "hi") {
     // The REAL implementation (not a duplicate/re-guessed one) -- see the
     // top-level import above.
     "@/app/data/focusedReportsConfig": { getFocusedReportSampleOrPreviewHref },
+    "@/components/focused-reports/FocusedSampleViewer": { default: loadSampleViewer() },
   });
   const config = { questionKey, priceRupees: 51, benefits: { en: ["b1"], hi: ["b1"] } };
-  return FocusedReportHero({ config, title: "T", question: "Q", locale });
+  return expand(FocusedReportHero({ config, title: "T", question: "Q", locale }));
+}
+function elementsOfType(tree: any, type: string): any[] {
+  const found: any[] = [];
+  walk(tree, (el) => { if (el.type === type) found.push(el); });
+  return found;
 }
 check("all 63 x EN/HI: the rendered Hero has exactly one 'View Sample' link -> its own existing PDF (126 targets)", () => {
   const hrefs = new Set<string>();
@@ -302,23 +329,93 @@ check("no focused product (Hero render, either locale) resolves to the generic e
     }
   }
 });
-check("FocusedReportHero source: driven by config.questionKey (never humanSlug/title), plain anchor, no Link/download, no carousel/modal", () => {
+const codeOnly = (source: string) => source
+  // Strip comments first (including multi-line JSX {/* ... */} blocks) -- explanatory comments may name
+  // what was deliberately NOT built; only actual code would be a violation.
+  .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .split("\n")
+  .filter((line) => !/^\s*\/\//.test(line))
+  .join("\n");
+check("FocusedReportHero source: driven by config.questionKey (never humanSlug/title), sample UI delegated to FocusedSampleViewer, no download, no carousel", () => {
   const source = read(FOCUSED_HERO);
-  // Strip comments first (including multi-line JSX {/* ... */} blocks) --
-  // this file's own explanatory comments are allowed to name what was
-  // deliberately NOT built; only actual code (a real import, component or
-  // class name) would be a violation.
-  const codeOnly = source
-    .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .split("\n")
-    .filter((line) => !/^\s*\/\//.test(line))
-    .join("\n");
   assert.ok(source.includes("getFocusedReportSampleOrPreviewHref(config.questionKey, locale)"));
+  assert.ok(source.includes("<FocusedSampleViewer") && source.includes("priceRupees={config.priceRupees}"));
   assert.ok(!/config\.humanSlug/.test(source));
   assert.ok(!/\bdownload\b/.test(source));
-  assert.ok(source.includes('target="_blank"') && source.includes('rel="noopener noreferrer"'));
-  assert.ok(!/carousel|modal|Modal|Carousel/i.test(codeOnly));
+  assert.ok(!/"use client"/.test(source), "the Hero stays a server component; only the viewer is a client island");
+  assert.ok(!/carousel|Carousel/.test(codeOnly(source)));
+});
+
+// ---- 5b. the on-page sample modal (FocusedSampleViewer) --------------------------------------------------------
+check("modal closed (initial render): only the View Sample trigger link renders -- no iframe, so no PDF is downloaded per page view", () => {
+  const Viewer = loadSampleViewer();
+  const tree = Viewer({ href: "/report-samples/promotion_timing_en.pdf", locale: "en", priceRupees: 51, title: "T" });
+  const found = anchors(tree);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].props["aria-haspopup"], "dialog");
+  assert.equal(typeof found[0].props.onClick, "function", "a plain click must be intercepted to open the modal");
+  assert.equal(elementsOfType(tree, "iframe").length, 0);
+  const dialogs = elementsOfType(tree, "dialog");
+  assert.equal(dialogs.length, 1);
+  assert.equal(dialogs[0].props["aria-modal"], "true");
+  assert.ok(dialogs[0].props["aria-labelledby"]);
+  assert.equal(typeof dialogs[0].props.onCancel, "function", "Escape (dialog cancel) must be handled");
+});
+for (const [locale, cta, close] of [
+  ["en", "Get My Personalized Report — ₹51", "Close sample"],
+  ["hi", "मेरी व्यक्तिगत रिपोर्ट प्राप्त करें — ₹51", "Sample बंद करें"],
+] as const) {
+  check(`modal open (${locale}): iframe shows exactly the given PDF, labelled dialog heading, accessible close, exact purchase CTA`, () => {
+    const href = `/report-samples/relationship_lead_to_marriage_${locale}.pdf`;
+    const tree = loadSampleViewer(true)({ href, locale, priceRupees: 51, title: "My Report" });
+    const frames = elementsOfType(tree, "iframe");
+    assert.equal(frames.length, 1);
+    assert.equal(frames[0].props.src, href);
+    assert.ok(frames[0].props.title);
+    const dialog = elementsOfType(tree, "dialog")[0];
+    const heading = elementsOfType(tree, "h2")[0];
+    assert.equal(heading.props.id, dialog.props["aria-labelledby"]);
+    assert.equal(textOf(heading.props.children), "My Report");
+    const buttons = elementsOfType(tree, "button");
+    assert.ok(buttons.some((b) => b.props["aria-label"] === close && b.props.autoFocus), "focused, labelled close button");
+    assert.ok(buttons.some((b) => textOf(b.props.children) === cta), `CTA must read exactly: ${cta}`);
+    // every link inside the modal still points at this product's own PDF only
+    for (const a of anchors(tree)) assert.equal(a.props.href, href);
+  });
+}
+check("the CTA price comes from the product config (priceRupees prop), never a hard-coded ₹51", () => {
+  const tree = loadSampleViewer(true)({ href: "/report-samples/x_en.pdf", locale: "en", priceRupees: 77, title: "T" });
+  assert.ok(elementsOfType(tree, "button").some((b) => textOf(b.props.children) === "Get My Personalized Report — ₹77"));
+  assert.ok(!/₹51/.test(read(SAMPLE_VIEWER)));
+});
+check("FocusedSampleViewer source: native showModal dialog, Back closes via one same-URL history entry, X/Escape/CTA reuse it, scroll lock restored, focus restored", () => {
+  const src = codeOnly(read(SAMPLE_VIEWER));
+  assert.ok(src.includes('"use client"'));
+  assert.ok(src.includes("dialog.showModal()") && src.includes("dialog.close()"));
+  // exactly one pushState, with NO url argument (same URL: no hash/query, nothing for Next to navigate to)
+  const pushes: string[] = src.match(/history\.pushState\(([^;]*)\);/g) || [];
+  assert.equal(pushes.length, 1);
+  const [push] = pushes;
+  assert.ok(/pushState\(\{ \.\.\.\(window\.history\.state \?\? \{\}\), \[HISTORY_KEY\]: href \}, ""\)/.test(push), push);
+  assert.ok(!/replaceState/.test(src));
+  assert.ok(src.includes('addEventListener("popstate"') && src.includes('removeEventListener("popstate"'));
+  assert.ok(src.includes("window.history.back()"), "closing while the modal entry is current must pop it, not push another");
+  assert.ok(/event\.preventDefault\(\);[^\n]*\n\s*requestClose\(\)/.test(src), "Escape must go through requestClose");
+  assert.ok(src.includes('root.style.overflow = "hidden"') && src.includes("root.style.overflow = previousOverflow"));
+  assert.ok(src.includes("triggerRef.current?.focus("));
+  assert.ok(/event\.metaKey \|\| event\.ctrlKey/.test(src), "modifier clicks keep native new-tab behaviour");
+});
+check("the modal's purchase CTA reuses the page's EXISTING checkout form -- no second checkout, no order/payment/network code", () => {
+  const src = codeOnly(read(SAMPLE_VIEWER));
+  assert.ok(src.includes('const PURCHASE_FORM_ID = "focused-report-form"'));
+  for (const checkout of ["components/focused-reports/FocusedReportCheckout.tsx", "components/focused-reports/FocusedDualReportCheckout.tsx"]) {
+    assert.ok(read(checkout).includes('id="focused-report-form"'), `${checkout} must still own the purchase form anchor`);
+  }
+  assert.ok(read(FOCUSED_HERO).includes('href="#focused-report-form"'), "the Hero's own purchase CTA targets the same form");
+  assert.ok(!/fetch\(|axios|XMLHttpRequest|useReportPurchase|razorpay|\border\b|\bpayment\b/i.test(src.replace(/"focused-report-form"/g, "")));
+  const imports = src.match(/^import .*$/gm) || [];
+  assert.deepEqual(imports.map((l) => l.match(/from "([^"]+)"/)?.[1]).sort(), ["@/lib/authority-engine/types", "react", "react"]);
 });
 check("the retained fallback: a key with NO sample PDF (not in the catalog) still gets exactly one link, to the locale-correct generic preview -- never a guessed/broken per-product PDF", () => {
   for (const locale of ["en", "hi"] as const) {

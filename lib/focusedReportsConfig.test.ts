@@ -939,8 +939,9 @@ check("the identity/customer-name line on the generic preview is a generic place
   assert.ok(!src.includes("Aarav Sharma"));
   assert.ok(src.includes("Example Customer") || src.includes("उदाहरण ग्राहक"));
 });
-check("Sample Preview labels are consistent everywhere: 'View Sample' (EN) / 'Sample देखें' (HI), on both the product-page Hero and the hub cards", () => {
-  const heroSrc = read("components/focused-reports/FocusedReportHero.tsx");
+check("Sample Preview labels are consistent everywhere: 'View Sample' (EN) / 'Sample देखें' (HI), on both the product-page Hero (its FocusedSampleViewer trigger) and the hub cards", () => {
+  assert.ok(read("components/focused-reports/FocusedReportHero.tsx").includes("<FocusedSampleViewer"));
+  const heroSrc = read("components/focused-reports/FocusedSampleViewer.tsx");
   assert.ok(heroSrc.includes("View Sample") && heroSrc.includes("Sample देखें"));
   assert.ok(read(HUB_PAGE).includes("View Sample") && read(HUB_PAGE).includes("Sample देखें"));
 });
