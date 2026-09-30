@@ -14,11 +14,13 @@
  */
 /* eslint-disable @typescript-eslint/no-explicit-any -- test helpers walk untyped React element trees */
 import * as assert from "assert";
+import { execFileSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 import * as vm from "vm";
 import * as ts from "typescript";
 import { reportsData } from "../app/data/reportsData";
+import { intentQuestions } from "../app/data/intentCatalog";
 import * as samples from "./reportSamples";
 import { focusedReportHasSample, getFocusedReportSampleOrPreviewHref, GENERIC_EXAMPLE_PREVIEW_PATH } from "../app/data/focusedReportsConfig";
 
@@ -61,21 +63,36 @@ check("the helper is tiny and has no product table, network or analytics", () =>
   assert.ok(!/career_report|relationship_future_report/.test(source.replace(/\/\*[\s\S]*?\*\//, "")));
 });
 
-// ---- 2. the 50 standard/relationship files + 4 focused-pilot (#62/#63) files ---------------------------------
+// ---- 2. the 50 standard/relationship files + 126 focused files (63 questionKeys x EN/HI) ---------------------
 const sampleDir = path.join(repo, "public/report-samples");
-// P0.6 (sample task) added exactly 4 files here: major_kundali_obstacles_{en,hi}.pdf,
-// major_kundali_strengths_{en,hi}.pdf -- the #62/#63 pilot samples. Nothing else in
-// this directory changed; the original 50 are still exactly the original 50.
-const FOCUSED_PILOT_SAMPLE_FILES = [
-  "major_kundali_obstacles_en.pdf", "major_kundali_obstacles_hi.pdf",
-  "major_kundali_strengths_en.pdf", "major_kundali_strengths_hi.pdf",
-];
-check("exactly 54 files (the original 50 + the 4 focused-pilot samples), every one a valid PDF named <slug>_<en|hi>.pdf", () => {
+// The focused samples are keyed by the backend's own question_key: <questionKey>_<en|hi>.pdf. #62/#63 keep
+// their original product-specific pilot files; the other 61 are a product-labelled SAMPLE REPORT cover over
+// the shared demonstration body. The original 50 paid-report files are untouched.
+const FOCUSED_QUESTION_KEYS = intentQuestions.map((q) => q.questionKey);
+const FOCUSED_SAMPLE_FILES = FOCUSED_QUESTION_KEYS.flatMap((key) => [`${key}_en.pdf`, `${key}_hi.pdf`]);
+const PAID_REPORT_SAMPLE_FILES = reportsData.flatMap((r) => [`${r.slug}_en.pdf`, `${r.slug}_hi.pdf`]);
+check("exactly 176 files (the original 50 + 126 focused samples), every one a valid PDF named <slug>_<en|hi>.pdf", () => {
   const files = fs.readdirSync(sampleDir);
-  assert.equal(files.length, 54);
+  assert.equal(files.length, 176);
   for (const f of files) {
     assert.match(f, /^[a-z_]+_(en|hi)\.pdf$/);
     assert.equal(fs.readFileSync(path.join(sampleDir, f)).subarray(0, 5).toString("latin1"), "%PDF-");
+  }
+});
+check("the directory is exactly the 50 paid-report files + the 126 focused files -- nothing else, no overlap", () => {
+  assert.equal(new Set(PAID_REPORT_SAMPLE_FILES).size, 50);
+  assert.equal(new Set(FOCUSED_SAMPLE_FILES).size, 126);
+  assert.ok(!FOCUSED_SAMPLE_FILES.some((f) => PAID_REPORT_SAMPLE_FILES.includes(f)), "a questionKey collides with a paid slug");
+  assert.deepEqual(fs.readdirSync(sampleDir).sort(), [...PAID_REPORT_SAMPLE_FILES, ...FOCUSED_SAMPLE_FILES].sort());
+});
+check("all 63 catalog questionKeys have an EN and a HI sample: 126 complete 3-page PDFs (header, page count, %%EOF)", () => {
+  assert.equal(FOCUSED_QUESTION_KEYS.length, 63);
+  assert.equal(new Set(FOCUSED_QUESTION_KEYS).size, 63);
+  for (const file of FOCUSED_SAMPLE_FILES) {
+    const bytes = fs.readFileSync(path.join(sampleDir, file)).toString("latin1");
+    assert.ok(bytes.startsWith("%PDF-"), `${file}: not a PDF`);
+    assert.ok(/%%EOF\s*$/.test(bytes), `${file}: truncated (no %%EOF trailer)`);
+    assert.equal((bytes.match(/\/Type\s*\/Page(?!s)\b/g) || []).length, 3, `${file}: expected 3 pages (cover + 2 body)`);
   }
 });
 check("every catalog slug (25) has both an EN and a HI sample at the helper's exact URL", () => {
@@ -87,19 +104,21 @@ check("every catalog slug (25) has both an EN and a HI sample at the helper's ex
     }
   }
 });
-check("24 standard EN + 24 standard HI + relationship EN + HI (unchanged by the focused-pilot addition)", () => {
+check("24 standard EN + 24 standard HI + relationship EN + HI (unchanged by the focused-sample addition)", () => {
   const files = fs.readdirSync(sampleDir);
   const standard = files.filter(
-    (f) => !f.startsWith("relationship_future_report_") && !FOCUSED_PILOT_SAMPLE_FILES.includes(f),
+    (f) => !f.startsWith("relationship_future_report_") && !FOCUSED_SAMPLE_FILES.includes(f),
   );
   assert.equal(standard.filter(f => f.endsWith("_en.pdf")).length, 24);
   assert.equal(standard.filter(f => f.endsWith("_hi.pdf")).length, 24);
   assert.ok(files.includes("relationship_future_report_en.pdf") && files.includes("relationship_future_report_hi.pdf"));
 });
-check("the 4 focused-pilot sample files exist, exactly these 4 and no others with that prefix", () => {
-  const files = fs.readdirSync(sampleDir);
-  const pilotFiles = files.filter((f) => f.startsWith("major_kundali_"));
-  assert.deepEqual(pilotFiles.sort(), [...FOCUSED_PILOT_SAMPLE_FILES].sort());
+check("the original 50 paid-report sample files are byte-for-byte unchanged in git (none modified or deleted)", () => {
+  // Plain `git diff` against HEAD: any change to a tracked paid sample (edit, overwrite, delete) is listed.
+  const changed = execFileSync("git", ["diff", "--name-only", "HEAD", "--", "public/report-samples"], { cwd: repo })
+    .toString().split("\n").filter(Boolean).map((p: string) => path.basename(p));
+  const touchedPaid = changed.filter((f: string) => PAID_REPORT_SAMPLE_FILES.includes(f));
+  assert.deepEqual(touchedPaid, [], `paid sample files changed: ${touchedPaid.join(", ")}`);
 });
 
 // ---- helpers to execute the REAL components in an isolated context -----------------------------------------------
@@ -241,12 +260,11 @@ check("relationship source: plain anchor, no Link, no download, payment + form u
 });
 
 // ---- 5. sample-or-preview CTA (FocusedReportHero, ALL 63) -----------------------------------------------------
-// Sample Preview Strategy update: every one of the 63 now gets a "View
-// Sample" action. #62/#63 open their own real, exact sample PDF
-// (unchanged mechanism/URL); the other 61 open the ONE shared, locale-
-// aware Example Report preview page -- resolved through the single
-// function getFocusedReportSampleOrPreviewHref(), never a second/guessed
-// implementation.
+// Every one of the 63 gets a "View Sample" action, and every one now opens
+// its OWN sample PDF (<questionKey>_<locale>.pdf) -- resolved through the
+// single function getFocusedReportSampleOrPreviewHref(), never a second/
+// guessed implementation. No catalog product reaches the generic Example
+// Report preview any more (that page/fallback is kept, retired separately).
 const FOCUSED_HERO = "components/focused-reports/FocusedReportHero.tsx";
 const EN_FOCUSED_LABEL = "View Sample";
 const HI_FOCUSED_LABEL = "Sample देखें";
@@ -261,27 +279,28 @@ function renderFocusedHero(questionKey: string, locale: "en" | "hi") {
   const config = { questionKey, priceRupees: 51, benefits: { en: ["b1"], hi: ["b1"] } };
   return FocusedReportHero({ config, title: "T", question: "Q", locale });
 }
-for (const [questionKey, locale, expectedFile] of [
-  ["major_kundali_obstacles", "en", "major_kundali_obstacles_en.pdf"],
-  ["major_kundali_obstacles", "hi", "major_kundali_obstacles_hi.pdf"],
-  ["major_kundali_strengths", "en", "major_kundali_strengths_en.pdf"],
-  ["major_kundali_strengths", "hi", "major_kundali_strengths_hi.pdf"],
-] as const) {
-  check(`#${questionKey === "major_kundali_obstacles" ? "62" : "63"} ${locale}: exactly one sample link -> real PDF ${expectedFile} (exact sample behavior unchanged)`, () => {
-    const found = anchors(renderFocusedHero(questionKey, locale));
-    assert.equal(found.length, 1);
-    assertSecondarySampleAnchor(found[0], `/report-samples/${expectedFile}`, locale === "hi" ? HI_FOCUSED_LABEL : EN_FOCUSED_LABEL);
-  });
-}
-check("#62 never resolves to #63's sample file and vice versa, for either language", () => {
-  assert.notEqual(
-    anchors(renderFocusedHero("major_kundali_obstacles", "en"))[0].props.href,
-    anchors(renderFocusedHero("major_kundali_strengths", "en"))[0].props.href,
-  );
-  assert.notEqual(
-    anchors(renderFocusedHero("major_kundali_obstacles", "hi"))[0].props.href,
-    anchors(renderFocusedHero("major_kundali_strengths", "hi"))[0].props.href,
-  );
+check("all 63 x EN/HI: the rendered Hero has exactly one 'View Sample' link -> its own existing PDF (126 targets)", () => {
+  const hrefs = new Set<string>();
+  for (const questionKey of FOCUSED_QUESTION_KEYS) {
+    for (const locale of ["en", "hi"] as const) {
+      const found = anchors(renderFocusedHero(questionKey, locale));
+      assert.equal(found.length, 1, `${questionKey}/${locale}`);
+      const expected = `/report-samples/${questionKey}_${locale}.pdf`;
+      assertSecondarySampleAnchor(found[0], expected, locale === "hi" ? HI_FOCUSED_LABEL : EN_FOCUSED_LABEL);
+      assert.ok(fs.existsSync(path.join(repo, "public", expected)), `broken sample href ${expected}`);
+      hrefs.add(expected);
+    }
+  }
+  assert.equal(hrefs.size, 126, "every product/locale must have its own distinct sample file");
+});
+check("no focused product (Hero render, either locale) resolves to the generic example-preview", () => {
+  for (const questionKey of FOCUSED_QUESTION_KEYS) {
+    for (const locale of ["en", "hi"] as const) {
+      const href: string = anchors(renderFocusedHero(questionKey, locale))[0].props.href;
+      assert.ok(!href.includes(GENERIC_EXAMPLE_PREVIEW_PATH), `${questionKey}/${locale} -> ${href}`);
+      assert.ok(focusedReportHasSample(questionKey), questionKey);
+    }
+  }
 });
 check("FocusedReportHero source: driven by config.questionKey (never humanSlug/title), plain anchor, no Link/download, no carousel/modal", () => {
   const source = read(FOCUSED_HERO);
@@ -301,29 +320,28 @@ check("FocusedReportHero source: driven by config.questionKey (never humanSlug/t
   assert.ok(source.includes('target="_blank"') && source.includes('rel="noopener noreferrer"'));
   assert.ok(!/carousel|modal|Modal|Carousel/i.test(codeOnly));
 });
-check("a product with NO real sample PDF (e.g. promotion_timing, one of the other 61) STILL shows exactly one 'View Sample' link -- pointing at the shared generic Example Report preview, never absent, never a broken/fake per-product PDF", () => {
+check("the retained fallback: a key with NO sample PDF (not in the catalog) still gets exactly one link, to the locale-correct generic preview -- never a guessed/broken per-product PDF", () => {
   for (const locale of ["en", "hi"] as const) {
-    const found = anchors(renderFocusedHero("promotion_timing", locale));
-    assert.equal(found.length, 1, `promotion_timing/${locale} must render exactly one sample/preview link`);
+    const found = anchors(renderFocusedHero("not_a_catalog_question", locale));
+    assert.equal(found.length, 1, `fallback/${locale} must render exactly one sample/preview link`);
     const expectedHref = locale === "hi" ? `/hi${GENERIC_EXAMPLE_PREVIEW_PATH}` : GENERIC_EXAMPLE_PREVIEW_PATH;
     assertSecondarySampleAnchor(found[0], expectedHref, locale === "hi" ? HI_FOCUSED_LABEL : EN_FOCUSED_LABEL);
   }
 });
-check("the generic Example Report preview link is locale-correct for EVERY one of the 61 non-sample products, always resolving through getFocusedReportSampleOrPreviewHref (never a second implementation)", () => {
+check("the Hero always resolves through getFocusedReportSampleOrPreviewHref (never a second implementation) and never hides the link", () => {
   const source = read(FOCUSED_HERO);
   assert.ok(source.includes("getFocusedReportSampleOrPreviewHref(config.questionKey, locale)"));
-  assert.ok(!/\{focusedReportHasSample/.test(source), "must no longer conditionally hide the link -- every product gets one now");
+  assert.ok(!/\{focusedReportHasSample/.test(source), "must not conditionally hide the link -- every product gets one");
 });
-check("the 4 focused-pilot sample PDFs visibly identify themselves as samples (EN: SAMPLE REPORT, HI: उदाहरण रिपोर्ट)", () => {
-  // Node's PDF.js/pypdf-equivalent text extraction isn't available here (no
-  // new dependency introduced for this check); instead this greps the raw
-  // PDF bytes for the literal stamped text, which -- for these WeasyPrint-
-  // produced, non-compressed-stream cover-page overlays -- appears as plain
-  // bytes in the file. This is a smoke check, not a full render; the actual
-  // visible placement was confirmed by hand (rendered PNG) as part of this
-  // task, see the sample task's own report.
-  const enText = fs.readFileSync(path.join(sampleDir, "major_kundali_obstacles_en.pdf")).toString("latin1");
-  assert.ok(enText.includes("SAMPLE REPORT"), "EN sample PDF must contain the literal SAMPLE REPORT stamp");
+check("all 63 EN focused sample PDFs visibly identify themselves as samples (literal SAMPLE REPORT bytes)", () => {
+  // Node has no PDF text extraction here (no new dependency for this check), so this greps the raw PDF bytes.
+  // The literal comes from the approved master's own reportlab-stamped "SAMPLE REPORT" banner on the body pages
+  // (the WeasyPrint cover encodes its text as glyph IDs). The HI stamp is Devanagari, so HI is not grep-able;
+  // the cover wording of all 126 was validated by the backend generator (qa_focused_cover_samples/manifest.json).
+  for (const key of FOCUSED_QUESTION_KEYS) {
+    const enText = fs.readFileSync(path.join(sampleDir, `${key}_en.pdf`)).toString("latin1");
+    assert.ok(enText.includes("SAMPLE REPORT"), `${key}_en.pdf must contain the literal SAMPLE REPORT stamp`);
+  }
 });
 
 // ---- 6. DUAL checkout contract (FocusedDualReportCheckout, the 9 focused_dual_v1 products) --------------------

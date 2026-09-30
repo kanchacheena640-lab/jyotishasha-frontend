@@ -73,11 +73,11 @@ export default function FocusedReportHero({ config, title, question, locale }: P
         {/* Secondary "View Sample" link -- every one of the 63 gets one now.
             config.questionKey (never humanSlug/title) drives which
             destination it resolves to, via the ONE decision point
-            (getFocusedReportSampleOrPreviewHref): #62/#63 open their own
-            real, exact sample PDF (unchanged mechanism/URL); every other
-            product opens the shared, locale-aware Example Report preview
-            page -- never another product's real sample, never implied to
-            be this product's own content. Plain anchor: no order/payment/
+            (getFocusedReportSampleOrPreviewHref): every one of the 63 opens
+            its own sample PDF (#62/#63: their original product-specific
+            samples; the other 61: a SAMPLE REPORT cover with this product's
+            question + a shared demonstration body the cover discloses as
+            sample analysis). Plain anchor: no order/payment/
             backend request, no carousel/modal, no second sample architecture. */}
         <a
           href={getFocusedReportSampleOrPreviewHref(config.questionKey, locale)}

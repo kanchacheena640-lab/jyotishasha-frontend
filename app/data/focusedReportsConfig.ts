@@ -251,21 +251,58 @@ export function humanSlugToQuestionKey(humanSlug: string): string {
 /** Every focused product that has a REAL sample PDF in public/report-samples/
  * today. Update this ONLY when a new sample is actually added there -- this
  * is the one, explicit, honest source of "does a sample exist", never
- * inferred from whether a product has bespoke copy or is active/inactive. */
+ * inferred from whether a product has bespoke copy or is active/inactive.
+ *
+ * All 63 catalog questions now have one (<questionKey>_<en|hi>.pdf, 126
+ * files). #62/#63 (major_kundali_obstacles/strengths) keep their original,
+ * product-specific pilot samples. The other 61 are a product-labelled SAMPLE
+ * REPORT cover carrying that product's own title + exact catalog question,
+ * followed by the SAME approved demonstration body (strongest_marriage_periods,
+ * sample person Aarav Sharma); the cover states that the following pages
+ * demonstrate the report format using sample analysis and that a purchased
+ * report answers the customer's own question. Generated deterministically,
+ * without AI, by the backend's scripts/generate_focused_cover_samples.py. A
+ * future catalog question with no PDF yet must NOT be added here -- it falls
+ * back to the generic preview. */
 export const FOCUSED_REPORTS_WITH_SAMPLES: ReadonlySet<string> = new Set([
-  "major_kundali_obstacles",
-  "major_kundali_strengths",
+  // career
+  "promotion_timing", "career_improvement_timing", "career_growth_delay_reason", "next_strong_career_period",
+  "salary_growth_timing", "work_recognition_timing", "best_career_years", "job_change_now", "new_job_timing",
+  "best_period_to_switch", "job_search_start_timing", "job_gap_easing",
+  // money & business
+  "financial_improvement_timing", "income_increase_timing", "money_growth_periods", "financial_pressure_easing",
+  "debt_pressure_easing", "business_start_timing", "business_growth_timing", "best_business_periods",
+  "business_expansion_timing", "business_slowdown_easing", "new_venture_partnership_timing",
+  // marriage
+  "strongest_marriage_periods", "marriage_chances_timing", "marriage_delay_reason", "marriage_delay_easing",
+  "marriage_talks_current_period", "relationship_to_marriage_window",
+  // relationship (two-person)
+  "relationship_lead_to_marriage", "long_term_compatibility", "kundali_match_for_marriage",
+  "right_time_to_consider_marriage", "relationship_strengths_risks", "conflict_areas", "emotional_communication_fit",
+  "strengthen_relationship", "relationship_care_periods",
+  // foreign
+  "going_abroad_timing", "foreign_work_timing", "study_abroad", "foreign_settlement_timing", "relocation_timing",
+  "foreign_plans_delay_reason",
+  // education
+  "study_strong_period", "exam_preparation_period", "higher_education_timing", "study_progress_improvement",
+  // property
+  "property_purchase_timing", "property_current_period", "property_strongest_period", "property_delay_reason",
+  "own_home_timing",
+  // life
+  "major_turning_points", "next_life_change_period", "important_years_ahead", "current_phase_meaning",
+  "areas_needing_attention", "natural_strengths", "life_direction", "focus_to_use_strengths",
+  "major_kundali_obstacles", "major_kundali_strengths",
 ]);
 export function focusedReportHasSample(questionKey: string): boolean {
   return FOCUSED_REPORTS_WITH_SAMPLES.has(questionKey);
 }
 
-/** Sample-preview strategy (this task) -- every one of the 63 products gets
- * a "View Sample" action, but only #62/#63 (focusedReportHasSample) open
- * their own real, exact sample PDF (public/report-samples/, unchanged).
- * The other 61 open the ONE reusable, locale-aware Example Report preview
- * page instead -- never a per-product fake, never labeled as that
- * product's own sample. Never call getReportSampleUrl() directly for the
+/** Sample-preview strategy -- every one of the 63 products gets a "View
+ * Sample" action, and all 63 are now in FOCUSED_REPORTS_WITH_SAMPLES, so each
+ * opens its own sample PDF (public/report-samples/<questionKey>_<lang>.pdf).
+ * The generic Example Report preview branch below is kept only as the
+ * fallback for a key without a PDF; no current catalog question reaches it
+ * (retiring it is a separate task). Never call getReportSampleUrl() directly for the
  * "View Sample" action outside this function -- this is the single place
  * that decides real-vs-generic. */
 export const GENERIC_EXAMPLE_PREVIEW_PATH = "/reports/focused/example-preview";

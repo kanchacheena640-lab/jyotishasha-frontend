@@ -1,7 +1,8 @@
 /**
  * Static sample PDFs for the paid report pages.
  *
- * The 50 files live in public/report-samples/ as `<slug>_<en|hi>.pdf`, so a sample URL is derived
+ * The 50 paid-report files (+ 126 focused-report files, keyed by questionKey) live in
+ * public/report-samples/ as `<slug>_<en|hi>.pdf`, so a sample URL is derived
  * from the report slug and language alone -- no per-product table, no backend call, no analytics.
  * Deliberately independent of every purchase/order/payment path.
  */

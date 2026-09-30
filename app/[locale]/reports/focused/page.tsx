@@ -12,9 +12,9 @@
 // Popular Reports -> 8 category sections. Cards show the CUSTOMER QUESTION
 // as primary content (never the report title or category name), price
 // once, then Proceed (primary) + View Sample (secondary). The sample/
-// preview resolution itself (getFocusedReportSampleOrPreviewHref --
-// #62/#63 real PDFs, the other 61 the shared generic Example Report
-// preview) is untouched by this layout change -- same import, same call.
+// preview resolution itself (getFocusedReportSampleOrPreviewHref -- all
+// 63 now resolve to their own sample PDF) is untouched by this layout
+// change -- same import, same call.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "@/lib/seo/articleSchema";

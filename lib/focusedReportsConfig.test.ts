@@ -716,7 +716,7 @@ check("63 routable, 54 SELF, 9 DUAL, EN bare canonical, HI /hi/, noindex -- all 
 check("#62/#63 sample links and ₹51 pricing remain intact", () => {
   assert.ok(focusedReportHasSample("major_kundali_obstacles"));
   assert.ok(focusedReportHasSample("major_kundali_strengths"));
-  assert.equal(FOCUSED_REPORTS_WITH_SAMPLES.size, 2);
+  assert.equal(FOCUSED_REPORTS_WITH_SAMPLES.size, 63);
   for (const humanSlug of PILOT_SLUGS) {
     assert.equal(getFocusedReportConfigBySlug(humanSlug)!.priceRupees, 51);
   }
@@ -803,42 +803,33 @@ check("checkout behavior/backend contract is unchanged by this visual fix: produ
   assert.ok(/amount:\s*orderData\.amount/.test(read(SELF_CHECKOUT)));
 });
 
-console.log("\n=== Sample Preview Strategy: all 63 expose 'View Sample', #62/#63 real, other 61 generic Example Report preview ===");
+console.log("\n=== Sample Strategy: all 63 expose 'View Sample', every one opens its own EN/HI sample PDF ===");
 const EXAMPLE_PREVIEW_PAGE = "app/[locale]/reports/focused/example-preview/page.tsx";
-check("all 63 real question_keys resolve to a NON-EMPTY sample-or-preview href via the ONE decision function", () => {
+check("FOCUSED_REPORTS_WITH_SAMPLES is exactly the 63 catalog question_keys -- no missing, no extra/unknown key", () => {
+  assert.deepEqual([...FOCUSED_REPORTS_WITH_SAMPLES].sort(), intentQuestions.map((q) => q.questionKey).sort());
+});
+check("all 63 question_keys resolve, in both locales, to their own /report-samples/<questionKey>_<locale>.pdf, and every one of the 126 files exists", () => {
+  const hrefs = new Set<string>();
   for (const q of intentQuestions) {
     for (const locale of ["en", "hi"] as const) {
       const href = getFocusedReportSampleOrPreviewHref(q.questionKey, locale);
-      assert.ok(href && href.length > 0, `${q.questionKey}/${locale} got an empty href`);
+      assert.equal(href, `/report-samples/${q.questionKey}_${locale}.pdf`, `${q.questionKey}/${locale}`);
+      assert.ok(fs.existsSync(path.join(repo, "public", href)), `broken sample href ${href}`);
+      hrefs.add(href);
     }
   }
+  assert.equal(hrefs.size, 126);
 });
-check("#62/#63 resolve to their own exact, real sample PDF -- unchanged mechanism/URL, in both languages", () => {
-  for (const key of PILOT_KEYS) {
-    assert.equal(getFocusedReportSampleOrPreviewHref(key, "en"), `/report-samples/${key}_en.pdf`);
-    assert.equal(getFocusedReportSampleOrPreviewHref(key, "hi"), `/report-samples/${key}_hi.pdf`);
-  }
+check("no focused product resolves to the generic example-preview, in either locale (zero fallback consumers in the catalog)", () => {
+  const fallback = intentQuestions.flatMap((q) => (["en", "hi"] as const)
+    .filter((locale) => getFocusedReportSampleOrPreviewHref(q.questionKey, locale).includes(GENERIC_EXAMPLE_PREVIEW_PATH))
+    .map((locale) => `${q.questionKey}/${locale}`));
+  assert.deepEqual(fallback, []);
 });
-check("every one of the other 61 (everything except #62/#63) resolves to the SAME shared generic Example Report preview path, locale-correct", () => {
-  let checked = 0;
-  for (const q of intentQuestions) {
-    if (PILOT_KEYS.includes(q.questionKey)) continue;
-    assert.equal(getFocusedReportSampleOrPreviewHref(q.questionKey, "en"), GENERIC_EXAMPLE_PREVIEW_PATH, q.questionKey);
-    assert.equal(getFocusedReportSampleOrPreviewHref(q.questionKey, "hi"), `/hi${GENERIC_EXAMPLE_PREVIEW_PATH}`, q.questionKey);
-    checked++;
-  }
-  assert.equal(checked, 61);
-});
-check("the generic preview is never a per-product URL -- exactly ONE EN path and ONE HI path serve all 61 (no 61 fake PDFs/duplicate assets)", () => {
-  const enHrefs = new Set<string>();
-  const hiHrefs = new Set<string>();
-  for (const q of intentQuestions) {
-    if (PILOT_KEYS.includes(q.questionKey)) continue;
-    enHrefs.add(getFocusedReportSampleOrPreviewHref(q.questionKey, "en"));
-    hiHrefs.add(getFocusedReportSampleOrPreviewHref(q.questionKey, "hi"));
-  }
-  assert.equal(enHrefs.size, 1);
-  assert.equal(hiHrefs.size, 1);
+check("the retained fallback still works for a key WITHOUT a sample PDF: locale-correct generic preview, never a guessed PDF", () => {
+  assert.ok(!focusedReportHasSample("not_a_catalog_question"));
+  assert.equal(getFocusedReportSampleOrPreviewHref("not_a_catalog_question", "en"), GENERIC_EXAMPLE_PREVIEW_PATH);
+  assert.equal(getFocusedReportSampleOrPreviewHref("not_a_catalog_question", "hi"), `/hi${GENERIC_EXAMPLE_PREVIEW_PATH}`);
 });
 check("the hub's FocusedReportCard renders a 'View Sample'/'Sample देखें' link for every card, driven by the same resolver, as a SIBLING of the 'Proceed →' link (never nested inside it, which would be invalid HTML and require a client-side event handler to fix)", () => {
   const src = read(HUB_PAGE);
