@@ -69,7 +69,7 @@ export default function HomeMuhurth({ data, dict, lang }: Props) {
       {/* Footer */}
       <div className="mt-6 pt-4 border-t border-purple-800 text-center">
         <Link
-          href={`${lang === "hi" ? "/hi" : ""}/panchang/muhurat`}
+          href={`${lang === "hi" ? "/hi" : ""}/panchang/muhurth-articles`}
           className="text-purple-300 hover:text-white text-sm underline"
         >
           {dict.muhurth.viewAll} →
