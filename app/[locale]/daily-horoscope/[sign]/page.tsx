@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { zodiacData, type ZodiacSign } from "@/lib/zodiac";
 import DailyHoroscopeBlock from "@/components/DailyHoroscopeBlock";
 import Link from "next/link";
+import AppDownloadLink from "@/components/AppDownloadLink";
 import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 import { getDailyHoroscope } from "@/lib/getDailyHoroscope";
 
@@ -170,9 +171,12 @@ export default async function DailyHoroscopePage({ params }: Props) {
             <p className="text-sm text-indigo-100 mb-6 leading-relaxed">
               {isHi ? "अपना व्यक्तिगत राशिफल और पंचांग मोबाइल पर पाएं। पहला प्रश्न मुफ्त!" : "Get personalized insights on mobile. First question is FREE!"}
             </p>
-            <Link href={`${langPath}/app-download`} className="block text-center py-3 rounded-xl bg-white text-indigo-700 font-bold hover:bg-indigo-50 transition">
+            <AppDownloadLink
+              utm={{ source: "daily_horoscope", medium: "sidebar_cta", campaign: sign }}
+              className="block text-center py-3 rounded-xl bg-white text-indigo-700 font-bold hover:bg-indigo-50 transition"
+            >
               {isHi ? "📱 ऐप डाउनलोड करें" : "📱 Download App"}
-            </Link>
+            </AppDownloadLink>
           </div>
 
           <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">

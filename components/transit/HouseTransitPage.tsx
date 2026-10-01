@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import VedicNote from "@/components/VedicNote";
 import DynamicTransitChart from "@/components/DynamicTransitChart";
 import TransitInternalLinks from "@/components/transit/TransitInternalLinks";
+import AppDownloadLink from "@/components/AppDownloadLink";
 import { buildFAQSchema, buildBreadcrumbSchema } from "@/lib/seo/transitSeo";
 import type { HousePlanetConfig } from "@/lib/transit/planetConfig";
 import { SITE_URL } from "@/lib/seo/articleSchema";
@@ -249,18 +250,25 @@ export default async function HouseTransitPage({
           </p>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 relative z-10">
-            <Link
-              href={`/${isHi ? "hi/" : ""}personalized-transit-report?planet=${config.planet}&house=${houseNum}&ascendant=${params.ascendant}`}
-              className={config.ctaBtnPrimaryClass}
-            >
-              {isHi ? config.ctaBtnPrimaryHi : config.ctaBtnPrimaryEn}
-            </Link>
-            <Link
-              href={config.ctaBtnSecondaryHref(isHi)}
-              className={config.ctaBtnSecondaryClass}
-            >
-              {isHi ? config.ctaBtnSecondaryHi : config.ctaBtnSecondaryEn}
-            </Link>
+            {/* Primary: only when an existing paid report matches this planet (Saturn/Jupiter);
+                the /reports catalog is English-only, so the same URL serves both locales. */}
+            {config.ctaBtnPrimaryHref && (
+              <Link href={config.ctaBtnPrimaryHref} className={config.ctaBtnPrimaryClass}>
+                {isHi ? config.ctaBtnPrimaryHi : config.ctaBtnPrimaryEn}
+              </Link>
+            )}
+            {config.ctaBtnSecondaryHref === "app" ? (
+              <AppDownloadLink
+                utm={{ source: "transit_house", medium: "secondary_cta", campaign: config.slug }}
+                className={config.ctaBtnSecondaryClass}
+              >
+                {isHi ? config.ctaBtnSecondaryHi : config.ctaBtnSecondaryEn}
+              </AppDownloadLink>
+            ) : (
+              <Link href={config.ctaBtnSecondaryHref(isHi)} className={config.ctaBtnSecondaryClass}>
+                {isHi ? config.ctaBtnSecondaryHi : config.ctaBtnSecondaryEn}
+              </Link>
+            )}
           </div>
         </div>
       </article>

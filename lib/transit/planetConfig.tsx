@@ -59,7 +59,11 @@ export type HousePlanetConfig = {
   ctaBtnPrimaryClass: string;
   ctaBtnPrimaryHi: string;
   ctaBtnPrimaryEn: string;
-  ctaBtnSecondaryHref: (isHi: boolean) => string;
+  /** The existing paid report that fulfils the primary CTA's promise. Omitted when no matching
+   * product exists -- the house page then renders no primary button at all (never a substitute). */
+  ctaBtnPrimaryHref?: string;
+  /** "app" = the Jyotishasha app on Google Play (AppDownloadLink); otherwise an internal route. */
+  ctaBtnSecondaryHref: "app" | ((isHi: boolean) => string);
   ctaBtnSecondaryClass: string;
   ctaBtnSecondaryHi: string;
   ctaBtnSecondaryEn: string;
@@ -139,7 +143,7 @@ export const sunConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-amber-600 text-slate-950 font-black px-12 py-5 rounded-full hover:bg-amber-500 transition-all shadow-2xl hover:scale-105 active:scale-95 text-lg",
   ctaBtnPrimaryHi: "मेरा सूर्य रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Solar Prediction →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/5 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/10 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना सूर्य अंतर्दृष्टि",
   ctaBtnSecondaryEn: "Daily Solar Insights",
@@ -212,7 +216,7 @@ export const moonConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-indigo-600 text-white font-black px-12 py-5 rounded-full hover:bg-indigo-700 transition-all shadow-2xl hover:scale-105 active:scale-95",
   ctaBtnPrimaryHi: "मेरा मूड रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Personal Moon Report →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/10 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/20 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना मूड अलर्ट",
   ctaBtnSecondaryEn: "Daily Mood Alerts",
@@ -280,7 +284,7 @@ export const marsConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-red-600 text-white font-black px-12 py-5 rounded-full hover:bg-red-700 transition-all shadow-2xl hover:scale-105 active:scale-95",
   ctaBtnPrimaryHi: "मेरा एक्शन रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Action Report →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/10 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/20 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना ऊर्जा अलर्ट",
   ctaBtnSecondaryEn: "Daily Energy Alerts",
@@ -357,7 +361,7 @@ export const mercuryConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-emerald-600 text-white font-black px-12 py-5 rounded-full hover:bg-emerald-700 transition-all shadow-2xl hover:scale-105 active:scale-95",
   ctaBtnPrimaryHi: "मेरा प्लानिंग रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Precision Logic Report →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/10 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/20 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना संचार टिप्स",
   ctaBtnSecondaryEn: "Daily Communication Tips",
@@ -432,6 +436,7 @@ export const jupiterConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-amber-500 text-slate-950 font-black px-12 py-5 rounded-full hover:bg-amber-400 transition-all shadow-2xl hover:scale-105 active:scale-95",
   ctaBtnPrimaryHi: "मेरा भाग्य रिपोर्ट प्राप्त करें →",
   ctaBtnPrimaryEn: "Get My Fortune Report →",
+  ctaBtnPrimaryHref: "/reports/jupiter_transit_report",
   ctaBtnSecondaryHref: (isHi) => `/${isHi ? "hi/" : ""}astrology-methodology`,
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/5 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/10 transition-all border border-white/10",
   ctaBtnSecondaryHi: "हमारी गणना विधि",
@@ -504,7 +509,7 @@ export const venusConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-rose-600 text-white font-black px-12 py-5 rounded-full hover:bg-rose-500 transition-all shadow-2xl hover:scale-105 active:scale-95 text-lg",
   ctaBtnPrimaryHi: "मेरा प्रेम और धन रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Relationship & Wealth Report →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/5 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/10 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना सौंदर्य और सुख टिप्स",
   ctaBtnSecondaryEn: "Daily Beauty & Bliss Tips",
@@ -576,7 +581,8 @@ export const saturnConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-white text-slate-950 font-black px-12 py-5 rounded-full hover:bg-slate-200 transition-all shadow-2xl hover:scale-105 active:scale-95 text-lg",
   ctaBtnPrimaryHi: "मेरा कर्म ऑडिट रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Karmic Audit Report →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnPrimaryHref: "/reports/saturn_transit_report",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/5 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/10 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना शनि उपाय",
   ctaBtnSecondaryEn: "Daily Shani Remedies",
@@ -650,7 +656,7 @@ export const rahuConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-indigo-600 text-white font-black px-12 py-5 rounded-full hover:bg-indigo-700 transition-all shadow-2xl hover:scale-105 active:scale-95",
   ctaBtnPrimaryHi: "मेरा राहु रिपोर्ट लो →",
   ctaBtnPrimaryEn: "Get My Rahu Reality Report →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/10 backdrop-blur-md text-white font-bold px-12 py-5 rounded-full hover:bg-white/20 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना महत्वाकांक्षा अलर्ट",
   ctaBtnSecondaryEn: "Daily Manifestation Alerts",
@@ -720,7 +726,7 @@ export const ketuConfig: HousePlanetConfig = {
   ctaBtnPrimaryClass: "w-full md:w-auto bg-blue-600 text-white font-black px-12 py-5 rounded-full hover:bg-blue-700 transition-all shadow-2xl hover:scale-105 active:scale-95",
   ctaBtnPrimaryHi: "अपना कर्म नक्शा खोलें →",
   ctaBtnPrimaryEn: "Unlock Your Karma Map →",
-  ctaBtnSecondaryHref: () => "/app-download",
+  ctaBtnSecondaryHref: "app",
   ctaBtnSecondaryClass: "w-full md:w-auto bg-white/10 backdrop-blur-md text-white font-black px-12 py-5 rounded-full hover:bg-white/20 transition-all border border-white/10",
   ctaBtnSecondaryHi: "रोज़ाना गोचर अलर्ट पाएँ",
   ctaBtnSecondaryEn: "Get Daily Transit Alerts",

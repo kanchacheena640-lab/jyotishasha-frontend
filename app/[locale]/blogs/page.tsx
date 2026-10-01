@@ -1,6 +1,7 @@
 ﻿import Link from "next/link";
 import type { Metadata } from "next";
 import HoroscopeTabs from "@/components/blogs/HoroscopeTabs";
+import AppDownloadLink from "@/components/AppDownloadLink";
 import { muhurthTopics } from "@/app/[locale]/panchang/muhurat/muhurth_topics";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 
@@ -214,12 +215,12 @@ export default async function BlogsHubPage({ params }: { params: any }) {
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
           {isHi ? "अपनी व्यक्तिगत ज्योतिष रिपोर्ट मोबाइल पर पाएं" : "Get Personalized Astrology on Your Mobile"}
         </h2>
-        <Link
-          href={`${langPath}/app-download`}
+        <AppDownloadLink
+          utm={{ source: "blogs_hub", medium: "final_cta", campaign: "app_download" }}
           className="inline-block bg-white text-indigo-900 px-10 py-4 rounded-full font-extrabold hover:bg-indigo-50 transition-colors shadow-lg"
         >
           {isHi ? "अभी डाउनलोड करें" : "Download App Now"}
-        </Link>
+        </AppDownloadLink>
       </section>
 
       {/* 📄 FOOTER INFO */}

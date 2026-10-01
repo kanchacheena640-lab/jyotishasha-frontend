@@ -438,16 +438,6 @@ export default async function KetuTransitAscendantPage({
           </div>
         </section>
 
-        {/* CTA */}
-        <div className="mt-20 text-center">
-          <Link
-            href="/personalized-transit-report"
-            className="inline-block bg-blue-700 text-white px-12 py-5 rounded-full font-black text-lg hover:bg-blue-800 transition-all shadow-lg hover:scale-105 active:scale-95"
-          >
-            {isHi ? `${currentYear} के लिए अपना कर्म नक्शा खोलें →` : `Unlock Your Karma Map for ${currentYear} →`}
-          </Link>
-        </div>
-
       </article>
     </div>
   );
