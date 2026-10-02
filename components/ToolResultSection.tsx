@@ -4,6 +4,7 @@ import Image from 'next/image';
 import KundaliChartNorth from '@/components/KundaliChartNorth';
 import ToolSuggestions from '@/components/ToolSuggestions';
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { replaceIsoDates } from '@/utils/dateReplacer';
 
 
@@ -187,6 +188,9 @@ function formatDate(isoDate?: string): string {
 
 export default function ToolResult({ result, kundaliData }: Props) {
   const lang: 'en' | 'hi' = 'en';
+  // Route locale (rendered under /tools and /hi/tools) -- only used to keep free tool links in-locale.
+  const routeParams = useParams();
+  const localePrefix = routeParams?.locale === 'hi' ? '/hi' : '';
 
   function pickText(v?: string | { en: string; hi: string }): string {
   if (!v) return '';
@@ -240,10 +244,10 @@ type PhaseKey = typeof keys[number];
 
       {/* 🔗 Quick Tool Links */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
-        <a href="/tools/rashi-finder" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Rashi Finder</a>
-        <a href="/tools/lagna-finder" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Lagna Finder</a>
-        <a href="/tools/Grahdashagrah-dasha-finder" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Grah-Dasha</a>
-        <a href="/tools/planet-overview" className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">All Planets</a>
+        <a href={`${localePrefix}/tools/rashi-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Rashi Finder</a>
+        <a href={`${localePrefix}/tools/lagna-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Lagna Finder</a>
+        <a href={`${localePrefix}/tools/grah-dasha-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Grah-Dasha</a>
+        <a href={`${localePrefix}/tools/planet-overview`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">All Planets</a>
       </div>
 
       {/* 🧩 Result Main Grid */}
