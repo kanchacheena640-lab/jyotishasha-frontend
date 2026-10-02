@@ -161,10 +161,10 @@ export default function GemstoneConsultation() {
               क्या आप अपने वर्तमान <strong>दशा और गोचर</strong> के आधार पर विशेष रत्न परामर्श चाहते हैं?
             </p>
             <Link
-              href="/special-gemstone-consult" // 👈 yahan apna slug do
+              href="/reports/gemstone_consultation"
               className="inline-block bg-white text-black font-bold px-5 py-2 rounded hover:bg-gray-100 border border-[#007BFF] transition-all"
             >
-              अभी प्राप्त करें – ₹49 में
+              अभी प्राप्त करें – ₹51 में
             </Link>
           </div>
         </div>
