@@ -279,8 +279,6 @@ export default async function sitemap() {
   const miscUrls = [
     createUrl(`${baseUrl}/gemstone-consult`, 0.6, "monthly"),
     createUrl(`${baseUrl}/hi/gemstone-consult`, 0.55, "monthly"),
-    createUrl(`${baseUrl}/birth-chart`, 0.7, "monthly"),
-    createUrl(`${baseUrl}/hi/birth-chart`, 0.65, "monthly"),
     createUrl(`${baseUrl}/today-panchang`, 0.8, "daily"),
     createUrl(`${baseUrl}/hi/today-panchang`, 0.75, "daily"),
     createUrl(`${baseUrl}/choghadiya`, 0.8, "daily"),

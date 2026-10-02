@@ -31,6 +31,10 @@ const nextConfig = {
         destination: '/free-kundali',
         permanent: true,
       },
+      // Retired /birth-chart prototype (hardcoded localhost API, broken in production) -> working Free Kundali.
+      { source: '/birth-chart', destination: '/free-kundali', permanent: true },
+      { source: '/hi/birth-chart', destination: '/hi/free-kundali', permanent: true },
+      { source: '/en/birth-chart', destination: '/free-kundali', permanent: true },
        // ✅ Holi year redirect
       {
         source: '/holi/:year(\\d{4})',
