@@ -517,7 +517,28 @@ export const compatibility: DomainTopic = {
         ],
       },
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-mangal-dosh',
+        type:           'tool',
+        slug:           'mangal-dosh',
+        label:          'Check Manglik Dosha',
+        label_hi:       'मांगलिक दोष जांचें',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-relationship-future-report',
+        type:           'report',
+        slug:           'relationship_future_report',
+        label:          'Get Relationship Future Report',
+        label_hi:       'रिलेशनशिप फ्यूचर रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report for you and your partner.',
+        description_hi: 'आपके और आपके साथी के लिए व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
 
   aiMetadata: {

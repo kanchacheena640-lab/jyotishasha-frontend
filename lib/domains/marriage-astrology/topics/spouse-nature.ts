@@ -517,7 +517,28 @@ export const spouseNature: DomainTopic = {
         ],
       },
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-marriage-path',
+        type:           'tool',
+        slug:           'marriage-path',
+        label:          'Explore Your Marriage Path',
+        label_hi:       'अपना विवाह मार्ग देखें',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-marriage-report',
+        type:           'report',
+        slug:           'marriage_report',
+        label:          'Get Your Marriage Report',
+        label_hi:       'अपनी विवाह रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
 
   aiMetadata: {

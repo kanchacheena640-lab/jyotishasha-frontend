@@ -320,7 +320,28 @@ export const secondMarriage: DomainTopic = {
         ]
       }
     ],
-    ctas:            [],
+    ctas: [
+      {
+        id:             'cta-marriage-path',
+        type:           'tool',
+        slug:           'marriage-path',
+        label:          'Review Your Marriage Indicators',
+        label_hi:       'अपने विवाह संकेतों की समीक्षा करें',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-second-marriage-report',
+        type:           'report',
+        slug:           'second_marriage_report',
+        label:          'Get Second Marriage Report',
+        label_hi:       'दूसरे विवाह की रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
 
   aiMetadata: {

@@ -373,7 +373,28 @@ export const earlyMarriage: DomainTopic = {
       },
 
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-marriage-path',
+        type:           'tool',
+        slug:           'marriage-path',
+        label:          'Check Your Marriage Timing Indicators',
+        label_hi:       'अपने विवाह समय के संकेत जांचें',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-marriage-report',
+        type:           'report',
+        slug:           'marriage_report',
+        label:          'Get Detailed Marriage Report',
+        label_hi:       'विस्तृत विवाह रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
 
   aiMetadata: {

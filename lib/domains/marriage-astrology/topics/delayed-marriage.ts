@@ -374,7 +374,28 @@ export const delayedMarriage: DomainTopic = {
       },
 
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-marriage-path',
+        type:           'tool',
+        slug:           'marriage-path',
+        label:          'See What Is Shaping Your Marriage Timing',
+        label_hi:       'देखें आपके विवाह के समय को क्या प्रभावित कर रहा है',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-delay-in-marriage-report',
+        type:           'report',
+        slug:           'delay_in_marriage_report',
+        label:          'Get Delay in Marriage Report',
+        label_hi:       'विवाह में देरी रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
 
   aiMetadata: {

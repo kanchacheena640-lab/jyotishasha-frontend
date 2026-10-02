@@ -419,7 +419,18 @@ export const divorcePossibility: DomainTopic = {
         ],
       },
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-divorce-possibility-report',
+        type:           'report',
+        slug:           'divorce_possibility_report',
+        label:          'Get Divorce Possibility Report',
+        label_hi:       'तलाक की संभावना रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'primary',
+      },
+    ],
   },
 
   aiMetadata: {

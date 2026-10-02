@@ -435,7 +435,28 @@ export const arrangedMarriage: DomainTopic = {
         ]
       }
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-marriage-path',
+        type:           'tool',
+        slug:           'marriage-path',
+        label:          'Check Your Marriage Prospects',
+        label_hi:       'अपनी विवाह संभावनाएं जांचें',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-marriage-report',
+        type:           'report',
+        slug:           'marriage_report',
+        label:          'Get a Personalised Marriage Report',
+        label_hi:       'व्यक्तिगत विवाह रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
   aiMetadata: {
     searchIntent:   'informational',

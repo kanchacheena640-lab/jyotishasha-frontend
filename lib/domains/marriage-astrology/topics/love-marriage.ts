@@ -359,7 +359,28 @@ export const loveMarriage: DomainTopic = {
       },
 
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-love-life',
+        type:           'tool',
+        slug:           'love-life',
+        label:          'Check Your Love-Life Indicators',
+        label_hi:       'अपने प्रेम जीवन के संकेत देखें',
+        description:    'A free check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        variant:        'primary',
+      },
+      {
+        id:             'cta-love-marriage-report',
+        type:           'report',
+        slug:           'love_marriage_report',
+        label:          'Get Love Marriage Report',
+        label_hi:       'प्रेम विवाह रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'secondary',
+      },
+    ],
   },
 
   aiMetadata: {

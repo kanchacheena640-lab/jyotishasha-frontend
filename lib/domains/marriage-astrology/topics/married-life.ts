@@ -489,7 +489,18 @@ export const marriedLife: DomainTopic = {
         ],
       },
     ],
-    ctas: [],
+    ctas: [
+      {
+        id:             'cta-problem-in-marriage-report',
+        type:           'report',
+        slug:           'problem_in_marriage_report',
+        label:          'Get Problem in Marriage Report',
+        label_hi:       'वैवाहिक समस्या रिपोर्ट प्राप्त करें',
+        description:    'A personalised PDF report based on your birth chart.',
+        description_hi: 'आपकी जन्म कुंडली पर आधारित व्यक्तिगत PDF रिपोर्ट।',
+        variant:        'primary',
+      },
+    ],
   },
 
   aiMetadata: {
