@@ -44,4 +44,12 @@ export const marriageAstrologyMeta: AuthorityDomainMeta = {
     'love-marriage',
     'compatibility',
   ],
+
+  hubLinks: [
+    {
+      href:     '/panchang/muhurat/marriage-muhurat',
+      label:    'Auspicious Marriage Dates (Vivah Muhurat)',
+      label_hi: 'शुभ विवाह मुहूर्त',
+    },
+  ],
 }

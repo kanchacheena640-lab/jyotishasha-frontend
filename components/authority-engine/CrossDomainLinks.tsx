@@ -23,7 +23,7 @@ export default function CrossDomainLinks({ links, locale }: Props) {
         {links.map(link => (
           <Link
             key={`${link.domainSlug}-${link.topicSlug}`}
-            href={`${localePath}/${link.domainSlug}/${link.topicSlug}`}
+            href={`${localePath}/${[link.domainSlug, link.topicSlug].filter(Boolean).join('/')}`}
             className="text-sm text-purple-300 hover:text-white bg-[#1e1b4b] hover:bg-[#2a2565] border border-purple-900/50 hover:border-purple-500 px-4 py-2 rounded-lg transition-all"
           >
             {loc(link, 'label', locale)}

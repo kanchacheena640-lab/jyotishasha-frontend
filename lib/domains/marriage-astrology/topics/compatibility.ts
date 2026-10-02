@@ -541,6 +541,18 @@ export const compatibility: DomainTopic = {
     ],
   },
 
+  relationships: {
+    crossLinks: [
+      {
+        domain:   'love',
+        slug:     '',
+        relation: 'cross-domain-ref',
+        label:    'Free Kundli Matching (Guna Milan)',
+        label_hi: 'फ्री कुंडली मिलान (गुण मिलान)',
+      },
+    ],
+  },
+
   aiMetadata: {
     searchIntent:   'commercial',   // reader evaluating match before marriage
     difficulty:     'beginner',

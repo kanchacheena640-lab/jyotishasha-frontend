@@ -172,7 +172,16 @@ export interface AuthorityDomain {
   icon: string
   categories: CategoryConfig[]
   featuredSlugs: string[]
+  hubLinks?: HubLink[]
   topics: Record<string, AuthorityTopic>
+}
+
+// Optional contextual links shown under the hub hero. `href` is locale-neutral
+// (e.g. '/panchang/muhurat/marriage-muhurat'); the renderer adds '/hi' for Hindi.
+export interface HubLink {
+  href: string
+  label: string
+  label_hi: string
 }
 
 export type AuthorityDomainMeta = Omit<AuthorityDomain, 'topics'>

@@ -314,6 +314,16 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         <div className="text-gray-300 text-sm md:text-base space-y-5 leading-loose">
            {isHi ? topic.description_hi : topic.description}
         </div>
+        {topic.relatedLink && (
+          <p className="mt-6 text-sm md:text-base">
+            <Link
+              href={`${isHi ? "/hi" : ""}${topic.relatedLink.href}`}
+              className="text-purple-300 hover:text-white underline underline-offset-4"
+            >
+              {isHi ? topic.relatedLink.label_hi : topic.relatedLink.label} →
+            </Link>
+          </p>
+        )}
       </section>
 
       <CtaKundali />

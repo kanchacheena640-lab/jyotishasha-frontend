@@ -306,6 +306,18 @@ export const marriageTiming: DomainTopic = {
     ],
   },
 
+  relationships: {
+    crossLinks: [
+      {
+        domain:   'panchang',
+        slug:     'muhurat/marriage-muhurat',
+        relation: 'cross-domain-ref',
+        label:    'Shubh Vivah Dates',
+        label_hi: 'शुभ विवाह तिथियां',
+      },
+    ],
+  },
+
   aiMetadata: {
     searchIntent:   'informational',
     difficulty:     'beginner',

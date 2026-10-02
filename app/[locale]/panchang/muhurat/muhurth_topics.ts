@@ -7,6 +7,9 @@ export interface MuhurthTopic {
   description_hi: string; // Mandatory for Hindi pages
   keywords: string[];
   canonical: string;
+  // Optional contextual link rendered after the Significance section of the hub
+  // page only. `href` is locale-neutral; the page adds "/hi" for Hindi.
+  relatedLink?: { href: string; label: string; label_hi: string };
 }
 
 const baseTopics: Record<string, MuhurthTopic> = {
@@ -29,6 +32,11 @@ const baseTopics: Record<string, MuhurthTopic> = {
     description_hi: "वैदिक ज्योतिष में विवाह मुहूर्त का गहरा महत्व है, क्योंकि विवाह के समय को दंपति के संपूर्ण वैवाहिक जीवन की दिशा तय करने वाला माना जाता है। शास्त्रीय ज्योतिष ग्रंथों में बल दिया जाता है कि विवाह मुहूर्त की गणना तिथि, नक्षत्र, लग्न और बृहस्पति व शुक्र—बुद्धि और प्रेम के ग्रहों—की स्थिति के आधार पर सावधानीपूर्वक की जानी चाहिए, ताकि दंपति के बीच दीर्घकालिक सामंजस्य, अनुकूलता और समृद्धि सुनिश्चित हो सके। रोहिणी, मघा और उत्तर फाल्गुनी जैसे शुभ नक्षत्रों को परंपरागत रूप से प्राथमिकता दी जाती है, जबकि चतुर्थी, अष्टमी और अमावस्या जैसी अशुभ तिथियों से सख्ती से परहेज किया जाता है। ज्योतिषी यह भी जांचते हैं कि गुरु या शुक्र वक्री हैं या नहीं, क्योंकि कुछ विशेष अवधियों को विवाह के लिए अनुपयुक्त माना जाता है, भले ही अन्य कारक अनुकूल हों। उचित मुहूर्त में विवाह संपन्न करने से दंपति का बंधन मजबूत होता है, भविष्य के संघर्ष कम होते हैं, और उनका संयुक्त भाग्य सहायक ग्रहों की ऊर्जा के साथ संरेखित होता है। भारत भर में परिवार विवाह की तिथि निश्चित करने के लिए आज भी पंचांग विशेषज्ञों और ज्योतिषियों से सलाह लेते हैं।",
     keywords: ["marriage muhurat", "vivah muhurat"],
     canonical: "https://www.jyotishasha.com/panchang/muhurat/marriage-muhurat",
+    relatedLink: {
+      href: "/marriage-astrology/marriage-timing",
+      label: "When does your chart support marriage?",
+      label_hi: "आपकी कुंडली विवाह का योग कब बनाती है?",
+    },
   },
   "grah-pravesh-muhurat": {
     title: "Grah Pravesh Muhurat – Auspicious Housewarming Dates",
