@@ -10,6 +10,7 @@ import { varaData } from "@/lib/data/varaData";
 import { tithiData } from "@/app/data/tithiData";
 import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
 import { SITE_URL } from "@/lib/seo/articleSchema";
+import { getAuthorityDomain, getAllTopicSlugs } from "@/lib/authority-engine/resolver";
 
 export default async function sitemap() {
   const baseUrl = SITE_URL;
@@ -275,6 +276,26 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/love${path}`, path === "" ? 0.7 : 0.55, "monthly")
   );
 
+  // ---------------- MARRIAGE ASTROLOGY (authority cluster) ----------------
+  // Hub + every topic registered in the authority engine (the same registry
+  // app/[locale]/marriage-astrology/[slug] renders from), EN + HI.
+  const marriageDomain = getAuthorityDomain("marriage-astrology");
+  const marriageTopicSlugs = getAllTopicSlugs(marriageDomain);
+
+  const marriageAstrologyUrls = [
+    createUrl(`${baseUrl}${marriageDomain.basePath}`, 0.75, "monthly"),
+    ...marriageTopicSlugs.map((slug) =>
+      createUrl(`${baseUrl}${marriageDomain.basePath}/${slug}`, 0.7, "monthly")
+    ),
+  ];
+
+  const marriageAstrologyUrlsHi = [
+    createUrl(`${baseUrl}/hi${marriageDomain.basePath}`, 0.7, "monthly"),
+    ...marriageTopicSlugs.map((slug) =>
+      createUrl(`${baseUrl}/hi${marriageDomain.basePath}/${slug}`, 0.65, "monthly")
+    ),
+  ];
+
   // ---------------- MISC TOOL / UTILITY PAGES ----------------
   const miscUrls = [
     createUrl(`${baseUrl}/gemstone-consult`, 0.6, "monthly"),
@@ -394,6 +415,8 @@ export default async function sitemap() {
     ...blogUrls,
     ...loveUrls,
     ...loveUrlsHi,
+    ...marriageAstrologyUrls,
+    ...marriageAstrologyUrlsHi,
     ...miscUrls,
     ...navratriUrls,
     ...navdurgaUrls,

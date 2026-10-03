@@ -6,7 +6,8 @@ import type { Metadata } from 'next'
 import type { Locale } from '@/lib/authority-engine/types'
 import { getAuthorityDomain } from '@/lib/authority-engine/resolver'
 import { generateAuthorityHubMetadata } from '@/lib/authority-engine/seo'
-import AuthorityHubRenderer from '@/components/authority-engine/AuthorityHubRenderer'
+import IntentHubRenderer from '@/components/authority-engine/IntentHubRenderer'
+import { marriageAstrologyHub } from '@/lib/domains/marriage-astrology/_hub'
 
 const DOMAIN_SLUG = 'marriage-astrology'
 
@@ -27,5 +28,11 @@ export default function MarriageAstrologyHub({
   params: { locale: string }
 }) {
   const locale = (params.locale === 'hi' ? 'hi' : 'en') as Locale
-  return <AuthorityHubRenderer domain={getAuthorityDomain(DOMAIN_SLUG)} locale={locale} />
+  return (
+    <IntentHubRenderer
+      domain={getAuthorityDomain(DOMAIN_SLUG)}
+      hub={marriageAstrologyHub}
+      locale={locale}
+    />
+  )
 }

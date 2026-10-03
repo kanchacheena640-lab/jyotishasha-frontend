@@ -5,6 +5,8 @@
 // below; nothing else about it changes. The parent app/[locale]/
 // layout.tsx stays a Server Component -- this is the one small leaf
 // boundary needed, not a wholesale layout conversion.
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { WebsiteEvents, buildAppDownloadCtaLocation } from "@/lib/websiteEvents";
 import { buildAppDownloadPlayStoreUrl } from "@/lib/playStoreAttribution";
 import { pushMarketingMeasurementEvent } from "@/lib/marketingMeasurementBridge";
@@ -19,9 +21,39 @@ type StickyAppDownloadCTAProps = {
   utm?: UTM;
 };
 
+// Routes where the bar must not compete with the first viewport: it stays
+// hidden until the visitor has scrolled past ~one screen, then behaves as
+// everywhere else. Locale-neutral paths; every other route is unchanged
+// (visible from first render, exactly as before).
+const DEFERRED_ROUTES = new Set(["/marriage-astrology"]);
+
+function isDeferredRoute(pathname: string | null): boolean {
+  if (!pathname) return false;
+  const neutral = pathname.replace(/^\/(en|hi)(?=\/|$)/, "").replace(/\/+$/, "") || "/";
+  return DEFERRED_ROUTES.has(neutral);
+}
+
 export default function StickyAppDownloadCTA({
   utm,
 }: StickyAppDownloadCTAProps) {
+  const deferred = isDeferredRoute(usePathname());
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    if (!deferred) return;
+    setRevealed(false);
+    const stopListening = () => window.removeEventListener("scroll", onScroll);
+    function onScroll() {
+      if (window.scrollY > window.innerHeight * 0.9) {
+        setRevealed(true);
+        stopListening();
+      }
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return stopListening;
+  }, [deferred]);
+
   const base =
     "https://play.google.com/store/apps/details?id=com.jyotishasha.app";
 
@@ -54,6 +86,8 @@ export default function StickyAppDownloadCTA({
     // claimed as a PRIMARY conversion for any destination by this bridge.
     pushMarketingMeasurementEvent({ name: "jyotishasha_app_download_intent", ctaLocation });
   };
+
+  if (deferred && !revealed) return null;
 
   return (
     <div
