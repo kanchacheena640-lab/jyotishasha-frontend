@@ -29,7 +29,8 @@ while (!fs.existsSync(path.join(root, "package.json")) && path.dirname(root) !==
 const src = (rel: string) => fs.readFileSync(path.join(root, rel), "utf8");
 
 const offer = marriageTimingLanding.offer;
-const video = marriageTimingLanding.video;
+// Marriage Timing keeps its video (the field is optional for other topics).
+const video = marriageTimingLanding.video!;
 
 console.log("=== A. Report product + CTA source of truth ===");
 const product = reportsData.find((r) => r.slug === offer.reportSlug);
@@ -57,7 +58,7 @@ check("video-adjacent sample hook reuses the existing viewer (activates [data-sa
   hook.includes("[data-sample-trigger]") && hook.includes("trigger.click()") && !/<dialog|FocusedSampleViewer\b(?! trigger)|iframe/.test(hook.replace(/\/\/.*$/gm, "")));
 check("hook uses the same locale sample URL + label helpers, rendered under the video",
   lead.includes("<SampleHookLink") && lead.includes("href={getReportSampleUrl(offer.reportSlug, locale)}") && lead.includes("label={getReportSampleLabel(locale)}"));
-check("hook lead copy present EN/HI", offer.sampleHookLead.en.length > 0 && offer.sampleHookLead.hi.length > 0);
+check("hook lead copy present EN/HI", !!offer.sampleHookLead && offer.sampleHookLead.en.length > 0 && offer.sampleHookLead.hi.length > 0);
 check("card keeps its own sample link (viewer still rendered in LeadOfferActions)", src("components/authority-engine/landing/LeadOfferActions.tsx").includes("<FocusedSampleViewer"));
 
 console.log("\n=== C. Video facade ===");
@@ -82,7 +83,9 @@ check("offer copy never claims a guaranteed / exact / confirmed date", !/guarant
 check("direct answer frames a window, not a guaranteed date", /not a guaranteed date/.test(marriageTimingLanding.directAnswer.en));
 
 console.log("\n=== E. Scope + indexability protection ===");
-check("landing opt-in exists only for marriage-timing", JSON.stringify(Object.keys(marriageTopicLandings)) === '["marriage-timing"]');
+check("landing opt-in is limited to the reviewed topics (marriage-timing, love-marriage)", JSON.stringify(Object.keys(marriageTopicLandings)) === '["marriage-timing","love-marriage"]');
+check("marriage-timing still configured with its video", !!marriageTopicLandings["marriage-timing"].video);
+check("lead renders the video figure only when a video is configured", lead.includes("{video ? (") && lead.indexOf("{video ? (") < lead.indexOf("<YouTubeShortFacade"));
 const adapter = src("lib/domains/_shared/domain-topic-adapter.ts");
 const seo = src("lib/authority-engine/seo.ts");
 check("dormant topic noindex fields stay unwired (adapter/seo never read robots / isIndexable)",

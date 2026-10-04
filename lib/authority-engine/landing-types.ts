@@ -1,7 +1,8 @@
 // lib/authority-engine/landing-types.ts
 // Opt-in "landing" presentation for an individual authority topic: a direct
-// answer under the hero, a click-to-load video + report conversion unit, a
-// contextual-links block before the FAQ, and server-rendered FAQ answers.
+// answer under the hero, a report conversion unit (optionally beside a
+// click-to-load video), a contextual-links block before the FAQ, and
+// server-rendered FAQ answers.
 // Dependency-free on purpose (plain data types) so configs and standalone
 // tests can import it without path-alias resolution.
 
@@ -34,8 +35,8 @@ export interface TopicLandingOffer {
   ctaLabel: LocalizedString
   microcopy: LocalizedString
   sampleTitle: LocalizedString
-  /** Lead-in for the secondary sample link under the video. */
-  sampleHookLead: LocalizedString
+  /** Lead-in for the secondary sample link under the video (only used with a video). */
+  sampleHookLead?: LocalizedString
   /** WebsiteEvents.ctaClick ids / screen name. */
   reportCtaId: string
   sampleCtaId: string
@@ -54,7 +55,8 @@ export interface TopicLandingContextLinks {
 export interface TopicLandingConfig {
   directAnswerLabel: LocalizedString
   directAnswer: LocalizedString
-  video: TopicLandingVideo
+  /** Optional: without it the report card renders alone (no video slot, no play tracking). */
+  video?: TopicLandingVideo
   offer: TopicLandingOffer
   contextLinks: TopicLandingContextLinks
   /** Render FAQ answers in server HTML (native <details>) for this topic. */

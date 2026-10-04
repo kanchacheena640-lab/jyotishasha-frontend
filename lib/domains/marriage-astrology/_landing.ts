@@ -1,7 +1,7 @@
 // lib/domains/marriage-astrology/_landing.ts
 // Opt-in landing presentation for individual Marriage topics. Only topics
-// listed here get the direct answer / video / report unit / SSR FAQ; every
-// other topic renders exactly as before.
+// listed here get the direct answer / report unit (+ video when configured) /
+// SSR FAQ; every other topic renders exactly as before.
 
 import type { TopicLandingConfig } from '../../authority-engine/landing-types'
 
@@ -79,7 +79,68 @@ export const marriageTimingLanding: TopicLandingConfig = {
   ssrFaq: true,
 }
 
+// No approved Love Marriage video yet: `video` is omitted on purpose, so the
+// report card renders on its own. Adding one later is config-only (a `video`
+// block plus `offer.sampleHookLead`).
+export const loveMarriageLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Vedic astrology does not judge love marriage from one placement. An astrologer looks at the 5th house of romance and its lord, the 7th house of marriage and its lord, and whether the two are connected — along with Venus, supporting influences such as Mars, Rahu and Jupiter, the Navamsa (D9) and the running Dasha–Antardasha. When these factors link romance with commitment, the chart indicates support for a love marriage; when they do not, it may suggest a more family-guided path. It shows a tendency, not a certainty — personal choice, family circumstances and real-life factors matter too.',
+    hi: 'वैदिक ज्योतिष में प्रेम विवाह किसी एक ग्रह-स्थिति से तय नहीं होता। ज्योतिषी प्रेम के पंचम भाव और पंचमेश, विवाह के सप्तम भाव और सप्तमेश, और इन दोनों के आपसी संबंध को देखते हैं — साथ में शुक्र, मंगल, राहु और गुरु जैसे सहायक प्रभाव, नवांश (D9) और चल रही महादशा–अंतर्दशा भी। जब ये कारक प्रेम को प्रतिबद्धता से जोड़ते हैं, तो कुंडली प्रेम विवाह का समर्थन करती है; जब नहीं जोड़ते, तो परिवार की भूमिका वाले मार्ग का संकेत मिल सकता है। यह एक प्रवृत्ति है, निश्चितता नहीं — आपकी अपनी पसंद, पारिवारिक परिस्थितियाँ और जीवन की वास्तविकताएँ भी मायने रखती हैं।',
+  },
+
+  offer: {
+    reportSlug: 'love_marriage_report',
+    eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
+    heading: { en: 'Personalised Love Marriage Report', hi: 'व्यक्तिगत प्रेम विवाह रिपोर्ट' },
+    intro: {
+      en: 'General rules cannot tell you how strongly your own chart supports a love marriage. The report applies them to your birth chart.',
+      hi: 'सामान्य नियम यह नहीं बता सकते कि आपकी अपनी कुंडली प्रेम विवाह का कितना समर्थन करती है। यह रिपोर्ट इन्हीं नियमों को आपकी जन्मकुंडली पर लागू करती है।',
+    },
+    bullets: {
+      en: [
+        'Your love-marriage tendency, with the reasons behind it',
+        '5th house (romance) and 7th house (partnership), including any 5th–7th link',
+        'Venus, Mars and Jupiter influences on your relationships',
+        'Current Dasha context and practical guidance',
+      ],
+      hi: [
+        'आपकी कुंडली में प्रेम विवाह की प्रवृत्ति और उसके कारण',
+        'पंचम भाव (प्रेम) और सप्तम भाव (साझेदारी), पंचम–सप्तम संबंध सहित',
+        'आपके संबंधों पर शुक्र, मंगल और गुरु का प्रभाव',
+        'वर्तमान दशा का संदर्भ और व्यावहारिक मार्गदर्शन',
+      ],
+    },
+    ctaLabel: { en: 'Get Love Marriage Report – ₹{price}', hi: 'प्रेम विवाह रिपोर्ट पाएं – ₹{price}' },
+    microcopy: {
+      en: 'Personalised using your Date, Time & Place of Birth.',
+      hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
+    },
+    sampleTitle: { en: 'Love Marriage Report', hi: 'प्रेम विवाह रिपोर्ट' },
+    reportCtaId: 'love_marriage_report_cta',
+    sampleCtaId: 'love_marriage_sample_report',
+    screenName: 'love_marriage_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at whether a chart supports a love marriage. Other questions have their own detailed guides — when marriage may happen, how arranged and intercaste unions are read, and what the chart shows about life after marriage:',
+      hi: 'यह मार्गदर्शिका बताती है कि कुंडली प्रेम विवाह का समर्थन करती है या नहीं। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — विवाह कब हो सकता है, अरेंज्ड और अंतरजातीय विवाह कैसे देखे जाते हैं, और विवाह के बाद के जीवन के बारे में कुंडली क्या बताती है:',
+    },
+    topicSlugs: ['marriage-timing', 'arranged-marriage', 'intercaste-marriage', 'married-life'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  ssrFaq: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, TopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
+  'love-marriage': loveMarriageLanding,
 }
