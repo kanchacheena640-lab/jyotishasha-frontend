@@ -1,25 +1,49 @@
 // components/authority-engine/AuthorityDetailRenderer.tsx
+import { Fragment } from 'react'
+import type { ReactNode } from 'react'
 import type { AuthorityDetailProps } from '@/lib/authority-engine/types'
 import { getRelatedTopics } from '@/lib/authority-engine/resolver'
 import AuthorityBreadcrumb from './AuthorityBreadcrumb'
 import TopicHero from './TopicHero'
 import SectionRouter from './SectionRouter'
+import StaticFaqSection from './sections/StaticFaqSection'
 import CtaBlock from './CtaBlock'
 import RelatedTopics from './RelatedTopics'
 import CrossDomainLinks from './CrossDomainLinks'
+import landingStyles from './landing/landing.module.css'
 
-export default function AuthorityDetailRenderer({ domain, topic, locale }: AuthorityDetailProps) {
+/** Optional per-topic landing slots. All absent = the original layout, unchanged. */
+interface LandingSlots {
+  /** Rendered right after the hero (e.g. direct answer + conversion unit). */
+  lead?: ReactNode
+  /** Rendered immediately before the FAQ section (or after all sections if none). */
+  beforeFaq?: ReactNode
+  /** Render FAQ answers in server HTML instead of the client accordion. */
+  ssrFaq?: boolean
+}
+
+export default function AuthorityDetailRenderer({
+  domain, topic, locale, lead, beforeFaq, ssrFaq,
+}: AuthorityDetailProps & LandingSlots) {
   const related = getRelatedTopics(domain, topic)
+  const hasFaq = topic.sections.some(section => section.layout === 'faq')
 
   return (
-    <main className="min-h-screen bg-[#0b1120] text-white pt-12">
-      <div className="max-w-4xl mx-auto px-4 md:px-6 py-10">
+    <main className={`min-h-screen bg-[#0b1120] text-white ${lead ? 'pt-2' : 'pt-12'}`}>
+      <div className={`max-w-4xl mx-auto px-4 md:px-6 ${lead ? `pt-4 pb-10 md:py-10 ${landingStyles.landing}` : 'py-10'}`}>
         <AuthorityBreadcrumb domain={domain} topic={topic} locale={locale} />
         <TopicHero domain={domain} topic={topic} locale={locale} />
+        {lead}
 
         {topic.sections.map(section => (
-          <SectionRouter key={section.id} section={section} locale={locale} />
+          <Fragment key={section.id}>
+            {section.layout === 'faq' && beforeFaq}
+            {ssrFaq && section.layout === 'faq'
+              ? <StaticFaqSection section={section} locale={locale} />
+              : <SectionRouter section={section} locale={locale} />}
+          </Fragment>
         ))}
+        {!hasFaq && beforeFaq}
 
         {topic.ctas.map((cta, i) => (
           <CtaBlock

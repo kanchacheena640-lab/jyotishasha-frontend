@@ -16,6 +16,9 @@ import {
   buildAuthorityArticleSchema,
 } from '@/lib/authority-engine/seo'
 import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDetailRenderer'
+import TopicLandingLead from '@/components/authority-engine/landing/TopicLandingLead'
+import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
+import { marriageTopicLandings } from '@/lib/domains/marriage-astrology/_landing'
 
 const DOMAIN_SLUG = 'marriage-astrology'
 
@@ -50,6 +53,8 @@ export default function MarriageAstrologyTopic({
 
   const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, topic!, locale)
   const articleSchema    = buildAuthorityArticleSchema(domain, topic!, locale)
+  // Opt-in landing presentation (currently marriage-timing only); others unchanged.
+  const landing = marriageTopicLandings[params.slug]
 
   return (
     <>
@@ -61,7 +66,16 @@ export default function MarriageAstrologyTopic({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <AuthorityDetailRenderer domain={domain} topic={topic!} locale={locale} />
+      <AuthorityDetailRenderer
+        domain={domain}
+        topic={topic!}
+        locale={locale}
+        {...(landing && {
+          lead: <TopicLandingLead config={landing} locale={locale} />,
+          beforeFaq: <TopicLandingContextLinks config={landing} domain={domain} locale={locale} />,
+          ssrFaq: landing.ssrFaq,
+        })}
+      />
     </>
   )
 }

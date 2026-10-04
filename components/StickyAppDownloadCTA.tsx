@@ -27,16 +27,33 @@ type StickyAppDownloadCTAProps = {
 // (visible from first render, exactly as before).
 const DEFERRED_ROUTES = new Set(["/marriage-astrology"]);
 
+// Route prefixes where the bar is not shown at all (not even after scroll):
+// every Marriage Astrology topic detail page (/marriage-astrology/<slug>, EN +
+// HI), whose own report/tool CTAs must not compete with it. The hub itself
+// (exact "/marriage-astrology") is NOT matched -- it keeps the deferral above.
+const HIDDEN_ROUTE_PREFIXES = ["/marriage-astrology/"];
+
+function localeNeutralPath(pathname: string | null): string | null {
+  if (!pathname) return null;
+  return pathname.replace(/^\/(en|hi)(?=\/|$)/, "").replace(/\/+$/, "") || "/";
+}
+
 function isDeferredRoute(pathname: string | null): boolean {
-  if (!pathname) return false;
-  const neutral = pathname.replace(/^\/(en|hi)(?=\/|$)/, "").replace(/\/+$/, "") || "/";
-  return DEFERRED_ROUTES.has(neutral);
+  const neutral = localeNeutralPath(pathname);
+  return neutral !== null && DEFERRED_ROUTES.has(neutral);
+}
+
+function isHiddenRoute(pathname: string | null): boolean {
+  const neutral = localeNeutralPath(pathname);
+  return neutral !== null && HIDDEN_ROUTE_PREFIXES.some((prefix) => neutral.startsWith(prefix));
 }
 
 export default function StickyAppDownloadCTA({
   utm,
 }: StickyAppDownloadCTAProps) {
-  const deferred = isDeferredRoute(usePathname());
+  const pathname = usePathname();
+  const hidden = isHiddenRoute(pathname);
+  const deferred = isDeferredRoute(pathname);
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
@@ -87,6 +104,7 @@ export default function StickyAppDownloadCTA({
     pushMarketingMeasurementEvent({ name: "jyotishasha_app_download_intent", ctaLocation });
   };
 
+  if (hidden) return null;
   if (deferred && !revealed) return null;
 
   return (

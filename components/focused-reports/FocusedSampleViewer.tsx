@@ -36,13 +36,22 @@ interface Props {
   locale: Locale;
   priceRupees: number;
   title: string;
+  /** Optional: where the in-dialog purchase CTA goes when the page has no
+   * #focused-report-form of its own (e.g. a topic page linking to a report
+   * page). Absent = unchanged focused-report behaviour (scroll to the form). */
+  purchaseHref?: string;
+  /** Optional trigger copy/styling overrides; absent = unchanged. */
+  triggerLabel?: string;
+  triggerClassName?: string;
 }
 
 function isModalEntry(state: unknown, href: string): boolean {
   return Boolean(state && typeof state === "object" && (state as Record<string, unknown>)[HISTORY_KEY] === href);
 }
 
-export default function FocusedSampleViewer({ href, locale, priceRupees, title }: Props) {
+export default function FocusedSampleViewer({
+  href, locale, priceRupees, title, purchaseHref, triggerLabel, triggerClassName,
+}: Props) {
   const isHi = locale === "hi";
   const [open, setOpen] = useState(false);
   const [pdfViewerAvailable, setPdfViewerAvailable] = useState(true);
@@ -86,7 +95,11 @@ export default function FocusedSampleViewer({ href, locale, priceRupees, title }
     wasOpenRef.current = false;
     const action = afterCloseRef.current;
     afterCloseRef.current = "restore-focus";
-    if (action === "purchase") {
+    if (action === "purchase" && purchaseHref) {
+      // Navigate only after history.back() has removed our modal entry, so Back from the
+      // destination returns to this page instead of a dead modal entry.
+      requestAnimationFrame(() => requestAnimationFrame(() => window.location.assign(purchaseHref)));
+    } else if (action === "purchase") {
       // Closing went through history.back(); the browser restores that entry's scroll position right after
       // popstate, which would cancel a scroll started now. Start it once the traversal has settled.
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -98,7 +111,7 @@ export default function FocusedSampleViewer({ href, locale, priceRupees, title }
       triggerRef.current?.focus({ preventScroll: true });
     }
     return undefined;
-  }, [open]);
+  }, [open, purchaseHref]);
 
   const openModal = useCallback(() => {
     if (!isModalEntry(window.history.state, href)) {
@@ -150,9 +163,10 @@ export default function FocusedSampleViewer({ href, locale, priceRupees, title }
         rel="noopener noreferrer"
         onClick={onTriggerClick}
         aria-haspopup="dialog"
-        className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-4 py-1.5 text-sm font-medium text-purple-300 transition-colors hover:border-purple-300 hover:text-white"
+        data-sample-trigger=""
+        className={triggerClassName ?? "inline-flex items-center gap-1.5 rounded-full border border-purple-400/40 px-4 py-1.5 text-sm font-medium text-purple-300 transition-colors hover:border-purple-300 hover:text-white"}
       >
-        {isHi ? "Sample देखें" : "View Sample"}
+        {triggerLabel ?? (isHi ? "Sample देखें" : "View Sample")}
         <span aria-hidden="true">↗</span>
       </a>
 
@@ -225,6 +239,7 @@ export default function FocusedSampleViewer({ href, locale, priceRupees, title }
             <div className="border-t border-white/10 bg-slate-900 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
               <button
                 type="button"
+                data-sample-purchase=""
                 onClick={() => requestClose("purchase")}
                 className="w-full rounded-xl bg-purple-700 px-6 py-3 text-base font-bold text-white shadow-xl transition-all hover:bg-purple-800 active:scale-[0.99] sm:text-lg"
               >
