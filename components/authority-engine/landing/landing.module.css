@@ -127,3 +127,34 @@
   align-items: center;
   font-size: 0.9375rem;
 }
+
+/* ---- Long-form variant (opt-in: landing config `longForm`) ----
+ * Text-heavy topics only. Divides consecutive sections, gives list/checklist
+ * labels a sub-heading treatment and slightly airier paragraphs; content and
+ * DOM are untouched. Declared last so it refines the base `.landing` rules. */
+.longform :global(section.mb-10) {
+  margin-bottom: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+.longform :global(section.mb-10 > h2.text-base) {
+  margin-bottom: 1.25rem;
+}
+.longform :global(ul.space-y-3 > li ~ li) {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+.longform :global(ul.space-y-3 > li > div > p.text-sm) {
+  color: rgb(254 205 211);
+  letter-spacing: -0.005em;
+}
+.longform :global(ul.space-y-3 > li > div > p.text-xs) {
+  margin-top: 0.5rem;
+  line-height: 1.8;
+}
+.longform :global(article.rounded-xl) {
+  gap: 0.625rem;
+}
+.longform :global(article.rounded-xl p.text-xs) {
+  line-height: 1.7;
+}

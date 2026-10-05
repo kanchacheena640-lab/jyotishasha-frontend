@@ -5,8 +5,8 @@ export const arrangedMarriage: DomainTopic = {
   identity: {
     id:         'marriage-astrology:arranged-marriage',
     slug:       'arranged-marriage',
-    title:      'Arranged Marriage in Vedic Astrology: Karmic Perspectives',
-    title_hi:   'वैदिक ज्योतिष में व्यवस्थित विवाह: कार्मिक दृष्टिकोण',
+    title:      'Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?',
+    title_hi:   'वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?',
     domain:     'astrology',
     subdomain:  'marriage-astrology',
     category:   'marriage',
@@ -24,426 +24,474 @@ export const arrangedMarriage: DomainTopic = {
   },
 
   seo: {
-    metaTitle:       'Arranged Marriage in Vedic Astrology: Karmic Timing and Analysis',
-    metaDescription: 'Understand the traditional Vedic astrological perspective on arranged marriage, including house analysis, timing, and karmic influences.',
-    robots:          'noindex,follow',
+    metaTitle:          'Arranged Marriage in Vedic Astrology: Karmic Timing and Analysis',
+    metaDescription:    'Will I have an arranged marriage? See how Vedic astrology reads arranged-marriage indications in a kundli — the 7th, 2nd, 9th and 11th houses, Jupiter, Venus, Navamsa and Dasha.',
+    metaDescription_hi: 'क्या मेरी अरेंज मैरिज होगी? जानें कुंडली में अरेंज मैरिज (व्यवस्थित विवाह) के योग कैसे देखे जाते हैं — सप्तम, द्वितीय, नवम और एकादश भाव, गुरु, शुक्र, नवांश और दशा।',
+    robots:             'noindex,follow',
   },
 
   hero: {
     headline:    'Arranged Marriage in Vedic Astrology',
     headline_hi: 'वैदिक ज्योतिष में व्यवस्थित विवाह',
-    subtext:     'Analyze the karmic promise, planetary conditions, and traditional Vedic framework for arranged marital unions.',
-    subtext_hi:  'व्यवस्थित विवाह के लिए कार्मिक वादा, ग्रह स्थिति और पारंपरिक वैदिक ढांचे का विश्लेषण करें।',
+    subtext:     'How a kundli is read for arranged-marriage indications — the 7th, 2nd, 9th and 11th houses, Jupiter and Venus, the Navamsa and Dasha — and what kind of answer it can realistically give.',
+    subtext_hi:  'कुंडली में अरेंज मैरिज (व्यवस्थित विवाह) के योग कैसे देखे जाते हैं — सप्तम, द्वितीय, नवम और एकादश भाव, गुरु और शुक्र, नवांश और दशा — और इससे किस तरह का उत्तर मिल सकता है।',
   },
 
   taxonomy: {
     tags:        ['vedic-astrology', 'marriage-astrology', 'arranged-marriage', 'karmic-astrology'],
-    keywords:    ['arranged marriage in vedic astrology', 'astrology of arranged marriage', 'marriage astrology', 'karmic marriage', 'traditional arranged marriage'],
-    keywords_hi: ['वैदिक ज्योतिष में व्यवस्थित विवाह', 'व्यवस्थित विवाह का ज्योतिष', 'विवाह ज्योतिष', 'कार्मिक विवाह', 'पारंपरिक व्यवस्थित विवाह'],
+    keywords:    ['arranged marriage astrology', 'arranged marriage in vedic astrology', 'will i have an arranged marriage', 'arranged marriage prediction by kundli', 'arranged marriage yog in kundli', 'houses for arranged marriage', 'love or arranged marriage astrology'],
+    keywords_hi: ['अरेंज मैरिज ज्योतिष', 'क्या मेरी अरेंज मैरिज होगी', 'कुंडली में अरेंज मैरिज के योग', 'वैदिक ज्योतिष में व्यवस्थित विवाह', 'विवाह अरेंज होगा या लव'],
     hubPriority: 'standard',
   },
 
   content: {
     contentTemplate: 'concept',
     contentBlocks: [
+
       {
-        id: 'introduction',
-        title: 'Introduction',
-        title_hi: 'परिचय',
-        layout: 'list',
+        id:       'what-it-means',
+        title:    'What Arranged Marriage Means in a Birth Chart',
+        title_hi: 'कुंडली में अरेंज मैरिज का अर्थ',
+        layout:   'list',
         items: [
           {
-            id: 'intro-context',
-            label: 'The Karmic Foundation of Arranged Marriage',
-            label_hi: 'व्यवस्थित विवाह का कार्मिक आधार',
-            body: 'Marriage, in the traditional Vedic framework, is regarded as a Sanskara—a transformative rite of passage that bridges two individuals, their families, and their respective karmic trajectories. Within this system, an arranged marriage is often viewed as a collaborative effort where the wisdom, intuition, and experience of the family and community serve to align two souls whose paths are destined to intersect for mutual karmic fulfillment. Far from being a mere social transaction, an arranged marriage in Vedic astrology is analyzed as the manifestation of the individual\'s Prarabdha Karma (matured past-life actions), structured within the context of family lineage and ancestral blessing. For the seasoned Vedic astrologer, the analysis of an arranged marriage is an exercise in discerning the karmic potential for partnership, the timing of such a union, and the degree of harmony it will foster between the couple and their extended families.',
-            body_hi: 'पारंपरिक वैदिक ढांचे में, विवाह—जिसे संस्कार के रूप में जाना जाता है—को दो व्यक्तियों, उनके परिवारों और उनके संबंधित कार्मिक प्रक्षेपवक्रों को जोड़ने वाला एक परिवर्तनकारी मार्ग माना जाता है। इस प्रणाली के भीतर, एक व्यवस्थित विवाह को अक्सर एक सहयोगात्मक प्रयास के रूप में देखा जाता है जहां परिवार और समुदाय का ज्ञान, अंतर्ज्ञान और अनुभव उन दो आत्माओं को संरेखित करने के लिए काम करता है जिनके रास्ते पारस्परिक कार्मिक पूर्ति के लिए प्रतिच्छेद करने के लिए नियत हैं। केवल एक सामाजिक लेन-देन से दूर, वैदिक ज्योतिष में एक व्यवस्थित विवाह का विश्लेषण व्यक्ति के प्रारब्ध कर्म (परिपक्व पिछले जीवन के कार्यों) की अभिव्यक्ति के रूप में किया जाता है, जो पारिवारिक वंश और पैतृक आशीर्वाद के संदर्भ में संरचित होता है। अनुभवी वैदिक ज्योतिषी के लिए, एक व्यवस्थित विवाह का विश्लेषण साझेदारी के लिए कार्मिक क्षमता, इस तरह के मिलन का समय, और जोड़े और उनके विस्तारित परिवारों के बीच यह जिस सामंजस्य को बढ़ावा देगा, उसे पहचानने का एक अभ्यास है।'
-          }
-        ]
+            id:       'family-assisted-path',
+            label:    'A Family-Assisted Path to Marriage',
+            label_hi: 'परिवार की सहायता से विवाह का मार्ग',
+            body:     'In Vedic astrology, an arranged marriage means a marriage in which family members, elders or the wider community play an active part in finding, introducing or approving the partner. Traditionally, marriage is a Sanskara — a rite that joins two individuals and two families — so astrologers read it through the houses of family, tradition and community as well as the 7th house of partnership. A chart is read for how strongly it supports this family-assisted path, not for whether that path is better or worse than a self-chosen one.',
+            body_hi:  'वैदिक ज्योतिष में अरेंज मैरिज (व्यवस्थित विवाह) का अर्थ है ऐसा विवाह जिसमें परिवार, बड़े-बुज़ुर्ग या समाज जीवनसाथी को खोजने, मिलवाने या स्वीकृति देने में सक्रिय भूमिका निभाते हैं। परंपरा में विवाह एक संस्कार है, जो दो व्यक्तियों के साथ दो परिवारों को भी जोड़ता है। इसलिए ज्योतिषी इसे साझेदारी के सप्तम भाव के साथ-साथ परिवार, परंपरा और समाज से जुड़े भावों से भी पढ़ते हैं। कुंडली से यह देखा जाता है कि वह परिवार की सहायता वाले इस मार्ग का कितना समर्थन करती है — यह नहीं कि यह मार्ग स्वयं चुने गए विवाह से बेहतर है या कमतर।',
+          },
+          {
+            id:       'promise-and-real-life',
+            label:    'Chart Promise and Real Life',
+            label_hi: 'कुंडली का संकेत और वास्तविक जीवन',
+            body:     'A birth chart shows tendencies, not a fixed script. Whether a marriage actually comes about through family introductions also depends on personal choice, family circumstances, culture and opportunity. Some people with strong family-path indications choose their own partner, and some with romance-leaning charts marry through introductions made by their families. The astrologer’s task is to describe which path the chart supports more easily — and to read that alongside real life.',
+            body_hi:  'जन्मकुंडली प्रवृत्तियाँ दिखाती है, कोई तय पटकथा नहीं। विवाह वास्तव में परिवार के माध्यम से होगा या नहीं, यह व्यक्तिगत पसंद, पारिवारिक परिस्थितियों, संस्कृति और अवसरों पर भी निर्भर करता है। कुछ लोग जिनकी कुंडली में परिवार-मार्ग के मज़बूत संकेत होते हैं, स्वयं साथी चुनते हैं, और कुछ जिनकी कुंडली प्रेम की ओर झुकी होती है, परिवार द्वारा मिलवाए गए रिश्ते में विवाह करते हैं। ज्योतिषी का काम यह बताना है कि कुंडली किस मार्ग का अधिक सहज समर्थन करती है — और इसे वास्तविक जीवन के साथ मिलाकर देखना।',
+          },
+        ],
       },
+
       {
-        id: 'what-is-arranged-marriage',
-        title: 'What is Arranged Marriage in Vedic Astrology?',
-        title_hi: 'वैदिक ज्योतिष में व्यवस्थित विवाह क्या है?',
-        layout: 'list',
+        id:       'arranged-indications',
+        title:    'Arranged-Marriage Indications in a Kundli',
+        title_hi: 'कुंडली में अरेंज मैरिज के योग और संकेत',
+        layout:   'cards',
         items: [
           {
-            id: 'traditional-definition',
-            label: 'The Traditional Perspective',
-            label_hi: 'पारंपरिक परिप्रेक्ष्य',
-            body: 'In traditional Vedic thought, arranged marriage is a structured union wherein the families and societal elders play a significant role in identifying, vetting, and finalizing the partnership. It is conceptually anchored in the 9th house, which governs Dharma (duty), ancestral tradition, and the societal order. Unlike unions driven primarily by individual romantic pursuit, the arranged marriage is seen as a way of integrating the individual’s destiny into the broader fabric of the family lineage and societal responsibility.',
-            body_hi: 'पारंपरिक वैदिक विचार में, व्यवस्थित विवाह एक संरचित मिलन है जिसमें परिवार और सामाजिक बुजुर्ग साझेदारी की पहचान करने, जांचने और अंतिम रूप देने में महत्वपूर्ण भूमिका निभाते हैं। यह वैचारिक रूप से नौवें घर में स्थित है, जो धर्म (कर्तव्य), पैतृक परंपरा और सामाजिक व्यवस्था को नियंत्रित करता है। व्यक्तिगत रोमांटिक खोज से प्रेरित मिलनों के विपरीत, व्यवस्थित विवाह को व्यक्तिगत नियति को पारिवारिक वंश और सामाजिक जिम्मेदारी के व्यापक ताने-बाने में एकीकृत करने के तरीके के रूप में देखा जाता है।'
-          }
-        ]
+            id:       'no-single-placement',
+            icon:     '🧩',
+            label:    'No Single Placement Decides It',
+            label_hi: 'कोई एक ग्रह-स्थिति निर्णय नहीं करती',
+            body:     'There is no one "arranged marriage yog" that settles the question. Astrologers look for several of the indications below appearing together, then weigh them against any romance-leaning factors in the same chart. One placement on its own only adds to the picture.',
+            body_hi:  'कोई एक "अरेंज मैरिज योग" ऐसा नहीं है जो इस प्रश्न का अंतिम उत्तर दे। ज्योतिषी देखते हैं कि नीचे दिए गए कई संकेत एक साथ मौजूद हैं या नहीं, और फिर उन्हें उसी कुंडली के प्रेम-संबंधी संकेतों के साथ तौलते हैं। अकेली कोई ग्रह-स्थिति केवल पूरे चित्र में एक कड़ी जोड़ती है।',
+          },
+          {
+            id:       'seventh-lord-family-links',
+            icon:     '🏠',
+            label:    '7th Lord Linked With the 2nd, 9th or 11th',
+            label_hi: 'सप्तमेश का द्वितीय, नवम या एकादश भाव से संबंध',
+            body:     'When the 7th lord connects with the lords of the 2nd house (family), the 9th house (tradition, elders) or the 11th house (wider social and community network) — by placement, conjunction, exchange or aspect — the chart tends to support a partner who arrives through family or community channels. This is one of the most commonly cited arranged-marriage indications.',
+            body_hi:  'जब सप्तमेश का संबंध द्वितीय भाव (परिवार), नवम भाव (परंपरा, बड़े-बुज़ुर्ग) या एकादश भाव (व्यापक सामाजिक और सामुदायिक दायरा) के स्वामियों से बनता है — स्थिति, युति, परिवर्तन या दृष्टि द्वारा — तो कुंडली ऐसे जीवनसाथी का समर्थन करती है जो परिवार या समाज के माध्यम से जीवन में आए। यह अरेंज मैरिज के सबसे अधिक बताए जाने वाले संकेतों में से एक है।',
+          },
+          {
+            id:       'jupiter-on-seventh',
+            icon:     '🪐',
+            label:    'Jupiter’s Influence on the 7th',
+            label_hi: 'सप्तम भाव पर गुरु का प्रभाव',
+            body:     'Jupiter represents tradition, elders and guidance. Its aspect or placement on the 7th house or the 7th lord tends to support a marriage that follows a traditional process and receives the family’s blessing. It supports a family-assisted path; it does not decide it on its own.',
+            body_hi:  'गुरु परंपरा, बड़ों और मार्गदर्शन का प्रतिनिधि है। सप्तम भाव या सप्तमेश पर गुरु की दृष्टि या स्थिति ऐसे विवाह का समर्थन करती है जो पारंपरिक प्रक्रिया से हो और जिसे परिवार का आशीर्वाद मिले। यह परिवार की सहायता वाले मार्ग का समर्थन करता है; अकेले निर्णय नहीं करता।',
+          },
+          {
+            id:       'saturn-structure',
+            icon:     '⏳',
+            label:    'Saturn: Structure and Maturity',
+            label_hi: 'शनि: व्यवस्था और परिपक्वता',
+            body:     'Saturn connected with the 7th house or its lord is often read as a practical, duty-minded approach to marriage — a preference for structure, family consultation and a considered decision. It is not automatically a sign of delay or difficulty; it describes the style of the path more than its outcome.',
+            body_hi:  'सप्तम भाव या सप्तमेश से जुड़ा शनि अक्सर विवाह के प्रति व्यावहारिक और कर्तव्य-प्रधान दृष्टिकोण दिखाता है — व्यवस्था, परिवार से परामर्श और सोच-समझकर लिए गए निर्णय की ओर झुकाव। यह अपने-आप देरी या कठिनाई का संकेत नहीं है; यह परिणाम से अधिक मार्ग की शैली बताता है।',
+          },
+          {
+            id:       'weaker-fifth-seventh',
+            icon:     '🔗',
+            label:    'A Weaker 5th–7th Emphasis',
+            label_hi: 'पंचम–सप्तम संबंध का कमज़ोर होना',
+            body:     'A strong link between the 5th house of romance and the 7th house tends to support a self-chosen partner. When that link is weak or absent while the family houses are prominent, the balance may tilt toward a family-assisted path. This is a supporting contrast only — never proof of an arranged marriage.',
+            body_hi:  'प्रेम के पंचम भाव और सप्तम भाव का मज़बूत संबंध स्वयं चुने गए साथी का समर्थन करता है। जब यह संबंध कमज़ोर या अनुपस्थित हो और परिवार से जुड़े भाव प्रमुख हों, तो संतुलन परिवार की सहायता वाले मार्ग की ओर झुक सकता है। यह केवल एक सहायक तुलना है — अरेंज मैरिज का प्रमाण नहीं।',
+          },
+          {
+            id:       'tenth-house-navamsa-support',
+            icon:     '🏛️',
+            label:    'Supporting Factors: 10th House and Navamsa',
+            label_hi: 'सहायक कारक: दशम भाव और नवांश',
+            body:     'A 7th lord connected with the 10th house (social standing, duty) can add weight to a traditional, status-conscious match. The Navamsa (D9) is then used as a supporting check: when the D9 repeats the same family-oriented themes, the indication is considered stronger. Neither is a verdict on its own.',
+            body_hi:  'दशम भाव (सामाजिक प्रतिष्ठा, कर्तव्य) से जुड़ा सप्तमेश पारंपरिक और प्रतिष्ठा-सजग रिश्ते के संकेत को बल दे सकता है। इसके बाद नवांश (D9) को सहायक जाँच के रूप में देखा जाता है: जब नवांश में भी परिवार-केंद्रित वही विषय दोहराए जाएँ, तो संकेत अधिक मज़बूत माना जाता है। इनमें से कोई भी अकेले अंतिम निर्णय नहीं है।',
+          },
+        ],
       },
+
       {
-        id: 'promise-vs-reality',
-        title: 'Astrological Promise vs Reality',
-        title_hi: 'ज्योतिषीय वादा बनाम वास्तविकता',
-        layout: 'list',
+        id:       'key-house-analysis',
+        title:    'Key Houses for Arranged Marriage',
+        title_hi: 'अरेंज मैरिज के प्रमुख भाव',
+        layout:   'accordion',
         items: [
           {
-            id: 'promise-nature',
-            label: 'Understanding Promise vs Reality',
-            label_hi: 'वादा बनाम वास्तविकता को समझना',
-            body: 'The "promise" in the chart is a set of tendencies toward partnership. The "reality" of the marriage is the intersection of that potential with the individual\'s free will, their family’s proactive involvement, and societal circumstances. Many individuals have charts showing a strong potential for partnership but marry through love because their environment and choices favored individual agency. Conversely, some individuals with traditional charts marry through arranged processes due to specific family dynamics and timely transit triggers. The astrologer must distinguish between the inner potential for partnership and the external event of an arranged marriage.',
-            body_hi: 'चार्ट में "वादा" साझेदारी के प्रति प्रवृत्तियों का एक समूह है। विवाह की "वास्तविकता" उस क्षमता का व्यक्ति की स्वतंत्र इच्छा, उनके परिवार की सक्रिय भागीदारी और सामाजिक परिस्थितियों के साथ प्रतिच्छेदन है। कई व्यक्तियों के चार्ट में साझेदारी की मजबूत क्षमता होती है, लेकिन वे प्रेम के माध्यम से विवाह करते हैं क्योंकि उनका वातावरण और विकल्प व्यक्तिगत एजेंसी के पक्ष में थे। इसके विपरीत, पारंपरिक चार्ट वाले कुछ व्यक्ति विशिष्ट पारिवारिक गतिशीलता और समय पर गोचर ट्रिगर के कारण व्यवस्थित प्रक्रियाओं के माध्यम से विवाह करते हैं। ज्योतिषी को साझेदारी की आंतरिक क्षमता और व्यवस्थित विवाह की बाहरी घटना के बीच अंतर करना चाहिए।'
-          }
-        ]
+            id:       '2nd-house',
+            label:    '2nd House — Family (Kutumba)',
+            label_hi: 'द्वितीय भाव — परिवार (कुटुंब)',
+            body:     'The 2nd house is Kutumba — the family unit, family values and the voice of the household. Because an arranged marriage is discussed and approved through families, this house is central to the reading. A strong, well-supported 2nd lord connected with the 7th house or the 7th lord tends to support a marriage that comes through family channels and is welcomed by the family. The 2nd house also describes how easily a person adapts to a new family’s customs, which matters when both families are closely involved. An afflicted 2nd house or lord may suggest differences over family expectations that need patience and clear conversation. Astrologers read the 2nd house together with the 7th and 9th: the family house, the partnership house and the tradition house describe, between them, how strongly the chart leans toward a family-assisted match.',
+            body_hi:  'द्वितीय भाव कुटुंब है — परिवार, पारिवारिक मूल्य और घर की वाणी। अरेंज मैरिज की बातचीत और स्वीकृति परिवारों के माध्यम से होती है, इसलिए इस विश्लेषण में यह भाव केंद्रीय है। सप्तम भाव या सप्तमेश से जुड़ा मज़बूत और शुभ प्रभाव वाला द्वितीयेश ऐसे विवाह का समर्थन करता है जो परिवार के माध्यम से हो और जिसका परिवार स्वागत करे। द्वितीय भाव यह भी बताता है कि व्यक्ति नए परिवार के रीति-रिवाज़ों में कितनी सहजता से ढलता है, जो तब महत्वपूर्ण है जब दोनों परिवार निकटता से जुड़े हों। पीड़ित द्वितीय भाव या द्वितीयेश पारिवारिक अपेक्षाओं पर मतभेद का संकेत दे सकता है, जिसके लिए धैर्य और स्पष्ट बातचीत ज़रूरी होती है। ज्योतिषी द्वितीय भाव को सप्तम और नवम के साथ पढ़ते हैं: परिवार, साझेदारी और परंपरा के ये तीन भाव मिलकर बताते हैं कि कुंडली परिवार की सहायता वाले रिश्ते की ओर कितना झुकती है।',
+          },
+          {
+            id:       '7th-house',
+            label:    '7th House — Marriage and Partnership',
+            label_hi: 'सप्तम भाव — विवाह और साझेदारी',
+            body:     'The 7th house is the primary house of marriage and partnership, and its lord describes how the marriage comes about. For the arranged-marriage question, the key is not only the strength of the 7th house but its connections: a 7th lord linked with the 2nd, 9th or 11th lords tends to point toward family or community introductions, while a 7th lord bound closely to the 5th tends to point toward a self-chosen partner. Benefics such as Jupiter or Venus influencing the 7th generally support a smoother, well-accepted union; heavy affliction from Saturn, Rahu or Mars may suggest a longer search or more negotiation before agreement. The nature of the spouse, also read from the 7th house, is covered in the Spouse Nature guide.',
+            body_hi:  'सप्तम भाव विवाह और साझेदारी का मुख्य भाव है, और सप्तमेश बताता है कि विवाह किस तरह होता है। अरेंज मैरिज के प्रश्न में केवल सप्तम भाव की शक्ति ही नहीं, उसके संबंध भी मुख्य हैं: द्वितीयेश, नवमेश या एकादशेश से जुड़ा सप्तमेश परिवार या समाज के माध्यम से रिश्ते की ओर संकेत करता है, जबकि पंचमेश से गहराई से जुड़ा सप्तमेश स्वयं चुने गए साथी की ओर। सप्तम भाव पर गुरु या शुक्र जैसे शुभ ग्रहों का प्रभाव सामान्यतः सहज और स्वीकार्य विवाह का समर्थन करता है; शनि, राहु या मंगल का भारी पीड़न सहमति से पहले लंबी खोज या अधिक बातचीत का संकेत दे सकता है। जीवनसाथी का स्वभाव, जो सप्तम भाव से भी देखा जाता है, जीवनसाथी के स्वभाव वाली मार्गदर्शिका में बताया गया है।',
+          },
+          {
+            id:       '9th-house',
+            label:    '9th House — Tradition and Elders',
+            label_hi: 'नवम भाव — परंपरा और बड़े-बुज़ुर्ग',
+            body:     'The 9th house represents Dharma, tradition, elders, the father and the values a family passes down. It is the house most closely associated with a marriage guided by elders. When the 9th lord connects with the 7th house or the 7th lord, the chart tends to support a union that follows family tradition and receives the blessing of elders. A strong 9th house can also describe a person who values that guidance and is comfortable with it. An afflicted 9th house or lord may suggest tension between personal preference and family tradition — not a forced outcome, but a decision that needs negotiation. The 9th house is read together with the 2nd: tradition and family side by side.',
+            body_hi:  'नवम भाव धर्म, परंपरा, बड़े-बुज़ुर्ग, पिता और परिवार द्वारा आगे बढ़ाए गए मूल्यों का भाव है। इसे बड़ों के मार्गदर्शन वाले विवाह से सबसे निकटता से जोड़ा जाता है। जब नवमेश का संबंध सप्तम भाव या सप्तमेश से बनता है, तो कुंडली ऐसे विवाह का समर्थन करती है जो पारिवारिक परंपरा के अनुसार हो और जिसे बड़ों का आशीर्वाद मिले। मज़बूत नवम भाव ऐसे व्यक्ति को भी दर्शा सकता है जो इस मार्गदर्शन को महत्व देता है और इसमें सहज रहता है। पीड़ित नवम भाव या नवमेश व्यक्तिगत पसंद और पारिवारिक परंपरा के बीच खिंचाव का संकेत दे सकता है — कोई थोपा हुआ परिणाम नहीं, बल्कि ऐसा निर्णय जिसमें बातचीत की ज़रूरत हो। नवम भाव को द्वितीय भाव के साथ पढ़ा जाता है: परंपरा और परिवार एक साथ।',
+          },
+          {
+            id:       '11th-house',
+            label:    '11th House — Social Network and Fulfilment',
+            label_hi: 'एकादश भाव — सामाजिक दायरा और इच्छापूर्ति',
+            body:     'The 11th house governs gains, the fulfilment of desires and the wider social circle — relatives, friends, community and professional networks. In an arranged-marriage reading it describes the channels through which proposals and introductions arrive. A 7th lord linked with the 11th, or a well-placed 11th lord connected to the 7th, tends to support a partner met through relatives, family friends or community networks. Because the 11th is also the house of fulfilled wishes, a strong 11th–7th connection is read as support for a marriage that meets the person’s own hopes as well as the family’s. An afflicted 11th house may suggest that introductions take longer to bring the right match.',
+            body_hi:  'एकादश भाव लाभ, इच्छापूर्ति और व्यापक सामाजिक दायरे — रिश्तेदार, मित्र, समाज और पेशेवर संपर्क — का भाव है। अरेंज मैरिज के विश्लेषण में यह बताता है कि रिश्ते और परिचय किन माध्यमों से आते हैं। एकादश भाव से जुड़ा सप्तमेश, या सप्तम से जुड़ा अच्छी स्थिति वाला एकादशेश, रिश्तेदारों, पारिवारिक मित्रों या सामाजिक दायरे के माध्यम से मिले साथी का समर्थन करता है। एकादश भाव इच्छापूर्ति का भी भाव है, इसलिए एकादश–सप्तम का मज़बूत संबंध ऐसे विवाह का समर्थन माना जाता है जो परिवार के साथ-साथ व्यक्ति की अपनी आशाओं को भी पूरा करे। पीड़ित एकादश भाव यह संकेत दे सकता है कि सही रिश्ता मिलने में अधिक समय लगे।',
+          },
+          {
+            id:       '4th-house',
+            label:    '4th House — Home and Settling In',
+            label_hi: 'चतुर्थ भाव — घर और नए परिवार में रचना-बसना',
+            body:     'The 4th house is home, mother and inner contentment. In a family-assisted marriage it describes how comfortably a person settles into a new household and how much the home environment supports the marriage. A 4th house connected favorably with the 7th or the 2nd tends to support a smooth transition between families. Its deeper role — domestic happiness over the years — belongs to the reading of married life.',
+            body_hi:  'चतुर्थ भाव घर, माता और आंतरिक संतोष का भाव है। परिवार की सहायता से हुए विवाह में यह बताता है कि व्यक्ति नए घर में कितनी सहजता से रचता-बसता है और घर का वातावरण विवाह का कितना साथ देता है। सप्तम या द्वितीय भाव से अनुकूल रूप से जुड़ा चतुर्थ भाव परिवारों के बीच सहज बदलाव का समर्थन करता है। वर्षों तक घरेलू सुख में इसकी गहरी भूमिका वैवाहिक जीवन के विश्लेषण का विषय है।',
+          },
+          {
+            id:       '5th-house',
+            label:    '5th House — Romance and Personal Choice',
+            label_hi: 'पंचम भाव — प्रेम और व्यक्तिगत पसंद',
+            body:     'The 5th house is romance, attraction and personal choice. In an arranged-marriage reading it acts as the counterweight: a strong 5th–7th link tends to support a self-chosen partner, while a 5th house that is not strongly tied to the 7th leaves more room for family introductions. A well-placed 5th lord can also suggest that genuine affection develops within an arranged match. The love-marriage side of this house is explained in the Love Marriage guide.',
+            body_hi:  'पंचम भाव प्रेम, आकर्षण और व्यक्तिगत पसंद का भाव है। अरेंज मैरिज के विश्लेषण में यह संतुलन का काम करता है: पंचम–सप्तम का मज़बूत संबंध स्वयं चुने गए साथी का समर्थन करता है, जबकि सप्तम से कम जुड़ा पंचम भाव परिवार द्वारा परिचय के लिए अधिक जगह छोड़ता है। अच्छी स्थिति वाला पंचमेश यह भी संकेत दे सकता है कि अरेंज रिश्ते में भी सच्चा स्नेह विकसित हो। इस भाव का प्रेम विवाह वाला पक्ष प्रेम विवाह मार्गदर्शिका में समझाया गया है।',
+          },
+        ],
       },
+
       {
-        id: 'key-house-analysis',
-        title: 'Key House Analysis',
-        title_hi: 'प्रमुख घर विश्लेषण',
-        layout: 'accordion',
+        id:       'planetary-influences',
+        title:    'Planetary Influences on an Arranged Marriage',
+        title_hi: 'अरेंज मैरिज पर ग्रहों का प्रभाव',
+        layout:   'accordion',
         items: [
           {
-            id: '2nd-house',
-            label: '2nd House',
-            label_hi: 'दूसरा भाव',
-            body: 'The 2nd house serves as the foundation of Kutumba, or the family unit, which is the primary pillar for any successful arranged marriage. In Vedic astrology, this house determines not only your financial stability but, more importantly, your capacity to assimilate into the family structure of your spouse. A strong placement here, often supported by a dignified 2nd lord, suggests that you possess the innate diplomacy and grace needed to win the approval and love of your extended family. This is critical in arranged unions where family consensus frequently dictates the pace of the relationship. Conversely, an afflicted 2nd house may indicate challenges in navigating family expectations, leading to friction or alienation after the marriage. This house works in tandem with the 4th house of domestic peace; if the 2nd house lacks stability, it often puts undue pressure on the 4th, resulting in a fractured home environment. Experienced astrologers look for a well-supported 2nd lord that connects favorably to the 7th or 9th house, which indicates that your entry into the new family is karmically destined to foster support and mutual growth, rather than conflict. Ultimately, the 2nd house represents the safety net that your family provides, ensuring that your marital union remains grounded in the traditions and values that define your lineage.',
-            body_hi: 'दूसरा भाव कुटुम्ब, या परिवार इकाई की नींव के रूप में कार्य करता है, जो किसी भी सफल व्यवस्थित विवाह के लिए प्राथमिक स्तंभ है। वैदिक ज्योतिष में, यह भाव न केवल आपकी वित्तीय स्थिरता को निर्धारित करता है, बल्कि इससे भी महत्वपूर्ण बात यह है कि यह आपके जीवनसाथी की पारिवारिक संरचना में घुलने-मिलने की आपकी क्षमता को भी निर्धारित करता है। यहां एक मजबूत प्लेसमेंट, जिसे अक्सर एक प्रतिष्ठित दूसरे स्वामी का समर्थन प्राप्त होता है, यह बताता है कि आपके पास अपने विस्तारित परिवार की स्वीकृति और प्यार जीतने के लिए आवश्यक जन्मजात कूटनीति और अनुग्रह है। यह व्यवस्थित मिलनों में महत्वपूर्ण है जहां पारिवारिक सहमति अक्सर रिश्ते की गति तय करती है। इसके विपरीत, एक कष्टप्रद दूसरा भाव पारिवारिक अपेक्षाओं को नेविगेट करने में चुनौतियों का संकेत दे सकता है, जिससे विवाह के बाद घर्षण या अलगाव हो सकता है। यह भाव घरेलू शांति के चौथे भाव के साथ मिलकर काम करता है; यदि दूसरे भाव में स्थिरता की कमी है, तो यह अक्सर चौथे भाव पर अनुचित दबाव डालता है, जिसके परिणामस्वरूप घर का वातावरण टूट जाता है। अनुभवी ज्योतिषी एक अच्छी तरह से समर्थित दूसरे स्वामी की तलाश करते हैं जो सातवें या नौवें भाव से अनुकूल रूप से जुड़ता है, जो यह दर्शाता है कि नए परिवार में आपका प्रवेश कार्मिक रूप से संघर्ष के बजाय समर्थन और पारस्परिक विकास को बढ़ावा देने के लिए नियत है। अंततः, दूसरा भाव उस सुरक्षा जाल का प्रतिनिधित्व करता है जो आपका परिवार प्रदान करता है, यह सुनिश्चित करता है कि आपका वैवाहिक मिलन उन परंपराओं और मूल्यों में निहित रहे जो आपके वंश को परिभाषित करते हैं।'
+            id:       'jupiter',
+            label:    'Jupiter — Tradition and Guidance',
+            label_hi: 'गुरु — परंपरा और मार्गदर्शन',
+            body:     'Jupiter is the natural significator of Dharma, wisdom, elders and tradition, and classical texts give it special weight in marriage — particularly in a woman’s chart. Its influence on the 7th house or the 7th lord is one of the most frequently cited supports for a traditional, family-blessed marriage. A well-placed Jupiter tends to describe a person who values guidance from elders and approaches marriage as a shared responsibility. An afflicted or weak Jupiter does not rule out an arranged marriage; it may suggest that the person weighs their own judgment more heavily than family advice. Jupiter is an important factor, but it is read together with the 7th lord and the family houses rather than on its own.',
+            body_hi:  'गुरु धर्म, ज्ञान, बड़ों और परंपरा का प्राकृतिक कारक है, और शास्त्रीय ग्रंथ विवाह में इसे विशेष महत्व देते हैं — विशेषकर स्त्री की कुंडली में। सप्तम भाव या सप्तमेश पर इसका प्रभाव पारंपरिक, परिवार के आशीर्वाद वाले विवाह के सबसे अधिक बताए जाने वाले सहायक कारकों में से एक है। अच्छी स्थिति वाला गुरु ऐसे व्यक्ति को दर्शाता है जो बड़ों के मार्गदर्शन को महत्व देता है और विवाह को साझा ज़िम्मेदारी मानता है। पीड़ित या कमज़ोर गुरु अरेंज मैरिज को नकारता नहीं; यह संकेत दे सकता है कि व्यक्ति परिवार की सलाह की तुलना में अपने निर्णय को अधिक महत्व देता है। गुरु एक महत्वपूर्ण कारक है, पर इसे अकेले नहीं, बल्कि सप्तमेश और परिवार से जुड़े भावों के साथ पढ़ा जाता है।',
           },
           {
-            id: '4th-house',
-            label: '4th House',
-            label_hi: 'चौथा भाव',
-            body: 'The 4th house is the seat of domestic happiness and the inner peace required to sustain a lifelong union. Because arranged marriages frequently involve significant adjustments to one’s living arrangements, the 4th house becomes a primary indicator of whether this transition will lead to serenity or stress. A strong 4th house, ideally featuring benefic influences, implies that the marriage will become a sanctuary, providing a harmonious domestic sphere where both partners can grow emotionally. In contrast, an afflicted 4th house signals instability in the home, which can become exacerbated when the couple is under the scrutiny of an extended family environment. This house is intrinsically linked to the 7th house, as the stability of the partner (7th) directly determines the quality of the home (4th). If a native has an afflicted 7th house but a powerful 4th, they may still maintain a peaceful home despite challenges in the marital partnership. Conversely, if both are weak, the home environment can become chaotic. Practical interpretation involves looking at the 4th lord’s relationship to the Moon, as this shows the native\'s capacity for emotional resilience within the home. When the 4th house is robust, it acts as an anchor for the 7th house of partnership, ensuring that the union remains rooted in a peaceful, secure space.',
-            body_hi: 'चौथा भाव घरेलू खुशी और जीवन भर के मिलन को बनाए रखने के लिए आवश्यक आंतरिक शांति का स्थान है। चूंकि व्यवस्थित विवाहों में अक्सर किसी के रहने की व्यवस्था में महत्वपूर्ण समायोजन शामिल होते हैं, इसलिए चौथा भाव एक प्राथमिक संकेतक बन जाता है कि क्या यह संक्रमण शांति या तनाव की ओर ले जाएगा। एक मजबूत चौथा भाव, जो आदर्श रूप से शुभ प्रभावों की विशेषता है, यह बताता है कि विवाह एक अभयारण्य बन जाएगा, जो एक सामंजस्यपूर्ण घरेलू क्षेत्र प्रदान करेगा जहां दोनों साथी भावनात्मक रूप से विकसित हो सकते हैं। इसके विपरीत, एक कष्टप्रद चौथा भाव घर में अस्थिरता का संकेत देता है, जो तब और अधिक बढ़ सकता है जब जोड़ा एक विस्तारित पारिवारिक वातावरण की जांच के दायरे में हो। यह भाव सातवें भाव से आंतरिक रूप से जुड़ा हुआ है, क्योंकि साथी (सातवां) की स्थिरता सीधे घर (चौथा) की गुणवत्ता निर्धारित करती है यदि किसी जातक का सातवां भाव कष्टप्रद है लेकिन चौथा शक्तिशाली है, तो वे वैवाहिक साझेदारी में चुनौतियों के बावजूद एक शांतिपूर्ण घर बनाए रख सकते हैं। इसके विपरीत, यदि दोनों कमजोर हैं, तो घर का वातावरण अराजक हो सकता है। व्यावहारिक व्याख्या में चौथे स्वामी के चंद्रमा के साथ संबंध को देखना शामिल है, क्योंकि यह घर के भीतर जातक की भावनात्मक लचीलेपन की क्षमता को दर्शाता है। जब चौथा भाव मजबूत होता है, तो यह साझेदारी के सातवें भाव के लिए एक लंगर के रूप में कार्य करता है, यह सुनिश्चित करता है कि मिलन एक शांतिपूर्ण, सुरक्षित स्थान में निहित रहे।'
+            id:       'venus',
+            label:    'Venus — Partnership and Harmony',
+            label_hi: 'शुक्र — साझेदारी और सामंजस्य',
+            body:     'Venus is the natural significator (karaka) of marriage, partnership and affection. For the love-or-arranged question, Venus is neutral on its own — it supports marriage either way. What matters is its connections: Venus linked with the 5th house or Rahu tends to lean toward romance-led choices, while Venus linked with Jupiter, the 2nd or the 9th tends to lean toward a family-approved match. A strong, unafflicted Venus supports attraction and warmth developing between the couple even when they were introduced by their families; an afflicted Venus may suggest the bond takes more time to warm up.',
+            body_hi:  'शुक्र विवाह, साझेदारी और स्नेह का प्राकृतिक कारक है। लव या अरेंज के प्रश्न पर शुक्र अकेले तटस्थ है — यह दोनों ही स्थितियों में विवाह का समर्थन करता है। मुख्य बात इसके संबंध हैं: पंचम भाव या राहु से जुड़ा शुक्र प्रेम-आधारित चुनाव की ओर झुकता है, जबकि गुरु, द्वितीय या नवम भाव से जुड़ा शुक्र परिवार द्वारा स्वीकृत रिश्ते की ओर। मज़बूत और अपीड़ित शुक्र परिवार द्वारा मिलवाए गए युगल में भी आकर्षण और आत्मीयता विकसित होने का समर्थन करता है; पीड़ित शुक्र संकेत दे सकता है कि संबंध में गर्माहट आने में अधिक समय लगे।',
           },
           {
-            id: '5th-house',
-            label: '5th House',
-            label_hi: 'पांचवां भाव',
-            body: 'The 5th house governs Purva Punya, the karmic merit from past lives that often manifests as the "luck" in finding a compatible partner, even within the confines of an arranged structure. While the 7th house shows the partner itself, the 5th house reveals whether the union will be flavored by genuine, heartfelt affection or merely cold, structured duty. A strong 5th house, characterized by placements in its own sign or aspects from Jupiter, indicates that your arranged partner will feel like a natural extension of your own soul, fostering a bond that transcends the limitations of family-led introductions. When this house is afflicted, the union may feel distant, formal, or emotionally hollow, despite being perfect on paper. The 5th house shares a vital connection with the 7th house, as it is the 11th from the 7th, making it a critical house for the realization of marital desires. Experienced astrologers check the 5th lord\'s connection to the 7th or 9th to confirm if the karmic promise of the union includes joy and romantic fulfillment. When the 5th house is well-developed, it ensures that your arranged partnership is energized by real affection, balancing the societal requirements of the 9th house with the individual need for true happiness.',
-            body_hi: 'पांचवां भाव पूर्व पुण्य को नियंत्रित करता है, जो पिछले जन्मों के कार्मिक गुणों का प्रतिनिधित्व करता है, जो अक्सर एक व्यवस्थित ढांचे के भीतर भी एक संगत साथी खोजने में "भाग्य" के रूप में प्रकट होता है। जबकि सातवां भाव स्वयं साथी को दर्शाता है, पांचवां भाव यह प्रकट करता है कि क्या मिलन वास्तविक, हार्दिक स्नेह से भरा होगा या केवल ठंडे, संरचित कर्तव्य से। पांचवें भाव का मजबूत होना, जो अपने ही संकेत में स्थित होने या गुरु के पहलुओं की विशेषता है, यह बताता है कि आपका व्यवस्थित साथी आपकी अपनी आत्मा का एक स्वाभाविक विस्तार महसूस करेगा, जो एक ऐसा बंधन पैदा करेगा जो परिवार के नेतृत्व वाले परिचय की सीमाओं से परे है। जब यह भाव कष्टप्रद होता है, तो कागजों पर उत्तम होने के बावजूद, मिलन दूर, औपचारिक या भावनात्मक रूप से खोखला महसूस हो सकता है। पांचवां भाव सातवें भाव के साथ एक महत्वपूर्ण संबंध साझा करता है, क्योंकि यह सातवें से 11वां है, जो इसे वैवाहिक इच्छाओं की प्राप्ति के लिए एक महत्वपूर्ण भाव बनाता है। अनुभवी ज्योतिषी यह पुष्टि करने के लिए कि मिलन के कार्मिक वादे में खुशी और रोमांटिक पूर्ति शामिल है या नहीं, सातवें या नौवें भाव से पांचवें स्वामी के संबंध की जांच करते हैं। जब पांचवां भाव अच्छी तरह से विकसित होता है, तो यह सुनिश्चित करता है कि आपकी व्यवस्थित साझेदारी वास्तविक स्नेह से ऊर्जावान है, जो नौवें भाव की सामाजिक आवश्यकताओं को सच्ची खुशी की व्यक्तिगत आवश्यकता के साथ संतुलित करती है।'
+            id:       'saturn',
+            label:    'Saturn — Duty, Structure and Patience',
+            label_hi: 'शनि — कर्तव्य, व्यवस्था और धैर्य',
+            body:     'Saturn stands for duty, structure, patience and long-term commitment. When it influences the 7th house or its lord, it is often read as a practical, responsibility-minded approach to marriage — taking time, consulting family and preferring a considered decision over a sudden one. This is why Saturn appears so often in discussions of arranged marriage. Saturn is not automatically a sign of a difficult marriage or of delay; supported by benefics, it tends to describe a steady, dependable bond that grows over time. Heavy affliction may suggest a slower search or more formality at first.',
+            body_hi:  'शनि कर्तव्य, व्यवस्था, धैर्य और दीर्घकालिक प्रतिबद्धता का ग्रह है। जब यह सप्तम भाव या सप्तमेश को प्रभावित करता है, तो अक्सर इसे विवाह के प्रति व्यावहारिक और ज़िम्मेदारी-भरे दृष्टिकोण के रूप में पढ़ा जाता है — समय लेना, परिवार से परामर्श करना और अचानक निर्णय के बजाय सोच-समझकर निर्णय लेना। इसीलिए अरेंज मैरिज की चर्चा में शनि अक्सर आता है। शनि अपने-आप कठिन विवाह या देरी का संकेत नहीं है; शुभ ग्रहों के समर्थन से यह स्थिर और भरोसेमंद संबंध दर्शाता है जो समय के साथ मज़बूत होता है। भारी पीड़न शुरुआत में धीमी खोज या अधिक औपचारिकता का संकेत दे सकता है।',
           },
           {
-            id: '7th-house',
-            label: '7th House',
-            label_hi: 'सातवां भाव',
-            body: 'The 7th house is the definitive seat of the marital partner and the primary lens through which all partnership dynamics are viewed. For an arranged marriage to manifest successfully, this house must be inherently active, symbolizing not just the person who arrives in your life, but the readiness to enter into a formal contract of union. A strong placement here, especially when supported by planets that embody tradition and family harmony like Jupiter or Venus, indicates a partner who is not just a companion but a source of stability. Conversely, an afflicted 7th house, particularly when impacted by malefics like Saturn or Rahu, can suggest that the partnership will be marked by persistent challenges, delays, or an inability to find common ground. The 7th house works intimately with the 2nd house of family, as the partner needs to be integrated into the family unit. If the 7th house lord is disconnected from the 2nd or 9th lords, the union might feel disconnected from family support. Practically, an experienced astrologer looks for the 7th lord’s strength to determine whether the union will serve as a karmic challenge or a catalyst for growth. When the 7th house is firmly supported, it provides the structural framework necessary to turn a family-arranged introduction into a lasting, committed, and loving partnership.',
-            body_hi: 'सातवां भाव वैवाहिक साथी का निश्चित स्थान है और प्राथमिक लेंस है जिसके माध्यम से सभी साझेदारी गतिशीलता देखी जाती है। व्यवस्थित विवाह के सफलतापूर्वक प्रकट होने के लिए, यह भाव स्वाभाविक रूप से सक्रिय होना चाहिए, जो न केवल उस व्यक्ति का प्रतीक है जो आपके जीवन में आता है, बल्कि मिलन के औपचारिक अनुबंध में प्रवेश करने की तत्परता का भी प्रतीक है। यहां एक मजबूत प्लेसमेंट, विशेष रूप से जब उन ग्रहों द्वारा समर्थित होता है जो गुरु या शुक्र जैसी परंपरा और पारिवारिक सद्भाव का प्रतीक हैं, एक ऐसे साथी का संकेत देता है जो न केवल एक साथी है, बल्कि स्थिरता का स्रोत भी है। इसके विपरीत, एक कष्टप्रद सातवां भाव, विशेष रूप से जब शनि या राहु जैसे पाप ग्रहों से प्रभावित होता है, तो यह सुझाव दे सकता है कि साझेदारी लगातार चुनौतियों, देरी, या आम सहमति खोजने में असमर्थता से चिह्नित होगी। सातवां भाव परिवार के दूसरे भाव के साथ मिलकर काम करता है, क्योंकि साथी को परिवार इकाई में एकीकृत करने की आवश्यकता होती है। यदि सातवें भाव का स्वामी दूसरे या नौवें स्वामी से कटा हुआ है, तो मिलन पारिवारिक समर्थन से कटा हुआ महसूस हो सकता है। व्यावहारिक रूप से, एक अनुभवी ज्योतिषी यह निर्धारित करने के लिए सातवें स्वामी की ताकत की तलाश करता है कि क्या मिलन एक कार्मिक चुनौती के रूप में काम करेगा या विकास के उत्प्रेरक के रूप में। जब सातवां भाव मजबूती से समर्थित होता है, तो यह एक परिवार-व्यवस्थित परिचय को एक स्थायी, प्रतिबद्ध और प्रेमपूर्ण साझेदारी में बदलने के लिए आवश्यक संरचनात्मक ढांचा प्रदान करता है।'
+            id:       'moon',
+            label:    'Moon — Emotional Comfort With Family',
+            label_hi: 'चंद्रमा — परिवार के साथ भावनात्मक सहजता',
+            body:     'The Moon shows the emotional mind and the comfort a person feels within the family. A steady, well-placed Moon tends to describe someone who is at ease with family involvement and adjusts well to a new household after marriage. An afflicted Moon may suggest that family-led decisions feel emotionally heavier, so the person needs more time and reassurance. The Moon’s wider role in long-term marital happiness belongs to the Married Life guide.',
+            body_hi:  'चंद्रमा भावनात्मक मन और परिवार के बीच व्यक्ति की सहजता को दर्शाता है। स्थिर और अच्छी स्थिति वाला चंद्रमा ऐसे व्यक्ति को दिखाता है जो परिवार की भागीदारी में सहज रहता है और विवाह के बाद नए घर में अच्छी तरह ढल जाता है। पीड़ित चंद्रमा संकेत दे सकता है कि परिवार द्वारा लिए गए निर्णय भावनात्मक रूप से भारी लगें, इसलिए व्यक्ति को अधिक समय और भरोसे की ज़रूरत हो। दीर्घकालिक वैवाहिक सुख में चंद्रमा की व्यापक भूमिका वैवाहिक जीवन मार्गदर्शिका का विषय है।',
           },
           {
-            id: '9th-house',
-            label: '9th House',
-            label_hi: 'नौवां भाव',
-            body: 'The 9th house is the anchor of tradition, Dharma, and the societal order that legitimizes the arranged marriage. It represents your ancestral lineage and the broader ethical framework that guides your life. For a successful arranged union, the 9th house should be strong, serving as the bridge that connects the personal choice of marriage to the collective wisdom of the family and society. A strong 9th house, often linked to the 7th house, demonstrates that the union aligns perfectly with your ancestral path and the duty you owe to your lineage. In contrast, an afflicted 9th house might indicate a struggle with tradition or a feeling that the marriage was forced against one’s own Dharma, leading to resentment and instability. This house is fundamentally connected to the 7th house of marriage, as the 9th provides the ideological "blessing" for the union. If the 9th lord is weak or damaged, the marriage may lack the societal and ancestral support that acts as a buffer during tough times. Practically, astrologers examine the 9th lord’s strength to see if the native views marriage as a sacred responsibility or an inconvenient burden. A well-placed 9th house ensures that the arranged marriage is not just an event, but a meaningful continuation of your ancestral legacy.',
-            body_hi: 'नौवां भाव परंपरा, धर्म और उस सामाजिक व्यवस्था का लंगर है जो व्यवस्थित विवाह को वैध बनाती है। यह आपके पैतृक वंश और व्यापक नैतिक ढांचे का प्रतिनिधित्व करता है जो आपके जीवन का मार्गदर्शन करता है। एक सफल व्यवस्थित मिलन के लिए, नौवां भाव मजबूत होना चाहिए, जो उस पुल के रूप में कार्य करता है जो विवाह के व्यक्तिगत विकल्प को परिवार और समाज के सामूहिक ज्ञान से जोड़ता है। एक मजबूत नौवां भाव, जो अक्सर सातवें भाव से जुड़ा होता है, यह दर्शाता है कि मिलन आपके पैतृक मार्ग और आपके वंश के प्रति आपके कर्तव्य के साथ पूरी तरह से संरेखित है। इसके विपरीत, एक कष्टप्रद नौवां भाव परंपरा के साथ संघर्ष या यह महसूस करने का संकेत दे सकता है कि विवाह को किसी के अपने धर्म के खिलाफ मजबूर किया गया था, जिससे नाराजगी और अस्थिरता पैदा हुई। यह भाव मौलिक रूप से विवाह के सातवें भाव से जुड़ा हुआ है, क्योंकि नौवां भाव मिलन के लिए वैचारिक "आशीर्वाद" प्रदान करता है। यदि नौवां स्वामी कमजोर या क्षतिग्रस्त है, तो विवाह में उस सामाजिक और पैतृक समर्थन की कमी हो सकती है जो कठिन समय में एक बफर के रूप में कार्य करता है। व्यावहारिक रूप से, ज्योतिषी नौवें स्वामी की ताकत की जांच करते हैं ताकि यह देखा जा सके कि क्या जातक विवाह को एक पवित्र जिम्मेदारी के रूप में देखता है या एक असुविधाजनक बोझ के रूप में। एक अच्छी तरह से स्थित नौवां भाव यह सुनिश्चित करता है कि व्यवस्थित विवाह केवल एक घटना नहीं है, बल्कि आपके पैतृक विरासत का एक सार्थक निरंतरता है।'
+            id:       'sun',
+            label:    'Sun — Father and Family Authority',
+            label_hi: 'सूर्य — पिता और पारिवारिक अधिकार',
+            body:     'The Sun represents the father, family authority and self-respect. A well-placed Sun tends to describe a person who respects family authority and sees a family-guided marriage as a dignified choice rather than a compromise. An afflicted Sun, or the Sun under Rahu’s influence, may suggest friction between personal identity and the expectations of the father or elders during the marriage decision.',
+            body_hi:  'सूर्य पिता, पारिवारिक अधिकार और आत्मसम्मान का प्रतिनिधि है। अच्छी स्थिति वाला सूर्य ऐसे व्यक्ति को दर्शाता है जो परिवार के अधिकार का सम्मान करता है और परिवार द्वारा निर्देशित विवाह को समझौता नहीं, बल्कि गरिमापूर्ण चुनाव मानता है। पीड़ित सूर्य, या राहु से प्रभावित सूर्य, विवाह के निर्णय के समय व्यक्तिगत पहचान और पिता या बड़ों की अपेक्षाओं के बीच टकराव का संकेत दे सकता है।',
           },
           {
-            id: '11th-house',
-            label: '11th House',
-            label_hi: 'ग्यारहवां भाव',
-            body: 'The 11th house is the house of fulfilled desires and community connections. In the context of an arranged marriage, it is the key indicator of whether your deep-seated aspirations for partnership will actually manifest through the avenues provided by your family and society. A strong 11th house, favorably connected to the 7th house, allows the native to harmonize their personal marital desires with the practical suggestions and opportunities that the family brings forth. This suggests that the arranged process is working for you, rather than against you. Conversely, an afflicted 11th house can signify that the native’s desires for partnership are constantly thwarted, or that the process of arrangement feels distant from their personal goals, leading to frustration. The 11th house serves as a critical bridge between the 7th house of marriage and the 5th house of personal choice. When the 11th is well-placed, it ensures that your needs and the family\'s choices converge, leading to a union that is fulfilling on both a personal and a social level. Practically, an experienced astrologer views the 11th lord\'s strength as a barometer for marital satisfaction; if it is strong and well-connected to the 7th, it confirms that the arranged partnership will successfully fulfill the native\'s karmic desires for companionship and joy.',
-            body_hi: '11वां भाव इच्छाओं की पूर्ति और सामुदायिक संबंधों का घर है। व्यवस्थित विवाह के संदर्भ में, यह इस बात का प्रमुख संकेतक है कि साझेदारी के लिए आपकी गहरी आकांक्षाएं वास्तव में आपके परिवार और समाज द्वारा प्रदान किए गए रास्तों के माध्यम से प्रकट होंगी या नहीं। 11वें भाव का मजबूत होना, जो सातवें भाव से अनुकूल रूप से जुड़ा है, जातक को अपनी व्यक्तिगत वैवाहिक इच्छाओं को परिवार द्वारा प्रस्तुत व्यावहारिक सुझावों और अवसरों के साथ सामंजस्य बिठाने की अनुमति देता है। यह बताता है कि व्यवस्थित प्रक्रिया आपके लिए काम कर रही है, न कि आपके खिलाफ। इसके विपरीत, 11वां भाव कष्टप्रद होने का अर्थ यह हो सकता है कि साझेदारी के लिए जातक की इच्छाएं लगातार विफल हो रही हैं, या व्यवस्थित करने की प्रक्रिया उनके व्यक्तिगत लक्ष्यों से दूर महसूस होती है, जिससे निराशा होती है। 11वां भाव विवाह के सातवें भाव और व्यक्तिगत विकल्प के पांचवें भाव के बीच एक महत्वपूर्ण पुल के रूप में कार्य करता है। जब 11वां भाव अच्छी तरह से स्थित होता है, तो यह सुनिश्चित करता है कि आपकी आवश्यकताएं और परिवार के विकल्प आपस में मिलते हैं, जिससे एक ऐसा मिलन होता है जो व्यक्तिगत और सामाजिक दोनों स्तरों पर संतोषजनक होता है। व्यावहारिक रूप से, एक अनुभवी ज्योतिषी वैवाहिक संतुष्टि के लिए 11वें स्वामी की ताकत को बैरोमीटर के रूप में देखता है; यदि यह मजबूत है और सातवें भाव से अच्छी तरह से जुड़ा हुआ है, तो यह पुष्टि करता है कि व्यवस्थित साझेदारी जातक की साथ और खुशी के लिए कार्मिक इच्छाओं को सफलतापूर्वक पूरा करेगी।'
-          }
-        ]
+            id:       'mercury',
+            label:    'Mercury — Communication and Negotiation',
+            label_hi: 'बुध — संवाद और बातचीत',
+            body:     'Mercury governs communication, discussion and negotiation — skills that matter in an arranged process, where expectations are discussed between two people and two families. A strong Mercury tends to support clear conversations with prospective partners and their families; an afflicted Mercury may suggest misunderstandings that are best handled by discussing expectations openly and early.',
+            body_hi:  'बुध संवाद, चर्चा और बातचीत का ग्रह है — ये कौशल अरेंज प्रक्रिया में महत्वपूर्ण हैं, जहाँ अपेक्षाओं पर दो व्यक्तियों और दो परिवारों के बीच बात होती है। मज़बूत बुध संभावित साथी और उनके परिवार के साथ स्पष्ट बातचीत का समर्थन करता है; पीड़ित बुध ग़लतफ़हमियों का संकेत दे सकता है, जिन्हें अपेक्षाओं पर जल्दी और खुलकर बात करके संभालना बेहतर है।',
+          },
+          {
+            id:       'mars',
+            label:    'Mars — Initiative and Drive',
+            label_hi: 'मंगल — पहल और उत्साह',
+            body:     'Mars represents initiative and drive. In an arranged-marriage context it describes how actively a person takes part in the process rather than leaving everything to the family. A balanced Mars supports decisiveness; a heavily afflicted Mars on the 7th house may suggest impatience or friction during discussions, which Jupiter’s influence tends to soften.',
+            body_hi:  'मंगल पहल और उत्साह का ग्रह है। अरेंज मैरिज के संदर्भ में यह बताता है कि व्यक्ति सब कुछ परिवार पर छोड़ने के बजाय प्रक्रिया में कितनी सक्रिय भूमिका निभाता है। संतुलित मंगल निर्णय-क्षमता का समर्थन करता है; सप्तम भाव पर भारी पीड़ित मंगल बातचीत के दौरान अधीरता या टकराव का संकेत दे सकता है, जिसे गुरु का प्रभाव नरम कर सकता है।',
+          },
+          {
+            id:       'rahu',
+            label:    'Rahu — The Unconventional Pull',
+            label_hi: 'राहु — परंपरा से हटकर खिंचाव',
+            body:     'Rahu represents the unconventional and the pull toward what lies outside familiar boundaries. Strong Rahu influence on the 7th house, the 7th lord or Venus tends to work against a purely traditional match — it can bring a partner from an unexpected background or a modern twist to a family-arranged process. It does not rule out an arranged marriage, but it often shifts the balance toward personal choice. Unions across caste or religion are covered in the Intercaste Marriage guide.',
+            body_hi:  'राहु अपरंपरागत और परिचित सीमाओं से बाहर की ओर खिंचाव का प्रतीक है। सप्तम भाव, सप्तमेश या शुक्र पर राहु का मज़बूत प्रभाव पूरी तरह पारंपरिक रिश्ते के विपरीत काम कर सकता है — यह अनपेक्षित पृष्ठभूमि वाला साथी या परिवार द्वारा तय प्रक्रिया में आधुनिक मोड़ ला सकता है। यह अरेंज मैरिज को नकारता नहीं, पर अक्सर संतुलन को व्यक्तिगत पसंद की ओर ले जाता है। जाति या धर्म से अलग विवाह अंतरजातीय विवाह मार्गदर्शिका में समझाए गए हैं।',
+          },
+          {
+            id:       'ketu',
+            label:    'Ketu — Detachment',
+            label_hi: 'केतु — विरक्ति',
+            body:     'Ketu represents detachment and inward focus. Ketu on the 7th house may describe a person who is less invested in the search itself and comfortable letting the family take the lead — or, at times, someone who feels distant from the process. With benefic support it can describe a calm, spiritually minded partnership; without it, the bond may need conscious effort to grow warm.',
+            body_hi:  'केतु विरक्ति और अंतर्मुखता का प्रतीक है। सप्तम भाव में केतु ऐसे व्यक्ति को दर्शा सकता है जो स्वयं खोज में कम रुचि रखता है और परिवार को आगे बढ़ने देने में सहज है — या कभी-कभी ऐसा व्यक्ति जो इस प्रक्रिया से दूरी महसूस करता है। शुभ ग्रहों के समर्थन से यह शांत और आध्यात्मिक साझेदारी दर्शा सकता है; इसके बिना संबंध में गर्माहट लाने के लिए सचेत प्रयास की ज़रूरत हो सकती है।',
+          },
+        ],
       },
+
       {
-        id: 'planetary-influences',
-        title: 'Planetary Influences',
-        title_hi: 'ग्रहों का प्रभाव',
-        layout: 'accordion',
+        id:       'navamsa-supporting',
+        title:    'Navamsa and Supporting Indicators',
+        title_hi: 'नवांश और सहायक संकेतक',
+        layout:   'list',
         items: [
           {
-            id: 'sun',
-            label: 'Sun',
-            label_hi: 'सूर्य',
-            body: 'The Sun represents the father, ancestors, and ego. A strong Sun in the chart suggests that the native respects ancestral authority, making them more receptive to family guidance in their choice of partner. It signifies a person who understands their identity as part of a family lineage. Conversely, an afflicted Sun can create tension between the native\'s individual identity and the demands of their family line, making the arranged marriage process feel like a test of their ego rather than a collaborative effort. In practice, I observe that when the Sun is well-situated in a Kendra or Trikona house, the native views an arranged union as a dignified and natural extension of their responsibility toward their ancestors. This alignment reduces internal conflict and promotes cooperation. However, if the Sun is weak, the native may subconsciously resist family-led initiatives, leading to delays or superficial compliance, which can ultimately hinder the marriage\'s long-term stability. The Sun is thus not just about the father, but the internal dignity that makes accepting family guidance a strength rather than a compromise.',
-            body_hi: 'सूर्य पिता, पूर्वजों और अहंकार का प्रतिनिधित्व करता है। चार्ट में एक मजबूत सूर्य बताता है कि जातक साथी के चयन में परिवार के मार्गदर्शन का सम्मान करता है, जो पारिवारिक वंश के भीतर अपनी भूमिका को समझता है। यह एक ऐसे व्यक्ति को दर्शाता है जो अपने पिता की पंक्ति के बजाय भीतर से मान्यता चाहता है, एक स्वतंत्र अहंकार संरचना का सुझाव देता है जो पारिवारिक प्रतिष्ठा पर निर्भर नहीं है। इसके विपरीत, एक कष्टप्रद सूर्य जातक की व्यक्तिगत पहचान और उनके परिवार की मांगों के बीच तनाव पैदा कर सकता है, जिससे व्यवस्थित विवाह प्रक्रिया एक सहयोगात्मक प्रयास के बजाय उनके अहंकार की परीक्षा जैसा महसूस हो सकती है। व्यवहार में, मैं देखता हूं कि जब सूर्य केंद्र या त्रिकोण घर में अच्छी तरह से स्थित होता है, तो जातक व्यवस्थित मिलन को अपने पूर्वजों के प्रति अपनी जिम्मेदारी का एक गरिमापूर्ण और स्वाभाविक विस्तार मानता है। यह संरेखण आंतरिक संघर्ष को कम करता है और सहयोग को बढ़ावा देता है। हालांकि, यदि सूर्य कमजोर है, तो जातक अवचेतन रूप से परिवार के नेतृत्व वाली पहलों का विरोध कर सकता है, जिससे देरी या सतही अनुपालन हो सकता है, जो अंततः विवाह की दीर्घकालिक स्थिरता में बाधा डाल सकता है। इसलिए सूर्य केवल पिता के बारे में नहीं है, बल्कि उस आंतरिक गरिमा के बारे में है जो पारिवारिक मार्गदर्शन को स्वीकार करने को एक समझौता के बजाय एक ताकत बनाती है।'
+            id:       'navamsa',
+            label:    'Navamsa (D9) — A Supporting Check',
+            label_hi: 'नवांश (D9) — एक सहायक जाँच',
+            body:     'The Navamsa (D9) is the divisional chart traditionally used to examine marriage in depth. For this question it acts as a supporting check rather than a verdict: if the D9 7th lord and the D9 placements repeat the family-oriented themes seen in the birth chart — links with the 2nd, 9th or 11th, or Jupiter’s influence — the arranged-marriage indication is considered stronger. If the D9 points in a different direction, the reading stays mixed.',
+            body_hi:  'नवांश (D9) वह वर्ग कुंडली है जिससे परंपरागत रूप से विवाह का गहराई से विश्लेषण किया जाता है। इस प्रश्न में यह अंतिम निर्णय नहीं, बल्कि सहायक जाँच है: यदि नवांश का सप्तमेश और नवांश की स्थितियाँ जन्मकुंडली के परिवार-केंद्रित विषयों को दोहराएँ — द्वितीय, नवम या एकादश से संबंध, या गुरु का प्रभाव — तो अरेंज मैरिज का संकेत अधिक मज़बूत माना जाता है। यदि नवांश किसी अन्य दिशा में संकेत करे, तो निष्कर्ष मिश्रित रहता है।',
           },
           {
-            id: 'moon',
-            label: 'Moon',
-            label_hi: 'चंद्र',
-            body: 'The Moon governs the emotional mind, domestic peace, and security, directly influencing the native\'s comfort within their family environment—a key component of arranged marriage success. A strong, well-placed Moon indicates an individual who finds genuine emotional security in their family\'s choices, making the transition into a new family dynamic much smoother. This emotional harmony allows the native to integrate into the arranged partner\'s domestic sphere with relative ease, as they naturally prioritize familial stability over emotional volatility. In horoscope analysis, I look for a Moon that is waxing, unafflicted by malefics, and ideally in a sign that provides comfort, such as Taurus or Cancer. When the Moon is in this state, the native enters the arranged union with a calm, receptive heart, capable of building an intimate connection without the stress of emotional defensiveness. In contrast, an afflicted Moon in the chart may cause the native to feel a persistent sense of alienation or lack of emotional support, even when the marriage is structurally correct. If the Moon is under stress, it becomes crucial for the astrologer to look for strong supportive aspects to prevent emotional dissatisfaction, potentially recommending practices that harmonize the native’s internal emotional state with the requirements of their new life.',
-            body_hi: 'चंद्रमा भावनात्मक मन, घरेलू शांति और सुरक्षा का शासन करता है, जो सीधे परिवार के वातावरण में जातक के आराम को प्रभावित करता है—जो व्यवस्थित विवाह की सफलता का एक प्रमुख घटक है। एक मजबूत, अच्छी तरह से स्थित चंद्रमा एक ऐसे व्यक्ति को इंगित करता है जो अपने परिवार के विकल्पों में वास्तविक भावनात्मक सुरक्षा पाता है, जिससे एक नए पारिवारिक गतिशील में संक्रमण बहुत आसान हो जाता है। यह भावनात्मक सामंजस्य जातक को अपेक्षाकृत आसानी से व्यवस्थित साथी के घरेलू क्षेत्र में एकीकृत करने की अनुमति देता है, क्योंकि वे स्वाभाविक रूप से भावनात्मक अस्थिरता पर पारिवारिक स्थिरता को प्राथमिकता देते हैं। राशिफल विश्लेषण में, मैं एक ऐसे चंद्रमा की तलाश करता हूं जो बढ़ रहा हो, पाप ग्रहों से रहित हो, और आदर्श रूप से एक ऐसे संकेत में हो जो आराम प्रदान करता है, जैसे वृषभ या कर्क। जब चंद्रमा इस स्थिति में होता है, तो जातक शांत, ग्रहणशील हृदय के साथ व्यवस्थित मिलन में प्रवेश करता है, भावनात्मक रक्षात्मकता के तनाव के बिना एक अंतरंग संबंध बनाने में सक्षम होता है। इसके विपरीत, चार्ट में एक कष्टप्रद चंद्रमा जातक को अलगाव की एक निरंतर भावना या भावनात्मक समर्थन की कमी का एहसास करा सकता है, तब भी जब विवाह संरचनात्मक रूप से सही हो। यदि चंद्रमा तनाव में है, तो ज्योतिषी के लिए भावनात्मक असंतोष को रोकने के लिए मजबूत सहायक पहलुओं की तलाश करना महत्वपूर्ण हो जाता है, संभावित रूप से उन अभ्यासों की सिफारिश करना जो जातक की आंतरिक भावनात्मक स्थिति को उनके नए जीवन की आवश्यकताओं के साथ संरेखित करते हैं।'
+            id:       'darakaraka',
+            label:    'Darakaraka (DK)',
+            label_hi: 'दाराकारक (DK)',
+            body:     'In the Jaimini system, the Darakaraka — the planet with the lowest degree in the chart — is a significator of the spouse. It is mainly used to describe the partner’s nature, which is covered in the Spouse Nature guide; for the love-or-arranged question it is only a minor supporting factor.',
+            body_hi:  'जैमिनी पद्धति में दाराकारक — कुंडली में सबसे कम अंश वाला ग्रह — जीवनसाथी का कारक माना जाता है। इसका मुख्य उपयोग जीवनसाथी के स्वभाव को समझने में होता है, जिसे जीवनसाथी के स्वभाव वाली मार्गदर्शिका में बताया गया है; लव या अरेंज के प्रश्न में यह केवल एक छोटा सहायक कारक है।',
           },
           {
-            id: 'mars',
-            label: 'Mars',
-            label_hi: 'मंगल',
-            body: 'Mars is the planet of initiative, courage, and action. In the context of an arranged marriage, Mars provides the necessary drive to execute the various steps of the arrangement process and the courage to integrate into a new, potentially challenging environment. A balanced Mars in the natal chart signifies an individual who is assertive, courageous, and capable of taking charge of their domestic life, which is essential for establishing stability in the early years of an arranged union. When Mars is well-positioned—perhaps in its own sign of Aries or Scorpio, or in a Kendra house—the native possesses a healthy drive to build the partnership. However, a heavily afflicted or malefic Mars in the 7th house can signal a propensity for volatility and impulsive conflicts within the partnership. From an astrological analysis perspective, the positioning of Mars is pivotal; if Mars is under the aspect of Jupiter, the energy is tempered and used constructively for familial harmony, whereas if Mars is influenced by Rahu or Saturn without benefic support, it can lead to aggressive, defensive, or frustrated behavior that hampers domestic peace. Therefore, Mars is not just about conflict; it is the vital, active energy that fuels the commitment to the partnership.',
-            body_hi: 'मंगल पहल, साहस और क्रिया का ग्रह है। व्यवस्थित विवाह के संदर्भ में, मंगल मिलन प्रक्रिया के विभिन्न चरणों को निष्पादित करने के लिए आवश्यक ड्राइव और एक नए, संभावित रूप से चुनौतीपूर्ण वातावरण में एकीकृत होने का साहस प्रदान करता है। जन्म चार्ट में एक संतुलित मंगल ऐसे व्यक्ति का संकेत देता है जो मुखर, साहसी है, और अपने घरेलू जीवन का कार्यभार संभालने में सक्षम है, जो व्यवस्थित मिलन के शुरुआती वर्षों में स्थिरता स्थापित करने के लिए आवश्यक है। जब मंगल अच्छी तरह से स्थित होता है—शायद मेष या वृश्चिक के अपने संकेत में, या केंद्र घर में—तो जातक के पास साझेदारी बनाने के लिए एक स्वस्थ ड्राइव होती है। हालांकि, सातवें घर में एक भारी कष्टप्रद या पाप मंगल साझेदारी के भीतर अस्थिरता और आवेगी संघर्षों की प्रवृत्ति का संकेत दे सकता है। ज्योतिषीय विश्लेषण के दृष्टिकोण से, मंगल की स्थिति महत्वपूर्ण है; यदि मंगल गुरु के पहलू में है, तो ऊर्जा को संयमित किया जाता है और पारिवारिक सद्भाव के लिए रचनात्मक रूप से उपयोग किया जाता है, जबकि यदि मंगल बिना शुभ समर्थन के राहु या शनि से प्रभावित होता है, तो यह आक्रामक, रक्षात्मक या निराश व्यवहार का कारण बन सकता है जो घरेलू शांति में बाधा डालता है। इसलिए, मंगल केवल संघर्ष के बारे में नहीं है; यह वह महत्वपूर्ण, सक्रिय ऊर्जा है जो साझेदारी के प्रति प्रतिबद्धता को बढ़ावा देती है।'
-          },
-          {
-            id: 'mercury',
-            label: 'Mercury',
-            label_hi: 'बुध',
-            body: 'Mercury governs communication, intellect, and the capacity for rational negotiation—all essential components for the delicate process of arranged marriage. A strong Mercury in the natal chart allows the native to effectively bridge the gap between their own expectations and those of their partner and extended family. It enables the native to navigate the social complexities and communications required in an arranged union with clarity and tact. When Mercury is well-placed, the native can explain their choices as reasonable, even if those choices defy social norms, helping to mitigate the friction created by the union. Conversely, an afflicted Mercury can cause misunderstandings, intellectual stagnation, or a failure to convey one\'s needs clearly to the partner, leading to preventable domestic discord. During horoscope analysis, I look for a Mercury that is well-aspected by benefics, indicating that the native will be able to foster clear channels of communication within the marriage. If Mercury is under the influence of malefic planets without support, it becomes vital to emphasize communication-based remedies, such as structured intellectual engagement or practices that clarify the native’s thinking, to ensure that the partnership remains grounded in clear understanding and mutual respect.',
-            body_hi: 'बुध संचार, बुद्धि और तर्कसंगत बातचीत की क्षमता को नियंत्रित करता है—ये सभी व्यवस्थित विवाह की नाजुक प्रक्रिया के लिए आवश्यक घटक हैं। जन्म चार्ट में एक मजबूत बुध जातक को अपनी अपेक्षाओं और अपने साथी और विस्तारित परिवार की अपेक्षाओं के बीच के अंतर को प्रभावी ढंग से पाटने की अनुमति देता है। यह जातक को स्पष्टता और चातुर्य के साथ व्यवस्थित मिलन में आवश्यक सामाजिक जटिलताओं और संचार को नेविगेट करने में सक्षम बनाता है। जब बुध अच्छी तरह से स्थित होता है, तो जातक अपने विकल्पों को उचित के रूप में समझा सकता है, भले ही वे विकल्प सामाजिक मानदंडों को धता बताते हों, मिलन द्वारा बनाए गए घर्षण को कम करने में मदद करते हैं। इसके विपरीत, एक कष्टप्रद बुध गलतफहमी, बौद्धिक ठहराव, या साथी को अपनी आवश्यकताओं को स्पष्ट रूप से व्यक्त करने में विफलता का कारण बन सकता है, जिससे रोकथाम योग्य घरेलू कलह हो सकती है। राशिफल विश्लेषण के दौरान, मैं एक ऐसे बुध की तलाश करता हूं जो शुभ ग्रहों द्वारा अच्छी तरह से देखा जाता है, जो यह दर्शाता है कि जातक विवाह के भीतर संचार के स्पष्ट चैनल विकसित करने में सक्षम होगा। यदि बुध बिना समर्थन के पाप ग्रहों के प्रभाव में है, तो संचार-आधारित उपायों पर जोर देना महत्वपूर्ण हो जाता है, जैसे कि संरचित बौद्धिक जुड़ाव या ऐसी प्रथाएं जो जातक की सोच को स्पष्ट करती हैं, यह सुनिश्चित करने के लिए कि साझेदारी स्पष्ट समझ और पारस्परिक सम्मान में निहित रहे।'
-          },
-          {
-            id: 'jupiter',
-            label: 'Jupiter',
-            label_hi: 'गुरु',
-            body: 'Jupiter is the planet of traditional wisdom, dharma, expansion, and spiritual growth, making it the most significant planet for the success of an arranged marriage. Its influence on the 7th house or its lord ensures that the union is based on dharma, tradition, and mutual growth. A strong Jupiter signifies an individual who approaches the partnership as a collaborative journey toward higher purpose. When Jupiter is well-placed—perhaps in its own sign of Sagittarius or Pisces, or in a Kendra house—the native possesses the maturity to handle the responsibilities of partnership and to value the wisdom of their elders. This stability is the bedrock of an arranged union. If Jupiter is afflicted, however, the native may prioritize personal experience over the wisdom of their elders, potentially leading to challenges in finding the alignment between personal desires and traditional expectations. In practical analysis, a well-placed Jupiter is a sign of long-term marital success, as it provides the perspective to navigate crises with grace. Conversely, a debilitated or afflicted Jupiter may signal that the native needs to actively work on developing their own inner sense of dharma to make the marriage work, as the external structure of the arrangement may not be sufficient for their spiritual maturity.',
-            body_hi: 'गुरु पारंपरिक ज्ञान, धर्म, विस्तार और आध्यात्मिक विकास का ग्रह है, जो इसे व्यवस्थित विवाह की सफलता के लिए सबसे महत्वपूर्ण ग्रह बनाता है। सातवें घर या इसके स्वामी पर इसका प्रभाव यह सुनिश्चित करता है कि मिलन धर्म, परंपरा और पारस्परिक विकास पर आधारित हो। एक मजबूत गुरु ऐसे व्यक्ति का संकेत देता है जो साझेदारी को उच्च उद्देश्य की ओर एक सहयोगात्मक यात्रा के रूप में देखता है। जब गुरु अच्छी तरह से स्थित होता है—शायद धनु या मीन के अपने संकेत में, या केंद्र घर में—तो जातक के पास साझेदारी की जिम्मेदारियों को संभालने और अपने बुजुर्गों के ज्ञान को महत्व देने की परिपक्वता होती है। यह स्थिरता एक व्यवस्थित मिलन की आधारशिला है। यदि गुरु कष्टप्रद है, हालांकि, जातक अपने बुजुर्गों के ज्ञान पर व्यक्तिगत अनुभव को प्राथमिकता दे सकता है, जो व्यक्तिगत इच्छाओं और पारंपरिक अपेक्षाओं के बीच संरेखण खोजने में चुनौतियों का सामना कर सकता है। व्यावहारिक विश्लेषण में, एक अच्छी तरह से स्थित गुरु दीर्घकालिक वैवाहिक सफलता का संकेत है, क्योंकि यह संकटों को शालीनता के साथ नेविगेट करने का परिप्रेक्ष्य प्रदान करता है। इसके विपरीत, एक कमजोर या कष्टप्रद गुरु संकेत दे सकता है कि जातक को विवाह को सफल बनाने के लिए धर्म की अपनी आंतरिक समझ विकसित करने पर सक्रिय रूप से काम करने की आवश्यकता है, क्योंकि व्यवस्था की बाहरी संरचना उनकी आध्यात्मिक परिपक्वता के लिए पर्याप्त नहीं हो सकती है।'
-          },
-          {
-            id: 'venus',
-            label: 'Venus',
-            label_hi: 'शुक्र',
-            body: 'Venus is the Karaka of the partner, pleasure, and marital harmony. A strong, unafflicted Venus ensures that there will be mutual attraction and genuine affection between the couple, even in an arranged context, creating a solid base for the partnership. Venus represents the quality of the bond and the capacity to enjoy the companionship of the partner. When Venus is in a Kendra or Trikona house and receives benefic aspects, the arranged marriage is blessed with beauty, romance, and a sense of shared purpose. In practice, a strong Venus makes the transition into the partnership fluid and delightful. Conversely, an afflicted Venus—due to a conjunction with Saturn or an aspect from Mars—can indicate early challenges in building an emotional connection, making the initial stages of the arranged union feel cold or formal. If Venus is under stress, the astrologer should emphasize remedies that cultivate devotion and aesthetic appreciation, ensuring the native nurtures the romantic potential within the structured environment of the marriage. Venus is thus not just about romance, but the vital capacity to perceive and value the partner as an individual, which is essential for sustaining the union.',
-            body_hi: 'शुक्र साथी, आनंद और वैवाहिक सद्भाव का कारक है। एक मजबूत, बिना कष्ट वाला शुक्र यह सुनिश्चित करता है कि जोड़े के बीच पारस्परिक आकर्षण और वास्तविक स्नेह होगा, भले ही वह एक व्यवस्थित संदर्भ में हो, जो साझेदारी के लिए एक ठोस आधार बनाता है। शुक्र बंधन की गुणवत्ता और साथी के साथ रहने का आनंद लेने की क्षमता का प्रतिनिधित्व करता है। जब शुक्र केंद्र या त्रिकोण घर में होता है और शुभ ग्रहों के पहलू प्राप्त करता है, तो व्यवस्थित विवाह सुंदरता, रोमांस और साझा उद्देश्य की भावना के साथ धन्य हो जाता है। व्यवहार में, एक मजबूत शुक्र साझेदारी में संक्रमण को तरल और आनंददायक बनाता है। इसके विपरीत, एक कष्टप्रद शुक्र—शनि के साथ संयोजन या मंगल के पहलू के कारण—भावनात्मक संबंध बनाने में प्रारंभिक चुनौतियों का संकेत दे सकता है, जिससे व्यवस्थित मिलन के शुरुआती चरण ठंडे या औपचारिक महसूस होते हैं। यदि शुक्र तनाव में है, तो ज्योतिषी को उन उपायों पर जोर देना चाहिए जो भक्ति और सौंदर्य प्रशंसा की खेती करते हैं, यह सुनिश्चित करते हुए कि जातक विवाह के संरचित वातावरण के भीतर रोमांटिक क्षमता का पोषण करे। इसलिए शुक्र केवल रोमांस के बारे में नहीं है, बल्कि साथी को एक व्यक्ति के रूप में समझने और महत्व देने की महत्वपूर्ण क्षमता है, जो मिलन को बनाए रखने के लिए आवश्यक है।'
-          },
-          {
-            id: 'saturn',
-            label: 'Saturn',
-            label_hi: 'शनि',
-            body: 'Saturn represents endurance, discipline, law, and long-term commitment. In an arranged marriage, Saturn in the 7th house often brings the stability needed for the union to last, even if it starts under formal or unconventional circumstances. Saturn acts as a stabilizer that hardens the couple\'s bond through shared struggle and time, rather than immediate, fleeting passion. When Saturn is well-placed, it suggests an individual who views marriage as a lifelong duty, which is the cornerstone of successful traditional unions. However, an afflicted Saturn in the 7th house can signal a cold, distant, or overly formal relationship, where the couple feels burdened by duty rather than inspired by love. In horoscope analysis, I look to see if Saturn is supported by benefic planets; if it is, the native will have the grit and patience to overcome the initial awkwardness of an arranged union. If Saturn is heavily afflicted, the native may struggle with the monotony or perceived restrictions of the marriage, necessitating remedies that emphasize service and the understanding of duty as a path to spiritual maturation. Saturn is ultimately about the integrity of the commitment, which is the most resilient bond in any union.',
-            body_hi: 'शनि सहनशक्ति, अनुशासन, कानून और दीर्घकालिक प्रतिबद्धता का प्रतिनिधित्व करता है। व्यवस्थित विवाह में, सातवें घर में शनि अक्सर मिलन के टिके रहने के लिए आवश्यक स्थिरता लाता है, भले ही यह औपचारिक या अपरंपरागत परिस्थितियों में शुरू हो। शनि एक ऐसे स्टेबलाइजर के रूप में कार्य करता है जो तत्काल, क्षणभंगुर जुनून के बजाय साझा संघर्ष और समय के माध्यम से जोड़े के बंधन को मजबूत करता है। जब शनि अच्छी तरह से स्थित होता है, तो यह एक ऐसे व्यक्ति का संकेत देता है जो विवाह को आजीवन कर्तव्य के रूप में देखता है, जो सफल पारंपरिक मिलनों की आधारशिला है। हालांकि, सातवें घर में एक कष्टप्रद शनि एक ठंडे, दूरस्थ या अत्यधिक औपचारिक रिश्ते का संकेत दे सकता है, जहां जोड़ा प्यार से प्रेरित होने के बजाय कर्तव्य के बोझ से दबता है। राशिफल विश्लेषण में, मैं यह देखने के लिए देखता हूं कि क्या शनि शुभ ग्रहों द्वारा समर्थित है; यदि ऐसा है, तो जातक के पास व्यवस्थित मिलन की प्रारंभिक अजीबोगरीब स्थिति को दूर करने के लिए धैर्य होगा। यदि शनि भारी रूप से पीड़ित है, तो जातक विवाह की एकरसता या कथित प्रतिबंधों के साथ संघर्ष कर सकता है, जिसके लिए उन उपायों की आवश्यकता होती है जो सेवा और कर्तव्य को आध्यात्मिक परिपक्वता के मार्ग के रूप में समझने पर जोर देते हैं। शनि अंततः प्रतिबद्धता की अखंडता के बारे में है, जो किसी भी मिलन में सबसे लचीला बंधन है।'
-          },
-          {
-            id: 'rahu',
-            label: 'Rahu',
-            label_hi: 'राहु',
-            body: 'Rahu represents obsession, the forbidden, and the desire to break out of established social boxes. If Rahu heavily afflicts the 7th house in an arranged marriage chart, it may cause the native to feel a hidden, dissatisfied longing, even if the marriage itself is stable structurally. Rahu pushes the individual to seek the "forbidden fruit"—that which lies outside their karmic comfort zone. In the context of arranged marriage, Rahu can be a complex influence: while the arrangement provides the container, the native’s Rahu-driven desire might want something that the container cannot provide. From an astrological standpoint, a strong Rahu influence requires the astrologer to caution the native about the nature of their desires and the risks of projection. If Rahu is under control through strong Jupiterian aspects, the obsession can be channeled into productive, joint ambitions with the partner. If Rahu is unchecked, it leads to perpetual dissatisfaction. Therefore, Rahu’s presence demands a high level of self-awareness; the native must distinguish between the stability offered by the arranged union and the restless, Rahu-driven impulse that may seek novelty over depth.',
-            body_hi: 'राहु जुनून, वर्जित, और स्थापित सामाजिक बक्से से बाहर निकलने की इच्छा का प्रतिनिधित्व करता है। यदि राहु एक व्यवस्थित विवाह चार्ट में सातवें घर को भारी रूप से पीड़ित करता है, तो यह जातक को एक छिपी हुई, असंतुष्ट लालसा महसूस करा सकता है, भले ही विवाह संरचनात्मक रूप से स्थिर हो। राहु व्यक्ति को "वर्जित फल"—वह जो उनके कार्मिक आराम क्षेत्र के बाहर स्थित है—की तलाश करने के लिए धक्का देता है। व्यवस्थित विवाह के संदर्भ में, राहु एक जटिल प्रभाव हो सकता है: जबकि व्यवस्था कंटेनर प्रदान करती है, जातक की राहु-संचालित इच्छा कुछ ऐसा चाह सकती है जो कंटेनर प्रदान नहीं कर सकता है। ज्योतिषीय दृष्टिकोण से, एक मजबूत राहु प्रभाव ज्योतिषी को जातक को उनकी इच्छाओं की प्रकृति और प्रक्षेपण के जोखिमों के बारे में आगाह करने की आवश्यकता होती है। यदि राहु मजबूत गुरु पहलुओं के माध्यम से नियंत्रण में है, तो जुनून को साथी के साथ उत्पादक, संयुक्त महत्वाकांक्षाओं में बदला जा सकता है। यदि राहु अनियंत्रित है, तो यह निरंतर असंतोष की ओर ले जाता है। इसलिए, राहु की उपस्थिति उच्च स्तर के आत्म-जागरूकता की मांग करती है; जातक को व्यवस्थित मिलन द्वारा दी गई स्थिरता और बेचैन, राहु-संचालित आवेग के बीच अंतर करना चाहिए जो गहराई पर नवीनता की तलाश कर सकता है।'
-          },
-          {
-            id: 'ketu',
-            label: 'Ketu',
-            label_hi: 'केतु',
-            body: 'Ketu represents detachment from established social norms, spiritual depth, and the dissolution of identity. Ketu’s influence on the 7th house can make the native feel a bit distant or detached from the partner, often requiring conscious effort to build emotional intimacy within the arranged structure. Ketu creates an energy of "being here, but not fully present," which can challenge the development of a traditional marital bond. In horoscope analysis, I observe that when Ketu is in the 7th house, the native may initially struggle to find the spark of connection expected in an arranged marriage, as their interest is geared more toward introspection or the transcendent. However, if Ketu is associated with benefic planets like Jupiter, this detachment can transform into a high-level spiritual partnership, where the couple finds meaning beyond simple domestic life. Conversely, if Ketu is isolated or heavily afflicted, it leads to a feeling of emotional loneliness within the marriage. The astrologer should recommend practices that ground the native, such as service-oriented work, which helps connect their transcendent energy with the concrete reality of their partnership, bridging the gap between their soul’s need for detachment and the marriage’s need for intimacy.',
-            body_hi: 'केतु स्थापित सामाजिक मानदंडों से अलगाव, आध्यात्मिक गहराई और पहचान के विघटन का प्रतिनिधित्व करता है। सातवें घर पर केतु का प्रभाव जातक को साथी से थोड़ा दूर या अलग महसूस करा सकता है, जिसके लिए अक्सर व्यवस्थित ढांचे के भीतर भावनात्मक अंतरंगता बनाने के लिए सचेत प्रयास की आवश्यकता होती है। केतु "यहां होने, लेकिन पूरी तरह से मौजूद न होने" की ऊर्जा पैदा करता है, जो पारंपरिक वैवाहिक बंधन के विकास को चुनौती दे सकता है। राशिफल विश्लेषण में, मैं देखता हूं कि जब केतु सातवें घर में होता है, तो जातक शुरू में व्यवस्थित विवाह में अपेक्षित जुड़ाव की चिंगारी खोजने के लिए संघर्ष कर सकता है, क्योंकि उनकी रुचि आत्म-निरीक्षण या पारलौकिक की ओर अधिक होती है। हालांकि, यदि केतु गुरु जैसे शुभ ग्रहों से जुड़ा है, तो यह अलगाव एक उच्च-स्तरीय आध्यात्मिक साझेदारी में बदल सकता है, जहां युगल साधारण घरेलू जीवन से परे अर्थ पाते हैं। इसके विपरीत, यदि केतु अलग-थलग या भारी रूप से पीड़ित है, तो यह विवाह के भीतर भावनात्मक अकेलेपन की भावना की ओर ले जाता है। ज्योतिषी को उन प्रथाओं की सिफारिश करनी चाहिए जो जातक को जमीन से जोड़ती हैं, जैसे कि सेवा-उन्मुख कार्य, जो उनकी पारलौकिक ऊर्जा को उनकी साझेदारी की ठोस वास्तविकता से जोड़ने में मदद करता है, उनकी आत्मा की अलगाव की आवश्यकता और विवाह की अंतरंगता की आवश्यकता के बीच के अंतर को पाटता है।'
-          }
-        ]
-      },
-      {
-        id: 'advanced-indicators',
-        title: 'Advanced Indicators',
-        title_hi: 'उन्नत संकेतक',
-        layout: 'list',
-        items: [
-          {
-            id: 'navamsa',
-            label: 'Navamsa (D9)',
-            label_hi: 'नवांश (D9)',
-            body: 'The Navamsa (D9) chart is indispensable for assessing the true, inner fruit of an arranged marriage. While the Rashi chart (D1) maps the external social setup, the D9 reveals the subconscious, karmic alignment between partners. Experienced astrologers interpret this by examining the strength of the D9 7th lord and its relationship to the D1 marriage houses. A positive indication is when the Navamsa lord of the D1 7th house is strongly placed in a Kendra or Trikona in the Navamsa chart, suggesting that the externally arranged union will blossom into an internal, soul-level partnership. Conversely, a challenging indicator is when the Navamsa 7th lord is debilitated or in a Dusthana (6th, 8th, or 12th) house, pointing toward a relationship that maintains a social facade of stability but feels hollow or strained on an intimate level. The D9 is also vital for timing; a strong Navamsa promise allows a native to sustain their arranged union through difficult Dasha periods, whereas a weak one might suggest that even a well-arranged marriage may face inexplicable emotional rifts. Ultimately, the D9 bridges the gap between social duty and private fulfillment.',
-            body_hi: 'नवांश (D9) चार्ट व्यवस्थित विवाह के सच्चे, आंतरिक फल का आकलन करने के लिए अपरिहार्य है। जबकि राशि चार्ट (D1) बाहरी सामाजिक सेटअप को मैप करता है, D9 भागीदारों के बीच अवचेतन, कार्मिक संरेखण को प्रकट करता है। अनुभवी ज्योतिषी D9 सातवें स्वामी की ताकत और D1 विवाह घरों के साथ इसके संबंध की जांच करके इसकी व्याख्या करते हैं। एक सकारात्मक संकेत तब होता है जब D1 सातवें घर का नवांश स्वामी नवांश चार्ट में केंद्र या त्रिकोण में मजबूती से स्थित होता है, जो यह बताता है कि बाहरी रूप से व्यवस्थित मिलन एक आंतरिक, आत्मा-स्तरीय साझेदारी में खिलेगा। इसके विपरीत, एक चुनौतीपूर्ण संकेतक तब होता है जब नवांश सातवां स्वामी नीच का होता है या दुस्थान (छठा, आठवां, या बारहवां) घर में होता है, जो एक ऐसे रिश्ते की ओर इशारा करता है जो स्थिरता का सामाजिक मुखौटा बनाए रखता है लेकिन अंतरंग स्तर पर खोखला या तनावपूर्ण महसूस होता है। D9 समय के लिए भी महत्वपूर्ण है; एक मजबूत नवांश वादा जातक को कठिन दशा अवधि के माध्यम से अपने व्यवस्थित मिलन को बनाए रखने की अनुमति देता है, जबकि एक कमजोर वादा यह सुझाव दे सकता है कि एक अच्छी तरह से व्यवस्थित विवाह भी अस्पष्ट भावनात्मक दरारों का सामना कर सकता है। अंततः, D9 सामाजिक कर्तव्य और निजी पूर्ति के बीच की खाई को पाटता है।'
-          },
-          {
-            id: 'darakaraka',
-            label: 'Darakaraka (DK)',
-            label_hi: 'दारकारक (DK)',
-            body: 'In the Jaimini system of astrology, the Darakaraka (DK)—the planet with the lowest degree in the Rashi chart—is the supreme significator of the spouse\'s soul-type and the fundamental reason for the karmic union. It identifies the partner as a primary catalyst for the native\'s growth rather than just a social companion. When the Darakaraka is robust, receiving aspects from natural benefics like Jupiter or Venus, it indicates that the arranged spouse acts as a spiritual mirror, guiding the native toward higher self-realization. Positive indications include the DK forming a Rajayoga or occupying a powerful house, which suggests the partner is a source of prosperity and profound life-path enhancement. Challenging indications occur if the DK is heavily afflicted by nodes or sits in a Dusthana house, suggesting the partner enters the native\'s life to teach difficult, potentially volatile lessons through emotional distance or conflict. An experienced astrologer analyzes the DK alongside the Upapada Lagna to determine the marriage\'s practical potential. If the DK is coherent with the 7th house, the arranged partner will harmonize perfectly with the native\'s life-goals. If they conflict, the native may experience a persistent sense of frustration, feeling that their spouse, though socially appropriate, does not resonate with their personal soul-level needs.',
-            body_hi: 'ज्योतिष की जैमिनी प्रणाली में, दारकारक (DK)—राशि चार्ट में सबसे कम डिग्री वाला ग्रह—जीवनसाथी के आत्मा-प्रकार और कार्मिक मिलन के मौलिक कारण का सर्वोच्च संकेतक है। यह साथी को केवल एक सामाजिक साथी के बजाय जातक के विकास के लिए एक प्राथमिक उत्प्रेरक के रूप में पहचानता है। जब दारकारक मजबूत होता है, गुरु या शुक्र जैसे प्राकृतिक शुभ ग्रहों से पहलू प्राप्त करता है, तो यह बताता है कि व्यवस्थित जीवनसाथी जातक को उच्च आत्म-साक्षात्कार की ओर निर्देशित करते हुए आध्यात्मिक दर्पण के रूप में कार्य करता है। सकारात्मक संकेतों में DK का राजयोग बनाना या एक शक्तिशाली घर पर कब्जा करना शामिल है, जो बताता है कि साथी समृद्धि और गहन जीवन-पथ वृद्धि का स्रोत है। चुनौतीपूर्ण संकेत तब होते हैं यदि DK नोड्स द्वारा भारी रूप से पीड़ित होता है या दुस्थान घर में बैठता है, जो यह सुझाव देता है कि साथी भावनात्मक दूरी या संघर्ष के माध्यम से कठिन, संभावित रूप से अस्थिर पाठ सिखाने के लिए जातक के जीवन में प्रवेश करता है। एक अनुभवी ज्योतिषी विवाह की व्यावहारिक क्षमता निर्धारित करने के लिए उपपद लग्न के साथ DK का विश्लेषण करता है। यदि DK सातवें घर के साथ सुसंगत है, तो व्यवस्थित साथी जातक के जीवन-लक्ष्यों के साथ पूरी तरह से सामंजस्य बिठाएगा। यदि वे संघर्ष करते हैं, तो जातक निराशा की निरंतर भावना का अनुभव कर सकता है, यह महसूस करते हुए कि उनका जीवनसाथी, हालांकि सामाजिक रूप से उपयुक्त है, उनकी व्यक्तिगत आत्मा-स्तरीय आवश्यकताओं के साथ प्रतिध्वनित नहीं होता है।'
-          },
-          {
-            id: 'upapada',
-            label: 'Upapada Lagna (UL)',
+            id:       'upapada',
+            label:    'Upapada Lagna (UL)',
             label_hi: 'उपपद लग्न (UL)',
-            body: 'The Upapada Lagna (UL) is the specific Jaimini-based house representing the marital partner and the sustainability of the marriage. It provides deep insight into the "external" stability of the union, tracking whether the social structure of the marriage holds firm against the inevitable stresses of life. An auspicious UL, with a well-placed lord, acts as a karmic shield, ensuring that even if there are internal disagreements, the social and domestic institution of the marriage remains intact. Positive indications include the UL lord receiving aspects from Jupiter, which suggests that the union is blessed with the grace of traditional wisdom, fostering respect and longevity. Challenging indications arise when the UL lord is weak, afflicted, or isolated in a Dusthana house, which can point toward a relationship that lacks internal cohesion, leading to situations where the marriage exists as a formal social contract but lacks the shared warmth and resilience needed to survive long-term. Astrologers scrutinize the UL lord not only in the Rashi chart but also in the Navamsa to ensure that the promise of domestic stability is not negated by deeper, internal disharmony. A strong UL provides the assurance that the family-arranged union is structurally destined to last, serving as a reliable container for the native’s domestic evolution.',
-            body_hi: 'उपपद लग्न (UL) वैवाहिक साथी और विवाह की स्थिरता का प्रतिनिधित्व करने वाला विशिष्ट जैमिनी-आधारित घर है। यह मिलन की "बाहरी" स्थिरता में गहरी अंतर्दृष्टि प्रदान करता है, यह ट्रैक करता है कि विवाह की सामाजिक संरचना जीवन के अपरिहार्य तनावों के खिलाफ मजबूती से टिकी है या नहीं। एक अच्छी तरह से स्थित स्वामी के साथ एक शुभ UL एक कार्मिक ढाल के रूप में कार्य करता है, यह सुनिश्चित करता है कि यदि आंतरिक असहमति है, तो भी विवाह की सामाजिक और घरेलू संस्था बरकरार रहती है। सकारात्मक संकेतों में UL स्वामी का गुरु से पहलू प्राप्त करना शामिल है, जो बताता है कि मिलन पारंपरिक ज्ञान के अनुग्रह के साथ धन्य है, सम्मान और दीर्घायु को बढ़ावा देता है। चुनौतीपूर्ण संकेत तब उत्पन्न होते हैं जब UL स्वामी कमजोर, पीड़ित, या दुस्थान घर में अलग-थलग होता है, जो एक ऐसे रिश्ते की ओर इशारा कर सकता है जिसमें आंतरिक सामंजस्य की कमी होती है, जो ऐसी स्थितियों की ओर ले जाती है जहां विवाह एक औपचारिक सामाजिक अनुबंध के रूप में मौजूद होता है लेकिन लंबे समय तक जीवित रहने के लिए आवश्यक साझा गर्माहट और लचीलेपन की कमी होती है। ज्योतिषी न केवल राशि चार्ट में बल्कि नवांश में भी UL स्वामी की जांच करते हैं ताकि यह सुनिश्चित हो सके कि घरेलू स्थिरता का वादा गहरे, आंतरिक सामंजस्य की कमी से नकार न दिया जाए। एक मजबूत UL यह आश्वासन प्रदान करता है कि परिवार-व्यवस्थित मिलन संरचनात्मक रूप से टिकने के लिए नियत है, जो जातक के घरेलू विकास के लिए एक विश्वसनीय कंटेनर के रूप में कार्य करता है।'
-          }
-        ]
+            body:     'The Upapada Lagna (UL) is a Jaimini point used to judge the marriage itself and how well it is sustained. Its connection with the 2nd house or Jupiter is sometimes read as support for a family-sanctioned union, but its main role concerns the stability of married life rather than how the marriage is arranged.',
+            body_hi:  'उपपद लग्न (UL) जैमिनी पद्धति का एक बिंदु है, जिससे विवाह और उसकी स्थिरता का विचार किया जाता है। द्वितीय भाव या गुरु से इसका संबंध कभी-कभी परिवार द्वारा स्वीकृत विवाह का समर्थन माना जाता है, पर इसकी मुख्य भूमिका विवाह कैसे तय होता है, इससे अधिक वैवाहिक जीवन की स्थिरता से जुड़ी है।',
+          },
+        ],
       },
+
       {
-        id: 'dasha-analysis',
-        title: 'Dasha Analysis',
-        title_hi: 'दशा विश्लेषण',
-        layout: 'list',
+        id:       'love-or-arranged',
+        title:    'Love or Arranged? How Astrologers Weigh It',
+        title_hi: 'लव या अरेंज? ज्योतिषी इसे कैसे तौलते हैं',
+        layout:   'list',
         items: [
           {
-            id: 'timing',
-            label: 'Timing Principles',
-            label_hi: 'समय के सिद्धांत',
-            body: 'The Vimshottari Dasha system acts as the karmic clock of the horoscope, determining exactly when the latent marriage potential defined by your birth chart manifests into external reality. While the natal chart represents the foundational promise of partnership—governed by the 7th house and its lord—the Dasha system dictates the activation of that potential. An arranged marriage, specifically, requires the activation of the 7th house for partnership, the 2nd house for family approval, and the 9th house for alignment with ancestral tradition. When the Mahadasha lord is connected to the 7th or 9th house, it creates the foundational environment necessary for a traditional union to occur. The Mahadasha sets the major theme, but it is the Antardasha lord that acts as the specific trigger, narrowing the timeframe for the event to happen. A strong marriage promise remains dormant if the activating Dasha is weak or afflicted by malefic influence. Venus, as the natural significator of marriage, and Jupiter, as the significator of dharma and traditional growth, must be positively influenced during these periods to ensure success. Many individuals with strong marriage charts marry late because the activating Dashas of the 7th or 9th house lords often do not occur until later in life, proving that the timing of the event is entirely subservient to the unfolding of the Dasha sequence. In practical Vedic interpretation, an experienced astrologer looks not just for the activation of marriage houses, but for the concurrent activation of the Dasha lord’s relationship to the 2nd lord, ensuring that the union is supported by family consensus, which is paramount in arranged processes. If the activating Dasha lord is also associated with the 5th house, it guarantees that the arrangement is flavored by genuine, heartfelt affection, effectively balancing the structural demands of the 9th house with the individual\'s desire for happiness. Furthermore, the Dasha sequence also provides context on the nature of the partnership. A Dasha lord that is well-placed and dignified suggests an arrangement that brings ease, harmony, and mutual respect, whereas an afflicted lord might signal an arrangement that requires significant effort and compromise to sustain. The 2nd house activation is particularly vital because, in an arranged union, marriage is not merely the union of two individuals, but the integration of two family lineages. A Dasha period that links the 7th lord with the 2nd house indicates that this integration will be supported by the family, facilitating the smooth transition of the native into the new domestic sphere. Additionally, the 9th house activation ensures the moral and traditional legitimacy of the union, aligning the marriage with the broader karmic trajectories of both families involved. Therefore, the Dasha analysis is an exercise in understanding the timing, context, and quality of the marriage event. It tells the astrologer whether the union is meant to be a source of stability, a vehicle for dharmic growth, or a karmic challenge requiring patience. By meticulously analyzing the inter-relationship between the Mahadasha and Antardasha lords, one can predict not only when the marriage will likely occur but also the primary influences that will shape the initial phases of the union, ensuring a comprehensive understanding of the karmic unfolding.',
-            body_hi: 'विमशोत्तरी दशा प्रणाली कुंडली की कार्मिक घड़ी के रूप में कार्य करती है, जो यह निर्धारित करती है कि जन्म कुंडली द्वारा परिभाषित अव्यक्त विवाह क्षमता वास्तव में कब बाहरी वास्तविकता में प्रकट होती है। जबकि जन्म कुंडली साझेदारी का मूलभूत वादा करती है—जो सातवें घर और उसके स्वामी द्वारा शासित होता है—दशा प्रणाली उस क्षमता को सक्रिय करने का निर्देश देती है। विशेष रूप से एक व्यवस्थित विवाह के लिए, साझेदारी के लिए सातवें घर, पारिवारिक स्वीकृति के लिए दूसरे घर, और पैतृक परंपरा के साथ संरेखण के लिए नौवें घर के सक्रिय होने की आवश्यकता होती है। जब महादशा स्वामी सातवें या नौवें घर से जुड़ा होता है, तो यह पारंपरिक मिलन के लिए आवश्यक मूलभूत वातावरण बनाता है। महादशा प्रमुख विषय निर्धारित करती है, लेकिन अंतर्दशा स्वामी विशिष्ट ट्रिगर के रूप में कार्य करता है, जो घटना के होने के लिए समय सीमा को सीमित करता है। यदि सक्रिय दशा कमजोर है या पाप ग्रहों के प्रभाव से पीड़ित है, तो एक मजबूत वैवाहिक वादा सुप्त रहता है। विवाह के प्राकृतिक कारक के रूप में शुक्र, और धर्म और पारंपरिक विकास के कारक के रूप में गुरु, सफलता सुनिश्चित करने के लिए इन अवधियों के दौरान सकारात्मक रूप से प्रभावित होने चाहिए। मजबूत विवाह चार्ट वाले कई व्यक्ति देर से विवाह करते हैं क्योंकि सातवें या नौवें घर के स्वामी की सक्रिय दशाएं अक्सर जीवन में बाद में आती हैं, जो यह साबित करता है कि घटना का समय पूरी तरह से दशा अनुक्रम के सामने आने के अधीन है। व्यावहारिक वैदिक व्याख्या में, एक अनुभवी ज्योतिषी न केवल विवाह के घरों के सक्रिय होने की तलाश करता है, बल्कि दूसरे स्वामी के साथ दशा स्वामी के संबंध की समवर्ती सक्रियता की भी तलाश करता है, यह सुनिश्चित करते हुए कि मिलन पारिवारिक सहमति द्वारा समर्थित है, जो व्यवस्थित प्रक्रियाओं में सर्वोपरि है। यदि सक्रिय दशा स्वामी पांचवें घर से भी जुड़ा है, तो यह गारंटी देता है कि व्यवस्था वास्तविक, हार्दिक स्नेह से भरी है, जो नौवें घर की संरचनात्मक मांगों को व्यक्ति की खुशी की इच्छा के साथ प्रभावी ढंग से संतुलित करती है। इसके अलावा, दशा अनुक्रम साझेदारी की प्रकृति पर भी संदर्भ प्रदान करता है। एक दशा स्वामी जो अच्छी तरह से स्थित और प्रतिष्ठित है, वह ऐसी व्यवस्था का सुझाव देता है जो आसानी, सद्भाव और पारस्परिक सम्मान लाती है, जबकि एक कष्टप्रद स्वामी ऐसी व्यवस्था का संकेत दे सकता है जिसे बनाए रखने के लिए महत्वपूर्ण प्रयास और समझौते की आवश्यकता होती है। दूसरे घर की सक्रियता विशेष रूप से महत्वपूर्ण है क्योंकि, व्यवस्थित मिलन में, विवाह केवल दो व्यक्तियों का मिलन नहीं है, बल्कि दो पारिवारिक वंशों का एकीकरण है। एक दशा अवधि जो सातवें स्वामी को दूसरे घर से जोड़ती है, यह दर्शाती है कि यह एकीकरण परिवार द्वारा समर्थित होगा, जो नए घरेलू क्षेत्र में जातक के सहज संक्रमण की सुविधा प्रदान करेगा। इसके अतिरिक्त, नौवें घर की सक्रियता मिलन की नैतिक और पारंपरिक वैधता सुनिश्चित करती है, जो विवाह को दोनों परिवारों के व्यापक कार्मिक प्रक्षेपवक्रों के साथ संरेखित करती है। इसलिए, दशा विश्लेषण विवाह घटना के समय, संदर्भ और गुणवत्ता को समझने का एक अभ्यास है। यह ज्योतिषी को बताता है कि क्या मिलन स्थिरता का स्रोत, धार्मिक विकास के लिए एक वाहन, या धैर्य की मांग करने वाली कार्मिक चुनौती है। महादशा और अंतर्दशा स्वामियों के बीच अंतर्संबंधों का सावधानीपूर्वक विश्लेषण करके, कोई न केवल यह अनुमान लगा सकता है कि विवाह कब होने की संभावना है, बल्कि उन प्राथमिक प्रभावों को भी समझ सकता है जो मिलन के शुरुआती चरणों को आकार देंगे, जिससे कार्मिक खुलासे की व्यापक समझ सुनिश्चित होगी।'
-          }
-        ]
+            id:       'reading-both-sides',
+            label:    'Reading Both Sides of the Chart',
+            label_hi: 'कुंडली के दोनों पक्षों को पढ़ना',
+            body:     'When people ask “will my marriage be love or arranged?”, astrologers compare two sets of indications. A strong 5th–7th emphasis — romance connected with marriage — may support a self-chosen, romantic path. A stronger 2nd, 9th or 11th emphasis on the 7th house — family, tradition and community — may support a family-assisted path. Many charts contain both, and in real life the result is often a blend: a couple who meet on their own and then seek family approval, or a family introduction that turns into genuine romance. That is why the whole chart is read together, along with personal choice and circumstances. The love-marriage side of this comparison is explained in the Love Marriage guide linked below.',
+            body_hi:  'जब लोग पूछते हैं "मेरा विवाह लव होगा या अरेंज?", तो ज्योतिषी संकेतों के दो समूहों की तुलना करते हैं। पंचम–सप्तम पर अधिक बल — प्रेम का विवाह से जुड़ना — स्वयं चुने गए, प्रेम-आधारित मार्ग का समर्थन कर सकता है। सप्तम भाव पर द्वितीय, नवम या एकादश भाव का अधिक बल — परिवार, परंपरा और समाज — परिवार की सहायता वाले मार्ग का समर्थन कर सकता है। कई कुंडलियों में दोनों प्रकार के संकेत होते हैं, और वास्तविक जीवन में परिणाम अक्सर मिला-जुला होता है: युगल स्वयं मिलते हैं और फिर परिवार की स्वीकृति लेते हैं, या परिवार द्वारा कराया गया परिचय सच्चे प्रेम में बदल जाता है। इसीलिए पूरी कुंडली को व्यक्तिगत पसंद और परिस्थितियों के साथ मिलाकर पढ़ा जाता है। इस तुलना का प्रेम विवाह वाला पक्ष नीचे दी गई प्रेम विवाह मार्गदर्शिका में समझाया गया है।',
+          },
+        ],
       },
+
       {
-        id: 'transit-analysis',
-        title: 'Transit Analysis',
-        title_hi: 'गोचर विश्लेषण',
-        layout: 'list',
+        id:       'family-introductions-matching',
+        title:    'Family, Introductions and Kundli Matching',
+        title_hi: 'परिवार, रिश्ते और कुंडली मिलान',
+        layout:   'list',
         items: [
           {
-            id: 'jupiter-transit',
-            label: 'Jupiter’s Transit',
-            label_hi: 'गुरु का गोचर',
-            body: 'Jupiter’s transit acts as the primary cosmic validator for the manifestation of an arranged marriage. Jupiter is the planet of dharma (duty) and traditional wisdom; its transit over the 7th house—the house of partnership—or the 7th house lord provides the necessary dharmic stamp of approval. In an arranged setup, this movement acts as the definitive signal that the karmic energy is ready to consolidate into an event. Jupiter’s influence ensures that the union is aligned with traditional values, which is paramount in an arranged process. It is important to realize that Jupiter’s transit cannot create a promise that is absent in the natal chart; it is a validator, not a creator. When Jupiter transits, it expands the native\'s vision, allowing them to see the marriage not just as a social contract but as a spiritual opportunity. This transit frequently interacts with Venus, the natural karaka of marriage, and the Dasha sequence. When Jupiter’s transit coincides with a supportive Dasha period, the opportunity for the marriage is at its peak. Experienced astrologers use this as a practical timing tool: if the natal promise is present and a valid Dasha is running, the specific window is narrowed down to when Jupiter makes contact with the marriage houses or the Dasha lord. Rahu or Ketu influences during this transit can signify unconventional additions to the process, such as intense family scrutiny or a shift toward a more modern approach, yet the core validation remains anchored by Jupiter. Without this transit, even strong promises often remain potential rather than manifest, as Jupiter is the cosmic regulator of dharmic events.',
-            body_hi: 'गुरु का गोचर व्यवस्थित विवाह के प्रकट होने के लिए प्राथमिक लौकिक मान्यता के रूप में कार्य करता है। गुरु धर्म (कर्तव्य) और पारंपरिक ज्ञान का ग्रह है; सातवें घर—साझेदारी के घर—या सातवें घर के स्वामी पर इसका गोचर मिलन के लिए आवश्यक धर्म की मुहर प्रदान करता है। व्यवस्थित सेटअप में, यह गतिविधि निश्चित संकेत के रूप में कार्य करती है कि कार्मिक ऊर्जा एक घटना में समेकित होने के लिए तैयार है। गुरु का प्रभाव यह सुनिश्चित करता है कि मिलन पारंपरिक मूल्यों के साथ संरेखित है, जो व्यवस्थित प्रक्रिया में सर्वोपरि है। यह महसूस करना महत्वपूर्ण है कि गुरु का गोचर ऐसा वादा नहीं बना सकता जो जन्म कुंडली में अनुपस्थित हो; यह एक मान्यताकर्ता है, निर्माता नहीं। जब गुरु गोचर करता है, तो यह जातक की दृष्टि का विस्तार करता है, जिससे उन्हें विवाह को केवल एक सामाजिक अनुबंध के रूप में नहीं, बल्कि एक आध्यात्मिक अवसर के रूप में देखने की अनुमति मिलती है। यह गोचर अक्सर विवाह के प्राकृतिक कारक शुक्र और दशा अनुक्रम के साथ बातचीत करता है। जब गुरु का गोचर एक सहायक दशा अवधि के साथ मेल खाता है, तो विवाह का अवसर अपने चरम पर होता है। अनुभवी ज्योतिषी इसे व्यावहारिक समय उपकरण के रूप में उपयोग करते हैं: यदि जन्म का वादा मौजूद है और एक वैध दशा चल रही है, तो विशिष्ट खिड़की तब सीमित हो जाती है जब गुरु विवाह के घरों या दशा स्वामी के संपर्क में आता है। इस गोचर के दौरान राहु या केतु के प्रभाव प्रक्रिया में अपरंपरागत परिवर्धन का संकेत दे सकते हैं, जैसे कि गहन पारिवारिक जांच या अधिक आधुनिक दृष्टिकोण की ओर बदलाव, फिर भी मुख्य मान्यता गुरु द्वारा लंगर डाले रहती है। इस गोचर के बिना, मजबूत वादे भी अक्सर प्रकट होने के बजाय संभावित बने रहते हैं, क्योंकि गुरु धर्मिक घटनाओं का लौकिक नियामक है।'
+            id:       'how-introductions-arrive',
+            label:    'How Introductions Usually Arrive',
+            label_hi: 'रिश्ते आमतौर पर कैसे आते हैं',
+            body:     'In a family-assisted marriage, proposals usually come through relatives, family friends, community networks or matrimonial platforms, and the families meet before the couple decides. Astrologically, these channels are described by the 2nd house (family), the 9th house (elders) and the 11th house (social network). The couple’s own consent remains central — an arranged process is an introduction and a shared decision, not a decision taken without the people who will marry.',
+            body_hi:  'परिवार की सहायता से होने वाले विवाह में रिश्ते आमतौर पर रिश्तेदारों, पारिवारिक मित्रों, सामाजिक दायरे या वैवाहिक मंचों के माध्यम से आते हैं, और युगल के निर्णय से पहले परिवार मिलते हैं। ज्योतिष में इन माध्यमों को द्वितीय भाव (परिवार), नवम भाव (बड़े-बुज़ुर्ग) और एकादश भाव (सामाजिक दायरा) से देखा जाता है। युगल की अपनी सहमति केंद्र में रहती है — अरेंज प्रक्रिया एक परिचय और साझा निर्णय है, विवाह करने वाले व्यक्तियों के बिना लिया गया निर्णय नहीं।',
           },
           {
-            id: 'saturn-transit',
-            label: 'Saturn’s Transit',
-            label_hi: 'शनि का गोचर',
-            body: 'Saturn’s transit provides the necessary stability, discipline, and endurance required for an arranged union to evolve into a lifelong commitment. When Saturn transits over the 2nd house of family or the 9th house of tradition, it acts as a karmic accelerator, forcing the native to confront their responsibilities toward their lineage and settling into a stable partnership. Saturn is the planet of structure, and its influence ensures that the arranged marriage is grounded in tangible reality rather than fleeting, romantic fantasies. This transit is essentially the time when "duty becomes bond." In practical timing analysis, Saturn’s movement is interpreted as the stabilizer that solidifies the decision-making process. While Jupiter provides the validation and the opportunity, Saturn ensures that the commitment holds over the long term. If Saturn transit occurs alongside a supportive Jupiter transit, the period is considered exceptionally auspicious, as it balances opportunity with stability. Astrologers note that Saturn’s transit often brings family acceptance into clear focus, as the native is compelled to take the marriage seriously. It turns the initial "contractual" nature of an arranged union into a permanent, resilient bond of duty. If Rahu influences this transit, the native might experience an intense pressure to perform according to societal expectations, potentially creating temporary anxiety. However, the ultimate purpose of Saturn’s transit is the creation of a durable domestic foundation. Without Saturn’s influence, a marriage might manifest but may lack the grit needed to survive the inevitable challenges of long-term partnership, essentially serving as the bedrock upon which the dharmic path of the couple is built.',
-            body_hi: 'शनि का गोचर एक व्यवस्थित मिलन के आजीवन प्रतिबद्धता में विकसित होने के लिए आवश्यक स्थिरता, अनुशासन और सहनशक्ति प्रदान करता है। जब शनि परिवार के दूसरे घर या परंपरा के नौवें घर पर गोचर करता है, तो यह कार्मिक त्वरक के रूप में कार्य करता है, जो जातक को अपने वंश के प्रति अपनी जिम्मेदारियों का सामना करने और एक स्थिर साझेदारी में बसने के लिए मजबूर करता है। शनि संरचना का ग्रह है, और इसका प्रभाव यह सुनिश्चित करता है कि व्यवस्थित विवाह क्षणभंगुर, रोमांटिक कल्पनाओं के बजाय ठोस वास्तविकता में निहित है। यह गोचर अनिवार्य रूप से वह समय है जब "कर्तव्य बंधन बन जाता है"। व्यावहारिक समय विश्लेषण में, शनि की गतिविधि को उस स्टेबलाइजर के रूप में व्याख्या किया जाता है जो निर्णय लेने की प्रक्रिया को मजबूत करता है। जबकि गुरु मान्यता और अवसर प्रदान करता है, शनि सुनिश्चित करता है कि प्रतिबद्धता लंबे समय तक बनी रहे। यदि शनि गोचर एक सहायक गुरु गोचर के साथ होता है, तो अवधि को असाधारण रूप से शुभ माना जाता है, क्योंकि यह अवसर को स्थिरता के साथ संतुलित करता है। ज्योतिषी नोट करते हैं कि शनि का गोचर अक्सर पारिवारिक स्वीकृति को स्पष्ट फोकस में लाता है, क्योंकि जातक विवाह को गंभीरता से लेने के लिए मजबूर होता है। यह एक व्यवस्थित मिलन की प्रारंभिक "संविदात्मक" प्रकृति को कर्तव्य और सेवा के एक स्थायी, लचीले बंधन में बदल देता है। यदि राहु इस गोचर को प्रभावित करता है, तो जातक सामाजिक अपेक्षाओं के अनुसार प्रदर्शन करने का तीव्र दबाव अनुभव कर सकता है, जो संभावित रूप से अस्थायी चिंता पैदा करता है। हालांकि, शनि के गोचर का अंतिम उद्देश्य एक टिकाऊ घरेलू नींव का निर्माण है। शनि के प्रभाव के बिना, विवाह प्रकट तो हो सकता है लेकिन इसमें दीर्घकालिक साझेदारी की अपरिहार्य चुनौतियों से बचने के लिए आवश्यक दृढ़ता की कमी हो सकती है, अनिवार्य रूप से उस आधार के रूप में कार्य करता है जिस पर युगल का धार्मिक मार्ग निर्मित होता है।'
+            id:       'specific-proposal-matching',
+            label:    'When a Specific Proposal Arrives',
+            label_hi: 'जब कोई विशेष रिश्ता सामने हो',
+            body:     'Reading one person’s chart for an arranged-marriage tendency is a different task from comparing two charts. Once a specific proposal or partner is being considered, families traditionally use kundli matching — Guna Milan, a Manglik assessment and a wider comparison of both charts. That process is explained in the Compatibility guide linked below.',
+            body_hi:  'किसी एक व्यक्ति की कुंडली में अरेंज मैरिज की प्रवृत्ति देखना, दो कुंडलियों की तुलना से अलग काम है। जब कोई विशेष रिश्ता या साथी विचार में हो, तो परिवार परंपरागत रूप से कुंडली मिलान करते हैं — गुण मिलान, मांगलिक विचार और दोनों कुंडलियों की व्यापक तुलना। यह प्रक्रिया नीचे दी गई अनुकूलता मार्गदर्शिका में समझाई गई है।',
+          },
+        ],
+      },
+
+      {
+        id:       'dasha-activation',
+        title:    'Dasha: Are Arranged-Marriage Indications Active?',
+        title_hi: 'दशा: क्या अरेंज मैरिज के योग सक्रिय हैं?',
+        layout:   'checklist',
+        items: [
+          {
+            id:       'dasha-activates-promise',
+            label:    'A Dasha activates what the birth chart already shows',
+            label_hi: 'दशा वही सक्रिय करती है जो जन्मकुंडली में पहले से है',
+            body:     'A Mahadasha or Antardasha cannot create an arranged-marriage tendency that the birth chart does not show; it brings existing combinations into focus. When the running period belongs to the 7th lord, Venus, Jupiter, or the lords of the 2nd, 9th or 11th houses, marriage and family involvement tend to become more prominent themes — for example, family members actively looking for proposals.',
+            body_hi:  'महादशा या अंतर्दशा ऐसी अरेंज मैरिज प्रवृत्ति नहीं बना सकती जो जन्मकुंडली में न हो; यह पहले से मौजूद संयोजनों को सक्रिय करती है। जब चल रही अवधि सप्तमेश, शुक्र, गुरु या द्वितीय, नवम अथवा एकादश भाव के स्वामी की हो, तो विवाह और उसमें परिवार की भागीदारी जीवन के अधिक प्रमुख विषय बन सकते हैं — जैसे परिवार का सक्रिय रूप से रिश्ते देखना।',
           },
           {
-            id: 'moon-transit',
-            label: 'Moon’s Transit',
-            label_hi: 'चंद्रमा का गोचर',
-            body: 'The Moon serves as the rapid event trigger, pinpointing the specific timing of the finalized arrangements within the broader karmic context set by the slower-moving planets. In Vedic astrology, Muhurta (timing selection) relies heavily on the Moon’s transit, as it moves through signs and Nakshatras quickly enough to define the exact days for initial meetings, engagements, or the final wedding ceremony. While Jupiter and Saturn create the broader environment of opportunity and commitment, the Moon validates the specific, auspicious moment that the families have chosen to act upon. This is a crucial application of the "multiple transit confirmation" technique—the astrologer does not look at the Moon in isolation; they corroborate its position against the major transits of Jupiter and Saturn. If Jupiter is validating the union and Saturn is stabilizing it, the Moon transiting the marriage houses or the Dasha lord’s position acts as the final push that sets the event in motion. This confluence of slow-moving karmic regulators and fast-moving emotional triggers defines the auspiciousness of the arranged process. The Moon’s interaction with Rahu or Ketu during these triggers can sometimes suggest unexpected developments or sudden adjustments in the final plans, yet the underlying support of Jupiter and Saturn remains the core driver. Ultimately, the Moon’s transit acts as the final, necessary signal that the karmic promise is ready to be realized in tangible reality, bringing the family-led process to its completion.',
-            body_hi: 'चंद्रमा तीव्र घटना ट्रिगर के रूप में कार्य करता है, जो धीमी गति से चलने वाले ग्रहों द्वारा निर्धारित व्यापक कार्मिक संदर्भ के भीतर अंतिम व्यवस्थाओं के विशिष्ट समय को इंगित करता है। वैदिक ज्योतिष में, मुहूर्त (समय चयन) चंद्रमा के गोचर पर बहुत अधिक निर्भर करता है, क्योंकि यह प्रारंभिक बैठकों, सगाई, या अंतिम विवाह समारोह के लिए सटीक दिनों को परिभाषित करने के लिए पर्याप्त तेजी से संकेतों और नक्षत्रों के माध्यम से चलता है। जबकि गुरु और शनि अवसर और प्रतिबद्धता का व्यापक वातावरण बनाते हैं, चंद्रमा उस विशिष्ट, शुभ क्षण को मान्य करता है जिसे परिवारों ने कार्य करने के लिए चुना है। यह "बहु गोचर पुष्टि" तकनीक का एक महत्वपूर्ण अनुप्रयोग है—ज्योतिषी चंद्रमा को अलग से नहीं देखते हैं; वे गुरु और शनि के प्रमुख गोचरों के खिलाफ इसकी स्थिति की पुष्टि करते हैं। यदि गुरु मिलन को मान्य कर रहा है और शनि इसे स्थिर कर रहा है, तो विवाह घरों या दशा स्वामी की स्थिति में गोचर करने वाला चंद्रमा अंतिम धक्का के रूप में कार्य करता है जो घटना को गति प्रदान करता है। धीमी गति से चलने वाले कार्मिक नियामकों और तेजी से चलने वाले भावनात्मक ट्रिगर का यह संगम व्यवस्थित प्रक्रिया की शुभता को परिभाषित करता है। इन ट्रिगर्स के दौरान राहु या केतु के साथ चंद्रमा की बातचीत कभी-कभी अंतिम योजनाओं में अप्रत्याशित विकास या अचानक समायोजन का सुझाव दे सकती है, फिर भी गुरु और शनि का अंतर्निहित समर्थन मुख्य चालक बना रहता है। अंततः, चंद्रमा का गोचर अंतिम, आवश्यक संकेत के रूप में कार्य करता है कि कार्मिक वादा ठोस वास्तविकता में महसूस होने के लिए तैयार है, जो परिवार के नेतृत्व वाली प्रक्रिया को पूरा करता है।'
-          }
-        ]
+            id:       'dasha-not-a-date',
+            label:    'Activation is not a marriage date',
+            label_hi: 'सक्रियता का अर्थ विवाह की तारीख नहीं',
+            body:     'An active period suggests that marriage-related indications are relevant now. It does not decide whether the marriage will be arranged, and it does not fix when it will happen. Estimating timing combines Dasha with the Navamsa and the transits of Jupiter and Saturn — that method is explained in the Marriage Timing guide linked below.',
+            body_hi:  'सक्रिय अवधि यह संकेत देती है कि विवाह से जुड़े योग अभी प्रासंगिक हैं। यह न तो तय करती है कि विवाह अरेंज होगा, न ही यह कि विवाह कब होगा। समय का अनुमान दशा, नवांश और गुरु-शनि के गोचर को मिलाकर लगाया जाता है — यह विधि नीचे दी गई विवाह के समय की मार्गदर्शिका में समझाई गई है।',
+          },
+        ],
       },
+
       {
-        id: 'astrological-combinations',
-        title: 'Strong and Weak Astrological Combinations',
-        title_hi: 'मजबूत और कमजोर ज्योतिषीय संयोजन',
-        layout: 'list',
+        id:       'common-misconceptions',
+        title:    'Common Misconceptions',
+        title_hi: 'सामान्य भ्रांतियाँ',
+        layout:   'checklist',
         items: [
-          { id: 'strong-combos', label: 'Strong Combinations', label_hi: 'मजबूत संयोजन', body: 'The combination of a well-placed 7th house lord, supported by Jupiter, while the 2nd and 9th houses are also strong, provides the native with both the stability of an arranged union and the harmony required for long-term happiness.', body_hi: 'गुरु द्वारा समर्थित सातवां स्वामी, मजबूत दूसरे और नौवें घर के साथ, दीर्घकालिक खुशी के साथ स्थिर व्यवस्थित मिलन की ओर ले जाता है।' },
-          { id: 'weak-combos', label: 'Weak Combinations', label_hi: 'कमजोर संयोजन', body: 'If the 7th lord is afflicted by malefic planets, or if the 2nd and 9th houses are weak, the arranged union may manifest, but the native may face persistent instability or lack of support from their new family environment.', body_hi: 'यदि सातवां स्वामी कष्टप्रद ग्रहों से पीड़ित है, या यदि दूसरा और नौवां घर कमजोर है, तो व्यवस्थित मिलन हो सकता है, लेकिन जातक को नए पारिवारिक वातावरण में लगातार अस्थिरता या समर्थन की कमी का सामना करना पड़ सकता है।' },
-          { id: 'mixed-combos', label: 'Mixed Combinations', label_hi: 'म्रिशित संयोजन', body: 'When the 7th house is supported, but the 8th or 12th house is also prominently involved, the union may occur, but it will be marked by intense, unpredictable changes, requiring great patience and adaptability from both partners.', body_hi: 'जब सातवां घर समर्थित होता है, लेकिन 8वां या 12वां घर भी प्रमुखता से शामिल होता है, तो मिलन हो सकता है, लेकिन यह तीव्र, अप्रत्याशित परिवर्तनों द्वारा चिह्नित होगा, जिसके लिए दोनों भागीदारों से महान धैर्य और अनुकूलन क्षमता की आवश्यकता होती है।' }
-        ]
+          {
+            id:       'no-choice',
+            label:    'Myth: An arranged marriage means no choice',
+            label_hi: 'भ्रम: अरेंज मैरिज में अपनी कोई पसंद नहीं होती',
+            body:     'Even when the chart favors a family-assisted path, the person keeps the choice to accept or decline a proposal. An arranged process is meant to be a collaboration between the individual and the family.',
+            body_hi:  'जब कुंडली परिवार की सहायता वाले मार्ग का समर्थन करती है, तब भी व्यक्ति के पास किसी रिश्ते को स्वीकार या अस्वीकार करने का विकल्प रहता है। अरेंज प्रक्रिया व्यक्ति और परिवार के बीच सहयोग के रूप में होती है।',
+          },
+          {
+            id:       'joyless',
+            label:    'Myth: Arranged marriages are joyless',
+            label_hi: 'भ्रम: अरेंज मैरिज में सुख नहीं होता',
+            body:     'The chart describes how a marriage is likely to begin, not how happy it will be. The quality of married life is read from other factors, covered in the Married Life guide.',
+            body_hi:  'कुंडली बताती है कि विवाह की शुरुआत कैसे होने की संभावना है, यह नहीं कि वह कितना सुखी होगा। वैवाहिक जीवन की गुणवत्ता अन्य कारकों से देखी जाती है, जिन पर वैवाहिक जीवन मार्गदर्शिका में बताया गया है।',
+          },
+          {
+            id:       'one-planet-decides',
+            label:    'Myth: One planet decides love or arranged',
+            label_hi: 'भ्रम: एक ग्रह तय करता है कि विवाह लव होगा या अरेंज',
+            body:     'Jupiter, Venus or Saturn alone cannot settle the question. The answer depends on how the 7th lord, the family houses and the 5th house combine across the whole chart.',
+            body_hi:  'अकेले गुरु, शुक्र या शनि इस प्रश्न का उत्तर नहीं दे सकते। उत्तर इस पर निर्भर करता है कि पूरी कुंडली में सप्तमेश, परिवार से जुड़े भाव और पंचम भाव कैसे मिलकर काम करते हैं।',
+          },
+          {
+            id:       'love-against-chart',
+            label:    'Myth: Choosing a love marriage goes “against” the chart',
+            label_hi: 'भ्रम: लव मैरिज चुनना कुंडली के "विरुद्ध" है',
+            body:     'Astrology describes tendencies and relative ease, not moral correctness. Neither path is better; either can be fulfilling when both partners put in the effort.',
+            body_hi:  'ज्योतिष प्रवृत्तियों और सहजता का वर्णन करता है, नैतिक सही-ग़लत का नहीं। कोई भी मार्ग दूसरे से बेहतर नहीं है; दोनों में से कोई भी तब सुखद हो सकता है जब दोनों साथी प्रयास करें।',
+          },
+        ],
       },
+
       {
-        id: 'family-role',
-        title: 'Family Role and Social Harmony',
-        title_hi: 'पारिवारिक भूमिका और सामाजिक सद्भाव',
-        layout: 'list',
+        id:       'practical-remedies',
+        title:    'Balanced, Optional Remedies',
+        title_hi: 'संतुलित और वैकल्पिक उपाय',
+        layout:   'checklist',
         items: [
-          { id: 'family-integration', label: 'Family Collaboration', label_hi: 'पारिवारिक सहयोग', body: 'The harmony of the union is not just between the two individuals, but between their two lineages. The strength of the 2nd house and its relationship to the 4th house (the home) in both charts is essential for determining how well the families will collaborate and support the new couple.', body_hi: 'मिलन का सद्भाव न केवल दो व्यक्तियों के बीच है, बल्कि उनके दो वंशों के बीच भी है। दोनों चार्ट में दूसरे घर की ताकत और चौथे घर (घर) के साथ इसका संबंध यह निर्धारित करने के लिए आवश्यक है कि परिवार कितनी अच्छी तरह सहयोग करेंगे और नए जोड़े का समर्थन करेंगे।' }
-        ]
+          {
+            id:       'seva',
+            label:    'Selfless Service (Seva)',
+            label_hi: 'निस्वार्थ सेवा',
+            body:     'Serving family and community is traditionally linked with the 2nd and 4th houses and supports patience and goodwill during a family-led search.',
+            body_hi:  'परिवार और समाज की सेवा को परंपरागत रूप से द्वितीय और चतुर्थ भाव से जोड़ा जाता है; यह परिवार द्वारा चल रही खोज के दौरान धैर्य और सद्भाव बनाए रखने में सहायक है।',
+          },
+          {
+            id:       'mantras',
+            label:    'Mantra Japa',
+            label_hi: 'मंत्र जप',
+            body:     'Chanting mantras for Jupiter or Venus is a traditional practice for cultivating wisdom and warmth. Treat it as optional support for your own state of mind, not a way to compel a proposal or an outcome.',
+            body_hi:  'गुरु या शुक्र के मंत्रों का जप ज्ञान और आत्मीयता बढ़ाने का पारंपरिक अभ्यास है। इसे अपनी मानसिक स्थिति के लिए वैकल्पिक सहायता मानें, किसी रिश्ते या परिणाम को बाध्य करने का साधन नहीं।',
+          },
+          {
+            id:       'open-conversation',
+            label:    'Open Conversation',
+            label_hi: 'खुली बातचीत',
+            body:     'Discussing expectations early — with your family and with prospective partners — is one of the most practical steps in any arranged process.',
+            body_hi:  'अपनी अपेक्षाओं पर जल्दी बात करना — अपने परिवार से भी और संभावित साथी से भी — किसी भी अरेंज प्रक्रिया का सबसे व्यावहारिक कदम है।',
+          },
+          {
+            id:       'patience',
+            label:    'Patience',
+            label_hi: 'धैर्य',
+            body:     'Introductions take time. Patience and clarity about your own priorities help more than any single remedy.',
+            body_hi:  'रिश्ते आने में समय लगता है। धैर्य और अपनी प्राथमिकताओं की स्पष्टता किसी एक उपाय से अधिक सहायक होती है।',
+          },
+        ],
       },
+
       {
-        id: 'arranged-vs-love',
-        title: 'Arranged Marriage vs Love Marriage',
-        title_hi: 'व्यवस्थित विवाह बनाम प्रेम विवाह',
-        layout: 'comparison',
-        items: [
-          { id: 'love', label: 'Love Marriage', label_hi: 'प्रेम विवाह', body: 'Defined by the personal choice of the couple (5th house).', body_hi: 'जोड़े के व्यक्तिगत विकल्प (पांचवां घर) द्वारा परिभाषित।' },
-          { id: 'arranged', label: 'Arranged Marriage', label_hi: 'व्यवस्थित विवाह', body: 'Defined by the alignment of the individual with their family and societal path (9th house).', body_hi: 'व्यक्ति के परिवार और सामाजिक मार्ग (नौवां घर) के साथ संरेखण द्वारा परिभाषित।' }
-        ]
-      },
-      {
-        id: 'common-misconceptions',
-        title: 'Common Misconceptions',
-        title_hi: 'सामान्य भ्रांतियां',
-        layout: 'list',
-        items: [
-          { id: 'joyless', label: 'Arranged Marriage is joyless', label_hi: 'व्यवस्थित विवाह आनंदहीन है', body: 'The quality of the marriage depends on the natal promise (7th house) and the effort the partners put into the relationship, not the method of the union.', body_hi: 'विवाह की गुणवत्ता जन्म वादे (सातवां घर) और भागीदारों द्वारा रिश्ते में किए गए प्रयास पर निर्भर करती है, न कि मिलन के तरीके पर।' },
-          { id: 'no-choice', label: 'No say in choice', label_hi: 'विकल्प में कोई कहना नहीं', body: 'Even in arranged structures, the native retains the free will to accept or reject, and the process is meant to be a collaborative engagement.', body_hi: 'व्यवस्थित संरचनाओं में भी, जातक स्वीकार या अस्वीकार करने की स्वतंत्र इच्छा रखता है, और प्रक्रिया एक सहयोगात्मक जुड़ाव के रूप में होती है।' },
-          { id: 'incompatible', label: 'Less compatible', label_hi: 'कम संगत', body: 'Compatibility is a matter of karmic resonance, not the method of introduction.', body_hi: 'संगतता कार्मिक प्रतिध्वनि का मामला है, परिचय का तरीका नहीं।' }
-        ]
-      },
-      {
-        id: 'practical-remedies',
-        title: 'Practical Remedies',
-        title_hi: 'व्यावहारिक उपाय',
-        layout: 'checklist',
-        items: [
-          { id: 'seva', label: 'Selfless Service (Seva)', label_hi: 'निस्वार्थ सेवा (सेवा)', body: 'Serving the family and the community helps balance the energy of the 2nd and 4th houses, fostering better relationships and stability.', body_hi: 'परिवार और समुदाय की सेवा करना दूसरे और चौथे घर की ऊर्जा को संतुलित करने में मदद करता है, बेहतर संबंधों और स्थिरता को बढ़ावा देता है।' },
-          { id: 'mantras', label: 'Mantra Japa', label_hi: 'मंत्र जप', body: 'Chanting Mantras for Jupiter (wisdom) or Venus (devotion) helps the individual internalize the qualities necessary for a stable partnership.', body_hi: 'गुरु (ज्ञान) या शुक्र (भक्ति) के लिए मंत्रों का जाप व्यक्ति को स्थिर साझेदारी के लिए आवश्यक गुणों को आंतरिक बनाने में मदद करता है।' },
-          { id: 'humility', label: 'Cultivating Humility', label_hi: 'विनम्रता विकसित करना', body: 'Practices that diminish the ego allow the individual to more easily adapt to a shared life.', body_hi: 'अहंकार को कम करने वाले अभ्यास व्यक्ति को साझा जीवन के अनुकूल होने में आसानी प्रदान करते हैं।' },
-          { id: 'patience', label: 'Patience', label_hi: 'धैर्य', body: 'Time is the most potent remedy. The challenges of an arranged marriage often diminish as the couple builds their own foundation through shared experiences.', body_hi: 'समय सबसे शक्तिशाली उपाय है। एक व्यवस्थित विवाह की चुनौतियां अक्सर कम हो जाती हैं जैसे-जैसे जोड़ा साझा अनुभवों के माध्यम से अपनी नींव बनाता है।' }
-        ]
-      },
-      {
-        id: 'ethical-interpretation',
-        title: 'Ethical Interpretation',
-        title_hi: 'नैतिक व्याख्या',
-        layout: 'list',
-        items: [
-          { id: 'astrologer-role', label: 'Astrological Role', label_hi: 'ज्योतिषीय भूमिका', body: 'An astrologer must never use their knowledge to validate or condemn a client\'s choice. The ethical role is to map the karmic landscape, explain the potential challenges, and offer perspective that empowers the client. In the case of arranged unions, the ethical astrologer highlights the nature of the karmic lesson and empowers the client to enter the process with clarity, maturity, and genuine intent.', body_hi: 'एक ज्योतिषी को अपने ज्ञान का उपयोग कभी भी ग्राहक के विकल्प को मान्य या निंदा करने के लिए नहीं करना चाहिए। नैतिक भूमिका कार्मिक परिदृश्य को मैप करना, संभावित चुनौतियों की व्याख्या करना और परिप्रेक्ष्य प्रदान करना है जो ग्राहक को सशक्त बनाता है। व्यवस्थित मिलन के मामले में, नैतिक ज्योतिषी कार्मिक पाठ की प्रकृति पर प्रकाश डालता है और ग्राहक को स्पष्टता, परिपक्वता और वास्तविक इरादे के साथ प्रक्रिया में प्रवेश करने के लिए सशक्त बनाता है।' }
-        ]
-      },
-      {
-        id: 'summary',
-        title: 'Summary',
-        title_hi: 'सारांश',
-        layout: 'list',
-        items: [
-          { id: 'summary-body', label: 'Understanding Arranged Unions', label_hi: 'व्यवस्थित मिलनों को समझना', body: 'Arranged marriage in Vedic Astrology is a deep karmic manifestation that integrates individual partnership with ancestral lineage and societal structure. By analyzing the 2nd, 5th, 7th, 9th, and 11th houses, alongside the strength of Jupiter and Venus, an astrologer can discern the potential for stability and harmony in an arranged union. These unions are not merely about following tradition; they are often profound vehicles for the soul\'s evolution, demanding growth, responsibility, and the cultivation of partnership within a broader karmic context.', body_hi: 'वैदिक ज्योतिष में व्यवस्थित विवाह एक गहरी कार्मिक अभिव्यक्ति है जो व्यक्तिगत साझेदारी को पैतृक वंश और सामाजिक संरचना के साथ एकीकृत करती है। दूसरे, 5वें, 7वें, 9वें और 11वें घरों का विश्लेषण करके, साथ ही गुरु और शुक्र की ताकत के साथ, एक ज्योतिषी व्यवस्थित मिलन में स्थिरता और सामंजस्य की क्षमता को समझ सकता है। ये मिलन केवल परंपरा का पालन करने के बारे में नहीं हैं; वे अक्सर आत्मा के विकास के लिए गहरे वाहन हैं, जो एक व्यापक कार्मिक संदर्भ के भीतर विकास, जिम्मेदारी और साझेदारी की खेती की मांग करते हैं।' }
-        ]
-      },
-      {
-        id: 'faq-section',
-        title: 'Frequently Asked Questions',
+        id:       'faq-section',
+        title:    'Frequently Asked Questions',
         title_hi: 'अक्सर पूछे जाने वाले प्रश्न',
-        layout: 'faq',
+        layout:   'faq',
         items: [
           {
-            id: 'faq-1',
-            label: 'How can I tell if my marriage will be arranged by looking at my chart?',
-            body: 'A reliable astrologer looks for the dominance of the 9th house, which governs ancestral tradition and societal dharma, in direct connection with the 7th house of partnership. When the 9th house lord, representing family authority and duty, influences the 7th house or its lord, it creates a karmic blueprint where the partnership is naturally mediated through family channels. This is not just about the 7th house; the strength of the 2nd house (family unit) and its interaction with the 7th house lord also act as clear identifiers. If these houses are prominent and well-supported, it implies that your karmic trajectory is tied to the traditional structures of family-arranged unions, where the wisdom of elders guides the outcome of your marital path, creating a foundation that respects ancestral legacy.',
-            label_hi: 'मैं कैसे बता सकता हूँ कि मेरा विवाह व्यवस्थित होगा?',
-            body_hi: 'एक विश्वसनीय ज्योतिषी नौवें घर के प्रभुत्व की तलाश करता है, जो पैतृक परंपरा और सामाजिक धर्म को नियंत्रित करता है, सीधे साझेदारी के सातवें घर के साथ संबंध में। जब परिवार के अधिकार और कर्तव्य का प्रतिनिधित्व करने वाला नौवां घर सातवें घर या इसके स्वामी को प्रभावित करता है, तो यह एक कार्मिक खाका बनाता है जहां साझेदारी स्वाभाविक रूप से पारिवारिक चैनलों के माध्यम से मध्यस्थता की जाती है। यह केवल सातवें घर के बारे में नहीं है; दूसरे घर (परिवार इकाई) की ताकत और सातवें घर के स्वामी के साथ इसकी बातचीत भी स्पष्ट पहचानकर्ताओं के रूप में कार्य करती है। यदि ये घर प्रमुख और अच्छी तरह से समर्थित हैं, तो इसका मतलब है कि आपका कार्मिक प्रक्षेपवक्र परिवार-व्यवस्थित मिलनों की पारंपरिक संरचनाओं से जुड़ा हुआ है, जहां बुजुर्गों का ज्ञान आपके वैवाहिक पथ के परिणाम का मार्गदर्शन करता है, एक ऐसी नींव बनाता है जो पैतृक विरासत का सम्मान करती है।'
+            id:       'faq-kundli-indicate',
+            label:    'Can a kundli indicate an arranged marriage?',
+            label_hi: 'क्या कुंडली से अरेंज मैरिज का संकेत मिल सकता है?',
+            body:     'A kundli can indicate a tendency toward a family-assisted marriage, not a certainty. Astrologers look for the 7th lord connecting with the 2nd, 9th or 11th house lords, Jupiter’s influence on the 7th, a relatively weak 5th–7th link and supporting confirmation in the Navamsa. When several of these appear together, the chart tends to support an arranged path; personal choice and circumstances still shape the outcome.',
+            body_hi:  'कुंडली परिवार की सहायता वाले विवाह की ओर प्रवृत्ति का संकेत दे सकती है, निश्चितता का नहीं। ज्योतिषी देखते हैं कि सप्तमेश द्वितीय, नवम या एकादश भाव के स्वामियों से जुड़ा है या नहीं, सप्तम भाव पर गुरु का प्रभाव है या नहीं, पंचम–सप्तम संबंध अपेक्षाकृत कमज़ोर है या नहीं, और नवांश से इसकी पुष्टि होती है या नहीं। जब इनमें से कई संकेत एक साथ हों, तो कुंडली अरेंज मार्ग का समर्थन करती है; फिर भी व्यक्तिगत पसंद और परिस्थितियाँ परिणाम को आकार देती हैं।',
           },
           {
-            id: 'faq-2',
-            label: 'Does an arranged marriage mean I will have no say in the choice?',
-            body: 'This is a significant misconception. In Vedic astrology, the natal chart is a map of potential, not a rigid script. The arranged marriage process in traditional Vedic thought is intended as a collaborative engagement between the individual, their family, and their community. While the chart may indicate that family influence is karmically favored or even necessary for the union to manifest, the individual’s free will remains a central component. Your choices during the process, and the proactive way you interact with potential partners, are part of the unfolding karmic drama. You are not a passive observer; your actions within the container provided by family choices shape the final outcome of the marital union.',
-            label_hi: 'क्या व्यवस्थित विवाह का मतलब है कि विकल्प में मेरा कोई कहना नहीं होगा?',
-            body_hi: 'यह एक महत्वपूर्ण गलतफहमी है। वैदिक ज्योतिष में, जन्म चार्ट क्षमता का नक्शा है, कठोर लिपि नहीं। पारंपरिक वैदिक विचार में व्यवस्थित विवाह प्रक्रिया का उद्देश्य व्यक्ति, उनके परिवार और उनके समुदाय के बीच एक सहयोगात्मक जुड़ाव है। जबकि चार्ट यह संकेत दे सकता है कि पारिवारिक प्रभाव कार्मिक रूप से अनुकूल है या मिलन के प्रकट होने के लिए आवश्यक भी है, व्यक्ति की स्वतंत्र इच्छा एक केंद्रीय घटक बनी हुई है। प्रक्रिया के दौरान आपके विकल्प, और संभावित साथियों के साथ जिस तरह से आप सक्रिय रूप से बातचीत करते हैं, वे कार्मिक नाटक का हिस्सा हैं। आप एक निष्क्रिय पर्यवेक्षक नहीं हैं; परिवार के विकल्पों द्वारा प्रदान किए गए कंटेनर के भीतर आपके कार्य वैवाहिक मिलन के अंतिम परिणाम को आकार देते हैं।'
+            id:       'faq-which-houses',
+            label:    'Which houses are considered for arranged marriage?',
+            label_hi: 'अरेंज मैरिज के लिए कौन-से भाव देखे जाते हैं?',
+            body:     'The 7th house and its lord are central. They are read together with the 2nd house (family), the 9th house (tradition and elders) and the 11th house (social and community network). The 5th house is checked as the counterweight for romance, and the 4th and 10th houses add supporting context about home and social standing.',
+            body_hi:  'सप्तम भाव और सप्तमेश केंद्रीय हैं। इन्हें द्वितीय भाव (परिवार), नवम भाव (परंपरा और बड़े-बुज़ुर्ग) और एकादश भाव (सामाजिक और सामुदायिक दायरा) के साथ पढ़ा जाता है। प्रेम के संतुलन के रूप में पंचम भाव देखा जाता है, और चतुर्थ व दशम भाव घर और सामाजिक प्रतिष्ठा के बारे में सहायक संदर्भ देते हैं।',
           },
           {
-            id: 'faq-3',
-            label: 'Can an arranged marriage be as fulfilling as a love marriage?',
-            body: 'Fulfillment in marriage is fundamentally determined by the strength and quality of the 7th house and its lord, alongside the individual’s capacity for emotional maturity and commitment. Whether a marriage is arranged or love-based is a matter of the method of introduction—the karmic "how"—rather than the karmic "what." If the natal chart promise for marriage is strong, the union will be fulfilling if the partners are aligned, regardless of how they met. In arranged setups, the familial involvement can often provide a level of structural stability and support that actually facilitates a deeper bond over time, provided both partners are committed to growth, understanding, and cultivating mutual respect within the karmic framework.',
-            label_hi: 'क्या व्यवस्थित विवाह प्रेम विवाह जितना ही संतोषजनक हो सकता है?',
-            body_hi: 'विवाह में संतुष्टि मौलिक रूप से सातवें घर और इसके स्वामी की ताकत और गुणवत्ता, और भावनात्मक परिपक्वता और प्रतिबद्धता के लिए व्यक्ति की क्षमता द्वारा निर्धारित की जाती है। विवाह व्यवस्थित है या प्रेम-आधारित, यह परिचय के तरीके—कार्मिक "कैसे"—का मामला है, न कि कार्मिक "क्या" का। यदि विवाह के लिए जन्म चार्ट का वादा मजबूत है, तो मिलन संतोषजनक होगा यदि साथी संरेखित हैं, चाहे वे कैसे भी मिले हों। व्यवस्थित सेटअप में, पारिवारिक भागीदारी अक्सर संरचनात्मक स्थिरता और समर्थन का स्तर प्रदान कर सकती है जो वास्तव में समय के साथ एक गहरे बंधन को सुगम बनाती है, बशर्ते दोनों साथी विकास, समझ और कार्मिक ढांचे के भीतर पारस्परिक सम्मान पैदा करने के लिए प्रतिबद्ध हों।'
+            id:       'faq-jupiter-venus-alone',
+            label:    'Does Jupiter or Venus alone indicate an arranged marriage?',
+            label_hi: 'क्या अकेले गुरु या शुक्र अरेंज मैरिज का संकेत देते हैं?',
+            body:     'No. Jupiter’s influence on the 7th house supports a traditional, family-blessed path, and Venus supports marriage in general, but neither decides the question alone. Venus in particular can lean either way depending on its connections. Both are read alongside the 7th lord and the family houses.',
+            body_hi:  'नहीं। सप्तम भाव पर गुरु का प्रभाव पारंपरिक, परिवार के आशीर्वाद वाले मार्ग का समर्थन करता है, और शुक्र सामान्य रूप से विवाह का समर्थन करता है, पर दोनों में से कोई भी अकेले यह प्रश्न तय नहीं करता। विशेषकर शुक्र अपने संबंधों के अनुसार किसी भी ओर झुक सकता है। दोनों को सप्तमेश और परिवार से जुड़े भावों के साथ पढ़ा जाता है।',
           },
           {
-            id: 'faq-4',
-            label: 'Why does Jupiter play such a central role?',
-            body: 'Jupiter is the planet of Dharma (righteous duty) and the primary Karaka (significator) of wisdom, expansion, and traditional success. In Vedic astrology, a successful arranged marriage is considered an act of Dharma—it is the fulfillment of duty toward ancestors and the societal structure. Jupiter’s transit is the most potent validating force because it brings the blessing of tradition and the grace needed to turn a contractual arrangement into a harmonious, growth-oriented partnership. When Jupiter influences the marriage houses, it suggests that the union is not just about personal desire but serves a higher, larger purpose, ensuring stability through the integration of the partner into the native’s karmic and ancestral path.',
-            label_hi: 'गुरु केंद्रीय भूमिका क्यों निभाता है?',
-            body_hi: 'गुरु धर्म (धार्मिक कर्तव्य) और ज्ञान, विस्तार और पारंपरिक सफलता का प्राथमिक कारक (संकेतक) है। वैदिक ज्योतिष में, एक सफल व्यवस्थित विवाह को धर्म का कार्य माना जाता है—यह पूर्वजों और सामाजिक संरचना के प्रति कर्तव्य की पूर्ति है। गुरु का गोचर सबसे शक्तिशाली मान्य शक्ति है क्योंकि यह परंपरा का आशीर्वाद और एक संविदात्मक व्यवस्था को एक सामंजस्यपूर्ण, विकास-उन्मुख साझेदारी में बदलने के लिए आवश्यक अनुग्रह लाता है। जब गुरु विवाह घरों को प्रभावित करता है, तो यह बताता है कि मिलन केवल व्यक्तिगत इच्छा के बारे में नहीं है, बल्कि एक उच्च, बड़े उद्देश्य की सेवा करता है, जो साथी को जातक के कार्मिक और पैतृक मार्ग में एकीकृत करके स्थिरता सुनिश्चित करता है।'
+            id:       'faq-no-say',
+            label:    'Does an arranged marriage mean I have no say?',
+            label_hi: 'क्या अरेंज मैरिज का अर्थ है कि मेरी कोई राय नहीं होगी?',
+            body:     'No. A chart that favors a family-assisted path describes how introductions are likely to come about, not who makes the final decision. In practice, an arranged process works best as a collaboration: the family helps find and introduce, and the couple decides. Your consent and judgment remain central.',
+            body_hi:  'नहीं। परिवार की सहायता वाले मार्ग का समर्थन करने वाली कुंडली यह बताती है कि परिचय कैसे होने की संभावना है, यह नहीं कि अंतिम निर्णय कौन लेगा। व्यवहार में अरेंज प्रक्रिया सहयोग के रूप में सबसे अच्छी चलती है: परिवार खोजने और मिलवाने में मदद करता है, और निर्णय युगल लेता है। आपकी सहमति और समझ केंद्र में रहती है।',
           },
           {
-            id: 'faq-5',
-            label: 'What if I don\'t feel a bond initially?',
-            body: 'Karmic bonds often reveal themselves through the shared responsibilities and life experiences that a traditional arranged marriage provides. The container of an arranged union—supported by family, tradition, and mutual duty—is designed precisely to allow for a bond to develop steadily over time, rather than demanding immediate, intense romantic sparks. For many, the initial feelings are formal or neutral, which is entirely normal. As both partners fulfill their duties, manage the home, and navigate life together, the deeper, authentic affection described by a strong 5th or 7th house promise will gradually emerge. Patience and the cultivation of respect are key, as they allow the "arranged" foundation to blossom into a profoundly meaningful partnership.',
-            label_hi: 'यदि मुझे शुरू में कोई बंधन महसूस नहीं होता है तो क्या होगा?',
-            body_hi: 'कार्मिक बंधन अक्सर साझा जिम्मेदारियों और जीवन के अनुभवों के माध्यम से खुद को प्रकट करते हैं जो एक पारंपरिक व्यवस्थित विवाह प्रदान करता है। व्यवस्थित मिलन का कंटेनर—परिवार, परंपरा और पारस्परिक कर्तव्य द्वारा समर्थित—को विशेष रूप से इसलिए डिज़ाइन किया गया है ताकि समय के साथ धीरे-धीरे बंधन विकसित हो सके, न कि तत्काल, तीव्र रोमांटिक चिंगारी की मांग के बजाय। कई लोगों के लिए, प्रारंभिक भावनाएं औपचारिक या तटस्थ होती हैं, जो पूरी तरह से सामान्य है। जैसे-जैसे दोनों साथी अपने कर्तव्यों को पूरा करते हैं, घर का प्रबंधन करते हैं, और एक साथ जीवन व्यतीत करते हैं, एक मजबूत पांचवें या सातवें घर के वादे द्वारा वर्णित गहरा, प्रामाणिक स्नेह धीरे-धीरे उभरेगा। धैर्य और सम्मान की खेती महत्वपूर्ण है, क्योंकि वे व्यवस्थित नींव को एक अर्थपूर्ण साझेदारी में बदलने की अनुमति देते हैं।'
+            id:       'faq-love-develop',
+            label:    'Can love develop before or within an arranged marriage?',
+            label_hi: 'क्या अरेंज मैरिज से पहले या उसके भीतर प्रेम विकसित हो सकता है?',
+            body:     'Yes. Many arranged marriages include a period of getting to know each other, and affection often grows after the wedding. Astrologically, a well-placed Venus or a supportive 5th lord can suggest warmth developing within a family-arranged match. How the relationship grows over the years is covered in the Married Life guide.',
+            body_hi:  'हाँ। कई अरेंज मैरिज में एक-दूसरे को जानने का समय होता है, और विवाह के बाद भी स्नेह अक्सर बढ़ता है। ज्योतिष में अच्छी स्थिति वाला शुक्र या सहायक पंचमेश परिवार द्वारा तय रिश्ते में भी आत्मीयता विकसित होने का संकेत दे सकता है। वर्षों में संबंध कैसे बढ़ता है, यह वैवाहिक जीवन मार्गदर्शिका में बताया गया है।',
           },
           {
-            id: 'faq-6',
-            label: 'Are remedies effective for increasing harmony?',
-            body: 'Spiritual remedies, when performed with genuine intent and understanding, can significantly alter the internal state of the native, making them more receptive to harmony. Remedies in Vedic astrology are not magical shortcuts but are tools for self-cultivation. By performing service to the family or engaging in practices that cultivate humility and patience, the native works on the internal blockages—often indicated by afflictions in the 2nd, 4th, or 7th houses—that hinder harmony. These actions change the "climate" of the native\'s internal life, allowing the external marital relationship to mirror that improved internal state, gradually reducing conflict and building a more supportive domestic sphere.',
-            label_hi: 'क्या सद्भाव बढ़ाने के लिए उपाय प्रभावी हैं?',
-            body_hi: 'आध्यात्मिक उपाय, जब वास्तविक इरादे और समझ के साथ किए जाते हैं, तो जातक की आंतरिक स्थिति को काफी हद तक बदल सकते हैं, जिससे वे सद्भाव के प्रति अधिक ग्रहणशील हो जाते हैं। वैदिक ज्योतिष में उपाय जादुई शॉर्टकट नहीं हैं बल्कि आत्म-खेती के उपकरण हैं। परिवार की सेवा करके या विनम्रता और धैर्य पैदा करने वाले अभ्यासों में शामिल होकर, जातक उन आंतरिक रुकावटों पर काम करता है—जो अक्सर दूसरे, चौथे या सातवें घर में कष्टों द्वारा इंगित की जाती हैं—जो सद्भाव में बाधा डालती हैं। ये कार्य जातक के आंतरिक जीवन की "जलवायु" को बदलते हैं, जिससे बाहरी वैवाहिक संबंध उस बेहतर आंतरिक स्थिति को प्रतिबिंबित करते हैं, धीरे-धीरे संघर्ष को कम करते हैं और एक अधिक सहायक घरेलू क्षेत्र का निर्माण करते हैं।'
+            id:       'faq-saturn-seventh',
+            label:    'Does Saturn on the 7th mean a difficult arranged marriage?',
+            label_hi: 'क्या सप्तम भाव में शनि का अर्थ कठिन अरेंज मैरिज है?',
+            body:     'Not necessarily. Saturn on the 7th house is often read as a serious, duty-minded approach to marriage and a preference for a considered, family-consulted decision. It may bring formality or a slower start, but with benefic support it tends to describe a stable bond that strengthens over time.',
+            body_hi:  'ज़रूरी नहीं। सप्तम भाव में शनि को अक्सर विवाह के प्रति गंभीर और कर्तव्य-प्रधान दृष्टिकोण, तथा परिवार से परामर्श करके सोच-समझकर निर्णय लेने की पसंद के रूप में पढ़ा जाता है। इससे औपचारिकता या धीमी शुरुआत हो सकती है, पर शुभ ग्रहों के समर्थन से यह स्थिर संबंध दर्शाता है जो समय के साथ मज़बूत होता है।',
           },
           {
-            id: 'faq-7',
-            label: 'Does Saturn’s influence always lead to a difficult marriage?',
-            body: 'This is a common but incorrect assumption. In traditional Vedic astrology, Saturn is the planet of endurance, stability, and integrity. While its influence can initially bring a sense of heaviness, formality, or slow progress, this "weight" is actually what builds the long-term resilience of the marriage. Saturn’s presence in the 7th house, or its transit over the marriage houses, acts as an anchor. It forces the couple to face their responsibilities and mature within the partnership. Instead of a difficult marriage, Saturn often leads to a sturdy, dependable one that survives the test of time, provided the couple can embrace duty, respect, and mutual service as the foundation of their life together.',
-            label_hi: 'क्या शनि का प्रभाव हमेशा कठिन विवाह की ओर ले जाता है?',
-            body_hi: 'यह एक सामान्य लेकिन गलत धारणा है। पारंपरिक वैदिक ज्योतिष में, शनि सहनशक्ति, स्थिरता और अखंडता का ग्रह है। हालांकि इसका प्रभाव शुरू में भारीपन, औपचारिकता, या धीमी प्रगति की भावना ला सकता है, यह "वजन" वास्तव में विवाह के दीर्घकालिक लचीलेपन का निर्माण करता है। सातवें घर में शनि की उपस्थिति, या विवाह घरों पर इसका गोचर, एक लंगर के रूप में कार्य करता है। यह जोड़े को अपनी जिम्मेदारियों का सामना करने और साझेदारी के भीतर परिपक्व होने के लिए मजबूर करता है। कठिन विवाह के बजाय, शनि अक्सर एक मजबूत, भरोसेमंद विवाह की ओर ले जाता है जो समय की परीक्षा में जीवित रहता है, बशर्ते जोड़ा कर्तव्य, सम्मान और पारस्परिक सेवा को अपने जीवन की नींव के रूप में अपना सके।'
+            id:       'faq-dasha-decide',
+            label:    'Does the Dasha decide whether my marriage will be arranged?',
+            label_hi: 'क्या दशा तय करती है कि मेरा विवाह अरेंज होगा?',
+            body:     'No. The Dasha shows when the marriage indications already present in the birth chart become active — for example, a period when family members begin looking for proposals. It does not turn a romance-leaning chart into an arranged one. When marriage itself may happen is explained in the Marriage Timing guide.',
+            body_hi:  'नहीं। दशा बताती है कि जन्मकुंडली में पहले से मौजूद विवाह के योग कब सक्रिय होते हैं — जैसे वह अवधि जब परिवार रिश्ते देखना शुरू करता है। यह प्रेम की ओर झुकी कुंडली को अरेंज वाली कुंडली नहीं बनाती। विवाह कब हो सकता है, यह विवाह के समय की मार्गदर्शिका में समझाया गया है।',
           },
           {
-            id: 'faq-8',
-            label: 'Is it "bad" astrology to choose a love marriage over an arranged one?',
-            body: 'Not at all. Vedic astrology describes the karmic blueprints and the tendencies inherent in an individual’s life, but it does not dictate moral correctness. The choice between love or arranged paths is fundamentally part of the human experience and the expression of free will. Astrology maps the potential for both, and neither is inherently "good" or "bad." A love marriage is not superior to an arranged one, nor is an arranged one superior to love. A successful union of any kind requires effort, understanding, and emotional intelligence—all qualities that an individual must cultivate regardless of the method through which they entered the partnership.',
-            label_hi: 'क्या व्यवस्थित के बजाय प्रेम विवाह चुनना "बुरा" ज्योतिष है?',
-            body_hi: 'बिल्कुल नहीं। वैदिक ज्योतिष कार्मिक खाका और व्यक्ति के जीवन में निहित प्रवृत्तियों का वर्णन करता है, लेकिन यह नैतिक शुद्धता को निर्धारित नहीं करता है। प्रेम या व्यवस्थित रास्तों के बीच का चुनाव मौलिक रूप से मानव अनुभव और स्वतंत्र इच्छा की अभिव्यक्ति का हिस्सा है। ज्योतिष दोनों के लिए क्षमता का नक्शा तैयार करता है, और न ही कोई स्वाभाविक रूप से "अच्छा" या "बुरा" है। प्रेम विवाह व्यवस्थित से श्रेष्ठ नहीं है, और न ही व्यवस्थित प्रेम से श्रेष्ठ है। किसी भी प्रकार के सफल मिलन के लिए प्रयास, समझ और भावनात्मक बुद्धिमत्ता की आवश्यकता होती है—वे सभी गुण जो एक व्यक्ति को साझेदारी में प्रवेश करने के तरीके की परवाह किए बिना विकसित करने चाहिए।'
+            id:       'faq-guarantee',
+            label:    'Can astrology guarantee whether my marriage will be love or arranged?',
+            label_hi: 'क्या ज्योतिष गारंटी दे सकता है कि मेरा विवाह लव होगा या अरेंज?',
+            body:     'No. Astrology shows tendencies and relative ease — which path the chart supports more naturally. Many charts carry both love and arranged indications, and personal choice, family and circumstances shape the result. For the love-marriage side of the question, see the Love Marriage guide.',
+            body_hi:  'नहीं। ज्योतिष प्रवृत्तियाँ और सहजता दिखाता है — कि कुंडली किस मार्ग का अधिक स्वाभाविक समर्थन करती है। कई कुंडलियों में लव और अरेंज दोनों के संकेत होते हैं, और व्यक्तिगत पसंद, परिवार और परिस्थितियाँ परिणाम तय करती हैं। प्रश्न के प्रेम विवाह वाले पक्ष के लिए प्रेम विवाह मार्गदर्शिका देखें।',
           },
-          {
-            id: 'faq-9',
-            label: 'How can I improve my compatibility with an arranged partner?',
-            body: 'Compatibility is a living, breathing aspect of any marriage, not a static condition. To improve it, focus actively on the qualities of Mercury—clear communication—and Jupiter—the cultivation of traditional wisdom and shared purpose. In an arranged setup, you may have different initial temperaments, but you can build common ground by engaging in shared tasks, openly discussing your needs while respecting the partner\'s family-rooted values, and cultivating patience. Understanding that your partner has their own karmic baggage, and choosing to act with Saturnian discipline (respect and duty) and Venusian appreciation (love and aesthetic delight) toward them, will gradually foster a deep sense of alignment, turning the initial arrangement into a true, loving partnership.',
-            label_hi: 'मैं व्यवस्थित साथी के साथ संगतता में सुधार कैसे कर सकता हूँ?',
-            body_hi: 'संगतता किसी भी विवाह का एक जीवित, सांस लेने वाला पहलू है, स्थिर स्थिति नहीं। इसे सुधारने के लिए, बुध के गुणों—स्पष्ट संचार—और गुरु—पारंपरिक ज्ञान और साझा उद्देश्य की खेती—पर सक्रिय रूप से ध्यान केंद्रित करें। एक व्यवस्थित सेटअप में, आपके पास अलग-अलग प्रारंभिक स्वभाव हो सकते हैं, लेकिन आप साझा कार्यों में संलग्न होकर, साथी के परिवार-जड़ वाले मूल्यों का सम्मान करते हुए अपनी आवश्यकताओं पर खुलकर चर्चा करके और धैर्य पैदा करके सामान्य आधार बना सकते हैं। यह समझना कि आपके साथी के पास अपना कार्मिक सामान है, और उनके प्रति शनि के अनुशासन (सम्मान और कर्तव्य) और शुक्र की प्रशंसा (प्यार और सौंदर्य आनंद) के साथ कार्य करना चुनना, धीरे-धीरे संरेखण की एक गहरी भावना को बढ़ावा देगा, जो शुरुआती व्यवस्था को एक सच्ची, प्रेमपूर्ण साझेदारी में बदल देगा।'
-          },
-          {
-            id: 'faq-10',
-            label: 'What is the most important factor in a successful arranged union?',
-            body: 'The most critical factor is the shared commitment to growth within the karmic container that the marriage provides. An arranged union is a sacred space designed for both partners to evolve, not just as individuals, but as members of a lineage. The success of the union depends on both partners viewing their commitment as a shared responsibility—treating the marriage not merely as a social event, but as a path to spiritual maturation. When both individuals bring their maturity, patience, and a willingness to understand each other’s values and goals to the table, they transcend the initial structure of the arrangement and build a beautiful, lasting partnership based on mutual trust and dharma.',
-            label_hi: 'सफल व्यवस्थित मिलन में सबसे महत्वपूर्ण कारक क्या है?',
-            body_hi: 'सबसे महत्वपूर्ण कारक विवाह द्वारा प्रदान किए जाने वाले कार्मिक कंटेनर के भीतर विकास के लिए साझा प्रतिबद्धता है। एक व्यवस्थित मिलन दोनों साथियों के विकसित होने के लिए डिज़ाइन किया गया एक पवित्र स्थान है, न केवल व्यक्तियों के रूप में, बल्कि वंश के सदस्यों के रूप में। मिलन की सफलता इस बात पर निर्भर करती है कि दोनों साथी अपनी प्रतिबद्धता को एक साझा जिम्मेदारी के रूप में देखते हैं—विवाह को केवल एक सामाजिक घटना के रूप में नहीं, बल्कि आध्यात्मिक परिपक्वता के मार्ग के रूप में मानते हैं। जब दोनों व्यक्ति अपनी परिपक्वता, धैर्य और एक-दूसरे के मूल्यों और लक्ष्यों को समझने की इच्छा रखते हैं, तो वे व्यवस्था की प्रारंभिक संरचना से ऊपर उठ जाते हैं और पारस्परिक विश्वास और धर्म पर आधारित एक सुंदर, स्थायी साझेदारी बनाते हैं।'
-          }
-        ]
-      }
+        ],
+      },
+
     ],
     ctas: [
       {
         id:             'cta-marriage-path',
         type:           'tool',
         slug:           'marriage-path',
-        label:          'Check Your Marriage Prospects',
-        label_hi:       'अपनी विवाह संभावनाएं जांचें',
-        description:    'A free check based on your birth details.',
-        description_hi: 'आपके जन्म विवरण पर आधारित निःशुल्क जांच।',
+        label:          'Explore Your Marriage Path',
+        label_hi:       'अपना विवाह मार्ग देखें',
+        description:    'A free, general 7th-house marriage check based on your birth details.',
+        description_hi: 'आपके जन्म विवरण पर आधारित सप्तम भाव की निःशुल्क, सामान्य विवाह जांच।',
         variant:        'primary',
       },
       {
@@ -464,11 +512,15 @@ export const arrangedMarriage: DomainTopic = {
     authorityLevel: 'standard',
   },
   schemaSignals: {
-    expertise: 'Authored by Vedic astrologers specializing in arranged marriage, 7th house analysis, and Dasha-based timing.',
+    expertise:     'Authored by Vedic astrologers specializing in arranged-marriage indications, 7th house analysis and the family houses (2nd, 9th, 11th).',
+    // First authored in commit 7cd8637 (2026-07-20, "marriage hub").
+    datePublished: '2026-07-20',
   },
   authority: {
     reviewStatus:   'not-reviewed',
-    contentVersion: 1,
+    contentVersion: 2,
+    // AM-2 restructure (direct answer, arranged-marriage indications, SSR houses/planets + FAQ).
+    lastUpdated:    '2026-10-05',
   },
   publishing: {
     isIndexable:     false,

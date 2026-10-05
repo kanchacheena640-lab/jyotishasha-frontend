@@ -18,19 +18,24 @@ interface LandingSlots {
   lead?: ReactNode
   /** Rendered immediately before the FAQ section (or after all sections if none). */
   beforeFaq?: ReactNode
-  /** Render FAQ answers in server HTML instead of the client accordion. */
+  /**
+   * Render FAQ answers -- and accordion-layout section bodies -- in server HTML
+   * (native <details>) instead of the client-only accordions.
+   */
   ssrFaq?: boolean
+  /** Opt-in long-form reading rhythm (landing.module.css `.longform`). */
+  longForm?: boolean
 }
 
 export default function AuthorityDetailRenderer({
-  domain, topic, locale, lead, beforeFaq, ssrFaq,
+  domain, topic, locale, lead, beforeFaq, ssrFaq, longForm,
 }: AuthorityDetailProps & LandingSlots) {
   const related = getRelatedTopics(domain, topic)
   const hasFaq = topic.sections.some(section => section.layout === 'faq')
 
   return (
     <main className={`min-h-screen bg-[#0b1120] text-white ${lead ? 'pt-2' : 'pt-12'}`}>
-      <div className={`max-w-4xl mx-auto px-4 md:px-6 ${lead ? `pt-4 pb-10 md:py-10 ${landingStyles.landing}` : 'py-10'}`}>
+      <div className={`max-w-4xl mx-auto px-4 md:px-6 ${lead ? `pt-4 pb-10 md:py-10 ${landingStyles.landing}${longForm ? ` ${landingStyles.longform}` : ''}` : 'py-10'}`}>
         <AuthorityBreadcrumb domain={domain} topic={topic} locale={locale} />
         <TopicHero domain={domain} topic={topic} locale={locale} />
         {lead}
@@ -38,7 +43,7 @@ export default function AuthorityDetailRenderer({
         {topic.sections.map(section => (
           <Fragment key={section.id}>
             {section.layout === 'faq' && beforeFaq}
-            {ssrFaq && section.layout === 'faq'
+            {ssrFaq && (section.layout === 'faq' || section.layout === 'accordion')
               ? <StaticFaqSection section={section} locale={locale} />
               : <SectionRouter section={section} locale={locale} />}
           </Fragment>

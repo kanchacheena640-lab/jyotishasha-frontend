@@ -1,7 +1,7 @@
 // lib/domains/marriage-astrology/_landing.ts
 // Opt-in landing presentation for individual Marriage topics. Only topics
 // listed here get the direct answer / report unit (+ video when configured) /
-// SSR FAQ; every other topic renders exactly as before.
+// SSR FAQ (and SSR accordion bodies); every other topic renders exactly as before.
 
 import type { TopicLandingConfig } from '../../authority-engine/landing-types'
 
@@ -139,8 +139,72 @@ export const loveMarriageLanding: TopicLandingConfig = {
   ssrFaq: true,
 }
 
+// No arranged-marriage report exists: the card offers the general Marriage
+// Report, framed only as a personalised marriage reading (no love-vs-arranged
+// verdict -- the sample does not contain one). No approved video yet.
+export const arrangedMarriageLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'No single placement decides whether a marriage will be arranged. An astrologer reads a combination: the 7th house of marriage and its lord, and how they connect with the 2nd house (family), the 9th house (tradition and elders) and the 11th house (wider social and community network); the influence of Jupiter and Venus; the Navamsa (D9) as supporting evidence; and the running Dasha, which can activate these factors without deciding the outcome. When the family-related factors are prominent, the chart tends to support a family-assisted path — and many charts show both arranged and love indications. Personal choice, family circumstances and real-world factors matter too.',
+    hi: 'कोई एक ग्रह-स्थिति यह तय नहीं करती कि विवाह अरेंज होगा। ज्योतिषी कई कारकों को मिलाकर देखते हैं: विवाह का सप्तम भाव और सप्तमेश, और इनका द्वितीय भाव (परिवार), नवम भाव (परंपरा और बड़े-बुज़ुर्ग) तथा एकादश भाव (व्यापक सामाजिक दायरा) से संबंध; गुरु और शुक्र का प्रभाव; सहायक प्रमाण के रूप में नवांश (D9); और चल रही दशा, जो इन कारकों को सक्रिय कर सकती है पर परिणाम तय नहीं करती। जब परिवार से जुड़े कारक प्रमुख हों, तो कुंडली परिवार की सहायता वाले मार्ग (व्यवस्थित विवाह) का समर्थन करती है — और कई कुंडलियों में अरेंज और लव दोनों के संकेत होते हैं। आपकी अपनी पसंद, पारिवारिक परिस्थितियाँ और जीवन की वास्तविकताएँ भी मायने रखती हैं।',
+  },
+
+  offer: {
+    reportSlug: 'marriage_report',
+    eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
+    heading: { en: 'Personalised Marriage Reading', hi: 'व्यक्तिगत विवाह विश्लेषण' },
+    intro: {
+      en: 'This page explains arranged-marriage indications in general. The report reads the core marriage factors in your own chart — it does not label your marriage as love or arranged.',
+      hi: 'यह पृष्ठ अरेंज मैरिज के संकेतों को सामान्य रूप से समझाता है। रिपोर्ट आपकी अपनी कुंडली के मुख्य विवाह-कारकों का विश्लेषण करती है — यह आपके विवाह को लव या अरेंज घोषित नहीं करती।',
+    },
+    bullets: {
+      en: [
+        'Your marriage outlook from the 7th house and its lord',
+        'Key planetary influences on marriage',
+        'Your current Dasha window and supportive periods',
+        'Strengths, areas needing attention and practical guidance',
+      ],
+      hi: [
+        'सप्तम भाव और सप्तमेश से आपके विवाह की संभावनाएँ',
+        'विवाह पर प्रमुख ग्रहों का प्रभाव',
+        'आपकी वर्तमान दशा और सहायक अवधियाँ',
+        'मज़बूत पक्ष, ध्यान देने योग्य बातें और व्यावहारिक मार्गदर्शन',
+      ],
+    },
+    ctaLabel: { en: 'Get My Marriage Report – ₹{price}', hi: 'मेरी विवाह रिपोर्ट पाएं – ₹{price}' },
+    microcopy: {
+      en: 'Personalised using your Date, Time & Place of Birth.',
+      hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
+    },
+    sampleTitle: { en: 'Marriage Report', hi: 'विवाह रिपोर्ट' },
+    reportCtaId: 'arranged_marriage_report_cta',
+    sampleCtaId: 'arranged_marriage_sample_report',
+    screenName: 'arranged_marriage_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at whether a chart supports a family-assisted path to marriage. Related questions have their own detailed guides — the love-marriage side, when marriage may happen, matching two charts once a proposal comes, the nature of the spouse and life after marriage:',
+      hi: 'यह मार्गदर्शिका बताती है कि कुंडली परिवार की सहायता वाले विवाह का समर्थन करती है या नहीं। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — प्रेम विवाह वाला पक्ष, विवाह कब हो सकता है, रिश्ता आने पर दो कुंडलियों का मिलान, जीवनसाथी का स्वभाव और विवाह के बाद का जीवन:',
+    },
+    topicSlugs: ['love-marriage', 'marriage-timing', 'compatibility', 'spouse-nature', 'married-life'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  // Also renders the Key Houses / Planetary Influences accordion bodies in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, TopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
   'love-marriage': loveMarriageLanding,
+  'arranged-marriage': arrangedMarriageLanding,
 }

@@ -59,6 +59,8 @@ export interface TopicLandingConfig {
   video?: TopicLandingVideo
   offer: TopicLandingOffer
   contextLinks: TopicLandingContextLinks
-  /** Render FAQ answers in server HTML (native <details>) for this topic. */
+  /** Render FAQ answers and accordion-section bodies in server HTML (native <details>) for this topic. */
   ssrFaq: boolean
+  /** Optional long-form reading rhythm (section dividers, sub-heading labels) for text-heavy topics. */
+  longForm?: boolean
 }

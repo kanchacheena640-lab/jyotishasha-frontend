@@ -74,6 +74,7 @@ export default function MarriageAstrologyTopic({
           lead: <TopicLandingLead config={landing} locale={locale} />,
           beforeFaq: <TopicLandingContextLinks config={landing} domain={domain} locale={locale} />,
           ssrFaq: landing.ssrFaq,
+          longForm: landing.longForm,
         })}
       />
     </>
