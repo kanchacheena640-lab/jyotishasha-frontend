@@ -202,9 +202,72 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
   longForm: true,
 }
 
+// Dedicated product: the Delay in Marriage Report (its own sample covers delay
+// signal, 7th house/lord, Saturn/Mars/Rahu-Ketu, current Dasha, what can
+// support the pattern). No timing promise, no Navamsa/transit claims. No video yet.
+export const delayedMarriageLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Astrology does not trace a delay in marriage to one placement. Astrologers read a combination: the condition of the 7th house and its lord; the influence of Saturn, Mars, Rahu and Ketu on them; the strength of Venus and Jupiter; supporting factors such as a combust or retrograde 7th lord; the Navamsa (D9) as supporting evidence; and the running Dasha, which can activate these factors. Together they may indicate a tendency toward slower progress or extra effort — not a fixed outcome, and not that marriage will not happen. Real-world circumstances such as education, career, family and personal choice matter too.',
+    hi: 'ज्योतिष में शादी में देरी को किसी एक ग्रह-स्थिति से नहीं जोड़ा जाता। ज्योतिषी कई कारकों को मिलाकर देखते हैं: सप्तम भाव और सप्तमेश की स्थिति; उन पर शनि, मंगल, राहु और केतु का प्रभाव; शुक्र और गुरु की शक्ति; अस्त या वक्री सप्तमेश जैसे सहायक कारक; सहायक प्रमाण के रूप में नवांश (D9); और चल रही दशा, जो इन कारकों को सक्रिय कर सकती है। ये मिलकर धीमी प्रगति या अधिक प्रयास की प्रवृत्ति का संकेत दे सकते हैं — कोई तय परिणाम नहीं, और न ही यह कि विवाह नहीं होगा। पढ़ाई, करियर, परिवार और अपनी पसंद जैसी वास्तविक परिस्थितियाँ भी मायने रखती हैं।',
+  },
+
+  offer: {
+    reportSlug: 'delay_in_marriage_report',
+    eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
+    heading: { en: 'Delay in Marriage Report', hi: 'विवाह में देरी रिपोर्ट' },
+    intro: {
+      en: 'General rules cannot show which delay factors apply to your own chart. The report reads them in your birth chart — it does not predict an exact marriage date.',
+      hi: 'सामान्य नियम यह नहीं बता सकते कि आपकी अपनी कुंडली में देरी के कौन-से कारक लागू होते हैं। यह रिपोर्ट इन्हें आपकी जन्मकुंडली में पढ़ती है — यह विवाह की कोई सटीक तारीख नहीं बताती।',
+    },
+    bullets: {
+      en: [
+        'Your delay signal, with the reasons behind it',
+        '7th house and 7th lord evidence',
+        'Saturn, Mars and Rahu–Ketu factors in your chart',
+        'Current Dasha window and what can support the pattern',
+      ],
+      hi: [
+        'आपकी कुंडली में देरी का संकेत और उसके कारण',
+        'सप्तम भाव और सप्तमेश का विश्लेषण',
+        'आपकी कुंडली में शनि, मंगल और राहु–केतु के कारक',
+        'वर्तमान दशा और इस प्रवृत्ति में क्या सहायक हो सकता है',
+      ],
+    },
+    ctaLabel: { en: 'Get My Delay Report – ₹{price}', hi: 'विवाह में देरी रिपोर्ट पाएं – ₹{price}' },
+    microcopy: {
+      en: 'Personalised using your Date, Time & Place of Birth.',
+      hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
+    },
+    sampleTitle: { en: 'Delay in Marriage Report', hi: 'विवाह में देरी रिपोर्ट' },
+    reportCtaId: 'delayed_marriage_report_cta',
+    sampleCtaId: 'delayed_marriage_sample_report',
+    screenName: 'delayed_marriage_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at why marriage may be delayed. Related questions have their own detailed guides — when marriage may happen, the love and arranged paths to marriage, matching two charts and life after marriage:',
+      hi: 'यह मार्गदर्शिका बताती है कि शादी में देरी क्यों हो सकती है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — विवाह कब हो सकता है, प्रेम और अरेंज विवाह के मार्ग, दो कुंडलियों का मिलान और विवाह के बाद का जीवन:',
+    },
+    topicSlugs: ['marriage-timing', 'love-marriage', 'arranged-marriage', 'compatibility', 'married-life'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, TopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
   'love-marriage': loveMarriageLanding,
   'arranged-marriage': arrangedMarriageLanding,
+  'delayed-marriage': delayedMarriageLanding,
 }
