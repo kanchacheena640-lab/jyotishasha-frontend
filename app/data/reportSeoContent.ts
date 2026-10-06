@@ -3490,4 +3490,144 @@ gemstone_consultation: {
   },
 },
 
+spouse_nature_report: {
+  seoTitle: {
+    en: "Spouse Nature Report | Future Spouse Prediction by Birth Chart",
+    hi: "जीवनसाथी स्वभाव रिपोर्ट | जन्म कुंडली से भावी जीवनसाथी की भविष्यवाणी",
+  },
+
+  seoDescription: {
+    en: "Personalized Spouse Nature Report based on your birth chart. Discover future spouse personality, communication, health and wealth tendencies. ₹51 PDF.",
+    hi: "जन्म कुंडली पर आधारित व्यक्तिगत जीवनसाथी स्वभाव रिपोर्ट। भावी जीवनसाथी का व्यक्तित्व, संवाद शैली, स्वास्थ्य और धन की प्रवृत्तियाँ जानें। ₹51 PDF।",
+  },
+
+  whyImportant: {
+    en: "Knowing the kind of partner your chart points to helps you approach marriage with clearer, more realistic expectations. This personalized report reads your birth chart (D1), Navamsa (D9) and Darakaraka to describe the tendencies indicated for your future spouse: temperament, communication and emotional style, relationship behaviour, health tendencies and financial background. It also shows the chart basis behind each reading. It describes tendencies, not a specific person, an exact income or a medical outcome.",
+    hi: "आपकी कुंडली किस तरह के जीवनसाथी की ओर संकेत करती है, यह जानना विवाह के प्रति स्पष्ट और व्यावहारिक अपेक्षाएँ बनाने में मदद करता है। यह व्यक्तिगत रिपोर्ट आपकी जन्म कुंडली (D1), नवांश (D9) और दाराकारक के आधार पर भावी जीवनसाथी के स्वभाव, संवाद और भावनात्मक शैली, रिश्ते में व्यवहार, स्वास्थ्य की प्रवृत्तियों और आर्थिक पृष्ठभूमि का वर्णन करती है, और हर निष्कर्ष का कुंडली आधार भी दिखाती है। यह प्रवृत्तियाँ बताती है, किसी विशेष व्यक्ति, सटीक आय या चिकित्सीय परिणाम की भविष्यवाणी नहीं करती।",
+  },
+
+  reportSections: {
+    en: [
+      "Future Spouse Snapshot",
+      "Spouse Nature & Personality",
+      "Communication & Emotional Style",
+      "Why Your Chart Suggests This (Birth Chart Basis)",
+      "Navamsa (D9) & Darakaraka Supporting Evidence",
+      "Spouse Health Tendencies",
+      "Financial Background & Wealth Tendencies",
+      "Integrated Spouse Profile",
+      "Important Limitations",
+    ],
+    hi: [
+      "भावी जीवनसाथी की झलक",
+      "जीवनसाथी का स्वभाव और व्यक्तित्व",
+      "संवाद और भावनात्मक शैली",
+      "आपकी कुंडली ऐसा क्यों संकेत देती है (जन्म कुंडली आधार)",
+      "नवांश (D9) और दाराकारक के सहायक प्रमाण",
+      "जीवनसाथी के स्वास्थ्य की प्रवृत्तियाँ",
+      "आर्थिक पृष्ठभूमि और धन की प्रवृत्तियाँ",
+      "जीवनसाथी की समग्र प्रोफ़ाइल",
+      "महत्वपूर्ण सीमाएँ",
+    ],
+  },
+
+  targetKeywords: [
+    "spouse nature report",
+    "future spouse prediction",
+    "future spouse report",
+    "future spouse nature",
+    "future spouse personality",
+    "spouse personality prediction",
+    "spouse prediction by date of birth",
+    "spouse prediction by birth chart",
+    "personalized spouse prediction",
+    "future husband nature astrology",
+    "future wife nature astrology",
+    "spouse health and wealth astrology",
+  ],
+
+  benefits: {
+    en: [
+      "Get a personalized picture of your future spouse's likely nature and temperament",
+      "Understand their probable communication and emotional style",
+      "See how they may approach responsibility, independence and family life",
+      "Learn the health and financial tendencies your chart indicates for your spouse",
+      "See the birth chart and Navamsa basis behind every reading",
+      "Approach marriage decisions with clearer, more realistic expectations",
+    ],
+    hi: [
+      "अपने भावी जीवनसाथी के संभावित स्वभाव और व्यक्तित्व की व्यक्तिगत जानकारी पाएँ",
+      "उनकी संभावित संवाद और भावनात्मक शैली को समझें",
+      "जानें कि वे ज़िम्मेदारी, स्वतंत्रता और पारिवारिक जीवन को कैसे देख सकते हैं",
+      "आपकी कुंडली में जीवनसाथी के स्वास्थ्य और आर्थिक प्रवृत्तियों के संकेत जानें",
+      "हर निष्कर्ष के पीछे का जन्म कुंडली और नवांश आधार देखें",
+      "विवाह से जुड़े निर्णयों में स्पष्ट और व्यावहारिक अपेक्षाएँ रखें",
+    ],
+  },
+
+  faqs: {
+    en: [
+      {
+        question: "Can astrology predict my future spouse's nature?",
+        answer: "Astrology describes tendencies, not certainties. This report reads your 7th house, its lord, your Navamsa (D9) and Darakaraka to describe the nature and temperament your chart indicates for your spouse.",
+      },
+      {
+        question: "Will this report tell me who my spouse will be?",
+        answer: "No. It does not name or identify a specific person. It describes the likely personality, communication style and tendencies of your future spouse based on your birth chart.",
+      },
+      {
+        question: "Does the report cover my spouse's health and financial background?",
+        answer: "Yes, as tendencies. It shows whether your chart indicates supportive or more demanding health and financial patterns for your spouse. It does not give a medical diagnosis, lifespan or an exact income.",
+      },
+      {
+        question: "Does it predict when I will get married?",
+        answer: "No. This report focuses on your spouse's nature. Marriage timing is covered in the Marriage Report and the Delay in Marriage Report.",
+      },
+      {
+        question: "What details do I need and how will I receive the report?",
+        answer: "Your date, time and place of birth. The personalized PDF report is sent to your email in English or Hindi, usually within minutes of successful payment.",
+      },
+    ],
+    hi: [
+      {
+        question: "क्या ज्योतिष भावी जीवनसाथी का स्वभाव बता सकता है?",
+        answer: "ज्योतिष निश्चितता नहीं, प्रवृत्तियाँ बताता है। यह रिपोर्ट आपके सप्तम भाव, सप्तमेश, नवांश (D9) और दाराकारक के आधार पर जीवनसाथी के संभावित स्वभाव और व्यवहार का वर्णन करती है।",
+      },
+      {
+        question: "क्या यह रिपोर्ट बताएगी कि मेरा जीवनसाथी कौन होगा?",
+        answer: "नहीं। यह किसी विशेष व्यक्ति का नाम या पहचान नहीं बताती। यह आपकी जन्म कुंडली के आधार पर भावी जीवनसाथी के संभावित व्यक्तित्व, संवाद शैली और प्रवृत्तियों का वर्णन करती है।",
+      },
+      {
+        question: "क्या रिपोर्ट में जीवनसाथी के स्वास्थ्य और आर्थिक पृष्ठभूमि की जानकारी है?",
+        answer: "हाँ, प्रवृत्तियों के रूप में। रिपोर्ट बताती है कि आपकी कुंडली जीवनसाथी के स्वास्थ्य और आर्थिक स्थिति के लिए सहायक या अधिक ध्यान देने वाले संकेत देती है। इसमें कोई चिकित्सीय निदान, आयु या सटीक आय नहीं बताई जाती।",
+      },
+      {
+        question: "क्या यह रिपोर्ट विवाह का समय बताती है?",
+        answer: "नहीं। यह रिपोर्ट जीवनसाथी के स्वभाव पर केंद्रित है। विवाह के समय के लिए विवाह रिपोर्ट और विवाह में देरी रिपोर्ट देखें।",
+      },
+      {
+        question: "मुझे कौन-सी जानकारी देनी होगी और रिपोर्ट कैसे मिलेगी?",
+        answer: "आपकी जन्म तिथि, जन्म समय और जन्म स्थान। सफल भुगतान के कुछ मिनटों के भीतर व्यक्तिगत PDF रिपोर्ट हिंदी या अंग्रेज़ी में आपके ईमेल पर भेज दी जाती है।",
+      },
+    ],
+  },
+
+  whoShouldBuy: {
+    en: [
+      "Unmarried people curious about their future spouse's nature",
+      "Those preparing for an arranged marriage or reviewing proposals",
+      "People who want realistic expectations before marriage",
+      "Anyone wanting to understand their future husband's or wife's likely temperament",
+      "Individuals interested in what their 7th house and Navamsa indicate about a partner",
+    ],
+    hi: [
+      "अविवाहित लोग जो अपने भावी जीवनसाथी के स्वभाव के बारे में जानना चाहते हैं",
+      "अरेंज्ड मैरिज की तैयारी कर रहे या रिश्तों पर विचार कर रहे लोग",
+      "विवाह से पहले व्यावहारिक अपेक्षाएँ बनाना चाहने वाले लोग",
+      "भावी पति या पत्नी के संभावित स्वभाव को समझना चाहने वाले व्यक्ति",
+      "सप्तम भाव और नवांश से जीवनसाथी के संकेत जानने में रुचि रखने वाले लोग",
+    ],
+  },
+},
+
 };
