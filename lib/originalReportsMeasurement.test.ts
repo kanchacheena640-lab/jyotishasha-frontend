@@ -1,9 +1,10 @@
 // lib/originalReportsMeasurement.test.ts
 
 /**
- * Reports Ads P0.2A -- the original 25 paid reports (24 standard at 51 +
- * relationship_future_report at 199) now use the SAME commerce measurement as
- * the 63 focused reports, giving 88 / 88 paid web reports measured.
+ * Reports Ads P0.2A -- the original paid reports (now 26: 25 standard at 51,
+ * including spouse_nature_report (rep_026), + relationship_future_report at 199)
+ * use the SAME commerce measurement as the 63 focused reports, giving 89 / 89
+ * paid web reports measured.
  *
  * Proves, from the real catalog data and real source: the four approved
  * family / report-type combinations, funnel events for all 88 products, the
@@ -80,13 +81,14 @@ class FakeDataLayer {
 }
 
 // The backend's trusted ORIGINAL_REPORT_CATEGORIES (modules/payments/purchase_measurement.py),
-// frozen here. The backend test proves its table equals exactly the 25 registry products; this test
+// frozen here. The backend test proves its table equals exactly the 26 registry products; this test
 // proves the FRONTEND catalog categories equal it, so funnel events and purchases agree.
 const BACKEND_CATEGORIES: Record<string, string> = {
   sadhesati_report: "transit", jupiter_transit_report: "transit", saturn_transit_report: "transit",
   financial_report: "finance", financial_stability_report: "finance", startup_suggestion_report: "finance", property_report: "finance",
   love_relationship_report: "love", love_disappointment_report: "love", relationship_future_report: "love",
   marriage_report: "marriage", love_marriage_report: "marriage", delay_in_marriage_report: "marriage", problem_in_marriage_report: "marriage", second_marriage_report: "marriage",
+  spouse_nature_report: "marriage",
   government_job_report: "self", foreign_travel_report: "self", business_report: "self", career_report: "self", gemstone_consultation: "self",
   children_parenting_report: "self", lifestyle_analysis_report: "self", mood_mental_health_report: "self", divorce_possibility_report: "self", legal_disputes_report: "self",
 };
@@ -101,14 +103,17 @@ function funnelInputFor(report: (typeof reportsData)[number]) {
 }
 
 async function main() {
-  console.log("\n=== 1. approved naming and the 25 original products ===");
+  console.log("\n=== 1. approved naming and the 26 original products ===");
   {
-    check("1a: the catalog holds exactly 25 original products (24 standard + relationship_future_report)",
-      reportsData.length === 25 && reportsData.filter((r) => r.slug !== RELATIONSHIP).length === 24 && reportsData.some((r) => r.slug === RELATIONSHIP));
-    check("1b: prices -- 24 standard at 51, relationship_future_report at 199", reportsData.every((r) => (r.slug === RELATIONSHIP ? r.price === 199 : r.price === 51)));
+    check("1a: the catalog holds exactly 26 original products (25 standard incl. spouse_nature_report + relationship_future_report)",
+      reportsData.length === 26 && reportsData.filter((r) => r.slug !== RELATIONSHIP).length === 25 && reportsData.some((r) => r.slug === RELATIONSHIP)
+      && reportsData.some((r) => r.slug === "spouse_nature_report"));
+    check("1b: prices -- 25 standard at 51, relationship_future_report at 199", reportsData.every((r) => (r.slug === RELATIONSHIP ? r.price === 199 : r.price === 51)));
     check("1c: approved families -- focused_report vs original_report", FOCUSED_PRODUCT_FAMILY === "focused_report" && ORIGINAL_PRODUCT_FAMILY === "original_report");
-    check("1d: catalog slugs equal the backend's 25 mapped products exactly", new Set(reportsData.map((r) => r.slug)).size === 25 && reportsData.every((r) => r.slug in BACKEND_CATEGORIES) && Object.keys(BACKEND_CATEGORIES).length === 25);
-    check("1e: frontend category (lower-cased catalog category.en) == the backend trusted category for ALL 25 (funnel and purchase agree)",
+    check("1d: catalog slugs equal the backend's 26 mapped products exactly", new Set(reportsData.map((r) => r.slug)).size === 26 && reportsData.every((r) => r.slug in BACKEND_CATEGORIES) && Object.keys(BACKEND_CATEGORIES).length === 26);
+    check("1d2: catalog ids are unique and rep_026 is spouse_nature_report", new Set(reportsData.map((r) => r.id)).size === 26
+      && reportsData.find((r) => r.id === "rep_026")?.slug === "spouse_nature_report");
+    check("1e: frontend category (lower-cased catalog category.en) == the backend trusted category for ALL 26 (funnel and purchase agree)",
       reportsData.every((r) => r.category.en.toLowerCase() === BACKEND_CATEGORIES[r.slug]));
     check("1f: every category is from the approved vocabulary; none is the 'other' fallback",
       Object.values(BACKEND_CATEGORIES).every((c) => ["transit", "finance", "love", "marriage", "self"].includes(c)));
@@ -119,13 +124,13 @@ async function main() {
       const src = fs.readFileSync(sibling, "utf8");
       const block = src.slice(src.indexOf("ORIGINAL_REPORT_CATEGORIES = {"), src.indexOf("UNMAPPED_ORIGINAL_CATEGORY"));
       const pairs = [...block.matchAll(/"([a-z_]+)":\s*"([a-z]+)"/g)].map((m) => [m[1], m[2]] as const);
-      check("1g: the sibling backend's ORIGINAL_REPORT_CATEGORIES equals this test's frozen table", pairs.length === 25 && pairs.every(([k, v]) => BACKEND_CATEGORIES[k] === v));
+      check("1g: the sibling backend's ORIGINAL_REPORT_CATEGORIES equals this test's frozen table", pairs.length === 26 && pairs.every(([k, v]) => BACKEND_CATEGORIES[k] === v));
     } else {
       console.log("  SKIP: 1g sibling backend checkout not present (backend test covers its own table)");
     }
   }
 
-  console.log("\n=== 2. funnel events for all 25 originals (view_item + begin_checkout) ===");
+  console.log("\n=== 2. funnel events for all 26 originals (view_item + begin_checkout) ===");
   {
     let ok = 0;
     for (const r of reportsData) {
@@ -141,7 +146,11 @@ async function main() {
         && JSON.stringify(v.ecommerce) === JSON.stringify(b.ecommerce);
       if (good) ok += 1;
     }
-    check("2a: all 25 originals produce correct GA4 view_item and begin_checkout (51 for 24, 199 for relationship, INR, English title, mapped category)", ok === 25);
+    check("2a: all 26 originals produce correct GA4 view_item and begin_checkout (51 for 25, 199 for relationship, INR, English title, mapped category)", ok === 26);
+    const spouse = buildViewItemEvent(funnelInputFor(reportsData.find((r) => r.slug === "spouse_nature_report")!)) as any;
+    check("2a2: spouse_nature_report -> original_report / standard, value 51, item_id spouse_nature_report, category marriage",
+      spouse.product_family === "original_report" && spouse.report_type === "standard" && spouse.ecommerce.value === 51
+      && spouse.ecommerce.items[0].item_id === "spouse_nature_report" && spouse.ecommerce.items[0].item_category === "marriage");
     const rel = buildViewItemEvent(funnelInputFor(reportsData.find((r) => r.slug === RELATIONSHIP)!)) as any;
     check("2b: relationship_future_report -> original_report / relationship, value 199", rel.product_family === "original_report" && rel.report_type === "relationship" && rel.ecommerce.value === 199);
     const std = buildViewItemEvent(funnelInputFor(reportsData.find((r) => r.slug === "career_report")!)) as any;
@@ -173,7 +182,7 @@ async function main() {
       (selfSrc.match(/trackBackendVerifiedPurchase\(/g) || []).length === 2 && selfSrc.indexOf("if (!webhookRes.ok)") < selfSrc.indexOf("trackBackendVerifiedPurchase("));
   }
 
-  console.log("\n=== 4. FINAL COVERAGE: 88 / 88 ===");
+  console.log("\n=== 4. FINAL COVERAGE: 89 / 89 ===");
   {
     const ids = new Set<string>();
     listFocusedReportHumanSlugs().forEach((s) => ids.add(getFocusedReportConfigBySlug(s)!.questionKey));
@@ -194,9 +203,9 @@ async function main() {
       if (fired && purchase && purchase.ecommerce.value === value && purchase.ecommerce.items[0].item_id === id && purchase.product_family === family && purchase.report_type === reportType) measurable += 1;
     }
     resetMeasuredMemoryForTest();
-    console.log(`  COVERAGE (frontend): ${measurable}/${ids.size} products have a valid parse -> GA4 purchase event path (54 SELF + 9 DUAL + 24 standard + 1 relationship)`);
-    check("4a: 63 focused + 25 original = 88 distinct products, all with a valid purchase-event path", ids.size === 88 && measurable === 88);
-    check("4b: canonical values -- purchases parse for 51 (87 products) and 199 (relationship_future_report), currency INR",
+    console.log(`  COVERAGE (frontend): ${measurable}/${ids.size} products have a valid parse -> GA4 purchase event path (54 SELF + 9 DUAL + 25 standard + 1 relationship)`);
+    check("4a: 63 focused + 26 original = 89 distinct products, all with a valid purchase-event path", ids.size === 89 && measurable === 89);
+    check("4b: canonical values -- purchases parse for 51 (88 products) and 199 (relationship_future_report), currency INR",
       parsePurchaseMeasurement({ transaction_id: "ord_9", value: 199, currency: "INR", item_id: RELATIONSHIP, item_name: "Relationship Future Report", item_category: "love", product_family: "original_report", report_type: "relationship", payment_provider: "RAZORPAY", source_platform: "web" })?.value === 199);
     const dl = new FakeDataLayer(); resetMeasuredMemoryForTest();
     pushPurchaseOnce({ transaction_id: "ord_77", value: 199, currency: "INR", item_id: RELATIONSHIP, item_name: "Relationship Future Report", item_category: "love", product_family: "original_report", report_type: "relationship", payment_provider: "RAZORPAY", source_platform: "web", email: "a@b.com", name: "Asha", dob: "1994-01-26", gclid: "G1" }, { storage: new MemStorage(), dataLayer: dl, waitForTags: true });

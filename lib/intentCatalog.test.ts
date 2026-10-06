@@ -155,9 +155,9 @@ check("no intent is active or purchasable yet; no intent or question is held/con
   assert.deepEqual(held, []);
   assert.ok(intentQuestions.every((q) => q.status === "wording_ready"));
 });
-check("the existing 25-report catalog is unchanged and shares no slug with the intent catalog", () => {
-  assert.equal(reportsData.length, 25);
-  assert.equal(reportsData.filter((r) => r.price === 51).length, 24);
+check("the existing 26-report catalog (25 + spouse_nature_report) shares no slug with the intent catalog", () => {
+  assert.equal(reportsData.length, 26);
+  assert.equal(reportsData.filter((r) => r.price === 51).length, 25);
   assert.equal(reportsData.find((r) => r.slug === "relationship_future_report")!.price, 199);
   const reportSlugs = new Set(reportsData.map((r) => r.slug));
   for (const i of intentDefinitions) assert.ok(!reportSlugs.has(i.intentSlug), i.intentSlug);

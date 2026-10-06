@@ -101,6 +101,12 @@ export const reportRelations: Record<string, string[]> = {
     "gemstone_consultation",
   ],
 
+  spouse_nature_report: [
+    "marriage_report",
+    "delay_in_marriage_report",
+    "gemstone_consultation",
+  ],
+
   love_disappointment_report: [
     "relationship_future_report",
     "love_relationship_report",

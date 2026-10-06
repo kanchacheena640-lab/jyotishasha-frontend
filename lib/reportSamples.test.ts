@@ -1,5 +1,5 @@
 /**
- * Paid-report SAMPLE integration (Q5.2): the 50 static sample PDFs, the shared URL helper, the two secondary
+ * Paid-report SAMPLE integration (Q5.2): the 52 static sample PDFs (50 original + spouse_nature_report EN/HI), the shared URL helper, the two secondary
  * "View Sample Report" CTAs and the noindex header. A sample click must stay completely independent of the
  * order / payment / backend flow -- the real components are executed here in an isolated context whose global
  * fetch throws, so any request made while rendering would fail this test.
@@ -63,7 +63,7 @@ check("the helper is tiny and has no product table, network or analytics", () =>
   assert.ok(!/career_report|relationship_future_report/.test(source.replace(/\/\*[\s\S]*?\*\//, "")));
 });
 
-// ---- 2. the 50 standard/relationship files + 126 focused files (63 questionKeys x EN/HI) ---------------------
+// ---- 2. the 52 standard/relationship files + 126 focused files (63 questionKeys x EN/HI) ---------------------
 const sampleDir = path.join(repo, "public/report-samples");
 // The focused samples are keyed by the backend's own question_key: <questionKey>_<en|hi>.pdf. #62/#63 keep
 // their original product-specific pilot files; the other 61 are a product-labelled SAMPLE REPORT cover over
@@ -71,16 +71,16 @@ const sampleDir = path.join(repo, "public/report-samples");
 const FOCUSED_QUESTION_KEYS = intentQuestions.map((q) => q.questionKey);
 const FOCUSED_SAMPLE_FILES = FOCUSED_QUESTION_KEYS.flatMap((key) => [`${key}_en.pdf`, `${key}_hi.pdf`]);
 const PAID_REPORT_SAMPLE_FILES = reportsData.flatMap((r) => [`${r.slug}_en.pdf`, `${r.slug}_hi.pdf`]);
-check("exactly 176 files (the original 50 + 126 focused samples), every one a valid PDF named <slug>_<en|hi>.pdf", () => {
+check("exactly 178 files (the original 50 + spouse_nature_report EN/HI + 126 focused samples), every one a valid PDF named <slug>_<en|hi>.pdf", () => {
   const files = fs.readdirSync(sampleDir);
-  assert.equal(files.length, 176);
+  assert.equal(files.length, 178);
   for (const f of files) {
     assert.match(f, /^[a-z_]+_(en|hi)\.pdf$/);
     assert.equal(fs.readFileSync(path.join(sampleDir, f)).subarray(0, 5).toString("latin1"), "%PDF-");
   }
 });
-check("the directory is exactly the 50 paid-report files + the 126 focused files -- nothing else, no overlap", () => {
-  assert.equal(new Set(PAID_REPORT_SAMPLE_FILES).size, 50);
+check("the directory is exactly the 52 paid-report files + the 126 focused files -- nothing else, no overlap", () => {
+  assert.equal(new Set(PAID_REPORT_SAMPLE_FILES).size, 52);
   assert.equal(new Set(FOCUSED_SAMPLE_FILES).size, 126);
   assert.ok(!FOCUSED_SAMPLE_FILES.some((f) => PAID_REPORT_SAMPLE_FILES.includes(f)), "a questionKey collides with a paid slug");
   assert.deepEqual(fs.readdirSync(sampleDir).sort(), [...PAID_REPORT_SAMPLE_FILES, ...FOCUSED_SAMPLE_FILES].sort());
@@ -95,8 +95,8 @@ check("all 63 catalog questionKeys have an EN and a HI sample: 126 complete 3-pa
     assert.equal((bytes.match(/\/Type\s*\/Page(?!s)\b/g) || []).length, 3, `${file}: expected 3 pages (cover + 2 body)`);
   }
 });
-check("every catalog slug (25) has both an EN and a HI sample at the helper's exact URL", () => {
-  assert.equal(reportsData.length, 25);
+check("every catalog slug (26) has both an EN and a HI sample at the helper's exact URL", () => {
+  assert.equal(reportsData.length, 26);
   for (const report of reportsData) {
     for (const language of ["en", "hi"]) {
       const url = samples.getReportSampleUrl(report.slug, language);
@@ -104,13 +104,14 @@ check("every catalog slug (25) has both an EN and a HI sample at the helper's ex
     }
   }
 });
-check("24 standard EN + 24 standard HI + relationship EN + HI (unchanged by the focused-sample addition)", () => {
+check("25 standard EN + 25 standard HI (24 original + spouse_nature_report) + relationship EN + HI (unchanged by the focused-sample addition)", () => {
   const files = fs.readdirSync(sampleDir);
   const standard = files.filter(
     (f) => !f.startsWith("relationship_future_report_") && !FOCUSED_SAMPLE_FILES.includes(f),
   );
-  assert.equal(standard.filter(f => f.endsWith("_en.pdf")).length, 24);
-  assert.equal(standard.filter(f => f.endsWith("_hi.pdf")).length, 24);
+  assert.equal(standard.filter(f => f.endsWith("_en.pdf")).length, 25);
+  assert.equal(standard.filter(f => f.endsWith("_hi.pdf")).length, 25);
+  assert.ok(files.includes("spouse_nature_report_en.pdf") && files.includes("spouse_nature_report_hi.pdf"));
   assert.ok(files.includes("relationship_future_report_en.pdf") && files.includes("relationship_future_report_hi.pdf"));
 });
 check("the original 50 paid-report sample files are byte-for-byte unchanged in git (none modified or deleted)", () => {
@@ -185,7 +186,7 @@ for (const [language, lang, label] of [["en", "en", EN_LABEL], ["hi", "hi", HI_L
     assertSecondarySampleAnchor(found[0], `/report-samples/career_report_${lang}.pdf`, label);
   });
 }
-check("the standard link follows the report slug for all 24 standard products", () => {
+check("the standard link follows the report slug for all 25 standard products", () => {
   for (const report of reportsData.filter(r => r.slug !== "relationship_future_report")) {
     assert.equal(anchors(renderReportContent(report.slug, "en"))[0].props.href, `/report-samples/${report.slug}_en.pdf`);
     assert.equal(anchors(renderReportContent(report.slug, "hi"))[0].props.href, `/report-samples/${report.slug}_hi.pdf`);

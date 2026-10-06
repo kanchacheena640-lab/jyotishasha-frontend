@@ -97,9 +97,9 @@ check("7/8: useReportPurchase passes orderData.amount straight through (5100/199
 check("9: no client-side ×100 anywhere in either file", !reportCheckout.includes("amount * 100") && !useReportPurchase.includes("amount * 100"));
 check("9: no client-side amountMultiplier / division remnants", !useReportPurchase.includes("amountMultiplier") && !reportCheckout.includes("orderData.amount / 100"));
 
-console.log("\n=== 10/26: display price stays human-readable rupees; all 25 reports remain purchasable ===");
+console.log("\n=== 10/26: display price stays human-readable rupees; all 26 reports remain purchasable ===");
 check("10: reportsData.ts still has real, unconverted rupee prices (51/199), never paise", reportsData.some((r) => r.price === 51) && reportsData.some((r) => r.price === 199));
-check("26: exactly 25 report products remain defined", reportsData.length === 25);
+check("26: exactly 26 report products are defined (25 + spouse_nature_report rep_026)", reportsData.length === 26);
 check("26: every report has a non-empty slug and a positive price", reportsData.every((r) => !!r.slug && r.price > 0));
 
 console.log("\n=== 11-13: relationship_future_report sends the complete primary + partner payload ===");

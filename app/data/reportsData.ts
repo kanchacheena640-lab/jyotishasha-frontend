@@ -386,5 +386,18 @@ export const reportsData: Report[] = [
       en: "Provides a deep analysis of compatibility, emotional bonding, and long-term stability.",
       hi: "दो व्यक्तियों के बीच भावनात्मक तालमेल, विवाह की संभावना और भविष्य की स्थिरता का गहरा विश्लेषण करती है।" 
     }
+  },
+  {
+    id: "rep_026",
+    title: { en: "Spouse Nature Report", hi: "जीवनसाथी स्वभाव रिपोर्ट" },
+    slug: "spouse_nature_report",
+    price: 51,
+    image: "/reports/marriage-report.webp",
+    category: { en: "Marriage", hi: "विवाह" },
+    description: { en: "Understand the likely nature and temperament of your spouse.", hi: "अपने जीवनसाथी के संभावित स्वभाव और व्यवहार को समझें।" },
+    fullDescription: {
+      en: "Reads your 7th house, Navamsa (D9) and Darakaraka to describe the tendencies your chart shows for your spouse's nature, without naming or predicting a specific person.",
+      hi: "आपके सप्तम भाव, नवांश (D9) और दाराकारक के आधार पर जीवनसाथी के स्वभाव की प्रवृत्तियों का वर्णन करती है, किसी विशेष व्यक्ति की पहचान या निश्चित भविष्यवाणी के बिना।"
+    }
   }
 ];
