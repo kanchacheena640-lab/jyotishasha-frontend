@@ -133,7 +133,7 @@ const DROPPED_CTA_ALLOWLIST: Readonly<Record<string, readonly string[]>> = {
  */
 const FAQ_COUNT_FLOOR: Readonly<Record<string, number>> = {
   "marriage-prediction": 8, "marriage-timing": 11, "love-marriage": 8, "arranged-marriage": 8,
-  "delayed-marriage": 9, "early-marriage": 9, "second-marriage": 10, "divorce-possibility": 10,
+  "delayed-marriage": 9, "early-marriage": 10, "second-marriage": 10, "divorce-possibility": 10,
   "spouse-nature": 10, "married-life": 10, "compatibility": 10, "intercaste-marriage": 10,
 };
 
