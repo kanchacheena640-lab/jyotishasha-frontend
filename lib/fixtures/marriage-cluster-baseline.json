@@ -165,7 +165,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -205,6 +206,76 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can Vedic astrology predict exactly when I will get married?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Vedic astrology suggests the most likely time frames based on the activation of marriage-related houses through Dasha and Transit. It offers probability-based insights rather than a fixed, unchangeable calendar date."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the role of Venus in marriage prediction?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Venus is the primary significator of love, romance, and marriage. Its strength and dignity reflect the potential for joy, aesthetics, and harmony within a union."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Mangal Dosha always mean trouble?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Mangal Dosha simply indicates a specific energy pattern that requires careful management. It is common to find balance between partners with similar energy configurations, often leading to a stable marriage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can astrology predict if a marriage will be love or arranged?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Specific combinations involving the 5th house (romance) and the 7th house (partnership), along with the strength of the 7th lord, often indicate a propensity for love-based or arranged-based paths."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my marriage is delayed?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Delayed marriage is often a result of specific karmic lessons or planetary influences like Saturn, not a sign that marriage will not happen. It often indicates that the timing is governed by a different karmic cycle requiring personal maturation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How important is the Navamsa chart?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Navamsa (D9) chart is indispensable. It validates the actual, deep-rooted strength and quality of the marriage, acting as the \"fruit\" of the natal potential shown in the main chart."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there remedies for marriage issues?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Vedic astrology offers various remedial measures, including mantras, gemstones, and acts of charity. These are intended to help balance difficult planetary influences and foster better harmony within one's personal and marital life."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I choose the right astrologer?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Seek those who adhere strictly to traditional Sidereal (Lahiri) systems, prioritize holistic analysis over isolated factors, and provide balanced, probability-based guidance rather than fear-based or fatalistic predictions."
+                }
+              }
+            ]
           }
         ]
       },
@@ -214,7 +285,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "8/8",
         "reportDestinationsRepeated": false
@@ -380,7 +451,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -420,6 +492,76 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या वैदिक ज्योतिष यह सटीक भविष्यवाणी कर सकता है कि मेरा विवाह कब होगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "वैदिक ज्योतिष दशा और गोचर के माध्यम से विवाह-संबंधित भावों की सक्रियता के आधार पर सबसे संभावित समय सीमा का सुझाव देता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "विवाह भविष्यवाणी में शुक्र की क्या भूमिका है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "शुक्र प्रेम, रोमांस और विवाह का प्राथमिक कारक है। इसकी शक्ति और गरिमा एक मिलन में आनंद और सद्भाव की संभावना को दर्शाती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मंगल दोष का मतलब हमेशा परेशानी होता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। मंगल दोष एक विशिष्ट ऊर्जा पैटर्न का संकेत देता है जिसे सावधानीपूर्वक प्रबंधित करने की आवश्यकता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या ज्योतिष भविष्यवाणी कर सकता है कि विवाह प्रेम होगा या व्यवस्थित?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हां। पंचम और सप्तम भाव से जुड़े विशिष्ट संयोजन अक्सर प्रेम-आधारित या व्यवस्थित-आधारित पथों की प्रवृत्ति का संकेत देते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अगर मेरा विवाह विलंबित हो तो क्या होगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "विलंबित विवाह अक्सर विशिष्ट कर्मिक पाठ या शनि जैसे ग्रह प्रभावों का परिणाम है — यह संकेत नहीं कि विवाह नहीं होगा।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "नवांश कुंडली कितनी महत्वपूर्ण है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नवांश (D9) कुंडली अपरिहार्य है। यह मुख्य कुंडली में दिखाई गई जन्मजात क्षमता के \"फल\" के रूप में कार्य करते हुए विवाह की वास्तविक शक्ति और गुणवत्ता को मान्य करती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या विवाह संबंधी समस्याओं के लिए कोई उपाय हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "वैदिक ज्योतिष कठिन ग्रह प्रभावों को संतुलित करने के लिए मंत्र, रत्न और दान सहित विभिन्न उपचारात्मक उपाय प्रदान करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मैं सही ज्योतिषी का चुनाव कैसे करूं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ऐसे लोगों की तलाश करें जो पारंपरिक नक्षत्र (लाहिड़ी) प्रणालियों का कड़ाई से पालन करते हैं और संतुलित, संभावना-आधारित मार्गदर्शन प्रदान करते हैं।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -429,7 +571,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "8/8",
         "reportDestinationsRepeated": false
@@ -596,7 +738,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -636,6 +779,100 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can my date of birth alone predict my marriage year?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not reliably. The date of birth fixes the planetary positions, but the time and place of birth determine the Ascendant, the houses — including the 7th — and the exact start dates of Mahadasha and Antardasha periods. Without an accurate birth time, a timing window can shift by months or even years."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which Dasha can indicate marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most often the Mahadasha or Antardasha of the 7th lord, of planets placed in or aspecting the 7th house, or of Venus — and of planets strongly connected to them. The Antardasha usually narrows the broad Mahadasha period to a more specific window."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "At what age will I get married?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrology answers this as a period rather than a fixed age: it looks at when the supporting Dasha and transits occur in your life. Some charts point to an earlier window and some to a later one — the dedicated guides on early and delayed marriage explain those patterns."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Rashi chart alone suffice for predicting marriage timing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. The Rashi chart provides the potential, but the Navamsa (D9) chart is indispensable for validating the strength and actualization of that potential. Timing predictions based on the Rashi chart alone are often inaccurate."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can marriage occur if the Mahadasha lord is not directly connected to the 7th house?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is rare. Marriage timing almost always falls in the Dasha of a planet that has a strong, explicit relationship with the 7th house, the 7th Lord, or Venus in the natal chart."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between a timing trigger and a timing window?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The timing window is created by the Mahadasha and Antardasha, which establish the overall opportunity. The transit of Jupiter or Saturn acts as the trigger that converts the potential opportunity into a physical event."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does my Jupiter transit look favorable, but I did not get married?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Transit is only a trigger. If the Dasha window is not active or does not support marriage, the trigger has nothing to activate. Both the Dasha and the Transit must point toward marriage simultaneously."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if the Mahadasha lord is related to marriage, but the Antardasha lord is not?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Marriage is less likely in that sub-period. For a strong timing indication, both the Mahadasha and the Antardasha lords should be favorable and related to marriage-signifying houses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the 8th house affect marriage timing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 8th house represents longevity. If it is highly active in the Dasha period, it may sometimes override or complicate the timing indicated by the 7th house, occasionally causing unforeseen delays or shifts in timing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How accurate is marriage timing prediction?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Analysis based on established Vedic principles — Dasha and transit convergence, checked in the Navamsa — can meaningfully identify supportive periods, but it indicates a likely window rather than a certain date. Its reliability depends heavily on an accurate birth time and on careful judgment of planetary strength."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Should I look at marriage or relationship timing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 7th house governs committed, formal partnership (marriage). Relationship experiences such as dating can be triggered by less formal activations of the 5th house or Venus, and should not be confused with the timing of a formal union."
+                }
+              }
+            ]
           }
         ]
       },
@@ -645,7 +882,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "11/11",
         "collapsedBodiesInServer": "11/11",
         "reportDestinationsRepeated": true
@@ -810,7 +1047,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -850,6 +1088,100 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या सिर्फ़ जन्म तिथि से शादी का वर्ष पता चल सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "भरोसे के साथ नहीं। जन्म तिथि से ग्रहों की स्थिति तय होती है, पर जन्म का समय और स्थान लग्न, भाव (सप्तम सहित) और महादशा–अंतर्दशा की सटीक शुरुआत तय करते हैं। सही जन्म समय के बिना समय-अवधि महीनों या वर्षों तक खिसक सकती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "कौन-सी दशा विवाह का संकेत दे सकती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "अक्सर सप्तमेश की, सप्तम भाव में बैठे या उस पर दृष्टि डालने वाले ग्रहों की, या शुक्र की महादशा या अंतर्दशा — और इनसे गहराई से जुड़े ग्रहों की। अंतर्दशा आमतौर पर व्यापक महादशा को एक अधिक विशिष्ट अवधि तक सीमित करती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मेरी शादी किस उम्र में होगी?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिष इसका उत्तर किसी तय उम्र के बजाय एक अवधि के रूप में देता है — यह देखता है कि आपके जीवन में सहायक दशा और गोचर कब आते हैं। कुछ कुंडलियाँ जल्दी की अवधि दिखाती हैं और कुछ बाद की — जल्दी और देर से विवाह की मार्गदर्शिकाएँ इन स्थितियों को समझाती हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या विवाह का समय जानने के लिए अकेली राशि कुंडली पर्याप्त है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। राशि कुंडली संभावना दिखाती है, पर उस संभावना की शक्ति और साकार होने की पुष्टि के लिए नवांश (D9) अनिवार्य है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या विवाह हो सकता है यदि महादशा स्वामी सप्तम भाव से सीधे जुड़ा नहीं है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ऐसा कम होता है। विवाह का समय लगभग हमेशा उस ग्रह की दशा में आता है जिसका जन्म कुंडली में सप्तम भाव, सप्तमेश या शुक्र से मज़बूत और स्पष्ट संबंध हो।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "समय-ट्रिगर और समय-अवधि में क्या अंतर है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "समय-अवधि महादशा और अंतर्दशा से बनती है, जो समग्र अवसर तय करती हैं। गुरु या शनि का गोचर वह ट्रिगर है जो इस संभावना को वास्तविक घटना में बदलता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मेरा गुरु गोचर अनुकूल दिखता है, फिर भी शादी क्यों नहीं हुई?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "गोचर केवल ट्रिगर है। अगर दशा की अवधि सक्रिय नहीं है या विवाह का समर्थन नहीं करती, तो ट्रिगर के पास सक्रिय करने के लिए कुछ नहीं होता। दशा और गोचर दोनों का एक साथ विवाह की ओर इशारा करना ज़रूरी है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अगर महादशा स्वामी विवाह से जुड़ा हो, पर अंतर्दशा स्वामी न हो तो?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "उस उप-अवधि में विवाह की संभावना कम रहती है। मज़बूत संकेत के लिए महादशा और अंतर्दशा दोनों के स्वामी अनुकूल और विवाह-संकेतक भावों से जुड़े होने चाहिए।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अष्टम भाव विवाह के समय को कैसे प्रभावित करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "अष्टम भाव दीर्घायु का भाव है। अगर दशा अवधि में यह बहुत सक्रिय हो, तो कभी-कभी सप्तम भाव से संकेतित समय को जटिल बना सकता है और अप्रत्याशित देरी या बदलाव ला सकता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "विवाह के समय की भविष्यवाणी कितनी सटीक होती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "स्थापित वैदिक सिद्धांतों — दशा और गोचर का अभिसरण, नवांश में पुष्टि — पर आधारित विश्लेषण सहायक अवधियों को सार्थक रूप से पहचान सकता है, पर यह एक संभावित अवधि बताता है, कोई निश्चित तारीख नहीं। इसकी विश्वसनीयता सही जन्म समय और ग्रह-बल के सावधान आकलन पर निर्भर करती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मुझे विवाह का समय देखना चाहिए या संबंध का?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "सप्तम भाव प्रतिबद्ध, औपचारिक साझेदारी (विवाह) से जुड़ा है। डेटिंग जैसे संबंध पंचम भाव या शुक्र की कम औपचारिक सक्रियता से भी शुरू हो सकते हैं — इन्हें औपचारिक विवाह के समय से नहीं मिलाना चाहिए।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -859,7 +1191,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": false,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "11/11",
         "collapsedBodiesInServer": "11/11",
         "reportDestinationsRepeated": true
@@ -1075,7 +1407,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -1115,6 +1448,76 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can a person with an arranged marriage chart have a love marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Astrology describes tendencies and relative ease, not fixed outcomes. A person whose chart leans toward a family-guided marriage can still choose a partner themselves — they may simply face more hurdles, or find that the path to that union is less conventional."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Rahu necessary for a love marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Rahu is common in love-marriage charts because it pushes against convention, but a clear 5th-7th link, Venus or a Venus-Mars connection can support a love marriage without it. Without Rahu, a love marriage tends to be more traditional in form — often with family involvement and approval."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my 5th and 7th houses have no connection?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Then the love-marriage tendency is weaker, not absent. Venus, the Navamsa or other supporting factors may still point toward a self-chosen partner. Often the result is a blend of love and arranged marriage — an emotional connection exists, but family plays a larger part in how the marriage comes about."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can remedies guarantee a love marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Remedies cannot make another person love you or compel your family to agree. Traditionally they are used to bring clarity, patience and balance to your own decisions. Treat them as optional support for your inner state, not as a way to change other people or fix an outcome."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does astrology tell infatuation from a relationship that leads to marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Infatuation tends to show as a short-lived activation of the 5th house — often during a passing transit — without a lasting link to the 7th house or the Navamsa. A relationship more likely to lead to marriage usually shows 5th-house energy connected firmly to the 7th, so that romance has a committed direction."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does my family oppose my love marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrologers look at the 9th house (father, tradition, religion) and 10th house (social status, duty), the traditional guardians of marriage alliances. When they are afflicted or conflict with your 5th and 7th house energy, family hesitation is a common pattern — not a personal failure, and not a sign that acceptance is impossible."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Dasha matter for love marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, but in a specific way. The Dasha shows when the love-marriage indications already present in the birth chart become active; it cannot turn a family-guided chart into a love-marriage chart. Estimating when marriage itself may happen combines Dasha with the Navamsa and transits — see the Marriage Timing guide."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is Gandharva Vivah?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Gandharva Vivah is one of the eight forms of marriage described in classical Hindu texts — a union based on the mutual love and consent of the couple. In astrology the term is often used for love marriage, and the Gandharva Vivah yoga described above refers to strong, well-supported 5th and 7th lords. It describes a tendency in the chart, not a guarantee."
+                }
+              }
+            ]
           }
         ]
       },
@@ -1124,7 +1527,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "8/8",
         "reportDestinationsRepeated": true
@@ -1338,7 +1741,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -1378,6 +1782,76 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या अरेंज्ड मैरिज कुंडली वाला व्यक्ति प्रेम विवाह कर सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हाँ। ज्योतिष प्रवृत्तियों और सहजता का वर्णन करता है, निश्चित परिणामों का नहीं। जिसकी कुंडली परिवार-निर्देशित विवाह की ओर झुकती है, वह भी स्वयं साथी चुन सकता है — बस उसे अधिक बाधाओं का सामना करना पड़ सकता है, या उसका मार्ग कुछ कम पारंपरिक हो सकता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या प्रेम विवाह के लिए राहु आवश्यक है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। राहु प्रेम विवाह की कुंडलियों में आम है क्योंकि यह परंपरा से हटकर चलने की प्रेरणा देता है, पर स्पष्ट पंचम-सप्तम संबंध, शुक्र या शुक्र-मंगल का संबंध भी राहु के बिना प्रेम विवाह का समर्थन कर सकता है। राहु के बिना प्रेम विवाह अक्सर अधिक पारंपरिक रूप में होता है — प्रायः परिवार की भागीदारी और स्वीकृति के साथ।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या होगा यदि मेरे पंचम और सप्तम भाव का कोई संबंध नहीं है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "तब प्रेम विवाह की प्रवृत्ति कमजोर होती है, समाप्त नहीं। शुक्र, नवांश या अन्य सहायक कारक फिर भी स्वयं चुने गए साथी की ओर संकेत कर सकते हैं। अक्सर परिणाम प्रेम और अरेंज्ड विवाह का मेल होता है — भावनात्मक जुड़ाव होता है, पर विवाह कैसे होगा इसमें परिवार की भूमिका बड़ी होती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या उपाय प्रेम विवाह की गारंटी दे सकते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। उपाय किसी को आपसे प्रेम करने के लिए या आपके परिवार को सहमत होने के लिए बाध्य नहीं कर सकते। परंपरागत रूप से इनका उपयोग अपने निर्णयों में स्पष्टता, धैर्य और संतुलन के लिए किया जाता है। इन्हें अपनी आंतरिक स्थिति के लिए वैकल्पिक सहायता मानें, दूसरों को बदलने या परिणाम तय करने का साधन नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "ज्योतिष क्षणिक आकर्षण और विवाह तक पहुँचने वाले संबंध में अंतर कैसे करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "क्षणिक आकर्षण प्रायः पंचम भाव की अल्पकालिक सक्रियता के रूप में दिखता है — अक्सर किसी गुजरते गोचर के दौरान — जिसका सप्तम भाव या नवांश से स्थायी संबंध नहीं होता। विवाह तक पहुँचने की अधिक संभावना वाले संबंध में पंचम भाव की ऊर्जा सप्तम भाव से मज़बूती से जुड़ी होती है, जिससे प्रेम को प्रतिबद्धता की दिशा मिलती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मेरा परिवार मेरे प्रेम विवाह का विरोध क्यों करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिषी 9वें भाव (पिता, परंपरा, धर्म) और 10वें भाव (सामाजिक प्रतिष्ठा, कर्तव्य) को देखते हैं, जो परंपरागत रूप से विवाह संबंधों के संरक्षक हैं। जब ये पीड़ित हों या आपके पंचम-सप्तम भाव की ऊर्जा से टकराएँ, तो परिवार की हिचक एक आम प्रवृत्ति है — यह व्यक्तिगत विफलता नहीं, और न ही इसका अर्थ है कि स्वीकृति असंभव है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या प्रेम विवाह के लिए दशा मायने रखती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हाँ, पर एक विशेष तरीके से। दशा बताती है कि जन्मकुंडली में पहले से मौजूद प्रेम विवाह के योग कब सक्रिय होते हैं; यह परिवार-निर्देशित कुंडली को प्रेम विवाह की कुंडली नहीं बना सकती। विवाह कब हो सकता है, इसका अनुमान दशा, नवांश और गोचर को मिलाकर लगाया जाता है — इसके लिए विवाह के समय की मार्गदर्शिका देखें।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "गंधर्व विवाह क्या है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "गंधर्व विवाह शास्त्रीय हिंदू ग्रंथों में वर्णित विवाह के आठ प्रकारों में से एक है — युगल के आपसी प्रेम और सहमति पर आधारित विवाह। ज्योतिष में यह शब्द अक्सर प्रेम विवाह के लिए प्रयोग होता है, और ऊपर बताया गया गंधर्व विवाह योग मज़बूत और शुभ प्रभाव वाले पंचमेश व सप्तमेश को दर्शाता है। यह कुंडली की एक प्रवृत्ति है, गारंटी नहीं।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1387,7 +1861,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": false,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "8/8",
         "reportDestinationsRepeated": true
@@ -1625,7 +2099,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -1665,6 +2140,76 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can a kundli indicate an arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A kundli can indicate a tendency toward a family-assisted marriage, not a certainty. Astrologers look for the 7th lord connecting with the 2nd, 9th or 11th house lords, Jupiter’s influence on the 7th, a relatively weak 5th–7th link and supporting confirmation in the Navamsa. When several of these appear together, the chart tends to support an arranged path; personal choice and circumstances still shape the outcome."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which houses are considered for arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 7th house and its lord are central. They are read together with the 2nd house (family), the 9th house (tradition and elders) and the 11th house (social and community network). The 5th house is checked as the counterweight for romance, and the 4th and 10th houses add supporting context about home and social standing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Jupiter or Venus alone indicate an arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Jupiter’s influence on the 7th house supports a traditional, family-blessed path, and Venus supports marriage in general, but neither decides the question alone. Venus in particular can lean either way depending on its connections. Both are read alongside the 7th lord and the family houses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does an arranged marriage mean I have no say?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. A chart that favors a family-assisted path describes how introductions are likely to come about, not who makes the final decision. In practice, an arranged process works best as a collaboration: the family helps find and introduce, and the couple decides. Your consent and judgment remain central."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can love develop before or within an arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Many arranged marriages include a period of getting to know each other, and affection often grows after the wedding. Astrologically, a well-placed Venus or a supportive 5th lord can suggest warmth developing within a family-arranged match. How the relationship grows over the years is covered in the Married Life guide."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Saturn on the 7th mean a difficult arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not necessarily. Saturn on the 7th house is often read as a serious, duty-minded approach to marriage and a preference for a considered, family-consulted decision. It may bring formality or a slower start, but with benefic support it tends to describe a stable bond that strengthens over time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Dasha decide whether my marriage will be arranged?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. The Dasha shows when the marriage indications already present in the birth chart become active — for example, a period when family members begin looking for proposals. It does not turn a romance-leaning chart into an arranged one. When marriage itself may happen is explained in the Marriage Timing guide."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can astrology guarantee whether my marriage will be love or arranged?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Astrology shows tendencies and relative ease — which path the chart supports more naturally. Many charts carry both love and arranged indications, and personal choice, family and circumstances shape the result. For the love-marriage side of the question, see the Love Marriage guide."
+                }
+              }
+            ]
           }
         ]
       },
@@ -1674,7 +2219,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "23/23",
         "reportDestinationsRepeated": true
@@ -1910,7 +2455,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -1950,6 +2496,76 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या कुंडली से अरेंज मैरिज का संकेत मिल सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "कुंडली परिवार की सहायता वाले विवाह की ओर प्रवृत्ति का संकेत दे सकती है, निश्चितता का नहीं। ज्योतिषी देखते हैं कि सप्तमेश द्वितीय, नवम या एकादश भाव के स्वामियों से जुड़ा है या नहीं, सप्तम भाव पर गुरु का प्रभाव है या नहीं, पंचम–सप्तम संबंध अपेक्षाकृत कमज़ोर है या नहीं, और नवांश से इसकी पुष्टि होती है या नहीं। जब इनमें से कई संकेत एक साथ हों, तो कुंडली अरेंज मार्ग का समर्थन करती है; फिर भी व्यक्तिगत पसंद और परिस्थितियाँ परिणाम को आकार देती हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अरेंज मैरिज के लिए कौन-से भाव देखे जाते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "सप्तम भाव और सप्तमेश केंद्रीय हैं। इन्हें द्वितीय भाव (परिवार), नवम भाव (परंपरा और बड़े-बुज़ुर्ग) और एकादश भाव (सामाजिक और सामुदायिक दायरा) के साथ पढ़ा जाता है। प्रेम के संतुलन के रूप में पंचम भाव देखा जाता है, और चतुर्थ व दशम भाव घर और सामाजिक प्रतिष्ठा के बारे में सहायक संदर्भ देते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अकेले गुरु या शुक्र अरेंज मैरिज का संकेत देते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। सप्तम भाव पर गुरु का प्रभाव पारंपरिक, परिवार के आशीर्वाद वाले मार्ग का समर्थन करता है, और शुक्र सामान्य रूप से विवाह का समर्थन करता है, पर दोनों में से कोई भी अकेले यह प्रश्न तय नहीं करता। विशेषकर शुक्र अपने संबंधों के अनुसार किसी भी ओर झुक सकता है। दोनों को सप्तमेश और परिवार से जुड़े भावों के साथ पढ़ा जाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अरेंज मैरिज का अर्थ है कि मेरी कोई राय नहीं होगी?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। परिवार की सहायता वाले मार्ग का समर्थन करने वाली कुंडली यह बताती है कि परिचय कैसे होने की संभावना है, यह नहीं कि अंतिम निर्णय कौन लेगा। व्यवहार में अरेंज प्रक्रिया सहयोग के रूप में सबसे अच्छी चलती है: परिवार खोजने और मिलवाने में मदद करता है, और निर्णय युगल लेता है। आपकी सहमति और समझ केंद्र में रहती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अरेंज मैरिज से पहले या उसके भीतर प्रेम विकसित हो सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हाँ। कई अरेंज मैरिज में एक-दूसरे को जानने का समय होता है, और विवाह के बाद भी स्नेह अक्सर बढ़ता है। ज्योतिष में अच्छी स्थिति वाला शुक्र या सहायक पंचमेश परिवार द्वारा तय रिश्ते में भी आत्मीयता विकसित होने का संकेत दे सकता है। वर्षों में संबंध कैसे बढ़ता है, यह वैवाहिक जीवन मार्गदर्शिका में बताया गया है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सप्तम भाव में शनि का अर्थ कठिन अरेंज मैरिज है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज़रूरी नहीं। सप्तम भाव में शनि को अक्सर विवाह के प्रति गंभीर और कर्तव्य-प्रधान दृष्टिकोण, तथा परिवार से परामर्श करके सोच-समझकर निर्णय लेने की पसंद के रूप में पढ़ा जाता है। इससे औपचारिकता या धीमी शुरुआत हो सकती है, पर शुभ ग्रहों के समर्थन से यह स्थिर संबंध दर्शाता है जो समय के साथ मज़बूत होता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या दशा तय करती है कि मेरा विवाह अरेंज होगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। दशा बताती है कि जन्मकुंडली में पहले से मौजूद विवाह के योग कब सक्रिय होते हैं — जैसे वह अवधि जब परिवार रिश्ते देखना शुरू करता है। यह प्रेम की ओर झुकी कुंडली को अरेंज वाली कुंडली नहीं बनाती। विवाह कब हो सकता है, यह विवाह के समय की मार्गदर्शिका में समझाया गया है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या ज्योतिष गारंटी दे सकता है कि मेरा विवाह लव होगा या अरेंज?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। ज्योतिष प्रवृत्तियाँ और सहजता दिखाता है — कि कुंडली किस मार्ग का अधिक स्वाभाविक समर्थन करती है। कई कुंडलियों में लव और अरेंज दोनों के संकेत होते हैं, और व्यक्तिगत पसंद, परिवार और परिस्थितियाँ परिणाम तय करती हैं। प्रश्न के प्रेम विवाह वाले पक्ष के लिए प्रेम विवाह मार्गदर्शिका देखें।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1959,7 +2575,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": false,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "23/23",
         "reportDestinationsRepeated": true
@@ -2195,7 +2811,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -2235,6 +2852,84 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why is my marriage getting delayed according to astrology?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrologers look for a combination of factors: an afflicted or weakly placed 7th house or 7th lord, the influence of Saturn, Mars, Rahu or Ketu on them, a challenged Venus or Jupiter, and supporting signs such as a combust or retrograde 7th lord or stress in the Navamsa. Several of these together may indicate a slower path; one alone does not. Real-life circumstances matter as well, so a full reading considers both."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which house is linked with delay in marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 7th house and its lord are central. Astrologers also look at the 2nd house (family), the 8th house (obstacles), the 1st house (personal readiness) and the 12th house (solitude and distance), together with the Navamsa. No single house decides the question."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Saturn in the 7th always delay marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Saturn in the 7th house is often associated with a slower, more cautious and responsibility-minded approach to marriage, but its effect depends on its sign, strength and the support it receives. With benefic support it frequently describes a stable, mature partnership rather than a problem."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can Mars cause delay in marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Mars is not a delay planet in itself. A strongly afflicted Mars on the 7th house or its lord may contribute to friction or impatience that slows relationships down. Whether it matters depends on the rest of the chart; the Manglik question in kundli matching is a separate topic."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can Rahu or Ketu delay marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "They can contribute. Rahu may point to unusual or very specific expectations of a partner; Ketu may point to a phase of detachment when marriage feels less important. Neither means marriage will not happen, and both are read together with the 7th lord, Venus and Jupiter."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does a weak or combust 7th lord mean late marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It may indicate a more effortful path, but it is not a verdict. A combust 7th lord can suggest partnership matters are overshadowed for a while, and a weak 7th lord can suggest a longer search. Support from Jupiter, Venus or a strong Navamsa often balances this."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does delayed marriage mean I will not marry?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. A delay indication describes a slower or more effortful path, not the absence of marriage. No single placement, dosha or Dasha shows that someone will never marry, and astrology describes tendencies rather than certainties. See the section above on why delayed marriage does not mean no marriage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can astrology tell when the delay will end?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrology can describe periods that are more or less supportive for marriage, by combining Dasha with the Navamsa and transits — not a fixed date. That timing method has its own guide: see Marriage Timing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there remedies for delayed marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Traditional practices — patience and service where Saturn is involved, mantras or stotras for Venus and Jupiter — are used for inner balance and clarity. They are optional and cannot promise a marriage. Practical steps such as self-development and honest conversations with family often matter just as much."
+                }
+              }
+            ]
           }
         ]
       },
@@ -2244,7 +2939,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "9/9",
         "collapsedBodiesInServer": "9/9",
         "reportDestinationsRepeated": true
@@ -2479,7 +3174,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -2519,6 +3215,84 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "ज्योतिष के अनुसार मेरी शादी में देरी क्यों हो रही है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिषी कई कारकों के मेल को देखते हैं: पीड़ित या कमज़ोर स्थिति वाला सप्तम भाव या सप्तमेश, उन पर शनि, मंगल, राहु या केतु का प्रभाव, कमज़ोर शुक्र या गुरु, और अस्त या वक्री सप्तमेश अथवा नवांश में दबाव जैसे सहायक संकेत। इनमें से कई एक साथ हों तो धीमे मार्ग का संकेत हो सकता है; अकेला एक कारक नहीं। वास्तविक जीवन की परिस्थितियाँ भी मायने रखती हैं, इसलिए पूरा विश्लेषण दोनों को देखता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "शादी में देरी से कौन-सा भाव जुड़ा है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "सप्तम भाव और सप्तमेश केंद्रीय हैं। ज्योतिषी द्वितीय भाव (परिवार), अष्टम भाव (बाधाएँ), प्रथम भाव (व्यक्तिगत तैयारी) और द्वादश भाव (एकांत और दूरी) को भी नवांश के साथ देखते हैं। कोई एक भाव इस प्रश्न का निर्णय नहीं करता।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सप्तम भाव में शनि हमेशा शादी में देरी करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। सप्तम भाव में शनि को अक्सर विवाह के प्रति धीमे, सावधान और ज़िम्मेदारी-भरे दृष्टिकोण से जोड़ा जाता है, पर इसका प्रभाव इसकी राशि, शक्ति और मिलने वाले समर्थन पर निर्भर करता है। शुभ ग्रहों के समर्थन से यह अक्सर किसी समस्या के बजाय स्थिर और परिपक्व साझेदारी दर्शाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मंगल शादी में देरी का कारण बन सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "मंगल अपने-आप में देरी का ग्रह नहीं है। सप्तम भाव या सप्तमेश पर गहराई से पीड़ित मंगल ऐसे टकराव या अधीरता में योगदान दे सकता है जिससे संबंध धीमे पड़ें। यह कितना महत्वपूर्ण है, यह बाकी कुंडली पर निर्भर करता है; कुंडली मिलान में मांगलिक का प्रश्न अलग विषय है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या राहु या केतु शादी में देरी कर सकते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ये योगदान दे सकते हैं। राहु साथी के बारे में असामान्य या बहुत विशिष्ट अपेक्षाओं का संकेत दे सकता है; केतु विरक्ति के ऐसे दौर का संकेत दे सकता है जब विवाह कम महत्वपूर्ण लगे। दोनों में से किसी का अर्थ विवाह न होना नहीं है, और दोनों को सप्तमेश, शुक्र और गुरु के साथ पढ़ा जाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या कमज़ोर या अस्त सप्तमेश का अर्थ देर से शादी है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "यह अधिक प्रयास वाले मार्ग का संकेत दे सकता है, पर यह कोई अंतिम निर्णय नहीं है। अस्त सप्तमेश संकेत दे सकता है कि कुछ समय तक साझेदारी के विषय दबे रहें, और कमज़ोर सप्तमेश लंबी खोज का संकेत दे सकता है। गुरु, शुक्र या मज़बूत नवांश का समर्थन अक्सर इसे संतुलित करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या शादी में देरी का अर्थ है कि मेरी शादी नहीं होगी?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। देरी का संकेत धीमे या अधिक प्रयास वाले मार्ग का वर्णन करता है, विवाह के न होने का नहीं। कोई एक ग्रह-स्थिति, दोष या दशा यह नहीं दिखाती कि किसी का विवाह कभी नहीं होगा, और ज्योतिष निश्चितताएँ नहीं, प्रवृत्तियाँ बताता है। ऊपर दिया गया खंड देखें कि शादी में देरी का अर्थ विवाह न होना क्यों नहीं है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या ज्योतिष बता सकता है कि देरी कब खत्म होगी?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिष दशा, नवांश और गोचर को मिलाकर विवाह के लिए अधिक या कम सहायक अवधियों का वर्णन कर सकता है — कोई तय तारीख नहीं। समय निर्धारण की इस विधि पर अलग मार्गदर्शिका है: विवाह के समय की मार्गदर्शिका देखें।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या शादी में देरी के लिए उपाय हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "पारंपरिक अभ्यास — जहाँ शनि शामिल हो वहाँ धैर्य और सेवा, शुक्र और गुरु के लिए मंत्र या स्तोत्र — आंतरिक संतुलन और स्पष्टता के लिए किए जाते हैं। ये वैकल्पिक हैं और विवाह का वादा नहीं कर सकते। आत्म-विकास और परिवार से खुली बातचीत जैसे व्यावहारिक कदम भी अक्सर उतने ही महत्वपूर्ण होते हैं।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -2528,7 +3302,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": false,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "9/9",
         "collapsedBodiesInServer": "9/9",
         "reportDestinationsRepeated": true
@@ -2722,7 +3496,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -2762,6 +3537,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How young is considered \"early\" for marriage in Vedic astrology?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "While traditionally early marriage means before 24-25, the Vedic definition is more precise: it is defined by the Dasha-Bhukti sequence that activates the 7th house and its lord early in the native's life. A native with a strong 7th house activation at 22 is experiencing early marriage by karmic design, regardless of the societal norm."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can early marriage happen if the 7th lord is debilitated?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is possible if the debilitated lord receives Neecha Bhanga (cancellation of debilitation) through specific planetary combinations — such as the lord of the debilitation sign being in a Kendra, or the exaltation lord aspecting the debilitated planet. In such cases, the initial weakness is converted into unexpected strength, and the marriage may still occur early, though it may bring initial adjustments."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does a strong Venus always guarantee an early marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A strong Venus is a major indicator but not a guarantee on its own. It must be supported by the 7th house strength and the correct Dasha period to manifest early. Venus strong in isolation — while other marriage indicators are weak or the Dasha activation is late — will produce a refined nature and capacity for love without necessarily producing early marriage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is early marriage destined for everyone with a strong 7th house?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. The Dasha sequence is the ultimate determinant of timing. A strong 7th house guarantees a good marriage potential — but if the 7th house activation Dasha arrives in the native's 30s or 40s, the marriage will manifest accordingly, regardless of how well-placed the 7th lord is. Strength governs quality; Dasha governs timing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What role does Mars play in early marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Mars acts as a catalyst for initiation. Its balanced energy can speed up the initiation of the marriage process if it is well-placed and not causing excessive conflict in the 7th house. However, Mars afflicting the 7th house tends to accelerate impulsive decisions rather than destined unions — speed without foundation. The distinction depends on whether Mars is driving or disturbing the 7th house."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can an early marriage be successful without a strong Navamsa?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is difficult. The Navamsa is essential for verifying the long-term stability and success of any marital promise shown in the Rashi chart. An early marriage indicated in the D1 but unsupported by the D9 may occur, but its long-term sustainability will be strained. Early marriage without Navamsa confirmation is premature marriage, not destined marriage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does the Moon's strength matter so much for early marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A strong Moon provides the emotional stability required to handle the responsibilities of marriage at a young age. Without a mature Moon, early marriage becomes an impulsive emotional decision driven by fleeting states rather than genuine readiness. The Moon is what ensures the \"early\" in early marriage is driven by karmic readiness rather than emotional impulse."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Should I perform remedies to speed up an early marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Remedies are helpful for mental alignment and internal calibration — not for altering the timing dictated by the Dasha sequence. If your chart has strong early marriage indicators, the Dasha window will open naturally. Remedies help you be more receptive and prepared when it does. They do not create a window that the chart has not permitted."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the main difference between early and immature marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Destined early marriage is supported by the chart's karmic promise and timing — the 7th house is strong, confirmed in the Navamsa, and the Dasha is delivering what the natal chart promised. Immature marriage is a result of external pressure or impulse, often lacking foundational planetary support and frequently showing heavy malefic afflictions to the 5th and 7th houses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How can I know if my early marriage is \"destined\"?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A detailed analysis of the Rashi chart, Dasha-Bhukti periods, and Navamsa chart by a knowledgeable astrologer can reveal whether the timing is supported by your karmic blueprint. Look for: a strong, unafflicted 7th house and lord; early activation of marriage-related Dashas; strong Venus and Moon; and confirmation of the D1 promise in the D9. All four layers agreeing is the clearest sign of a destined early marriage."
+                }
+              }
+            ]
           }
         ]
       },
@@ -2771,7 +3632,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "10/10",
         "reportDestinationsRepeated": false
@@ -2962,7 +3823,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -3002,6 +3864,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "वैदिक ज्योतिष में विवाह के लिए कितनी छोटी उम्र \"प्रारंभिक\" मानी जाती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "जबकि परंपरागत रूप से प्रारंभिक विवाह 24-25 से पहले का अर्थ है, वैदिक परिभाषा अधिक सटीक है: यह दशा-भुक्ति अनुक्रम द्वारा परिभाषित है जो जातक के जीवन में जल्दी 7वें भाव और इसके स्वामी को सक्रिय करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या प्रारंभिक विवाह हो सकता है यदि सप्तमेश नीच हो?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "यह संभव है यदि नीच स्वामी को नीच भंग (नीचता का रद्दीकरण) विशिष्ट ग्रह संयोजनों के माध्यम से प्राप्त हो — जैसे नीचता राशि का स्वामी केंद्र में हो। ऐसे मामलों में, प्रारंभिक कमजोरी अप्रत्याशित शक्ति में बदल जाती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मजबूत शुक्र हमेशा प्रारंभिक विवाह की गारंटी देता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "मजबूत शुक्र एक प्रमुख संकेतक है लेकिन अपने आप में गारंटी नहीं है। इसे 7वें भाव की शक्ति और सही दशा अवधि द्वारा समर्थित होना चाहिए। अकेले मजबूत शुक्र — जबकि अन्य विवाह संकेतक कमजोर हों — प्रेम की क्षमता देगा लेकिन जरूरी नहीं कि प्रारंभिक विवाह हो।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मजबूत सप्तम भाव वाले सभी के लिए प्रारंभिक विवाह नियत है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। दशा अनुक्रम समय का अंतिम निर्धारक है। एक मजबूत 7वाँ भाव अच्छी विवाह क्षमता की गारंटी देता है — लेकिन यदि 7वें भाव की सक्रियता दशा 30 या 40 के दशक में आती है, तो विवाह तदनुसार प्रकट होगा।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "प्रारंभिक विवाह में मंगल की क्या भूमिका है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "मंगल शुरुआत के लिए उत्प्रेरक के रूप में कार्य करता है। इसकी संतुलित ऊर्जा विवाह प्रक्रिया की शुरुआत को तेज कर सकती है यदि यह सुस्थित हो। हालाँकि, सप्तम भाव को पीड़ित करने वाला मंगल नियत मिलन के बजाय आवेगी निर्णयों को तेज करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या प्रारंभिक विवाह मजबूत नवांश के बिना सफल हो सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "यह कठिन है। नवांश राशि कुंडली में दिखाए गए किसी भी वैवाहिक वादे की दीर्घकालिक स्थिरता और सफलता को सत्यापित करने के लिए आवश्यक है। D1 में संकेतित लेकिन D9 द्वारा असमर्थित प्रारंभिक विवाह हो सकता है, लेकिन इसकी दीर्घकालिक स्थिरता तनावपूर्ण होगी।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "प्रारंभिक विवाह के लिए चंद्रमा की शक्ति इतनी क्यों मायने रखती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "मजबूत चंद्रमा कम उम्र में विवाह की जिम्मेदारियों को संभालने के लिए आवश्यक भावनात्मक स्थिरता प्रदान करता है। परिपक्व चंद्रमा के बिना, प्रारंभिक विवाह एक आवेगी भावनात्मक निर्णय बन जाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मुझे प्रारंभिक विवाह को तेज करने के लिए उपाय करने चाहिए?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "उपाय मानसिक संरेखण और आंतरिक अंशांकन के लिए सहायक हैं — दशा अनुक्रम द्वारा निर्धारित समय को बदलने के लिए नहीं। यदि आपकी कुंडली में मजबूत प्रारंभिक विवाह संकेतक हैं, तो दशा खिड़की स्वाभाविक रूप से खुलेगी।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "प्रारंभिक और अपरिपक्व विवाह के बीच मुख्य अंतर क्या है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नियत प्रारंभिक विवाह कुंडली के कार्मिक वादे और समय द्वारा समर्थित है — 7वाँ भाव मजबूत है, नवांश में पुष्टि, और दशा वही दे रही है जो जन्म कुंडली ने वादा किया था। अपरिपक्व विवाह बाहरी दबाव या आवेग का परिणाम है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मैं कैसे जान सकता हूँ कि मेरा प्रारंभिक विवाह \"नियत\" है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "एक जानकार ज्योतिषी द्वारा राशि कुंडली, दशा-भुक्ति अवधियों और नवांश कुंडली का विस्तृत विश्लेषण प्रकट कर सकता है कि क्या समय आपके कार्मिक ब्लूप्रिंट द्वारा समर्थित है। देखें: मजबूत, अपीड़ित 7वाँ भाव; विवाह-संबंधित दशाओं की प्रारंभिक सक्रियता; मजबूत शुक्र और चंद्रमा; और D9 में D1 वादे की पुष्टि।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -3011,7 +3959,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "10/10",
         "reportDestinationsRepeated": false
@@ -3227,7 +4175,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -3267,6 +4216,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does every divorce guarantee a second marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. A second marriage must be specifically promised by the natal chart and triggered by the correct Dasha sequence."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How can I tell if my second marriage will be successful?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "By analyzing the 9th house, its lord, and the strength of the 7th house/lord in the Navamsa chart, an experienced astrologer can provide insights."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is the 9th house definitely the house of the second spouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is a widely accepted principle in traditional Vedic astrology, as it represents the partner following the first."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can a strong Jupiter mitigate the challenges of a second marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely. A strong Jupiter brings the wisdom, maturity, and perspective necessary to learn from past failures and build a more stable partnership."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does Rahu in the 7th house affect the possibility of a second marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Rahu often creates volatility and unconventional experiences, which can lead to the dissolution of a first union and the potential for a complex or unconventional second one."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are remedies effective if the chart indicates a second marriage is destined?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Remedies help in preparing the mind and purifying the karmic energy, but they do not create a second marriage if it is not promised by the natal chart."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does the 8th house matter so much in marital dissolution?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 8th house represents transformation and sudden, often disruptive changes; its activation during a Dasha period is frequently linked to the end of a relationship."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can a second marriage happen if the first one never officially ended?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In the context of Vedic Astrology, we look at the karmic dissolution. If the first union is functionally dead, the potential for a second can manifest, but legal factors in the native's life also play a significant role."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the main difference between a first and second marriage in the chart?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The first marriage is primarily indicated by the 7th house and its lord; the second is studied through the 2nd or 9th house, and the Navamsa chart's specific indications for a second partner."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long should one wait before pursuing a second marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "There is no fixed time frame. The decision should be made when the individual has gained clarity and emotional maturity, supported by the timing indicated in their Dasha sequence."
+                }
+              }
+            ]
           }
         ]
       },
@@ -3276,7 +4311,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "15/15",
         "reportDestinationsRepeated": false
@@ -3492,7 +4527,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -3532,6 +4568,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या हर तलाक दूसरे विवाह की गारंटी देता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। दूसरे विवाह का जन्म चार्ट द्वारा विशेष रूप से वादा किया जाना चाहिए और सही दशा अनुक्रम द्वारा ट्रिगर किया जाना चाहिए।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मैं कैसे बता सकता हूँ कि मेरा दूसरा विवाह सफल होगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नवम भाव, इसके स्वामी और नवांश चार्ट में सप्तम भाव/स्वामी की शक्ति का विश्लेषण करके, एक अनुभवी ज्योतिषी अंतर्दृष्टि प्रदान कर सकते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या नवम भाव निश्चित रूप से दूसरे जीवनसाथी का घर है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "यह पारंपरिक वैदिक ज्योतिष में व्यापक रूप से स्वीकृत सिद्धांत है, क्योंकि यह पहले के बाद आने वाले साथी का प्रतिनिधित्व करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या एक मजबूत गुरु दूसरे विवाह की चुनौतियों को कम कर सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "बिल्कुल। एक मजबूत गुरु पिछली असफलताओं से सीखने और अधिक स्थिर साझेदारी बनाने के लिए आवश्यक ज्ञान, परिपक्वता और परिप्रेक्ष्य लाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "सप्तम भाव में राहु दूसरे विवाह की संभावना को कैसे प्रभावित करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "राहु अक्सर अस्थिरता और अपरंपरागत अनुभव पैदा करता है, जो पहले मिलन के विघटन और एक जटिल या अपरंपरागत दूसरे की संभावना का कारण बन सकता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या उपाय प्रभावी हैं यदि चार्ट दूसरे विवाह का संकेत देता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "उपाय मन को तैयार करने और कार्मिक ऊर्जा को शुद्ध करने में मदद करते हैं, लेकिन यदि वे जन्म चार्ट द्वारा वादा नहीं किए गए हैं तो वे दूसरा विवाह नहीं बनाते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "वैवाहिक विघटन में अष्टम भाव इतना महत्वपूर्ण क्यों है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "अष्टम भाव परिवर्तन और अचानक, अक्सर विघटनकारी परिवर्तनों का प्रतिनिधित्व करता है; दशा अवधि के दौरान इसकी सक्रियता अक्सर रिश्ते के अंत से जुड़ी होती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या दूसरा विवाह हो सकता है यदि पहला आधिकारिक रूप से समाप्त नहीं हुआ है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "वैदिक ज्योतिष के संदर्भ में, हम कार्मिक विघटन को देखते हैं। यदि पहला मिलन कार्यात्मक रूप से मृत है, तो दूसरे की संभावना प्रकट हो सकती है, लेकिन व्यक्ति के जीवन में कानूनी कारक भी महत्वपूर्ण भूमिका निभाते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "चार्ट में पहले और दूसरे विवाह में मुख्य अंतर क्या है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "पहला विवाह मुख्य रूप से सप्तम भाव और उसके स्वामी द्वारा इंगित किया जाता है; दूसरा दूसरे या नवम भाव के माध्यम से, और नवांश चार्ट के दूसरे साथी के लिए विशिष्ट संकेतों के माध्यम से अध्ययन किया जाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "दूसरे विवाह के लिए आगे बढ़ने से पहले व्यक्ति को कितने समय तक इंतजार करना चाहिए?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "कोई निश्चित समय सीमा नहीं है। निर्णय तब लिया जाना चाहिए जब व्यक्ति ने स्पष्टता और भावनात्मक परिपक्वता प्राप्त कर ली हो, जो उनके दशा अनुक्रम में इंगित समय द्वारा समर्थित हो।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -3541,7 +4663,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "15/15",
         "reportDestinationsRepeated": false
@@ -3726,7 +4848,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -3766,6 +4889,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can Vedic astrology predict divorce with certainty?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Vedic astrology indicates karmic tendencies and challenges, but the ultimate outcome depends on the efforts and maturity of both partners. The chart maps the probability space, not the predetermined destination — conscious, sustained effort can navigate even the most challenging configurations toward a constructive outcome."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my horoscope shows divorce possibilities?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Challenges are karmic opportunities for growth. Understanding them allows the native to cultivate the maturity to navigate them successfully. A chart that shows divorce possibilities is a chart that is asking for a higher level of self-awareness, communication, and emotional maturity — qualities that, when developed, can transform the challenge into a source of profound personal and relational growth."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Navamsa chart reveal the stability of my marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The Navamsa is the indispensable tool for understanding the inner reality and structural strength of the marital union. It reveals the qualities and patterns that emerge in the intimacy and sustained reality of marriage — what the Rashi chart alone cannot fully predict. A strong Navamsa is one of the most reliable indicators of a marriage with genuine endurance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can remedies prevent divorce?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Remedies are designed to align your own consciousness, which shifts the dynamics of the union toward harmony and growth. They work on the individual's inner state — refining the quality of awareness, patience, and empathy brought into the relationship — rather than overriding the partner or the karmic configuration of the charts."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How important is Dasha in analyzing marriage stability?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dasha is crucial — it defines the karmic themes the couple navigates at any given time and the timing of significant marital events. A difficult Dasha period does not seal the fate of a marriage; it highlights the areas where the greatest conscious effort is currently required. Understanding the Dasha can help partners approach a challenging period with greater awareness rather than reactive conflict."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the significance of the 8th house in marriage stability?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 8th house governs shared assets, deep vulnerabilities, and how the couple handles crises. It is the 2nd from the 7th house, indicating the sustenance of the marriage. A strong 8th house exchange in both charts suggests the capacity to deepen and transform the bond through difficulty; an afflicted 8th house warns of potential hidden crises or sudden upheavals that can destabilize the foundation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Rahu in the 7th house always negative for stability?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Rahu in the 7th house indicates an intense or unconventional relationship that requires high levels of maturity and trust to navigate — not a partnership that is automatically destined to fail. Such relationships often carry an unusual magnetism and can be highly transformative when both partners commit to understanding the deeper karmic purpose of the union."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can astrology tell if a divorce is final?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrology can show the karmic indicators for separation and the periods during which those indicators are most strongly activated. However, reconciliation is always a possibility based on the conscious effort of both partners. No configuration in the chart removes the possibility of renewal — it can only indicate the intensity of the karmic test being navigated."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I use this knowledge ethically?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Use this knowledge to foster self-improvement, empathy, and informed decision-making. Astrological insights into marital challenges are tools for developing greater understanding of your own patterns and greater compassion for your partner's — never for judging, manipulating, or prejudging another person based on their chart or yours."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is stability analysis the same as predicting the future?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Stability analysis is a snapshot of current karmic trends and the structural strengths and challenges present in both charts. Predicting the future requires a deep, ongoing understanding of karmic evolution — how both partners grow, adapt, and choose over time. The chart creates the conditions; the partners' choices determine the outcome."
+                }
+              }
+            ]
           }
         ]
       },
@@ -3775,7 +4984,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
@@ -3956,7 +5165,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -3996,6 +5206,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या वैदिक ज्योतिष निश्चितता के साथ तलाक की भविष्यवाणी कर सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। वैदिक ज्योतिष कार्मिक प्रवृत्तियों और चुनौतियों को इंगित करता है, लेकिन अंतिम परिणाम दोनों साझेदारों के प्रयासों और परिपक्वता पर निर्भर करता है। कुंडली संभावना स्थान को मैप करती है, पूर्वनिर्धारित गंतव्य को नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या होगा यदि मेरी जन्म कुंडली तलाक की संभावनाएं दिखाती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "चुनौतियां विकास के लिए कार्मिक अवसर हैं। उन्हें समझने से जातक को उन्हें सफलतापूर्वक नेविगेट करने की परिपक्वता विकसित करने की अनुमति मिलती है। तलाक की संभावनाएं दिखाने वाली कुंडली एक उच्च स्तर की आत्म-जागरूकता, संचार और भावनात्मक परिपक्वता की मांग कर रही है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या नवांश चार्ट मेरे विवाह की स्थिरता को प्रकट करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हां। नवांश वैवाहिक मिलन की आंतरिक वास्तविकता और संरचनात्मक शक्ति को समझने के लिए अपरिहार्य उपकरण है। यह विवाह की अंतरंगता और निरंतर वास्तविकता में उभरने वाले गुणों और पैटर्न को प्रकट करता है — जो राशि चार्ट अकेले पूरी तरह से भविष्यवाणी नहीं कर सकता।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या उपाय तलाक को रोक सकते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, जो मिलन की गतिशीलता को सद्भाव और विकास की ओर स्थानांतरित करता है। वे व्यक्ति की आंतरिक स्थिति पर काम करते हैं — जागरूकता, धैर्य और सहानुभूति की गुणवत्ता को परिष्कृत करते हुए।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "विवाह स्थिरता के विश्लेषण में दशा कितनी महत्वपूर्ण है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "दशा महत्वपूर्ण है — यह उन कार्मिक विषयों को परिभाषित करती है जिन्हें जोड़ा किसी भी समय नेविगेट करता है और महत्वपूर्ण वैवाहिक घटनाओं का समय निर्धारित करती है। एक कठिन दशा अवधि विवाह का भाग्य नहीं तय करती; यह उन क्षेत्रों को उजागर करती है जहाँ वर्तमान में सबसे बड़े सचेत प्रयास की आवश्यकता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "विवाह स्थिरता में 8वें भाव का क्या महत्व है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "अष्टम भाव साझा संपत्ति, गहरी कमजोरियों और जोड़े के संकटों को संभालने के तरीके को नियंत्रित करता है। यह सप्तम भाव से दूसरा है, जो विवाह की जीविका को इंगित करता है। दोनों कुंडलियों में एक मजबूत अष्टम भाव आदान-प्रदान कठिनाई के माध्यम से बंधन को गहरा और परिवर्तित करने की क्षमता का सुझाव देता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सप्तम भाव में राहु स्थिरता के लिए हमेशा नकारात्मक है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। सप्तम भाव में राहु एक तीव्र या अपरंपरागत संबंध को इंगित करता है जिसे नेविगेट करने के लिए उच्च स्तर की परिपक्वता और विश्वास की आवश्यकता होती है — न कि एक साझेदारी जो स्वतः विफल होने के लिए नियत है। ऐसे रिश्ते अक्सर असामान्य चुंबकत्व वहन करते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या ज्योतिष बता सकता है कि तलाक अंतिम है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिष अलगाव के कार्मिक संकेतकों और उन अवधियों को दिखा सकता है जिनमें वे संकेतक सबसे मजबूती से सक्रिय होते हैं। हालांकि, दोनों साझेदारों के सचेत प्रयास के आधार पर सुलह हमेशा एक संभावना है। कुंडली में कोई भी विन्यास नवीकरण की संभावना को नहीं हटाता।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मैं इस ज्ञान का नैतिक रूप से उपयोग कैसे करूं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "इस ज्ञान का उपयोग आत्म-सुधार, सहानुभूति और सूचित निर्णय लेने को बढ़ावा देने के लिए करें। वैवाहिक चुनौतियों में ज्योतिषीय अंतर्दृष्टि आपके अपने पैटर्न की गहरी समझ विकसित करने के उपकरण हैं — किसी अन्य व्यक्ति को उनकी या आपकी कुंडली के आधार पर आंकने, हेरफेर करने या पूर्व-निर्णय करने के लिए कभी नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या स्थिरता विश्लेषण भविष्य की भविष्यवाणी के समान है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। स्थिरता विश्लेषण वर्तमान कार्मिक प्रवृत्तियों और दोनों कुंडलियों में मौजूद संरचनात्मक शक्तियों और चुनौतियों का एक स्नैपशॉट है। भविष्य की भविष्यवाणी के लिए कार्मिक विकास की गहरी, निरंतर समझ की आवश्यकता होती है। कुंडली स्थितियां बनाती है; साझेदारों के विकल्प परिणाम निर्धारित करते हैं।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -4005,7 +5301,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
@@ -4218,7 +5514,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -4258,6 +5555,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can Vedic astrology tell me exactly who I will marry?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Vedic astrology indicates tendencies, archetypes, and timing, but the final choice remains entirely with the individual. The chart maps the quality and nature of the partnership that karmic circumstances favor — it does not name a specific, predetermined person."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is it better to have a spouse with a similar chart?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not necessarily. Often, complementary energies create a stronger union than identical ones. A person who needs stability paired with a grounded, Saturn-strong partner, or someone whose emotional gaps are met by their partner's strengths — these complementary dynamics frequently produce more growth than mirrored charts."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my 7th house indicates challenges?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Challenges in the 7th house are not a verdict — they are karmic opportunities for growth. Understanding them early provides a crucial advantage: it helps in developing the maturity, patience, and specific emotional skills needed to navigate a more complex relational dynamic with wisdom rather than resistance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Navamsa chart reveal my partner's personality?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The Navamsa (D9) reveals the deeper, inner nature of the spouse — the qualities that emerge in the intimacy and day-to-day reality of marriage, which may not be apparent in the more outward indicators of the Rashi chart. It also reveals the underlying health and strength of the partnership itself."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can remedies change my spouse's nature?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Remedies in Vedic astrology are designed to align your own consciousness, not to change another person. As you cultivate greater patience, clarity, and compassion within yourself, the dynamics of the relationship naturally improve — because the quality of any interaction depends on both participants' inner states."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How important is the Darakaraka?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Darakaraka is highly significant in Jaimini astrology. It points to the soul-level archetype of the spouse — not just their outer personality but the deepest quality they are karmically designed to bring into your life. Analyzed alongside the 7th house and Navamsa, it provides a layered, nuanced picture of the partner."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I know the exact time of meeting my spouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrology can identify periods of high probability — specific Dasha windows and transit alignments that favor the meeting of a partner — but not usually the exact date or time. Think of it as narrowing a wide river into a specific channel rather than pinpointing a single moment."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What does it mean if my 7th Lord is in the 8th house?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 7th Lord in the 8th house suggests a karmic journey through deep transformation, intensity, and possibly shared resources or secrets. It often indicates a relationship that requires high levels of trust and a willingness to face the partner's — and one's own — hidden dimensions. This is a profound placement, not simply a problematic one."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Rahu in the 7th house always bad?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Rahu in the 7th house can indicate a highly unusual, intense, or transformative relationship — one that brings significant growth, ambition, or unconventional fulfilment. The key is the overall dignity of the 7th Lord and the support available from benefic aspects, which determine whether Rahu's amplifying energy serves the relationship positively."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How should I use this knowledge ethically?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Use astrological knowledge for self-improvement, empathy, and making informed decisions — never to control, judge, or pre-judge a partner. The purpose of understanding spouse nature through astrology is to approach partnership with greater wisdom, compassion, and realistic expectations, not to exercise power over another person's life choices."
+                }
+              }
+            ]
           }
         ]
       },
@@ -4267,7 +5650,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
@@ -4477,7 +5860,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -4517,6 +5901,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या वैदिक ज्योतिष मुझे बता सकता है कि मैं किससे शादी करूंगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। वैदिक ज्योतिष प्रवृत्तियों, आदर्शों और समय का संकेत देता है, लेकिन अंतिम विकल्प पूरी तरह से व्यक्ति के पास रहता है। कुंडली उस साझेदारी की गुणवत्ता और प्रकृति का नक्शा बनाती है जो कार्मिक परिस्थितियां पसंद करती हैं — यह किसी विशिष्ट, पूर्व-निर्धारित व्यक्ति का नाम नहीं लेती।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या समान कुंडली वाला जीवनसाथी होना बेहतर है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "जरूरी नहीं। अक्सर, पूरक ऊर्जाएं समान ऊर्जाओं की तुलना में एक मजबूत मिलन बनाती हैं। एक ऐसा व्यक्ति जिसे एक स्थिर, शनि-मजबूत साथी के साथ स्थिरता की आवश्यकता है, या कोई ऐसा व्यक्ति जिसकी भावनात्मक कमियां उनके साथी की ताकत से पूरी होती हैं — ये पूरक गतिशीलताएं अक्सर समान कुंडलियों की तुलना में अधिक विकास उत्पन्न करती हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या होगा यदि मेरा सप्तम भाव चुनौतियों का संकेत देता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "सप्तम भाव में चुनौतियां कोई फैसला नहीं हैं — वे विकास के कार्मिक अवसर हैं। उन्हें जल्दी समझने से एक महत्वपूर्ण लाभ मिलता है: यह प्रतिरोध के बजाय ज्ञान के साथ अधिक जटिल संबंधात्मक गतिशीलता को नेविगेट करने के लिए आवश्यक परिपक्वता, धैर्य और विशिष्ट भावनात्मक कौशल विकसित करने में मदद करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या नवांश चार्ट मेरे साथी के व्यक्तित्व को प्रकट करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हां। नवांश (D9) जीवनसाथी की गहरी, आंतरिक प्रकृति को प्रकट करता है — वे गुण जो विवाह की अंतरंगता और दिन-प्रतिदिन की वास्तविकता में उभरते हैं, जो राशि चार्ट के अधिक बाहरी संकेतकों में स्पष्ट नहीं हो सकते। यह साझेदारी की अंतर्निहित स्वास्थ्य और शक्ति को भी प्रकट करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या उपाय मेरे जीवनसाथी का स्वभाव बदल सकते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। वैदिक ज्योतिष में उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, किसी अन्य व्यक्ति को बदलने के लिए नहीं। जैसे-जैसे आप अपने भीतर अधिक धैर्य, स्पष्टता और करुणा विकसित करते हैं, रिश्ते की गतिशीलता स्वाभाविक रूप से सुधरती है — क्योंकि किसी भी बातचीत की गुणवत्ता दोनों प्रतिभागियों की आंतरिक अवस्थाओं पर निर्भर करती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "दारकारक कितना महत्वपूर्ण है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "दारकारक जैमिनी ज्योतिष में अत्यधिक महत्वपूर्ण है। यह जीवनसाथी के आत्मा-स्तरीय आदर्श की ओर इशारा करता है — न केवल उनका बाहरी व्यक्तित्व बल्कि वह गहरी गुणवत्ता जो वे कार्मिक रूप से आपके जीवन में लाने के लिए डिज़ाइन किए गए हैं। सप्तम भाव और नवांश के साथ विश्लेषण किया गया, यह साथी की एक स्तरीय, सूक्ष्म तस्वीर प्रदान करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मैं अपने जीवनसाथी से मिलने का सटीक समय जान सकता हूँ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिष उच्च संभावना की अवधियों की पहचान कर सकता है — विशिष्ट दशा विंडो और गोचर संरेखण जो साथी से मिलने का समर्थन करते हैं — लेकिन आमतौर पर सटीक तारीख या समय नहीं। इसे एक एकल क्षण को इंगित करने के बजाय एक विस्तृत नदी को एक विशिष्ट चैनल में संकुचित करने के रूप में सोचें।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "इसका क्या मतलब है यदि मेरा सप्तम स्वामी 8वें भाव में है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "सप्तम स्वामी का 8वें भाव में होना गहरे परिवर्तन, तीव्रता और संभवतः साझा संसाधनों या रहस्यों के माध्यम से एक कार्मिक यात्रा का सुझाव देता है। यह अक्सर ऐसे रिश्ते को इंगित करता है जिसके लिए उच्च स्तर के विश्वास और साथी की — तथा अपनी — छिपी हुई आयामों का सामना करने की इच्छा की आवश्यकता होती है। यह एक गहन स्थिति है, केवल समस्याग्रस्त नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सप्तम भाव में राहु हमेशा बुरा होता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। सप्तम भाव में राहु एक अत्यधिक असामान्य, तीव्र या परिवर्तनकारी रिश्ते का संकेत दे सकता है — जो महत्वपूर्ण विकास, महत्वाकांक्षा या अपरंपरागत पूर्ति लाता है। कुंजी सप्तम स्वामी की समग्र गरिमा और शुभ दृष्टियों से उपलब्ध समर्थन है, जो यह निर्धारित करता है कि राहु की प्रवर्धक ऊर्जा रिश्ते की सकारात्मक सेवा करती है या नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मुझे इस ज्ञान का नैतिक रूप से उपयोग कैसे करना चाहिए?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिषीय ज्ञान का उपयोग आत्म-सुधार, सहानुभूति और सूचित निर्णय लेने के लिए करें — कभी भी साथी को नियंत्रित करने, न्याय करने या पूर्व-निर्णय करने के लिए नहीं। ज्योतिष के माध्यम से जीवनसाथी के स्वभाव को समझने का उद्देश्य अधिक ज्ञान, करुणा और यथार्थवादी अपेक्षाओं के साथ साझेदारी के पास पहुंचना है, न कि किसी अन्य व्यक्ति के जीवन विकल्पों पर शक्ति का प्रयोग करना।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -4526,7 +5996,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": false,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
@@ -4712,7 +6182,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -4752,6 +6223,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can Vedic astrology predict the success of my marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Vedic astrology indicates karmic tendencies and potential challenges, but the success of a marriage depends on the conscious efforts and maturity of both partners. The chart is a map of potential, not a fixed verdict — how that potential is realized is determined by the daily choices both individuals make."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my horoscope shows marital problems?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Challenges indicated in the chart are karmic opportunities, not sentences. Understanding them allows the native to cultivate the necessary maturity to navigate them successfully — often transforming what could have been a source of conflict into the primary arena for personal growth and deepened connection."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Navamsa chart reveal my partner's nature?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The Navamsa reveals the deeper, inner nature of the partner and the stability of the marital union itself — the qualities and dynamics that emerge in the intimacy and day-to-day reality of marriage, which may not be visible in the Rashi chart alone."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can remedies fix my marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Remedies are designed to align your own consciousness, which shifts the dynamics and quality of the interaction within the marriage. They are not external interventions that change the partner or the circumstances directly — they refine the internal state of the native, which influences everything in the environment."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How important is Dasha in marriage analysis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dasha analysis is crucial. It determines the timing of events and the dominant karmic themes the couple navigates at any given time. Even a strongly-promised marriage chart requires a supportive Dasha window for the major events to materialize, and difficult periods often coincide with challenging Dasha combinations."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the significance of the 8th house in marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 8th house governs shared assets, the intensity of intimacy, and the transformative aspects of the union — how the couple navigates major crises, deep vulnerabilities, and the hidden dimensions of the relationship. A strong 8th house indicates the capacity for profound bonding under pressure."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Rahu in the 7th house always negative for marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Rahu in the 7th house indicates an unusual, intense, or karmically transformative relationship rather than a simply negative one. The quality of the outcome depends heavily on the overall dignity of the 7th Lord and the support available from benefic aspects or a strong Navamsa chart."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can astrology tell me if I will have a love or arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrology can show the nature of the partnership and the likely circumstances of meeting — for example, a strong 5th house suggests romance-driven attraction, while a strong 9th house suggests family-mediated processes — but not with absolute certainty. Multiple factors and the individual's own choices ultimately determine the form the union takes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I use this knowledge ethically?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Use astrological knowledge of married life to foster self-improvement, empathy, and informed decision-making — never to control, manipulate, or judge a partner. The purpose is to approach the relationship with greater wisdom and realistic expectations, and to identify opportunities for growth rather than ammunition for conflict."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is compatibility analysis the same as predicting marriage success?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Compatibility analysis is a snapshot of current alignment between two charts, whereas predicting success requires a deep understanding of ongoing karmic evolution — how both partners grow, adapt, and choose over time. Compatibility creates the conditions for success; sustained conscious effort builds it."
+                }
+              }
+            ]
           }
         ]
       },
@@ -4761,7 +6318,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "29/29",
         "reportDestinationsRepeated": false
@@ -4944,7 +6501,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -4984,6 +6542,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या वैदिक ज्योतिष मेरे विवाह की सफलता की भविष्यवाणी कर सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। वैदिक ज्योतिष कार्मिक प्रवृत्तियों और संभावित चुनौतियों को इंगित करता है, लेकिन विवाह की सफलता दोनों साझेदारों के सचेत प्रयासों और परिपक्वता पर निर्भर करती है। कुंडली क्षमता का एक नक्शा है, न कि एक निश्चित फैसला।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या होगा यदि मेरी कुंडली वैवाहिक समस्याओं को दर्शाती है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "कुंडली में इंगित चुनौतियां कार्मिक अवसर हैं, सजाएं नहीं। उन्हें समझने से जातक को उन्हें सफलतापूर्वक नेविगेट करने के लिए आवश्यक परिपक्वता विकसित करने की अनुमति मिलती है — अक्सर जो संघर्ष का स्रोत हो सकता था उसे व्यक्तिगत विकास के प्राथमिक क्षेत्र में बदल देती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या नवांश चार्ट मेरे साथी की प्रकृति को प्रकट करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हां। नवांश साथी की गहरी, आंतरिक प्रकृति और वैवाहिक मिलन की स्थिरता को प्रकट करता है — वे गुण और गतिशीलता जो विवाह की अंतरंगता और दिन-प्रतिदिन की वास्तविकता में उभरती हैं, जो केवल राशि चार्ट में दिखाई नहीं दे सकती।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या उपाय मेरे विवाह को ठीक कर सकते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, जो विवाह के भीतर बातचीत की गतिशीलता और गुणवत्ता को बदलता है। वे बाहरी हस्तक्षेप नहीं हैं जो साथी या परिस्थितियों को सीधे बदलते हैं — वे जातक की आंतरिक स्थिति को परिष्कृत करते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "विवाह विश्लेषण में दशा कितनी महत्वपूर्ण है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "दशा विश्लेषण महत्वपूर्ण है। यह घटनाओं के समय और उस प्रमुख कार्मिक विषयों को निर्धारित करता है जिन्हें जोड़ा किसी भी समय नेविगेट करता है। यहां तक कि एक दृढ़ता से वादा किए गए विवाह चार्ट के लिए प्रमुख घटनाओं को साकार करने के लिए एक सहायक दशा खिड़की की आवश्यकता होती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "विवाह में 8वें भाव का क्या महत्व है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "अष्टम भाव साझा संपत्ति, अंतरंगता की तीव्रता और मिलन के परिवर्तनकारी पहलुओं को नियंत्रित करता है — जोड़ा प्रमुख संकटों, गहरी कमजोरियों और रिश्ते के छिपे हुए आयामों से कैसे निपटता है। एक मजबूत अष्टम भाव दबाव में गहरे बंधन की क्षमता को इंगित करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सप्तम भाव में राहु विवाह के लिए हमेशा नकारात्मक है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। सप्तम भाव में राहु केवल नकारात्मक के बजाय एक असामान्य, तीव्र या कार्मिक रूप से परिवर्तनकारी संबंध को इंगित करता है। परिणाम की गुणवत्ता काफी हद तक सप्तम स्वामी की समग्र गरिमा और शुभ पहलुओं या एक मजबूत नवांश चार्ट से उपलब्ध समर्थन पर निर्भर करती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या ज्योतिष मुझे बता सकता है कि मेरा प्रेम विवाह होगा या व्यवस्थित?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिष साझेदारी की प्रकृति और मिलने की संभावित परिस्थितियों को दिखा सकता है — उदाहरण के लिए, एक मजबूत पंचम भाव रोमांस-चालित आकर्षण का सुझाव देता है, जबकि एक मजबूत नवम भाव पारिवारिक-मध्यस्थ प्रक्रियाओं का — लेकिन पूर्ण निश्चितता के साथ नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मैं इस ज्ञान का नैतिक रूप से उपयोग कैसे करूं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "वैवाहिक जीवन के ज्योतिषीय ज्ञान का उपयोग आत्म-सुधार, सहानुभूति और सूचित निर्णय लेने को बढ़ावा देने के लिए करें — कभी भी साथी को नियंत्रित करने, हेरफेर करने या न्याय करने के लिए नहीं। उद्देश्य अधिक ज्ञान और यथार्थवादी अपेक्षाओं के साथ रिश्ते के पास पहुंचना है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। अनुकूलता विश्लेषण दो कुंडलियों के बीच वर्तमान संरेखण का एक स्नैपशॉट है, जबकि सफलता की भविष्यवाणी के लिए निरंतर कार्मिक विकास की गहरी समझ की आवश्यकता होती है — दोनों साथी समय के साथ कैसे बढ़ते, अनुकूलन करते और चुनते हैं। अनुकूलता सफलता की स्थितियां बनाती है; निरंतर सचेत प्रयास इसे बनाता है।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -4993,7 +6637,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "29/29",
         "reportDestinationsRepeated": false
@@ -5185,7 +6829,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -5225,6 +6870,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can Vedic astrology predict the success of my marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Vedic astrology indicates karmic tendencies and the nature of potential challenges, but the success of a marriage depends on the conscious efforts and maturity of both partners. Compatibility analysis provides a map of potential — how that potential is realized depends entirely on the daily choices and sustained effort both individuals bring."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my Guna Milan score is low?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Guna Milan is only one part of the compatibility process. A low score does not automatically indicate an incompatible match — the structural analysis of both charts, the strength of the 7th house, the Navamsa, and the planetary interactions are all more decisive indicators of long-term compatibility than the Guna score alone."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the Navamsa reveal my partner's nature?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The Navamsa reveals the inner nature of the partner and the underlying strength and health of the union itself — the qualities and dynamics that emerge in the intimacy and sustained reality of marriage, which the Rashi chart alone cannot fully predict."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can remedies fix compatibility issues?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Remedies are designed to align your own consciousness, which shifts the dynamics and quality of interaction within the relationship. They do not change the partner or override the chart — they refine the individual's inner state, which in turn influences the relationship's overall environment and quality."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How important is Dasha in compatibility?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dasha analysis is crucial. It defines the dominant karmic themes the couple navigates at any given time, and the Dasha periods active at the time of meeting and marriage significantly shape the tone of the relationship's formative phases. Synchronicity in both partners' Dashas often indicates a shared karmic readiness for the union."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the significance of the 8th house in compatibility?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The 8th house governs intensity, shared assets, and the transformative dimension of the union — how the couple navigates major crises and the deeper, more vulnerable aspects of intimacy. Strong 8th house connections between two charts indicate capacity for profound bonding under pressure and a relationship that deepens through difficulty rather than fracturing under it."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Rahu in the 7th house always negative for compatibility?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Rahu in the 7th house indicates an unconventional, intense, or karmically charged relationship rather than a straightforwardly negative one. The outcome depends on the overall dignity of the 7th Lord and the support from benefic aspects. Such partnerships often carry an unusual magnetism and can bring significant growth when navigated consciously."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can astrology tell if I will have a love or arranged marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Astrology can show the nature of the partnership and the likely circumstances of meeting — a strong 5th house suggests romance-driven connection, while a strong 9th house suggests a family-mediated process — but not with absolute certainty. The individual's own choices and the timing of Dashas ultimately shape which pathway the union takes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I use this knowledge ethically?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Use astrological compatibility knowledge to foster empathy and informed decision-making — to better understand yourself and approach a potential partnership with realistic expectations and genuine openness. Never use it to control, prejudge, or dismiss a partner, or to justify a decision that was made on other, non-astrological grounds."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is compatibility analysis the same as predicting marriage success?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Compatibility analysis is a snapshot of current karmic alignment between two charts, whereas predicting success requires a deep understanding of ongoing karmic evolution — how both partners grow, adapt, and choose over time. Compatibility creates the conditions for success; the partners' conscious, sustained effort builds it day by day."
+                }
+              }
+            ]
           }
         ]
       },
@@ -5234,7 +6965,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "39/39",
         "reportDestinationsRepeated": false
@@ -5423,7 +7154,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -5463,6 +7195,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "क्या वैदिक ज्योतिष मेरे विवाह की सफलता की भविष्यवाणी कर सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। वैदिक ज्योतिष कार्मिक प्रवृत्तियों और संभावित चुनौतियों की प्रकृति को इंगित करता है, लेकिन विवाह की सफलता दोनों साझेदारों के सचेत प्रयासों और परिपक्वता पर निर्भर करती है। अनुकूलता विश्लेषण क्षमता का नक्शा प्रदान करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या होगा यदि मेरा गुण मिलान अंक कम है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "गुण मिलान अनुकूलता प्रक्रिया का केवल एक हिस्सा है। कम अंक स्वतः असंगत मिलान का संकेत नहीं देते — दोनों कुंडलियों का संरचनात्मक विश्लेषण, सप्तम भाव की शक्ति, नवांश और ग्रहीय परस्पर क्रियाएं सभी गुण अंक से अधिक निर्णायक संकेतक हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या नवांश मेरे साथी की प्रकृति को प्रकट करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "हां। नवांश साथी की आंतरिक प्रकृति और मिलन की अंतर्निहित शक्ति और स्वास्थ्य को प्रकट करता है — वे गुण और गतिशीलता जो विवाह की अंतरंगता और निरंतर वास्तविकता में उभरती हैं, जिसे राशि चार्ट अकेले पूरी तरह से भविष्यवाणी नहीं कर सकता।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या उपाय अनुकूलता की समस्याओं को ठीक कर सकते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, जो रिश्ते के भीतर बातचीत की गतिशीलता और गुणवत्ता को बदलता है। वे साथी को नहीं बदलते या कुंडली को ओवरराइड नहीं करते — वे व्यक्ति की आंतरिक स्थिति को परिष्कृत करते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अनुकूलता में दशा कितनी महत्वपूर्ण है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "दशा विश्लेषण महत्वपूर्ण है। यह उन प्रमुख कार्मिक विषयों को परिभाषित करता है जिन्हें जोड़ा किसी भी समय नेविगेट करता है, और मिलने और विवाह के समय सक्रिय दशा अवधियां रिश्ते के निर्माणकारी चरणों के स्वर को महत्वपूर्ण रूप से आकार देती हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अनुकूलता में 8वें भाव का क्या महत्व है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "अष्टम भाव तीव्रता, साझा संपत्ति और मिलन के परिवर्तनकारी आयाम को नियंत्रित करता है — जोड़ा प्रमुख संकटों और अंतरंगता के गहरे, अधिक कमजोर पहलुओं को कैसे नेविगेट करता है। दो कुंडलियों के बीच मजबूत अष्टम भाव संबंध दबाव में गहरे बंधन की क्षमता को इंगित करते हैं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सप्तम भाव में राहु अनुकूलता के लिए हमेशा नकारात्मक है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। सप्तम भाव में राहु एक सरल नकारात्मक के बजाय एक अपरंपरागत, तीव्र या कार्मिक रूप से आवेशित संबंध को इंगित करता है। परिणाम सप्तम स्वामी की समग्र गरिमा और शुभ पहलुओं के समर्थन पर निर्भर करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या ज्योतिष बता सकता है कि मेरा प्रेम विवाह होगा या व्यवस्थित?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिष साझेदारी की प्रकृति और मिलने की संभावित परिस्थितियों को दिखा सकता है — एक मजबूत पंचम भाव रोमांस-चालित संबंध का सुझाव देता है, जबकि एक मजबूत नवम भाव परिवार-मध्यस्थ प्रक्रिया का — लेकिन पूर्ण निश्चितता के साथ नहीं।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "मैं इस ज्ञान का नैतिक रूप से उपयोग कैसे करूं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ज्योतिषीय अनुकूलता ज्ञान का उपयोग सहानुभूति और सूचित निर्णय लेने को बढ़ावा देने के लिए करें — स्वयं को बेहतर समझने और यथार्थवादी अपेक्षाओं और वास्तविक खुलेपन के साथ संभावित साझेदारी के पास पहुंचने के लिए। इसे कभी भी साथी को नियंत्रित करने, पूर्व-निर्णय करने या खारिज करने के लिए उपयोग न करें।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। अनुकूलता विश्लेषण दो कुंडलियों के बीच वर्तमान कार्मिक संरेखण का एक स्नैपशॉट है, जबकि सफलता की भविष्यवाणी के लिए निरंतर कार्मिक विकास की गहरी समझ की आवश्यकता होती है। अनुकूलता सफलता की स्थितियां बनाती है; साझेदारों का सचेत, निरंतर प्रयास इसे दिन-प्रतिदिन बनाता है।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -5472,7 +7290,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "39/39",
         "reportDestinationsRepeated": false
@@ -5735,7 +7553,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -5775,6 +7594,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How can I tell if my marriage will be intercaste just by looking at my chart?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Look for a strong connection between the 7th house/lord and Rahu/Ketu, combined with a 9th house that is either weak or detached from the marital promise."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does parental opposition affect destiny?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Opposition is a secondary event (2nd house issue). If the 7th house and Dasha favor marriage, it will occur regardless of opposition."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is an intercaste marriage more likely to result in divorce?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not necessarily. Divorce depends on the overall strength of the marital house and the couple's maturity, not just the social background."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use remedies to make my parents accept my partner?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You can use remedies (like service and mantra) to balance the energy, but family acceptance is a complex social event that is rarely fully within one's control."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does Jupiter’s influence matter in an intercaste marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Jupiter provides the wisdom and emotional maturity to handle the complexities of cultural and traditional differences."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are all intercaste marriages difficult?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. If the 5th and 7th houses are strong and harmonious, the couple’s bond can be deep and resilient, regardless of social friction."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can the 9th house be strengthened to improve family acceptance?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Performing remedies for the 9th lord can help harmonize the native's relationship with tradition and ancestors, which may indirectly influence how they are perceived."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Dasha analysis really tell me when I will marry?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dasha analysis provides the window of opportunity when the promise of the chart is activated; it is the primary tool for timing marital events."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is it \"bad\" astrology to have a chart that supports intercaste marriage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is simply a karmic reality. In Vedic Astrology, there is no good or bad—only the movement of the soul through the karmic journey."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Rahu in the 7th house guarantee an intercaste union?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is a strong indicator, but it needs corroboration from other house configurations and the current Dasha sequence."
+                }
+              }
+            ]
           }
         ]
       },
@@ -5784,7 +7689,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "25/25",
         "reportDestinationsRepeated": false
@@ -6047,7 +7952,8 @@
       "schema": {
         "types": [
           "BreadcrumbList",
-          "Article"
+          "Article",
+          "FAQPage"
         ],
         "objects": [
           {
@@ -6087,6 +7993,92 @@
               "name": "Jyotishasha",
               "url": "https://www.jyotishasha.com"
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "मैं कैसे बता सकता हूँ कि मेरा विवाह अंतरजातीय होगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "7वें स्वामी पर राहु/केतु का प्रभाव और कमजोर 9वां घर देखें जो वैवाहिक वादे से अलग हो।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या माता-पिता का विरोध भाग्य को प्रभावित करता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "विरोध एक माध्यमिक घटना (दूसरा घर का मुद्दा) है। यदि सातवां घर और दशा विवाह का समर्थन करते हैं, तो यह होगा।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अंतरजातीय विवाह में तलाक की संभावना अधिक है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "जरूरी नहीं। तलाक कुल चार्ट शक्ति और जोड़े की परिपक्वता पर निर्भर करता है, न कि केवल सामाजिक पृष्ठभूमि पर।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या मैं माता-पिता को मेरे साथी को स्वीकार करने के लिए उपाय कर सकता हूँ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "आप ऊर्जा को संतुलित करने के लिए उपायों (जैसे सेवा और मंत्र) का उपयोग कर सकते हैं, लेकिन पारिवारिक स्वीकृति एक जटिल सामाजिक घटना है जो शायद ही कभी पूरी तरह से किसी के नियंत्रण में होती है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "अंतरजातीय विवाह में गुरु का प्रभाव क्यों मायने रखता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "गुरु सांस्कृतिक और पारंपरिक मतभेदों की जटिलताओं को संभालने के लिए ज्ञान और भावनात्मक परिपक्वता प्रदान करता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सभी अंतरजातीय विवाह कठिन होते हैं?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नहीं। यदि पांचवां और सातवां घर मजबूत और सामंजस्यपूर्ण हैं, तो जोड़े का बंधन सामाजिक घर्षण के बावजूद गहरा और लचीला हो सकता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या पारिवारिक स्वीकृति में सुधार के लिए नौवें घर को मजबूत किया जा सकता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "नौवें स्वामी के लिए उपाय करने से जातक के परंपरा और पूर्वजों के साथ संबंधों में सामंजस्य स्थापित करने में मदद मिल सकती है, जो परोक्ष रूप से इस बात को प्रभावित कर सकता है कि उन्हें कैसे देखा जाता है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या दशा विश्लेषण वास्तव में बताता है कि मैं कब विवाह करूँगा?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "दशा विश्लेषण अवसर की खिड़की प्रदान करता है जब चार्ट का वादा सक्रिय होता है; यह वैवाहिक घटनाओं के समय के लिए प्राथमिक उपकरण है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या अंतरजातीय विवाह का समर्थन करने वाला चार्ट होना \"बुरा\" ज्योतिष है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "यह केवल एक कार्मिक वास्तविकता है। वैदिक ज्योतिष में, कोई अच्छा या बुरा नहीं है—केवल कार्मिक यात्रा के माध्यम से आत्मा की गति है।"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "क्या सातवें घर में राहु अंतरजातीय मिलन की गारंटी देता है?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "यह एक मजबूत संकेतक है, लेकिन इसे अन्य घर के विन्यासों और वर्तमान दशा अनुक्रम से पुष्टि की आवश्यकता है।"
+                }
+              }
+            ]
           }
         ]
       },
@@ -6096,7 +8088,7 @@
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
-        "faqPageSchema": false,
+        "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "25/25",
         "reportDestinationsRepeated": false

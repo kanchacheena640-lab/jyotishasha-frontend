@@ -20,6 +20,7 @@ import TopicLandingLead from '@/components/authority-engine/landing/TopicLanding
 import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
 import LandingInlineTool from '@/components/authority-engine/landing/LandingInlineTool'
 import { marriageTopicLandings } from '@/lib/domains/marriage-astrology/_landing'
+import { buildMarriageFaqPageSchema } from '@/lib/domains/marriage-astrology/faqSchema'
 
 const DOMAIN_SLUG = 'marriage-astrology'
 
@@ -54,6 +55,8 @@ export default function MarriageAstrologyTopic({
 
   const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, topic!, locale)
   const articleSchema    = buildAuthorityArticleSchema(domain, topic!, locale)
+  // MC-06: FAQPage built from the same FAQ items the page renders (null when a topic has no FAQ).
+  const faqSchema        = buildMarriageFaqPageSchema(topic!, locale)
   // Opt-in landing presentation (currently marriage-timing only); others unchanged.
   const landing = marriageTopicLandings[params.slug]
 
@@ -67,6 +70,12 @@ export default function MarriageAstrologyTopic({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <AuthorityDetailRenderer
         domain={domain}
         topic={topic!}
