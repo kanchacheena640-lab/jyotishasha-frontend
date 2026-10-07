@@ -88,8 +88,8 @@ const landingCss = src("components/authority-engine/landing/landing.module.css")
 check("long-form CSS is scoped under .longform and leaves content untouched (no hiding / content rules)",
   /\.longform :global\(section\.mb-10\)/.test(landingCss) &&
   !/\.longform[^{]*\{[^}]*(display:\s*none|content:|visibility:\s*hidden)/.test(landingCss));
-check("other marriage topics with accordions have no landing config (spouse-nature opted in at MC-03, compatibility at P1, married-life at P2)",
-  ["intercaste-marriage", "divorce-possibility", "second-marriage"]
+check("other marriage topics with accordions have no landing config (spouse-nature opted in at MC-03, compatibility at P1, married-life at P2, intercaste-marriage at P3)",
+  ["divorce-possibility", "second-marriage"]
     .every((slug) => marriageTopicLandings[slug] === undefined));
 check("Marriage Timing / Love Marriage topics have no accordion sections (unaffected by the opt-in)",
   !/layout:\s*'accordion'/.test(src("lib/domains/marriage-astrology/topics/marriage-timing.ts")) &&

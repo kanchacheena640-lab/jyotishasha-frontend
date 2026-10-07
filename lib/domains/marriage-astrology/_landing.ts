@@ -462,6 +462,70 @@ export const marriedLifeLanding: TopicLandingConfig = {
   },
 }
 
+// Tool-led (P3): the primary action is the EXISTING free Marriage Path tool (/tools/marriage-path). The
+// tool reads the 7th house (sign, lord, occupants), Venus/Jupiter dignity and Rahu with the 7th lord --
+// the copy claims nothing more (no D9, no Dasha, no caste or family assessment). The Love Marriage Report
+// is a contextual card after the love-vs-intercaste comparison, framed as love-marriage tendency only:
+// it does not analyse caste, intercaste indications or family acceptance.
+export const intercasteMarriageLanding: ToolLedLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Vedic astrology traditionally links certain combinations with marriage outside family or social convention — most often Rahu or Ketu influencing the 7th house or its lord, a strong link between the 5th house of personal choice and the 7th, and a 9th house (tradition) that is less connected to marriage, read again in the Navamsa (D9) and the running Dasha. No single planet or yoga proves an intercaste marriage. A horoscope does not show anyone’s caste and cannot say whether a family will accept a relationship; it describes tendencies, and the choice of partner remains a personal one.',
+    hi: 'वैदिक ज्योतिष परंपरागत रूप से कुछ योगों को परिवार या सामाजिक परंपरा से अलग विवाह से जोड़ता है — सबसे अधिक सप्तम भाव या सप्तमेश पर राहु या केतु का प्रभाव, व्यक्तिगत चुनाव के पंचम भाव और सप्तम भाव का मज़बूत संबंध, और विवाह से कम जुड़ा नवम भाव (परंपरा) — जिन्हें नवांश (D9) और चल रही दशा में दोबारा परखा जाता है। कोई एक ग्रह या योग अंतरजातीय विवाह को सिद्ध नहीं करता। जन्मकुंडली किसी की जाति नहीं बताती और यह नहीं कह सकती कि परिवार रिश्ते को स्वीकार करेगा या नहीं; यह प्रवृत्तियाँ बताती है, और जीवनसाथी का चुनाव व्यक्तिगत ही रहता है।',
+  },
+
+  primaryAction: {
+    eyebrow: { en: 'Free Marriage Path Check', hi: 'फ्री विवाह मार्ग जाँच' },
+    heading: { en: 'Check Your Marriage Path', hi: 'अपना विवाह मार्ग जाँचें' },
+    body: {
+      en: 'Enter your birth details for a free 7th-house reading: the planets placed in your 7th house, the strength of Venus and Jupiter, the planet with the strongest influence on your marriage, and whether Rahu — the planet traditionally linked with unconventional unions — sits with your 7th lord.',
+      hi: 'अपना जन्म विवरण दर्ज करें और सप्तम भाव का फ्री विश्लेषण पाएं: आपके सप्तम भाव में स्थित ग्रह, शुक्र और गुरु की स्थिति, विवाह पर सबसे प्रबल प्रभाव वाला ग्रह, और यह कि क्या राहु — जिसे परंपरागत रूप से अपरंपरागत विवाह से जोड़ा जाता है — आपके सप्तमेश के साथ है।',
+    },
+    ctaLabel: { en: 'Check Marriage Path — Free', hi: 'फ्री में विवाह मार्ग जाँचें' },
+    microcopy: {
+      en: 'A general snapshot from your birth chart. It does not assess caste or family acceptance.',
+      hi: 'आपकी जन्मकुंडली पर आधारित सामान्य झलक। यह जाति या पारिवारिक स्वीकृति का आकलन नहीं करती।',
+    },
+    href: '/tools/marriage-path',
+    ctaId: 'intercaste_marriage_path_cta',
+    screenName: 'intercaste_marriage_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at astrological indications of marriage outside family or social convention. Related questions have their own detailed guides — the love-marriage side and the family-arranged side:',
+      hi: 'यह मार्गदर्शिका परिवार या सामाजिक परंपरा से अलग विवाह के ज्योतिषीय संकेतों को देखती है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — प्रेम विवाह का पक्ष और परिवार द्वारा तय विवाह का पक्ष:',
+    },
+    topicSlugs: ['love-marriage', 'arranged-marriage'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  // Also renders the Key House / Planetary Influences accordion bodies in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+
+  inlineTool: {
+    kind: 'contextual-report',
+    afterSectionId: 'love-vs-intercaste',
+    reportSlug: 'love_marriage_report',
+    eyebrow: { en: 'Love Marriage Report', hi: 'प्रेम विवाह रिपोर्ट' },
+    heading: { en: 'Want to Understand Your Love-Marriage Tendency?', hi: 'अपनी प्रेम विवाह की प्रवृत्ति समझना चाहते हैं?' },
+    body: {
+      en: 'The Love Marriage Report reads your own chart for love-marriage tendency — the 5th house of romance, the 7th house of partnership, the link between them, and Venus, Mars and Jupiter. It does not assess caste, intercaste indications or family acceptance.',
+      hi: 'प्रेम विवाह रिपोर्ट आपकी अपनी कुंडली में प्रेम विवाह की प्रवृत्ति देखती है — प्रेम का पंचम भाव, साझेदारी का सप्तम भाव, इन दोनों का संबंध, और शुक्र, मंगल व गुरु। यह जाति, अंतरजातीय संकेतों या पारिवारिक स्वीकृति का आकलन नहीं करती।',
+    },
+    ctaLabel: { en: 'Get Love Marriage Report – ₹{price}', hi: 'प्रेम विवाह रिपोर्ट पाएं – ₹{price}' },
+    ctaId: 'intercaste_love_marriage_report_cta',
+    screenName: 'intercaste_marriage_topic',
+  },
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
@@ -471,4 +535,5 @@ export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'spouse-nature': spouseNatureLanding,
   'compatibility': compatibilityLanding,
   'married-life': marriedLifeLanding,
+  'intercaste-marriage': intercasteMarriageLanding,
 }

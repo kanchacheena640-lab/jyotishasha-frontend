@@ -6,6 +6,11 @@ import ToolSuggestions from '@/components/ToolSuggestions';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { replaceIsoDates } from '@/utils/dateReplacer';
+import Link from 'next/link';
+import { reportsData } from '@/app/data/reportsData';
+
+// Marriage Path result -> paid continuation: the existing Marriage Report (route + price from the catalogue).
+const MARRIAGE_PATH_REPORT = reportsData.find((r) => r.slug === 'marriage_report');
 
 
 
@@ -1806,11 +1811,16 @@ type PhaseKey = typeof keys[number];
               {kundaliData.marriage_path.cta && (
                 <div className="mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded">
                   <p className="text-gray-800">{kundaliData.marriage_path.cta}</p>
-                  <button className="mt-2 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-                  suppressHydrationWarning
-                  >
-                    Buy Now
-                  </button>
+                  {MARRIAGE_PATH_REPORT && (
+                    <Link
+                      href={`/reports/${MARRIAGE_PATH_REPORT.slug}`}
+                      className="mt-2 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                    >
+                      {localePrefix === '/hi'
+                        ? `विस्तृत विवाह रिपोर्ट पाएं – ₹${MARRIAGE_PATH_REPORT.price}`
+                        : `Get Detailed Marriage Report – ₹${MARRIAGE_PATH_REPORT.price}`}
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

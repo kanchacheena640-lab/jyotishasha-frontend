@@ -100,7 +100,6 @@ const HINDI_META_GAP_ALLOWLIST: readonly string[] = [
   "early-marriage",        // MC-10
   "second-marriage",       // MC-12
   "divorce-possibility",   // MC-09
-  "intercaste-marriage",   // MC-14
 ];
 
 /**
@@ -233,7 +232,10 @@ for (const slug of slugs) {
       check(t(`C landing offer report '${landing.offer.reportSlug}' is a catalogue report`), reportSlugs.has(landing.offer.reportSlug));
     }
     if (landing.primaryAction) {
-      check(t(`C landing primary action '${landing.primaryAction.href}' resolves to an existing app route`), resolvesToAppRoute(landing.primaryAction.href));
+      // /tools/<slug> is served by the dynamic /tools/[toolId] route: validate it exactly like a bottom tool CTA.
+      const tool = /^\/tools\/([a-z0-9-]+)$/.exec(landing.primaryAction.href)?.[1];
+      check(t(`C landing primary action '${landing.primaryAction.href}' resolves to an existing app route${tool ? " (toolsData + /tools/[toolId] route map)" : ""}`),
+        tool ? toolSlugs.has(tool) && tool in toolContentMap : resolvesToAppRoute(landing.primaryAction.href));
     }
     check(t("C landing has a conversion unit (report card or primary action)"), !!(landing.offer || landing.primaryAction));
     if (landing.inlineTool) {

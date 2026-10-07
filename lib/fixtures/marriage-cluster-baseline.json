@@ -7463,13 +7463,13 @@
           "Intercaste Marriage in Vedic Astrology: Karmic Analysis"
         ],
         "h2": [
+          "Check Your Marriage Path",
           "What is Intercaste Marriage in Vedic Astrology?",
           "Astrological Promise vs Reality",
           "Key House Analysis",
           "Planetary Influences",
           "Advanced Indicators",
-          "Dasha Analysis",
-          "Transit Analysis",
+          "Dasha and Transit Timing",
           "Astrological Combinations",
           "Family Opposition and Acceptance",
           "Love Marriage vs Intercaste Marriage",
@@ -7477,14 +7477,15 @@
           "Practical Remedies",
           "Ethical Interpretation",
           "Summary",
+          "Related Marriage Questions",
           "Frequently Asked Questions",
           "Related Topics"
         ],
         "h3": [
           "Love Marriage",
           "Intercaste Marriage",
+          "Want to Understand Your Love-Marriage Tendency?",
           "Check Your Marriage Path",
-          "Get Love Marriage Report",
           "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
           "Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?",
           "Marriage Prediction in Vedic Astrology"
@@ -7493,14 +7494,14 @@
       "faq": {
         "count": 10,
         "questions": [
-          "How can I tell if my marriage will be intercaste just by looking at my chart?",
-          "Does parental opposition affect destiny?",
+          "Can a horoscope show whether my marriage will be intercaste?",
+          "Can astrology tell whether my family will accept my partner?",
           "Is an intercaste marriage more likely to result in divorce?",
           "Can I use remedies to make my parents accept my partner?",
           "Why does Jupiter’s influence matter in an intercaste marriage?",
           "Are all intercaste marriages difficult?",
           "Can the 9th house be strengthened to improve family acceptance?",
-          "Does Dasha analysis really tell me when I will marry?",
+          "Is every intercaste marriage a love marriage in astrology?",
           "Is it \"bad\" astrology to have a chart that supports intercaste marriage?",
           "Does Rahu in the 7th house guarantee an intercaste union?"
         ],
@@ -7561,22 +7562,12 @@
         {
           "id": "dasha-analysis",
           "layout": "list",
-          "title": "Dasha Analysis",
+          "title": "Dasha and Transit Timing",
           "titleInServer": true,
-          "items": 1,
-          "labelsInServer": 1,
-          "bodies": 1,
-          "bodiesInServer": 1
-        },
-        {
-          "id": "transit-analysis",
-          "layout": "list",
-          "title": "Transit Analysis",
-          "titleInServer": true,
-          "items": 1,
-          "labelsInServer": 1,
-          "bodies": 1,
-          "bodiesInServer": 1
+          "items": 2,
+          "labelsInServer": 2,
+          "bodies": 2,
+          "bodiesInServer": 2
         },
         {
           "id": "astrological-combinations",
@@ -7664,6 +7655,7 @@
           "/",
           "/marriage-astrology",
           "/marriage-astrology/arranged-marriage",
+          "/marriage-astrology/love-marriage",
           "/marriage-astrology/marriage-prediction",
           "/marriage-astrology/second-marriage",
           "/reports/love_marriage_report",
@@ -7678,6 +7670,7 @@
         ],
         "marriageTopics": [
           "/marriage-astrology/arranged-marriage",
+          "/marriage-astrology/love-marriage",
           "/marriage-astrology/marriage-prediction",
           "/marriage-astrology/second-marriage"
         ],
@@ -7738,18 +7731,18 @@
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "How can I tell if my marriage will be intercaste just by looking at my chart?",
+                "name": "Can a horoscope show whether my marriage will be intercaste?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Look for a strong connection between the 7th house/lord and Rahu/Ketu, combined with a 9th house that is either weak or detached from the marital promise."
+                  "text": "Not with certainty. Astrologers look for combinations traditionally associated with an unconventional union — for example Rahu or Ketu influencing the 7th house or its lord, a strong 5th–7th connection and a 9th house that is less connected to marriage — and check them in the Navamsa and the running Dasha. These describe a tendency; a horoscope does not reveal anyone’s caste, and the actual choice of partner depends on the person and their circumstances."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Does parental opposition affect destiny?",
+                "name": "Can astrology tell whether my family will accept my partner?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Opposition is a secondary event (2nd house issue). If the 7th house and Dasha favor marriage, it will occur regardless of opposition."
+                  "text": "No. The 2nd and 9th houses describe family and tradition themes in your chart, and supportive periods can be identified, but astrology cannot know how a particular family will respond. Acceptance depends on the people involved — their values, their circumstances and how the couple communicates with them — and often grows over time."
                 }
               },
               {
@@ -7794,10 +7787,10 @@
               },
               {
                 "@type": "Question",
-                "name": "Does Dasha analysis really tell me when I will marry?",
+                "name": "Is every intercaste marriage a love marriage in astrology?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Dasha analysis provides the window of opportunity when the promise of the chart is activated; it is the primary tool for timing marital events."
+                  "text": "No. The two overlap but are read differently. A love marriage is read mainly through the 5th house of personal choice connecting with the 7th; an intercaste union is read mainly as a departure from 9th-house tradition, often with Rahu or Ketu involved. A marriage can be both, only one of them, or arranged by families across communities."
                 }
               },
               {
@@ -7813,7 +7806,7 @@
                 "name": "Does Rahu in the 7th house guarantee an intercaste union?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "It is a strong indicator, but it needs corroboration from other house configurations and the current Dasha sequence."
+                  "text": "No. It is one of the most commonly cited indicators, but it needs corroboration from other house configurations, the Navamsa and the current Dasha sequence."
                 }
               }
             ]
@@ -7821,7 +7814,7 @@
         ]
       },
       "server": {
-        "wordCount": 2992,
+        "wordCount": 3580,
         "detailsElements": 25
       },
       "facts": {
@@ -7839,7 +7832,7 @@
       "path": "/hi/marriage-astrology/intercaste-marriage",
       "seo": {
         "title": "वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण",
-        "description": "Understand the astrological promise of intercaste marriage in Vedic Astrology. Explore planetary influences, house analysis, and karmic timing.",
+        "description": "वैदिक ज्योतिष में अंतरजातीय विवाह के संकेत — सप्तम, पंचम और नवम भाव, राहु-केतु, शुक्र, नवांश और दशा। जानें कौन-से योग परंपरा से अलग विवाह से जुड़े माने जाते हैं, और ज्योतिष क्या नहीं बता सकता।",
         "keywords": [
           "वैदिक ज्योतिष में अंतरजातीय विवाह",
           "विवाह का ज्योतिष",
@@ -7865,28 +7858,29 @@
           "वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण"
         ],
         "h2": [
+          "अपना विवाह मार्ग जाँचें",
           "वैदिक ज्योतिष में अंतरजातीय विवाह क्या है?",
-          "ज्योतिषीय वादा बनाम वास्तविकता",
-          "प्रमुख घर विश्लेषण",
+          "कुंडली के योग बनाम वास्तविकता",
+          "प्रमुख भाव विश्लेषण",
           "ग्रहों का प्रभाव",
           "उन्नत संकेतक",
-          "दशा विश्लेषण",
-          "गोचर विश्लेषण",
-          "ज्योतिषीय संयोजन",
+          "दशा और गोचर से समय का विश्लेषण",
+          "ज्योतिषीय योग",
           "पारिवारिक विरोध और स्वीकृति",
           "प्रेम विवाह बनाम अंतरजातीय विवाह",
           "सामान्य भ्रांतियां",
           "व्यावहारिक उपाय",
           "नैतिक व्याख्या",
           "सारांश",
+          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
           "संबंधित विषय"
         ],
         "h3": [
           "प्रेम विवाह",
           "अंतरजातीय विवाह",
+          "अपनी प्रेम विवाह की प्रवृत्ति समझना चाहते हैं?",
           "अपना विवाह मार्ग जांचें",
-          "प्रेम विवाह रिपोर्ट प्राप्त करें",
           "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
           "वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?",
           "वैदिक ज्योतिष में विवाह भविष्यवाणी"
@@ -7895,14 +7889,14 @@
       "faq": {
         "count": 10,
         "questions": [
-          "मैं कैसे बता सकता हूँ कि मेरा विवाह अंतरजातीय होगा?",
-          "क्या माता-पिता का विरोध भाग्य को प्रभावित करता है?",
+          "क्या कुंडली से पता चल सकता है कि मेरा विवाह अंतरजातीय होगा?",
+          "क्या ज्योतिष बता सकता है कि मेरा परिवार मेरे साथी को स्वीकार करेगा?",
           "क्या अंतरजातीय विवाह में तलाक की संभावना अधिक है?",
-          "क्या मैं माता-पिता को मेरे साथी को स्वीकार करने के लिए उपाय कर सकता हूँ?",
+          "क्या उपायों के ज़रिए मैं अपने माता-पिता से अपने साथी को स्वीकार करवा सकता हूँ?",
           "अंतरजातीय विवाह में गुरु का प्रभाव क्यों मायने रखता है?",
           "क्या सभी अंतरजातीय विवाह कठिन होते हैं?",
           "क्या पारिवारिक स्वीकृति में सुधार के लिए नौवें घर को मजबूत किया जा सकता है?",
-          "क्या दशा विश्लेषण वास्तव में बताता है कि मैं कब विवाह करूँगा?",
+          "क्या ज्योतिष में हर अंतरजातीय विवाह प्रेम विवाह होता है?",
           "क्या अंतरजातीय विवाह का समर्थन करने वाला चार्ट होना \"बुरा\" ज्योतिष है?",
           "क्या सातवें घर में राहु अंतरजातीय मिलन की गारंटी देता है?"
         ],
@@ -7923,7 +7917,7 @@
         {
           "id": "astrological-promise-vs-reality",
           "layout": "list",
-          "title": "ज्योतिषीय वादा बनाम वास्तविकता",
+          "title": "कुंडली के योग बनाम वास्तविकता",
           "titleInServer": true,
           "items": 1,
           "labelsInServer": 1,
@@ -7933,7 +7927,7 @@
         {
           "id": "key-house-analysis",
           "layout": "accordion",
-          "title": "प्रमुख घर विश्लेषण",
+          "title": "प्रमुख भाव विश्लेषण",
           "titleInServer": true,
           "items": 6,
           "labelsInServer": 6,
@@ -7963,27 +7957,17 @@
         {
           "id": "dasha-analysis",
           "layout": "list",
-          "title": "दशा विश्लेषण",
+          "title": "दशा और गोचर से समय का विश्लेषण",
           "titleInServer": true,
-          "items": 1,
-          "labelsInServer": 1,
-          "bodies": 1,
-          "bodiesInServer": 1
-        },
-        {
-          "id": "transit-analysis",
-          "layout": "list",
-          "title": "गोचर विश्लेषण",
-          "titleInServer": true,
-          "items": 1,
-          "labelsInServer": 1,
-          "bodies": 1,
-          "bodiesInServer": 1
+          "items": 2,
+          "labelsInServer": 2,
+          "bodies": 2,
+          "bodiesInServer": 2
         },
         {
           "id": "astrological-combinations",
           "layout": "list",
-          "title": "ज्योतिषीय संयोजन",
+          "title": "ज्योतिषीय योग",
           "titleInServer": true,
           "items": 3,
           "labelsInServer": 3,
@@ -8066,6 +8050,7 @@
           "/hi",
           "/hi/marriage-astrology",
           "/hi/marriage-astrology/arranged-marriage",
+          "/hi/marriage-astrology/love-marriage",
           "/hi/marriage-astrology/marriage-prediction",
           "/hi/marriage-astrology/second-marriage",
           "/hi/tools/marriage-path",
@@ -8080,6 +8065,7 @@
         ],
         "marriageTopics": [
           "/hi/marriage-astrology/arranged-marriage",
+          "/hi/marriage-astrology/love-marriage",
           "/hi/marriage-astrology/marriage-prediction",
           "/hi/marriage-astrology/second-marriage"
         ],
@@ -8121,7 +8107,7 @@
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण",
-            "description": "Understand the astrological promise of intercaste marriage in Vedic Astrology. Explore planetary influences, house analysis, and karmic timing.",
+            "description": "वैदिक ज्योतिष में अंतरजातीय विवाह के संकेत — सप्तम, पंचम और नवम भाव, राहु-केतु, शुक्र, नवांश और दशा। जानें कौन-से योग परंपरा से अलग विवाह से जुड़े माने जाते हैं, और ज्योतिष क्या नहीं बता सकता।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/intercaste-marriage",
             "author": {
               "@type": "Organization",
@@ -8140,18 +8126,18 @@
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "मैं कैसे बता सकता हूँ कि मेरा विवाह अंतरजातीय होगा?",
+                "name": "क्या कुंडली से पता चल सकता है कि मेरा विवाह अंतरजातीय होगा?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "7वें स्वामी पर राहु/केतु का प्रभाव और कमजोर 9वां घर देखें जो वैवाहिक वादे से अलग हो।"
+                  "text": "निश्चित रूप से नहीं। ज्योतिषी ऐसे योग देखते हैं जिन्हें परंपरागत रूप से अपरंपरागत विवाह से जोड़ा जाता है — जैसे सप्तम भाव या सप्तमेश पर राहु या केतु का प्रभाव, पंचम और सप्तम भाव का मज़बूत संबंध और विवाह से कम जुड़ा नवम भाव — और इनकी पुष्टि नवांश और चल रही दशा में करते हैं। ये एक प्रवृत्ति बताते हैं; जन्मकुंडली किसी की जाति नहीं बताती, और साथी का वास्तविक चुनाव व्यक्ति और उसकी परिस्थितियों पर निर्भर करता है।"
                 }
               },
               {
                 "@type": "Question",
-                "name": "क्या माता-पिता का विरोध भाग्य को प्रभावित करता है?",
+                "name": "क्या ज्योतिष बता सकता है कि मेरा परिवार मेरे साथी को स्वीकार करेगा?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "विरोध एक माध्यमिक घटना (दूसरा घर का मुद्दा) है। यदि सातवां घर और दशा विवाह का समर्थन करते हैं, तो यह होगा।"
+                  "text": "नहीं। द्वितीय और नवम भाव आपकी कुंडली में परिवार और परंपरा से जुड़े विषय दिखाते हैं, और सहायक अवधियाँ पहचानी जा सकती हैं, लेकिन ज्योतिष यह नहीं जान सकता कि कोई विशेष परिवार कैसी प्रतिक्रिया देगा। स्वीकृति उन लोगों पर निर्भर करती है — उनके मूल्यों, उनकी परिस्थितियों और जोड़ा उनसे कैसे संवाद करता है — और अक्सर समय के साथ बढ़ती है।"
                 }
               },
               {
@@ -8164,7 +8150,7 @@
               },
               {
                 "@type": "Question",
-                "name": "क्या मैं माता-पिता को मेरे साथी को स्वीकार करने के लिए उपाय कर सकता हूँ?",
+                "name": "क्या उपायों के ज़रिए मैं अपने माता-पिता से अपने साथी को स्वीकार करवा सकता हूँ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "आप ऊर्जा को संतुलित करने के लिए उपायों (जैसे सेवा और मंत्र) का उपयोग कर सकते हैं, लेकिन पारिवारिक स्वीकृति एक जटिल सामाजिक घटना है जो शायद ही कभी पूरी तरह से किसी के नियंत्रण में होती है।"
@@ -8196,10 +8182,10 @@
               },
               {
                 "@type": "Question",
-                "name": "क्या दशा विश्लेषण वास्तव में बताता है कि मैं कब विवाह करूँगा?",
+                "name": "क्या ज्योतिष में हर अंतरजातीय विवाह प्रेम विवाह होता है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "दशा विश्लेषण अवसर की खिड़की प्रदान करता है जब चार्ट का वादा सक्रिय होता है; यह वैवाहिक घटनाओं के समय के लिए प्राथमिक उपकरण है।"
+                  "text": "नहीं। दोनों एक-दूसरे से जुड़े हैं, पर इन्हें अलग तरह से पढ़ा जाता है। प्रेम विवाह मुख्य रूप से व्यक्तिगत चुनाव के पंचम भाव और सप्तम भाव के संबंध से देखा जाता है, जबकि अंतरजातीय विवाह मुख्य रूप से नवम भाव की परंपरा से हटने के रूप में देखा जाता है, जिसमें अक्सर राहु या केतु शामिल होते हैं। कोई विवाह दोनों हो सकता है, केवल एक हो सकता है, या परिवारों द्वारा अलग समुदायों के बीच तय किया गया विवाह भी हो सकता है।"
                 }
               },
               {
@@ -8215,7 +8201,7 @@
                 "name": "क्या सातवें घर में राहु अंतरजातीय मिलन की गारंटी देता है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "यह एक मजबूत संकेतक है, लेकिन इसे अन्य घर के विन्यासों और वर्तमान दशा अनुक्रम से पुष्टि की आवश्यकता है।"
+                  "text": "नहीं। यह सबसे अधिक बताए जाने वाले संकेतों में से एक है, लेकिन इसकी पुष्टि अन्य भावों की स्थिति, नवांश और वर्तमान दशा से होनी चाहिए।"
                 }
               }
             ]
@@ -8223,11 +8209,11 @@
         ]
       },
       "server": {
-        "wordCount": 3453,
+        "wordCount": 3968,
         "detailsElements": 25
       },
       "facts": {
-        "hindiMetaFallsBackToEnglish": true,
+        "hindiMetaFallsBackToEnglish": false,
         "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "25/25",
