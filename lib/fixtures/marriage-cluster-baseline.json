@@ -6754,6 +6754,7 @@
           "Compatibility in Vedic Astrology: Complete Guide"
         ],
         "h2": [
+          "Check Your Compatibility",
           "Introduction",
           "Kundli Matching and Ashtakoota System",
           "Key House Analysis for Compatibility",
@@ -6761,6 +6762,7 @@
           "Advanced Tools for Compatibility",
           "Dimensions of Compatibility",
           "Myths, Remedies and Ethical Use",
+          "Related Marriage Questions",
           "Frequently Asked Questions",
           "Related Topics"
         ],
@@ -6770,7 +6772,7 @@
           "Upapada Lagna",
           "Dasha Compatibility",
           "Transit Influence",
-          "Check Manglik Dosha",
+          "Also Check Manglik Dosha",
           "Get Relationship Future Report",
           "Delayed Marriage in Vedic Astrology: Why Is My Marriage Getting Delayed?",
           "Early Marriage in Vedic Astrology",
@@ -6881,9 +6883,14 @@
           "/",
           "/love",
           "/marriage-astrology",
+          "/marriage-astrology/arranged-marriage",
           "/marriage-astrology/delayed-marriage",
           "/marriage-astrology/divorce-possibility",
           "/marriage-astrology/early-marriage",
+          "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-prediction",
+          "/marriage-astrology/married-life",
+          "/marriage-astrology/spouse-nature",
           "/reports/relationship_future_report",
           "/tools/mangal-dosh"
         ],
@@ -6895,9 +6902,14 @@
           "/tools/mangal-dosh"
         ],
         "marriageTopics": [
+          "/marriage-astrology/arranged-marriage",
           "/marriage-astrology/delayed-marriage",
           "/marriage-astrology/divorce-possibility",
-          "/marriage-astrology/early-marriage"
+          "/marriage-astrology/early-marriage",
+          "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-prediction",
+          "/marriage-astrology/married-life",
+          "/marriage-astrology/spouse-nature"
         ],
         "external": [],
         "embeds": []
@@ -7039,7 +7051,7 @@
         ]
       },
       "server": {
-        "wordCount": 3509,
+        "wordCount": 3747,
         "detailsElements": 39
       },
       "facts": {
@@ -7057,7 +7069,7 @@
       "path": "/hi/marriage-astrology/compatibility",
       "seo": {
         "title": "वैदिक ज्योतिष में अनुकूलता",
-        "description": "Explore Vedic compatibility through Kundli matching, Ashtakoota, Navamsa, and Dasha cycles — a complete guide to karmic alignment and marital harmony.",
+        "description": "वैदिक ज्योतिष में विवाह अनुकूलता कैसे देखी जाती है — कुंडली मिलान, अष्टकूट गुण मिलान, नाड़ी, भकूट, मंगल दोष, नवांश और दोनों कुंडलियों के सप्तम भाव की पूरी मार्गदर्शिका।",
         "keywords": [
           "वैदिक ज्योतिष में अनुकूलता",
           "कुंडली मिलान",
@@ -7082,6 +7094,7 @@
           "वैदिक ज्योतिष में अनुकूलता"
         ],
         "h2": [
+          "अपनी कुंडली अनुकूलता जाँचें",
           "परिचय",
           "कुंडली मिलान और अष्टकूट प्रणाली",
           "अनुकूलता के लिए मुख्य भाव विश्लेषण",
@@ -7089,6 +7102,7 @@
           "अनुकूलता के लिए उन्नत उपकरण",
           "अनुकूलता के आयाम",
           "भ्रांतियां, उपाय और नैतिक उपयोग",
+          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
           "संबंधित विषय"
         ],
@@ -7098,7 +7112,7 @@
           "उपपद लग्न",
           "दशा अनुकूलता",
           "गोचर प्रभाव",
-          "मांगलिक दोष जांचें",
+          "मांगलिक दोष भी जाँचें",
           "रिलेशनशिप फ्यूचर रिपोर्ट प्राप्त करें",
           "वैदिक ज्योतिष में शादी में देरी: मेरी शादी में देरी क्यों हो रही है?",
           "वैदिक ज्योतिष में प्रारंभिक विवाह",
@@ -7209,9 +7223,14 @@
           "/hi",
           "/hi/love",
           "/hi/marriage-astrology",
+          "/hi/marriage-astrology/arranged-marriage",
           "/hi/marriage-astrology/delayed-marriage",
           "/hi/marriage-astrology/divorce-possibility",
           "/hi/marriage-astrology/early-marriage",
+          "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
+          "/hi/marriage-astrology/married-life",
+          "/hi/marriage-astrology/spouse-nature",
           "/hi/tools/mangal-dosh",
           "/reports/relationship_future_report"
         ],
@@ -7223,9 +7242,14 @@
           "/hi/tools/mangal-dosh"
         ],
         "marriageTopics": [
+          "/hi/marriage-astrology/arranged-marriage",
           "/hi/marriage-astrology/delayed-marriage",
           "/hi/marriage-astrology/divorce-possibility",
-          "/hi/marriage-astrology/early-marriage"
+          "/hi/marriage-astrology/early-marriage",
+          "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
+          "/hi/marriage-astrology/married-life",
+          "/hi/marriage-astrology/spouse-nature"
         ],
         "external": [],
         "embeds": []
@@ -7265,7 +7289,7 @@
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "वैदिक ज्योतिष में अनुकूलता",
-            "description": "Explore Vedic compatibility through Kundli matching, Ashtakoota, Navamsa, and Dasha cycles — a complete guide to karmic alignment and marital harmony.",
+            "description": "वैदिक ज्योतिष में विवाह अनुकूलता कैसे देखी जाती है — कुंडली मिलान, अष्टकूट गुण मिलान, नाड़ी, भकूट, मंगल दोष, नवांश और दोनों कुंडलियों के सप्तम भाव की पूरी मार्गदर्शिका।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/compatibility",
             "author": {
               "@type": "Organization",
@@ -7303,7 +7327,7 @@
                 "name": "क्या नवांश मेरे साथी की प्रकृति को प्रकट करता है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "हां। नवांश साथी की आंतरिक प्रकृति और मिलन की अंतर्निहित शक्ति और स्वास्थ्य को प्रकट करता है — वे गुण और गतिशीलता जो विवाह की अंतरंगता और निरंतर वास्तविकता में उभरती हैं, जिसे राशि चार्ट अकेले पूरी तरह से भविष्यवाणी नहीं कर सकता।"
+                  "text": "हां। नवांश साथी की आंतरिक प्रकृति और मिलन की अंतर्निहित शक्ति और स्वास्थ्य को प्रकट करता है — वे गुण और व्यवहार जो विवाह की अंतरंगता और निरंतर वास्तविकता में उभरती हैं, जिसे राशि चार्ट अकेले पूरी तरह से भविष्यवाणी नहीं कर सकता।"
                 }
               },
               {
@@ -7311,7 +7335,7 @@
                 "name": "क्या उपाय अनुकूलता की समस्याओं को ठीक कर सकते हैं?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, जो रिश्ते के भीतर बातचीत की गतिशीलता और गुणवत्ता को बदलता है। वे साथी को नहीं बदलते या कुंडली को ओवरराइड नहीं करते — वे व्यक्ति की आंतरिक स्थिति को परिष्कृत करते हैं।"
+                  "text": "उपाय आपकी अपनी चेतना को संतुलित करने के लिए डिज़ाइन किए गए हैं, जो रिश्ते के भीतर आपसी व्यवहार और बातचीत की गुणवत्ता को बदलता है। वे साथी को नहीं बदलते या कुंडली को ओवरराइड नहीं करते — वे व्यक्ति की आंतरिक स्थिति को परिष्कृत करते हैं।"
                 }
               },
               {
@@ -7319,7 +7343,7 @@
                 "name": "अनुकूलता में दशा कितनी महत्वपूर्ण है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "दशा विश्लेषण महत्वपूर्ण है। यह उन प्रमुख कार्मिक विषयों को परिभाषित करता है जिन्हें जोड़ा किसी भी समय नेविगेट करता है, और मिलने और विवाह के समय सक्रिय दशा अवधियां रिश्ते के निर्माणकारी चरणों के स्वर को महत्वपूर्ण रूप से आकार देती हैं।"
+                  "text": "दशा विश्लेषण महत्वपूर्ण है। यह उन प्रमुख कार्मिक विषयों को परिभाषित करता है जिनसे जोड़ा किसी भी समय गुज़रता है, और मिलने और विवाह के समय सक्रिय दशा अवधियां रिश्ते के निर्माणकारी चरणों के स्वर को महत्वपूर्ण रूप से आकार देती हैं।"
                 }
               },
               {
@@ -7327,7 +7351,7 @@
                 "name": "अनुकूलता में 8वें भाव का क्या महत्व है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "अष्टम भाव तीव्रता, साझा संपत्ति और मिलन के परिवर्तनकारी आयाम को नियंत्रित करता है — जोड़ा प्रमुख संकटों और अंतरंगता के गहरे, अधिक कमजोर पहलुओं को कैसे नेविगेट करता है। दो कुंडलियों के बीच मजबूत अष्टम भाव संबंध दबाव में गहरे बंधन की क्षमता को इंगित करते हैं।"
+                  "text": "अष्टम भाव तीव्रता, साझा संपत्ति और मिलन के परिवर्तनकारी आयाम को नियंत्रित करता है — जोड़ा प्रमुख संकटों और अंतरंगता के गहरे, अधिक संवेदनशील पहलुओं को कैसे संभालता है। दो कुंडलियों के बीच मजबूत अष्टम भाव संबंध दबाव में गहरे बंधन की क्षमता को इंगित करते हैं।"
                 }
               },
               {
@@ -7359,7 +7383,7 @@
                 "name": "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। अनुकूलता विश्लेषण दो कुंडलियों के बीच वर्तमान कार्मिक संरेखण का एक स्नैपशॉट है, जबकि सफलता की भविष्यवाणी के लिए निरंतर कार्मिक विकास की गहरी समझ की आवश्यकता होती है। अनुकूलता सफलता की स्थितियां बनाती है; साझेदारों का सचेत, निरंतर प्रयास इसे दिन-प्रतिदिन बनाता है।"
+                  "text": "नहीं। अनुकूलता विश्लेषण दो कुंडलियों के बीच वर्तमान कार्मिक तालमेल की एक झलक है, जबकि सफलता की भविष्यवाणी के लिए निरंतर कार्मिक विकास की गहरी समझ की आवश्यकता होती है। अनुकूलता सफलता की स्थितियां बनाती है; साझेदारों का सचेत, निरंतर प्रयास इसे दिन-प्रतिदिन बनाता है।"
                 }
               }
             ]
@@ -7367,11 +7391,11 @@
         ]
       },
       "server": {
-        "wordCount": 3279,
+        "wordCount": 3536,
         "detailsElements": 39
       },
       "facts": {
-        "hindiMetaFallsBackToEnglish": true,
+        "hindiMetaFallsBackToEnglish": false,
         "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "39/39",

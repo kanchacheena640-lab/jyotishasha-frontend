@@ -61,12 +61,27 @@ export interface TopicLandingInlineTool {
   reportSlug: string
 }
 
-export interface TopicLandingConfig {
+/** Optional primary action: a compact card linking to an EXISTING site route (e.g. a free calculator). */
+export interface TopicLandingPrimaryAction {
+  eyebrow: LocalizedString
+  heading: LocalizedString
+  body: LocalizedString
+  ctaLabel: LocalizedString
+  microcopy: LocalizedString
+  /** Locale-less internal path of an existing route, e.g. '/love'. The /hi prefix is added for Hindi. */
+  href: string
+  ctaId: string
+  screenName: string
+}
+
+/** Fields shared by every landing overlay. */
+interface TopicLandingBase {
   directAnswerLabel: LocalizedString
   directAnswer: LocalizedString
   /** Optional: without it the report card renders alone (no video slot, no play tracking). */
   video?: TopicLandingVideo
-  offer: TopicLandingOffer
+  /** Optional primary action card, rendered after the direct answer and before any report card. */
+  primaryAction?: TopicLandingPrimaryAction
   contextLinks: TopicLandingContextLinks
   /** Render FAQ answers and accordion-section bodies in server HTML (native <details>) for this topic. */
   ssrFaq: boolean
@@ -75,3 +90,16 @@ export interface TopicLandingConfig {
   /** Optional interactive tool placed inside the article after one content section. */
   inlineTool?: TopicLandingInlineTool
 }
+
+/** Report-led landing (the original shape): a paid report card is the conversion unit. */
+export interface TopicLandingConfig extends TopicLandingBase {
+  offer: TopicLandingOffer
+}
+
+/** Tool-led landing: the primary action is an existing free tool; no report card on the page. */
+export interface ToolLedLandingConfig extends TopicLandingBase {
+  offer?: undefined
+  primaryAction: TopicLandingPrimaryAction
+}
+
+export type AnyTopicLandingConfig = TopicLandingConfig | ToolLedLandingConfig

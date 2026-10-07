@@ -101,7 +101,6 @@ const HINDI_META_GAP_ALLOWLIST: readonly string[] = [
   "second-marriage",       // MC-12
   "divorce-possibility",   // MC-09
   "married-life",          // MC-09
-  "compatibility",         // MC-09
   "intercaste-marriage",   // MC-14
 ];
 
@@ -231,14 +230,20 @@ for (const slug of slugs) {
     check(t(`C cross-domain link ${href} resolves to ${isAuthority ? "a registered authority topic" : "an existing app route"}`), ok);
   }
   if (landing) {
-    check(t(`C landing offer report '${landing.offer.reportSlug}' is a catalogue report`), reportSlugs.has(landing.offer.reportSlug));
+    if (landing.offer) {
+      check(t(`C landing offer report '${landing.offer.reportSlug}' is a catalogue report`), reportSlugs.has(landing.offer.reportSlug));
+    }
+    if (landing.primaryAction) {
+      check(t(`C landing primary action '${landing.primaryAction.href}' resolves to an existing app route`), resolvesToAppRoute(landing.primaryAction.href));
+    }
+    check(t("C landing has a conversion unit (report card or primary action)"), !!(landing.offer || landing.primaryAction));
     const ctxTargets = [...landing.contextLinks.topicSlugs, landing.contextLinks.overviewSlug];
     const badCtx = ctxTargets.filter((s: string) => s === slug || !slugs.includes(s));
     check(t(`C landing context links point at other registered topics (bad: ${JSON.stringify(badCtx)})`), badCtx.length === 0);
   }
 
   // D. Report CTA duplication (landing card + bottom report CTAs)
-  const offered = [...(landing ? [landing.offer.reportSlug] : []), ...ctas.filter((c) => c.type === "report").map((c) => c.slug)];
+  const offered = [...(landing?.offer ? [landing.offer.reportSlug] : []), ...ctas.filter((c) => c.type === "report").map((c) => c.slug)];
   const dupes = [...new Set(offered.filter((s, i) => offered.indexOf(s) !== i))];
   const allowedDupe = DUPLICATE_REPORT_CTA_ALLOWLIST[slug];
   const unexpectedDupes = dupes.filter((s) => s !== allowedDupe);

@@ -93,7 +93,10 @@ for (const slug of slugs) {
     check(t("section headings unchanged in count (one H2 per content section is still rendered)"),
       topic.sections.every((s: any) => count(text, pick(s, locale, "title")) >= 1) && h2 >= topic.sections.length);
     if (marriageTopicLandings[slug]) {
-      check(t("landing overlay still renders (short answer + offer card)"), main.includes('aria-labelledby="topic-landing-offer"') && /Short answer|संक्षिप्त उत्तर/.test(text));
+      const unitOk = marriageTopicLandings[slug].offer
+        ? main.includes('aria-labelledby="topic-landing-offer"')
+        : main.includes('aria-labelledby="topic-landing-primary-action"');
+      check(t("landing overlay still renders (short answer + its report card or primary action)"), unitOk && /Short answer|संक्षिप्त उत्तर/.test(text));
     }
     if (slug === "spouse-nature") {
       check(t("spouse-nature keeps exactly 27 <details> and the Lagna tool"), details === 27 && /<select\b/.test(main) && main.includes("lagna-finder"));

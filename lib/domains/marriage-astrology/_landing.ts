@@ -3,7 +3,7 @@
 // listed here get the direct answer / report unit (+ video when configured) /
 // SSR FAQ (and SSR accordion bodies); every other topic renders exactly as before.
 
-import type { TopicLandingConfig } from '../../authority-engine/landing-types'
+import type { AnyTopicLandingConfig, TopicLandingConfig, ToolLedLandingConfig } from '../../authority-engine/landing-types'
 
 export const marriageTimingLanding: TopicLandingConfig = {
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -333,11 +333,58 @@ export const spouseNatureLanding: TopicLandingConfig = {
   inlineTool: { kind: 'spouse-lagna', afterSectionId: 'introduction', reportSlug: 'spouse_nature_report' },
 }
 
+// Tool-led (P1): the primary action is the EXISTING free Kundli Matching calculator (/love). Its result
+// pages already offer the Relationship Future Report, so this page carries no report card of its own
+// (the existing bottom report CTA stays as a secondary option).
+export const compatibilityLanding: ToolLedLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Marriage compatibility in Vedic astrology is broader than a single Guna Milan score. Kundli matching usually starts with the Ashtakoota system — 36 gunas, including Nadi, Bhakoot and Graha Maitri — and a Mangal Dosha check, and is then read alongside both full birth charts: the Moon for emotional fit, the 7th house and its lord, Venus and Jupiter, and the Navamsa (D9). A high score does not by itself mean a happy marriage, and a low score is not a verdict on its own.',
+    hi: 'वैदिक ज्योतिष में विवाह की अनुकूलता केवल गुण मिलान के अंकों तक सीमित नहीं है। कुंडली मिलान आमतौर पर अष्टकूट पद्धति — 36 गुण, जिनमें नाड़ी, भकूट और ग्रह मैत्री शामिल हैं — और मंगल दोष की जाँच से शुरू होता है, और फिर दोनों की पूरी जन्मकुंडली के साथ पढ़ा जाता है: भावनात्मक मेल के लिए चंद्रमा, सप्तम भाव और सप्तमेश, शुक्र और गुरु, और नवांश (D9)। अधिक गुण अपने आप सुखी विवाह का प्रमाण नहीं हैं, और कम गुण अकेले कोई अंतिम फैसला नहीं हैं।',
+  },
+
+  primaryAction: {
+    eyebrow: { en: 'Free Kundli Matching', hi: 'फ्री कुंडली मिलान' },
+    heading: { en: 'Check Your Compatibility', hi: 'अपनी कुंडली अनुकूलता जाँचें' },
+    body: {
+      en: 'Enter both partners\' birth details to see your Guna Milan score with the Ashtakoota breakdown and a Mangal Dosha check.',
+      hi: 'दोनों साथियों की जन्म तिथि, समय और स्थान दर्ज करें और अष्टकूट विवरण के साथ गुण मिलान और मंगल दोष की जाँच देखें।',
+    },
+    ctaLabel: { en: 'Check Compatibility — Free', hi: 'फ्री में अनुकूलता जाँचें' },
+    microcopy: {
+      en: 'After your free result you can choose a detailed two-chart report.',
+      hi: 'फ्री परिणाम के बाद आप दोनों कुंडलियों की विस्तृत रिपोर्ट चुन सकते हैं।',
+    },
+    href: '/love',
+    ctaId: 'compatibility_kundli_matching_cta',
+    screenName: 'compatibility_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at how two charts are matched for marriage. Related questions have their own detailed guides — the nature of the spouse, what married life may look like, and how love and arranged paths are read:',
+      hi: 'यह मार्गदर्शिका बताती है कि विवाह के लिए दो कुंडलियों का मिलान कैसे किया जाता है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — जीवनसाथी का स्वभाव, विवाह के बाद का जीवन, और प्रेम व अरेंज्ड विवाह के मार्ग:',
+    },
+    topicSlugs: ['married-life', 'spouse-nature', 'love-marriage', 'arranged-marriage'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
-export const marriageTopicLandings: Record<string, TopicLandingConfig> = {
+export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
   'love-marriage': loveMarriageLanding,
   'arranged-marriage': arrangedMarriageLanding,
   'delayed-marriage': delayedMarriageLanding,
   'spouse-nature': spouseNatureLanding,
+  'compatibility': compatibilityLanding,
 }

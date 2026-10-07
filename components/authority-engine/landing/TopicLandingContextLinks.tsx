@@ -5,11 +5,11 @@
 
 import Link from 'next/link'
 import type { AuthorityDomain, Locale } from '@/lib/authority-engine/types'
-import type { TopicLandingConfig } from '@/lib/authority-engine/landing-types'
+import type { AnyTopicLandingConfig } from '@/lib/authority-engine/landing-types'
 import { loc } from '@/lib/authority-engine/i18n'
 
 interface Props {
-  config: TopicLandingConfig
+  config: AnyTopicLandingConfig
   domain: AuthorityDomain
   locale: Locale
 }

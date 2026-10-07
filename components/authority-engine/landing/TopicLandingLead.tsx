@@ -6,20 +6,39 @@
 // server-rendered; only the video facade and the CTA/sample actions hydrate.
 
 import type { Locale } from '@/lib/authority-engine/types'
-import type { TopicLandingConfig } from '@/lib/authority-engine/landing-types'
+import type { AnyTopicLandingConfig, TopicLandingOffer } from '@/lib/authority-engine/landing-types'
 import { reportsData } from '@/app/data/reportsData'
 import { getReportSampleLabel, getReportSampleUrl } from '@/lib/reportSamples'
 import YouTubeShortFacade from './YouTubeShortFacade'
 import LeadOfferActions from './LeadOfferActions'
 import SampleHookLink from './SampleHookLink'
+import LeadPrimaryAction from './LeadPrimaryAction'
 
 interface Props {
-  config: TopicLandingConfig
+  config: AnyTopicLandingConfig
   locale: Locale
 }
 
 export default function TopicLandingLead({ config, locale }: Props) {
-  const { video, offer } = config
+  return (
+    <>
+      <section aria-label={config.directAnswerLabel[locale]} className="mb-8">
+        <div className="rounded-2xl border-l-4 border-rose-400 bg-rose-500/[0.07] px-5 py-4 sm:px-6 sm:py-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-rose-300">
+            {config.directAnswerLabel[locale]}
+          </p>
+          <p className="mt-2.5 text-base leading-7 text-gray-100">{config.directAnswer[locale]}</p>
+        </div>
+      </section>
+      {config.primaryAction && <LeadPrimaryAction action={config.primaryAction} locale={locale} />}
+      {config.offer && <LeadOfferUnit config={config} offer={config.offer} locale={locale} />}
+    </>
+  )
+}
+
+/** The report conversion unit: video + report card, or the report card alone. */
+function LeadOfferUnit({ config, offer, locale }: Props & { offer: TopicLandingOffer }) {
+  const { video } = config
   const product = reportsData.find(r => r.slug === offer.reportSlug)
   const reportHref = `/reports/${offer.reportSlug}`
   const price = product?.price
@@ -69,15 +88,6 @@ export default function TopicLandingLead({ config, locale }: Props) {
 
   return (
     <>
-      <section aria-label={config.directAnswerLabel[locale]} className="mb-8">
-        <div className="rounded-2xl border-l-4 border-rose-400 bg-rose-500/[0.07] px-5 py-4 sm:px-6 sm:py-5">
-          <p className="text-xs font-semibold uppercase tracking-wider text-rose-300">
-            {config.directAnswerLabel[locale]}
-          </p>
-          <p className="mt-2.5 text-base leading-7 text-gray-100">{config.directAnswer[locale]}</p>
-        </div>
-      </section>
-
       {video ? (
         <section
           aria-labelledby="topic-landing-offer"
