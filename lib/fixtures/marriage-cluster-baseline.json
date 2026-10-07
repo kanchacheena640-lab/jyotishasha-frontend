@@ -4046,6 +4046,7 @@
           "Spouse Nature in Vedic Astrology: Houses & Planets"
         ],
         "h2": [
+          "Spouse Nature Report",
           "Introduction",
           "Primary Houses for Spouse Analysis",
           "Planet-wise Analysis of Spouse Nature",
@@ -4053,6 +4054,7 @@
           "Positive and Challenging Combinations",
           "Factors That Improve Married Life",
           "Misconceptions, Remedies and Practical Guidance",
+          "Related Marriage Questions",
           "Frequently Asked Questions",
           "Related Topics"
         ],
@@ -4088,7 +4090,7 @@
           "How should I use this knowledge ethically?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -4109,7 +4111,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         },
         {
           "id": "planet-wise-analysis",
@@ -4119,7 +4121,7 @@
           "items": 9,
           "labelsInServer": 9,
           "bodies": 9,
-          "bodiesInServer": 0
+          "bodiesInServer": 9
         },
         {
           "id": "key-indicators",
@@ -4169,29 +4171,42 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
         "internal": [
           "/",
           "/marriage-astrology",
+          "/marriage-astrology/arranged-marriage",
+          "/marriage-astrology/compatibility",
           "/marriage-astrology/early-marriage",
           "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-prediction",
+          "/marriage-astrology/marriage-timing",
           "/marriage-astrology/married-life",
+          "/report-samples/spouse_nature_report_en.pdf",
           "/reports/marriage_report",
+          "/reports/spouse_nature_report",
           "/tools/marriage-path"
         ],
         "reports": [
-          "/reports/marriage_report"
+          "/reports/marriage_report",
+          "/reports/spouse_nature_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/spouse_nature_report_en.pdf"
+        ],
         "tools": [
           "/tools/marriage-path"
         ],
         "marriageTopics": [
+          "/marriage-astrology/arranged-marriage",
+          "/marriage-astrology/compatibility",
           "/marriage-astrology/early-marriage",
           "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-prediction",
+          "/marriage-astrology/marriage-timing",
           "/marriage-astrology/married-life"
         ],
         "external": [],
@@ -4244,14 +4259,14 @@
         ]
       },
       "server": {
-        "wordCount": 1933,
-        "detailsElements": 0
+        "wordCount": 3488,
+        "detailsElements": 27
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/27",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
       }
     },
@@ -4262,7 +4277,7 @@
       "path": "/hi/marriage-astrology/spouse-nature",
       "seo": {
         "title": "वैदिक ज्योतिष में जीवनसाथी का स्वभाव",
-        "description": "Discover how Vedic astrology reveals your spouse's nature through the 7th house, planetary karakas, Navamsa, and Darakaraka for clearer understanding.",
+        "description": "जानें वैदिक ज्योतिष में सप्तम भाव, सप्तमेश, शुक्र-गुरु, नवांश (D9) और दारकारक से जीवनसाथी के स्वभाव, व्यवहार और रिश्ते की प्रवृत्तियाँ कैसे समझी जाती हैं।",
         "keywords": [
           "वैदिक ज्योतिष में जीवनसाथी का स्वभाव",
           "जीवनसाथी का स्वभाव ज्योतिष",
@@ -4287,6 +4302,7 @@
           "वैदिक ज्योतिष में जीवनसाथी का स्वभाव"
         ],
         "h2": [
+          "जीवनसाथी स्वभाव रिपोर्ट",
           "परिचय",
           "जीवनसाथी विश्लेषण के प्राथमिक भाव",
           "जीवनसाथी के स्वभाव का ग्रह-वार विश्लेषण",
@@ -4294,6 +4310,7 @@
           "सकारात्मक और चुनौतीपूर्ण संयोजन",
           "वैवाहिक जीवन को बेहतर बनाने वाले कारक",
           "भ्रांतियां, उपाय और व्यावहारिक मार्गदर्शन",
+          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
           "संबंधित विषय"
         ],
@@ -4329,7 +4346,7 @@
           "मुझे इस ज्ञान का नैतिक रूप से उपयोग कैसे करना चाहिए?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -4350,7 +4367,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         },
         {
           "id": "planet-wise-analysis",
@@ -4360,7 +4377,7 @@
           "items": 9,
           "labelsInServer": 9,
           "bodies": 9,
-          "bodiesInServer": 0
+          "bodiesInServer": 9
         },
         {
           "id": "key-indicators",
@@ -4410,29 +4427,42 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
         "internal": [
           "/hi",
           "/hi/marriage-astrology",
+          "/hi/marriage-astrology/arranged-marriage",
+          "/hi/marriage-astrology/compatibility",
           "/hi/marriage-astrology/early-marriage",
           "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
+          "/hi/marriage-astrology/marriage-timing",
           "/hi/marriage-astrology/married-life",
           "/hi/tools/marriage-path",
-          "/reports/marriage_report"
+          "/report-samples/spouse_nature_report_hi.pdf",
+          "/reports/marriage_report",
+          "/reports/spouse_nature_report"
         ],
         "reports": [
-          "/reports/marriage_report"
+          "/reports/marriage_report",
+          "/reports/spouse_nature_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/spouse_nature_report_hi.pdf"
+        ],
         "tools": [
           "/hi/tools/marriage-path"
         ],
         "marriageTopics": [
+          "/hi/marriage-astrology/arranged-marriage",
+          "/hi/marriage-astrology/compatibility",
           "/hi/marriage-astrology/early-marriage",
           "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
+          "/hi/marriage-astrology/marriage-timing",
           "/hi/marriage-astrology/married-life"
         ],
         "external": [],
@@ -4472,7 +4502,7 @@
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "वैदिक ज्योतिष में जीवनसाथी का स्वभाव",
-            "description": "Discover how Vedic astrology reveals your spouse's nature through the 7th house, planetary karakas, Navamsa, and Darakaraka for clearer understanding.",
+            "description": "जानें वैदिक ज्योतिष में सप्तम भाव, सप्तमेश, शुक्र-गुरु, नवांश (D9) और दारकारक से जीवनसाथी के स्वभाव, व्यवहार और रिश्ते की प्रवृत्तियाँ कैसे समझी जाती हैं।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/spouse-nature",
             "datePublished": "",
             "dateModified": "",
@@ -4485,14 +4515,14 @@
         ]
       },
       "server": {
-        "wordCount": 2142,
-        "detailsElements": 0
+        "wordCount": 3870,
+        "detailsElements": 27
       },
       "facts": {
-        "hindiMetaFallsBackToEnglish": true,
+        "hindiMetaFallsBackToEnglish": false,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/27",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
       }
     },

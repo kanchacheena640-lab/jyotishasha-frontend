@@ -103,7 +103,6 @@ const HINDI_META_GAP_ALLOWLIST: readonly string[] = [
   "married-life",          // MC-09
   "compatibility",         // MC-09
   "intercaste-marriage",   // MC-14
-  "spouse-nature",         // MC-03 (canary)
 ];
 
 /**

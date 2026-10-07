@@ -264,10 +264,76 @@ export const delayedMarriageLanding: TopicLandingConfig = {
   longForm: true,
 }
 
+// Dedicated product: the Spouse Nature Report (rep_026). Bullets stay within its
+// sample (nature/temperament, communication and emotional style, the 7th-house,
+// Navamsa and Darakaraka basis, health and financial tendencies). It never names
+// a specific person. The bottom report CTA stays the broader Marriage Report, so
+// the dedicated report is offered once. No approved video yet.
+export const spouseNatureLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Vedic astrology does not read a spouse\'s nature from one placement. An astrologer combines the sign on the 7th house and the condition of its lord, the planets placed in or influencing the 7th house, Venus and Jupiter as significators of the partner, the Navamsa (D9) chart for the inner nature of the partnership, and supporting indicators such as the Darakaraka. Together they point to likely tendencies in temperament, communication and relationship style — not a fixed description of one particular person.',
+    hi: 'वैदिक ज्योतिष में जीवनसाथी का स्वभाव किसी एक ग्रह-स्थिति से तय नहीं होता। ज्योतिषी सप्तम भाव की राशि और सप्तमेश की स्थिति, सप्तम भाव में बैठे या उस पर प्रभाव डालने वाले ग्रह, जीवनसाथी के कारक शुक्र और गुरु, रिश्ते की आंतरिक प्रकृति के लिए नवांश (D9) कुंडली और दारकारक जैसे सहायक संकेतकों को साथ मिलाकर देखते हैं। इनसे जीवनसाथी के स्वभाव, बातचीत के तरीके और रिश्ते में व्यवहार की संभावित प्रवृत्तियों का संकेत मिलता है — किसी एक विशेष व्यक्ति का तय विवरण नहीं।',
+  },
+
+  offer: {
+    reportSlug: 'spouse_nature_report',
+    eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
+    heading: { en: 'Spouse Nature Report', hi: 'जीवनसाथी स्वभाव रिपोर्ट' },
+    intro: {
+      en: 'This page explains the general principles. The report reads these factors in your own birth chart to describe your spouse\'s likely tendencies — it does not identify a specific person.',
+      hi: 'यह पृष्ठ सामान्य सिद्धांत समझाता है। रिपोर्ट इन्हीं कारकों को आपकी अपनी जन्मकुंडली में पढ़कर जीवनसाथी की संभावित प्रवृत्तियों का वर्णन करती है — यह किसी विशेष व्यक्ति की पहचान नहीं बताती।',
+    },
+    bullets: {
+      en: [
+        'Your spouse\'s likely nature, temperament and personality',
+        'Communication and emotional style',
+        'The 7th house, Navamsa (D9) and Darakaraka basis behind each reading',
+        'Health and financial tendencies — indications, not certainties',
+      ],
+      hi: [
+        'जीवनसाथी का संभावित स्वभाव, मिज़ाज और व्यक्तित्व',
+        'बातचीत और भावनात्मक शैली',
+        'हर निष्कर्ष के पीछे का सप्तम भाव, नवांश (D9) और दारकारक आधार',
+        'स्वास्थ्य और आर्थिक प्रवृत्तियाँ — संकेत, निश्चितता नहीं',
+      ],
+    },
+    ctaLabel: { en: 'Get Spouse Nature Report – ₹{price}', hi: 'जीवनसाथी स्वभाव रिपोर्ट पाएं – ₹{price}' },
+    microcopy: {
+      en: 'Personalised using your Date, Time & Place of Birth.',
+      hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
+    },
+    sampleTitle: { en: 'Spouse Nature Report', hi: 'जीवनसाथी स्वभाव रिपोर्ट' },
+    reportCtaId: 'spouse_nature_report_cta',
+    sampleCtaId: 'spouse_nature_sample_report',
+    screenName: 'spouse_nature_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at what a chart suggests about the nature of a partner. Related questions have their own detailed guides — matching two charts once a proposal comes, what life after marriage may look like, when marriage may happen, and how a family-arranged match is read:',
+      hi: 'यह मार्गदर्शिका बताती है कि कुंडली जीवनसाथी के स्वभाव के बारे में क्या संकेत देती है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — रिश्ता आने पर दो कुंडलियों का मिलान, विवाह के बाद का जीवन, विवाह कब हो सकता है, और अरेंज्ड रिश्ते को कैसे देखा जाता है:',
+    },
+    topicSlugs: ['compatibility', 'married-life', 'marriage-timing', 'arranged-marriage'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  // Also renders the Primary Houses / Planet-wise accordion bodies in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, TopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
   'love-marriage': loveMarriageLanding,
   'arranged-marriage': arrangedMarriageLanding,
   'delayed-marriage': delayedMarriageLanding,
+  'spouse-nature': spouseNatureLanding,
 }

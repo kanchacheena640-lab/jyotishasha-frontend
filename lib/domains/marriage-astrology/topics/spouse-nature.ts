@@ -26,6 +26,7 @@ export const spouseNature: DomainTopic = {
   seo: {
     metaTitle:       'Spouse Nature in Vedic Astrology: Complete Guide',
     metaDescription: 'Discover how Vedic astrology reveals your spouse\'s nature through the 7th house, planetary karakas, Navamsa, and Darakaraka for clearer understanding.',
+    metaDescription_hi: 'जानें वैदिक ज्योतिष में सप्तम भाव, सप्तमेश, शुक्र-गुरु, नवांश (D9) और दारकारक से जीवनसाथी के स्वभाव, व्यवहार और रिश्ते की प्रवृत्तियाँ कैसे समझी जाती हैं।',
     robots:          'noindex,follow',
   },
 
