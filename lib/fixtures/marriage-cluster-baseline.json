@@ -199,8 +199,11 @@
             "headline": "Marriage Prediction in Vedic Astrology",
             "description": "Seeking marriage prediction? Explore how Vedic astrology analyzes the 7th house, Venus, Jupiter, and Navamsa to provide insights into marriage timing and compatibility.",
             "url": "https://www.jyotishasha.com/marriage-astrology/marriage-prediction",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -485,8 +488,11 @@
             "headline": "वैदिक ज्योतिष में विवाह भविष्यवाणी",
             "description": "Seeking marriage prediction? Explore how Vedic astrology analyzes the 7th house, Venus, Jupiter, and Navamsa to provide insights into marriage timing and compatibility.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/marriage-prediction",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -774,6 +780,11 @@
             "url": "https://www.jyotishasha.com/marriage-astrology/marriage-timing",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-04",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -1083,6 +1094,11 @@
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/marriage-timing",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-04",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -1443,6 +1459,11 @@
             "url": "https://www.jyotishasha.com/marriage-astrology/love-marriage",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-04",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -1777,6 +1798,11 @@
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/love-marriage",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-04",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -2135,6 +2161,11 @@
             "url": "https://www.jyotishasha.com/marriage-astrology/arranged-marriage",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-05",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -2491,6 +2522,11 @@
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/arranged-marriage",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-05",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -2847,6 +2883,11 @@
             "url": "https://www.jyotishasha.com/marriage-astrology/delayed-marriage",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-06",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -3210,6 +3251,11 @@
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/delayed-marriage",
             "datePublished": "2026-07-20",
             "dateModified": "2026-10-06",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -3530,8 +3576,11 @@
             "headline": "Early Marriage in Vedic Astrology",
             "description": "Discover the astrological indicators for early marriage — the 7th house, Venus, Jupiter, Dasha timing, and how to distinguish a destined early union from an immature one.",
             "url": "https://www.jyotishasha.com/marriage-astrology/early-marriage",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -3857,8 +3906,11 @@
             "headline": "वैदिक ज्योतिष में प्रारंभिक विवाह",
             "description": "Discover the astrological indicators for early marriage — the 7th house, Venus, Jupiter, Dasha timing, and how to distinguish a destined early union from an immature one.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/early-marriage",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -4209,8 +4261,11 @@
             "headline": "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
             "description": "Understand the astrological promise of a second marriage in Vedic Astrology. Explore key house analysis, Dasha timing, and the role of the 9th house.",
             "url": "https://www.jyotishasha.com/marriage-astrology/second-marriage",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -4561,8 +4616,11 @@
             "headline": "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
             "description": "Understand the astrological promise of a second marriage in Vedic Astrology. Explore key house analysis, Dasha timing, and the role of the 9th house.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/second-marriage",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -4882,8 +4940,11 @@
             "headline": "Divorce Possibility in Vedic Astrology: A Guide",
             "description": "Learn how Vedic astrology identifies divorce possibility through the 7th house, Navamsa, and Dasha cycles — a guide to karmic patterns and marital resilience.",
             "url": "https://www.jyotishasha.com/marriage-astrology/divorce-possibility",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -5199,8 +5260,11 @@
             "headline": "वैदिक ज्योतिष में तलाक की संभावना",
             "description": "Learn how Vedic astrology identifies divorce possibility through the 7th house, Navamsa, and Dasha cycles — a guide to karmic patterns and marital resilience.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/divorce-possibility",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -5548,8 +5612,11 @@
             "headline": "Spouse Nature in Vedic Astrology: Houses & Planets",
             "description": "Discover how Vedic astrology reveals your spouse's nature through the 7th house, planetary karakas, Navamsa, and Darakaraka for clearer understanding.",
             "url": "https://www.jyotishasha.com/marriage-astrology/spouse-nature",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -5894,8 +5961,11 @@
             "headline": "वैदिक ज्योतिष में जीवनसाथी का स्वभाव",
             "description": "जानें वैदिक ज्योतिष में सप्तम भाव, सप्तमेश, शुक्र-गुरु, नवांश (D9) और दारकारक से जीवनसाथी के स्वभाव, व्यवहार और रिश्ते की प्रवृत्तियाँ कैसे समझी जाती हैं।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/spouse-nature",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -6216,8 +6286,11 @@
             "headline": "Married Life in Vedic Astrology: A Complete Guide",
             "description": "Explore how Vedic astrology assesses married life through the 7th house, Navamsa, and Dasha cycles — a guide to harmony, challenges, and karmic growth.",
             "url": "https://www.jyotishasha.com/marriage-astrology/married-life",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -6535,8 +6608,11 @@
             "headline": "वैदिक ज्योतिष में वैवाहिक जीवन",
             "description": "Explore how Vedic astrology assesses married life through the 7th house, Navamsa, and Dasha cycles — a guide to harmony, challenges, and karmic growth.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/married-life",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -6863,8 +6939,11 @@
             "headline": "Compatibility in Vedic Astrology: Complete Guide",
             "description": "Explore Vedic compatibility through Kundli matching, Ashtakoota, Navamsa, and Dasha cycles — a complete guide to karmic alignment and marital harmony.",
             "url": "https://www.jyotishasha.com/marriage-astrology/compatibility",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -7188,8 +7267,11 @@
             "headline": "वैदिक ज्योतिष में अनुकूलता",
             "description": "Explore Vedic compatibility through Kundli matching, Ashtakoota, Navamsa, and Dasha cycles — a complete guide to karmic alignment and marital harmony.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/compatibility",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -7587,8 +7669,11 @@
             "headline": "Intercaste Marriage in Vedic Astrology: Karmic Analysis",
             "description": "Understand the astrological promise of intercaste marriage in Vedic Astrology. Explore planetary influences, house analysis, and karmic timing.",
             "url": "https://www.jyotishasha.com/marriage-astrology/intercaste-marriage",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -7986,8 +8071,11 @@
             "headline": "वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण",
             "description": "Understand the astrological promise of intercaste marriage in Vedic Astrology. Explore planetary influences, house analysis, and karmic timing.",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/intercaste-marriage",
-            "datePublished": "",
-            "dateModified": "",
+            "author": {
+              "@type": "Organization",
+              "name": "Jyotishasha",
+              "url": "https://www.jyotishasha.com"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Jyotishasha",

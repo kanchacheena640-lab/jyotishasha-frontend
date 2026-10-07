@@ -13,7 +13,6 @@ import {
 import {
   generateAuthorityTopicMetadata,
   buildAuthorityBreadcrumbSchema,
-  buildAuthorityArticleSchema,
 } from '@/lib/authority-engine/seo'
 import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDetailRenderer'
 import TopicLandingLead from '@/components/authority-engine/landing/TopicLandingLead'
@@ -21,6 +20,7 @@ import TopicLandingContextLinks from '@/components/authority-engine/landing/Topi
 import LandingInlineTool from '@/components/authority-engine/landing/LandingInlineTool'
 import { marriageTopicLandings } from '@/lib/domains/marriage-astrology/_landing'
 import { buildMarriageFaqPageSchema } from '@/lib/domains/marriage-astrology/faqSchema'
+import { buildMarriageArticleSchema } from '@/lib/domains/marriage-astrology/articleSchema'
 
 const DOMAIN_SLUG = 'marriage-astrology'
 
@@ -54,7 +54,8 @@ export default function MarriageAstrologyTopic({
   if (!topic) notFound()
 
   const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, topic!, locale)
-  const articleSchema    = buildAuthorityArticleSchema(domain, topic!, locale)
+  // MC-07: shared Article builder + marriage-scoped integrity (no empty dates, canonical Organization author).
+  const articleSchema    = buildMarriageArticleSchema(domain, topic!, locale)
   // MC-06: FAQPage built from the same FAQ items the page renders (null when a topic has no FAQ).
   const faqSchema        = buildMarriageFaqPageSchema(topic!, locale)
   // Opt-in landing presentation (currently marriage-timing only); others unchanged.
