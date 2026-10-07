@@ -379,6 +379,89 @@ export const compatibilityLanding: ToolLedLandingConfig = {
   longForm: true,
 }
 
+// Report-led (P2): most readers want to know what married life may be like, not to fix an existing
+// problem -- so the primary card is the Marriage Report (outlook, married-life dynamics, strengths and
+// areas needing attention; it does not read the Navamsa, so the card never claims D9). The Problem in
+// Marriage Report is offered only as a compact contextual card after the harmony/challenges section,
+// for readers already facing difficulties. Couples comparing two charts get the free /love calculator
+// via the topic's own cross-link.
+export const marriedLifeLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Married life astrology does not judge a marriage from one planet or one yoga. An astrologer reads the 7th house and its lord together with the houses linked to family, home, intimacy and shared values (the 2nd, 4th, 8th and 9th), the marital karakas Venus and Jupiter, the Moon for emotional temperament, and the supportive or challenging combinations in the chart — then checks the Navamsa (D9) and the running Dasha. The result describes tendencies: where married life is naturally supported and where it may need more conscious effort. It is not a verdict on whether a marriage will be happy or will last.',
+    hi: 'वैवाहिक जीवन का आकलन किसी एक ग्रह या एक योग से नहीं होता। ज्योतिषी सप्तम भाव और सप्तमेश को परिवार, घर, अंतरंगता और साझे मूल्यों से जुड़े भावों (द्वितीय, चतुर्थ, अष्टम और नवम) के साथ पढ़ते हैं; विवाह के कारक शुक्र और गुरु, भावनात्मक स्वभाव के लिए चंद्रमा, और कुंडली के सहायक या चुनौतीपूर्ण योगों को देखते हैं — फिर नवांश (D9) और चल रही दशा से इसकी पुष्टि करते हैं। इससे प्रवृत्तियों का पता चलता है: वैवाहिक जीवन में कहाँ स्वाभाविक सहारा है और कहाँ अधिक सचेत प्रयास की आवश्यकता हो सकती है। यह इस बात का फैसला नहीं है कि विवाह सुखी होगा या टिकेगा।',
+  },
+
+  offer: {
+    reportSlug: 'marriage_report',
+    eyebrow: { en: 'Personalised Marriage Report', hi: 'व्यक्तिगत विवाह रिपोर्ट' },
+    heading: { en: 'Your Married Life Outlook', hi: 'आपके वैवाहिक जीवन की संभावनाएँ' },
+    intro: {
+      en: 'This guide explains the general indicators. The report applies the core marriage factors to your own birth chart, including a dedicated section on married-life dynamics.',
+      hi: 'यह मार्गदर्शिका सामान्य संकेत समझाती है। रिपोर्ट विवाह के मुख्य कारकों को आपकी अपनी जन्मकुंडली पर लागू करती है, जिसमें वैवाहिक जीवन के आपसी व्यवहार पर अलग खंड है।',
+    },
+    bullets: {
+      en: [
+        'Your marriage outlook from the 7th house and its lord',
+        'Married-life dynamics: emotional connection, communication and harmony',
+        'Strengths and areas needing attention',
+        'Key planetary influences, your current Dasha window and practical guidance',
+      ],
+      hi: [
+        'सप्तम भाव और सप्तमेश से आपके विवाह की संभावनाएँ',
+        'वैवाहिक जीवन का आपसी व्यवहार: भावनात्मक जुड़ाव, बातचीत और सामंजस्य',
+        'मज़बूत पक्ष और ध्यान देने योग्य बातें',
+        'प्रमुख ग्रहों का प्रभाव, आपकी वर्तमान दशा और व्यावहारिक मार्गदर्शन',
+      ],
+    },
+    ctaLabel: { en: 'Get My Marriage Report – ₹{price}', hi: 'मेरी विवाह रिपोर्ट पाएं – ₹{price}' },
+    microcopy: {
+      en: 'Personalised using your Date, Time & Place of Birth.',
+      hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
+    },
+    sampleTitle: { en: 'Marriage Report', hi: 'विवाह रिपोर्ट' },
+    reportCtaId: 'married_life_report_cta',
+    sampleCtaId: 'married_life_sample_report',
+    screenName: 'married_life_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at what a birth chart suggests about married life. Related questions have their own detailed guides — matching two charts, the nature of the spouse, and how astrology reads relationship stress and separation risk:',
+      hi: 'यह मार्गदर्शिका बताती है कि जन्मकुंडली वैवाहिक जीवन के बारे में क्या संकेत देती है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — दो कुंडलियों का मिलान, जीवनसाथी का स्वभाव, और ज्योतिष में रिश्ते के तनाव व अलगाव की आशंका को कैसे देखा जाता है:',
+    },
+    topicSlugs: ['compatibility', 'spouse-nature', 'divorce-possibility'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  // Also renders the Key Houses / Planetary Influences accordion bodies in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+
+  // Secondary path for readers ALREADY facing difficulties -- placed right after the harmony /
+  // challenges indicators, worded without fear and without implying the reader has a problem.
+  inlineTool: {
+    kind: 'contextual-report',
+    afterSectionId: 'harmony-and-challenges',
+    reportSlug: 'problem_in_marriage_report',
+    eyebrow: { en: 'Problem in Marriage Report', hi: 'विवाह समस्या रिपोर्ट' },
+    heading: { en: 'Already Facing Difficulties in Your Marriage?', hi: 'क्या वैवाहिक जीवन में पहले से कठिनाइयाँ हैं?' },
+    body: {
+      en: 'The Problem in Marriage Report focuses on the friction patterns your own chart shows, the factors that can help steady the relationship, and practical steps that may help. It does not predict separation.',
+      hi: 'विवाह समस्या रिपोर्ट आपकी अपनी कुंडली में दिखने वाले मतभेद के पैटर्न, रिश्ते को स्थिर करने में सहायक कारकों और मददगार व्यावहारिक कदमों पर केंद्रित है। यह अलगाव की भविष्यवाणी नहीं करती।',
+    },
+    ctaLabel: { en: 'Get Problem in Marriage Report – ₹{price}', hi: 'विवाह समस्या रिपोर्ट पाएं – ₹{price}' },
+    ctaId: 'married_life_problem_report_cta',
+    screenName: 'married_life_topic',
+  },
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
@@ -387,4 +470,5 @@ export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'delayed-marriage': delayedMarriageLanding,
   'spouse-nature': spouseNatureLanding,
   'compatibility': compatibilityLanding,
+  'married-life': marriedLifeLanding,
 }

@@ -53,13 +53,35 @@ export interface TopicLandingContextLinks {
 }
 
 /** Optional interactive tool rendered inside the article, right after one content section. */
-export interface TopicLandingInlineTool {
+export interface TopicLandingSpouseLagnaTool {
   kind: 'spouse-lagna'
   /** Content-section id the tool is placed after. */
   afterSectionId: string
   /** Catalogue report the tool's result CTA links to. */
   reportSlug: string
 }
+
+/**
+ * Optional compact, secondary report card placed after one content section, for a narrower audience
+ * than the page's main offer (e.g. readers already facing a specific problem). Not a second main card.
+ */
+export interface TopicLandingContextualReport {
+  kind: 'contextual-report'
+  /** Content-section id the card is placed after. */
+  afterSectionId: string
+  /** reportsData slug -- route and price derive from it. */
+  reportSlug: string
+  eyebrow: LocalizedString
+  heading: LocalizedString
+  body: LocalizedString
+  /** CTA label; "{price}" is replaced with the product's reportsData price. */
+  ctaLabel: LocalizedString
+  ctaId: string
+  screenName: string
+}
+
+/** Unit rendered inside the article after one content section (an interactive tool or a contextual card). */
+export type TopicLandingInlineTool = TopicLandingSpouseLagnaTool | TopicLandingContextualReport
 
 /** Optional primary action: a compact card linking to an EXISTING site route (e.g. a free calculator). */
 export interface TopicLandingPrimaryAction {
@@ -87,7 +109,7 @@ interface TopicLandingBase {
   ssrFaq: boolean
   /** Optional long-form reading rhythm (section dividers, sub-heading labels) for text-heavy topics. */
   longForm?: boolean
-  /** Optional interactive tool placed inside the article after one content section. */
+  /** Optional unit (interactive tool or contextual report card) placed inside the article after one content section. */
   inlineTool?: TopicLandingInlineTool
 }
 

@@ -100,7 +100,6 @@ const HINDI_META_GAP_ALLOWLIST: readonly string[] = [
   "early-marriage",        // MC-10
   "second-marriage",       // MC-12
   "divorce-possibility",   // MC-09
-  "married-life",          // MC-09
   "intercaste-marriage",   // MC-14
 ];
 
@@ -237,13 +236,22 @@ for (const slug of slugs) {
       check(t(`C landing primary action '${landing.primaryAction.href}' resolves to an existing app route`), resolvesToAppRoute(landing.primaryAction.href));
     }
     check(t("C landing has a conversion unit (report card or primary action)"), !!(landing.offer || landing.primaryAction));
+    if (landing.inlineTool) {
+      const sectionIds = (topic?.sections ?? []).map((s: any) => s.id);
+      check(t(`C inline unit '${landing.inlineTool.kind}' is placed after an existing content section ('${landing.inlineTool.afterSectionId}')`), sectionIds.includes(landing.inlineTool.afterSectionId));
+      check(t(`C inline unit report '${landing.inlineTool.reportSlug}' is a catalogue report`), reportSlugs.has(landing.inlineTool.reportSlug));
+    }
     const ctxTargets = [...landing.contextLinks.topicSlugs, landing.contextLinks.overviewSlug];
     const badCtx = ctxTargets.filter((s: string) => s === slug || !slugs.includes(s));
     check(t(`C landing context links point at other registered topics (bad: ${JSON.stringify(badCtx)})`), badCtx.length === 0);
   }
 
   // D. Report CTA duplication (landing card + bottom report CTAs)
-  const offered = [...(landing?.offer ? [landing.offer.reportSlug] : []), ...ctas.filter((c) => c.type === "report").map((c) => c.slug)];
+  const offered = [
+    ...(landing?.offer ? [landing.offer.reportSlug] : []),
+    ...(landing?.inlineTool?.kind === "contextual-report" ? [landing.inlineTool.reportSlug] : []),
+    ...ctas.filter((c) => c.type === "report").map((c) => c.slug),
+  ];
   const dupes = [...new Set(offered.filter((s, i) => offered.indexOf(s) !== i))];
   const allowedDupe = DUPLICATE_REPORT_CTA_ALLOWLIST[slug];
   const unexpectedDupes = dupes.filter((s) => s !== allowedDupe);

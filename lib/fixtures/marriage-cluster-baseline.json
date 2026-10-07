@@ -6107,6 +6107,7 @@
           "Married Life in Vedic Astrology: A Complete Guide"
         ],
         "h2": [
+          "Your Married Life Outlook",
           "Introduction",
           "Key House Analysis for Married Life",
           "Planetary Influences on Married Life",
@@ -6114,6 +6115,7 @@
           "Indicators of Harmony and Challenges",
           "Timing, Stability and Compatibility",
           "Remedies, Misconceptions and Ethical Use",
+          "Related Marriage Questions",
           "Frequently Asked Questions",
           "Related Topics"
         ],
@@ -6122,7 +6124,7 @@
           "Darakaraka",
           "Upapada Lagna",
           "Marriage Yogas",
-          "Get Problem in Marriage Report",
+          "Already Facing Difficulties in Your Marriage?",
           "Spouse Nature in Vedic Astrology: Houses & Planets",
           "Love Marriage in Vedic Astrology: Will I Have a Love Marriage?",
           "Delayed Marriage in Vedic Astrology: Why Is My Marriage Getting Delayed?"
@@ -6131,16 +6133,16 @@
       "faq": {
         "count": 10,
         "questions": [
-          "Can Vedic astrology predict the success of my marriage?",
+          "Can astrology predict what my married life will be like?",
           "What if my horoscope shows marital problems?",
           "Does the Navamsa chart reveal my partner's nature?",
           "Can remedies fix my marriage?",
           "How important is Dasha in marriage analysis?",
           "What is the significance of the 8th house in marriage?",
           "Is Rahu in the 7th house always negative for marriage?",
-          "Can astrology tell me if I will have a love or arranged marriage?",
+          "Which factors in a kundli indicate a happy married life?",
           "How do I use this knowledge ethically?",
-          "Is compatibility analysis the same as predicting marriage success?"
+          "Is married life read from my chart alone, or from both partners' charts?"
         ],
         "questionsInServer": 10,
         "answersInServer": 10
@@ -6230,20 +6232,32 @@
       "links": {
         "internal": [
           "/",
+          "/love",
           "/marriage-astrology",
+          "/marriage-astrology/compatibility",
           "/marriage-astrology/delayed-marriage",
+          "/marriage-astrology/divorce-possibility",
           "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-prediction",
           "/marriage-astrology/spouse-nature",
+          "/report-samples/marriage_report_en.pdf",
+          "/reports/marriage_report",
           "/reports/problem_in_marriage_report"
         ],
         "reports": [
+          "/reports/marriage_report",
           "/reports/problem_in_marriage_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/marriage_report_en.pdf"
+        ],
         "tools": [],
         "marriageTopics": [
+          "/marriage-astrology/compatibility",
           "/marriage-astrology/delayed-marriage",
+          "/marriage-astrology/divorce-possibility",
           "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-prediction",
           "/marriage-astrology/spouse-nature"
         ],
         "external": [],
@@ -6303,10 +6317,10 @@
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "Can Vedic astrology predict the success of my marriage?",
+                "name": "Can astrology predict what my married life will be like?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No. Vedic astrology indicates karmic tendencies and potential challenges, but the success of a marriage depends on the conscious efforts and maturity of both partners. The chart is a map of potential, not a fixed verdict — how that potential is realized is determined by the daily choices both individuals make."
+                  "text": "Astrology can describe tendencies, not a fixed outcome. A married-life reading shows where the chart supports harmony and where more conscious effort may be needed, and the running Dasha shows which of these themes are more active in a given period. How married life actually unfolds still depends on the choices, communication and maturity of both partners."
                 }
               },
               {
@@ -6359,10 +6373,10 @@
               },
               {
                 "@type": "Question",
-                "name": "Can astrology tell me if I will have a love or arranged marriage?",
+                "name": "Which factors in a kundli indicate a happy married life?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Astrology can show the nature of the partnership and the likely circumstances of meeting — for example, a strong 5th house suggests romance-driven attraction, while a strong 9th house suggests family-mediated processes — but not with absolute certainty. Multiple factors and the individual's own choices ultimately determine the form the union takes."
+                  "text": "No single factor decides it. Astrologers look for a combination: a strong, well-placed 7th Lord; Venus and Jupiter in good condition; benefic influence on the 7th house; a steady Moon for emotional balance; and a supportive Navamsa (D9). When several of these are present, the chart tends to support harmony and stability — but the couple's own effort, communication and maturity still shape how married life actually unfolds."
                 }
               },
               {
@@ -6375,10 +6389,10 @@
               },
               {
                 "@type": "Question",
-                "name": "Is compatibility analysis the same as predicting marriage success?",
+                "name": "Is married life read from my chart alone, or from both partners' charts?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No. Compatibility analysis is a snapshot of current alignment between two charts, whereas predicting success requires a deep understanding of ongoing karmic evolution — how both partners grow, adapt, and choose over time. Compatibility creates the conditions for success; sustained conscious effort builds it."
+                  "text": "Both have a role. Your own chart shows the tendencies you bring into marriage — how you relate, what you need and where you may find it harder. Once there is a specific partner, their chart is read alongside yours to see how the two interact; that comparison is Kundli matching, which is covered in the compatibility guide. Neither reading on its own is a verdict on how the marriage will turn out."
                 }
               }
             ]
@@ -6386,7 +6400,7 @@
         ]
       },
       "server": {
-        "wordCount": 3231,
+        "wordCount": 3603,
         "detailsElements": 29
       },
       "facts": {
@@ -6404,7 +6418,7 @@
       "path": "/hi/marriage-astrology/married-life",
       "seo": {
         "title": "वैदिक ज्योतिष में वैवाहिक जीवन",
-        "description": "Explore how Vedic astrology assesses married life through the 7th house, Navamsa, and Dasha cycles — a guide to harmony, challenges, and karmic growth.",
+        "description": "वैदिक ज्योतिष में वैवाहिक जीवन कैसे देखा जाता है — सप्तम भाव और सप्तमेश, शुक्र-गुरु, चंद्रमा, नवांश और दशा से सुखी वैवाहिक जीवन, स्थिरता और चुनौतियों के संकेत समझें।",
         "keywords": [
           "वैदिक ज्योतिष में वैवाहिक जीवन",
           "वैवाहिक जीवन ज्योतिष",
@@ -6429,6 +6443,7 @@
           "वैदिक ज्योतिष में वैवाहिक जीवन"
         ],
         "h2": [
+          "आपके वैवाहिक जीवन की संभावनाएँ",
           "परिचय",
           "वैवाहिक जीवन के लिए मुख्य भाव विश्लेषण",
           "वैवाहिक जीवन पर ग्रहीय प्रभाव",
@@ -6436,6 +6451,7 @@
           "सद्भाव और चुनौतियों के संकेतक",
           "समय, स्थिरता और अनुकूलता",
           "उपाय, भ्रांतियां और नैतिक उपयोग",
+          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
           "संबंधित विषय"
         ],
@@ -6444,7 +6460,7 @@
           "दारकारक",
           "उपपद लग्न",
           "विवाह योग",
-          "वैवाहिक समस्या रिपोर्ट प्राप्त करें",
+          "क्या वैवाहिक जीवन में पहले से कठिनाइयाँ हैं?",
           "वैदिक ज्योतिष में जीवनसाथी का स्वभाव",
           "वैदिक ज्योतिष में प्रेम विवाह: क्या मेरा प्रेम विवाह होगा?",
           "वैदिक ज्योतिष में शादी में देरी: मेरी शादी में देरी क्यों हो रही है?"
@@ -6453,16 +6469,16 @@
       "faq": {
         "count": 10,
         "questions": [
-          "क्या वैदिक ज्योतिष मेरे विवाह की सफलता की भविष्यवाणी कर सकता है?",
+          "क्या ज्योतिष बता सकता है कि मेरा वैवाहिक जीवन कैसा रहेगा?",
           "क्या होगा यदि मेरी कुंडली वैवाहिक समस्याओं को दर्शाती है?",
           "क्या नवांश चार्ट मेरे साथी की प्रकृति को प्रकट करता है?",
           "क्या उपाय मेरे विवाह को ठीक कर सकते हैं?",
           "विवाह विश्लेषण में दशा कितनी महत्वपूर्ण है?",
           "विवाह में 8वें भाव का क्या महत्व है?",
           "क्या सप्तम भाव में राहु विवाह के लिए हमेशा नकारात्मक है?",
-          "क्या ज्योतिष मुझे बता सकता है कि मेरा प्रेम विवाह होगा या व्यवस्थित?",
+          "कुंडली में कौन-से कारक सुखी वैवाहिक जीवन का संकेत देते हैं?",
           "मैं इस ज्ञान का नैतिक रूप से उपयोग कैसे करूं?",
-          "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?"
+          "वैवाहिक जीवन केवल मेरी कुंडली से देखा जाता है या दोनों साथियों की कुंडली से?"
         ],
         "questionsInServer": 10,
         "answersInServer": 10
@@ -6552,20 +6568,32 @@
       "links": {
         "internal": [
           "/hi",
+          "/hi/love",
           "/hi/marriage-astrology",
+          "/hi/marriage-astrology/compatibility",
           "/hi/marriage-astrology/delayed-marriage",
+          "/hi/marriage-astrology/divorce-possibility",
           "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
           "/hi/marriage-astrology/spouse-nature",
+          "/report-samples/marriage_report_hi.pdf",
+          "/reports/marriage_report",
           "/reports/problem_in_marriage_report"
         ],
         "reports": [
+          "/reports/marriage_report",
           "/reports/problem_in_marriage_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/marriage_report_hi.pdf"
+        ],
         "tools": [],
         "marriageTopics": [
+          "/hi/marriage-astrology/compatibility",
           "/hi/marriage-astrology/delayed-marriage",
+          "/hi/marriage-astrology/divorce-possibility",
           "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
           "/hi/marriage-astrology/spouse-nature"
         ],
         "external": [],
@@ -6606,7 +6634,7 @@
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "वैदिक ज्योतिष में वैवाहिक जीवन",
-            "description": "Explore how Vedic astrology assesses married life through the 7th house, Navamsa, and Dasha cycles — a guide to harmony, challenges, and karmic growth.",
+            "description": "वैदिक ज्योतिष में वैवाहिक जीवन कैसे देखा जाता है — सप्तम भाव और सप्तमेश, शुक्र-गुरु, चंद्रमा, नवांश और दशा से सुखी वैवाहिक जीवन, स्थिरता और चुनौतियों के संकेत समझें।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/married-life",
             "author": {
               "@type": "Organization",
@@ -6625,10 +6653,10 @@
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "क्या वैदिक ज्योतिष मेरे विवाह की सफलता की भविष्यवाणी कर सकता है?",
+                "name": "क्या ज्योतिष बता सकता है कि मेरा वैवाहिक जीवन कैसा रहेगा?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। वैदिक ज्योतिष कार्मिक प्रवृत्तियों और संभावित चुनौतियों को इंगित करता है, लेकिन विवाह की सफलता दोनों साझेदारों के सचेत प्रयासों और परिपक्वता पर निर्भर करती है। कुंडली क्षमता का एक नक्शा है, न कि एक निश्चित फैसला।"
+                  "text": "ज्योतिष प्रवृत्तियाँ बता सकता है, कोई तय परिणाम नहीं। वैवाहिक जीवन के विश्लेषण से पता चलता है कि कुंडली कहाँ सामंजस्य का समर्थन करती है और कहाँ अधिक सचेत प्रयास की आवश्यकता हो सकती है, और चल रही दशा बताती है कि किसी अवधि में इनमें से कौन-से विषय अधिक सक्रिय हैं। वैवाहिक जीवन वास्तव में कैसा रहेगा, यह फिर भी दोनों साथियों के निर्णयों, बातचीत और परिपक्वता पर निर्भर करता है।"
                 }
               },
               {
@@ -6636,7 +6664,7 @@
                 "name": "क्या होगा यदि मेरी कुंडली वैवाहिक समस्याओं को दर्शाती है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "कुंडली में इंगित चुनौतियां कार्मिक अवसर हैं, सजाएं नहीं। उन्हें समझने से जातक को उन्हें सफलतापूर्वक नेविगेट करने के लिए आवश्यक परिपक्वता विकसित करने की अनुमति मिलती है — अक्सर जो संघर्ष का स्रोत हो सकता था उसे व्यक्तिगत विकास के प्राथमिक क्षेत्र में बदल देती है।"
+                  "text": "कुंडली में इंगित चुनौतियां कार्मिक अवसर हैं, सजाएं नहीं। उन्हें समझने से जातक को उनका सफलतापूर्वक सामना करने के लिए आवश्यक परिपक्वता विकसित करने की अनुमति मिलती है — अक्सर जो संघर्ष का स्रोत हो सकता था उसे व्यक्तिगत विकास के प्राथमिक क्षेत्र में बदल देती है।"
                 }
               },
               {
@@ -6644,7 +6672,7 @@
                 "name": "क्या नवांश चार्ट मेरे साथी की प्रकृति को प्रकट करता है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "हां। नवांश साथी की गहरी, आंतरिक प्रकृति और वैवाहिक मिलन की स्थिरता को प्रकट करता है — वे गुण और गतिशीलता जो विवाह की अंतरंगता और दिन-प्रतिदिन की वास्तविकता में उभरती हैं, जो केवल राशि चार्ट में दिखाई नहीं दे सकती।"
+                  "text": "हां। नवांश साथी की गहरी, आंतरिक प्रकृति और वैवाहिक मिलन की स्थिरता को प्रकट करता है — वे गुण और व्यवहार जो विवाह की अंतरंगता और दिन-प्रतिदिन की वास्तविकता में उभरती हैं, जो केवल राशि चार्ट में दिखाई नहीं दे सकती।"
                 }
               },
               {
@@ -6652,7 +6680,7 @@
                 "name": "क्या उपाय मेरे विवाह को ठीक कर सकते हैं?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, जो विवाह के भीतर बातचीत की गतिशीलता और गुणवत्ता को बदलता है। वे बाहरी हस्तक्षेप नहीं हैं जो साथी या परिस्थितियों को सीधे बदलते हैं — वे जातक की आंतरिक स्थिति को परिष्कृत करते हैं।"
+                  "text": "उपाय आपकी अपनी चेतना को संतुलित करने के लिए हैं, जिससे विवाह में आपसी व्यवहार और बातचीत की गुणवत्ता बदलती है। वे बाहरी हस्तक्षेप नहीं हैं जो साथी या परिस्थितियों को सीधे बदलते हैं — वे जातक की आंतरिक स्थिति को परिष्कृत करते हैं।"
                 }
               },
               {
@@ -6660,7 +6688,7 @@
                 "name": "विवाह विश्लेषण में दशा कितनी महत्वपूर्ण है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "दशा विश्लेषण महत्वपूर्ण है। यह घटनाओं के समय और उस प्रमुख कार्मिक विषयों को निर्धारित करता है जिन्हें जोड़ा किसी भी समय नेविगेट करता है। यहां तक कि एक दृढ़ता से वादा किए गए विवाह चार्ट के लिए प्रमुख घटनाओं को साकार करने के लिए एक सहायक दशा खिड़की की आवश्यकता होती है।"
+                  "text": "दशा विश्लेषण महत्वपूर्ण है। यह घटनाओं के समय और उन प्रमुख कार्मिक विषयों को निर्धारित करती है जिनसे जोड़ा किसी भी समय गुज़रता है। जिस कुंडली में विवाह के योग मज़बूत हों, उसमें भी प्रमुख घटनाओं के फलित होने के लिए सहायक दशा-अवधि की आवश्यकता होती है।"
                 }
               },
               {
@@ -6676,15 +6704,15 @@
                 "name": "क्या सप्तम भाव में राहु विवाह के लिए हमेशा नकारात्मक है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। सप्तम भाव में राहु केवल नकारात्मक के बजाय एक असामान्य, तीव्र या कार्मिक रूप से परिवर्तनकारी संबंध को इंगित करता है। परिणाम की गुणवत्ता काफी हद तक सप्तम स्वामी की समग्र गरिमा और शुभ पहलुओं या एक मजबूत नवांश चार्ट से उपलब्ध समर्थन पर निर्भर करती है।"
+                  "text": "नहीं। सप्तम भाव में राहु केवल नकारात्मक के बजाय एक असामान्य, तीव्र या कार्मिक रूप से परिवर्तनकारी संबंध को इंगित करता है। परिणाम की गुणवत्ता काफी हद तक सप्तम स्वामी की समग्र गरिमा और शुभ ग्रहों की दृष्टि या मजबूत नवांश चार्ट से उपलब्ध समर्थन पर निर्भर करती है।"
                 }
               },
               {
                 "@type": "Question",
-                "name": "क्या ज्योतिष मुझे बता सकता है कि मेरा प्रेम विवाह होगा या व्यवस्थित?",
+                "name": "कुंडली में कौन-से कारक सुखी वैवाहिक जीवन का संकेत देते हैं?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "ज्योतिष साझेदारी की प्रकृति और मिलने की संभावित परिस्थितियों को दिखा सकता है — उदाहरण के लिए, एक मजबूत पंचम भाव रोमांस-चालित आकर्षण का सुझाव देता है, जबकि एक मजबूत नवम भाव पारिवारिक-मध्यस्थ प्रक्रियाओं का — लेकिन पूर्ण निश्चितता के साथ नहीं।"
+                  "text": "कोई एक कारक इसे तय नहीं करता। ज्योतिषी कई कारकों को साथ देखते हैं: मज़बूत और सुस्थित सप्तम स्वामी; अच्छी स्थिति में शुक्र और गुरु; सप्तम भाव पर शुभ ग्रहों का प्रभाव; भावनात्मक संतुलन के लिए स्थिर चंद्रमा; और सहायक नवांश (D9)। जब इनमें से कई कारक मौजूद हों, तो कुंडली सद्भाव और स्थिरता का समर्थन करती है — फिर भी वैवाहिक जीवन वास्तव में कैसा रहेगा, यह दोनों के प्रयास, बातचीत और परिपक्वता पर भी निर्भर करता है।"
                 }
               },
               {
@@ -6697,10 +6725,10 @@
               },
               {
                 "@type": "Question",
-                "name": "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?",
+                "name": "वैवाहिक जीवन केवल मेरी कुंडली से देखा जाता है या दोनों साथियों की कुंडली से?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। अनुकूलता विश्लेषण दो कुंडलियों के बीच वर्तमान संरेखण का एक स्नैपशॉट है, जबकि सफलता की भविष्यवाणी के लिए निरंतर कार्मिक विकास की गहरी समझ की आवश्यकता होती है — दोनों साथी समय के साथ कैसे बढ़ते, अनुकूलन करते और चुनते हैं। अनुकूलता सफलता की स्थितियां बनाती है; निरंतर सचेत प्रयास इसे बनाता है।"
+                  "text": "दोनों की भूमिका है। आपकी अपनी कुंडली बताती है कि आप विवाह में कौन-सी प्रवृत्तियाँ लेकर आते हैं — आप रिश्ते को कैसे निभाते हैं, आपकी ज़रूरतें क्या हैं और कहाँ आपको अधिक प्रयास करना पड़ सकता है। जब कोई निश्चित साथी हो, तो उसकी कुंडली को आपकी कुंडली के साथ पढ़कर देखा जाता है कि दोनों का आपसी तालमेल कैसा है; इसे कुंडली मिलान कहते हैं, जिसकी जानकारी अनुकूलता मार्गदर्शिका में है। इनमें से कोई भी विश्लेषण अकेले यह फैसला नहीं करता कि विवाह कैसा रहेगा।"
                 }
               }
             ]
@@ -6708,11 +6736,11 @@
         ]
       },
       "server": {
-        "wordCount": 3146,
+        "wordCount": 3587,
         "detailsElements": 29
       },
       "facts": {
-        "hindiMetaFallsBackToEnglish": true,
+        "hindiMetaFallsBackToEnglish": false,
         "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "29/29",
