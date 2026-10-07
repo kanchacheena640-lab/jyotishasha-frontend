@@ -73,7 +73,7 @@
           "How do I choose the right astrologer?"
         ],
         "questionsInServer": 8,
-        "answersInServer": 0
+        "answersInServer": 8
       },
       "sections": [
         {
@@ -134,7 +134,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         }
       ],
       "links": {
@@ -209,14 +209,14 @@
         ]
       },
       "server": {
-        "wordCount": 1693,
-        "detailsElements": 0
+        "wordCount": 1938,
+        "detailsElements": 8
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/8",
-        "collapsedBodiesInServer": "0/8",
+        "faqAnswersInServer": "8/8",
+        "collapsedBodiesInServer": "8/8",
         "reportDestinationsRepeated": false
       }
     },
@@ -288,7 +288,7 @@
           "मैं सही ज्योतिषी का चुनाव कैसे करूं?"
         ],
         "questionsInServer": 8,
-        "answersInServer": 0
+        "answersInServer": 8
       },
       "sections": [
         {
@@ -349,7 +349,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         }
       ],
       "links": {
@@ -424,14 +424,14 @@
         ]
       },
       "server": {
-        "wordCount": 1432,
-        "detailsElements": 0
+        "wordCount": 1614,
+        "detailsElements": 8
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/8",
-        "collapsedBodiesInServer": "0/8",
+        "faqAnswersInServer": "8/8",
+        "collapsedBodiesInServer": "8/8",
         "reportDestinationsRepeated": false
       }
     },
@@ -2610,7 +2610,7 @@
           "How can I know if my early marriage is \"destined\"?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -2691,7 +2691,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -2766,14 +2766,14 @@
         ]
       },
       "server": {
-        "wordCount": 2027,
-        "detailsElements": 0
+        "wordCount": 2618,
+        "detailsElements": 10
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/10",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "10/10",
         "reportDestinationsRepeated": false
       }
     },
@@ -2850,7 +2850,7 @@
           "मैं कैसे जान सकता हूँ कि मेरा प्रारंभिक विवाह \"नियत\" है?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -2931,7 +2931,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -3006,14 +3006,14 @@
         ]
       },
       "server": {
-        "wordCount": 1654,
-        "detailsElements": 0
+        "wordCount": 2066,
+        "detailsElements": 10
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/10",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "10/10",
         "reportDestinationsRepeated": false
       }
     },
@@ -3085,7 +3085,7 @@
           "How long should one wait before pursuing a second marriage?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -3106,7 +3106,7 @@
           "items": 5,
           "labelsInServer": 5,
           "bodies": 5,
-          "bodiesInServer": 0
+          "bodiesInServer": 5
         },
         {
           "id": "planetary-influences",
@@ -3196,7 +3196,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -3271,14 +3271,14 @@
         ]
       },
       "server": {
-        "wordCount": 1204,
-        "detailsElements": 0
+        "wordCount": 1665,
+        "detailsElements": 15
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/15",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "15/15",
         "reportDestinationsRepeated": false
       }
     },
@@ -3350,7 +3350,7 @@
           "दूसरे विवाह के लिए आगे बढ़ने से पहले व्यक्ति को कितने समय तक इंतजार करना चाहिए?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -3371,7 +3371,7 @@
           "items": 5,
           "labelsInServer": 5,
           "bodies": 5,
-          "bodiesInServer": 0
+          "bodiesInServer": 5
         },
         {
           "id": "planetary-influences",
@@ -3461,7 +3461,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -3536,14 +3536,14 @@
         ]
       },
       "server": {
-        "wordCount": 1305,
-        "detailsElements": 0
+        "wordCount": 1804,
+        "detailsElements": 15
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/15",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "15/15",
         "reportDestinationsRepeated": false
       }
     },
@@ -3617,7 +3617,7 @@
           "Is stability analysis the same as predicting the future?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -3638,7 +3638,7 @@
           "items": 6,
           "labelsInServer": 6,
           "bodies": 6,
-          "bodiesInServer": 0
+          "bodiesInServer": 6
         },
         {
           "id": "planetary-influences",
@@ -3648,7 +3648,7 @@
           "items": 11,
           "labelsInServer": 11,
           "bodies": 11,
-          "bodiesInServer": 0
+          "bodiesInServer": 11
         },
         {
           "id": "advanced-tools",
@@ -3698,7 +3698,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -3770,14 +3770,14 @@
         ]
       },
       "server": {
-        "wordCount": 1617,
-        "detailsElements": 0
+        "wordCount": 3101,
+        "detailsElements": 27
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/27",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
       }
     },
@@ -3847,7 +3847,7 @@
           "क्या स्थिरता विश्लेषण भविष्य की भविष्यवाणी के समान है?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -3868,7 +3868,7 @@
           "items": 6,
           "labelsInServer": 6,
           "bodies": 6,
-          "bodiesInServer": 0
+          "bodiesInServer": 6
         },
         {
           "id": "planetary-influences",
@@ -3878,7 +3878,7 @@
           "items": 11,
           "labelsInServer": 11,
           "bodies": 11,
-          "bodiesInServer": 0
+          "bodiesInServer": 11
         },
         {
           "id": "advanced-tools",
@@ -3928,7 +3928,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -4000,14 +4000,14 @@
         ]
       },
       "server": {
-        "wordCount": 1453,
-        "detailsElements": 0
+        "wordCount": 2867,
+        "detailsElements": 27
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/27",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "27/27",
         "reportDestinationsRepeated": false
       }
     },
@@ -4603,7 +4603,7 @@
           "Is compatibility analysis the same as predicting marriage success?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -4624,7 +4624,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         },
         {
           "id": "planetary-analysis",
@@ -4634,7 +4634,7 @@
           "items": 11,
           "labelsInServer": 11,
           "bodies": 11,
-          "bodiesInServer": 0
+          "bodiesInServer": 11
         },
         {
           "id": "advanced-tools",
@@ -4684,7 +4684,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -4756,14 +4756,14 @@
         ]
       },
       "server": {
-        "wordCount": 1895,
-        "detailsElements": 0
+        "wordCount": 3231,
+        "detailsElements": 29
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/29",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "29/29",
         "reportDestinationsRepeated": false
       }
     },
@@ -4835,7 +4835,7 @@
           "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -4856,7 +4856,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         },
         {
           "id": "planetary-analysis",
@@ -4866,7 +4866,7 @@
           "items": 11,
           "labelsInServer": 11,
           "bodies": 11,
-          "bodiesInServer": 0
+          "bodiesInServer": 11
         },
         {
           "id": "advanced-tools",
@@ -4916,7 +4916,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -4988,14 +4988,14 @@
         ]
       },
       "server": {
-        "wordCount": 1773,
-        "detailsElements": 0
+        "wordCount": 3146,
+        "detailsElements": 29
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/29",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "29/29",
         "reportDestinationsRepeated": false
       }
     },
@@ -5072,7 +5072,7 @@
           "Is compatibility analysis the same as predicting marriage success?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -5093,7 +5093,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         },
         {
           "id": "key-house-analysis",
@@ -5103,7 +5103,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         },
         {
           "id": "planetary-influences",
@@ -5113,7 +5113,7 @@
           "items": 11,
           "labelsInServer": 11,
           "bodies": 11,
-          "bodiesInServer": 0
+          "bodiesInServer": 11
         },
         {
           "id": "advanced-tools",
@@ -5153,7 +5153,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -5229,14 +5229,14 @@
         ]
       },
       "server": {
-        "wordCount": 1603,
-        "detailsElements": 0
+        "wordCount": 3509,
+        "detailsElements": 39
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/39",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "39/39",
         "reportDestinationsRepeated": false
       }
     },
@@ -5310,7 +5310,7 @@
           "क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -5331,7 +5331,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         },
         {
           "id": "key-house-analysis",
@@ -5341,7 +5341,7 @@
           "items": 8,
           "labelsInServer": 8,
           "bodies": 8,
-          "bodiesInServer": 0
+          "bodiesInServer": 8
         },
         {
           "id": "planetary-influences",
@@ -5351,7 +5351,7 @@
           "items": 11,
           "labelsInServer": 11,
           "bodies": 11,
-          "bodiesInServer": 0
+          "bodiesInServer": 11
         },
         {
           "id": "advanced-tools",
@@ -5391,7 +5391,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -5467,14 +5467,14 @@
         ]
       },
       "server": {
-        "wordCount": 1551,
-        "detailsElements": 0
+        "wordCount": 3279,
+        "detailsElements": 39
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/39",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "39/39",
         "reportDestinationsRepeated": false
       }
     },
@@ -5553,7 +5553,7 @@
           "Does Rahu in the 7th house guarantee an intercaste union?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -5584,7 +5584,7 @@
           "items": 6,
           "labelsInServer": 6,
           "bodies": 6,
-          "bodiesInServer": 0
+          "bodiesInServer": 6
         },
         {
           "id": "planetary-influences",
@@ -5594,7 +5594,7 @@
           "items": 9,
           "labelsInServer": 9,
           "bodies": 9,
-          "bodiesInServer": 0
+          "bodiesInServer": 9
         },
         {
           "id": "advanced-indicators",
@@ -5704,7 +5704,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -5779,14 +5779,14 @@
         ]
       },
       "server": {
-        "wordCount": 1754,
-        "detailsElements": 0
+        "wordCount": 2992,
+        "detailsElements": 25
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": null,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/25",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "25/25",
         "reportDestinationsRepeated": false
       }
     },
@@ -5865,7 +5865,7 @@
           "क्या सातवें घर में राहु अंतरजातीय मिलन की गारंटी देता है?"
         ],
         "questionsInServer": 10,
-        "answersInServer": 0
+        "answersInServer": 10
       },
       "sections": [
         {
@@ -5896,7 +5896,7 @@
           "items": 6,
           "labelsInServer": 6,
           "bodies": 6,
-          "bodiesInServer": 0
+          "bodiesInServer": 6
         },
         {
           "id": "planetary-influences",
@@ -5906,7 +5906,7 @@
           "items": 9,
           "labelsInServer": 9,
           "bodies": 9,
-          "bodiesInServer": 0
+          "bodiesInServer": 9
         },
         {
           "id": "advanced-indicators",
@@ -6016,7 +6016,7 @@
           "items": 10,
           "labelsInServer": 10,
           "bodies": 10,
-          "bodiesInServer": 0
+          "bodiesInServer": 10
         }
       ],
       "links": {
@@ -6091,14 +6091,14 @@
         ]
       },
       "server": {
-        "wordCount": 1988,
-        "detailsElements": 0
+        "wordCount": 3453,
+        "detailsElements": 25
       },
       "facts": {
         "hindiMetaFallsBackToEnglish": true,
         "faqPageSchema": false,
-        "faqAnswersInServer": "0/10",
-        "collapsedBodiesInServer": "0/25",
+        "faqAnswersInServer": "10/10",
+        "collapsedBodiesInServer": "25/25",
         "reportDestinationsRepeated": false
       }
     },

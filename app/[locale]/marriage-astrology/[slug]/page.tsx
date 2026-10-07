@@ -71,10 +71,12 @@ export default function MarriageAstrologyTopic({
         domain={domain}
         topic={topic!}
         locale={locale}
+        // MC-05: every Marriage topic renders FAQ answers and accordion bodies in server HTML
+        // (native <details>, collapsed by default). A landing config can still set its own ssrFaq.
+        ssrFaq={landing?.ssrFaq ?? true}
         {...(landing && {
           lead: <TopicLandingLead config={landing} locale={locale} />,
           beforeFaq: <TopicLandingContextLinks config={landing} domain={domain} locale={locale} />,
-          ssrFaq: landing.ssrFaq,
           longForm: landing.longForm,
           ...(landing.inlineTool && {
             afterSection: {
