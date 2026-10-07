@@ -18,6 +18,7 @@ import {
 import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDetailRenderer'
 import TopicLandingLead from '@/components/authority-engine/landing/TopicLandingLead'
 import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
+import LandingInlineTool from '@/components/authority-engine/landing/LandingInlineTool'
 import { marriageTopicLandings } from '@/lib/domains/marriage-astrology/_landing'
 
 const DOMAIN_SLUG = 'marriage-astrology'
@@ -75,6 +76,12 @@ export default function MarriageAstrologyTopic({
           beforeFaq: <TopicLandingContextLinks config={landing} domain={domain} locale={locale} />,
           ssrFaq: landing.ssrFaq,
           longForm: landing.longForm,
+          ...(landing.inlineTool && {
+            afterSection: {
+              sectionId: landing.inlineTool.afterSectionId,
+              node: <LandingInlineTool tool={landing.inlineTool} locale={locale} />,
+            },
+          }),
         })}
       />
     </>

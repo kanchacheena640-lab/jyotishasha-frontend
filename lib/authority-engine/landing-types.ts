@@ -52,6 +52,15 @@ export interface TopicLandingContextLinks {
   overviewSlug: string
 }
 
+/** Optional interactive tool rendered inside the article, right after one content section. */
+export interface TopicLandingInlineTool {
+  kind: 'spouse-lagna'
+  /** Content-section id the tool is placed after. */
+  afterSectionId: string
+  /** Catalogue report the tool's result CTA links to. */
+  reportSlug: string
+}
+
 export interface TopicLandingConfig {
   directAnswerLabel: LocalizedString
   directAnswer: LocalizedString
@@ -63,4 +72,6 @@ export interface TopicLandingConfig {
   ssrFaq: boolean
   /** Optional long-form reading rhythm (section dividers, sub-heading labels) for text-heavy topics. */
   longForm?: boolean
+  /** Optional interactive tool placed inside the article after one content section. */
+  inlineTool?: TopicLandingInlineTool
 }

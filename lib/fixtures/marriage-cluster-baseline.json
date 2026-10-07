@@ -4048,6 +4048,7 @@
         "h2": [
           "Spouse Nature Report",
           "Introduction",
+          "Spouse Nature from Your Lagna",
           "Primary Houses for Spouse Analysis",
           "Planet-wise Analysis of Spouse Nature",
           "Key Indicators and Divisional Tools",
@@ -4188,6 +4189,7 @@
           "/report-samples/spouse_nature_report_en.pdf",
           "/reports/marriage_report",
           "/reports/spouse_nature_report",
+          "/tools/lagna-finder",
           "/tools/marriage-path"
         ],
         "reports": [
@@ -4198,6 +4200,7 @@
           "/report-samples/spouse_nature_report_en.pdf"
         ],
         "tools": [
+          "/tools/lagna-finder",
           "/tools/marriage-path"
         ],
         "marriageTopics": [
@@ -4259,7 +4262,7 @@
         ]
       },
       "server": {
-        "wordCount": 3488,
+        "wordCount": 3551,
         "detailsElements": 27
       },
       "facts": {
@@ -4304,6 +4307,7 @@
         "h2": [
           "जीवनसाथी स्वभाव रिपोर्ट",
           "परिचय",
+          "अपने लग्न से जानें जीवनसाथी का स्वभाव",
           "जीवनसाथी विश्लेषण के प्राथमिक भाव",
           "जीवनसाथी के स्वभाव का ग्रह-वार विश्लेषण",
           "मुख्य संकेतक और विभागीय उपकरण",
@@ -4441,6 +4445,7 @@
           "/hi/marriage-astrology/marriage-prediction",
           "/hi/marriage-astrology/marriage-timing",
           "/hi/marriage-astrology/married-life",
+          "/hi/tools/lagna-finder",
           "/hi/tools/marriage-path",
           "/report-samples/spouse_nature_report_hi.pdf",
           "/reports/marriage_report",
@@ -4454,6 +4459,7 @@
           "/report-samples/spouse_nature_report_hi.pdf"
         ],
         "tools": [
+          "/hi/tools/lagna-finder",
           "/hi/tools/marriage-path"
         ],
         "marriageTopics": [
@@ -4515,7 +4521,7 @@
         ]
       },
       "server": {
-        "wordCount": 3870,
+        "wordCount": 3932,
         "detailsElements": 27
       },
       "facts": {

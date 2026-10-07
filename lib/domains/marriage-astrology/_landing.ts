@@ -327,6 +327,10 @@ export const spouseNatureLanding: TopicLandingConfig = {
   ssrFaq: true,
   // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
   longForm: true,
+
+  // MC-04: free Lagna -> 7th-house sign check, placed after the Introduction (before the deep
+  // house/planet analysis). Its result CTA is a compact text link to the same report.
+  inlineTool: { kind: 'spouse-lagna', afterSectionId: 'introduction', reportSlug: 'spouse_nature_report' },
 }
 
 /** Topic slug -> landing config. Topics not listed render unchanged. */
