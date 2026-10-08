@@ -63,6 +63,8 @@ export default function Header() {
         { href: `${lp}/ekadashi`, label: { en: 'Ekadashi', hi: 'एकादशी' } },
         { href: `${lp}/navratri`, label: { en: 'Navratri', hi: 'नवरात्रि' } },
         { href: `${lp}/holi/${holiYear}`, label: { en: 'Holi', hi: 'होली' } },
+        { href: `${lp}/chhath-puja`, label: { en: 'Chhath Puja', hi: 'छठ पूजा' } },
+        { href: `${lp}/panchang/tithi`, label: { en: 'Tithi', hi: 'तिथि' } },
       ],
     },
     { type: 'link', href: `${lp}/tools`, label: { en: 'Tools', hi: 'ज्योतिष टूल्स' } },
