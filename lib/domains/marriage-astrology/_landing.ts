@@ -588,6 +588,72 @@ export const earlyMarriageLanding: ToolLedLandingConfig = {
   },
 }
 
+// Report-led (P5): the dedicated Second Marriage Report is the primary card. Its copy claims only what
+// the report reads (Low / Moderate / Elevated second-union indication; 7th + 9th house evidence;
+// Venus / Jupiter; current Dasha context; guidance) -- no D9, no transits, no date, no guarantee, and it
+// never assumes the reader is divorced or separated. The free Marriage Path tool stays a secondary,
+// honestly-labelled bottom action (it is not a second-marriage calculator).
+export const secondMarriageLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Vedic astrology does not read a second marriage from one placement. Astrologers weigh several factors together: the 7th house and its lord, which describe the first marriage and one’s approach to partnership; the houses traditionally used for a later union — most often the 9th, with some approaches also examining the 2nd; the condition of Venus and Jupiter; the Dasha periods that could activate these houses; and the Navamsa (D9) as a supporting layer. A single placement does not guarantee a second marriage, difficulties in the 7th house do not automatically mean divorce, and later-union indications do not mean anyone must leave a present relationship.',
+    hi: 'वैदिक ज्योतिष दूसरे विवाह को किसी एक ग्रह-स्थिति से नहीं पढ़ता। ज्योतिषी कई कारकों को साथ देखते हैं: सप्तम भाव और सप्तमेश, जो पहले विवाह और साझेदारी के प्रति दृष्टिकोण को दर्शाते हैं; बाद के विवाह के लिए परंपरागत रूप से देखे जाने वाले भाव — सबसे अधिक नवम भाव, और कुछ पद्धतियों में द्वितीय भाव भी; शुक्र और गुरु की स्थिति; इन भावों को सक्रिय करने वाली दशाएँ; और सहायक स्तर के रूप में नवांश (D9)। कोई एक ग्रह-स्थिति दूसरे विवाह की गारंटी नहीं देती, सप्तम भाव की कठिनाइयों का अर्थ अपने आप तलाक नहीं है, और बाद के विवाह के संकेतों का अर्थ यह नहीं कि किसी को अपना वर्तमान संबंध छोड़ना होगा।',
+  },
+
+  offer: {
+    reportSlug: 'second_marriage_report',
+    eyebrow: { en: 'Personalised Second Marriage Report', hi: 'व्यक्तिगत दूसरे विवाह की रिपोर्ट' },
+    heading: { en: 'Explore Your Second-Marriage Indications', hi: 'अपने दूसरे विवाह के संकेत जानें' },
+    intro: {
+      en: 'A personalised reading of possible later-union indications in your own chart. It discusses supportive and challenging factors — not a guaranteed remarriage or an exact marriage date.',
+      hi: 'आपकी अपनी कुंडली में बाद के विवाह के संभावित संकेतों का व्यक्तिगत विश्लेषण। यह सहायक और चुनौतीपूर्ण कारकों की चर्चा करती है — दूसरे विवाह की गारंटी या विवाह की सटीक तारीख नहीं।',
+    },
+    bullets: {
+      en: [
+        'Your second-union indication — Low, Moderate or Elevated, as a tendency',
+        'Evidence from both the 7th and 9th houses, including their signs and lords',
+        'Venus and Jupiter as supporting or reducing factors',
+        'Your current Dasha context and practical guidance',
+      ],
+      hi: [
+        'आपके दूसरे विवाह का संकेत — कम, मध्यम या अधिक, एक प्रवृत्ति के रूप में',
+        'सप्तम और नवम दोनों भावों के संकेत, उनकी राशि और स्वामी सहित',
+        'सहायक या कम करने वाले कारकों के रूप में शुक्र और गुरु',
+        'आपकी वर्तमान दशा का संदर्भ और व्यावहारिक मार्गदर्शन',
+      ],
+    },
+    ctaLabel: { en: 'Get Second Marriage Report – ₹{price}', hi: 'दूसरे विवाह की रिपोर्ट प्राप्त करें – ₹{price}' },
+    // Visible on phones (the intro sentence is hidden there), so it carries the scope limit too.
+    microcopy: {
+      en: 'Personalised from your birth details. Shows tendencies — not a guaranteed remarriage or an exact date.',
+      hi: 'आपके जन्म विवरण पर आधारित। यह प्रवृत्तियाँ बताती है — दूसरे विवाह की गारंटी या सटीक तारीख नहीं।',
+    },
+    sampleTitle: { en: 'Second Marriage Report', hi: 'दूसरे विवाह की रिपोर्ट' },
+    reportCtaId: 'second_marriage_report_cta',
+    sampleCtaId: 'second_marriage_sample_report',
+    screenName: 'second_marriage_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at indications of a second or later marriage. Related questions have their own detailed guides — how astrology reads relationship stress and separation risk, and what married life may look like:',
+      hi: 'यह मार्गदर्शिका दूसरे या बाद के विवाह के संकेतों को देखती है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — ज्योतिष में रिश्ते के तनाव व अलगाव की आशंका को कैसे देखा जाता है, और वैवाहिक जीवन कैसा हो सकता है:',
+    },
+    topicSlugs: ['divorce-possibility', 'married-life'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  // Also renders the Key House Analysis accordion bodies in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
@@ -599,4 +665,5 @@ export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'married-life': marriedLifeLanding,
   'intercaste-marriage': intercasteMarriageLanding,
   'early-marriage': earlyMarriageLanding,
+  'second-marriage': secondMarriageLanding,
 }

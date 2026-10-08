@@ -337,15 +337,15 @@ export const reportsData: Report[] = [
   },
   {
     id: "rep_022",
-    title: { en: "Second Marriage Report", hi: "द्वितीय विवाह रिपोर्ट" },
+    title: { en: "Second Marriage Report", hi: "दूसरे विवाह की रिपोर्ट" },
     slug: "second_marriage_report",
     price: 51,
     image: "/reports/second_marriage_report.webp",
     category: { en: "Marriage", hi: "विवाह" },
     description: { en: "Analyze prospects of remarriage.", hi: "पुनर्विवाह की संभावनाओं का विश्लेषण करें।" },
     fullDescription: { 
-      en: "Reveals chances of remarriage and finding a compatible partner after separation.",
-      hi: "तलाक या अलगाव के बाद दूसरे विवाह की संभावनाओं और अनुकूल जीवनसाथी मिलने के योग बताती है।" 
+      en: "Explore indications of a second marriage or significant later union in your birth chart, with personalized astrological guidance.",
+      hi: "अपनी कुंडली में दूसरे विवाह या जीवन में आगे किसी महत्वपूर्ण वैवाहिक संबंध के संकेतों और उनसे जुड़े ज्योतिषीय मार्गदर्शन को समझें।" 
     }
   },
   {
