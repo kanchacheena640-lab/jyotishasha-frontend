@@ -736,6 +736,73 @@ export const divorcePossibilityLanding: TopicLandingConfig = {
   },
 }
 
+// Report-led (P7): Marriage Prediction is the broad entry page, so the primary card is the broad Marriage
+// Report. Its copy claims only what the report reads (outlook from the 7th house + lord; Venus, Jupiter,
+// Mars, Saturn, Rahu; current Dasha window + supportive periods; married-life dynamics; guidance) -- no D9,
+// no transits, no exact date or age. The scope limit sits in the microcopy, which stays visible on phones.
+// The free Marriage Path tool stays a secondary, honestly-worded bottom action. Detailed timing is handed
+// to Marriage Timing; the context links route readers to the specialised cluster pages.
+export const marriagePredictionLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'Vedic astrology does not predict marriage from one placement. Astrologers read marriage prospects from several factors together: the 7th house and its lord, Venus and Jupiter as marriage significators, the Darakaraka, supportive combinations and challenging influences such as Saturn, Mars and Rahu, and the Navamsa (D9) as a supporting layer — with the Dasha periods showing when marriage themes are more active. No single placement guarantees marriage or fixes an exact date; Dasha windows are read as potentially supportive periods, not certain wedding dates.',
+    hi: 'वैदिक ज्योतिष किसी एक ग्रह-स्थिति से विवाह की भविष्यवाणी नहीं करता। ज्योतिषी कई कारकों को साथ देखकर विवाह की संभावनाएँ पढ़ते हैं: सप्तम भाव और सप्तमेश, विवाह के कारक शुक्र और गुरु, दारकारक, सहायक योग और शनि, मंगल व राहु जैसे चुनौतीपूर्ण प्रभाव, और सहायक स्तर के रूप में नवांश (D9) — साथ ही दशाएँ बताती हैं कि विवाह से जुड़े विषय कब अधिक सक्रिय हैं। कोई एक ग्रह-स्थिति विवाह की गारंटी नहीं देती और न ही सटीक तारीख तय करती है; दशा की अवधियों को संभावित सहायक समय माना जाता है, निश्चित विवाह-तिथि नहीं।',
+  },
+
+  offer: {
+    reportSlug: 'marriage_report',
+    eyebrow: { en: 'Personalised Marriage Report', hi: 'व्यक्तिगत विवाह रिपोर्ट' },
+    heading: { en: 'Explore Your Personal Marriage Prospects', hi: 'अपने विवाह की व्यक्तिगत संभावनाएँ जानें' },
+    intro: {
+      en: 'A personalised reading of marriage-related houses, planetary influences, supportive periods and relationship outlook, based on your birth details.',
+      hi: 'आपके जन्म विवरण के आधार पर विवाह से जुड़े भावों, ग्रहों के प्रभाव, सहायक अवधियों और रिश्ते की संभावनाओं का व्यक्तिगत विश्लेषण।',
+    },
+    bullets: {
+      en: [
+        'Your marriage outlook from the 7th house and its lord',
+        'Key planetary influences — Venus, Jupiter, Mars, Saturn and Rahu',
+        'Your current Dasha window and comparatively supportive periods',
+        'Married-life dynamics, strengths and practical guidance',
+      ],
+      hi: [
+        'सप्तम भाव और सप्तमेश से आपके विवाह की संभावनाएँ',
+        'प्रमुख ग्रहों का प्रभाव — शुक्र, गुरु, मंगल, शनि और राहु',
+        'आपकी वर्तमान दशा और अपेक्षाकृत सहायक अवधियाँ',
+        'वैवाहिक जीवन का आपसी व्यवहार, मज़बूत पक्ष और व्यावहारिक मार्गदर्शन',
+      ],
+    },
+    ctaLabel: { en: 'Get Personal Marriage Report – ₹{price}', hi: 'व्यक्तिगत विवाह रिपोर्ट प्राप्त करें – ₹{price}' },
+    // Visible on phones (the intro sentence is hidden there), so it carries the scope limit.
+    microcopy: {
+      en: 'Personalised from your birth details. Shows indications and possible supportive periods — not a guaranteed marriage date or exact age.',
+      hi: 'आपके जन्म विवरण पर आधारित। यह संकेत और संभावित सहायक अवधियाँ बताती है — विवाह की निश्चित तारीख या सटीक उम्र नहीं।',
+    },
+    sampleTitle: { en: 'Marriage Report', hi: 'विवाह रिपोर्ट' },
+    reportCtaId: 'marriage_prediction_report_cta',
+    sampleCtaId: 'marriage_prediction_sample_report',
+    screenName: 'marriage_prediction_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Explore Specific Marriage Questions', hi: 'विवाह से जुड़े विशेष प्रश्न' },
+    body: {
+      en: 'This page gives the broad picture. Specific questions have their own detailed guides — when marriage may happen and why it can be delayed, love and arranged paths, and the nature of the spouse:',
+      hi: 'यह पृष्ठ विवाह की समग्र तस्वीर देता है। विशेष प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — विवाह कब हो सकता है और देरी क्यों हो सकती है, प्रेम और अरेंज्ड विवाह के मार्ग, और जीवनसाथी का स्वभाव:',
+    },
+    topicSlugs: ['marriage-timing', 'delayed-marriage', 'love-marriage', 'arranged-marriage', 'spouse-nature'],
+    overviewLead: {
+      en: 'When a specific match is in view, the two charts are read together — see',
+      hi: 'जब कोई विशेष रिश्ता सामने हो, तो दोनों कुंडलियाँ साथ पढ़ी जाती हैं — देखें',
+    },
+    overviewSlug: 'compatibility',
+  },
+
+  // Also renders FAQ answers in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
@@ -749,4 +816,5 @@ export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'early-marriage': earlyMarriageLanding,
   'second-marriage': secondMarriageLanding,
   'divorce-possibility': divorcePossibilityLanding,
+  'marriage-prediction': marriagePredictionLanding,
 }

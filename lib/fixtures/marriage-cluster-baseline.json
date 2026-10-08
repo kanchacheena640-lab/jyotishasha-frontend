@@ -39,11 +39,13 @@
           "Marriage Prediction in Vedic Astrology"
         ],
         "h2": [
+          "Explore Your Personal Marriage Prospects",
           "Understanding Marriage Prediction in Vedic Astrology",
           "The Five Pillars of Vedic Marriage Analysis",
           "Important Marriage Yogas and Delaying Factors",
           "Timing Marriage: Dasha and Transit Synergy",
           "Addressing Misconceptions in Marriage Astrology",
+          "Explore Specific Marriage Questions",
           "Frequently Asked Questions",
           "Related Topics"
         ],
@@ -53,8 +55,7 @@
           "Jupiter — The Karaka for Women",
           "Darakaraka — The Soulmate Indicator",
           "Navamsa (D9) — The Fruit of Marriage",
-          "Check Your Marriage Path",
-          "Get Detailed Marriage Report",
+          "Explore Your Marriage Indicators",
           "Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?",
           "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
           "Intercaste Marriage in Vedic Astrology: Karmic Analysis"
@@ -70,7 +71,7 @@
           "What if my marriage is delayed?",
           "How important is the Navamsa chart?",
           "Are there remedies for marriage issues?",
-          "How do I choose the right astrologer?"
+          "What if my 7th house is empty?"
         ],
         "questionsInServer": 8,
         "answersInServer": 8
@@ -142,22 +143,35 @@
           "/",
           "/marriage-astrology",
           "/marriage-astrology/arranged-marriage",
+          "/marriage-astrology/compatibility",
+          "/marriage-astrology/delayed-marriage",
           "/marriage-astrology/intercaste-marriage",
+          "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-timing",
           "/marriage-astrology/second-marriage",
+          "/marriage-astrology/spouse-nature",
+          "/report-samples/marriage_report_en.pdf",
           "/reports/marriage_report",
           "/tools/marriage-path"
         ],
         "reports": [
           "/reports/marriage_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/marriage_report_en.pdf"
+        ],
         "tools": [
           "/tools/marriage-path"
         ],
         "marriageTopics": [
           "/marriage-astrology/arranged-marriage",
+          "/marriage-astrology/compatibility",
+          "/marriage-astrology/delayed-marriage",
           "/marriage-astrology/intercaste-marriage",
-          "/marriage-astrology/second-marriage"
+          "/marriage-astrology/love-marriage",
+          "/marriage-astrology/marriage-timing",
+          "/marriage-astrology/second-marriage",
+          "/marriage-astrology/spouse-nature"
         ],
         "external": [],
         "embeds": []
@@ -219,7 +233,7 @@
                 "name": "Can Vedic astrology predict exactly when I will get married?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Vedic astrology suggests the most likely time frames based on the activation of marriage-related houses through Dasha and Transit. It offers probability-based insights rather than a fixed, unchangeable calendar date."
+                  "text": "Not to an exact date. Vedic astrology identifies periods traditionally considered supportive for marriage, based on how Dasha and Transit activate the marriage-related houses. These are windows of possibility, not a fixed date, month or age. Detailed timing methods are covered in the Marriage Timing guide."
                 }
               },
               {
@@ -243,7 +257,7 @@
                 "name": "Can astrology predict if a marriage will be love or arranged?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. Specific combinations involving the 5th house (romance) and the 7th house (partnership), along with the strength of the 7th lord, often indicate a propensity for love-based or arranged-based paths."
+                  "text": "To a degree. Combinations involving the 5th house (romance) and the 7th house (partnership), along with the strength of the 7th lord and the 9th house of family tradition, can show a tendency toward a love-based or a family-arranged path. Many charts show both, and personal choice decides the path a person actually takes."
                 }
               },
               {
@@ -259,7 +273,7 @@
                 "name": "How important is the Navamsa chart?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "The Navamsa (D9) chart is indispensable. It validates the actual, deep-rooted strength and quality of the marriage, acting as the \"fruit\" of the natal potential shown in the main chart."
+                  "text": "It is an important supporting layer. The Navamsa (D9) is used to check the deeper strength and quality of the marriage shown in the main chart — the \"fruit\" of the natal potential — and is always read together with the Rashi chart rather than on its own."
                 }
               },
               {
@@ -272,10 +286,10 @@
               },
               {
                 "@type": "Question",
-                "name": "How do I choose the right astrologer?",
+                "name": "What if my 7th house is empty?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Seek those who adhere strictly to traditional Sidereal (Lahiri) systems, prioritize holistic analysis over isolated factors, and provide balanced, probability-based guidance rather than fear-based or fatalistic predictions."
+                  "text": "An empty 7th house does not mean no marriage. The house is still read through its sign, its lord and where that lord is placed, together with any planets aspecting it, Venus and Jupiter, and the Navamsa. Many people with an empty 7th house marry and have stable marriages."
                 }
               }
             ]
@@ -283,7 +297,7 @@
         ]
       },
       "server": {
-        "wordCount": 1938,
+        "wordCount": 2383,
         "detailsElements": 8
       },
       "facts": {
@@ -301,7 +315,7 @@
       "path": "/hi/marriage-astrology/marriage-prediction",
       "seo": {
         "title": "वैदिक ज्योतिष में विवाह भविष्यवाणी",
-        "description": "Seeking marriage prediction? Explore how Vedic astrology analyzes the 7th house, Venus, Jupiter, and Navamsa to provide insights into marriage timing and compatibility.",
+        "description": "कुंडली से विवाह की भविष्यवाणी कैसे की जाती है — सप्तम भाव, सप्तमेश, शुक्र, गुरु, विवाह योग, दशा और नवांश। जानें विवाह की संभावना के पारंपरिक संकेत, और क्यों कोई योग विवाह की सटीक तारीख तय नहीं करता।",
         "keywords": [
           "विवाह भविष्यवाणी",
           "विवाह ज्योतिष",
@@ -328,11 +342,13 @@
           "वैदिक ज्योतिष में विवाह भविष्यवाणी"
         ],
         "h2": [
+          "अपने विवाह की व्यक्तिगत संभावनाएँ जानें",
           "वैदिक ज्योतिष में विवाह भविष्यवाणी को समझना",
           "वैदिक विवाह विश्लेषण के पांच स्तंभ",
           "महत्वपूर्ण विवाह योग और विलंब करने वाले कारक",
-          "विवाह का समय: दशा और गोचर की तालमेल",
+          "विवाह का समय: दशा और गोचर का तालमेल",
           "विवाह ज्योतिष में गलतफहमियों को दूर करना",
+          "विवाह से जुड़े विशेष प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
           "संबंधित विषय"
         ],
@@ -342,8 +358,7 @@
           "गुरु — महिलाओं के लिए कारक",
           "दारकारक — जीवनसाथी संकेतक",
           "नवांश (D9) — विवाह का फल",
-          "अपना विवाह मार्ग जांचें",
-          "विस्तृत विवाह रिपोर्ट प्राप्त करें",
+          "अपने विवाह संकेत देखें",
           "वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?",
           "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
           "वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण"
@@ -359,7 +374,7 @@
           "अगर मेरा विवाह विलंबित हो तो क्या होगा?",
           "नवांश कुंडली कितनी महत्वपूर्ण है?",
           "क्या विवाह संबंधी समस्याओं के लिए कोई उपाय हैं?",
-          "मैं सही ज्योतिषी का चुनाव कैसे करूं?"
+          "अगर मेरा सप्तम भाव खाली हो तो क्या?"
         ],
         "questionsInServer": 8,
         "answersInServer": 8
@@ -398,7 +413,7 @@
         {
           "id": "timing-analysis",
           "layout": "checklist",
-          "title": "विवाह का समय: दशा और गोचर की तालमेल",
+          "title": "विवाह का समय: दशा और गोचर का तालमेल",
           "titleInServer": true,
           "items": 6,
           "labelsInServer": 6,
@@ -431,22 +446,35 @@
           "/hi",
           "/hi/marriage-astrology",
           "/hi/marriage-astrology/arranged-marriage",
+          "/hi/marriage-astrology/compatibility",
+          "/hi/marriage-astrology/delayed-marriage",
           "/hi/marriage-astrology/intercaste-marriage",
+          "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-timing",
           "/hi/marriage-astrology/second-marriage",
+          "/hi/marriage-astrology/spouse-nature",
           "/hi/tools/marriage-path",
+          "/report-samples/marriage_report_hi.pdf",
           "/reports/marriage_report"
         ],
         "reports": [
           "/reports/marriage_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/marriage_report_hi.pdf"
+        ],
         "tools": [
           "/hi/tools/marriage-path"
         ],
         "marriageTopics": [
           "/hi/marriage-astrology/arranged-marriage",
+          "/hi/marriage-astrology/compatibility",
+          "/hi/marriage-astrology/delayed-marriage",
           "/hi/marriage-astrology/intercaste-marriage",
-          "/hi/marriage-astrology/second-marriage"
+          "/hi/marriage-astrology/love-marriage",
+          "/hi/marriage-astrology/marriage-timing",
+          "/hi/marriage-astrology/second-marriage",
+          "/hi/marriage-astrology/spouse-nature"
         ],
         "external": [],
         "embeds": []
@@ -486,7 +514,7 @@
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "वैदिक ज्योतिष में विवाह भविष्यवाणी",
-            "description": "Seeking marriage prediction? Explore how Vedic astrology analyzes the 7th house, Venus, Jupiter, and Navamsa to provide insights into marriage timing and compatibility.",
+            "description": "कुंडली से विवाह की भविष्यवाणी कैसे की जाती है — सप्तम भाव, सप्तमेश, शुक्र, गुरु, विवाह योग, दशा और नवांश। जानें विवाह की संभावना के पारंपरिक संकेत, और क्यों कोई योग विवाह की सटीक तारीख तय नहीं करता।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/marriage-prediction",
             "author": {
               "@type": "Organization",
@@ -508,7 +536,7 @@
                 "name": "क्या वैदिक ज्योतिष यह सटीक भविष्यवाणी कर सकता है कि मेरा विवाह कब होगा?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "वैदिक ज्योतिष दशा और गोचर के माध्यम से विवाह-संबंधित भावों की सक्रियता के आधार पर सबसे संभावित समय सीमा का सुझाव देता है।"
+                  "text": "सटीक तारीख तक नहीं। वैदिक ज्योतिष दशा और गोचर द्वारा विवाह से जुड़े भावों की सक्रियता के आधार पर उन अवधियों की पहचान करता है जिन्हें परंपरागत रूप से विवाह के लिए सहायक माना जाता है। ये संभावना की अवधियाँ हैं, कोई तय तारीख, महीना या उम्र नहीं। समय निकालने की विस्तृत विधियाँ विवाह के समय वाली मार्गदर्शिका में दी गई हैं।"
                 }
               },
               {
@@ -532,7 +560,7 @@
                 "name": "क्या ज्योतिष भविष्यवाणी कर सकता है कि विवाह प्रेम होगा या व्यवस्थित?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "हां। पंचम और सप्तम भाव से जुड़े विशिष्ट संयोजन अक्सर प्रेम-आधारित या व्यवस्थित-आधारित पथों की प्रवृत्ति का संकेत देते हैं।"
+                  "text": "कुछ हद तक। पंचम भाव (प्रेम) और सप्तम भाव (साझेदारी) से जुड़े योग, सप्तमेश की शक्ति और पारिवारिक परंपरा का नवम भाव — ये प्रेम विवाह या परिवार द्वारा तय विवाह की ओर झुकाव दिखा सकते हैं। कई कुंडलियों में दोनों के संकेत होते हैं, और वास्तविक मार्ग व्यक्ति का अपना निर्णय तय करता है।"
                 }
               },
               {
@@ -540,7 +568,7 @@
                 "name": "अगर मेरा विवाह विलंबित हो तो क्या होगा?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "विलंबित विवाह अक्सर विशिष्ट कर्मिक पाठ या शनि जैसे ग्रह प्रभावों का परिणाम है — यह संकेत नहीं कि विवाह नहीं होगा।"
+                  "text": "विवाह में देरी अक्सर विशेष कार्मिक पाठों या शनि जैसे ग्रहों के प्रभाव का परिणाम होती है — इसका अर्थ यह नहीं कि विवाह नहीं होगा। यह अक्सर दिखाता है कि समय किसी अलग कार्मिक चक्र से तय हो रहा है, जिसमें व्यक्तिगत परिपक्वता की ज़रूरत है।"
                 }
               },
               {
@@ -548,7 +576,7 @@
                 "name": "नवांश कुंडली कितनी महत्वपूर्ण है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नवांश (D9) कुंडली अपरिहार्य है। यह मुख्य कुंडली में दिखाई गई जन्मजात क्षमता के \"फल\" के रूप में कार्य करते हुए विवाह की वास्तविक शक्ति और गुणवत्ता को मान्य करती है।"
+                  "text": "यह एक महत्वपूर्ण सहायक स्तर है। नवांश (D9) से मुख्य कुंडली में दिखे विवाह की गहरी शक्ति और गुणवत्ता — यानी जन्मकुंडली की संभावना का \"फल\" — परखा जाता है, और इसे हमेशा राशि कुंडली के साथ पढ़ा जाता है, अकेले नहीं।"
                 }
               },
               {
@@ -561,10 +589,10 @@
               },
               {
                 "@type": "Question",
-                "name": "मैं सही ज्योतिषी का चुनाव कैसे करूं?",
+                "name": "अगर मेरा सप्तम भाव खाली हो तो क्या?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "ऐसे लोगों की तलाश करें जो पारंपरिक नक्षत्र (लाहिड़ी) प्रणालियों का कड़ाई से पालन करते हैं और संतुलित, संभावना-आधारित मार्गदर्शन प्रदान करते हैं।"
+                  "text": "खाली सप्तम भाव का अर्थ विवाह न होना नहीं है। इस भाव को उसकी राशि, सप्तमेश और सप्तमेश की स्थिति के साथ-साथ उस पर दृष्टि डालने वाले ग्रहों, शुक्र और गुरु, और नवांश से पढ़ा जाता है। खाली सप्तम भाव वाले बहुत से लोगों का विवाह होता है और वह स्थिर रहता है।"
                 }
               }
             ]
@@ -572,11 +600,11 @@
         ]
       },
       "server": {
-        "wordCount": 1613,
+        "wordCount": 2389,
         "detailsElements": 8
       },
       "facts": {
-        "hindiMetaFallsBackToEnglish": true,
+        "hindiMetaFallsBackToEnglish": false,
         "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "8/8",

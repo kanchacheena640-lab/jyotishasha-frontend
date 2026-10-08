@@ -110,8 +110,8 @@ export const reportsData: Report[] = [
     category: { en: "Marriage", hi: "विवाह" },
     description: { en: "Understand your marriage prospects and timing.", hi: "अपने विवाह की संभावनाओं और समय को समझें।" },
     fullDescription: { 
-      en: "Reveals emotional compatibility and possible challenges using your astrological chart and dasha.",
-      hi: "आपकी ज्योतिषीय कुंडली और दशा का उपयोग करके भावनात्मक अनुकूलता और चुनौतियों का खुलासा करती है।" 
+      en: "Explore your marriage outlook, supportive Dasha periods and married-life dynamics through a personalized birth-chart reading.",
+      hi: "व्यक्तिगत कुंडली विश्लेषण के माध्यम से अपने विवाह की संभावनाएँ, सहायक दशा अवधियाँ और वैवाहिक जीवन के आपसी व्यवहार को समझें।" 
     }
   },
   {
