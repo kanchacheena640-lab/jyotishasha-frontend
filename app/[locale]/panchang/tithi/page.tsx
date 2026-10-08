@@ -12,6 +12,7 @@ import TithiTools from "@/components/tithi/TithiTools";
 import TithiFaq from "@/components/tithi/TithiFaq";
 import { tithiSeoContent } from "@/app/data/tithiSeoContent";
 import TithiSchema from "@/components/tithi/TithiSchema";
+import { tithiIndexFromNumber } from "@/lib/tithi/tithiIndexFromNumber";
 
 const SITE_URL = "https://www.jyotishasha.com";
 
@@ -82,32 +83,14 @@ export default async function TithiPage({
       isHi ? "hi" : "en"
     );
 
-  const tithiName =
-    panchang?.selected_date?.tithi?.name || "";
-
-  const slugMap: Record<string, string> = {
-    Pratipada: "pratipada",
-    Dwitiya: "dwitiya",
-    Tritiya: "tritiya",
-    Chaturthi: "chaturthi",
-    Panchami: "panchami",
-    Shashthi: "shashthi",
-    Saptami: "saptami",
-    Ashtami: "ashtami",
-    Navami: "navami",
-    Dashami: "dashami",
-    Ekadashi: "ekadashi",
-    Dvadashi: "dwadashi",
-    Trayodashi: "trayodashi",
-    Chaturdashi: "chaturdashi",
-    Purnima: "purnima",
-    Amavasya: "amavasya",
-  };
+  // Look up by the language-independent tithi number (1-30): the API's
+  // tithi.name is localized ("द्वितीया" on /hi) and spelled "Dvitiya" in English.
+  const tithiIndex = tithiIndexFromNumber(
+    panchang?.selected_date?.tithi?.number
+  );
 
   const currentTithi =
-    tithiData.find(
-      (t) => t.slug === slugMap[tithiName]
-    ) || null;
+    tithiIndex === null ? null : tithiData[tithiIndex] ?? null;
 
   const faq = [
     tithiSeoContent.pratipada.faq[0],
