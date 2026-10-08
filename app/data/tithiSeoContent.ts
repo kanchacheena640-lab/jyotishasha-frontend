@@ -1004,6 +1004,12 @@ export const tithiSeoContent = {
     "महाषष्ठी (दुर्गा पूजा)",
   ],
 
+  // Festivals with their own page (rendered as links on the tithi page).
+  festivalLinks: {
+    "Chhath Puja": "/chhath-puja",
+    "छठ पूजा": "/chhath-puja",
+  } as Record<string, string>,
+
   // ==========================
   // Internal Linking
   // ==========================

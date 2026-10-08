@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { HinduMonthDetail } from '@/lib/data/hinduMonthsData';
 
 export default function HinduMonthContextComponents({
@@ -60,6 +61,14 @@ export default function HinduMonthContextComponents({
                 <p className="text-sm text-gray-300 mt-2">
                   {isHi ? festival.significance.hi : festival.significance.en}
                 </p>
+                {festival.linkToPage && festival.existingPageUrl && (
+                  <Link
+                    href={`${isHi ? '/hi' : ''}${festival.existingPageUrl}`}
+                    className="inline-block mt-3 text-sm font-medium text-purple-300 hover:text-purple-200"
+                  >
+                    {isHi ? `${festival.name.hi} की तिथि और समय देखें` : `See ${festival.name.en} dates & timings`} →
+                  </Link>
+                )}
               </div>
             ))}
           </div>

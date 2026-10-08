@@ -129,6 +129,13 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/navratri/${mata.slug}`, 0.65)
   );
 
+  // ---------------- CHHATH PUJA ----------------
+  // Evergreen URLs; the page always shows the current/upcoming year.
+  const chhathUrls = [
+    createUrl(`${baseUrl}/chhath-puja`, 0.8, "weekly"),
+    createUrl(`${baseUrl}/hi/chhath-puja`, 0.75, "weekly"),
+  ];
+
   // ---------------- TRANSITS ----------------
   const planets = [
     "sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu",
@@ -419,6 +426,7 @@ export default async function sitemap() {
     ...marriageAstrologyUrlsHi,
     ...miscUrls,
     ...navratriUrls,
+    ...chhathUrls,
     ...navdurgaUrls,
     ...navdurgaUrlsHi,
     ...monthUrls,

@@ -1,0 +1,857 @@
+{
+  "2025_patna_en": {
+    "candidates": [
+      {
+        "dates": {
+          "kharna": "2025-10-27",
+          "nahay_khay": "2025-10-26",
+          "sandhya_arghya": "2025-10-28",
+          "usha_arghya": "2025-10-29"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": true,
+        "label": "Shashthi at sunrise, Patna reference (primary)",
+        "matching_days": [
+          "2025-10-28"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunrise_udaya",
+        "sandhya_arghya": "2025-10-28"
+      },
+      {
+        "dates": {
+          "kharna": "2025-10-26",
+          "nahay_khay": "2025-10-25",
+          "sandhya_arghya": "2025-10-27",
+          "usha_arghya": "2025-10-28"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": false,
+        "label": "Shashthi at sunrise, New Delhi cross-check",
+        "matching_days": [
+          "2025-10-27",
+          "2025-10-28"
+        ],
+        "reference_city": "delhi",
+        "rule_id": "delhi_sunrise_udaya",
+        "sandhya_arghya": "2025-10-27"
+      },
+      {
+        "dates": {
+          "kharna": "2025-10-26",
+          "nahay_khay": "2025-10-25",
+          "sandhya_arghya": "2025-10-27",
+          "usha_arghya": "2025-10-28"
+        },
+        "evaluated_at": "sunset",
+        "is_primary": false,
+        "label": "Shashthi at sunset, Patna reference",
+        "matching_days": [
+          "2025-10-27"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunset_shashthi",
+        "sandhya_arghya": "2025-10-27"
+      }
+    ],
+    "days": [
+      {
+        "date": "2025-10-26",
+        "key": "nahay_khay",
+        "name": "Nahay Khay",
+        "name_en": "Nahay Khay",
+        "name_hi": "नहाय खाय",
+        "sunrise": "05:54",
+        "sunset": "17:12",
+        "tithi_at_sunrise": {
+          "name": "Panchami",
+          "name_en": "Panchami",
+          "name_hi": "पंचमी",
+          "number": 5,
+          "paksha": "Shukla"
+        },
+        "weekday": "Sunday",
+        "weekday_local": "Sunday"
+      },
+      {
+        "date": "2025-10-27",
+        "key": "kharna",
+        "name": "Kharna",
+        "name_en": "Kharna",
+        "name_hi": "खरना",
+        "sunrise": "05:54",
+        "sunset": "17:11",
+        "tithi_at_sunrise": {
+          "name": "Panchami",
+          "name_en": "Panchami",
+          "name_hi": "पंचमी",
+          "number": 5,
+          "paksha": "Shukla"
+        },
+        "weekday": "Monday",
+        "weekday_local": "Monday"
+      },
+      {
+        "arghya_event": "sunset",
+        "arghya_time": "17:10",
+        "date": "2025-10-28",
+        "key": "sandhya_arghya",
+        "name": "Sandhya Arghya",
+        "name_en": "Sandhya Arghya",
+        "name_hi": "संध्या अर्घ्य",
+        "sunrise": "05:55",
+        "sunset": "17:10",
+        "tithi_at_sunrise": {
+          "name": "Shashthi",
+          "name_en": "Shashthi",
+          "name_hi": "षष्ठी",
+          "number": 6,
+          "paksha": "Shukla"
+        },
+        "weekday": "Tuesday",
+        "weekday_local": "Tuesday"
+      },
+      {
+        "arghya_event": "sunrise",
+        "arghya_time": "05:55",
+        "date": "2025-10-29",
+        "key": "usha_arghya",
+        "name": "Usha Arghya",
+        "name_en": "Usha Arghya",
+        "name_hi": "उषा अर्घ्य",
+        "sunrise": "05:55",
+        "sunset": "17:10",
+        "tithi_at_sunrise": {
+          "name": "Saptami",
+          "name_en": "Saptami",
+          "name_hi": "सप्तमी",
+          "number": 7,
+          "paksha": "Shukla"
+        },
+        "weekday": "Wednesday",
+        "weekday_local": "Wednesday"
+      }
+    ],
+    "diagnostics": {
+      "cross_check_udaya_days": [
+        "2025-10-27",
+        "2025-10-28"
+      ],
+      "reference_sunset_rule_day": "2025-10-27",
+      "reference_udaya_days": [
+        "2025-10-28"
+      ],
+      "selected_city_udaya_days": [
+        "2025-10-28"
+      ]
+    },
+    "festival": "chhath",
+    "flags": {
+      "adhik_kartik_skipped": false,
+      "date_differs_by_city": false,
+      "kshaya": false,
+      "month_identification_uncertain": false,
+      "near_sunrise_boundary": true,
+      "reference_disagreement": true,
+      "sunset_rule_differs": true,
+      "vriddhi": false
+    },
+    "language": "en",
+    "location": {
+      "city": "patna",
+      "lat": 25.5941,
+      "lon": 85.1376,
+      "name": "Patna",
+      "name_en": "Patna",
+      "name_hi": "पटना",
+      "tz": "Asia/Kolkata"
+    },
+    "lunar_month": {
+      "adhik_kartik_skipped": false,
+      "amanta": "Kartik",
+      "is_adhik": false,
+      "new_moon_ist": "2025-10-21T17:55",
+      "paksha": "Shukla"
+    },
+    "review_reasons": [
+      "Shashthi begins or ends within 30 minutes of Patna sunrise; published Panchangs may differ.",
+      "Udaya rule at the New Delhi cross-check reference selects a different day."
+    ],
+    "rule": {
+      "anchor_basis": "udaya_reference",
+      "calculation_basis": "astronomical: Lahiri sidereal tithi (Swiss Ephemeris) at Astral sunrise, IST",
+      "cross_check_city": "delhi",
+      "offsets": {
+        "kharna": -1,
+        "nahay_khay": -2,
+        "sandhya_arghya": 0,
+        "usha_arghya": 1
+      },
+      "policy_status": "owner_approved_display_policy",
+      "policy_unapproved": [
+        "near_sunrise_boundary_threshold_30min"
+      ],
+      "reference_city": "patna",
+      "reference_location": {
+        "city": "patna",
+        "lat": 25.5941,
+        "lon": 85.1376,
+        "name_en": "Patna"
+      },
+      "rule_id": "patna_sunrise_udaya",
+      "rule_version": "chhath-kartik-udaya-patna-v1",
+      "sandhya_arghya": "Kartik Shukla Shashthi prevailing at sunrise (udaya) at the Patna reference"
+    },
+    "rule_version": "chhath-kartik-udaya-patna-v1",
+    "shashthi": {
+      "end_ist": "2025-10-28T08:00",
+      "start_ist": "2025-10-27T06:05"
+    },
+    "source": "computed",
+    "status": "needs_review",
+    "timezone_display": "IST",
+    "type": "kartik",
+    "verification": {
+      "note": "status 'confirmed' means the Patna sunrise rule gave an unambiguous date with no review flag; it does not certify that every regional Panchang or community observes the same date.",
+      "regional_observance_verified": false,
+      "status_scope": "astronomical_calculation_under_selected_rule"
+    },
+    "year": 2025
+  },
+  "2026_kolkata_en": {
+    "candidates": [
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": true,
+        "label": "Shashthi at sunrise, Patna reference (primary)",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunrise_udaya",
+        "sandhya_arghya": "2026-11-15"
+      },
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": false,
+        "label": "Shashthi at sunrise, New Delhi cross-check",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "delhi",
+        "rule_id": "delhi_sunrise_udaya",
+        "sandhya_arghya": "2026-11-15"
+      },
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunset",
+        "is_primary": false,
+        "label": "Shashthi at sunset, Patna reference",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunset_shashthi",
+        "sandhya_arghya": "2026-11-15"
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-13",
+        "key": "nahay_khay",
+        "name": "Nahay Khay",
+        "name_en": "Nahay Khay",
+        "name_hi": "नहाय खाय",
+        "sunrise": "05:47",
+        "sunset": "16:53",
+        "tithi_at_sunrise": {
+          "name": "Chaturthi",
+          "name_en": "Chaturthi",
+          "name_hi": "चतुर्थी",
+          "number": 4,
+          "paksha": "Shukla"
+        },
+        "weekday": "Friday",
+        "weekday_local": "Friday"
+      },
+      {
+        "date": "2026-11-14",
+        "key": "kharna",
+        "name": "Kharna",
+        "name_en": "Kharna",
+        "name_hi": "खरना",
+        "sunrise": "05:48",
+        "sunset": "16:52",
+        "tithi_at_sunrise": {
+          "name": "Panchami",
+          "name_en": "Panchami",
+          "name_hi": "पंचमी",
+          "number": 5,
+          "paksha": "Shukla"
+        },
+        "weekday": "Saturday",
+        "weekday_local": "Saturday"
+      },
+      {
+        "arghya_event": "sunset",
+        "arghya_time": "16:52",
+        "date": "2026-11-15",
+        "key": "sandhya_arghya",
+        "name": "Sandhya Arghya",
+        "name_en": "Sandhya Arghya",
+        "name_hi": "संध्या अर्घ्य",
+        "sunrise": "05:49",
+        "sunset": "16:52",
+        "tithi_at_sunrise": {
+          "name": "Shashthi",
+          "name_en": "Shashthi",
+          "name_hi": "षष्ठी",
+          "number": 6,
+          "paksha": "Shukla"
+        },
+        "weekday": "Sunday",
+        "weekday_local": "Sunday"
+      },
+      {
+        "arghya_event": "sunrise",
+        "arghya_time": "05:49",
+        "date": "2026-11-16",
+        "key": "usha_arghya",
+        "name": "Usha Arghya",
+        "name_en": "Usha Arghya",
+        "name_hi": "उषा अर्घ्य",
+        "sunrise": "05:49",
+        "sunset": "16:52",
+        "tithi_at_sunrise": {
+          "name": "Saptami",
+          "name_en": "Saptami",
+          "name_hi": "सप्तमी",
+          "number": 7,
+          "paksha": "Shukla"
+        },
+        "weekday": "Monday",
+        "weekday_local": "Monday"
+      }
+    ],
+    "diagnostics": {
+      "cross_check_udaya_days": [
+        "2026-11-15"
+      ],
+      "reference_sunset_rule_day": "2026-11-15",
+      "reference_udaya_days": [
+        "2026-11-15"
+      ],
+      "selected_city_udaya_days": [
+        "2026-11-15"
+      ]
+    },
+    "festival": "chhath",
+    "flags": {
+      "adhik_kartik_skipped": false,
+      "date_differs_by_city": false,
+      "kshaya": false,
+      "month_identification_uncertain": false,
+      "near_sunrise_boundary": false,
+      "reference_disagreement": false,
+      "sunset_rule_differs": false,
+      "vriddhi": false
+    },
+    "language": "en",
+    "location": {
+      "city": "kolkata",
+      "lat": 22.5726,
+      "lon": 88.3639,
+      "name": "Kolkata",
+      "name_en": "Kolkata",
+      "name_hi": "कोलकाता",
+      "tz": "Asia/Kolkata"
+    },
+    "lunar_month": {
+      "adhik_kartik_skipped": false,
+      "amanta": "Kartik",
+      "is_adhik": false,
+      "new_moon_ist": "2026-11-09T12:32",
+      "paksha": "Shukla"
+    },
+    "review_reasons": [],
+    "rule": {
+      "anchor_basis": "udaya_reference",
+      "calculation_basis": "astronomical: Lahiri sidereal tithi (Swiss Ephemeris) at Astral sunrise, IST",
+      "cross_check_city": "delhi",
+      "offsets": {
+        "kharna": -1,
+        "nahay_khay": -2,
+        "sandhya_arghya": 0,
+        "usha_arghya": 1
+      },
+      "policy_status": "owner_approved_display_policy",
+      "policy_unapproved": [],
+      "reference_city": "patna",
+      "reference_location": {
+        "city": "patna",
+        "lat": 25.5941,
+        "lon": 85.1376,
+        "name_en": "Patna"
+      },
+      "rule_id": "patna_sunrise_udaya",
+      "rule_version": "chhath-kartik-udaya-patna-v1",
+      "sandhya_arghya": "Kartik Shukla Shashthi prevailing at sunrise (udaya) at the Patna reference"
+    },
+    "rule_version": "chhath-kartik-udaya-patna-v1",
+    "shashthi": {
+      "end_ist": "2026-11-16T02:01",
+      "start_ist": "2026-11-14T23:24"
+    },
+    "source": "computed",
+    "status": "confirmed",
+    "timezone_display": "IST",
+    "type": "kartik",
+    "verification": {
+      "note": "status 'confirmed' means the Patna sunrise rule gave an unambiguous date with no review flag; it does not certify that every regional Panchang or community observes the same date.",
+      "regional_observance_verified": false,
+      "status_scope": "astronomical_calculation_under_selected_rule"
+    },
+    "year": 2026
+  },
+  "2026_patna_en": {
+    "candidates": [
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": true,
+        "label": "Shashthi at sunrise, Patna reference (primary)",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunrise_udaya",
+        "sandhya_arghya": "2026-11-15"
+      },
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": false,
+        "label": "Shashthi at sunrise, New Delhi cross-check",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "delhi",
+        "rule_id": "delhi_sunrise_udaya",
+        "sandhya_arghya": "2026-11-15"
+      },
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunset",
+        "is_primary": false,
+        "label": "Shashthi at sunset, Patna reference",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunset_shashthi",
+        "sandhya_arghya": "2026-11-15"
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-13",
+        "key": "nahay_khay",
+        "name": "Nahay Khay",
+        "name_en": "Nahay Khay",
+        "name_hi": "नहाय खाय",
+        "sunrise": "06:05",
+        "sunset": "17:01",
+        "tithi_at_sunrise": {
+          "name": "Chaturthi",
+          "name_en": "Chaturthi",
+          "name_hi": "चतुर्थी",
+          "number": 4,
+          "paksha": "Shukla"
+        },
+        "weekday": "Friday",
+        "weekday_local": "Friday"
+      },
+      {
+        "date": "2026-11-14",
+        "key": "kharna",
+        "name": "Kharna",
+        "name_en": "Kharna",
+        "name_hi": "खरना",
+        "sunrise": "06:06",
+        "sunset": "17:01",
+        "tithi_at_sunrise": {
+          "name": "Panchami",
+          "name_en": "Panchami",
+          "name_hi": "पंचमी",
+          "number": 5,
+          "paksha": "Shukla"
+        },
+        "weekday": "Saturday",
+        "weekday_local": "Saturday"
+      },
+      {
+        "arghya_event": "sunset",
+        "arghya_time": "17:00",
+        "date": "2026-11-15",
+        "key": "sandhya_arghya",
+        "name": "Sandhya Arghya",
+        "name_en": "Sandhya Arghya",
+        "name_hi": "संध्या अर्घ्य",
+        "sunrise": "06:06",
+        "sunset": "17:00",
+        "tithi_at_sunrise": {
+          "name": "Shashthi",
+          "name_en": "Shashthi",
+          "name_hi": "षष्ठी",
+          "number": 6,
+          "paksha": "Shukla"
+        },
+        "weekday": "Sunday",
+        "weekday_local": "Sunday"
+      },
+      {
+        "arghya_event": "sunrise",
+        "arghya_time": "06:07",
+        "date": "2026-11-16",
+        "key": "usha_arghya",
+        "name": "Usha Arghya",
+        "name_en": "Usha Arghya",
+        "name_hi": "उषा अर्घ्य",
+        "sunrise": "06:07",
+        "sunset": "17:00",
+        "tithi_at_sunrise": {
+          "name": "Saptami",
+          "name_en": "Saptami",
+          "name_hi": "सप्तमी",
+          "number": 7,
+          "paksha": "Shukla"
+        },
+        "weekday": "Monday",
+        "weekday_local": "Monday"
+      }
+    ],
+    "diagnostics": {
+      "cross_check_udaya_days": [
+        "2026-11-15"
+      ],
+      "reference_sunset_rule_day": "2026-11-15",
+      "reference_udaya_days": [
+        "2026-11-15"
+      ],
+      "selected_city_udaya_days": [
+        "2026-11-15"
+      ]
+    },
+    "festival": "chhath",
+    "flags": {
+      "adhik_kartik_skipped": false,
+      "date_differs_by_city": false,
+      "kshaya": false,
+      "month_identification_uncertain": false,
+      "near_sunrise_boundary": false,
+      "reference_disagreement": false,
+      "sunset_rule_differs": false,
+      "vriddhi": false
+    },
+    "language": "en",
+    "location": {
+      "city": "patna",
+      "lat": 25.5941,
+      "lon": 85.1376,
+      "name": "Patna",
+      "name_en": "Patna",
+      "name_hi": "पटना",
+      "tz": "Asia/Kolkata"
+    },
+    "lunar_month": {
+      "adhik_kartik_skipped": false,
+      "amanta": "Kartik",
+      "is_adhik": false,
+      "new_moon_ist": "2026-11-09T12:32",
+      "paksha": "Shukla"
+    },
+    "review_reasons": [],
+    "rule": {
+      "anchor_basis": "udaya_reference",
+      "calculation_basis": "astronomical: Lahiri sidereal tithi (Swiss Ephemeris) at Astral sunrise, IST",
+      "cross_check_city": "delhi",
+      "offsets": {
+        "kharna": -1,
+        "nahay_khay": -2,
+        "sandhya_arghya": 0,
+        "usha_arghya": 1
+      },
+      "policy_status": "owner_approved_display_policy",
+      "policy_unapproved": [],
+      "reference_city": "patna",
+      "reference_location": {
+        "city": "patna",
+        "lat": 25.5941,
+        "lon": 85.1376,
+        "name_en": "Patna"
+      },
+      "rule_id": "patna_sunrise_udaya",
+      "rule_version": "chhath-kartik-udaya-patna-v1",
+      "sandhya_arghya": "Kartik Shukla Shashthi prevailing at sunrise (udaya) at the Patna reference"
+    },
+    "rule_version": "chhath-kartik-udaya-patna-v1",
+    "shashthi": {
+      "end_ist": "2026-11-16T02:01",
+      "start_ist": "2026-11-14T23:24"
+    },
+    "source": "computed",
+    "status": "confirmed",
+    "timezone_display": "IST",
+    "type": "kartik",
+    "verification": {
+      "note": "status 'confirmed' means the Patna sunrise rule gave an unambiguous date with no review flag; it does not certify that every regional Panchang or community observes the same date.",
+      "regional_observance_verified": false,
+      "status_scope": "astronomical_calculation_under_selected_rule"
+    },
+    "year": 2026
+  },
+  "2026_patna_hi": {
+    "candidates": [
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": true,
+        "label": "Shashthi at sunrise, Patna reference (primary)",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunrise_udaya",
+        "sandhya_arghya": "2026-11-15"
+      },
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunrise",
+        "is_primary": false,
+        "label": "Shashthi at sunrise, New Delhi cross-check",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "delhi",
+        "rule_id": "delhi_sunrise_udaya",
+        "sandhya_arghya": "2026-11-15"
+      },
+      {
+        "dates": {
+          "kharna": "2026-11-14",
+          "nahay_khay": "2026-11-13",
+          "sandhya_arghya": "2026-11-15",
+          "usha_arghya": "2026-11-16"
+        },
+        "evaluated_at": "sunset",
+        "is_primary": false,
+        "label": "Shashthi at sunset, Patna reference",
+        "matching_days": [
+          "2026-11-15"
+        ],
+        "reference_city": "patna",
+        "rule_id": "patna_sunset_shashthi",
+        "sandhya_arghya": "2026-11-15"
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-13",
+        "key": "nahay_khay",
+        "name": "नहाय खाय",
+        "name_en": "Nahay Khay",
+        "name_hi": "नहाय खाय",
+        "sunrise": "06:05",
+        "sunset": "17:01",
+        "tithi_at_sunrise": {
+          "name": "चतुर्थी",
+          "name_en": "Chaturthi",
+          "name_hi": "चतुर्थी",
+          "number": 4,
+          "paksha": "Shukla"
+        },
+        "weekday": "Friday",
+        "weekday_local": "शुक्रवार"
+      },
+      {
+        "date": "2026-11-14",
+        "key": "kharna",
+        "name": "खरना",
+        "name_en": "Kharna",
+        "name_hi": "खरना",
+        "sunrise": "06:06",
+        "sunset": "17:01",
+        "tithi_at_sunrise": {
+          "name": "पंचमी",
+          "name_en": "Panchami",
+          "name_hi": "पंचमी",
+          "number": 5,
+          "paksha": "Shukla"
+        },
+        "weekday": "Saturday",
+        "weekday_local": "शनिवार"
+      },
+      {
+        "arghya_event": "sunset",
+        "arghya_time": "17:00",
+        "date": "2026-11-15",
+        "key": "sandhya_arghya",
+        "name": "संध्या अर्घ्य",
+        "name_en": "Sandhya Arghya",
+        "name_hi": "संध्या अर्घ्य",
+        "sunrise": "06:06",
+        "sunset": "17:00",
+        "tithi_at_sunrise": {
+          "name": "षष्ठी",
+          "name_en": "Shashthi",
+          "name_hi": "षष्ठी",
+          "number": 6,
+          "paksha": "Shukla"
+        },
+        "weekday": "Sunday",
+        "weekday_local": "रविवार"
+      },
+      {
+        "arghya_event": "sunrise",
+        "arghya_time": "06:07",
+        "date": "2026-11-16",
+        "key": "usha_arghya",
+        "name": "उषा अर्घ्य",
+        "name_en": "Usha Arghya",
+        "name_hi": "उषा अर्घ्य",
+        "sunrise": "06:07",
+        "sunset": "17:00",
+        "tithi_at_sunrise": {
+          "name": "सप्तमी",
+          "name_en": "Saptami",
+          "name_hi": "सप्तमी",
+          "number": 7,
+          "paksha": "Shukla"
+        },
+        "weekday": "Monday",
+        "weekday_local": "सोमवार"
+      }
+    ],
+    "diagnostics": {
+      "cross_check_udaya_days": [
+        "2026-11-15"
+      ],
+      "reference_sunset_rule_day": "2026-11-15",
+      "reference_udaya_days": [
+        "2026-11-15"
+      ],
+      "selected_city_udaya_days": [
+        "2026-11-15"
+      ]
+    },
+    "festival": "chhath",
+    "flags": {
+      "adhik_kartik_skipped": false,
+      "date_differs_by_city": false,
+      "kshaya": false,
+      "month_identification_uncertain": false,
+      "near_sunrise_boundary": false,
+      "reference_disagreement": false,
+      "sunset_rule_differs": false,
+      "vriddhi": false
+    },
+    "language": "hi",
+    "location": {
+      "city": "patna",
+      "lat": 25.5941,
+      "lon": 85.1376,
+      "name": "पटना",
+      "name_en": "Patna",
+      "name_hi": "पटना",
+      "tz": "Asia/Kolkata"
+    },
+    "lunar_month": {
+      "adhik_kartik_skipped": false,
+      "amanta": "Kartik",
+      "is_adhik": false,
+      "new_moon_ist": "2026-11-09T12:32",
+      "paksha": "Shukla"
+    },
+    "review_reasons": [],
+    "rule": {
+      "anchor_basis": "udaya_reference",
+      "calculation_basis": "astronomical: Lahiri sidereal tithi (Swiss Ephemeris) at Astral sunrise, IST",
+      "cross_check_city": "delhi",
+      "offsets": {
+        "kharna": -1,
+        "nahay_khay": -2,
+        "sandhya_arghya": 0,
+        "usha_arghya": 1
+      },
+      "policy_status": "owner_approved_display_policy",
+      "policy_unapproved": [],
+      "reference_city": "patna",
+      "reference_location": {
+        "city": "patna",
+        "lat": 25.5941,
+        "lon": 85.1376,
+        "name_en": "Patna"
+      },
+      "rule_id": "patna_sunrise_udaya",
+      "rule_version": "chhath-kartik-udaya-patna-v1",
+      "sandhya_arghya": "Kartik Shukla Shashthi prevailing at sunrise (udaya) at the Patna reference"
+    },
+    "rule_version": "chhath-kartik-udaya-patna-v1",
+    "shashthi": {
+      "end_ist": "2026-11-16T02:01",
+      "start_ist": "2026-11-14T23:24"
+    },
+    "source": "computed",
+    "status": "confirmed",
+    "timezone_display": "IST",
+    "type": "kartik",
+    "verification": {
+      "note": "status 'confirmed' means the Patna sunrise rule gave an unambiguous date with no review flag; it does not certify that every regional Panchang or community observes the same date.",
+      "regional_observance_verified": false,
+      "status_scope": "astronomical_calculation_under_selected_rule"
+    },
+    "year": 2026
+  }
+}

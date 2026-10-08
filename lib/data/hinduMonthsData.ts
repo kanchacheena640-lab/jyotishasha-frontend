@@ -17,6 +17,8 @@ export interface Festival {
   significance: Multilingual;
   isMajor: boolean;
   existingPageUrl?: string;
+  /** Render the festival card as a link to existingPageUrl (opt-in per festival). */
+  linkToPage?: boolean;
 }
 
 export interface Vrat {
@@ -1114,6 +1116,7 @@ export const hinduMonthsData: Record<MonthSlug, HinduMonthDetail> = {
     festivals: [
       { slug: "dhanteras", name: { en: "Dhanteras", hi: "धनतेरस" }, approxTithi: "Kartika Krishna Trayodashi", paksha: "krishna", significance: { en: "Gold, silver and household utensils are purchased on this day for prosperity — the opening of the Diwali festival sequence.", hi: "इस दिन समृद्धि हेतु सोना, चांदी और घरेलू बर्तन खरीदे जाते हैं — दिवाली उत्सव क्रम का प्रारंभ।" }, isMajor: true },
       { slug: "diwali-deepavali", name: { en: "Diwali / Deepavali", hi: "दिवाली / दीपावली" }, approxTithi: "Kartika Amavasya", significance: { en: "The Festival of Lights — Lakshmi Puja and firecrackers mark the return of Rama to Ayodhya and the worship of wealth.", hi: "दीपों का उत्सव — लक्ष्मी पूजा और पटाखे राम की अयोध्या वापसी और धन की पूजा का प्रतीक हैं।" }, isMajor: true },
+      { slug: "chhath-puja", name: { en: "Chhath Puja", hi: "छठ पूजा" }, approxTithi: "Kartika Shukla Shashthi", paksha: "shukla", significance: { en: "Four days of Surya and Chhathi Maiya worship — Nahay Khay, Kharna, and Arghya to the setting and rising Sun — observed especially in Bihar, Jharkhand and eastern Uttar Pradesh.", hi: "सूर्य देव और छठी मैया की चार दिवसीय उपासना — नहाय खाय, खरना तथा डूबते और उगते सूर्य को अर्घ्य — विशेष रूप से बिहार, झारखंड और पूर्वी उत्तर प्रदेश में मनाई जाती है।" }, isMajor: true, existingPageUrl: "/chhath-puja", linkToPage: true },
       { slug: "tulsi-vivah", name: { en: "Tulsi Vivah", hi: "तुलसी विवाह" }, approxTithi: "Kartika Shukla Dwadashi", paksha: "shukla", significance: { en: "The ceremonial marriage of Tulsi plant to Lord Vishnu — marks the end of Chaturmas and the traditional reopening of the wedding season.", hi: "तुलसी पौधे का भगवान विष्णु से विवाह — चातुर्मास का समापन और पारंपरिक विवाह मौसम का पुनः प्रारंभ।" }, isMajor: true },
     ],
     vrats: [

@@ -28,6 +28,13 @@ const FESTIVALS = [
     desc: "The festival of colours — Holika Dahan date, Rangwali Holi significance, rituals and the Holi calendar.",
     desc_hi: "रंगों का त्योहार — होलिका दहन तिथि, रंगवाली होली का महत्व, पूजा विधि और होली कैलेंडर।",
   },
+  {
+    href: "/chhath-puja",
+    title: "Chhath Puja",
+    title_hi: "छठ पूजा",
+    desc: "Four days of Surya worship — Nahay Khay, Kharna, Sandhya and Usha Arghya dates with sunrise and sunset timings for your city.",
+    desc_hi: "सूर्य उपासना के चार दिन — नहाय खाय, खरना, संध्या और उषा अर्घ्य की तिथि तथा आपके शहर के सूर्योदय-सूर्यास्त समय।",
+  },
 ];
 
 export async function generateMetadata({
@@ -40,11 +47,11 @@ export async function generateMetadata({
   const canonicalUrl = `${SITE_URL}${langPath}/vrat-tyohar`;
 
   const title = isHi
-    ? "व्रत और त्योहार — एकादशी, नवरात्रि, होली | ज्योतिष आशा"
-    : "Hindu Vrat & Tyohar — Ekadashi, Navratri & Holi Festival Guide | Jyotishasha";
+    ? "व्रत और त्योहार — एकादशी, नवरात्रि, होली, छठ पूजा | ज्योतिष आशा"
+    : "Hindu Vrat & Tyohar — Ekadashi, Navratri, Holi & Chhath Puja Guide | Jyotishasha";
   const description = isHi
-    ? "एकादशी, नवरात्रि और होली सहित प्रमुख हिंदू व्रत और त्योहारों की संपूर्ण जानकारी — तिथि, पूजा विधि और महत्व।"
-    : "Complete guide to Hindu vrats and festivals — Ekadashi, Navratri and Holi with dates, puja vidhi and spiritual significance.";
+    ? "एकादशी, नवरात्रि, होली और छठ पूजा सहित प्रमुख हिंदू व्रत और त्योहारों की संपूर्ण जानकारी — तिथि, पूजा विधि और महत्व।"
+    : "Complete guide to Hindu vrats and festivals — Ekadashi, Navratri, Holi and Chhath Puja with dates, puja vidhi and spiritual significance.";
 
   return {
     title,
@@ -90,7 +97,7 @@ export default function VratTyoharPage({
           )}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {FESTIVALS.map((festival) => (
             <Link
               key={festival.href}

@@ -200,9 +200,24 @@ export default function TithiDetailPage({
           <ul className="list-disc pl-6 space-y-2">
             {(isHi
               ? seo.majorFestivals_hi
-              : seo.majorFestivals).map((item: string) => (
-              <li key={item}>{item}</li>
-            ))}
+              : seo.majorFestivals).map((item: string) => {
+              const festivalHref =
+                "festivalLinks" in seo ? seo.festivalLinks[item] : undefined;
+              return (
+                <li key={item}>
+                  {festivalHref ? (
+                    <Link
+                      href={`${isHi ? "/hi" : ""}${festivalHref}`}
+                      className="text-orange-600 underline underline-offset-2 hover:text-orange-700"
+                    >
+                      {item}
+                    </Link>
+                  ) : (
+                    item
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </section>
 
