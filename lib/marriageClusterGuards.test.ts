@@ -97,7 +97,6 @@ for (const file of fs.readdirSync(path.join(root, TOPICS_DIR)).filter((f) => f.e
 /** Topics still missing a Hindi meta description (seo.metaDescription_hi). Remove each as it is migrated. */
 const HINDI_META_GAP_ALLOWLIST: readonly string[] = [
   "marriage-prediction",   // MC-10
-  "early-marriage",        // MC-10
   "second-marriage",       // MC-12
   "divorce-possibility",   // MC-09
 ];

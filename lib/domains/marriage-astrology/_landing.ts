@@ -526,6 +526,68 @@ export const intercasteMarriageLanding: ToolLedLandingConfig = {
   },
 }
 
+// Tool-led (P4): the primary action is the EXISTING free Marriage Path tool, described only by what it
+// computes (7th-house occupants, Venus/Jupiter dignity, Rahu with the 7th lord, strongest influence) --
+// it calculates no Dasha, no D9 and no marriage age. The Marriage Report is a contextual card after the
+// timing section, framed as a broader marriage outlook -- never an early-marriage or exact-age report.
+export const earlyMarriageLanding: ToolLedLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'In Vedic astrology, a relatively early marriage is traditionally read from several factors together: a strong 7th house and 7th lord, supportive links from the 2nd, 5th and 11th houses, a well-placed Venus, Jupiter and Moon, and marriage-related Dasha periods that become active early in life, checked again in the Navamsa (D9). No single placement guarantees early marriage, and “early” is relative to the person’s chart and circumstances — the chart shows a tendency, not a fixed age or date.',
+    hi: 'वैदिक ज्योतिष में अपेक्षाकृत जल्दी विवाह को परंपरागत रूप से कई कारकों को साथ मिलाकर देखा जाता है: मज़बूत सप्तम भाव और सप्तमेश, द्वितीय, पंचम और एकादश भाव से सहायक संबंध, सुस्थित शुक्र, गुरु और चंद्रमा, और विवाह से जुड़ी दशाएँ जो जीवन में जल्दी सक्रिय हों — जिनकी पुष्टि नवांश (D9) में भी की जाती है। कोई एक ग्रह-स्थिति जल्दी विवाह की गारंटी नहीं देती, और “जल्दी” व्यक्ति की कुंडली और परिस्थितियों के सापेक्ष होता है — कुंडली एक प्रवृत्ति दिखाती है, कोई तय उम्र या तारीख नहीं।',
+  },
+
+  primaryAction: {
+    eyebrow: { en: 'Free Marriage Path Check', hi: 'फ्री विवाह मार्ग जाँच' },
+    heading: { en: 'Check Your Marriage Path', hi: 'अपना विवाह मार्ग जाँचें' },
+    body: {
+      en: 'Enter your birth details for a free check of your main marriage indicators: the planets placed in your 7th house, the strength of Venus and Jupiter, whether Rahu sits with your 7th lord, and the planet with the strongest influence on your marriage.',
+      hi: 'अपना जन्म विवरण दर्ज करें और अपने मुख्य विवाह संकेतों की फ्री जाँच पाएं: आपके सप्तम भाव में स्थित ग्रह, शुक्र और गुरु की स्थिति, क्या राहु आपके सप्तमेश के साथ है, और विवाह पर सबसे प्रबल प्रभाव वाला ग्रह।',
+    },
+    ctaLabel: { en: 'Check Marriage Path — Free', hi: 'फ्री में विवाह मार्ग जाँचें' },
+    microcopy: {
+      en: 'A general snapshot of your marriage indicators. It does not calculate Dasha periods or a marriage age.',
+      hi: 'आपके विवाह संकेतों की सामान्य झलक। यह दशाओं या विवाह की उम्र की गणना नहीं करती।',
+    },
+    href: '/tools/marriage-path',
+    ctaId: 'early_marriage_path_cta',
+    screenName: 'early_marriage_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at the indicators traditionally associated with a relatively early marriage. Related questions have their own detailed guides — how marriage timing is read in general, and why marriage can be delayed:',
+      hi: 'यह मार्गदर्शिका उन संकेतों को देखती है जिन्हें परंपरागत रूप से अपेक्षाकृत जल्दी विवाह से जोड़ा जाता है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — विवाह का समय सामान्य रूप से कैसे देखा जाता है, और विवाह में देरी क्यों हो सकती है:',
+    },
+    topicSlugs: ['marriage-timing', 'delayed-marriage'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+
+  inlineTool: {
+    kind: 'contextual-report',
+    afterSectionId: 'timing-analysis',
+    reportSlug: 'marriage_report',
+    eyebrow: { en: 'Marriage Report', hi: 'विवाह रिपोर्ट' },
+    heading: { en: 'Want a Broader Personalised Marriage Outlook?', hi: 'अपने विवाह की व्यापक, व्यक्तिगत संभावनाएँ जानना चाहते हैं?' },
+    body: {
+      en: 'The Marriage Report reads your own chart for your overall marriage outlook — the 7th house and its lord, key planetary influences, your current Dasha window and supportive periods, and practical guidance. It does not give an exact marriage age or date.',
+      hi: 'विवाह रिपोर्ट आपकी अपनी कुंडली से आपके विवाह की समग्र संभावनाएँ देखती है — सप्तम भाव और सप्तमेश, प्रमुख ग्रहों का प्रभाव, आपकी वर्तमान दशा और सहायक अवधियाँ, और व्यावहारिक मार्गदर्शन। यह विवाह की कोई सटीक उम्र या तारीख नहीं बताती।',
+    },
+    ctaLabel: { en: 'Get Marriage Report – ₹{price}', hi: 'विवाह रिपोर्ट पाएं – ₹{price}' },
+    ctaId: 'early_marriage_report_cta',
+    screenName: 'early_marriage_topic',
+  },
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
@@ -536,4 +598,5 @@ export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'compatibility': compatibilityLanding,
   'married-life': marriedLifeLanding,
   'intercaste-marriage': intercasteMarriageLanding,
+  'early-marriage': earlyMarriageLanding,
 }
