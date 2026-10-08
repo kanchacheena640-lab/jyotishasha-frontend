@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { tithiCategoryLabel } from "@/lib/tithi/tithiDisplay";
 
 export default function TithiCard({
   tithi,
@@ -35,7 +36,7 @@ export default function TithiCard({
           backgroundColor: tithi.color,
         }}
       >
-        {tithi.category}
+        {tithiCategoryLabel(tithi.category, isHi)}
       </div>
 
       <div className="mt-4 text-sm">

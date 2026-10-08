@@ -1,3 +1,5 @@
+import { formatIstDateTime, tithiCategoryLabel } from "@/lib/tithi/tithiDisplay";
+
 type Props = {
   panchang: any;
   currentTithi: any;
@@ -14,12 +16,8 @@ export default function TodayTithiHero({
   const data =
     panchang.selected_date || panchang;
 
-  const formattedEndDate =
-  data?.tithi?.end_ist
-    ? new Date(
-        data.tithi.end_ist
-      ).toLocaleString("en-GB")
-    : "-";
+  // API end_ist is IST wall-clock time ("YYYY-MM-DD HH:MM"): DD-MM-YYYY, hh:mm AM/PM IST.
+  const formattedEndDate = formatIstDateTime(data?.tithi?.end_ist);
 
   return (
     <section className="mb-10">
@@ -47,12 +45,12 @@ export default function TodayTithiHero({
                 : "Today's Tithi"}
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-black mt-2">
+            <h2 className="text-3xl md:text-5xl font-black mt-2">
               {data?.tithi?.paksha}{" "}
               {isHi
                 ? currentTithi.name_hi
                 : currentTithi.name}
-            </h1>
+            </h2>
 
             <p className="text-gray-300 mt-3 text-lg">
               {isHi
@@ -63,7 +61,7 @@ export default function TodayTithiHero({
             <div className="flex flex-wrap gap-3 mt-4">
 
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-sm">
-                {currentTithi.category}
+                {tithiCategoryLabel(currentTithi.category, isHi)}
               </div>
 
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-500/10 text-green-300 text-sm">
