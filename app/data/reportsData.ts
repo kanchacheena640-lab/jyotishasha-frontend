@@ -290,7 +290,7 @@ export const reportsData: Report[] = [
     price: 51,
     image: "/reports/problem_in_marriage_report.webp",
     category: { en: "Marriage", hi: "विवाह" },
-    description: { en: "Identify causes of conflict in marriage.", hi: "विवाहिक जीवन में कलह के कारणों की पहचान करें।" },
+    description: { en: "Identify causes of conflict in marriage.", hi: "वैवाहिक जीवन में कलह के कारणों की पहचान करें।" },
     fullDescription: { 
       en: "Analyzes the 7th house and dasha influences to find practical solutions for harmony.",
       hi: "विवाह में आपसी तालमेल की कमी और विवादों के कारणों को जानकर शांति के उपाय बताती है।" 
@@ -350,14 +350,14 @@ export const reportsData: Report[] = [
   },
   {
     id: "rep_023",
-    title: { en: "Divorce Possibility Report", hi: "तलाक संभावना रिपोर्ट" },
+    title: { en: "Divorce Possibility Report", hi: "तलाक की संभावना रिपोर्ट" },
     slug: "divorce_possibility_report",
     price: 51,
     image: "/reports/divorce_possibility_report.webp",
     category: { en: "Self", hi: "स्वयं" },
     description: { en: "Factors indicating separation in marriage.", hi: "विवाह में अलगाव या तलाक के ज्योतिषीय संकेत।" },
     fullDescription: { 
-      en: "Assesses challenges in marital life triggered by dasha and transit influences.",
+      en: "Assesses marital stress indicators, protective factors and the current Dasha context, with constructive guidance.",
       hi: "विवाह में अलगाव पैदा करने वाले ग्रहों और दशाओं का विश्लेषण कर समाधान के तरीके बताती है।" 
     }
   },

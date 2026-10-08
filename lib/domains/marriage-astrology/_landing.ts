@@ -654,6 +654,88 @@ export const secondMarriageLanding: TopicLandingConfig = {
   longForm: true,
 }
 
+// Report-led (P6): the dedicated Divorce Possibility Report is the primary card. Its copy claims only what
+// the report reads (Low / Moderate / Elevated stress signal; 7th-house foundation; 6th / 8th stress
+// indicators; current sensitive Dasha period; protective factors; communication guidance; restrained
+// remedies) -- no D9, no transits, no date, no legal outcome. The scope limit sits in the microcopy, which
+// stays visible on phones (the intro is hidden there). Readers already in difficulty get the Problem in
+// Marriage Report as a compact contextual card after the timing / communication section.
+export const divorcePossibilityLanding: TopicLandingConfig = {
+  directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
+  directAnswer: {
+    en: 'In Vedic astrology, marital strain and separation indications are read from several chart factors together, not from one planet or one house. Astrologers examine the 7th house and its lord, the 6th, 8th and 12th houses, Venus and Jupiter, challenging influences from Mars, Saturn, Rahu and Ketu, the running Dasha, and the Navamsa (D9) — and weigh protective combinations that can moderate difficult indications. A difficult combination does not guarantee divorce. Personal choices, communication, circumstances and legal realities are separate from any astrological reading.',
+    hi: 'वैदिक ज्योतिष में वैवाहिक तनाव और अलगाव के संकेत किसी एक ग्रह या एक भाव से नहीं, बल्कि कुंडली के कई कारकों को साथ देखकर पढ़े जाते हैं। ज्योतिषी सप्तम भाव और सप्तमेश, षष्ठ, अष्टम और द्वादश भाव, शुक्र और गुरु, मंगल, शनि, राहु और केतु के चुनौतीपूर्ण प्रभाव, चल रही दशा और नवांश (D9) देखते हैं — और उन सुरक्षात्मक योगों को भी तौलते हैं जो कठिन संकेतों को कम कर सकते हैं। कोई कठिन योग तलाक की गारंटी नहीं देता। व्यक्तिगत निर्णय, आपसी संवाद, परिस्थितियाँ और कानूनी वास्तविकताएँ किसी भी ज्योतिषीय विश्लेषण से अलग हैं।',
+  },
+
+  offer: {
+    reportSlug: 'divorce_possibility_report',
+    eyebrow: { en: 'Personalised Divorce Possibility Report', hi: 'व्यक्तिगत तलाक की संभावना रिपोर्ट' },
+    heading: { en: 'Understand Your Marriage Stability Indicators', hi: 'अपने विवाह की स्थिरता के संकेत समझें' },
+    intro: {
+      en: 'A personalised assessment of relationship-stress signals in your own chart, the protective factors that can balance them, the current sensitive period and practical guidance.',
+      hi: 'आपकी अपनी कुंडली में रिश्ते के तनाव के संकेतों, उन्हें संतुलित करने वाले सुरक्षात्मक कारकों, वर्तमान संवेदनशील अवधि और व्यावहारिक मार्गदर्शन का व्यक्तिगत आकलन।',
+    },
+    bullets: {
+      en: [
+        'Your relationship-stress signal — Low, Moderate or Elevated, as a tendency',
+        'The 7th-house foundation, with the 6th and 8th houses as stress indicators',
+        'Your current Dasha period and the protective factors in your chart',
+        'Communication guidance and restrained, evidence-aware remedies',
+      ],
+      hi: [
+        'आपके रिश्ते के तनाव का संकेत — कम, मध्यम या अधिक, एक प्रवृत्ति के रूप में',
+        'सप्तम भाव की नींव, और तनाव के संकेत के रूप में षष्ठ व अष्टम भाव',
+        'आपकी वर्तमान दशा और आपकी कुंडली के सुरक्षात्मक कारक',
+        'संवाद से जुड़ा मार्गदर्शन और संयमित, संकेतों पर आधारित उपाय',
+      ],
+    },
+    ctaLabel: { en: 'Explore Divorce Possibility Report – ₹{price}', hi: 'तलाक की संभावना रिपोर्ट देखें – ₹{price}' },
+    // Visible on phones (the intro sentence is hidden there), so it carries the scope limit.
+    microcopy: {
+      en: 'Personalised from your birth details. Shows tendencies and protective factors — not a certain divorce, a date or a legal outcome.',
+      hi: 'आपके जन्म विवरण पर आधारित। यह प्रवृत्तियाँ और सुरक्षात्मक कारक बताती है — निश्चित तलाक, तारीख या कानूनी परिणाम नहीं।',
+    },
+    sampleTitle: { en: 'Divorce Possibility Report', hi: 'तलाक की संभावना रिपोर्ट' },
+    reportCtaId: 'divorce_possibility_report_cta',
+    sampleCtaId: 'divorce_possibility_sample_report',
+    screenName: 'divorce_possibility_topic',
+  },
+
+  contextLinks: {
+    heading: { en: 'Related Marriage Questions', hi: 'विवाह से जुड़े अन्य प्रश्न' },
+    body: {
+      en: 'This guide looks at how astrology reads marital stress and separation indications. Related questions have their own detailed guides — indications of a later marriage, and married-life harmony and dynamics:',
+      hi: 'यह मार्गदर्शिका बताती है कि ज्योतिष वैवाहिक तनाव और अलगाव के संकेतों को कैसे पढ़ता है। अन्य प्रश्नों पर अलग विस्तृत मार्गदर्शिकाएँ हैं — बाद के विवाह के संकेत, और वैवाहिक जीवन का सामंजस्य व आपसी व्यवहार:',
+    },
+    topicSlugs: ['second-marriage', 'married-life'],
+    overviewLead: {
+      en: 'For a broader overview of how a kundli is read for marriage, see',
+      hi: 'कुंडली में विवाह को समग्र रूप से कैसे पढ़ा जाता है, यह जानने के लिए देखें',
+    },
+    overviewSlug: 'marriage-prediction',
+  },
+
+  // Also renders the Key House / Planetary / Advanced-tools accordion bodies in server HTML.
+  ssrFaq: true,
+  // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
+  longForm: true,
+
+  inlineTool: {
+    kind: 'contextual-report',
+    afterSectionId: 'timing-and-factors',
+    reportSlug: 'problem_in_marriage_report',
+    eyebrow: { en: 'Problem in Marriage Report', hi: 'विवाह समस्या रिपोर्ट' },
+    heading: { en: 'Facing Difficulties in Your Marriage?', hi: 'क्या वैवाहिक जीवन में कठिनाइयाँ चल रही हैं?' },
+    body: {
+      en: 'A separate personalised reading focused on the friction patterns in your chart, the factors that can help steady the relationship, and practical, constructive guidance. It does not predict separation.',
+      hi: 'एक अलग व्यक्तिगत विश्लेषण, जो आपकी कुंडली में मतभेद के पैटर्न, रिश्ते को स्थिर करने में सहायक कारकों और व्यावहारिक, रचनात्मक मार्गदर्शन पर केंद्रित है। यह अलगाव की भविष्यवाणी नहीं करता।',
+    },
+    ctaLabel: { en: 'Get Problem in Marriage Report – ₹{price}', hi: 'विवाह समस्या रिपोर्ट पाएं – ₹{price}' },
+    ctaId: 'divorce_problem_in_marriage_report_cta',
+    screenName: 'divorce_possibility_topic',
+  },
+}
+
 /** Topic slug -> landing config. Topics not listed render unchanged. */
 export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'marriage-timing': marriageTimingLanding,
@@ -666,4 +748,5 @@ export const marriageTopicLandings: Record<string, AnyTopicLandingConfig> = {
   'intercaste-marriage': intercasteMarriageLanding,
   'early-marriage': earlyMarriageLanding,
   'second-marriage': secondMarriageLanding,
+  'divorce-possibility': divorcePossibilityLanding,
 }

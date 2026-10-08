@@ -88,9 +88,12 @@ const landingCss = src("components/authority-engine/landing/landing.module.css")
 check("long-form CSS is scoped under .longform and leaves content untouched (no hiding / content rules)",
   /\.longform :global\(section\.mb-10\)/.test(landingCss) &&
   !/\.longform[^{]*\{[^}]*(display:\s*none|content:|visibility:\s*hidden)/.test(landingCss));
-check("other marriage topics with accordions have no landing config (spouse-nature opted in at MC-03, compatibility at P1, married-life at P2, intercaste-marriage at P3, second-marriage at P5)",
-  ["divorce-possibility"]
-    .every((slug) => marriageTopicLandings[slug] === undefined));
+const accordionTopics = fs.readdirSync(path.join(root, "lib/domains/marriage-astrology/topics"))
+  .filter((f) => /layout:\s*'accordion'/.test(src(`lib/domains/marriage-astrology/topics/${f}`)))
+  .map((f) => f.replace(/\.ts$/, ""));
+check(`every marriage topic with accordions now has a reviewed landing that SSRs its bodies (${accordionTopics.join(", ")}; divorce-possibility opted in at P6)`,
+  accordionTopics.length >= 7 && accordionTopics.includes("divorce-possibility") &&
+  accordionTopics.every((slug) => marriageTopicLandings[slug] !== undefined && marriageTopicLandings[slug].ssrFaq === true));
 check("Marriage Timing / Love Marriage topics have no accordion sections (unaffected by the opt-in)",
   !/layout:\s*'accordion'/.test(src("lib/domains/marriage-astrology/topics/marriage-timing.ts")) &&
   !/layout:\s*'accordion'/.test(src("lib/domains/marriage-astrology/topics/love-marriage.ts")));

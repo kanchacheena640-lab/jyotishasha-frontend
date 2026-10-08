@@ -3343,7 +3343,7 @@
         ]
       },
       "server": {
-        "wordCount": 3108,
+        "wordCount": 3110,
         "detailsElements": 9
       },
       "facts": {
@@ -4790,6 +4790,7 @@
           "Divorce Possibility in Vedic Astrology: A Guide"
         ],
         "h2": [
+          "Understand Your Marriage Stability Indicators",
           "Introduction",
           "Key House Analysis for Marital Stability",
           "Planetary Influences and Karaka Analysis",
@@ -4797,6 +4798,7 @@
           "Separation Yogas, Divorce Yogas, and Protective Combinations",
           "Timing, Transits, and Contributing Factors",
           "Remedies, Ethics, and Summary",
+          "Related Marriage Questions",
           "Frequently Asked Questions",
           "Related Topics"
         ],
@@ -4804,7 +4806,7 @@
           "Navamsa (D9)",
           "Darakaraka",
           "Upapada Lagna",
-          "Get Divorce Possibility Report",
+          "Facing Difficulties in Your Marriage?",
           "Delayed Marriage in Vedic Astrology: Why Is My Marriage Getting Delayed?",
           "Early Marriage in Vedic Astrology",
           "Spouse Nature in Vedic Astrology: Houses & Planets"
@@ -4822,7 +4824,7 @@
           "Is Rahu in the 7th house always negative for stability?",
           "Can astrology tell if a divorce is final?",
           "How do I use this knowledge ethically?",
-          "Is stability analysis the same as predicting the future?"
+          "What is the difference between marital stress and a legal divorce?"
         ],
         "questionsInServer": 10,
         "answersInServer": 10
@@ -4915,17 +4917,28 @@
           "/marriage-astrology",
           "/marriage-astrology/delayed-marriage",
           "/marriage-astrology/early-marriage",
+          "/marriage-astrology/marriage-prediction",
+          "/marriage-astrology/married-life",
+          "/marriage-astrology/second-marriage",
           "/marriage-astrology/spouse-nature",
-          "/reports/divorce_possibility_report"
+          "/report-samples/divorce_possibility_report_en.pdf",
+          "/reports/divorce_possibility_report",
+          "/reports/problem_in_marriage_report"
         ],
         "reports": [
-          "/reports/divorce_possibility_report"
+          "/reports/divorce_possibility_report",
+          "/reports/problem_in_marriage_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/divorce_possibility_report_en.pdf"
+        ],
         "tools": [],
         "marriageTopics": [
           "/marriage-astrology/delayed-marriage",
           "/marriage-astrology/early-marriage",
+          "/marriage-astrology/marriage-prediction",
+          "/marriage-astrology/married-life",
+          "/marriage-astrology/second-marriage",
           "/marriage-astrology/spouse-nature"
         ],
         "external": [],
@@ -4996,7 +5009,7 @@
                 "name": "What if my horoscope shows divorce possibilities?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Challenges are karmic opportunities for growth. Understanding them allows the native to cultivate the maturity to navigate them successfully. A chart that shows divorce possibilities is a chart that is asking for a higher level of self-awareness, communication, and emotional maturity — qualities that, when developed, can transform the challenge into a source of profound personal and relational growth."
+                  "text": "It shows tendencies toward strain, not a verdict. Understanding them can help you work on communication, maturity and mutual support where the relationship is healthy and both partners want to strengthen it. A chart is never a reason to stay in a relationship that is unsafe — personal safety and your own choices come first."
                 }
               },
               {
@@ -5004,7 +5017,7 @@
                 "name": "Does the Navamsa chart reveal the stability of my marriage?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. The Navamsa is the indispensable tool for understanding the inner reality and structural strength of the marital union. It reveals the qualities and patterns that emerge in the intimacy and sustained reality of marriage — what the Rashi chart alone cannot fully predict. A strong Navamsa is one of the most reliable indicators of a marriage with genuine endurance."
+                  "text": "Yes, as an important layer. The Navamsa is an essential tool for understanding the inner reality and structural strength of the marital union. It reveals the qualities and patterns that emerge in the intimacy and sustained reality of marriage — what the Rashi chart alone cannot fully show. A strong Navamsa is one of the strongest supportive indicators of a marriage with genuine endurance, read together with the rest of the chart."
                 }
               },
               {
@@ -5012,7 +5025,7 @@
                 "name": "Can remedies prevent divorce?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Remedies are designed to align your own consciousness, which shifts the dynamics of the union toward harmony and growth. They work on the individual's inner state — refining the quality of awareness, patience, and empathy brought into the relationship — rather than overriding the partner or the karmic configuration of the charts."
+                  "text": "Remedies are designed to align your own consciousness, which can shift the dynamics of the union toward harmony and growth. They work on the individual’s inner state — refining the quality of awareness, patience, and empathy brought into the relationship — rather than overriding the partner or the karmic configuration of the charts. They are not a substitute for counselling, legal or safety support."
                 }
               },
               {
@@ -5020,7 +5033,7 @@
                 "name": "How important is Dasha in analyzing marriage stability?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Dasha is crucial — it defines the karmic themes the couple navigates at any given time and the timing of significant marital events. A difficult Dasha period does not seal the fate of a marriage; it highlights the areas where the greatest conscious effort is currently required. Understanding the Dasha can help partners approach a challenging period with greater awareness rather than reactive conflict."
+                  "text": "Dasha is crucial — it defines the karmic themes a couple faces at any given time and the periods when significant marital events are more likely. A difficult Dasha period does not seal the fate of a marriage; it highlights the areas where the greatest conscious effort is currently required. Understanding the Dasha can help partners approach a challenging period with greater awareness rather than reactive conflict."
                 }
               },
               {
@@ -5044,7 +5057,7 @@
                 "name": "Can astrology tell if a divorce is final?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Astrology can show the karmic indicators for separation and the periods during which those indicators are most strongly activated. However, reconciliation is always a possibility based on the conscious effort of both partners. No configuration in the chart removes the possibility of renewal — it can only indicate the intensity of the karmic test being navigated."
+                  "text": "Astrology can show indicators for separation and the periods when they are more active, but it cannot decide whether a separation is final or what a court will decide. Reconciliation can happen when both partners want it and it is safe — but it is a personal choice, not something a chart can require."
                 }
               },
               {
@@ -5057,10 +5070,10 @@
               },
               {
                 "@type": "Question",
-                "name": "Is stability analysis the same as predicting the future?",
+                "name": "What is the difference between marital stress and a legal divorce?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No. Stability analysis is a snapshot of current karmic trends and the structural strengths and challenges present in both charts. Predicting the future requires a deep, ongoing understanding of karmic evolution — how both partners grow, adapt, and choose over time. The chart creates the conditions; the partners' choices determine the outcome."
+                  "text": "Marital stress is the friction, distance or conflict a couple experiences — and it is what astrological indicators describe, as tendencies. A legal divorce is a formal decision made by people and courts under the law. A chart can point to periods of strain; it cannot determine whether a divorce will be filed or granted, or what its terms will be."
                 }
               }
             ]
@@ -5068,7 +5081,7 @@
         ]
       },
       "server": {
-        "wordCount": 3100,
+        "wordCount": 3512,
         "detailsElements": 27
       },
       "facts": {
@@ -5086,7 +5099,7 @@
       "path": "/hi/marriage-astrology/divorce-possibility",
       "seo": {
         "title": "वैदिक ज्योतिष में तलाक की संभावना",
-        "description": "Learn how Vedic astrology identifies divorce possibility through the 7th house, Navamsa, and Dasha cycles — a guide to karmic patterns and marital resilience.",
+        "description": "कुंडली में तलाक के योग और वैवाहिक तनाव के संकेत कैसे देखे जाते हैं — सप्तम, षष्ठ, अष्टम और द्वादश भाव, शुक्र-गुरु, दशा, नवांश और सुरक्षात्मक योग। जानें विवाह की स्थिरता के संकेत, और क्यों कोई योग तलाक को निश्चित नहीं करता।",
         "keywords": [
           "वैदिक ज्योतिष में तलाक",
           "विवाह विच्छेद ज्योतिष",
@@ -5110,6 +5123,7 @@
           "वैदिक ज्योतिष में तलाक की संभावना"
         ],
         "h2": [
+          "अपने विवाह की स्थिरता के संकेत समझें",
           "परिचय",
           "वैवाहिक स्थिरता के लिए मुख्य भाव विश्लेषण",
           "ग्रहीय प्रभाव और कारक विश्लेषण",
@@ -5117,6 +5131,7 @@
           "अलगाव योग, तलाक योग और सुरक्षात्मक संयोजन",
           "समय, गोचर और योगदान करने वाले कारक",
           "उपाय, नैतिकता और सारांश",
+          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
           "संबंधित विषय"
         ],
@@ -5124,7 +5139,7 @@
           "नवांश (D9)",
           "दारकारक",
           "उपपद लग्न",
-          "तलाक की संभावना रिपोर्ट प्राप्त करें",
+          "क्या वैवाहिक जीवन में कठिनाइयाँ चल रही हैं?",
           "वैदिक ज्योतिष में शादी में देरी: मेरी शादी में देरी क्यों हो रही है?",
           "वैदिक ज्योतिष में प्रारंभिक विवाह",
           "वैदिक ज्योतिष में जीवनसाथी का स्वभाव"
@@ -5142,7 +5157,7 @@
           "क्या सप्तम भाव में राहु स्थिरता के लिए हमेशा नकारात्मक है?",
           "क्या ज्योतिष बता सकता है कि तलाक अंतिम है?",
           "मैं इस ज्ञान का नैतिक रूप से उपयोग कैसे करूं?",
-          "क्या स्थिरता विश्लेषण भविष्य की भविष्यवाणी के समान है?"
+          "वैवाहिक तनाव और कानूनी तलाक में क्या अंतर है?"
         ],
         "questionsInServer": 10,
         "answersInServer": 10
@@ -5235,17 +5250,28 @@
           "/hi/marriage-astrology",
           "/hi/marriage-astrology/delayed-marriage",
           "/hi/marriage-astrology/early-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
+          "/hi/marriage-astrology/married-life",
+          "/hi/marriage-astrology/second-marriage",
           "/hi/marriage-astrology/spouse-nature",
-          "/reports/divorce_possibility_report"
+          "/report-samples/divorce_possibility_report_hi.pdf",
+          "/reports/divorce_possibility_report",
+          "/reports/problem_in_marriage_report"
         ],
         "reports": [
-          "/reports/divorce_possibility_report"
+          "/reports/divorce_possibility_report",
+          "/reports/problem_in_marriage_report"
         ],
-        "samples": [],
+        "samples": [
+          "/report-samples/divorce_possibility_report_hi.pdf"
+        ],
         "tools": [],
         "marriageTopics": [
           "/hi/marriage-astrology/delayed-marriage",
           "/hi/marriage-astrology/early-marriage",
+          "/hi/marriage-astrology/marriage-prediction",
+          "/hi/marriage-astrology/married-life",
+          "/hi/marriage-astrology/second-marriage",
           "/hi/marriage-astrology/spouse-nature"
         ],
         "external": [],
@@ -5286,7 +5312,7 @@
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "वैदिक ज्योतिष में तलाक की संभावना",
-            "description": "Learn how Vedic astrology identifies divorce possibility through the 7th house, Navamsa, and Dasha cycles — a guide to karmic patterns and marital resilience.",
+            "description": "कुंडली में तलाक के योग और वैवाहिक तनाव के संकेत कैसे देखे जाते हैं — सप्तम, षष्ठ, अष्टम और द्वादश भाव, शुक्र-गुरु, दशा, नवांश और सुरक्षात्मक योग। जानें विवाह की स्थिरता के संकेत, और क्यों कोई योग तलाक को निश्चित नहीं करता।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/divorce-possibility",
             "author": {
               "@type": "Organization",
@@ -5308,7 +5334,7 @@
                 "name": "क्या वैदिक ज्योतिष निश्चितता के साथ तलाक की भविष्यवाणी कर सकता है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। वैदिक ज्योतिष कार्मिक प्रवृत्तियों और चुनौतियों को इंगित करता है, लेकिन अंतिम परिणाम दोनों साझेदारों के प्रयासों और परिपक्वता पर निर्भर करता है। कुंडली संभावना स्थान को मैप करती है, पूर्वनिर्धारित गंतव्य को नहीं।"
+                  "text": "नहीं। वैदिक ज्योतिष कार्मिक प्रवृत्तियाँ और चुनौतियाँ दिखाता है, लेकिन अंतिम परिणाम दोनों साथियों के प्रयासों और परिपक्वता पर निर्भर करता है। कुंडली संभावनाओं का दायरा दिखाती है, पहले से तय मंज़िल नहीं।"
                 }
               },
               {
@@ -5316,7 +5342,7 @@
                 "name": "क्या होगा यदि मेरी जन्म कुंडली तलाक की संभावनाएं दिखाती है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "चुनौतियां विकास के लिए कार्मिक अवसर हैं। उन्हें समझने से जातक को उन्हें सफलतापूर्वक नेविगेट करने की परिपक्वता विकसित करने की अनुमति मिलती है। तलाक की संभावनाएं दिखाने वाली कुंडली एक उच्च स्तर की आत्म-जागरूकता, संचार और भावनात्मक परिपक्वता की मांग कर रही है।"
+                  "text": "यह तनाव की प्रवृत्तियाँ दिखाता है, कोई फैसला नहीं। इन्हें समझकर आप संवाद, परिपक्वता और आपसी सहयोग पर काम कर सकते हैं, जहाँ रिश्ता स्वस्थ हो और दोनों साथी उसे मज़बूत करना चाहें। कुंडली कभी भी किसी असुरक्षित रिश्ते में बने रहने का कारण नहीं है — व्यक्तिगत सुरक्षा और आपके अपने निर्णय सबसे पहले हैं।"
                 }
               },
               {
@@ -5324,7 +5350,7 @@
                 "name": "क्या नवांश चार्ट मेरे विवाह की स्थिरता को प्रकट करता है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "हां। नवांश वैवाहिक मिलन की आंतरिक वास्तविकता और संरचनात्मक शक्ति को समझने के लिए अपरिहार्य उपकरण है। यह विवाह की अंतरंगता और निरंतर वास्तविकता में उभरने वाले गुणों और पैटर्न को प्रकट करता है — जो राशि चार्ट अकेले पूरी तरह से भविष्यवाणी नहीं कर सकता।"
+                  "text": "हाँ, एक महत्वपूर्ण स्तर के रूप में। नवांश वैवाहिक संबंध की आंतरिक वास्तविकता और उसकी मज़बूती समझने का आवश्यक साधन है। यह विवाह की निकटता और लंबे साथ में उभरने वाले गुण और पैटर्न दिखाता है — जो अकेली राशि कुंडली पूरी तरह नहीं दिखा सकती। मज़बूत नवांश टिकाऊ विवाह के सबसे प्रबल सहायक संकेतों में से एक है, जिसे बाकी कुंडली के साथ पढ़ा जाता है।"
                 }
               },
               {
@@ -5332,7 +5358,7 @@
                 "name": "क्या उपाय तलाक को रोक सकते हैं?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "उपाय आपकी अपनी चेतना को संरेखित करने के लिए डिज़ाइन किए गए हैं, जो मिलन की गतिशीलता को सद्भाव और विकास की ओर स्थानांतरित करता है। वे व्यक्ति की आंतरिक स्थिति पर काम करते हैं — जागरूकता, धैर्य और सहानुभूति की गुणवत्ता को परिष्कृत करते हुए।"
+                  "text": "उपायों का उद्देश्य आपकी अपनी चेतना को संतुलित करना है, जिससे रिश्ते में सामंजस्य और विकास की दिशा में बदलाव आ सकता है। वे व्यक्ति की आंतरिक स्थिति पर काम करते हैं — जागरूकता, धैर्य और सहानुभूति को निखारते हुए — साथी या कुंडली के योगों को बदलकर नहीं। वे परामर्श, कानूनी या सुरक्षा सहायता का विकल्प नहीं हैं।"
                 }
               },
               {
@@ -5340,7 +5366,7 @@
                 "name": "विवाह स्थिरता के विश्लेषण में दशा कितनी महत्वपूर्ण है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "दशा महत्वपूर्ण है — यह उन कार्मिक विषयों को परिभाषित करती है जिन्हें जोड़ा किसी भी समय नेविगेट करता है और महत्वपूर्ण वैवाहिक घटनाओं का समय निर्धारित करती है। एक कठिन दशा अवधि विवाह का भाग्य नहीं तय करती; यह उन क्षेत्रों को उजागर करती है जहाँ वर्तमान में सबसे बड़े सचेत प्रयास की आवश्यकता है।"
+                  "text": "दशा बहुत महत्वपूर्ण है — यह बताती है कि किसी समय दंपति किन कार्मिक विषयों से गुज़र रहा है और किन अवधियों में महत्वपूर्ण वैवाहिक घटनाओं की संभावना अधिक है। कठिन दशा विवाह का भाग्य तय नहीं करती; यह दिखाती है कि अभी किन क्षेत्रों में सबसे अधिक सचेत प्रयास की ज़रूरत है।"
                 }
               },
               {
@@ -5356,7 +5382,7 @@
                 "name": "क्या सप्तम भाव में राहु स्थिरता के लिए हमेशा नकारात्मक है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। सप्तम भाव में राहु एक तीव्र या अपरंपरागत संबंध को इंगित करता है जिसे नेविगेट करने के लिए उच्च स्तर की परिपक्वता और विश्वास की आवश्यकता होती है — न कि एक साझेदारी जो स्वतः विफल होने के लिए नियत है। ऐसे रिश्ते अक्सर असामान्य चुंबकत्व वहन करते हैं।"
+                  "text": "नहीं। सप्तम भाव में राहु एक तीव्र या अपरंपरागत संबंध का संकेत देता है, जिसे संभालने के लिए उच्च स्तर की परिपक्वता और विश्वास चाहिए — यह कोई ऐसी साझेदारी नहीं जो अपने आप विफल होने के लिए तय हो। ऐसे रिश्तों में अक्सर असामान्य आकर्षण होता है।"
                 }
               },
               {
@@ -5364,7 +5390,7 @@
                 "name": "क्या ज्योतिष बता सकता है कि तलाक अंतिम है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "ज्योतिष अलगाव के कार्मिक संकेतकों और उन अवधियों को दिखा सकता है जिनमें वे संकेतक सबसे मजबूती से सक्रिय होते हैं। हालांकि, दोनों साझेदारों के सचेत प्रयास के आधार पर सुलह हमेशा एक संभावना है। कुंडली में कोई भी विन्यास नवीकरण की संभावना को नहीं हटाता।"
+                  "text": "ज्योतिष अलगाव के संकेत और वे अवधियाँ दिखा सकता है जब ये संकेत अधिक सक्रिय हों, लेकिन यह तय नहीं कर सकता कि अलगाव अंतिम है या अदालत क्या निर्णय देगी। सुलह तब हो सकती है जब दोनों साथी ऐसा चाहें और यह सुरक्षित हो — लेकिन यह व्यक्तिगत निर्णय है, ऐसा कुछ नहीं जिसे कुंडली अनिवार्य कर सके।"
                 }
               },
               {
@@ -5377,10 +5403,10 @@
               },
               {
                 "@type": "Question",
-                "name": "क्या स्थिरता विश्लेषण भविष्य की भविष्यवाणी के समान है?",
+                "name": "वैवाहिक तनाव और कानूनी तलाक में क्या अंतर है?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "नहीं। स्थिरता विश्लेषण वर्तमान कार्मिक प्रवृत्तियों और दोनों कुंडलियों में मौजूद संरचनात्मक शक्तियों और चुनौतियों का एक स्नैपशॉट है। भविष्य की भविष्यवाणी के लिए कार्मिक विकास की गहरी, निरंतर समझ की आवश्यकता होती है। कुंडली स्थितियां बनाती है; साझेदारों के विकल्प परिणाम निर्धारित करते हैं।"
+                  "text": "वैवाहिक तनाव वह टकराव, दूरी या मतभेद है जिसे दंपति अनुभव करता है — और ज्योतिषीय संकेत इसी को प्रवृत्तियों के रूप में बताते हैं। कानूनी तलाक कानून के तहत व्यक्तियों और अदालतों द्वारा लिया गया औपचारिक निर्णय है। कुंडली तनाव की अवधियाँ दिखा सकती है; यह तय नहीं कर सकती कि तलाक का मामला दायर होगा या स्वीकार होगा, या उसकी शर्तें क्या होंगी।"
                 }
               }
             ]
@@ -5388,11 +5414,11 @@
         ]
       },
       "server": {
-        "wordCount": 2869,
+        "wordCount": 3524,
         "detailsElements": 27
       },
       "facts": {
-        "hindiMetaFallsBackToEnglish": true,
+        "hindiMetaFallsBackToEnglish": false,
         "faqPageSchema": true,
         "faqAnswersInServer": "10/10",
         "collapsedBodiesInServer": "27/27",
@@ -7447,7 +7473,7 @@
         ]
       },
       "server": {
-        "wordCount": 3538,
+        "wordCount": 3540,
         "detailsElements": 39
       },
       "facts": {

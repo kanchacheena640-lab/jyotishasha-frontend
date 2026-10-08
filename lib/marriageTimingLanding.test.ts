@@ -83,7 +83,7 @@ check("offer copy never claims a guaranteed / exact / confirmed date", !/guarant
 check("direct answer frames a window, not a guaranteed date", /not a guaranteed date/.test(marriageTimingLanding.directAnswer.en));
 
 console.log("\n=== E. Scope + indexability protection ===");
-check("landing opt-in is limited to the reviewed topics (marriage-timing, love-marriage, arranged-marriage, delayed-marriage, spouse-nature, compatibility, married-life, intercaste-marriage, early-marriage, second-marriage)", JSON.stringify(Object.keys(marriageTopicLandings)) === '["marriage-timing","love-marriage","arranged-marriage","delayed-marriage","spouse-nature","compatibility","married-life","intercaste-marriage","early-marriage","second-marriage"]');
+check("landing opt-in is limited to the reviewed topics (marriage-timing, love-marriage, arranged-marriage, delayed-marriage, spouse-nature, compatibility, married-life, intercaste-marriage, early-marriage, second-marriage, divorce-possibility)", JSON.stringify(Object.keys(marriageTopicLandings)) === '["marriage-timing","love-marriage","arranged-marriage","delayed-marriage","spouse-nature","compatibility","married-life","intercaste-marriage","early-marriage","second-marriage","divorce-possibility"]');
 check("marriage-timing still configured with its video", !!marriageTopicLandings["marriage-timing"].video);
 check("lead renders the video figure only when a video is configured", lead.includes("{video ? (") && lead.indexOf("{video ? (") < lead.indexOf("<YouTubeShortFacade"));
 const adapter = src("lib/domains/_shared/domain-topic-adapter.ts");
