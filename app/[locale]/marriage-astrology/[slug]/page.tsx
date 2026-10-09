@@ -18,6 +18,7 @@ import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDeta
 import TopicLandingLead from '@/components/authority-engine/landing/TopicLandingLead'
 import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
 import LandingInlineTool from '@/components/authority-engine/landing/LandingInlineTool'
+import MarriageYouTubeShort from '@/components/authority-engine/landing/MarriageYouTubeShort'
 import { marriageTopicLandings } from '@/lib/domains/marriage-astrology/_landing'
 import { buildMarriageFaqPageSchema } from '@/lib/domains/marriage-astrology/faqSchema'
 import { buildMarriageArticleSchema } from '@/lib/domains/marriage-astrology/articleSchema'
@@ -93,6 +94,13 @@ export default function MarriageAstrologyTopic({
               sectionId: landing.inlineTool.afterSectionId,
               node: <LandingInlineTool tool={landing.inlineTool} locale={locale} />,
             },
+          }),
+          // Click-to-load Short inside the article; rendered after any inline tool on the same section.
+          ...(landing.inlineVideo && {
+            afterSections: [{
+              sectionId: landing.inlineVideo.afterSectionId,
+              node: <MarriageYouTubeShort video={landing.inlineVideo} locale={locale} />,
+            }],
           }),
         })}
       />

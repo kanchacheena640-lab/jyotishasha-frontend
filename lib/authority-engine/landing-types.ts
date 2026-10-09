@@ -83,6 +83,27 @@ export interface TopicLandingContextualReport {
 /** Unit rendered inside the article after one content section (an interactive tool or a contextual card). */
 export type TopicLandingInlineTool = TopicLandingSpouseLagnaTool | TopicLandingContextualReport
 
+/**
+ * Optional click-to-load YouTube Short placed inside the article after one content section.
+ * Separate from `video` (which sits beside the report card in the lead): it supports the written
+ * analysis without touching the lead / report CTA. Nothing loads from YouTube until a tap.
+ */
+export interface TopicLandingInlineVideo {
+  /** YouTube video id (embedded via youtube-nocookie.com only after a tap). */
+  youtubeId: string
+  /** Local, self-hosted 9:16 poster (public/ path). */
+  posterSrc: string
+  posterWidth: number
+  posterHeight: number
+  /** Content-section id the video is placed after. */
+  afterSectionId: string
+  heading: LocalizedString
+  description: LocalizedString
+  playLabel: LocalizedString
+  /** WebsiteEvents.featureUsed name fired on the play tap. */
+  playFeatureName: string
+}
+
 /** Optional primary action: a compact card linking to an EXISTING site route (e.g. a free calculator). */
 export interface TopicLandingPrimaryAction {
   eyebrow: LocalizedString
@@ -111,6 +132,8 @@ interface TopicLandingBase {
   longForm?: boolean
   /** Optional unit (interactive tool or contextual report card) placed inside the article after one content section. */
   inlineTool?: TopicLandingInlineTool
+  /** Optional click-to-load YouTube Short placed inside the article after one content section. */
+  inlineVideo?: TopicLandingInlineVideo
 }
 
 /** Report-led landing (the original shape): a paid report card is the conversion unit. */

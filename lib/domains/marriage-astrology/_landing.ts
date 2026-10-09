@@ -83,6 +83,18 @@ export const marriageTimingLanding: TopicLandingConfig = {
 // report card renders on its own. Adding one later is config-only (a `video`
 // block plus `offer.sampleHookLead`).
 export const loveMarriageLanding: TopicLandingConfig = {
+  inlineVideo: {
+    youtubeId: 'WkTFU_-uqGg',
+    posterSrc: '/media/love-marriage-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'intro',
+    heading: { en: 'Watch: Love Marriage Yogas in Your Kundli', hi: 'देखें: कुंडली में प्रेम विवाह के योग' },
+    description: { en: 'A short video (in Hindi) on the chart indications linked with love marriage.', hi: 'प्रेम विवाह से जुड़े कुंडली के संकेतों पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: Love Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में प्रेम विवाह के योग' },
+    playFeatureName: 'love_marriage_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Vedic astrology does not judge love marriage from one placement. An astrologer looks at the 5th house of romance and its lord, the 7th house of marriage and its lord, and whether the two are connected — along with Venus, supporting influences such as Mars, Rahu and Jupiter, the Navamsa (D9) and the running Dasha–Antardasha. When these factors link romance with commitment, the chart indicates support for a love marriage; when they do not, it may suggest a more family-guided path. It shows a tendency, not a certainty — personal choice, family circumstances and real-life factors matter too.',
@@ -143,6 +155,18 @@ export const loveMarriageLanding: TopicLandingConfig = {
 // Report, framed only as a personalised marriage reading (no love-vs-arranged
 // verdict -- the sample does not contain one). No approved video yet.
 export const arrangedMarriageLanding: TopicLandingConfig = {
+  inlineVideo: {
+    youtubeId: '5-7nLtnnpfs',
+    posterSrc: '/media/arranged-marriage-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'what-it-means',
+    heading: { en: 'Watch: Arranged Marriage Yogas in Your Kundli', hi: 'देखें: कुंडली में अरेंज मैरिज के योग' },
+    description: { en: 'A short video (in Hindi) on the chart indications astrologers check for an arranged marriage.', hi: 'अरेंज मैरिज के लिए कुंडली में देखे जाने वाले संकेतों पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: Arranged Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में अरेंज मैरिज के योग' },
+    playFeatureName: 'arranged_marriage_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'No single placement decides whether a marriage will be arranged. An astrologer reads a combination: the 7th house of marriage and its lord, and how they connect with the 2nd house (family), the 9th house (tradition and elders) and the 11th house (wider social and community network); the influence of Jupiter and Venus; the Navamsa (D9) as supporting evidence; and the running Dasha, which can activate these factors without deciding the outcome. When the family-related factors are prominent, the chart tends to support a family-assisted path — and many charts show both arranged and love indications. Personal choice, family circumstances and real-world factors matter too.',
@@ -206,6 +230,18 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
 // signal, 7th house/lord, Saturn/Mars/Rahu-Ketu, current Dasha, what can
 // support the pattern). No timing promise, no Navamsa/transit claims. No video yet.
 export const delayedMarriageLanding: TopicLandingConfig = {
+  inlineVideo: {
+    youtubeId: 'tNHyYsD3x5M',
+    posterSrc: '/media/delayed-marriage-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'intro',
+    heading: { en: 'Watch: Delayed Marriage in Vedic Astrology', hi: 'देखें: कुंडली में शादी में देरी क्यों होती है?' },
+    description: { en: 'A short video (in Hindi) on why marriage can be delayed in a kundli.', hi: 'कुंडली में शादी में देरी के कारणों पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: Delayed Marriage in Vedic Astrology', hi: 'वीडियो चलाएं: कुंडली में शादी में देरी क्यों होती है?' },
+    playFeatureName: 'delayed_marriage_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Astrology does not trace a delay in marriage to one placement. Astrologers read a combination: the condition of the 7th house and its lord; the influence of Saturn, Mars, Rahu and Ketu on them; the strength of Venus and Jupiter; supporting factors such as a combust or retrograde 7th lord; the Navamsa (D9) as supporting evidence; and the running Dasha, which can activate these factors. Together they may indicate a tendency toward slower progress or extra effort — not a fixed outcome, and not that marriage will not happen. Real-world circumstances such as education, career, family and personal choice matter too.',
@@ -270,6 +306,18 @@ export const delayedMarriageLanding: TopicLandingConfig = {
 // a specific person. The bottom report CTA stays the broader Marriage Report, so
 // the dedicated report is offered once. No approved video yet.
 export const spouseNatureLanding: TopicLandingConfig = {
+  inlineVideo: {
+    youtubeId: 'yl9kprGsEZg',
+    posterSrc: '/media/spouse-nature-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'introduction',
+    heading: { en: 'Watch: What Your Kundli Says About Your Life Partner', hi: 'देखें: आपका जीवनसाथी कैसा होगा?' },
+    description: { en: 'A short video (in Hindi) on reading your future spouse\'s nature from the birth chart.', hi: 'जन्मकुंडली से जीवनसाथी के स्वभाव को समझने पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: What Your Kundli Says About Your Life Partner', hi: 'वीडियो चलाएं: आपका जीवनसाथी कैसा होगा?' },
+    playFeatureName: 'spouse_nature_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Vedic astrology does not read a spouse\'s nature from one placement. An astrologer combines the sign on the 7th house and the condition of its lord, the planets placed in or influencing the 7th house, Venus and Jupiter as significators of the partner, the Navamsa (D9) chart for the inner nature of the partnership, and supporting indicators such as the Darakaraka. Together they point to likely tendencies in temperament, communication and relationship style — not a fixed description of one particular person.',
@@ -337,6 +385,18 @@ export const spouseNatureLanding: TopicLandingConfig = {
 // pages already offer the Relationship Future Report, so this page carries no report card of its own
 // (the existing bottom report CTA stays as a secondary option).
 export const compatibilityLanding: ToolLedLandingConfig = {
+  inlineVideo: {
+    youtubeId: '_BEtbbOlCOQ',
+    posterSrc: '/media/compatibility-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'introduction',
+    heading: { en: 'Watch: Why Kundli Matching Matters Before Marriage', hi: 'देखें: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
+    description: { en: 'A short video (in Hindi) on why compatibility is checked before marriage.', hi: 'विवाह से पहले अनुकूलता जाँचने के महत्व पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: Why Kundli Matching Matters Before Marriage', hi: 'वीडियो चलाएं: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
+    playFeatureName: 'compatibility_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Marriage compatibility in Vedic astrology is broader than a single Guna Milan score. Kundli matching usually starts with the Ashtakoota system — 36 gunas, including Nadi, Bhakoot and Graha Maitri — and a Mangal Dosha check, and is then read alongside both full birth charts: the Moon for emotional fit, the 7th house and its lord, Venus and Jupiter, and the Navamsa (D9). A high score does not by itself mean a happy marriage, and a low score is not a verdict on its own.',
@@ -386,6 +446,18 @@ export const compatibilityLanding: ToolLedLandingConfig = {
 // for readers already facing difficulties. Couples comparing two charts get the free /love calculator
 // via the topic's own cross-link.
 export const marriedLifeLanding: TopicLandingConfig = {
+  inlineVideo: {
+    youtubeId: 'KyKc4_EjLoY',
+    posterSrc: '/media/married-life-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'introduction',
+    heading: { en: 'Watch: Married Life in Vedic Astrology', hi: 'देखें: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
+    description: { en: 'A short video (in Hindi) on what the birth chart indicates about life after marriage.', hi: 'विवाह के बाद के जीवन के बारे में कुंडली क्या संकेत देती है, इस पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: Married Life in Vedic Astrology', hi: 'वीडियो चलाएं: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
+    playFeatureName: 'married_life_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Married life astrology does not judge a marriage from one planet or one yoga. An astrologer reads the 7th house and its lord together with the houses linked to family, home, intimacy and shared values (the 2nd, 4th, 8th and 9th), the marital karakas Venus and Jupiter, the Moon for emotional temperament, and the supportive or challenging combinations in the chart — then checks the Navamsa (D9) and the running Dasha. The result describes tendencies: where married life is naturally supported and where it may need more conscious effort. It is not a verdict on whether a marriage will be happy or will last.',
@@ -468,6 +540,18 @@ export const marriedLifeLanding: TopicLandingConfig = {
 // is a contextual card after the love-vs-intercaste comparison, framed as love-marriage tendency only:
 // it does not analyse caste, intercaste indications or family acceptance.
 export const intercasteMarriageLanding: ToolLedLandingConfig = {
+  inlineVideo: {
+    youtubeId: '0Ldyl0oygJQ',
+    posterSrc: '/media/intercaste-marriage-short-poster.webp',
+    posterWidth: 480,
+    posterHeight: 854,
+    afterSectionId: 'what-is-intercaste-marriage',
+    heading: { en: 'Watch: Intercaste Marriage Yogas in Your Kundli', hi: 'देखें: कुंडली में अंतरजातीय विवाह के योग' },
+    description: { en: 'A short video (in Hindi) on the chart indications linked with intercaste marriage.', hi: 'अंतरजातीय विवाह से जुड़े कुंडली के संकेतों पर एक छोटा वीडियो।' },
+    playLabel: { en: 'Play video: Intercaste Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में अंतरजातीय विवाह के योग' },
+    playFeatureName: 'intercaste_marriage_video_play',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Vedic astrology traditionally links certain combinations with marriage outside family or social convention — most often Rahu or Ketu influencing the 7th house or its lord, a strong link between the 5th house of personal choice and the 7th, and a 9th house (tradition) that is less connected to marriage, read again in the Navamsa (D9) and the running Dasha. No single planet or yoga proves an intercaste marriage. A horoscope does not show anyone’s caste and cannot say whether a family will accept a relationship; it describes tendencies, and the choice of partner remains a personal one.',

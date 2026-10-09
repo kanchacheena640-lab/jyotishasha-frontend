@@ -56,8 +56,13 @@ check("lead has a separate no-video branch", lead.includes("{video ? (") && noVi
 check("no-video branch has no figure, facade or sample hook",
   !/<figure|YouTubeShortFacade|SampleHookLink/.test(noVideoBranch));
 check("no-video branch still renders heading, bullets and actions", /\{heading\}/.test(noVideoBranch) && /\{bullets\}/.test(noVideoBranch) && /\{actions/.test(noVideoBranch));
-check("no YouTube id / play event anywhere in the love-marriage config",
-  !/youtube|playFeatureName|video_play/i.test(JSON.stringify(loveMarriageLanding)));
+// MC Shorts: the only video is the approved inline Short after the intro; the lead/offer unit stays video-free.
+const { inlineVideo: loveInlineVideo, ...loveWithoutInlineVideo } = loveMarriageLanding;
+check("no lead video; no YouTube id / play event outside the approved inline Short",
+  loveMarriageLanding.video === undefined && !/youtube|playFeatureName|video_play/i.test(JSON.stringify(loveWithoutInlineVideo)));
+check("inline Short is the approved WkTFU_-uqGg, after the intro section",
+  loveInlineVideo?.youtubeId === "WkTFU_-uqGg" && loveInlineVideo.afterSectionId === "intro" &&
+  loveInlineVideo.playFeatureName === "love_marriage_video_play");
 
 console.log("\n=== D. Copy: EN/HI present, balanced, sample-proven ===");
 for (const loc of ["en", "hi"] as const) {

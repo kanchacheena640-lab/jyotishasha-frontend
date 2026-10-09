@@ -27,10 +27,12 @@ interface LandingSlots {
   longForm?: boolean
   /** Optional node rendered right after the content section with this id (e.g. an inline tool). */
   afterSection?: { sectionId: string; node: ReactNode }
+  /** Optional extra nodes after content sections (e.g. an inline video), rendered after `afterSection`. */
+  afterSections?: { sectionId: string; node: ReactNode }[]
 }
 
 export default function AuthorityDetailRenderer({
-  domain, topic, locale, lead, beforeFaq, ssrFaq, longForm, afterSection,
+  domain, topic, locale, lead, beforeFaq, ssrFaq, longForm, afterSection, afterSections,
 }: AuthorityDetailProps & LandingSlots) {
   const related = getRelatedTopics(domain, topic)
   const hasFaq = topic.sections.some(section => section.layout === 'faq')
@@ -49,6 +51,9 @@ export default function AuthorityDetailRenderer({
               ? <StaticFaqSection section={section} locale={locale} />
               : <SectionRouter section={section} locale={locale} />}
             {afterSection?.sectionId === section.id && afterSection.node}
+            {afterSections?.map((slot, i) =>
+              slot.sectionId === section.id ? <Fragment key={`after-${i}`}>{slot.node}</Fragment> : null
+            )}
           </Fragment>
         ))}
         {!hasFaq && beforeFaq}
