@@ -94,7 +94,10 @@ function LeadOfferUnit({ config, offer, locale }: Props & { offer: TopicLandingO
           className="mb-14 overflow-hidden rounded-3xl border border-rose-500/30 bg-gradient-to-b from-[#1d1530] via-[#151a31] to-[#121a2e] p-4 shadow-xl shadow-black/40 sm:p-6"
         >
           <div className="flex flex-col items-center gap-6 md:flex-row md:items-start md:gap-8">
-            <figure className="w-[240px] flex-none md:w-[290px]">
+            {/* Phones: the report column (price, benefits, buy button) comes first and the video
+                follows it inside this card (order-2); from md up the original two-column layout
+                (video left, report right) is restored. DOM order is unchanged. */}
+            <figure className="order-2 w-[240px] flex-none md:order-none md:w-[290px]">
               <YouTubeShortFacade
                 youtubeId={video.youtubeId}
                 posterSrc={video.posterSrc}
@@ -116,9 +119,9 @@ function LeadOfferUnit({ config, offer, locale }: Props & { offer: TopicLandingO
               )}
             </figure>
 
-            <div className="w-full min-w-0 border-t border-white/10 pt-5 md:border-t-0 md:pt-0">
+            <div className="w-full min-w-0 border-b border-white/10 pb-5 md:border-b-0 md:pb-0">
               {heading}
-              {/* Phones: skip the intro sentence so the CTA stays close to the video (still in the HTML). */}
+              {/* Phones: skip the intro sentence so the CTA stays near the top of the card (still in the HTML). */}
               <p className="mt-2 hidden text-base leading-7 text-gray-300 sm:block">{offer.intro[locale]}</p>
               {bullets}
               {actions && <div className="mt-5">{actions}</div>}

@@ -157,7 +157,7 @@ console.log("5b. Styling aligned with the Marriage Timing lead video");
 // ===========================================================================
 const lead = read("components/authority-engine/landing/TopicLandingLead.tsx");
 check("same poster widths as Marriage Timing: 240px phone, 290px desktop",
-  lead.includes('className="w-[240px] flex-none md:w-[290px]"') && shortCode.includes('className="mx-auto w-[240px] md:w-[290px]"'));
+  /<figure className="[^"]*\bw-\[240px\][^"]*\bmd:w-\[290px\][^"]*">/.test(lead) && shortCode.includes('className="mx-auto w-[240px] md:w-[290px]"'));
 check("same caption style as Marriage Timing",
   lead.includes('<figcaption className="mt-2 text-center text-sm leading-5 text-gray-300">') &&
   shortCode.includes('className="mt-2 text-center text-sm leading-5 text-gray-300"'));
