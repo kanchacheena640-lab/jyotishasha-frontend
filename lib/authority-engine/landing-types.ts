@@ -22,6 +22,11 @@ export interface TopicLandingVideo {
   playLabel: LocalizedString
   /** WebsiteEvents.featureUsed name fired on the play tap. */
   playFeatureName: string
+  /**
+   * Desktop (md+) only: show the buy button right after the report intro and the benefits under it,
+   * so the video column does not push the CTA down. Phones and the markup order are unchanged.
+   */
+  desktopCtaFirst?: boolean
 }
 
 export interface TopicLandingOffer {
@@ -95,8 +100,13 @@ export interface TopicLandingInlineVideo {
   posterSrc: string
   posterWidth: number
   posterHeight: number
-  /** Content-section id the video is placed after. */
-  afterSectionId: string
+  /**
+   * Where the Short card goes: 'after-lead' = directly after the top lead unit (e.g. a free-tool card),
+   * before any article section; 'after-section' (default) = after the content section `afterSectionId`.
+   */
+  placement?: 'after-lead' | 'after-section'
+  /** Content-section id the video is placed after (placement 'after-section'). */
+  afterSectionId?: string
   heading: LocalizedString
   description: LocalizedString
   playLabel: LocalizedString

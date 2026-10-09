@@ -67,15 +67,12 @@ for (const loc of ["en", "hi"] as const) {
   check(`sample PDF exists on disk (${loc})`, fs.existsSync(path.join(root, "public", url)));
 }
 
-console.log("\n=== C. No video ===");
-check("config has no video and no sample-hook lead", arrangedMarriageLanding.video === undefined && offer.sampleHookLead === undefined);
-// MC Shorts: the only video is the approved inline Short after the intro; the lead/offer unit stays video-free.
-const { inlineVideo: arrangedInlineVideo, ...arrangedWithoutInlineVideo } = arrangedMarriageLanding;
-check("no YouTube id / play event outside the approved inline Short",
-  !/youtube|playFeatureName|video_play/i.test(JSON.stringify(arrangedWithoutInlineVideo)));
-check("inline Short is the approved 5-7nLtnnpfs, after the intro section",
-  arrangedInlineVideo?.youtubeId === "5-7nLtnnpfs" && arrangedInlineVideo.afterSectionId === "what-it-means" &&
-  arrangedInlineVideo.playFeatureName === "arranged_marriage_video_play");
+console.log("\n=== C. Video ===");
+// Video placement stage B: the approved Short sits in the top report card; no inline copy in the article.
+check("lead video is the approved 5-7nLtnnpfs (play event, Hindi label, desktop CTA kept high) + sample-hook lead",
+  arrangedMarriageLanding.video?.youtubeId === "5-7nLtnnpfs" && arrangedMarriageLanding.video.playFeatureName === "arranged_marriage_video_play" &&
+  /\(in Hindi\)$/.test(arrangedMarriageLanding.video.caption.en) && arrangedMarriageLanding.video.desktopCtaFirst === true && !!offer.sampleHookLead);
+check("no inline Short (exactly one video on the page)", arrangedMarriageLanding.inlineVideo === undefined);
 
 console.log("\n=== D. SSR accordions: opt-in only ===");
 check("renderer sends accordion sections to StaticFaqSection only when ssrFaq is on",

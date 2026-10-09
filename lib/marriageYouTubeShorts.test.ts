@@ -1,8 +1,12 @@
 // lib/marriageYouTubeShorts.test.ts
 
 /**
- * MC Shorts -- seven approved YouTube Shorts embedded inline on their Marriage topic pages
- * (TopicLandingConfig.inlineVideo -> MarriageYouTubeShort -> YouTubeShortFacade).
+ * MC Shorts -- seven approved YouTube Shorts on their Marriage topic pages, placed in the top
+ * introductory area (video placement stages A/B):
+ *   - report-led pages: the report card's own video slot (TopicLandingConfig.video -> TopicLandingLead),
+ *     like Marriage Timing -- CTA first on phones, CTA kept near its old desktop position (desktopCtaFirst);
+ *   - free-tool pages (no report card): the standalone Short card right after the top tool card
+ *     (inlineVideo placement 'after-lead' -> MarriageYouTubeShort).
  *
  * Same standalone check()/pass-fail-counter convention as every other
  * lib/*.test.ts file in this repo (no test runner installed).
@@ -48,15 +52,6 @@ const APPROVED: Record<string, string> = {
   "married-life": "KyKc4_EjLoY",
 };
 
-/** Top-level content-section ids of a topic file, in page order. */
-function sectionIds(slug: string): string[] {
-  const src = read(`lib/domains/marriage-astrology/topics/${slug}.ts`);
-  const start = src.indexOf("contentBlocks:");
-  const end = src.indexOf("ctas:", start);
-  const body = src.slice(start, end > start ? end : undefined);
-  return [...body.matchAll(/^ {8}id:\s*'([^']+)'/gm)].map((m) => m[1]);
-}
-
 /** Width/height of a lossy (VP8) WebP file. */
 function webpSize(file: string): { w: number; h: number } | null {
   const b = fs.readFileSync(file);
@@ -64,50 +59,72 @@ function webpSize(file: string): { w: number; h: number } | null {
   return { w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff };
 }
 
+/** The page's single Short, whichever slot carries it. */
+type Short = { slot: "lead" | "after-lead"; youtubeId: string; posterSrc: string; posterWidth: number; posterHeight: number;
+  captionEn: string; captionHi: string; playLabel: { en: string; hi: string }; playFeatureName: string };
+function shortOf(slug: string): Short | null {
+  const c = marriageTopicLandings[slug];
+  const v = c.video, iv = c.inlineVideo;
+  if (v) return { slot: "lead", youtubeId: v.youtubeId, posterSrc: v.posterSrc, posterWidth: v.posterWidth, posterHeight: v.posterHeight,
+    captionEn: v.caption.en, captionHi: v.caption.hi, playLabel: v.playLabel, playFeatureName: v.playFeatureName };
+  if (iv) return { slot: "after-lead", youtubeId: iv.youtubeId, posterSrc: iv.posterSrc, posterWidth: iv.posterWidth, posterHeight: iv.posterHeight,
+    captionEn: `${iv.heading.en} ${iv.description.en}`, captionHi: iv.heading.hi, playLabel: iv.playLabel, playFeatureName: iv.playFeatureName };
+  return null;
+}
+const REPORT_LED = ["delayed-marriage", "arranged-marriage", "love-marriage", "spouse-nature", "married-life"];
+const TOOL_LED = ["compatibility", "intercaste-marriage"];
+
 // ===========================================================================
 console.log("1. Mapping: exactly the 7 approved Shorts, one per page");
 // ===========================================================================
-const withInline = Object.entries(marriageTopicLandings).filter(([, c]) => c.inlineVideo);
-check("exactly 7 topics have an inline Short", withInline.length === 7);
-check("they are exactly the 7 approved pages", JSON.stringify(withInline.map(([s]) => s).sort()) === JSON.stringify(Object.keys(APPROVED).sort()));
+const withShort = Object.keys(APPROVED).map((slug) => [slug, shortOf(slug)!] as const);
 for (const [slug, id] of Object.entries(APPROVED)) {
-  check(`${slug} -> ${id}`, marriageTopicLandings[slug]?.inlineVideo?.youtubeId === id);
+  check(`${slug} -> ${id}`, shortOf(slug)?.youtubeId === id);
+  const c = marriageTopicLandings[slug];
+  check(`${slug}: exactly one Short on the page (lead video XOR standalone card)`, !!c.video !== !!c.inlineVideo);
 }
-const ids = withInline.map(([, c]) => c.inlineVideo!.youtubeId);
+const ids = withShort.map(([, v]) => v.youtubeId);
 check("no Short is reused on two pages", new Set(ids).size === ids.length);
-check("none of the 7 also has a lead video (no duplicate video on the page)",
-  withInline.every(([, c]) => c.video === undefined));
+check("no other topic has an inline Short",
+  Object.entries(marriageTopicLandings).filter(([, c]) => c.inlineVideo).every(([slug]) => TOOL_LED.includes(slug)));
 check("marriage-timing keeps only its existing lead video (unchanged), no inline Short",
-  marriageTopicLandings["marriage-timing"].video?.youtubeId === "uJ8DrQmh0nA" && !marriageTopicLandings["marriage-timing"].inlineVideo);
+  marriageTopicLandings["marriage-timing"].video?.youtubeId === "uJ8DrQmh0nA" && !marriageTopicLandings["marriage-timing"].inlineVideo &&
+  marriageTopicLandings["marriage-timing"].video?.desktopCtaFirst === undefined);
 check("YouTube ids are well-formed (11 chars)", ids.every((id) => /^[A-Za-z0-9_-]{11}$/.test(id)));
 
 // ===========================================================================
-console.log("2. Placement: after the first (introductory) content section");
+console.log("2. Placement: top introductory area, before the first article section");
 // ===========================================================================
-for (const [slug] of Object.entries(APPROVED)) {
-  const v = marriageTopicLandings[slug].inlineVideo!;
-  const sections = sectionIds(slug);
-  check(`${slug}: after "${v.afterSectionId}" = first section (${sections[0]}) of ${sections.length}`,
-    sections.length > 3 && sections[0] === v.afterSectionId);
+for (const slug of REPORT_LED) {
+  const c = marriageTopicLandings[slug];
+  check(`${slug}: Short in the top report card's video slot, CTA kept high on desktop (desktopCtaFirst)`,
+    !!c.offer && c.video?.youtubeId === APPROVED[slug] && c.video.desktopCtaFirst === true && c.inlineVideo === undefined);
 }
-check("spouse-nature: video shares the intro slot with the Spouse Lagna tool (tool first, then video)",
-  marriageTopicLandings["spouse-nature"].inlineTool?.afterSectionId === "introduction" &&
-  marriageTopicLandings["spouse-nature"].inlineVideo?.afterSectionId === "introduction");
+for (const slug of TOOL_LED) {
+  const c = marriageTopicLandings[slug];
+  check(`${slug}: free-tool page -> standalone Short card right after the top tool card (no invented report card)`,
+    !c.offer && !!c.primaryAction && c.video === undefined && c.inlineVideo?.placement === "after-lead" && c.inlineVideo.afterSectionId === undefined);
+}
+check("spouse-nature: Spouse Lagna tool stays in the article after the intro", marriageTopicLandings["spouse-nature"].inlineTool?.afterSectionId === "introduction");
 const renderer = read("components/authority-engine/AuthorityDetailRenderer.tsx");
-check("renderer renders afterSection (tool) before afterSections (video) for the same section",
-  renderer.indexOf("afterSection?.sectionId === section.id") < renderer.indexOf("afterSections?.map(") &&
-  renderer.indexOf("afterSections?.map(") > 0);
 const page = read("app/[locale]/marriage-astrology/[slug]/page.tsx");
-check("page wires inlineVideo into afterSections with MarriageYouTubeShort",
-  /landing\.inlineVideo && \{\s*afterSections: \[\{\s*sectionId: landing\.inlineVideo\.afterSectionId,\s*node: \(\s*<MarriageYouTubeShort\s+video=\{landing\.inlineVideo\}\s+locale=\{locale\}/.test(page));
-check("lead (direct answer + report/tool unit) is untouched: still rendered before sections",
+const leadSrc = read("components/authority-engine/landing/TopicLandingLead.tsx");
+check("lead slot (direct answer + report/tool unit + after-lead Short) renders before the article sections",
   renderer.indexOf("{lead}") > 0 && renderer.indexOf("{lead}") < renderer.indexOf("topic.sections.map("));
+check("page renders the after-lead Short card inside the lead slot, right after TopicLandingLead",
+  /<TopicLandingLead config=\{landing\} locale=\{locale\} \/>\s*\{shortCard && landing\.inlineVideo\?\.placement === 'after-lead' && shortCard\}/.test(page));
+check("page builds the Short card from inlineVideo with MarriageYouTubeShort",
+  /const shortCard = landing\?\.inlineVideo && \(\s*<MarriageYouTubeShort\s+video=\{landing\.inlineVideo\}\s+locale=\{locale\}/.test(page));
+check("in-article placement only for placement 'after-section' (no page uses it now)",
+  page.includes("landing.inlineVideo?.placement !== 'after-lead' && landing.inlineVideo?.afterSectionId"));
+check("phones: lead video after the report CTA (order-2); desktop: buy button above the bullets only with desktopCtaFirst",
+  leadSrc.includes('<figure className="order-2 w-[240px] flex-none md:order-none md:w-[290px]">') &&
+  /video\.desktopCtaFirst \? \((?:\s*\/\/[^\n]*)*\s*<>\s*<div className="md:order-2">\{bullets\}<\/div>\s*\{actions && <div className="mt-5 md:order-1">\{actions\}<\/div>\}/.test(leadSrc));
 
 // ===========================================================================
 console.log("3. Self-hosted 9:16 posters");
 // ===========================================================================
-for (const [slug, cfg] of withInline) {
-  const v = cfg.inlineVideo!;
+for (const [slug, v] of withShort) {
   const file = path.join(ROOT, "public", v.posterSrc);
   const size = fs.existsSync(file) ? webpSize(file) : null;
   check(`${slug}: ${v.posterSrc} exists, WebP ${size?.w}x${size?.h} matches config ${v.posterWidth}x${v.posterHeight} (9:16)`,
@@ -116,21 +133,19 @@ for (const [slug, cfg] of withInline) {
 }
 
 // ===========================================================================
-console.log("4. Copy: topic-specific EN/HI headings, labels and play events");
+console.log("4. Copy: topic-specific EN/HI captions, labels and play events");
 // ===========================================================================
-for (const [slug, cfg] of withInline) {
-  const v = cfg.inlineVideo!;
-  check(`${slug}: EN heading "Watch: ...", HI heading "देखें: ..." (Devanagari)`,
-    v.heading.en.startsWith("Watch: ") && v.heading.hi.startsWith("देखें: ") && /[ऀ-ॿ]/.test(v.heading.hi));
-  check(`${slug}: EN description says the video is in Hindi; HI description in Devanagari`,
-    /\(in Hindi\)/.test(v.description.en) && /[ऀ-ॿ]/.test(v.description.hi));
+for (const [slug, v] of withShort) {
+  check(`${slug}: EN caption "Watch: ...", HI caption "देखें: ..." (Devanagari)`,
+    v.captionEn.startsWith("Watch: ") && v.captionHi.startsWith("देखें: ") && /[ऀ-ॿ]/.test(v.captionHi));
+  check(`${slug}: EN caption says the video is in Hindi`, /\(in Hindi\)/.test(v.captionEn));
   check(`${slug}: play labels localized`, v.playLabel.en.startsWith("Play video: ") && v.playLabel.hi.startsWith("वीडियो चलाएं: "));
   check(`${slug}: play event ${v.playFeatureName}`, v.playFeatureName === `${slug.replace("-", "_")}_video_play`);
 }
-const headings = withInline.map(([, c]) => c.inlineVideo!.heading.en);
-check("headings are topic-specific (all different)", new Set(headings).size === 7);
+const captions = withShort.map(([, v]) => v.captionEn);
+check("captions are topic-specific (all different)", new Set(captions).size === 7);
 check("copy invents no duration / date / transcript",
-  !withInline.some(([, c]) => /\d+\s*(sec|second|min|minute)|सेकंड|मिनट|uploaded|transcript/i.test(JSON.stringify(c.inlineVideo))));
+  !withShort.some(([, v]) => /\d+\s*(sec|second|min|minute)|सेकंड|मिनट|uploaded|transcript/i.test(JSON.stringify(v))));
 
 // ===========================================================================
 console.log("5. Performance / privacy: nothing from YouTube before a tap");
@@ -144,7 +159,7 @@ check("iframe uses youtube-nocookie.com; autoplay only after the tap mounts it",
   facade.includes("https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&playsinline=1&rel=0"));
 check("poster box reserves 9:16 (aspect-ratio) -> no layout shift", facade.includes("aspect-[9/16]"));
 check("poster is a local lazy image (no i.ytimg.com request)", facade.includes('loading="lazy"') &&
-  withInline.every(([, c]) => c.inlineVideo!.posterSrc.startsWith("/media/")) && !/ytimg/.test(short + facade));
+  withShort.every(([, v]) => v.posterSrc.startsWith("/media/")) && !/ytimg/.test(short + facade));
 check("MarriageYouTubeShort is a server component (only the facade hydrates)", !/['"]use client['"]/.test(short));
 check("accessible: iframe title + play label passed; aside labelled by its caption",
   short.includes("iframeTitle={video.heading[locale]}") && short.includes("playLabel={video.playLabel[locale]}") &&
@@ -168,19 +183,19 @@ check("same card border / gradient / padding / shadow as the Marriage Timing uni
 // ===========================================================================
 console.log("5c. Sample hook: report-led pages only, verified sample PDFs");
 // ===========================================================================
-const REPORT_LED = ["delayed-marriage", "arranged-marriage", "love-marriage", "spouse-nature", "married-life"];
-for (const [slug, cfg] of withInline) {
-  const offer = (cfg as { offer?: { reportSlug: string } }).offer;
-  const hasLead = !!cfg.inlineVideo!.sampleHookLead;
+for (const [slug] of withShort) {
+  const c = marriageTopicLandings[slug];
   if (REPORT_LED.includes(slug)) {
-    const files = ["en", "hi"].map((l) => path.join(ROOT, "public", "report-samples", `${offer?.reportSlug}_${l}.pdf`));
-    check(`${slug}: sample hook for ${offer?.reportSlug}, EN+HI sample PDFs exist`,
-      hasLead && !!offer && files.every((f) => fs.existsSync(f)));
+    const files = ["en", "hi"].map((l) => path.join(ROOT, "public", "report-samples", `${c.offer?.reportSlug}_${l}.pdf`));
+    check(`${slug}: sample hook under the lead video for ${c.offer?.reportSlug}, EN+HI sample PDFs exist`,
+      !!c.offer?.sampleHookLead && files.every((f) => fs.existsSync(f)));
   } else {
-    check(`${slug}: tool-led page (no report card) -> no sample hook`, !hasLead && !offer);
+    check(`${slug}: tool-led page (no report card) -> no sample hook`, !c.inlineVideo?.sampleHookLead && !c.offer);
   }
 }
-check("page passes the sample only with a report offer + hook text, from the offer's own report",
+check("lead renders the sample hook under the video only with the product + offer hook text",
+  /\{product && offer\.sampleHookLead && \(\s*<SampleHookLink/.test(leadSrc));
+check("standalone card passes a sample only with a report offer + hook text, from the offer's own report",
   /landing\.offer && landing\.inlineVideo\.sampleHookLead && \{\s*sampleHref: getReportSampleUrl\(landing\.offer\.reportSlug, locale\),\s*sampleLabel: getReportSampleLabel\(locale\),/.test(page));
 const hook = read("components/authority-engine/landing/SampleHookLink.tsx");
 check("SampleHookLink: own unit's trigger first (Marriage Timing unchanged), else the page's offer trigger",

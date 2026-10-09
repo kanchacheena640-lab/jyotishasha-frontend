@@ -90,7 +90,9 @@ check("couples get the existing free Kundli Matching calculator (/love) as a cro
   /domain: +'love',\s+slug: +'',/.test(topic) && topic.includes("label:    'Check Compatibility — Free Kundli Matching',") &&
   fs.existsSync(path.join(root, "app/[locale]/love/page.tsx")));
 check("relationship_future_report is not offered on the page", !JSON.stringify(marriedLifeLanding).includes("relationship_future_report") && !topic.includes("relationship_future_report"));
-check("ssrFaq + longForm on, no video", marriedLifeLanding.ssrFaq === true && marriedLifeLanding.longForm === true && marriedLifeLanding.video === undefined);
+check("ssrFaq + longForm on", marriedLifeLanding.ssrFaq === true && marriedLifeLanding.longForm === true);
+check("lead video is the approved Short KyKc4_EjLoY; no inline copy (exactly one video)",
+  marriedLifeLanding.video?.youtubeId === "KyKc4_EjLoY" && marriedLifeLanding.video.desktopCtaFirst === true && marriedLifeLanding.inlineVideo === undefined);
 
 console.log("\n=== E. Page identity and content protected ===");
 check("title / H1 unchanged (EN + HI)",

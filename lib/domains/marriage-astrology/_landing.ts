@@ -83,17 +83,16 @@ export const marriageTimingLanding: TopicLandingConfig = {
 // report card renders on its own. Adding one later is config-only (a `video`
 // block plus `offer.sampleHookLead`).
 export const loveMarriageLanding: TopicLandingConfig = {
-  inlineVideo: {
+  // Short in the top report card (same slot as Marriage Timing): CTA first on phones, video beside it on desktop.
+  video: {
     youtubeId: 'WkTFU_-uqGg',
     posterSrc: '/media/love-marriage-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'intro',
-    heading: { en: 'Watch: Love Marriage Yogas in Your Kundli', hi: 'देखें: कुंडली में प्रेम विवाह के योग' },
-    description: { en: 'A short video (in Hindi) on the chart indications linked with love marriage.', hi: 'प्रेम विवाह से जुड़े कुंडली के संकेतों पर एक छोटा वीडियो।' },
+    caption: { en: 'Watch: Love Marriage Yogas in Your Kundli (in Hindi)', hi: 'देखें: कुंडली में प्रेम विवाह के योग' },
     playLabel: { en: 'Play video: Love Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में प्रेम विवाह के योग' },
     playFeatureName: 'love_marriage_video_play',
-    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
+    desktopCtaFirst: true,
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -130,6 +129,7 @@ export const loveMarriageLanding: TopicLandingConfig = {
       hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
     },
     sampleTitle: { en: 'Love Marriage Report', hi: 'प्रेम विवाह रिपोर्ट' },
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
     reportCtaId: 'love_marriage_report_cta',
     sampleCtaId: 'love_marriage_sample_report',
     screenName: 'love_marriage_topic',
@@ -156,17 +156,17 @@ export const loveMarriageLanding: TopicLandingConfig = {
 // Report, framed only as a personalised marriage reading (no love-vs-arranged
 // verdict -- the sample does not contain one). No approved video yet.
 export const arrangedMarriageLanding: TopicLandingConfig = {
-  inlineVideo: {
+  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
+  // video beside the report on desktop with the CTA kept near its original position.
+  video: {
     youtubeId: '5-7nLtnnpfs',
     posterSrc: '/media/arranged-marriage-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'what-it-means',
-    heading: { en: 'Watch: Arranged Marriage Yogas in Your Kundli', hi: 'देखें: कुंडली में अरेंज मैरिज के योग' },
-    description: { en: 'A short video (in Hindi) on the chart indications astrologers check for an arranged marriage.', hi: 'अरेंज मैरिज के लिए कुंडली में देखे जाने वाले संकेतों पर एक छोटा वीडियो।' },
+    caption: { en: 'Watch: Arranged Marriage Yogas in Your Kundli (in Hindi)', hi: 'देखें: कुंडली में अरेंज मैरिज के योग' },
     playLabel: { en: 'Play video: Arranged Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में अरेंज मैरिज के योग' },
     playFeatureName: 'arranged_marriage_video_play',
-    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
+    desktopCtaFirst: true,
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -203,6 +203,7 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
       hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
     },
     sampleTitle: { en: 'Marriage Report', hi: 'विवाह रिपोर्ट' },
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
     reportCtaId: 'arranged_marriage_report_cta',
     sampleCtaId: 'arranged_marriage_sample_report',
     screenName: 'arranged_marriage_topic',
@@ -232,17 +233,17 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
 // signal, 7th house/lord, Saturn/Mars/Rahu-Ketu, current Dasha, what can
 // support the pattern). No timing promise, no Navamsa/transit claims. No video yet.
 export const delayedMarriageLanding: TopicLandingConfig = {
-  inlineVideo: {
+  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
+  // video beside the report on desktop with the CTA kept near its original position.
+  video: {
     youtubeId: 'tNHyYsD3x5M',
     posterSrc: '/media/delayed-marriage-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'intro',
-    heading: { en: 'Watch: Delayed Marriage in Vedic Astrology', hi: 'देखें: कुंडली में शादी में देरी क्यों होती है?' },
-    description: { en: 'A short video (in Hindi) on why marriage can be delayed in a kundli.', hi: 'कुंडली में शादी में देरी के कारणों पर एक छोटा वीडियो।' },
+    caption: { en: 'Watch: Delayed Marriage in Vedic Astrology (in Hindi)', hi: 'देखें: कुंडली में शादी में देरी क्यों होती है?' },
     playLabel: { en: 'Play video: Delayed Marriage in Vedic Astrology', hi: 'वीडियो चलाएं: कुंडली में शादी में देरी क्यों होती है?' },
     playFeatureName: 'delayed_marriage_video_play',
-    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
+    desktopCtaFirst: true,
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -279,6 +280,7 @@ export const delayedMarriageLanding: TopicLandingConfig = {
       hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
     },
     sampleTitle: { en: 'Delay in Marriage Report', hi: 'विवाह में देरी रिपोर्ट' },
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
     reportCtaId: 'delayed_marriage_report_cta',
     sampleCtaId: 'delayed_marriage_sample_report',
     screenName: 'delayed_marriage_topic',
@@ -309,17 +311,17 @@ export const delayedMarriageLanding: TopicLandingConfig = {
 // a specific person. The bottom report CTA stays the broader Marriage Report, so
 // the dedicated report is offered once. No approved video yet.
 export const spouseNatureLanding: TopicLandingConfig = {
-  inlineVideo: {
+  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
+  // video beside the report on desktop with the CTA kept near its original position.
+  video: {
     youtubeId: 'yl9kprGsEZg',
     posterSrc: '/media/spouse-nature-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'introduction',
-    heading: { en: 'Watch: What Your Kundli Says About Your Life Partner', hi: 'देखें: आपका जीवनसाथी कैसा होगा?' },
-    description: { en: 'A short video (in Hindi) on reading your future spouse\'s nature from the birth chart.', hi: 'जन्मकुंडली से जीवनसाथी के स्वभाव को समझने पर एक छोटा वीडियो।' },
+    caption: { en: 'Watch: What Your Kundli Says About Your Life Partner (in Hindi)', hi: 'देखें: आपका जीवनसाथी कैसा होगा?' },
     playLabel: { en: 'Play video: What Your Kundli Says About Your Life Partner', hi: 'वीडियो चलाएं: आपका जीवनसाथी कैसा होगा?' },
     playFeatureName: 'spouse_nature_video_play',
-    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
+    desktopCtaFirst: true,
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -356,6 +358,7 @@ export const spouseNatureLanding: TopicLandingConfig = {
       hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
     },
     sampleTitle: { en: 'Spouse Nature Report', hi: 'जीवनसाथी स्वभाव रिपोर्ट' },
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
     reportCtaId: 'spouse_nature_report_cta',
     sampleCtaId: 'spouse_nature_sample_report',
     screenName: 'spouse_nature_topic',
@@ -394,7 +397,8 @@ export const compatibilityLanding: ToolLedLandingConfig = {
     posterSrc: '/media/compatibility-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'introduction',
+    // Free-tool page (no report card): the Short card sits right after the top tool card.
+    placement: 'after-lead',
     heading: { en: 'Watch: Why Kundli Matching Matters Before Marriage', hi: 'देखें: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
     description: { en: 'A short video (in Hindi) on why compatibility is checked before marriage.', hi: 'विवाह से पहले अनुकूलता जाँचने के महत्व पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: Why Kundli Matching Matters Before Marriage', hi: 'वीडियो चलाएं: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
@@ -450,17 +454,17 @@ export const compatibilityLanding: ToolLedLandingConfig = {
 // for readers already facing difficulties. Couples comparing two charts get the free /love calculator
 // via the topic's own cross-link.
 export const marriedLifeLanding: TopicLandingConfig = {
-  inlineVideo: {
+  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
+  // video beside the report on desktop with the CTA kept near its original position.
+  video: {
     youtubeId: 'KyKc4_EjLoY',
     posterSrc: '/media/married-life-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'introduction',
-    heading: { en: 'Watch: Married Life in Vedic Astrology', hi: 'देखें: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
-    description: { en: 'A short video (in Hindi) on what the birth chart indicates about life after marriage.', hi: 'विवाह के बाद के जीवन के बारे में कुंडली क्या संकेत देती है, इस पर एक छोटा वीडियो।' },
+    caption: { en: 'Watch: Married Life in Vedic Astrology (in Hindi)', hi: 'देखें: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
     playLabel: { en: 'Play video: Married Life in Vedic Astrology', hi: 'वीडियो चलाएं: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
     playFeatureName: 'married_life_video_play',
-    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
+    desktopCtaFirst: true,
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -497,6 +501,7 @@ export const marriedLifeLanding: TopicLandingConfig = {
       hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
     },
     sampleTitle: { en: 'Marriage Report', hi: 'विवाह रिपोर्ट' },
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
     reportCtaId: 'married_life_report_cta',
     sampleCtaId: 'married_life_sample_report',
     screenName: 'married_life_topic',
@@ -550,7 +555,8 @@ export const intercasteMarriageLanding: ToolLedLandingConfig = {
     posterSrc: '/media/intercaste-marriage-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    afterSectionId: 'what-is-intercaste-marriage',
+    // Free-tool page (no report card): the Short card sits right after the top tool card.
+    placement: 'after-lead',
     heading: { en: 'Watch: Intercaste Marriage Yogas in Your Kundli', hi: 'देखें: कुंडली में अंतरजातीय विवाह के योग' },
     description: { en: 'A short video (in Hindi) on the chart indications linked with intercaste marriage.', hi: 'अंतरजातीय विवाह से जुड़े कुंडली के संकेतों पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: Intercaste Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में अंतरजातीय विवाह के योग' },

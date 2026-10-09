@@ -68,13 +68,11 @@ for (const loc of ["en", "hi"] as const) {
 
 console.log("\n=== C. No video; SSR FAQ + long-form opt-ins ===");
 // MC Shorts: the only video is the approved inline Short after the intro; the lead/offer unit stays video-free.
-const { inlineVideo: delayedInlineVideo, ...delayedWithoutInlineVideo } = delayedMarriageLanding;
-check("no lead video / sample-hook lead; no play event outside the approved inline Short",
-  delayedMarriageLanding.video === undefined && offer.sampleHookLead === undefined &&
-  !/youtube|playFeatureName|video_play/i.test(JSON.stringify(delayedWithoutInlineVideo)));
-check("inline Short is the approved tNHyYsD3x5M, after the intro section",
-  delayedInlineVideo?.youtubeId === "tNHyYsD3x5M" && delayedInlineVideo.afterSectionId === "intro" &&
-  delayedInlineVideo.playFeatureName === "delayed_marriage_video_play");
+// Video placement stage B: the approved Short sits in the top report card; no inline copy in the article.
+check("lead video is the approved tNHyYsD3x5M (play event, Hindi label, desktop CTA kept high) + sample-hook lead",
+  delayedMarriageLanding.video?.youtubeId === "tNHyYsD3x5M" && delayedMarriageLanding.video.playFeatureName === "delayed_marriage_video_play" &&
+  /\(in Hindi\)$/.test(delayedMarriageLanding.video.caption.en) && delayedMarriageLanding.video.desktopCtaFirst === true && !!offer.sampleHookLead);
+check("no inline Short (exactly one video on the page)", delayedMarriageLanding.inlineVideo === undefined);
 check("ssrFaq and longForm enabled", delayedMarriageLanding.ssrFaq === true && delayedMarriageLanding.longForm === true);
 check("topic has no accordion sections (all content already server-rendered)", !/layout:\s*'accordion'/.test(topic));
 

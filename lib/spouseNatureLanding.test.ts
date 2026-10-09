@@ -77,7 +77,8 @@ check("every context-link target topic exists and is not the page itself",
 console.log("\n=== E. Presentation flags ===");
 check("ssrFaq on (FAQ answers + accordion bodies in server HTML)", spouseNatureLanding.ssrFaq === true);
 check("longForm on (text-heavy page)", spouseNatureLanding.longForm === true);
-check("no video configured (none approved)", spouseNatureLanding.video === undefined);
+check("lead video is the approved Short yl9kprGsEZg; no inline copy (exactly one video)",
+  spouseNatureLanding.video?.youtubeId === "yl9kprGsEZg" && spouseNatureLanding.video.desktopCtaFirst === true && spouseNatureLanding.inlineVideo === undefined);
 
 console.log("\n=== F. Existing page identity protected ===");
 check("H1/title unchanged (EN)", topic.includes("title:      'Spouse Nature in Vedic Astrology: Houses & Planets',"));

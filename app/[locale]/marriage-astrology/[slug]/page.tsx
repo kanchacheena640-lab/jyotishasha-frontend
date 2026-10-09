@@ -62,6 +62,18 @@ export default function MarriageAstrologyTopic({
   const faqSchema        = buildMarriageFaqPageSchema(topic!, locale)
   // Opt-in landing presentation (currently marriage-timing only); others unchanged.
   const landing = marriageTopicLandings[params.slug]
+  // Standalone Short card (TopicLandingConfig.inlineVideo); report-led pages use the lead card's own `video` slot.
+  const shortCard = landing?.inlineVideo && (
+    <MarriageYouTubeShort
+      video={landing.inlineVideo}
+      locale={locale}
+      // Sample hook only on report-led pages: the offer's own sample PDF.
+      {...(landing.offer && landing.inlineVideo.sampleHookLead && {
+        sampleHref: getReportSampleUrl(landing.offer.reportSlug, locale),
+        sampleLabel: getReportSampleLabel(locale),
+      })}
+    />
+  )
 
   return (
     <>
@@ -87,7 +99,14 @@ export default function MarriageAstrologyTopic({
         // (native <details>, collapsed by default). A landing config can still set its own ssrFaq.
         ssrFaq={landing?.ssrFaq ?? true}
         {...(landing && {
-          lead: <TopicLandingLead config={landing} locale={locale} />,
+          // A Short with placement 'after-lead' (free-tool pages) sits right after the top lead unit,
+          // before the first article section; report-led pages carry their Short inside the lead card.
+          lead: (
+            <>
+              <TopicLandingLead config={landing} locale={locale} />
+              {shortCard && landing.inlineVideo?.placement === 'after-lead' && shortCard}
+            </>
+          ),
           beforeFaq: <TopicLandingContextLinks config={landing} domain={domain} locale={locale} />,
           longForm: landing.longForm,
           ...(landing.inlineTool && {
@@ -96,22 +115,9 @@ export default function MarriageAstrologyTopic({
               node: <LandingInlineTool tool={landing.inlineTool} locale={locale} />,
             },
           }),
-          // Click-to-load Short inside the article; rendered after any inline tool on the same section.
-          ...(landing.inlineVideo && {
-            afterSections: [{
-              sectionId: landing.inlineVideo.afterSectionId,
-              node: (
-                <MarriageYouTubeShort
-                  video={landing.inlineVideo}
-                  locale={locale}
-                  // Sample hook only on report-led pages: the offer's own sample PDF.
-                  {...(landing.offer && landing.inlineVideo.sampleHookLead && {
-                    sampleHref: getReportSampleUrl(landing.offer.reportSlug, locale),
-                    sampleLabel: getReportSampleLabel(locale),
-                  })}
-                />
-              ),
-            }],
+          // Click-to-load Short inside the article (placement 'after-section'); after any inline tool there.
+          ...(shortCard && landing.inlineVideo?.placement !== 'after-lead' && landing.inlineVideo?.afterSectionId && {
+            afterSections: [{ sectionId: landing.inlineVideo.afterSectionId, node: shortCard }],
           }),
         })}
       />

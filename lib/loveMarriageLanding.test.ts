@@ -48,21 +48,19 @@ for (const loc of ["en", "hi"] as const) {
 }
 check("sample title present EN/HI", offer.sampleTitle.en.length > 0 && offer.sampleTitle.hi.length > 0);
 
-console.log("\n=== C. No video yet: nothing video-related renders ===");
-check("config has no video", loveMarriageLanding.video === undefined);
-check("config has no sample-hook lead (hook only exists beside a video)", offer.sampleHookLead === undefined);
+console.log("\n=== C. Video: the approved Short in the top report card ===");
+check("lead video is the approved WkTFU_-uqGg with its own play event",
+  loveMarriageLanding.video?.youtubeId === "WkTFU_-uqGg" && loveMarriageLanding.video.playFeatureName === "love_marriage_video_play");
+check("sample-hook lead present (rendered under the video)", !!offer.sampleHookLead?.en && !!offer.sampleHookLead?.hi);
 const noVideoBranch = lead.slice(lead.indexOf(") : ("));
 check("lead has a separate no-video branch", lead.includes("{video ? (") && noVideoBranch.length > 0);
 check("no-video branch has no figure, facade or sample hook",
   !/<figure|YouTubeShortFacade|SampleHookLink/.test(noVideoBranch));
 check("no-video branch still renders heading, bullets and actions", /\{heading\}/.test(noVideoBranch) && /\{bullets\}/.test(noVideoBranch) && /\{actions/.test(noVideoBranch));
-// MC Shorts: the only video is the approved inline Short after the intro; the lead/offer unit stays video-free.
-const { inlineVideo: loveInlineVideo, ...loveWithoutInlineVideo } = loveMarriageLanding;
-check("no lead video; no YouTube id / play event outside the approved inline Short",
-  loveMarriageLanding.video === undefined && !/youtube|playFeatureName|video_play/i.test(JSON.stringify(loveWithoutInlineVideo)));
-check("inline Short is the approved WkTFU_-uqGg, after the intro section",
-  loveInlineVideo?.youtubeId === "WkTFU_-uqGg" && loveInlineVideo.afterSectionId === "intro" &&
-  loveInlineVideo.playFeatureName === "love_marriage_video_play");
+// Video placement stage A: the only video is the lead Short (no inline copy inside the article).
+check("no inline Short (exactly one video on the page)", loveMarriageLanding.inlineVideo === undefined);
+check("caption says the video is in Hindi (EN); desktop keeps the CTA near its original position",
+  /\(in Hindi\)$/.test(loveMarriageLanding.video?.caption.en ?? "") && loveMarriageLanding.video?.desktopCtaFirst === true);
 
 console.log("\n=== D. Copy: EN/HI present, balanced, sample-proven ===");
 for (const loc of ["en", "hi"] as const) {

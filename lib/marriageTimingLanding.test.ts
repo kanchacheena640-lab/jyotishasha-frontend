@@ -106,7 +106,8 @@ check("phones: video figure after the report column (order-2), desktop order res
   lead.includes('<figure className="order-2 w-[240px] flex-none md:order-none md:w-[290px]">'));
 check("markup order unchanged (figure still first in the DOM); report column divides from the video on phones only",
   lead.indexOf('<figure className="order-2') > 0 &&
-  lead.indexOf('<figure className="order-2') < lead.indexOf('<div className="w-full min-w-0 border-b border-white/10 pb-5 md:border-b-0 md:pb-0">'));
+  lead.indexOf('<figure className="order-2') < lead.indexOf('<div className={`w-full min-w-0 border-b border-white/10 pb-5 md:border-b-0 md:pb-0${video.desktopCtaFirst ? \' md:flex md:flex-col\' : \'\'}`}>'));
+check("marriage-timing does not opt into desktopCtaFirst (its desktop order is unchanged)", video.desktopCtaFirst === undefined);
 check("desktop two-column layout unchanged (md:flex-row, 290px video column)",
   lead.includes('className="flex flex-col items-center gap-6 md:flex-row md:items-start md:gap-8"') && lead.includes("md:w-[290px]"));
 

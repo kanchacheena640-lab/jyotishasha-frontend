@@ -119,12 +119,23 @@ function LeadOfferUnit({ config, offer, locale }: Props & { offer: TopicLandingO
               )}
             </figure>
 
-            <div className="w-full min-w-0 border-b border-white/10 pb-5 md:border-b-0 md:pb-0">
+            <div className={`w-full min-w-0 border-b border-white/10 pb-5 md:border-b-0 md:pb-0${video.desktopCtaFirst ? ' md:flex md:flex-col' : ''}`}>
               {heading}
               {/* Phones: skip the intro sentence so the CTA stays near the top of the card (still in the HTML). */}
               <p className="mt-2 hidden text-base leading-7 text-gray-300 sm:block">{offer.intro[locale]}</p>
-              {bullets}
-              {actions && <div className="mt-5">{actions}</div>}
+              {video.desktopCtaFirst ? (
+                // Opt-in: from md up the actions sit right after the intro and the benefits follow,
+                // keeping the CTA where it is without the video. Phones and DOM order are unchanged.
+                <>
+                  <div className="md:order-2">{bullets}</div>
+                  {actions && <div className="mt-5 md:order-1">{actions}</div>}
+                </>
+              ) : (
+                <>
+                  {bullets}
+                  {actions && <div className="mt-5">{actions}</div>}
+                </>
+              )}
             </div>
           </div>
         </section>
