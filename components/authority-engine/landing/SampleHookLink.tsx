@@ -18,7 +18,11 @@ interface Props {
 export default function SampleHookLink({ href, lead, label }: Props) {
   const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-    const trigger = event.currentTarget.closest('section')?.querySelector<HTMLAnchorElement>('[data-sample-trigger]')
+    // Inside the offer unit (Marriage Timing): that unit's trigger. Outside it (inline Shorts card):
+    // the page's report-offer trigger, so the same viewer opens and the click is tracked once there.
+    const trigger =
+      event.currentTarget.closest('section')?.querySelector<HTMLAnchorElement>('[data-sample-trigger]') ??
+      document.querySelector<HTMLAnchorElement>('section[aria-labelledby="topic-landing-offer"] [data-sample-trigger]')
     if (!trigger) return
     event.preventDefault()
     trigger.click()

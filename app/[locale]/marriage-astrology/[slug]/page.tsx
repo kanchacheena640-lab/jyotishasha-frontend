@@ -19,6 +19,7 @@ import TopicLandingLead from '@/components/authority-engine/landing/TopicLanding
 import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
 import LandingInlineTool from '@/components/authority-engine/landing/LandingInlineTool'
 import MarriageYouTubeShort from '@/components/authority-engine/landing/MarriageYouTubeShort'
+import { getReportSampleLabel, getReportSampleUrl } from '@/lib/reportSamples'
 import { marriageTopicLandings } from '@/lib/domains/marriage-astrology/_landing'
 import { buildMarriageFaqPageSchema } from '@/lib/domains/marriage-astrology/faqSchema'
 import { buildMarriageArticleSchema } from '@/lib/domains/marriage-astrology/articleSchema'
@@ -99,7 +100,17 @@ export default function MarriageAstrologyTopic({
           ...(landing.inlineVideo && {
             afterSections: [{
               sectionId: landing.inlineVideo.afterSectionId,
-              node: <MarriageYouTubeShort video={landing.inlineVideo} locale={locale} />,
+              node: (
+                <MarriageYouTubeShort
+                  video={landing.inlineVideo}
+                  locale={locale}
+                  // Sample hook only on report-led pages: the offer's own sample PDF.
+                  {...(landing.offer && landing.inlineVideo.sampleHookLead && {
+                    sampleHref: getReportSampleUrl(landing.offer.reportSlug, locale),
+                    sampleLabel: getReportSampleLabel(locale),
+                  })}
+                />
+              ),
             }],
           }),
         })}

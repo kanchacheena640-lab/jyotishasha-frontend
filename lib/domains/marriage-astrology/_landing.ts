@@ -93,6 +93,7 @@ export const loveMarriageLanding: TopicLandingConfig = {
     description: { en: 'A short video (in Hindi) on the chart indications linked with love marriage.', hi: 'प्रेम विवाह से जुड़े कुंडली के संकेतों पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: Love Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में प्रेम विवाह के योग' },
     playFeatureName: 'love_marriage_video_play',
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -165,6 +166,7 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
     description: { en: 'A short video (in Hindi) on the chart indications astrologers check for an arranged marriage.', hi: 'अरेंज मैरिज के लिए कुंडली में देखे जाने वाले संकेतों पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: Arranged Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में अरेंज मैरिज के योग' },
     playFeatureName: 'arranged_marriage_video_play',
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -240,6 +242,7 @@ export const delayedMarriageLanding: TopicLandingConfig = {
     description: { en: 'A short video (in Hindi) on why marriage can be delayed in a kundli.', hi: 'कुंडली में शादी में देरी के कारणों पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: Delayed Marriage in Vedic Astrology', hi: 'वीडियो चलाएं: कुंडली में शादी में देरी क्यों होती है?' },
     playFeatureName: 'delayed_marriage_video_play',
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -316,6 +319,7 @@ export const spouseNatureLanding: TopicLandingConfig = {
     description: { en: 'A short video (in Hindi) on reading your future spouse\'s nature from the birth chart.', hi: 'जन्मकुंडली से जीवनसाथी के स्वभाव को समझने पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: What Your Kundli Says About Your Life Partner', hi: 'वीडियो चलाएं: आपका जीवनसाथी कैसा होगा?' },
     playFeatureName: 'spouse_nature_video_play',
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
@@ -456,6 +460,7 @@ export const marriedLifeLanding: TopicLandingConfig = {
     description: { en: 'A short video (in Hindi) on what the birth chart indicates about life after marriage.', hi: 'विवाह के बाद के जीवन के बारे में कुंडली क्या संकेत देती है, इस पर एक छोटा वीडियो।' },
     playLabel: { en: 'Play video: Married Life in Vedic Astrology', hi: 'वीडियो चलाएं: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
     playFeatureName: 'married_life_video_play',
+    sampleHookLead: { en: 'See what you’ll get', hi: 'रिपोर्ट में क्या मिलेगा?' },
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },

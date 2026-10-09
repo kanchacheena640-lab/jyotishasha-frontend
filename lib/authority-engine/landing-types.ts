@@ -102,6 +102,11 @@ export interface TopicLandingInlineVideo {
   playLabel: LocalizedString
   /** WebsiteEvents.featureUsed name fired on the play tap. */
   playFeatureName: string
+  /**
+   * Optional lead-in for a "see what you'll get" sample link under the video. Rendered only on
+   * report-led pages (the sample is the page offer's own verified sample PDF).
+   */
+  sampleHookLead?: LocalizedString
 }
 
 /** Optional primary action: a compact card linking to an EXISTING site route (e.g. a free calculator). */

@@ -99,7 +99,7 @@ check("renderer renders afterSection (tool) before afterSections (video) for the
   renderer.indexOf("afterSections?.map(") > 0);
 const page = read("app/[locale]/marriage-astrology/[slug]/page.tsx");
 check("page wires inlineVideo into afterSections with MarriageYouTubeShort",
-  /landing\.inlineVideo && \{\s*afterSections: \[\{\s*sectionId: landing\.inlineVideo\.afterSectionId,\s*node: <MarriageYouTubeShort video=\{landing\.inlineVideo\} locale=\{locale\} \/>/.test(page));
+  /landing\.inlineVideo && \{\s*afterSections: \[\{\s*sectionId: landing\.inlineVideo\.afterSectionId,\s*node: \(\s*<MarriageYouTubeShort\s+video=\{landing\.inlineVideo\}\s+locale=\{locale\}/.test(page));
 check("lead (direct answer + report/tool unit) is untouched: still rendered before sections",
   renderer.indexOf("{lead}") > 0 && renderer.indexOf("{lead}") < renderer.indexOf("topic.sections.map("));
 
@@ -146,11 +146,45 @@ check("poster box reserves 9:16 (aspect-ratio) -> no layout shift", facade.inclu
 check("poster is a local lazy image (no i.ytimg.com request)", facade.includes('loading="lazy"') &&
   withInline.every(([, c]) => c.inlineVideo!.posterSrc.startsWith("/media/")) && !/ytimg/.test(short + facade));
 check("MarriageYouTubeShort is a server component (only the facade hydrates)", !/['"]use client['"]/.test(short));
-check("accessible: iframe title + play label passed; aside labelled by its heading",
+check("accessible: iframe title + play label passed; aside labelled by its caption",
   short.includes("iframeTitle={video.heading[locale]}") && short.includes("playLabel={video.playLabel[locale]}") &&
-  short.includes('aria-labelledby="topic-landing-video"') && short.includes('id="topic-landing-video"'));
-check("video heading is an <h3> inside an <aside> (article <h2> outline unchanged)",
-  /<aside[\s\S]*<h3 id="topic-landing-video"/.test(shortCode) && !/<h2[\s>]/.test(shortCode));
+  short.includes('aria-labelledby="topic-landing-video"') && /<figcaption id="topic-landing-video"/.test(shortCode));
+check("no extra heading: caption below the video (article <h2> outline unchanged, no <h3>)",
+  !/<h[1-6][\s>]/.test(shortCode) && shortCode.indexOf("<YouTubeShortFacade") < shortCode.indexOf("<figcaption"));
+
+// ===========================================================================
+console.log("5b. Styling aligned with the Marriage Timing lead video");
+// ===========================================================================
+const lead = read("components/authority-engine/landing/TopicLandingLead.tsx");
+check("same poster widths as Marriage Timing: 240px phone, 290px desktop",
+  lead.includes('className="w-[240px] flex-none md:w-[290px]"') && shortCode.includes('className="mx-auto w-[240px] md:w-[290px]"'));
+check("same caption style as Marriage Timing",
+  lead.includes('<figcaption className="mt-2 text-center text-sm leading-5 text-gray-300">') &&
+  shortCode.includes('className="mt-2 text-center text-sm leading-5 text-gray-300"'));
+const cardClasses = "overflow-hidden rounded-3xl border border-rose-500/30 bg-gradient-to-b from-[#1d1530] via-[#151a31] to-[#121a2e] p-4 shadow-xl shadow-black/40 sm:p-6";
+check("same card border / gradient / padding / shadow as the Marriage Timing unit",
+  lead.includes(cardClasses) && shortCode.includes(cardClasses));
+
+// ===========================================================================
+console.log("5c. Sample hook: report-led pages only, verified sample PDFs");
+// ===========================================================================
+const REPORT_LED = ["delayed-marriage", "arranged-marriage", "love-marriage", "spouse-nature", "married-life"];
+for (const [slug, cfg] of withInline) {
+  const offer = (cfg as { offer?: { reportSlug: string } }).offer;
+  const hasLead = !!cfg.inlineVideo!.sampleHookLead;
+  if (REPORT_LED.includes(slug)) {
+    const files = ["en", "hi"].map((l) => path.join(ROOT, "public", "report-samples", `${offer?.reportSlug}_${l}.pdf`));
+    check(`${slug}: sample hook for ${offer?.reportSlug}, EN+HI sample PDFs exist`,
+      hasLead && !!offer && files.every((f) => fs.existsSync(f)));
+  } else {
+    check(`${slug}: tool-led page (no report card) -> no sample hook`, !hasLead && !offer);
+  }
+}
+check("page passes the sample only with a report offer + hook text, from the offer's own report",
+  /landing\.offer && landing\.inlineVideo\.sampleHookLead && \{\s*sampleHref: getReportSampleUrl\(landing\.offer\.reportSlug, locale\),\s*sampleLabel: getReportSampleLabel\(locale\),/.test(page));
+const hook = read("components/authority-engine/landing/SampleHookLink.tsx");
+check("SampleHookLink: own unit's trigger first (Marriage Timing unchanged), else the page's offer trigger",
+  /closest\('section'\)\?\.querySelector<HTMLAnchorElement>\('\[data-sample-trigger\]'\) \?\?\s*document\.querySelector<HTMLAnchorElement>\('section\[aria-labelledby="topic-landing-offer"\] \[data-sample-trigger\]'\)/.test(hook));
 
 // ===========================================================================
 console.log("6. SEO: no unverifiable VideoObject schema");
