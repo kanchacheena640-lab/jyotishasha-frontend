@@ -114,7 +114,7 @@ export default function PrivacyPolicyPage() {
         please contact us:
         <br />
         <strong>Email:</strong> jraviom@gmail.com <br />
-        <strong>Phone:</strong> +91 7007012255
+        <strong>Phone:</strong> +91 9118877495
       </p>
 
       <p className="text-gray-500 text-sm mt-10">

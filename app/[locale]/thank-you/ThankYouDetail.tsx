@@ -37,7 +37,7 @@ export default function ThankYouDetail({ locale }: { locale: string }) {
            {currentLang === 'hi' ? "कोई सवाल है?" : "Have any questions?"}
         </p>
         <a
-          href="https://wa.me/917007012255"
+          href="https://wa.me/919118877495"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3 text-green-400 hover:text-green-300 font-bold transition-all text-lg"

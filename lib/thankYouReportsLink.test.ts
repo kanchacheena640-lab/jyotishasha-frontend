@@ -147,7 +147,7 @@ for (const [locale, lang, title, subtext] of [
   check(`${lang}: WhatsApp support is unchanged`, () => {
     const wa = render(locale).links.filter(l => /wa\.me/.test(l.href));
     assert.equal(wa.length, 1);
-    assert.equal(wa[0].href, "https://wa.me/917007012255");
+    assert.equal(wa[0].href, "https://wa.me/919118877495");
     assert.equal(wa[0].props.target, "_blank");
     assert.equal(wa[0].props.rel, "noopener noreferrer");
     assert.equal(wa[0].text, lang === "hi" ? "💬सहायता चाहिए? व्हाट्सएप पर चैट करें" : "💬Need help? Chat with us on WhatsApp");

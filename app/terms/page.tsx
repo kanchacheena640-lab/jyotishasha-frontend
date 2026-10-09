@@ -123,7 +123,7 @@ export default function TermsPage() {
         contact us at:
         <br />
         <strong>Email:</strong> support@jyotishasha.com <br />
-        <strong>Phone:</strong> +91 7007012255
+        <strong>Phone:</strong> +91 9118877495
       </p>
     </div>
   );

@@ -72,7 +72,7 @@ export default function LocaleLayout({
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/917007012255"
+        href="https://wa.me/919118877495"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed right-4 z-50 bottom-[88px] md:bottom-4

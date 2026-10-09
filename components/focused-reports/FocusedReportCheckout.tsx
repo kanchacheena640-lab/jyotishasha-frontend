@@ -331,7 +331,7 @@ export default function FocusedReportCheckout({ config, locale }: Props) {
           </div>
           {!isDelayedOnly && (
             <a
-              href="https://wa.me/917007012255"
+              href="https://wa.me/919118877495"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all"
