@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { LOVE_APPROXIMATE_COPY, loveScorePrecision } from "@/lib/loveApproximate";
 
 export default function LoveResultSummaryDetail({ locale }: { locale: string }) {
   const router = useRouter();
@@ -9,6 +10,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
 
   const [summary, setSummary] = useState<any>(null);
   const [tools, setTools] = useState<any>(null);
+  const [payload, setPayload] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,6 +31,12 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
       // Isliye hum summary.data ko set kar rahe hain
       setSummary(parsedSummary.data || parsedSummary);
       setTools(parsedTools);
+      // The submitted birth details -- only used to flag an approximate score if the backend gives no flag.
+      try {
+        setPayload(JSON.parse(sessionStorage.getItem("love_payload") || "null"));
+      } catch {
+        setPayload(null);
+      }
     } catch (e) {
       router.replace(`${isHi ? "/hi" : ""}/love`);
     }
@@ -46,7 +54,10 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
   // Data Extraction with Safety (Matches your Postman structure)
   const ashtakoot = summary.ashtakoot || {};
   const mangal = summary.mangal_dosh || {};
-  
+  // Partner's birth time/place missing -> the score is an estimate; say so beside the score.
+  const precision = loveScorePrecision(summary, payload);
+  const approxCopy = LOVE_APPROXIMATE_COPY[isHi ? "hi" : "en"];
+
   // Tools safety (Marriage & Truth/Dare)
   const marriage = tools.marriage_potential?.data || tools.marriage_potential;
   const truthDare = tools.truth_or_dare?.data || tools.truth_or_dare;
@@ -78,6 +89,12 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
             </div>
             <p className="text-4xl font-black">{ashtakoot.total_score || 0}<span className="text-sm opacity-30">/36</span></p>
           </div>
+          {precision === "approximate" && (
+            <div data-testid="love-score-approximate" className="mt-4 rounded-2xl border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-left">
+              <p className="text-xs font-black uppercase tracking-wider text-amber-300">⚠ {approxCopy.badge}</p>
+              <p className="mt-1 text-sm leading-snug text-amber-100/90">{approxCopy.reason}</p>
+            </div>
+          )}
         </div>
 
         {/* 2. Mangal Dosh Tile */}
