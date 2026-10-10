@@ -86,3 +86,46 @@ export function relationshipPlaceError(
   }
   return null;
 }
+
+// ---------- name / date / time of birth (both people) ----------
+
+export interface BirthDetails {
+  name?: unknown;
+  dob?: unknown;
+  tob?: unknown;
+}
+
+const BIRTH_LABEL = {
+  boy: { en: "boy's", hi: "लड़के का" },
+  girl: { en: "girl's", hi: "लड़की का" },
+} as const;
+
+function isValidDob(dob: unknown, today: Date): boolean {
+  if (typeof dob !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(dob)) return false;
+  const [y, m, d] = dob.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) return false;
+  return y >= 1900 && dt.getTime() <= today.getTime();
+}
+
+const isValidTob = (tob: unknown) => typeof tob === "string" && /^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/.test(tob);
+
+/**
+ * Name, a real past date of birth, and a birth TIME for one person -- the backend needs all three for a
+ * two-person Ashtakoot (without the time a partner's Moon could only be estimated). Null when complete.
+ */
+export function birthDetailsError(person: BirthDetails | null | undefined, side: "boy" | "girl", isHi: boolean, today: Date = new Date()): string | null {
+  const who = BIRTH_LABEL[side];
+  if (typeof person?.name !== "string" || !person.name.trim()) {
+    return isHi ? `कृपया ${who.hi} नाम लिखें।` : `Please enter the ${who.en} name.`;
+  }
+  if (!isValidDob(person.dob, today)) {
+    return isHi ? `कृपया ${who.hi} सही जन्म तिथि चुनें।` : `Please enter the ${who.en} correct date of birth.`;
+  }
+  if (!isValidTob(person.tob)) {
+    return isHi
+      ? `कृपया ${who.hi} जन्म समय डालें। सही गुण मिलान के लिए जन्म समय ज़रूरी है।`
+      : `Please enter the ${who.en} time of birth. Guna Milan needs the birth time to be accurate.`;
+  }
+  return null;
+}

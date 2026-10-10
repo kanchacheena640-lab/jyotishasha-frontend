@@ -12,6 +12,7 @@ import {
   relationshipPlaceError,
   restoreStoredPlace,
   type SelectedPlace,
+  birthDetailsError,
 } from "@/lib/relationshipPlaceValidation";
 
 interface RelationshipFutureReportFormProps {
@@ -118,6 +119,15 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
     const placeError = relationshipPlaceError(form.boy, form.girl, isHi);
     if (placeError) {
       alert(placeError);
+      return;
+    }
+
+    // Names, dates and both birth times are required by the backend order contract
+    // (LOVE_PREMIUM_*_REQUIRED_FIELDS). Check them here so a missing field is named
+    // instead of surfacing later as a generic "Payment failed" (no order is created).
+    const detailsError = birthDetailsError(form.boy, "boy", isHi) || birthDetailsError(form.girl, "girl", isHi);
+    if (detailsError) {
+      alert(detailsError);
       return;
     }
 

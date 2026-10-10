@@ -4,6 +4,15 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
 import { WebsiteEvents } from "@/lib/websiteEvents";
+import { pushMarketingMeasurementEvent } from "@/lib/marketingMeasurementBridge";
+import { applyPlaceSelection, applyPobEdit, type SelectedPlace } from "@/lib/relationshipPlaceValidation";
+import {
+  LOVE_MATCH_MEASURED_PREFIX,
+  loveMatchErrorMessage,
+  loveMatchKey,
+  validateLoveMatchForm,
+  type LoveMatchPerson,
+} from "@/lib/loveMatchForm";
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
 
@@ -11,40 +20,73 @@ interface LoveFormProps {
   locale: string;
 }
 
+/** The exact birth fields the backend receives (the local placeSelected flag stays in the form). */
+const toPayloadPerson = ({ name, dob, tob, pob, lat, lng }: LoveMatchPerson) => ({ name, dob, tob, pob, lat, lng });
+
 export default function LoveFormPage({ locale }: LoveFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const isHi = locale === "hi";
-  
-  const abortControllerRef = useRef<AbortController | null>(null);
 
-  const [form, setForm] = useState({
+  const abortControllerRef = useRef<AbortController | null>(null);
+  // Match keys already measured on this page view (StrictMode / double-click safety; sessionStorage covers reloads).
+  const measuredRef = useRef<Set<string>>(new Set());
+
+  // placeSelected: true only after a real autocomplete suggestion was picked (typed text has no coordinates).
+  const [form, setForm] = useState<{ language: string; boy: LoveMatchPerson; girl: LoveMatchPerson }>({
     language: locale,
-    boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
-    girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0 },
+    boy: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0, placeSelected: false },
+    girl: { name: "", dob: "", tob: "", pob: "", lat: 0, lng: 0, placeSelected: false },
   });
 
   useEffect(() => {
     return () => abortControllerRef.current?.abort();
   }, []);
 
-  const update = (section: "boy" | "girl", field: string, value: any) => {
+  const update = (section: "boy" | "girl", field: "name" | "dob" | "tob", value: string) => {
     setForm((prev) => ({
       ...prev,
       [section]: { ...prev[section], [field]: value },
     }));
   };
 
+  // Birth place: valid only after a suggestion is picked; any manual edit drops the previous coordinates.
+  const selectPlace = (section: "boy" | "girl", place: SelectedPlace) => {
+    setForm((prev) => ({ ...prev, [section]: applyPlaceSelection(prev[section], place) }));
+  };
+  const editPob = (section: "boy" | "girl", value: string) => {
+    setForm((prev) => ({ ...prev, [section]: applyPobEdit(prev[section], value) }));
+  };
+
+  // Ads measurement: one jyotishasha_love_match_success per couple per browser session. Consent is handled the
+  // same way as every other bridge event -- Google Consent Mode decides what GTM's tags may do with it.
+  const measureMatchSuccess = (key: string) => {
+    if (measuredRef.current.has(key)) return;
+    measuredRef.current.add(key);
+    try {
+      const storageKey = LOVE_MATCH_MEASURED_PREFIX + key;
+      if (sessionStorage.getItem(storageKey)) return;
+      sessionStorage.setItem(storageKey, "1");
+    } catch {
+      // Storage unavailable: the in-memory guard above still prevents duplicates on this page view.
+    }
+    pushMarketingMeasurementEvent({ name: "jyotishasha_love_match_success" });
+  };
+
   const submit = async () => {
     if (loading) return;
 
-    abortControllerRef.current?.abort();
-    abortControllerRef.current = new AbortController();
-
-    if (!form.boy.dob || !form.girl.dob || form.boy.lat === 0 || form.girl.lat === 0) {
-      alert(isHi ? "कृपया जन्म तिथि और स्थान सही ढंग से भरें" : "Please fill birth details correctly");
+    // Names, dates, BOTH birth times and selected places are required -- no score from an estimated Moon.
+    const invalid = validateLoveMatchForm(form, isHi);
+    if (invalid) {
+      setError(invalid);
       return;
     }
+    setError(null);
+
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = new AbortController();
 
     // Task 13E -- the meaningful Match Making generation attempt: fires
     // only after required local validation has passed (both DOBs present,
@@ -61,9 +103,12 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
     const payload = {
       language: form.language,
       boy_is_user: true,
-      user: form.boy,
-      partner: form.girl,
+      user: toPayloadPerson(form.boy),
+      partner: toPayloadPerson(form.girl),
     };
+
+    // HTTP status of the main report call, for the error message (stays null if no answer arrived).
+    let reportStatus: number | null = null;
 
     try {
       const fetchOptions = {
@@ -79,6 +124,7 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
         fetch(`${BACKEND}/api/love/love-marriage-probability`, fetchOptions),
       ]);
 
+      reportStatus = reportRes.status;
       if (!reportRes.ok) throw new Error("Primary API failed");
 
       const [reportJson, truthJson, marriageJson] = await Promise.all([
@@ -105,11 +151,12 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
       // -- only the fixed feature identity, mirroring the /tools family's
       // own "featureUsed only after successful generation" rule.
       WebsiteEvents.featureUsed("love_matchmaking_generate");
+      measureMatchSuccess(loveMatchKey(payload));
 
       router.push(`${isHi ? "/hi" : ""}/love/result`);
     } catch (e: any) {
-      if (e.name === 'AbortError') return;
-      alert(isHi ? "सर्वर धीमा है, कृपया पुनः प्रयास करें" : "Server is slow, please try again");
+      if (e?.name === "AbortError") return;
+      setError(loveMatchErrorMessage(reportStatus, isHi));
     } finally {
       setLoading(false);
     }
@@ -125,7 +172,7 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
           {isHi ? "💍 वैदिक मिलान" : "💍 Vedic Matchmaking"}
         </h2>
         <p className="text-gray-400 text-sm">
-          {isHi ? "कुंडली और गुण मिलान" : "Accurate Kundli & Guna Milan"}
+          {isHi ? "कुंडली और 36 गुण मिलान" : "Kundli & 36 Guna Milan"}
         </p>
       </div>
 
@@ -135,10 +182,10 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
           <h2 className="text-lg font-bold text-blue-400">♂ {isHi ? "लड़का" : "Boy's Details"}</h2>
           <div>
             <label className={labelClass}>{isHi ? "पूरा नाम" : "Full Name"}</label>
-            <input 
-              className={inputClass} 
-              value={form.boy.name} 
-              onChange={(e) => update("boy", "name", e.target.value)} 
+            <input
+              className={inputClass}
+              value={form.boy.name}
+              onChange={(e) => update("boy", "name", e.target.value)}
               placeholder={isHi ? "नाम लिखें..." : "Enter name..."}
             />
           </div>
@@ -156,12 +203,8 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
             <label className={labelClass}>{isHi ? "जन्म स्थान" : "Place of Birth"}</label>
             <PlaceAutocompleteInput
               value={form.boy.pob}
-              onChange={(val) => update("boy", "pob", val)}
-              onPlaceSelected={(p) => { 
-                update("boy", "pob", p.name); 
-                update("boy", "lat", p.lat); 
-                update("boy", "lng", p.lng); 
-              }}
+              onChange={(val) => editPob("boy", val)}
+              onPlaceSelected={(p) => selectPlace("boy", p)}
             />
           </div>
         </div>
@@ -171,10 +214,10 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
           <h2 className="text-lg font-bold text-pink-400">♀ {isHi ? "लड़की" : "Girl's Details"}</h2>
           <div>
             <label className={labelClass}>{isHi ? "पूरा नाम" : "Full Name"}</label>
-            <input 
-              className={inputClass} 
-              value={form.girl.name} 
-              onChange={(e) => update("girl", "name", e.target.value)} 
+            <input
+              className={inputClass}
+              value={form.girl.name}
+              onChange={(e) => update("girl", "name", e.target.value)}
               placeholder={isHi ? "नाम लिखें..." : "Enter name..."}
             />
           </div>
@@ -192,18 +235,19 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
             <label className={labelClass}>{isHi ? "जन्म स्थान" : "Place of Birth"}</label>
             <PlaceAutocompleteInput
               value={form.girl.pob}
-              onChange={(val) => update("girl", "pob", val)}
-              onPlaceSelected={(p) => { 
-                update("girl", "pob", p.name); 
-                update("girl", "lat", p.lat); 
-                update("girl", "lng", p.lng); 
-              }}
+              onChange={(val) => editPob("girl", val)}
+              onPlaceSelected={(p) => selectPlace("girl", p)}
             />
           </div>
         </div>
       </div>
 
       <div className="mt-12 max-w-sm mx-auto">
+        {error && (
+          <p role="alert" data-testid="love-form-error" className="mb-4 rounded-xl border border-rose-400/40 bg-rose-500/10 px-4 py-3 text-sm leading-snug text-rose-100">
+            {error}
+          </p>
+        )}
         <button
           onClick={submit}
           disabled={loading}

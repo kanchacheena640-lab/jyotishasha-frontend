@@ -95,8 +95,8 @@ export default function LovePage({ params }: { params: { locale: string } }) {
           </div>
           <p className="mt-8 text-xs text-gray-500 italic border-l-2 border-purple-500/50 pl-4">
             {isHi 
-              ? "कुल 36 गुणों में से मिलान किया जाता है। 18 से अधिक अंक सफल विवाह का संकेत देते हैं।" 
-              : "Calculated out of 36 Gunas. A score above 18 suggests a high probability of a stable marriage."}
+              ? "कुल 36 गुणों में से मिलान किया जाता है। परंपरा में 18 से अधिक गुण स्वीकार्य माने जाते हैं; यह विवाह की सफलता की गारंटी नहीं है।"
+              : "Calculated out of 36 Gunas. Traditionally, a score above 18 is considered acceptable; it is not a prediction or guarantee of how a marriage will go."}
           </p>
         </div>
 
@@ -104,18 +104,18 @@ export default function LovePage({ params }: { params: { locale: string } }) {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="md:col-span-2 rounded-[2.5rem] bg-gradient-to-br from-purple-900/40 to-indigo-900/40 p-8 border border-white/10 flex flex-col justify-center">
              <h2 className="text-3xl font-black mb-4 uppercase italic">
-                {isHi ? "सटीक डेटा, सटीक निर्णय" : "NASA-Grade Precision"}
+                {isHi ? "कैसे गणना होती है" : "How It's Calculated"}
              </h2>
              <p className="text-sm text-purple-100/70 leading-relaxed">
-                {isHi 
-                  ? "हम NASA के JPL प्लैनेटरी डेटा और सूक्ष्म लाहिरी अयनांश का उपयोग करते हैं, जो आपको बाज़ार में उपलब्ध अन्य ऐप्स से कहीं अधिक सटीक परिणाम देता है।" 
-                  : "Using NASA’s JPL planetary data and precise Lahiri Ayanamsa, we offer calculation accuracy unmatched by generic astrology apps."}
+                {isHi
+                  ? "दोनों की चंद्र राशि और नक्षत्र स्विस एफेमेरिस (Swiss Ephemeris) और लाहिरी अयनांश से निकाले जाते हैं, फिर पारंपरिक अष्टकूट नियमों से 36 में से गुण गिने जाते हैं।"
+                  : "Both partners' Moon sign and nakshatra are calculated with the Swiss Ephemeris and Lahiri Ayanamsa, then scored out of 36 using the traditional Ashtakoot rules."}
              </p>
           </div>
           <div className="rounded-[2.5rem] bg-white/5 border border-white/10 p-8 flex items-center justify-center text-center">
             <div className="space-y-2">
               <span className="text-4xl">🔬</span>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Verified by Vedic Experts</p>
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{isHi ? "जन्म समय सहित पूरा विवरण ज़रूरी" : "Needs full birth details incl. time"}</p>
             </div>
           </div>
         </div>

@@ -2,16 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { MANGAL_TONE_CLASS, mangalSignalView } from "@/lib/loveMangalSignal";
 
 export default function MangalDoshDetail({ locale }: { locale: string }) {
   const router = useRouter();
   const [data, setData] = useState<any>(null);
+  const [loaded, setLoaded] = useState(false);
   const [mounted, setMounted] = useState(false); // 🛡️ Server crash se bachane ke liye
   const isHi = locale === "hi";
 
   useEffect(() => {
     setMounted(true); // Pehle confirm karo ki hum browser par hain
-    
+
     const s = sessionStorage.getItem("love_summary");
     if (!s) {
       router.replace(`${isHi ? "/hi" : ""}/love`);
@@ -22,7 +24,8 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
       const parsed = JSON.parse(s);
       // 🔥 Safety Check: API response agar data.data.mangal_dosh mein hai
       const mangalData = parsed?.data?.mangal_dosh || parsed?.mangal_dosh;
-      setData(mangalData);
+      setData(mangalData || null);
+      setLoaded(true);
     } catch (e) {
       router.replace(`${isHi ? "/hi" : ""}/love`);
     }
@@ -31,7 +34,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
   // 🛑 Server-side par render nahi hone dega (No Mismatch Crash)
   if (!mounted) return null;
 
-  if (!data) {
+  if (!loaded) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#0f0a1e]">
         <div className="text-center space-y-4">
@@ -44,22 +47,32 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
     );
   }
 
+  // GREEN / RED / missing -> plain wording (never the raw codes, never an endless spinner).
+  const view = mangalSignalView(data, isHi);
+  const showCharts = view.tone !== "unavailable" && data;
+
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-10 bg-[#0f0a1e] min-h-screen text-white">
-      
+
       {/* 🏁 Header & Signal Section */}
       <div className="text-center space-y-4">
         <h2 className="text-3xl md:text-5xl font-black text-red-500 uppercase">
           🔥 {isHi ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
         </h2>
-        <div className={`inline-block px-8 py-3 rounded-full border-2 font-black tracking-widest ${
-          data?.signal === "GREEN" ? "bg-green-500/10 border-green-500/50 text-green-400" : "bg-red-500/10 border-red-500/50 text-red-400"
-        }`}>
-          {isHi ? "संकेत" : "SIGNAL"}: {data?.signal}
+        <div data-testid="mangal-signal" className={`inline-block px-8 py-3 rounded-full border-2 font-black tracking-widest ${MANGAL_TONE_CLASS[view.tone]}`}>
+          {isHi ? "तुलना" : "Comparison"}: {view.label}
         </div>
+        {view.explanation ? (
+          <p className="max-w-xl mx-auto text-sm leading-relaxed text-gray-300">{view.explanation}</p>
+        ) : (
+          typeof data?.summary === "string" && data.summary && (
+            <p className="max-w-xl mx-auto text-sm leading-relaxed text-gray-300">{data.summary}</p>
+          )
+        )}
       </div>
 
       {/* 📊 Profiles (Boy & Girl) */}
+      {showCharts && (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Boy Card */}
         <div className="bg-white/5 p-8 rounded-[2.5rem] border border-white/10">
@@ -87,6 +100,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
           </ul>
         </div>
       </div>
+      )}
 
       <div className="w-full md:w-auto text-center mt-12">
         <button

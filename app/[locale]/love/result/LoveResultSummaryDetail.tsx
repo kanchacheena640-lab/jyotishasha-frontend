@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LOVE_APPROXIMATE_COPY, loveScorePrecision } from "@/lib/loveApproximate";
+import { MANGAL_TONE_CLASS, mangalSignalView } from "@/lib/loveMangalSignal";
 
 export default function LoveResultSummaryDetail({ locale }: { locale: string }) {
   const router = useRouter();
@@ -53,10 +54,10 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
 
   // Data Extraction with Safety (Matches your Postman structure)
   const ashtakoot = summary.ashtakoot || {};
-  const mangal = summary.mangal_dosh || {};
   // Partner's birth time/place missing -> the score is an estimate; say so beside the score.
   const precision = loveScorePrecision(summary, payload);
   const approxCopy = LOVE_APPROXIMATE_COPY[isHi ? "hi" : "en"];
+  const mangalView = mangalSignalView(summary.mangal_dosh, isHi);
 
   // Tools safety (Marriage & Truth/Dare)
   const marriage = tools.marriage_potential?.data || tools.marriage_potential;
@@ -87,7 +88,8 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
               <h2 className="text-lg font-bold text-indigo-300">🧿 {isHi ? "अष्टकूट" : "Compatibility"}</h2>
               <p className="text-[10px] text-gray-500 font-black tracking-widest uppercase mt-1">{isHi ? "रिपोर्ट देखें →" : "View Report →"}</p>
             </div>
-            <p className="text-4xl font-black">{ashtakoot.total_score || 0}<span className="text-sm opacity-30">/36</span></p>
+            {/* An approximate (estimated-Moon) result never shows a number. */}
+            <p className="text-4xl font-black">{precision === "approximate" ? "—" : (ashtakoot.total_score || 0)}<span className="text-sm opacity-30">/36</span></p>
           </div>
           {precision === "approximate" && (
             <div data-testid="love-score-approximate" className="mt-4 rounded-2xl border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-left">
@@ -104,8 +106,8 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
               <h2 className="text-lg font-bold text-orange-400">🔥 {isHi ? "मंगल दोष" : "Mangal Dosh"}</h2>
               <p className="text-[10px] text-gray-500 font-black tracking-widest uppercase mt-1">{isHi ? "विवरण →" : "Details →"}</p>
             </div>
-            <span className={`px-4 py-1 rounded-xl text-[10px] font-black border ${mangal.signal === "GREEN" ? "bg-green-500/10 text-green-400 border-green-500/30" : "bg-red-500/10 text-red-400 border-red-500/30"}`}>
-              {mangal.signal || "CHECK"}
+            <span className={`px-4 py-1 rounded-xl text-[10px] font-black border ${MANGAL_TONE_CLASS[mangalView.tone]}`}>
+              {mangalView.label}
             </span>
           </div>
         </div>

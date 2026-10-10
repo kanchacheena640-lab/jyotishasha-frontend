@@ -31,6 +31,11 @@
  *   jyotishasha_app_download_intent   { cta_location }
  *   jyotishasha_report_purchase_intent
  *
+ * Added later (Kundli Matching ads sprint), same rules -- no payload beyond {event}:
+ *
+ *   jyotishasha_love_match_success     free /love match calculated and shown
+ *                                      (de-duplicated per couple per browser session by the caller)
+ *
  * No event pushed here is, or is ever claimed to be, a PRIMARY
  * conversion for any destination. Financial conversions
  * (payment_verified, subscription_started) remain entirely backend-
@@ -88,12 +93,14 @@
 export type MarketingMeasurementEvent =
   | { name: "jyotishasha_kundali_generated" }
   | { name: "jyotishasha_app_download_intent"; ctaLocation: string }
-  | { name: "jyotishasha_report_purchase_intent" };
+  | { name: "jyotishasha_report_purchase_intent" }
+  | { name: "jyotishasha_love_match_success" };
 
 const ALLOWED_EVENT_NAMES: ReadonlySet<MarketingMeasurementEvent["name"]> = new Set([
   "jyotishasha_kundali_generated",
   "jyotishasha_app_download_intent",
   "jyotishasha_report_purchase_intent",
+  "jyotishasha_love_match_success",
 ]);
 
 interface DataLayerLike {
