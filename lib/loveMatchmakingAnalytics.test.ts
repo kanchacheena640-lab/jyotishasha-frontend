@@ -124,11 +124,16 @@ check("11: no manual page_path/pagePath construction in this file (reuses the ex
 check("12: WebsiteEvents calls are not individually wrapped in their own try/catch (rely on the existing never-throws guarantee, matching every other call site)",
   !/try\s*\{\s*WebsiteEvents\./.test(src));
 
-// 13. Business logic untouched -- the actual calculation flow (the 3
-// Promise.all API calls, the reportRes.ok gate, sessionStorage keys, and
-// the router.push destination) is structurally unchanged.
-check("13: all three API calls are still present and unchanged (report, truth-or-dare, love-marriage-probability)",
-  src.includes("/api/love/report") && src.includes("/api/love/truth-or-dare") && src.includes("/api/love/love-marriage-probability"));
+// 13. Calculation flow -- the reportRes.ok gate, sessionStorage keys and
+// the router.push destination are unchanged. Speed fix (2026-10): only the
+// main /api/love/report call is awaited here; the two secondary calls
+// (truth-or-dare, love-marriage-probability) moved to lib/loveTools.ts and
+// are started after the report succeeded, so all three are still made.
+const tools = readSource("lib/loveTools.ts");
+check("13: all three API calls are still made -- report awaited in the form, the two secondary calls in lib/loveTools.ts",
+  src.includes("fetch(`${BACKEND}/api/love/report`") &&
+  tools.includes("/api/love/truth-or-dare`") && tools.includes("/api/love/love-marriage-probability`") &&
+  src.indexOf('if (!reportRes.ok) throw new Error("Primary API failed")') < src.indexOf("loadLoveTools(payload, BACKEND)"));
 check("13b: the primary API ok-gate is unchanged", src.includes('if (!reportRes.ok) throw new Error("Primary API failed")'));
 check("13c: all three sessionStorage keys are unchanged", src.includes('"love_payload"') && src.includes('"love_summary"') && src.includes('"love_tools"'));
 check("13d: navigation destination is unchanged (/love/result)", src.includes("/love/result"));

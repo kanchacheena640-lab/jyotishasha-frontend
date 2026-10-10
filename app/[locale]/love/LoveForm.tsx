@@ -13,6 +13,7 @@ import {
   validateLoveMatchForm,
   type LoveMatchPerson,
 } from "@/lib/loveMatchForm";
+import { loadLoveTools, pendingToolsRecord } from "@/lib/loveTools";
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
 
@@ -118,32 +119,28 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
         signal: abortControllerRef.current.signal,
       };
 
-      const [reportRes, truthRes, marriageRes] = await Promise.all([
-        fetch(`${BACKEND}/api/love/report`, fetchOptions),
-        fetch(`${BACKEND}/api/love/truth-or-dare`, fetchOptions),
-        fetch(`${BACKEND}/api/love/love-marriage-probability`, fetchOptions),
-      ]);
+      // Only the main report is awaited: it alone carries the score, verdict and Mangal Dosh. The backend
+      // handles one request at a time, so waiting for all three calls made the visitor wait for their sum.
+      const reportRes = await fetch(`${BACKEND}/api/love/report`, fetchOptions);
 
       reportStatus = reportRes.status;
       if (!reportRes.ok) throw new Error("Primary API failed");
 
-      const [reportJson, truthJson, marriageJson] = await Promise.all([
-        reportRes.json(),
-        truthRes.json(),
-        marriageRes.json(),
-      ]);
+      const reportJson = await reportRes.json();
+      const matchKey = loveMatchKey(payload);
 
       sessionStorage.setItem("love_payload", JSON.stringify(payload));
       sessionStorage.setItem("love_summary", JSON.stringify(reportJson));
-      sessionStorage.setItem("love_tools", JSON.stringify({
-        truth_or_dare: truthJson.data || truthJson,
-        marriage_potential: marriageJson.data || marriageJson,
-      }));
+      // Truth-or-Dare and Marriage potential (/api/love/truth-or-dare, /api/love/love-marriage-probability)
+      // load AFTER the main report, in the background: marked pending here, filled in by lib/loveTools.ts,
+      // which the result page reuses (one load per match; never aborted by this form unmounting).
+      sessionStorage.setItem("love_tools", pendingToolsRecord(matchKey));
+      void loadLoveTools(payload, BACKEND);
 
       // Task 13E -- successful completion ONLY: reached exclusively after
-      // all three API calls resolved without throwing, the primary
-      // report response was confirmed ok, and the usable result was
-      // safely prepared and stored in sessionStorage just above. Never
+      // the primary report response was confirmed ok and the main match
+      // result was safely prepared and stored in sessionStorage just
+      // above (the two secondary tools load afterwards). Never
       // fires from the catch block below, never on a validation/API
       // failure, never on page load or a result-page render. One real
       // submission that truly succeeds produces exactly one feature_used.
@@ -151,7 +148,7 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
       // -- only the fixed feature identity, mirroring the /tools family's
       // own "featureUsed only after successful generation" rule.
       WebsiteEvents.featureUsed("love_matchmaking_generate");
-      measureMatchSuccess(loveMatchKey(payload));
+      measureMatchSuccess(matchKey);
 
       router.push(`${isHi ? "/hi" : ""}/love/result`);
     } catch (e: any) {

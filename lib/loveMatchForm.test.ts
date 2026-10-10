@@ -84,7 +84,7 @@ const iValidate = form.indexOf("validateLoveMatchForm(form, isHi)");
 check("form validates before the attempt event and before any request",
   iValidate > 0 && iValidate < form.indexOf('WebsiteEvents.ctaClick("love_matchmaking_generate"') && iValidate < form.indexOf("fetch(`${BACKEND}/api/love/report`"));
 check("match success measured once, right after the existing featureUsed (success path only)",
-  form.indexOf('WebsiteEvents.featureUsed("love_matchmaking_generate");\n      measureMatchSuccess(loveMatchKey(payload));') > 0 &&
+  form.indexOf('WebsiteEvents.featureUsed("love_matchmaking_generate");\n      measureMatchSuccess(matchKey);') > 0 &&
   (form.match(/pushMarketingMeasurementEvent\(/g) || []).length === 1);
 check("de-duplicated in memory and per browser session", form.includes("measuredRef.current.has(key)") && form.includes("sessionStorage.getItem(storageKey)"));
 check("no 'Server is slow' and no blocking alert() left in the free form", !/Server is slow|सर्वर धीमा/.test(form) && !/\balert\(/.test(form));

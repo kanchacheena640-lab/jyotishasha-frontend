@@ -2,38 +2,51 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { loadLoveTools } from "@/lib/loveTools";
 
 export default function TruthOrDareDetail({ locale }: { locale: string }) {
   const router = useRouter();
   const [data, setData] = useState<any>(null);
+  const [unavailable, setUnavailable] = useState(false);
   const [mounted, setMounted] = useState(false);
   const isHi = locale === "hi";
 
   useEffect(() => {
     setMounted(true);
-    const tools = sessionStorage.getItem("love_tools");
-    if (!tools) {
+    let cancelled = false;
+    let payload: any = null;
+    try {
+      payload = JSON.parse(sessionStorage.getItem("love_payload") || "null");
+    } catch {
+      payload = null;
+    }
+    if (!payload || !sessionStorage.getItem("love_summary")) {
       router.replace(`${isHi ? "/hi" : ""}/love`);
       return;
     }
-
-    try {
-      const parsed = JSON.parse(tools);
-      // 🔥 DYNAMIC MAPPING: Postman JSON structure ke hisab se data dhoondo
-      let td = parsed.truth_or_dare;
-      
-      // Agar API response mein 'data' key nested hai
-      if (td && td.data) {
-        td = td.data;
-      }
-      
-      setData(td);
-    } catch (e) {
-      router.replace(`${isHi ? "/hi" : ""}/love`);
-    }
+    // Loaded after the main result (lib/loveTools.ts): reuses the load in flight, or loads it again after a reload.
+    loadLoveTools(payload).then((state) => {
+      if (cancelled) return;
+      if (state.status === "ready" && state.truthOrDare) setData(state.truthOrDare);
+      else setUnavailable(true);
+    });
+    return () => { cancelled = true; };
   }, [router, locale]);
 
   if (!mounted) return null;
+
+  if (unavailable) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#0f0a1e] px-4">
+        <div className="max-w-md text-center space-y-5 text-white">
+          <p className="text-gray-300">{isHi ? "यह हिस्सा अभी नहीं निकल सका। कृपया थोड़ी देर बाद फिर से देखें।" : "This part couldn't be calculated right now. Please try again in a little while."}</p>
+          <button onClick={() => router.push(`${isHi ? "/hi" : ""}/love/result`)} className="px-6 py-3 rounded-xl bg-white text-rose-900 font-bold">
+            {isHi ? "परिणाम पर वापस जाएँ" : "Back to result"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (!data) {
     return (

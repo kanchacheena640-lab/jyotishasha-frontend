@@ -4,20 +4,22 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LOVE_APPROXIMATE_COPY, loveScorePrecision } from "@/lib/loveApproximate";
 import { MANGAL_TONE_CLASS, mangalSignalView } from "@/lib/loveMangalSignal";
+import { loadLoveTools, type LoveToolsState } from "@/lib/loveTools";
 
 export default function LoveResultSummaryDetail({ locale }: { locale: string }) {
   const router = useRouter();
   const isHi = locale === "hi";
 
   const [summary, setSummary] = useState<any>(null);
-  const [tools, setTools] = useState<any>(null);
+  // Truth-or-Dare + Marriage potential load after the main result (lib/loveTools.ts).
+  const [tools, setTools] = useState<LoveToolsState>({ status: "pending" });
   const [payload, setPayload] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    let cancelled = false;
     const s = sessionStorage.getItem("love_summary");
-    const t = sessionStorage.getItem("love_tools");
 
     if (!s) {
       router.replace(`${isHi ? "/hi" : ""}/love`);
@@ -26,21 +28,28 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
 
     try {
       const parsedSummary = JSON.parse(s);
-      const parsedTools = t ? JSON.parse(t) : {};
 
       // 🔥 POSTMAN FIX: Tumhare JSON mein asli data 'data' key ke andar hai
       // Isliye hum summary.data ko set kar rahe hain
       setSummary(parsedSummary.data || parsedSummary);
-      setTools(parsedTools);
-      // The submitted birth details -- only used to flag an approximate score if the backend gives no flag.
+      // The submitted birth details -- flag an approximate score if the backend gives no flag, and key the
+      // secondary results to this match.
+      let storedPayload: any = null;
       try {
-        setPayload(JSON.parse(sessionStorage.getItem("love_payload") || "null"));
+        storedPayload = JSON.parse(sessionStorage.getItem("love_payload") || "null");
       } catch {
-        setPayload(null);
+        storedPayload = null;
+      }
+      setPayload(storedPayload);
+      if (storedPayload) {
+        loadLoveTools(storedPayload).then((state) => { if (!cancelled) setTools(state); });
+      } else {
+        setTools({ status: "failed" });
       }
     } catch (e) {
       router.replace(`${isHi ? "/hi" : ""}/love`);
     }
+    return () => { cancelled = true; };
   }, [router, locale]);
 
   // 🛡️ Blank Screen Guard
@@ -59,9 +68,11 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
   const approxCopy = LOVE_APPROXIMATE_COPY[isHi ? "hi" : "en"];
   const mangalView = mangalSignalView(summary.mangal_dosh, isHi);
 
-  // Tools safety (Marriage & Truth/Dare)
-  const marriage = tools.marriage_potential?.data || tools.marriage_potential;
-  const truthDare = tools.truth_or_dare?.data || tools.truth_or_dare;
+  // Tools safety (Marriage & Truth/Dare) -- shown as loading / unavailable until (or unless) they arrive.
+  const marriage = tools.status === "ready" ? tools.marriagePotential : null;
+  const truthDare = tools.status === "ready" ? tools.truthOrDare : null;
+  const toolLabel = (ready: boolean, value: string) =>
+    ready ? value : tools.status === "pending" ? (isHi ? "लोड हो रहा है…" : "Loading…") : "—";
 
   const go = (path: string) => router.push(`${isHi ? "/hi" : ""}${path}`);
 
@@ -119,8 +130,8 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
               <h2 className="text-lg font-bold text-rose-400">⚡ {isHi ? "ट्रुथ या डेयर" : "Truth or Dare"}</h2>
               <p className="text-[10px] text-gray-500 font-black tracking-widest uppercase mt-1">{isHi ? "रिस्क चेक →" : "Risk Check →"}</p>
             </div>
-            <span className={`px-4 py-1 rounded-xl text-[10px] font-black border ${truthDare?.verdict === "TRUTH" ? "bg-green-500/10 text-green-400 border-green-500/30" : "bg-red-500/10 text-red-400 border-red-500/30"}`}>
-              {truthDare?.verdict || "PENDING"}
+            <span data-testid="love-tile-truth" className={`px-4 py-1 rounded-xl text-[10px] font-black border ${!truthDare?.verdict ? "bg-white/5 text-gray-300 border-white/20" : truthDare.verdict === "TRUTH" ? "bg-green-500/10 text-green-400 border-green-500/30" : "bg-red-500/10 text-red-400 border-red-500/30"}`}>
+              {toolLabel(!!truthDare?.verdict, truthDare?.verdict)}
             </span>
           </div>
         </div>
@@ -132,7 +143,9 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
               <h2 className="text-lg font-bold text-emerald-400">💍 {isHi ? "विवाह संभावना" : "Marriage"}</h2>
               <p className="text-[10px] text-gray-500 font-black tracking-widest uppercase mt-1">{isHi ? "भविष्य →" : "Future →"}</p>
             </div>
-            <span className="text-2xl font-black text-white">{marriage?.user_result?.pct || 0}%</span>
+            <span data-testid="love-tile-marriage" className={tools.status === "ready" ? "text-2xl font-black text-white" : "text-sm font-bold text-gray-300"}>
+              {toolLabel(typeof marriage?.user_result?.pct === "number", `${marriage?.user_result?.pct}%`)}
+            </span>
           </div>
         </div>
       </div>
