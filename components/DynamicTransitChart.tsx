@@ -88,6 +88,9 @@ export default function DynamicTransitChart({
         }
         /* Target specifically the planet text (usually the 2nd text in a group) */
         svg g text:nth-of-type(2) {
+          /* Pulse around the label itself (SVG default is the chart's top-left corner, which slid it across lines) */
+          transform-box: fill-box;
+          transform-origin: center;
           animation: transitPulse 2.5s infinite ease-in-out;
           fill: #1d4ed8 !important; /* Vivid Blue */
           font-weight: 800 !important;

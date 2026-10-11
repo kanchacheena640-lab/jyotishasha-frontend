@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { CHART_BASE, RASHI_FONT_SIZE, RASHI_NUMBER_POS, layoutHouseLabels } from "@/lib/kundaliChartLayout";
 
 interface PlanetData {
   name?: string;
@@ -44,7 +45,7 @@ const ALT: Record<string, string> = {
   raahu: "rahu",
 };
 
-const BASE = 400;
+const BASE = CHART_BASE;
 const CENTER = BASE / 2;
 
 const toInt = (x: any): number => {
@@ -82,21 +83,6 @@ export default function KundaliChartNorth({ planets, lagnaRashi, size = 400 }: P
 
   const rashis = getRashisByHouse(lagnaRashi);
 
-  const houseCenters: Record<number, { x: number; y: number }> = {
-    1: { x: CENTER, y: 155 },
-    2: { x: CENTER - 100, y: 80 },
-    3: { x: CENTER - 130, y: CENTER - 95 },
-    4: { x: CENTER - 40, y: CENTER },
-    5: { x: CENTER - 130, y: CENTER + 95 },
-    6: { x: CENTER - 100, y: CENTER + 120 },
-    7: { x: CENTER, y: CENTER + 50 },
-    8: { x: CENTER + 100, y: CENTER + 120 },
-    9: { x: CENTER + 130, y: CENTER + 95 },
-    10:{ x: CENTER + 40, y: CENTER },
-    11:{ x: CENTER + 130, y: CENTER - 95 },
-    12:{ x: CENTER + 100, y: 80 },
-  };
-
   return (
     <div className="mx-auto" style={{ width: size, maxWidth: "100%" }}>
       <svg
@@ -121,36 +107,32 @@ export default function KundaliChartNorth({ planets, lagnaRashi, size = 400 }: P
         <line x1={CENTER} y1={BASE} x2={BASE} y2={CENTER} stroke="black" strokeWidth={1.5} />
         <line x1={BASE} y1={CENTER} x2={CENTER} y2="0" stroke="black" strokeWidth={1.5} />
 
-        {/* Houses */}
-        {Object.entries(houseCenters).map(([k, pos]) => {
+        {/* Houses: rashi number at its fixed spot, planets in the house's own label area (lib/kundaliChartLayout.ts) */}
+        {Object.entries(RASHI_NUMBER_POS).map(([k, pos]) => {
           const house = parseInt(k, 10);
           const rashi = rashis[house - 1];
           const hp = byHouse[house] || [];
-
-          let shiftX = 0, shiftY = 0;
-          if ([1, 2, 12].includes(house)) shiftY = -28;
-          else if ([3, 4, 5].includes(house)) shiftX = -30;
-          else if ([6, 7, 8].includes(house)) shiftY = 30;
-          else if ([9, 10, 11].includes(house)) shiftX = 30;
+          const { fontSize, slots } = layoutHouseLabels(house, hp.length);
 
           return (
             <g key={house}>
-              <text x={pos.x} y={pos.y} fontSize="14" fill="black" textAnchor="middle" dominantBaseline="middle">
+              <text x={pos.x} y={pos.y} fontSize={RASHI_FONT_SIZE} fill="black" textAnchor="middle" dominantBaseline="middle">
                 {rashi}
               </text>
-              {hp.length > 0 && (
+              {hp.map((abbr, i) => (
                 <text
-                  x={pos.x + shiftX}
-                  y={pos.y + shiftY}
-                  fontSize="12"
+                  key={i}
+                  x={slots[i].x}
+                  y={slots[i].y}
+                  fontSize={fontSize}
                   fill="black"
                   textAnchor="middle"
                   dominantBaseline="middle"
                   style={{ fontWeight: 600 }}
                 >
-                  {hp.join(", ")}
+                  {abbr}
                 </text>
-              )}
+              ))}
             </g>
           );
         })}
