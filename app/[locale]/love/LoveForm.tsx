@@ -135,7 +135,6 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
       // load AFTER the main report, in the background: marked pending here, filled in by lib/loveTools.ts,
       // which the result page reuses (one load per match; never aborted by this form unmounting).
       sessionStorage.setItem("love_tools", pendingToolsRecord(matchKey));
-      void loadLoveTools(payload, BACKEND);
 
       // Task 13E -- successful completion ONLY: reached exclusively after
       // the primary report response was confirmed ok and the main match
@@ -147,8 +146,11 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
       // No birth data, no API response, no calculated/compatibility data
       // -- only the fixed feature identity, mirroring the /tools family's
       // own "featureUsed only after successful generation" rule.
+      // Sent BEFORE the background load: the backend handles one request at a time, and queued behind the two
+      // slow secondary calls this small request hit the analytics client's 3s timeout.
       WebsiteEvents.featureUsed("love_matchmaking_generate");
       measureMatchSuccess(matchKey);
+      void loadLoveTools(payload, BACKEND);
 
       router.push(`${isHi ? "/hi" : ""}/love/result`);
     } catch (e: any) {
