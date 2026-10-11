@@ -87,7 +87,7 @@ export default function DynamicTransitChart({
           100% { opacity: 1; filter: drop-shadow(0 0 2px #3b82f6); transform: scale(1); }
         }
         /* Target specifically the planet text (usually the 2nd text in a group) */
-        svg g text:nth-of-type(2) {
+        svg[aria-label="Kundali North Chart"] g text:nth-of-type(2) {
           /* Pulse around the label itself (SVG default is the chart's top-left corner, which slid it across lines) */
           transform-box: fill-box;
           transform-origin: center;

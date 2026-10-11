@@ -90,7 +90,7 @@ export default function KundaliChartNorth({ planets, lagnaRashi, size = 400 }: P
         width={size}
         height={size}
         preserveAspectRatio="xMidYMid meet"
-        className="h-auto"
+        className="w-full h-auto"
         role="img"
         aria-label="Kundali North Chart"
       >
