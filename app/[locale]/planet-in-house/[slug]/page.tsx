@@ -6,6 +6,7 @@ import {
   getAllPlanetInHouseSlugs,
   type PlanetInHouseData,
 } from "@/lib/planetInHouse";
+import { resolvePlanetInHouseCta } from "@/lib/planetInHouse/ctaDestinations";
 import {
   DEFAULT_OG_IMAGE,
   SITE_URL,
@@ -142,6 +143,9 @@ export default function PlanetInHousePage({
   const relatedOtherPlanets = data.related.otherPlanetsInSameHouse
     .map((s) => getPlanetInHouseContent(s))
     .filter((d): d is PlanetInHouseData => d !== null);
+
+  /* ---------- CTA (destination + copy from the central mapping) ---------- */
+  const cta = resolvePlanetInHouseCta(data, isHi ? "hi" : "en");
 
   return (
     <div className="bg-gradient-to-b from-indigo-950 to-slate-900 py-6 md:py-16 min-h-screen">
@@ -384,19 +388,19 @@ export default function PlanetInHousePage({
         )}
 
         {/* CTA */}
-        {data.cta && (
+        {cta && (
           <section className="mb-10 bg-indigo-900 text-white rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-3">
-              {t(data.cta.title, data.cta.title_hi)}
+              {cta.title}
             </h2>
             <p className="text-indigo-100 mb-4 leading-relaxed">
-              {t(data.cta.description, data.cta.description_hi)}
+              {cta.description}
             </p>
             <Link
-              href={`/reports/${data.cta.reportSlug}`}
+              href={cta.href}
               className="inline-block px-6 py-3 rounded-full bg-white text-indigo-900 font-bold text-sm hover:bg-indigo-50 transition"
             >
-              {t("Get Your Report", "रिपोर्ट प्राप्त करें")} →
+              {cta.label} →
             </Link>
           </section>
         )}
