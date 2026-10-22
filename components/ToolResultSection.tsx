@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation';
 import { replaceIsoDates } from '@/utils/dateReplacer';
 import Link from 'next/link';
 import { reportsData } from '@/app/data/reportsData';
+import YogaReportCta from '@/components/YogaReportCta';
 
 // Marriage Path result -> paid continuation: the existing Marriage Report (route + price from the catalogue).
 const MARRIAGE_PATH_REPORT = reportsData.find((r) => r.slug === 'marriage_report');
@@ -196,6 +197,8 @@ export default function ToolResult({ result, kundaliData }: Props) {
   // Route locale (rendered under /tools and /hi/tools) -- only used to keep free tool links in-locale.
   const routeParams = useParams();
   const localePrefix = routeParams?.locale === 'hi' ? '/hi' : '';
+  // Report CTA copy follows the route locale, like the Marriage Path CTA below.
+  const ctaLocale: 'en' | 'hi' = localePrefix === '/hi' ? 'hi' : 'en';
 
   function pickText(v?: string | { en: string; hi: string }): string {
   if (!v) return '';
@@ -491,42 +494,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell with Dropdown */}
-          {Array.isArray(kundaliData.parashari_rajyog.upsell?.products) && kundaliData.parashari_rajyog.upsell!.products.length > 0 && (
-            <details className="rounded border border-pink-300 bg-pink-50 p-4">
-              <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                {kundaliData.parashari_rajyog.upsell!.products[0].title[lang]}
-              </summary>
-
-              <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                {/* First product bullets */}
-                {Array.isArray(kundaliData.parashari_rajyog.upsell!.products[0].dropdown?.[lang]) && (
-                  <ul className="list-disc pl-5 text-sm text-gray-700">
-                    {kundaliData.parashari_rajyog.upsell!.products[0].dropdown![lang].map((tip, i) => (
-                      <li key={i}>{tip}</li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* First product CTA */}
-                <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                  {kundaliData.parashari_rajyog.upsell!.products[0].cta[lang]}
-                </button>
-
-                {/* Second product (if exists) */}
-                {kundaliData.parashari_rajyog.upsell!.products[1] && (
-                  <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                    <p className="font-medium text-gray-800">
-                      {kundaliData.parashari_rajyog.upsell!.products[1].title[lang]}
-                    </p>
-                    <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                      {kundaliData.parashari_rajyog.upsell!.products[1].cta[lang]}
-                    </button>
-                  </div>
-                )}
-              </div>
-            </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="parashari_rajyog" yoga={kundaliData.parashari_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* 👇 Neechbhang Rajyog UI Block starts here*/}
@@ -586,43 +555,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Products */}
-          {Array.isArray(kundaliData.neechbhang_rajyog.upsell?.products) &&
-            kundaliData.neechbhang_rajyog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.neechbhang_rajyog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* First dropdown list */}
-                  {pickList(kundaliData.neechbhang_rajyog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.neechbhang_rajyog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA button */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.neechbhang_rajyog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Second upsell (if exists) */}
-                  {kundaliData.neechbhang_rajyog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.neechbhang_rajyog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.neechbhang_rajyog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="neechbhang_rajyog" yoga={kundaliData.neechbhang_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* 👆 Neechbhang Rajyog UI Block starts here*/}
@@ -683,43 +617,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.gajakesari_yog.upsell?.products) &&
-            kundaliData.gajakesari_yog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.gajakesari_yog.upsell.products[0].title ?? '')}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown list */}
-                  {pickList(kundaliData.gajakesari_yog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.gajakesari_yog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.gajakesari_yog.upsell.products[0].cta ?? '')}
-                  </button>
-
-                  {/* Optional Second Product */}
-                  {kundaliData.gajakesari_yog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.gajakesari_yog.upsell.products[1].title ?? '')}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.gajakesari_yog.upsell.products[1].cta ?? '')}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="gajakesari_yog" yoga={kundaliData.gajakesari_yog} locale={ctaLocale} />
         </div>
       )}
       {/* 🐘 Gajakesari Yog UI Block Finish */}
@@ -775,38 +674,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {Array.isArray(kundaliData.panch_mahapurush_yog.upsell?.products) &&
-            kundaliData.panch_mahapurush_yog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.panch_mahapurush_yog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {pickList(kundaliData.panch_mahapurush_yog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.panch_mahapurush_yog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.panch_mahapurush_yog.upsell.products[0].cta)}
-                  </button>
-
-                  {kundaliData.panch_mahapurush_yog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.panch_mahapurush_yog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.panch_mahapurush_yog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="panch_mahapurush_yog" yoga={kundaliData.panch_mahapurush_yog} locale={ctaLocale} />
         </div>
       )}
       {/* 🧘 Panch Mahapurush Rajyog UI Block END */}
@@ -867,43 +736,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.chandra_mangal_yog.upsell?.products) &&
-            kundaliData.chandra_mangal_yog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.chandra_mangal_yog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown list */}
-                  {pickList(kundaliData.chandra_mangal_yog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.chandra_mangal_yog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.chandra_mangal_yog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Optional Second Product */}
-                  {kundaliData.chandra_mangal_yog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.chandra_mangal_yog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.chandra_mangal_yog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="chandra_mangal_yog" yoga={kundaliData.chandra_mangal_yog} locale={ctaLocale} />
         </div>
       )}
                 {/* 🌙🔥 Chandra-Mangal Yog UI Block Finish*/}
@@ -964,40 +798,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.dhan_yog.upsell?.products) &&
-            kundaliData.dhan_yog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.dhan_yog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {pickList(kundaliData.dhan_yog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.dhan_yog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.dhan_yog.upsell.products[0].cta)}
-                  </button>
-
-                  {kundaliData.dhan_yog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.dhan_yog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.dhan_yog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="dhan_yog" yoga={kundaliData.dhan_yog} locale={ctaLocale} />
         </div>
       )}
       {/* 💰 Dhan Yog UI Block END */}
@@ -1058,40 +860,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.rajya_sambandh_rajyog.upsell?.products) &&
-            kundaliData.rajya_sambandh_rajyog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.rajya_sambandh_rajyog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {pickList(kundaliData.rajya_sambandh_rajyog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.rajya_sambandh_rajyog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.rajya_sambandh_rajyog.upsell.products[0].cta)}
-                  </button>
-
-                  {kundaliData.rajya_sambandh_rajyog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.rajya_sambandh_rajyog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.rajya_sambandh_rajyog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="rajya_sambandh_rajyog" yoga={kundaliData.rajya_sambandh_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* 🏛️ Rajya Sambandh Rajyog UI Block END */}
@@ -1152,40 +922,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.dharma_karmadhipati_rajyog.upsell?.products) &&
-            kundaliData.dharma_karmadhipati_rajyog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.dharma_karmadhipati_rajyog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {pickList(kundaliData.dharma_karmadhipati_rajyog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.dharma_karmadhipati_rajyog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.dharma_karmadhipati_rajyog.upsell.products[0].cta)}
-                  </button>
-
-                  {kundaliData.dharma_karmadhipati_rajyog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.dharma_karmadhipati_rajyog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.dharma_karmadhipati_rajyog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="dharma_karmadhipati_rajyog" yoga={kundaliData.dharma_karmadhipati_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* 🪔 Dharma-Karmadhipati Rajyog UI Block END */}
@@ -1246,43 +984,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell */}
-          {Array.isArray(kundaliData.vipreet_rajyog.upsell?.products) &&
-            kundaliData.vipreet_rajyog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.vipreet_rajyog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown */}
-                  {pickList(kundaliData.vipreet_rajyog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.vipreet_rajyog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.vipreet_rajyog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Optional Second CTA */}
-                  {kundaliData.vipreet_rajyog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.vipreet_rajyog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.vipreet_rajyog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="vipreet_rajyog" yoga={kundaliData.vipreet_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* ⚡ Vipreet Rajyog UI Block Finish*/}
@@ -1343,43 +1046,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.lakshmi_yog.upsell?.products) &&
-            kundaliData.lakshmi_yog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.lakshmi_yog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown list */}
-                  {pickList(kundaliData.lakshmi_yog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.lakshmi_yog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.lakshmi_yog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Optional Second Product */}
-                  {kundaliData.lakshmi_yog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.lakshmi_yog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.lakshmi_yog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="lakshmi_yog" yoga={kundaliData.lakshmi_yog} locale={ctaLocale} />
         </div>
       )}
       {/* 💰 Lakshmi Yog UI Block Finish */}
@@ -1440,43 +1108,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.shubh_kartari_yog.upsell?.products) &&
-            kundaliData.shubh_kartari_yog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.shubh_kartari_yog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown list */}
-                  {pickList(kundaliData.shubh_kartari_yog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.shubh_kartari_yog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.shubh_kartari_yog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Optional Second Product */}
-                  {kundaliData.shubh_kartari_yog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.shubh_kartari_yog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.shubh_kartari_yog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="shubh_kartari_yog" yoga={kundaliData.shubh_kartari_yog} locale={ctaLocale} />
         </div>
       )}
         {/* 🌿 Shubh Kartari Yog UI Block Finish*/}
@@ -1536,43 +1169,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.adhi_rajyog.upsell?.products) &&
-            kundaliData.adhi_rajyog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.adhi_rajyog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown list */}
-                  {pickList(kundaliData.adhi_rajyog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.adhi_rajyog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.adhi_rajyog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Optional Second Product */}
-                  {kundaliData.adhi_rajyog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.adhi_rajyog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.adhi_rajyog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="adhi_rajyog" yoga={kundaliData.adhi_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* 💰 Kuber Rajyog UI Block */}
@@ -1631,43 +1229,8 @@ type PhaseKey = typeof keys[number];
             </div>
           )}
 
-          {/* Upsell Block */}
-          {Array.isArray(kundaliData.kuber_rajyog.upsell?.products) &&
-            kundaliData.kuber_rajyog.upsell.products.length > 0 && (
-              <details className="rounded border border-pink-300 bg-pink-50 p-4">
-                <summary className="cursor-pointer font-medium text-gray-800 list-none">
-                  {pickText(kundaliData.kuber_rajyog.upsell.products[0].title)}
-                </summary>
-
-                <div className="mt-3 space-y-2 pl-2 border-l-2 border-pink-400 ml-2">
-                  {/* Dropdown list */}
-                  {pickList(kundaliData.kuber_rajyog.upsell.products[0].dropdown).length > 0 && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700">
-                      {pickList(kundaliData.kuber_rajyog.upsell.products[0].dropdown).map((tip, i) => (
-                        <li key={i}>{tip}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* First CTA */}
-                  <button className="mt-2 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                    {pickText(kundaliData.kuber_rajyog.upsell.products[0].cta)}
-                  </button>
-
-                  {/* Optional Second Product */}
-                  {kundaliData.kuber_rajyog.upsell.products[1] && (
-                    <div className="mt-4 p-4 border border-pink-200 rounded-md bg-white space-y-2">
-                      <p className="font-medium text-gray-800">
-                        {pickText(kundaliData.kuber_rajyog.upsell.products[1].title)}
-                      </p>
-                      <button className="mt-1 px-4 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700">
-                        {pickText(kundaliData.kuber_rajyog.upsell.products[1].cta)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </details>
-          )}
+          {/* Report CTA -- shown only when this yoga is active (lib/yogaReportCta.ts) */}
+          <YogaReportCta yogaKey="kuber_rajyog" yoga={kundaliData.kuber_rajyog} locale={ctaLocale} />
         </div>
       )}
       {/* 💰 Kuber Rajyog UI Block Finish */}
