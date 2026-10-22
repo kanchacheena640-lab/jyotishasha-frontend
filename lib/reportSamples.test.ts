@@ -22,6 +22,7 @@ import * as ts from "typescript";
 import { reportsData } from "../app/data/reportsData";
 import { intentQuestions } from "../app/data/intentCatalog";
 import * as samples from "./reportSamples";
+import * as checkoutUx from "./checkoutUx";
 import { focusedReportHasSample, getFocusedReportSampleOrPreviewHref, GENERIC_EXAMPLE_PREVIEW_PATH } from "../app/data/focusedReportsConfig";
 
 const repo = process.cwd();
@@ -157,6 +158,11 @@ function anchors(tree: any): any[] {
   walk(tree, el => { if (el.type === "a") found.push(el); });
   return found;
 }
+// R2-D2 -- ReportContent also renders ONE primary purchase CTA (an in-page
+// "#report-checkout" anchor). Sample-link checks only consider sample PDFs.
+function sampleAnchors(tree: any): any[] {
+  return anchors(tree).filter(a => String(a.props.href).startsWith("/report-samples/"));
+}
 function assertSecondarySampleAnchor(a: any, expectedHref: string, expectedLabel: string) {
   assert.equal(a.props.href, expectedHref);
   assert.equal(a.props.target, "_blank");
@@ -175,21 +181,33 @@ function renderReportContent(slug: string, language: string) {
     "react/jsx-runtime": jsxRuntime,
     "react-i18next": { useTranslation: () => ({ i18n: { language } }) },
     "@/lib/reportSamples": samples,
+    "@/lib/checkoutUx": checkoutUx,
   });
   const report = { slug, title: { en: "Career Report", hi: "करियर रिपोर्ट" }, fullDescription: { en: "d", hi: "d" }, price: 51 };
   return ReportContent({ report, seo });
 }
 for (const [language, lang, label] of [["en", "en", EN_LABEL], ["hi", "hi", HI_LABEL], ["hi-IN", "hi", HI_LABEL], ["fr", "en", EN_LABEL]] as const) {
   check(`standard page language ${language}: exactly one sample link -> career_report_${lang}.pdf`, () => {
-    const found = anchors(renderReportContent("career_report", language));
+    const found = sampleAnchors(renderReportContent("career_report", language));
     assert.equal(found.length, 1);
     assertSecondarySampleAnchor(found[0], `/report-samples/career_report_${lang}.pdf`, label);
   });
 }
+check("standard page: exactly two links -- the sample PDF plus ONE in-page purchase CTA to #report-checkout", () => {
+  for (const language of ["en", "hi"]) {
+    const all = anchors(renderReportContent("career_report", language));
+    const purchase = all.filter(a => !String(a.props.href).startsWith("/report-samples/"));
+    assert.equal(all.length, 2);
+    assert.equal(purchase.length, 1);
+    assert.equal(purchase[0].props.href, "#report-checkout");
+    assert.ok(!("target" in purchase[0].props), "purchase CTA stays on the page");
+    assert.ok(textOf(purchase[0].props.children).includes("₹51"), "purchase CTA shows the report price");
+  }
+});
 check("the standard link follows the report slug for all 25 standard products", () => {
   for (const report of reportsData.filter(r => r.slug !== "relationship_future_report")) {
-    assert.equal(anchors(renderReportContent(report.slug, "en"))[0].props.href, `/report-samples/${report.slug}_en.pdf`);
-    assert.equal(anchors(renderReportContent(report.slug, "hi"))[0].props.href, `/report-samples/${report.slug}_hi.pdf`);
+    assert.equal(sampleAnchors(renderReportContent(report.slug, "en"))[0].props.href, `/report-samples/${report.slug}_en.pdf`);
+    assert.equal(sampleAnchors(renderReportContent(report.slug, "hi"))[0].props.href, `/report-samples/${report.slug}_hi.pdf`);
   }
 });
 check("standard CTA sits after Price/Format/Language/Delivery and before 'This Report Covers'", () => {
@@ -197,7 +215,7 @@ check("standard CTA sits after Price/Format/Language/Delivery and before 'This R
     const children: any[] = renderReportContent("career_report", language).props.children;
     const at = (test: (c: any) => boolean) => children.findIndex(test);
     const meta = at(c => textOf(c).includes(delivery));
-    const cta = at(c => anchors(c).length === 1);
+    const cta = at(c => sampleAnchors(c).length === 1);
     const cover = at(c => textOf(c).includes(covers));
     assert.ok(meta >= 0 && cta > meta && cover > cta, `order meta=${meta} cta=${cta} covers=${cover}`);
   }

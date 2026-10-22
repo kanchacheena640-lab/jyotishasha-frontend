@@ -16,6 +16,10 @@ import {
   buildCheckoutPrefill, applyCheckoutPrefill, clearCheckoutPrefill, hasAppliedPrefill,
   type AppliedPrefill, type PrefillField,
 } from "@/lib/checkoutPrefill";
+import {
+  CHECKOUT_ANCHOR_ID, CHECKOUT_COPY, REFUND_POLICY_PATH, SUPPORT_WHATSAPP_URL,
+  PLACES_MAX_POLLS, PLACES_POLL_INTERVAL_MS, hasInvalidCheckoutEmail,
+} from "@/lib/checkoutUx";
 
 
 // Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
@@ -102,6 +106,11 @@ export default function ReportCheckout() {
   const formRef = useRef(form);
   formRef.current = form;
   const [appliedPrefill, setAppliedPrefill] = useState<AppliedPrefill>({});
+  // R2-D2 -- inline email check (shown after the field is left or Pay is
+  // tapped) and Google Places load failure (see the Places effect below).
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [placesUnavailable, setPlacesUnavailable] = useState(false);
   const viewItemSentRef = useRef(false);
   const beginCheckoutSentRef = useRef(false);
   const params = useParams();
@@ -136,12 +145,28 @@ export default function ReportCheckout() {
     // Google Maps used to load globally on every page via app/layout.tsx.
     // It's now loaded on demand instead -- this triggers that same shared,
     // idempotent load (safe to call even if another component on the page
-    // already triggered it). The polling loop below is unchanged: it just
-    // waits for window.google.maps to become available, however it got there.
-    loadGoogleMapsPlaces();
+    // already triggered it). The polling loop below just waits for
+    // window.google.maps to become available, however it got there.
+    //
+    // R2-D2 -- a failed load used to reject unhandled and leave the loop
+    // polling forever, so the place could never be confirmed and Pay stayed
+    // blocked with no explanation. Now a rejection (or ~60 s without Maps)
+    // stops the loop and shows a message by the place field. Coordinates are
+    // never invented: the existing "select from suggestions" rule stands.
+    let polls = 0;
+    let stopped = false;
+    const stop = () => {
+      stopped = true;
+      clearInterval(interval);
+    };
+    const fail = () => {
+      if (stopped) return;
+      stop();
+      setPlacesUnavailable(true);
+    };
     const interval = setInterval(() => {
       if ((window as any).google?.maps) {
-        clearInterval(interval);
+        stop();
         const autocomplete = new (window as any).google.maps.places.Autocomplete(placeRef.current!, {
           types: ["(cities)"],
         });
@@ -155,9 +180,13 @@ export default function ReportCheckout() {
             longitude: place.geometry?.location?.lng()?.toString() || "",
           }));
         });
+        return;
       }
-    }, 300);
-    return () => clearInterval(interval);
+      polls += 1;
+      if (polls >= PLACES_MAX_POLLS) fail();
+    }, PLACES_POLL_INTERVAL_MS);
+    loadGoogleMapsPlaces().catch(fail);
+    return stop;
   }, []);
 
   // Runs whenever the tool cache loads (useUserCache reads it after mount).
@@ -197,6 +226,26 @@ export default function ReportCheckout() {
     const val = e.target.value;
     editedFieldsRef.current.add("place");
     setForm((prev) => ({ ...prev, pob: val, latitude: "", longitude: "" }));
+  };
+
+  // R2-D2 -- trim stray spaces (common after mobile keyboard suggestions)
+  // and start showing the inline email error once the field is left.
+  const handleEmailBlur = () => {
+    setEmailTouched(true);
+    setForm((prev) => (prev.email === prev.email.trim() ? prev : { ...prev, email: prev.email.trim() }));
+  };
+
+  // R2-D2 -- the Pay button's email-format gate, run BEFORE the unchanged
+  // handleSubmit below (order creation, Razorpay and /webhook untouched).
+  // An empty email still goes through handleSubmit's existing
+  // required-field check and message.
+  const handlePayClick = () => {
+    if (hasInvalidCheckoutEmail(form.email)) {
+      setEmailTouched(true);
+      emailInputRef.current?.focus();
+      return;
+    }
+    handleSubmit();
   };
 
   // 💰 The Real Razorpay Logic connected to Flask Backend
@@ -468,8 +517,11 @@ export default function ReportCheckout() {
     );
   }
 
+  const showEmailError = emailTouched && hasInvalidCheckoutEmail(form.email);
+  const lang = currentLang === 'hi' ? 'hi' : 'en';
+
   return (
-    <div className="max-w-xl mx-auto px-4 py-10 font-sans">
+    <div id={CHECKOUT_ANCHOR_ID} className="max-w-xl mx-auto px-4 py-10 font-sans scroll-mt-24">
       <h2 className="text-2xl font-bold mb-8 text-center text-purple-800">
         {currentLang === 'hi'
           ? `${currentReport?.title?.hi || "रिपोर्ट"} के लिए विवरण भरें`
@@ -496,7 +548,16 @@ export default function ReportCheckout() {
         </h3>
         <div className="space-y-4">
           <input name="name" value={form.name} onChange={handleChange} placeholder={currentLang === 'hi' ? "पूरा नाम *" : "Full Name *"} className="inputStyle" required />
-          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email Address *" className="inputStyle" required />
+          <input
+            ref={emailInputRef} name="email" type="email" value={form.email} onChange={handleChange} onBlur={handleEmailBlur}
+            placeholder="Email Address *" className="inputStyle" required
+            aria-invalid={showEmailError} aria-describedby={showEmailError ? "checkout-email-error" : undefined}
+          />
+          {showEmailError && (
+            <p id="checkout-email-error" role="alert" className="text-sm text-red-600">
+              {CHECKOUT_COPY.invalidEmail[lang]}
+            </p>
+          )}
           <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder={currentLang === 'hi' ? "फ़ोन नंबर *" : "Phone Number *"} className="inputStyle" required />
         </div>
       </div>
@@ -545,6 +606,16 @@ export default function ReportCheckout() {
               {currentLang === 'hi' ? "जन्म स्थान *" : "Place of Birth *"}
             </label>
             <input ref={placeRef} name="pob" value={form.pob} onChange={handlePobChange} placeholder={currentLang === 'hi' ? "शहर चुनें" : "Search City"} className="inputStyle text-gray-900" required />
+            {/* Only when no confirmed coordinates are held -- a valid
+                Places pick or R2-C3 prefilled place still pays normally. */}
+            {placesUnavailable && form.latitude === "" && (
+              <p role="alert" className="mt-2 text-sm text-red-600">
+                {CHECKOUT_COPY.placesUnavailable[lang]}{" "}
+                <a href={SUPPORT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                  {CHECKOUT_COPY.needHelp[lang]}
+                </a>
+              </p>
+            )}
           </div>
 
           {/* Report Language Selection */}
@@ -561,7 +632,7 @@ export default function ReportCheckout() {
       </div>
 
       <button
-        onClick={handleSubmit}
+        onClick={handlePayClick}
         disabled={isProcessing}
         className={`w-full text-white py-4 rounded-xl font-bold text-lg shadow-xl transition-all active:scale-95 ${
           isProcessing ? "bg-purple-400 cursor-not-allowed" : "bg-purple-700 hover:bg-purple-800"
@@ -571,6 +642,15 @@ export default function ReportCheckout() {
           ? (currentLang === 'hi' ? "प्रोसेस हो रहा है..." : "Processing...")
           : (currentLang === 'hi' ? `भुगतान करें ₹${price}` : `Proceed to Pay ₹${price}`)}
       </button>
+
+      {/* R2-D2 -- payment reassurance: existing pages only, no new promises. */}
+      <p className="mt-3 text-center text-xs leading-6 text-slate-300">
+        🔒 {CHECKOUT_COPY.securePayment[lang]} · {CHECKOUT_COPY.pdfByEmail[lang]} ·{" "}
+        <a href={REFUND_POLICY_PATH} className="underline text-purple-300 hover:text-white">{CHECKOUT_COPY.refundPolicy[lang]}</a> ·{" "}
+        <a href={SUPPORT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="underline text-purple-300 hover:text-white">
+          {CHECKOUT_COPY.support[lang]}
+        </a>
+      </p>
 
       <style jsx>{`
         .inputStyle {

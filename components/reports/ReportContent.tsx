@@ -2,6 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import { getReportSampleLabel, getReportSampleUrl } from "@/lib/reportSamples";
+import { CHECKOUT_ANCHOR_ID, topCtaLabel } from "@/lib/checkoutUx";
 
 interface Props {
   report: any;
@@ -71,6 +72,19 @@ export default function ReportContent({
             : "Email in 5 Minutes"}
         </span>
 
+      </div>
+
+      {/* R2-D2 -- primary purchase CTA near the top: jumps to the checkout
+          form further down this page (no navigation, no order). Price comes
+          from the report catalog entry. */}
+      <div className="mb-4">
+        <a
+          href={`#${CHECKOUT_ANCHOR_ID}`}
+          className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-base font-bold text-white shadow-lg transition-colors hover:bg-purple-700"
+        >
+          {topCtaLabel(lang, report.price)}
+          <span aria-hidden="true">↓</span>
+        </a>
       </div>
 
       {/* Secondary, static sample PDF (public/report-samples). A plain anchor: no order, no payment,
