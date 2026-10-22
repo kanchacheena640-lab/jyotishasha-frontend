@@ -11,6 +11,11 @@ import { buildCampaignContextFromAttribution, readStoredAttribution } from "@/li
 import { formatCalendarDob } from "@/lib/formatCalendarDob";
 import { getBrowserOrderAttribution } from "@/lib/adAttribution";
 import { pushViewItem, pushBeginCheckout, trackBackendVerifiedPurchase, ORIGINAL_PRODUCT_FAMILY, type FunnelItemInput } from "@/lib/ecommerceMeasurement";
+import { useUserCache } from "@/lib/useUserCache";
+import {
+  buildCheckoutPrefill, applyCheckoutPrefill, clearCheckoutPrefill, hasAppliedPrefill,
+  type AppliedPrefill, type PrefillField,
+} from "@/lib/checkoutPrefill";
 
 
 // Ye check karega ki agar i18n start nahi hua hai, toh usko forced start kar dega
@@ -87,6 +92,16 @@ export default function ReportCheckout() {
   // dismissal, payment success, and webhook confirmation.
   const paymentConfirmedRef = useRef(false);
   const placeRef = useRef<HTMLInputElement | null>(null);
+  // Birth-details prefill from the last astrology tool entry
+  // (localStorage['jyotishasha_user'], see lib/checkoutPrefill.ts). Applied
+  // once, after mount, to empty fields the user has not touched; the form
+  // always renders empty on the server, so there is no hydration mismatch.
+  const { userData } = useUserCache();
+  const editedFieldsRef = useRef<Set<PrefillField>>(new Set());
+  const prefillAppliedRef = useRef(false);
+  const formRef = useRef(form);
+  formRef.current = form;
+  const [appliedPrefill, setAppliedPrefill] = useState<AppliedPrefill>({});
   const viewItemSentRef = useRef(false);
   const beginCheckoutSentRef = useRef(false);
   const params = useParams();
@@ -132,6 +147,7 @@ export default function ReportCheckout() {
         });
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
+          editedFieldsRef.current.add("place");
           setForm((prev) => ({
             ...prev,
             pob: place.name || "",
@@ -144,7 +160,30 @@ export default function ReportCheckout() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleChange = (e: any) => setForm({ ...form, [e.target.name]: e.target.value });
+  // Runs whenever the tool cache loads (useUserCache reads it after mount).
+  // The cache carries no email/phone and its language is never used, so
+  // those fields are never touched.
+  useEffect(() => {
+    if (prefillAppliedRef.current) return;
+    const prefill = buildCheckoutPrefill(userData);
+    if (!prefill.name && !prefill.dob && !prefill.tob && !prefill.place) return;
+    prefillAppliedRef.current = true;
+    const { applied } = applyCheckoutPrefill(formRef.current, prefill, editedFieldsRef.current);
+    if (!hasAppliedPrefill(applied)) return;
+    setForm((prev) => applyCheckoutPrefill(prev, prefill, editedFieldsRef.current).form);
+    setAppliedPrefill(applied);
+  }, [userData]);
+
+  const handleClearPrefill = () => {
+    setForm((prev) => clearCheckoutPrefill(prev, appliedPrefill));
+    setAppliedPrefill({});
+  };
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    if (name === "name" || name === "tob") editedFieldsRef.current.add(name);
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   // The place field's own onChange only ever fires from genuine user typing:
   // the Autocomplete widget's place_changed handler above sets pob directly
@@ -156,6 +195,7 @@ export default function ReportCheckout() {
   // whatever coordinates were captured, until a new real suggestion is chosen.
   const handlePobChange = (e: any) => {
     const val = e.target.value;
+    editedFieldsRef.current.add("place");
     setForm((prev) => ({ ...prev, pob: val, latitude: "", longitude: "" }));
   };
 
@@ -436,6 +476,19 @@ export default function ReportCheckout() {
           : `Fill Details for ${currentReport?.title?.en || "Report"}`}
       </h2>
 
+      {hasAppliedPrefill(appliedPrefill) && (
+        <div role="status" className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+          <p>
+            {currentLang === 'hi'
+              ? "आपकी पिछली ज्योतिष टूल प्रविष्टि से जन्म विवरण भरे गए हैं। भुगतान से पहले कृपया इन्हें जांच लें।"
+              : "We filled in birth details from your last astrology tool entry. Please check them before paying."}
+          </p>
+          <button type="button" onClick={handleClearPrefill} className="mt-2 font-semibold underline">
+            {currentLang === 'hi' ? "भरे गए विवरण हटाएँ" : "Clear prefilled details"}
+          </button>
+        </div>
+      )}
+
       {/* 👤 Personal Details Section */}
       <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-50 mb-6">
         <h3 className="text-lg font-bold mb-4 text-purple-700 border-b pb-2">
@@ -463,6 +516,7 @@ export default function ReportCheckout() {
             <DatePicker
               selected={form.dob ? new Date(`${form.dob}T00:00:00`) : null}
               onChange={(date: Date | null) => {
+                editedFieldsRef.current.add("dob");
                 if (date) {
                   const formatted = formatCalendarDob(date);
                   setForm(prev => ({ ...prev, dob: formatted }));
