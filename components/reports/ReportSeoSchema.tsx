@@ -1,22 +1,28 @@
-import Script from "next/script";
 import { SITE_URL } from "@/lib/seo/articleSchema";
+import { getReportDisplayName, serializeJsonLd } from "@/lib/reportProductSeo";
 
 interface Props {
   report: any;
   seoContent: any;
 }
 
+// Plain <script> elements (not next/script) so the JSON-LD is in the initial
+// server HTML -- Google warns that JS-injected Product markup makes Shopping
+// crawls less frequent and less reliable.
 export default function ReportSeoSchema({
   report,
   seoContent,
 }: Props) {
+  const url = `${SITE_URL}/reports/${report.slug}`;
+  const name = getReportDisplayName(report, seoContent, "en");
+
   const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
 
-  name: report.title?.en || report.title,
+  name,
 
-  image: [report.image],
+  image: [`${SITE_URL}${report.image}`],
 
   description:
     seoContent?.seoDescription?.en ||
@@ -29,21 +35,15 @@ export default function ReportSeoSchema({
     name: "Jyotishasha",
   },
 
+  // Personalized PDF delivered by email: no shippingDetails (nothing is
+  // shipped), and no availability claim -- the frontend has no trusted view of
+  // the backend registry's active flag, so "InStock" could not be verified
+  // (availability is a recommended, not required, Offer property).
   offers: {
     "@type": "Offer",
-    url: `${SITE_URL}/reports/${report.slug}`,
+    url,
     price: report.price,
     priceCurrency: "INR",
-    availability: "https://schema.org/InStock",
-
-    shippingDetails: {
-      "@type": "OfferShippingDetails",
-      shippingRate: {
-        "@type": "MonetaryAmount",
-        value: "0",
-        currency: "INR",
-      },
-    },
 
     hasMerchantReturnPolicy: {
       "@type": "MerchantReturnPolicy",
@@ -53,20 +53,6 @@ export default function ReportSeoSchema({
     },
   },
 };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity:
-      seoContent?.faqs?.en?.map((faq: any) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })) || [],
-  };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -87,40 +73,23 @@ export default function ReportSeoSchema({
       {
         "@type": "ListItem",
         position: 3,
-        name: report.title?.en || report.title,
-        item: `${SITE_URL}/reports/${report.slug}`,
+        name,
+        item: url,
       },
     ],
   };
 
   return (
     <>
-      <Script
-        id={`product-schema-${report.slug}`}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(productSchema) }}
       />
 
-      {seoContent?.faqs?.length > 0 && (
-        <Script
-          id={`faq-schema-${report.slug}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
-          }}
-        />
-      )}
-
-      <Script
-        id={`breadcrumb-schema-${report.slug}`}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbSchema) }}
       />
     </>
   );
 }
-

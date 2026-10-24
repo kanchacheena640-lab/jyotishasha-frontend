@@ -7012,6 +7012,7 @@
         "internal": [
           "/",
           "/love",
+          "/love/report/relationship_future_report",
           "/marriage-astrology",
           "/marriage-astrology/arranged-marriage",
           "/marriage-astrology/delayed-marriage",
@@ -7021,12 +7022,9 @@
           "/marriage-astrology/marriage-prediction",
           "/marriage-astrology/married-life",
           "/marriage-astrology/spouse-nature",
-          "/reports/relationship_future_report",
           "/tools/mangal-dosh"
         ],
-        "reports": [
-          "/reports/relationship_future_report"
-        ],
+        "reports": [],
         "samples": [],
         "tools": [
           "/tools/mangal-dosh"
@@ -7354,6 +7352,7 @@
         "internal": [
           "/hi",
           "/hi/love",
+          "/hi/love/report/relationship_future_report",
           "/hi/marriage-astrology",
           "/hi/marriage-astrology/arranged-marriage",
           "/hi/marriage-astrology/delayed-marriage",
@@ -7363,12 +7362,9 @@
           "/hi/marriage-astrology/marriage-prediction",
           "/hi/marriage-astrology/married-life",
           "/hi/marriage-astrology/spouse-nature",
-          "/hi/tools/mangal-dosh",
-          "/reports/relationship_future_report"
+          "/hi/tools/mangal-dosh"
         ],
-        "reports": [
-          "/reports/relationship_future_report"
-        ],
+        "reports": [],
         "samples": [],
         "tools": [
           "/hi/tools/mangal-dosh"

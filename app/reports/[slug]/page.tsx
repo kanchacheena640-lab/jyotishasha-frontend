@@ -1,6 +1,5 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import ReportCheckout from "@/components/reports/ReportCheckout";
-import RelationshipReportRedirect from "@/components/reports/RelationshipReportRedirect";
 import ReportSeoSchema from "@/components/reports/ReportSeoSchema";
 import ReportContent from "@/components/reports/ReportContent";
 import ReportContentDetails from "@/components/reports/ReportContentDetails";
@@ -9,6 +8,7 @@ import RelatedReports from "@/components/reports/RelatedReports";
 import { reportsData } from "@/app/data/reportsData";
 import { reportSeoContent } from "@/app/data/reportSeoContent";
 import { reportRelations } from "@/app/data/reportRelations";
+import { RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG } from "@/lib/reportProductSeo";
 
 type Props = {
   params: {
@@ -80,8 +80,10 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default function ReportPage({ params }: Props) {
-  if (params.slug === "relationship_future_report") {
-    return <RelationshipReportRedirect />;
+  // next.config.js already 301s this URL; this server-side fallback keeps the
+  // route from ever rendering an empty page if that redirect is bypassed.
+  if (params.slug === RELATIONSHIP_REPORT_SLUG) {
+    permanentRedirect(RELATIONSHIP_REPORT_PATH);
   }
 
   const report = reportsData.find(

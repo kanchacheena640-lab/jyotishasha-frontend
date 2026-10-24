@@ -23,6 +23,7 @@ import { reportsData } from "../app/data/reportsData";
 import { intentQuestions } from "../app/data/intentCatalog";
 import * as samples from "./reportSamples";
 import * as checkoutUx from "./checkoutUx";
+import * as reportProductSeo from "./reportProductSeo";
 import { focusedReportHasSample, getFocusedReportSampleOrPreviewHref, GENERIC_EXAMPLE_PREVIEW_PATH } from "../app/data/focusedReportsConfig";
 
 const repo = process.cwd();
@@ -182,10 +183,29 @@ function renderReportContent(slug: string, language: string) {
     "react-i18next": { useTranslation: () => ({ i18n: { language } }) },
     "@/lib/reportSamples": samples,
     "@/lib/checkoutUx": checkoutUx,
+    "@/lib/reportProductSeo": reportProductSeo,
+    "next/image": { default: "Image" },
   });
-  const report = { slug, title: { en: "Career Report", hi: "करियर रिपोर्ट" }, fullDescription: { en: "d", hi: "d" }, price: 51 };
+  const report = { slug, title: { en: "Career Report", hi: "करियर रिपोर्ट" }, fullDescription: { en: "d", hi: "d" }, price: 51, image: `/reports/${slug}.webp` };
   return ReportContent({ report, seo });
 }
+check("F10-P05: catalog product image via next/image -- responsive, uncropped, decorative, fixed size, priority", () => {
+  for (const language of ["en", "hi"]) {
+    const children: any[] = renderReportContent("career_report", language).props.children;
+    const img = children.find((c) => c && c.type === "Image");
+    const h1 = children.find((c) => c && c.type === "h1");
+    assert.ok(img && h1, "image and H1 present");
+    assert.ok(children.indexOf(img) < children.indexOf(h1), "image sits right above the H1");
+    assert.ok(textOf(h1.props.children).trim().length > 0, "H1 names the product");
+    assert.equal(img.props.src, "/reports/career_report.webp");
+    assert.equal(img.props.alt, "", "decorative: the adjacent H1 already names the product");
+    assert.equal(img.props.width, 192);
+    assert.equal(img.props.height, 192);
+    assert.equal(img.props.sizes, "(min-width: 768px) 192px, 160px");
+    assert.equal(img.props.priority, true);
+    assert.ok(/\bobject-contain\b/.test(img.props.className) && !/\bobject-cover\b/.test(img.props.className), "never crops");
+  }
+});
 for (const [language, lang, label] of [["en", "en", EN_LABEL], ["hi", "hi", HI_LABEL], ["hi-IN", "hi", HI_LABEL], ["fr", "en", EN_LABEL]] as const) {
   check(`standard page language ${language}: exactly one sample link -> career_report_${lang}.pdf`, () => {
     const found = sampleAnchors(renderReportContent("career_report", language));

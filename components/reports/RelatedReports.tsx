@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { getReportProductPath } from "@/lib/reportProductSeo";
 
 type Report = {
   slug: string;
@@ -51,7 +52,7 @@ export default function RelatedReports({
         {reports.map((report) => (
           <Link
             key={report.slug}
-            href={`/reports/${report.slug}`}
+            href={getReportProductPath(report.slug, lang)}
             className="group bg-gradient-to-br from-[#1e1b4b] to-[#312e81]
             border border-purple-900/50 rounded-2xl overflow-hidden
             hover:border-purple-500 transition-all duration-300

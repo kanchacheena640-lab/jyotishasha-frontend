@@ -41,6 +41,13 @@ const nextConfig = {
         destination: '/holi-:year',
         permanent: true,
       },
+      // F10-P03: obsolete ₹199 product URL -> the real product page (was an
+      // empty server page with a client-side redirect).
+      {
+        source: '/reports/relationship_future_report',
+        destination: '/love/report/relationship_future_report',
+        permanent: true,
+      },
       {
         source: '/:planet-transit/:ascendant/house/:house(\\d+)',
         destination: '/:planet-transit/:ascendant/house-:house',

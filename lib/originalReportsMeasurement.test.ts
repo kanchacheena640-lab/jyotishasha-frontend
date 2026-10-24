@@ -269,8 +269,10 @@ async function main() {
       && reportsData.find((r) => r.slug === RELATIONSHIP)!.price === 199);
     check("6f: EN / HI -- the form is locale-driven (thank-you redirect uses the locale) and both language pages exist under [locale]",
       raw.includes("redirectTo: `/${locale}/thank-you`") && fs.existsSync(path.join(ROOT, "app/[locale]/love/report/relationship_future_report/page.tsx")));
-    check("6g: /reports/relationship_future_report stays a plain client redirect (no analytics there; view_item fires on the locale page)",
-      stripComments(readSource("components/reports/RelationshipReportRedirect.tsx")).indexOf("pushViewItem") === -1 && readSource("app/reports/[slug]/page.tsx").includes("RelationshipReportRedirect"));
+    check("6g: /reports/relationship_future_report is a server-side permanent redirect (no page, so no analytics there; view_item fires on the locale page)",
+      !fs.existsSync(path.join(ROOT, "components/reports/RelationshipReportRedirect.tsx"))
+      && /permanentRedirect\(RELATIONSHIP_REPORT_PATH\)/.test(readSource("app/reports/[slug]/page.tsx"))
+      && readSource("next.config.js").includes("source: '/reports/relationship_future_report'"));
   }
 
   console.log("\n=== 7. GTM loads exactly once (existing container, existing consent ordering) ===");

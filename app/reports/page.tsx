@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ReportsPageClient from "./ReportsPageClient";
 import { reportsData } from "@/app/data/reportsData";
+import { getReportProductPath } from "@/lib/reportProductSeo";
 
 const SITE_URL = "https://www.jyotishasha.com";
 
@@ -31,7 +32,7 @@ export default function ReportsPage() {
           HTML. Visually hidden (sr-only) — does not change the visible UI. */}
       <nav className="sr-only" aria-label="All reports">
         {reportsData.map((report) => (
-          <Link key={report.slug} href={`/reports/${report.slug}`}>
+          <Link key={report.slug} href={getReportProductPath(report.slug)}>
             {report.title.en}
           </Link>
         ))}

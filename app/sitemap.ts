@@ -11,6 +11,7 @@ import { tithiData } from "@/app/data/tithiData";
 import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 import { getAuthorityDomain, getAllTopicSlugs } from "@/lib/authority-engine/resolver";
+import { getReportProductPath, RELATIONSHIP_REPORT_PATH } from "@/lib/reportProductSeo";
 
 export default async function sitemap() {
   const baseUrl = SITE_URL;
@@ -24,6 +25,19 @@ export default async function sitemap() {
   ) => ({
     url,
     lastModified: now,
+    changeFrequency: changeFreq,
+    priority,
+  });
+
+  // Paid-report product URLs carry NO lastModified: there is no trustworthy
+  // per-product modification date, and Google uses <lastmod> only when it is
+  // consistently accurate -- omitting it is valid, a fabricated "now" is not.
+  const createProductUrl = (
+    url: string,
+    priority: number,
+    changeFreq: string = "monthly"
+  ) => ({
+    url,
     changeFrequency: changeFreq,
     priority,
   });
@@ -52,7 +66,9 @@ export default async function sitemap() {
   const englishOnlyStaticPaths = ["/reports", "/privacy-policy", "/terms"];
 
   const englishOnlyStaticUrls = englishOnlyStaticPaths.map((path) =>
-    createUrl(`${baseUrl}${path}`, 0.9, "weekly")
+    path === "/reports"
+      ? createProductUrl(`${baseUrl}${path}`, 0.9, "weekly")
+      : createUrl(`${baseUrl}${path}`, 0.9, "weekly")
   );
 
   // ---------------- MUHURAT ----------------
@@ -104,9 +120,13 @@ export default async function sitemap() {
   );
 
   // ---------------- REPORTS ----------------
-  const reportUrls = reportsData.map((report) =>
-    createUrl(`${baseUrl}/reports/${report.slug}`, 0.75)
-  );
+  // Only reports whose canonical product page IS /reports/<slug>. The ₹199
+  // relationship report's /reports URL is a permanent redirect; its real EN/HI
+  // product pages are listed in the LOVE block below. Focused reports
+  // (/reports/focused/*) are noindex and deliberately never listed.
+  const reportUrls = reportsData
+    .filter((report) => getReportProductPath(report.slug) === `/reports/${report.slug}`)
+    .map((report) => createProductUrl(`${baseUrl}/reports/${report.slug}`, 0.75));
 
 
   // ---------------- FREE KUNDALI ----------------
@@ -275,12 +295,15 @@ export default async function sitemap() {
     "/truth-or-dare",
   ];
 
+  // The ₹199 product page gets no fabricated lastModified (see createProductUrl).
+  const isProductPath = (path: string) => `/love${path}` === RELATIONSHIP_REPORT_PATH;
+
   const loveUrls = loveSubPaths.map((path) =>
-    createUrl(`${baseUrl}/love${path}`, path === "" ? 0.75 : 0.6, "monthly")
+    (isProductPath(path) ? createProductUrl : createUrl)(`${baseUrl}/love${path}`, path === "" ? 0.75 : 0.6, "monthly")
   );
 
   const loveUrlsHi = loveSubPaths.map((path) =>
-    createUrl(`${baseUrl}/hi/love${path}`, path === "" ? 0.7 : 0.55, "monthly")
+    (isProductPath(path) ? createProductUrl : createUrl)(`${baseUrl}/hi/love${path}`, path === "" ? 0.7 : 0.55, "monthly")
   );
 
   // ---------------- MARRIAGE ASTROLOGY (authority cluster) ----------------

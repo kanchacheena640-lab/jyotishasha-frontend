@@ -13,8 +13,10 @@
 //     reports (unlike the 25 standard reports' public/reports/*.webp).
 //     Omitted rather than pointed at a non-existent/generic asset.
 // No ratings, reviews or sales-count claims are made anywhere here.
-import Script from "next/script";
+// Plain <script> elements (not next/script) so the JSON-LD is in the initial
+// server HTML; the page itself stays noindex (see the route's generateMetadata).
 import { SITE_URL } from "@/lib/seo/articleSchema";
+import { serializeJsonLd } from "@/lib/reportProductSeo";
 import type { FocusedReportConfig } from "@/app/data/focusedReportsConfig";
 import type { Locale } from "@/lib/authority-engine/types";
 
@@ -69,12 +71,12 @@ export default function FocusedReportSeoSchema({ config, title, locale }: Props)
 
   return (
     <>
-      <Script id={`focused-product-schema-${config.questionKey}-${locale}`} type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
-      <Script id={`focused-faq-schema-${config.questionKey}-${locale}`} type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Script id={`focused-breadcrumb-schema-${config.questionKey}-${locale}`} type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(productSchema) }} />
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqSchema) }} />
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbSchema) }} />
     </>
   );
 }

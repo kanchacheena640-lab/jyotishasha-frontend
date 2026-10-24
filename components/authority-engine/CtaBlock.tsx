@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { Cta, Locale, DomainAccentColor } from '@/lib/authority-engine/types'
 import { loc } from '@/lib/authority-engine/i18n'
 import { DOMAIN_ACCENT, CTA_TYPE_LABELS, CTA_ACTION_LABELS, CTA_BASE_PATHS } from '@/lib/authority-engine/constants'
+import { getReportProductPath } from '@/lib/reportProductSeo'
 
 interface Props {
   cta: Cta
@@ -21,7 +22,7 @@ export default function CtaBlock({ cta, locale, isPrimary, accentColor }: Props)
 
   const href = cta.type === 'tool'
     ? `${localePath}${CTA_BASE_PATHS.tool}/${cta.slug}`
-    : `${CTA_BASE_PATHS.report}/${cta.slug}`
+    : getReportProductPath(cta.slug, locale)
 
   return (
     <div className={`my-8 rounded-2xl p-6 border transition-colors

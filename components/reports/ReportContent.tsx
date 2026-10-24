@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { getReportSampleLabel, getReportSampleUrl } from "@/lib/reportSamples";
 import { CHECKOUT_ANCHOR_ID, topCtaLabel } from "@/lib/checkoutUx";
+import { getReportDisplayName } from "@/lib/reportProductSeo";
 
 interface Props {
   report: any;
@@ -20,12 +22,29 @@ export default function ReportContent({
       ? "hi"
       : "en";
 
+  const displayName = getReportDisplayName(report, seo, lang);
+
   return (
     <div className="max-w-4xl mx-auto text-center mb-10">
 
+      {/* Product image (the same catalog asset the Product schema uses).
+          next/image serves a 160-192px-sized file instead of the 1000-1536px
+          original; fixed box + width/height = no layout shift; object-contain
+          never crops non-square art. Decorative: the H1 right below already
+          names the product, so alt="" avoids announcing it twice. Priority:
+          it can be the page's largest above-the-fold paint. */}
+      <Image
+        src={report.image}
+        alt=""
+        width={192}
+        height={192}
+        sizes="(min-width: 768px) 192px, 160px"
+        priority
+        className="mx-auto mb-6 h-40 w-40 md:h-48 md:w-48 rounded-2xl object-contain shadow-lg"
+      />
+
       <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-        {seo?.seoTitle?.[lang]?.split("|")[0] ||
-          report?.title?.[lang]}
+        {displayName}
       </h1>
 
       <p className="text-lg text-slate-300 leading-relaxed max-w-3xl mx-auto mb-6">
