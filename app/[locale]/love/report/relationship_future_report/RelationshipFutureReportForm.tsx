@@ -210,11 +210,9 @@ export default function RelationshipFutureReportForm({ locale }: RelationshipFut
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-10 bg-[#0f0a1e] min-h-screen text-white">
       
-      {/* HERO */}
+      {/* HERO -- no heading here: the page's own H1 (page.tsx) already names the
+          report right above this card, with the price. */}
       <div className="rounded-[2.5rem] bg-gradient-to-br from-purple-600/20 to-indigo-900/30 p-8 md:p-12 text-center border border-purple-500/20 shadow-2xl relative overflow-hidden">
-        <h2 className="text-3xl md:text-5xl font-black mb-4 leading-tight">
-          💞 {isHi ? "रिलेशनशिप भविष्य रिपोर्ट" : "Relationship Future Report"}
-        </h2>
         <p className="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto italic">
           {isHi 
             ? "विवाह की सफलता, ग्रहों के दोष और भविष्य की पूरी जानकारी सीधे ईमेल पर।" 
