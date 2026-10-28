@@ -1,9 +1,14 @@
 import { SITE_URL } from "@/lib/seo/articleSchema";
 import { getReportDisplayName, serializeJsonLd } from "@/lib/reportProductSeo";
+import { offerAvailability, reviewSchemaFields, type ReviewSummary } from "@/lib/reportReviews";
 
 interface Props {
   report: any;
   seoContent: any;
+  /** F10-P15: backend registry active flag (null = unknown -> no claim). */
+  active?: boolean | null;
+  /** F10-P15: published verified-buyer reviews (null = unavailable -> no rating). */
+  reviews?: ReviewSummary | null;
 }
 
 // Plain <script> elements (not next/script) so the JSON-LD is in the initial
@@ -12,9 +17,14 @@ interface Props {
 export default function ReportSeoSchema({
   report,
   seoContent,
+  active = null,
+  reviews = null,
 }: Props) {
   const url = `${SITE_URL}/reports/${report.slug}`;
   const name = getReportDisplayName(report, seoContent, "en");
+  // F10-P15: the page passes the live registry state and published reviews
+  // (the SAME summary it renders visibly); null -> no claim is made.
+  const availability = offerAvailability(active);
 
   const productSchema = {
   "@context": "https://schema.org",
@@ -35,15 +45,17 @@ export default function ReportSeoSchema({
     name: "Jyotishasha",
   },
 
+  ...reviewSchemaFields(reviews),
+
   // Personalized PDF delivered by email: no shippingDetails (nothing is
-  // shipped), and no availability claim -- the frontend has no trusted view of
-  // the backend registry's active flag, so "InStock" could not be verified
-  // (availability is a recommended, not required, Offer property).
+  // shipped). availability comes only from the backend registry's active flag
+  // (the same flag order creation enforces); unknown -> omitted.
   offers: {
     "@type": "Offer",
     url,
     price: report.price,
     priceCurrency: "INR",
+    ...(availability ? { availability } : {}),
 
     hasMerchantReturnPolicy: {
       "@type": "MerchantReturnPolicy",
@@ -54,42 +66,12 @@ export default function ReportSeoSchema({
   },
 };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Reports",
-        item: `${SITE_URL}/reports`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name,
-        item: url,
-      },
-    ],
-  };
-
+  // BreadcrumbList is rendered by ProductBreadcrumb (app/reports/[slug]/page.tsx)
+  // together with the visible trail it describes.
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(productSchema) }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(productSchema) }}
+    />
   );
 }

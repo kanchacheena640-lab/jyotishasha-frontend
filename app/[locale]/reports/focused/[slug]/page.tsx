@@ -37,6 +37,10 @@ import FocusedDualReportCheckout from "@/components/focused-reports/FocusedDualR
 import FocusedReportDetails from "@/components/focused-reports/FocusedReportDetails";
 import RelatedFocusedReports from "@/components/focused-reports/RelatedFocusedReports";
 import FocusedReportSeoSchema from "@/components/focused-reports/FocusedReportSeoSchema";
+import ProductBreadcrumb from "@/components/reports/ProductBreadcrumb";
+import PurchasePolicyLinks from "@/components/reports/PurchasePolicyLinks";
+import ProductReviews from "@/components/reports/ProductReviews";
+import { fetchProductActive, fetchReviewSummary } from "@/lib/reportReviews";
 
 export const revalidate = 86400;
 
@@ -90,9 +94,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default function FocusedReportPage({ params }: { params: Params }) {
+export default async function FocusedReportPage({ params }: { params: Params }) {
   const config = getFocusedReportConfigBySlug(params.slug);
   if (!config) notFound();
+  // F10-P15: backend product key = question_key. Fetched once for both the
+  // visible reviews and the Product JSON-LD (null -> no claim).
+  const [active, reviews] = await Promise.all([
+    fetchProductActive(config.questionKey),
+    fetchReviewSummary(config.questionKey),
+  ]);
 
   const locale = toLocale(params.locale);
   const title = config.title[locale];
@@ -115,15 +125,30 @@ export default function FocusedReportPage({ params }: { params: Params }) {
 
   return (
     <div className="min-h-screen bg-[#0b0620]">
+      {/* Real user path: /reports -> /reports/focused (hub) -> product. The
+          /reports catalogue is English-only, so it has no /hi variant. */}
+      <div className="px-4 pt-6">
+        <ProductBreadcrumb
+          items={[
+            { name: locale === "hi" ? "होम" : "Home", path: locale === "hi" ? "/hi" : "" },
+            { name: locale === "hi" ? "रिपोर्ट्स" : "Reports", path: "/reports" },
+            { name: locale === "hi" ? "फोकस्ड रिपोर्ट्स" : "Focused Reports", path: `${locale === "hi" ? "/hi" : ""}/reports/focused` },
+            { name: title, path: `${locale === "hi" ? "/hi" : ""}/reports/focused/${config.humanSlug}` },
+          ]}
+        />
+      </div>
       <FocusedReportHero config={config} title={title} question={questionText} locale={locale} />
       {isDual ? (
         <FocusedDualReportCheckout config={config} locale={locale} />
       ) : (
         <FocusedReportCheckout config={config} locale={locale} />
       )}
+      {/* The checkouts already show secure-payment and WhatsApp-support lines. */}
+      <PurchasePolicyLinks lang={locale === "hi" ? "hi" : "en"} variant="refund" />
       <FocusedReportDetails config={config} locale={locale} />
+      <ProductReviews summary={reviews} lang={locale === "hi" ? "hi" : "en"} />
       <RelatedFocusedReports items={relatedItems} locale={locale} />
-      <FocusedReportSeoSchema config={config} title={title} locale={locale} />
+      <FocusedReportSeoSchema config={config} title={title} locale={locale} active={active} reviews={reviews} />
     </div>
   );
 }

@@ -10,7 +10,7 @@ import * as vm from "vm";
 import * as ts from "typescript";
 import * as assert from "assert";
 import { reportsData } from "../app/data/reportsData";
-import { getReportProductPath, RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG } from "./reportProductSeo";
+import { getReportDisplayName, getReportProductPath, RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG } from "./reportProductSeo";
 
 let passed = 0;
 function check(label: string, test: () => void) {
@@ -48,23 +48,42 @@ const dependencies: Record<string, unknown> = {
   "@/app/data/reportsData": { reportsData },
   "@/app/data/reportSeoContent": { reportSeoContent: {} },
   "@/app/data/reportRelations": { reportRelations: {} },
-  "@/lib/reportProductSeo": { RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG },
+  "@/lib/reportProductSeo": { getReportDisplayName, RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG },
+  // F10-P15: the page fetches registry availability + published reviews once;
+  // stubbed here (no network in this test).
+  "@/lib/reportReviews": { fetchProductActive: async () => true, fetchReviewSummary: async () => SUMMARY },
 };
-for (const name of ["ReportCheckout", "ReportSeoSchema", "ReportContent", "ReportContentDetails", "RelatedReports"]) {
+const SUMMARY = { product: "x", review_count: 0, average_rating: null, distribution: {}, reviews: [] };
+for (const name of ["ReportCheckout", "ReportSeoSchema", "ReportContent", "ReportContentDetails", "RelatedReports", "ProductBreadcrumb", "ProductReviews"]) {
   dependencies[`@/components/reports/${name}`] = { default: name };
 }
+const childOfType = (tree: any, type: string) => tree.props.children.find((c: any) => c && c.type === type);
 const page = load("app/reports/[slug]/page.tsx", dependencies).default;
-check("relationship slug issues a server-side permanent redirect to the real product page, never a page or checkout", () => {
-  assert.throws(() => page({ params: { slug: RELATIONSHIP_REPORT_SLUG } }), /NEXT_REDIRECT/);
-  assert.deepEqual(redirects, ["/love/report/relationship_future_report"]);
-});
-for (const report of reportsData.filter(r => r.slug !== RELATIONSHIP_REPORT_SLUG)) {
-  check(`${report.slug} retains the standard page and checkout`, () => {
-    const tree = page({ params: { slug: report.slug } });
-    assert.equal(tree.type, "div");
-    assert.equal(tree.props.children[1].type, "ReportCheckout");
-    assert.equal(tree.props.children[0].props.report.slug, report.slug);
+
+async function pageChecks() {
+  let redirectError: unknown = null;
+  try { await page({ params: { slug: RELATIONSHIP_REPORT_SLUG } }); } catch (e) { redirectError = e; }
+  check("relationship slug issues a server-side permanent redirect to the real product page, never a page or checkout", () => {
+    assert.ok(redirectError instanceof Error && /NEXT_REDIRECT/.test(redirectError.message));
+    assert.deepEqual(redirects, ["/love/report/relationship_future_report"]);
   });
+  for (const report of reportsData.filter(r => r.slug !== RELATIONSHIP_REPORT_SLUG)) {
+    const tree = await page({ params: { slug: report.slug } });
+    check(`${report.slug} retains the standard page and checkout`, () => {
+      assert.equal(tree.type, "div");
+      const types = tree.props.children.filter(Boolean).map((c: any) => c.type);
+      assert.ok(types.indexOf("ReportContent") < types.indexOf("ReportCheckout"), "checkout follows the report content");
+      assert.ok(childOfType(tree, "ReportCheckout"), "checkout still rendered");
+      assert.equal(childOfType(tree, "ReportContent").props.report.slug, report.slug);
+      const crumbs = childOfType(tree, "ProductBreadcrumb").props.items;
+      assert.deepEqual(crumbs.map((c: any) => c.path), ["", "/reports", `/reports/${report.slug}`]);
+      assert.equal(crumbs[2].name, getReportDisplayName(report, undefined, "en"), "last crumb = H1/Product name");
+      // Visible reviews and the Product JSON-LD get the SAME fetched data.
+      assert.equal(childOfType(tree, "ProductReviews").props.summary, SUMMARY);
+      assert.equal(childOfType(tree, "ReportSeoSchema").props.reviews, SUMMARY);
+      assert.equal(childOfType(tree, "ReportSeoSchema").props.active, true);
+    });
+  }
 }
 check("next.config.js has the permanent 301 for the obsolete URL", () => {
   const config = fs.readFileSync("next.config.js", "utf8");
@@ -91,4 +110,6 @@ check("destination matches the existing visible catalog route", () => {
   assert.ok(catalog.includes('router.push(`/${currentLang}/love/report/${slug}`)'));
   assert.ok(fs.existsSync("app/[locale]/love/report/relationship_future_report/page.tsx"));
 });
-console.log(`TOTAL: ${passed} passed, 0 failed`);
+pageChecks().then(() => {
+  console.log(`TOTAL: ${passed} passed, 0 failed`);
+}).catch((e) => { console.error("FAIL:", e); process.exit(1); });

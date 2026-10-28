@@ -183,13 +183,29 @@ section("5. server render: checkout + every report detail page");
     check("5h: Hindi reassurance", hiCheckout.includes("Razorpay द्वारा सुरक्षित भुगतान") && hiCheckout.includes("रिफंड नीति"));
     i18next.changeLanguage("en");
 
+  } finally {
+    console.error = originalError;
+  }
+}
+
+// The report page is an async server component (F10-P15: it fetches registry
+// availability + published reviews). It is awaited here, offline: fetch is
+// stubbed to fail, which exercises the "no claim" fallback with no network.
+async function renderReportPages() {
+  const React = require("react");
+  const { renderToStaticMarkup } = require("react-dom/server");
+  const originalError = console.error;
+  const originalFetch = globalThis.fetch;
+  console.error = () => undefined;
+  globalThis.fetch = (async () => { throw new Error("offline test: no backend"); }) as typeof fetch;
+  try {
     const Page = load("app/reports/[slug]/page.tsx").default;
     let pages = 0;
     for (const report of reportsData) {
       if (report.slug === "relationship_future_report") continue; // redirect route, no checkout here
       routeSlug = report.slug;
       let h = "";
-      try { h = renderToStaticMarkup(React.createElement(Page, { params: { slug: report.slug } })); }
+      try { h = renderToStaticMarkup(await Page({ params: { slug: report.slug } })); }
       catch (e: any) { check(`5i: /reports/${report.slug} renders (${e?.message})`, false); continue; }
       pages++;
       check(`5j: /reports/${report.slug} -- top CTA, anchor target, Pay price all present`,
@@ -200,12 +216,15 @@ section("5. server render: checkout + every report detail page");
     check(`5l: all ${reportsData.length - 1} standard report pages rendered (got ${pages})`, pages === reportsData.length - 1);
   } finally {
     console.error = originalError;
+    globalThis.fetch = originalFetch;
   }
 }
 
 // ------------------------------------------------------------------------------------------------
-console.log(`\n${passed} passed, ${failed} failed`);
-if (failed > 0) {
-  console.log("\nFailures:\n" + failures.slice(0, 40).map((f) => `  - ${f}`).join("\n"));
-  process.exit(1);
-}
+renderReportPages().then(() => {
+  console.log(`\n${passed} passed, ${failed} failed`);
+  if (failed > 0) {
+    console.log("\nFailures:\n" + failures.slice(0, 40).map((f) => `  - ${f}`).join("\n"));
+    process.exit(1);
+  }
+});

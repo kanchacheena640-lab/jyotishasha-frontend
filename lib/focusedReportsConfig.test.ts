@@ -474,7 +474,7 @@ check("₹51 REPORT badge is removed -- price appears exactly once per card, no 
 });
 
 console.log("\n=== SEO schema: no fabricated ratings/reviews/availability claims ===");
-check("FocusedReportSeoSchema never claims availability, ratings, reviews or a sales/popularity count", () => {
+check("FocusedReportSeoSchema makes no fabricated availability, rating or sales/popularity claims", () => {
   const src = read("components/focused-reports/FocusedReportSeoSchema.tsx");
   // Strip comment lines first -- the file's own header comment explains,
   // in prose, WHY availability/image are deliberately omitted; that
@@ -484,12 +484,22 @@ check("FocusedReportSeoSchema never claims availability, ratings, reviews or a s
     .split("\n")
     .filter((line) => !/^\s*(\/\/|\*|\/\*)/.test(line))
     .join("\n");
-  for (const forbidden of ["availability\\s*:", "aggregateRating", "\\breview\\b", "ratingValue", "InStock"]) {
-    assert.ok(!new RegExp(forbidden, "i").test(codeOnly), `must not claim "${forbidden}"`);
+  // F10-P15: availability may appear ONLY as the registry-derived value
+  // (offerAvailability(fetchProductActive(...))), ratings ONLY via
+  // reviewSchemaFields(genuine published reviews) -- never a literal claim.
+  for (const forbidden of ["aggregateRating", "ratingValue", "InStock", "OutOfStock", "salesCount|popular"]) {
+    assert.ok(!new RegExp(forbidden, "i").test(codeOnly), `must not hard-code "${forbidden}"`);
   }
+  const page = read("app/[locale]/reports/focused/[slug]/page.tsx");
+  assert.ok(/availability:\s*offerState/.test(codeOnly) && /offerAvailability\(active\)/.test(codeOnly) && /fetchProductActive\(config\.questionKey\)/.test(page),
+    "availability only from the backend registry active flag (fetched by the page)");
+  assert.ok(/\.\.\.reviewSchemaFields\(reviews\)/.test(codeOnly) && /fetchReviewSummary\(config\.questionKey\)/.test(page) && /<ProductReviews summary=\{reviews\}/.test(page),
+    "ratings only from published verified-buyer reviews -- the same summary shown on the page");
   assert.ok(src.includes('"@type": "Product"'));
   assert.ok(src.includes('"@type": "FAQPage"'));
-  assert.ok(src.includes('"@type": "BreadcrumbList"'));
+  // F10-P14: BreadcrumbList moved to ProductBreadcrumb, rendered on the page with its visible trail.
+  assert.ok(!src.includes('"@type": "BreadcrumbList"'), "no second BreadcrumbList in the schema component");
+  assert.ok(read("app/[locale]/reports/focused/[slug]/page.tsx").includes("<ProductBreadcrumb"), "focused page renders the visible breadcrumb + its BreadcrumbList");
   assert.ok(src.includes("priceCurrency"));
 });
 

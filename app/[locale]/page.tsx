@@ -26,6 +26,8 @@ import { getPanchang } from "@/lib/getPanchang";
 import { getHomeMuhurth } from "@/lib/getHomeMuhurth";
 import { getTransit } from "@/lib/getTransit";
 import { getUpcomingEvents } from "@/lib/getUpcomingEvents";
+import { buildOrganizationSchema } from "@/lib/seo/organizationSchema";
+import { serializeJsonLd } from "@/lib/reportProductSeo";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 
 // Authority hub links — rendered as a 4-card grid for internal linking
@@ -135,6 +137,8 @@ export default async function HomePage({
 
   return (
     <div className="min-h-screen bg-[#0b1120] pt-12 text-white">
+      {/* F10-P15: the site's one Organization node (verified, published facts only). */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildOrganizationSchema()) }} />
       <div className="max-w-6xl mx-auto px-4 md:px-6">
 
         {/* 1. Live Panchang Ticker + Compact Kundali Link */}

@@ -3,6 +3,10 @@ import { Metadata } from "next";
 import { reportsData } from "@/app/data/reportsData";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 import { RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG, serializeJsonLd } from "@/lib/reportProductSeo";
+import ProductBreadcrumb from "@/components/reports/ProductBreadcrumb";
+import PurchasePolicyLinks from "@/components/reports/PurchasePolicyLinks";
+import ProductReviews from "@/components/reports/ProductReviews";
+import { fetchProductActive, fetchReviewSummary, offerAvailability, reviewSchemaFields } from "@/lib/reportReviews";
 
 // Single source for price and image: the report catalog (₹199, same as the
 // backend registry seed). Never hard-code the price here.
@@ -46,14 +50,20 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default function ReportPage({ params }: { params: { locale: string } }) {
+export default async function ReportPage({ params }: { params: { locale: string } }) {
   const isHi = params.locale === "hi";
   const { name, description } = copy(isHi);
   const canonical = canonicalFor(isHi);
+  // F10-P15: registry active flag + published verified-buyer reviews (null = unknown -> no claim).
+  const [active, reviews] = await Promise.all([
+    fetchProductActive(RELATIONSHIP_REPORT_SLUG),
+    fetchReviewSummary(RELATIONSHIP_REPORT_SLUG),
+  ]);
+  const availability = offerAvailability(active);
 
-  // Personalized PDF delivered by email: no shippingDetails, and no
-  // availability claim (the frontend has no trusted view of the backend
-  // registry's active flag -- F10-P03 unresolved item).
+  // Personalized PDF delivered by email: no shippingDetails. availability only
+  // from the registry flag order creation enforces; ratings only from the
+  // published reviews rendered below.
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -61,11 +71,13 @@ export default function ReportPage({ params }: { params: { locale: string } }) {
     image: [`${SITE_URL}${catalogEntry.image}`],
     description,
     brand: { "@type": "Brand", name: "Jyotishasha" },
+    ...reviewSchemaFields(reviews),
     offers: {
       "@type": "Offer",
       url: canonical,
       price: catalogEntry.price,
       priceCurrency: "INR",
+      ...(availability ? { availability } : {}),
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: "IN",
@@ -74,25 +86,22 @@ export default function ReportPage({ params }: { params: { locale: string } }) {
     },
   };
 
-  const base = `${SITE_URL}${isHi ? "/hi" : ""}`;
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: isHi ? "होम" : "Home", item: `${base}/` },
-      { "@type": "ListItem", position: 2, name: isHi ? "प्रेम" : "Love", item: `${base}/love` },
-      { "@type": "ListItem", position: 3, name, item: canonical },
-    ],
-  };
+  const prefix = isHi ? "/hi" : "";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(productSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbSchema) }} />
       {/* Razorpay is loaded on demand by the useReportPurchase hook inside
           RelationshipFutureReportForm, only when the user actually pays --
           not eagerly here on every page load. */}
       <div className="text-center bg-[#0f0a1e] pt-10 pb-2 px-4">
+        <ProductBreadcrumb
+          items={[
+            { name: isHi ? "होम" : "Home", path: prefix },
+            { name: isHi ? "प्रेम" : "Love", path: `${prefix}/love` },
+            { name, path: `${prefix}${RELATIONSHIP_REPORT_PATH}` },
+          ]}
+        />
         <h1 className="text-3xl md:text-5xl font-black leading-tight text-white">
           💞 {name}
         </h1>
@@ -105,6 +114,10 @@ export default function ReportPage({ params }: { params: { locale: string } }) {
         </p>
       </div>
       <RelationshipFutureReportForm locale={params.locale} />
+      <div className="bg-[#0f0a1e]">
+        <PurchasePolicyLinks lang={isHi ? "hi" : "en"} />
+        <ProductReviews summary={reviews} lang={isHi ? "hi" : "en"} />
+      </div>
     </>
   );
 }

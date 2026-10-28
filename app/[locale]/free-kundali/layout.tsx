@@ -70,11 +70,9 @@ export default async function FreeKundaliLayout({
       "price": "0",
       "priceCurrency": "INR",
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "1200",
-    }
+    // F10-P15: the hard-coded aggregateRating (4.9 from "1200" ratings) was
+    // removed -- no rating data exists behind it, and Google requires ratings
+    // to come from real users and be visible on the page.
   };
 
   return (

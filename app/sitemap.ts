@@ -122,8 +122,8 @@ export default async function sitemap() {
   // ---------------- REPORTS ----------------
   // Only reports whose canonical product page IS /reports/<slug>. The ₹199
   // relationship report's /reports URL is a permanent redirect; its real EN/HI
-  // product pages are listed in the LOVE block below. Focused reports
-  // (/reports/focused/*) are noindex and deliberately never listed.
+  // product pages are listed in the LOVE block below. Focused reports are
+  // noindex and deliberately never listed.
   const reportUrls = reportsData
     .filter((report) => getReportProductPath(report.slug) === `/reports/${report.slug}`)
     .map((report) => createProductUrl(`${baseUrl}/reports/${report.slug}`, 0.75));

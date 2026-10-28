@@ -34,6 +34,7 @@ const LINKS = [
   { href: "/admin/analytics", label: "Analytics" },
   { href: "/admin/revenue", label: "Revenue" },
   { href: "/admin", label: "Orders" },
+  { href: "/admin/reviews", label: "Reviews" },
   { href: "/admin/app-version", label: "App Version" },
 ];
 
