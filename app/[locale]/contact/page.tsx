@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import GrievanceOfficer from "@/components/legal/GrievanceOfficer";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/articleSchema";
 
 export async function generateMetadata({
@@ -85,6 +86,10 @@ export default function ContactPage({
             />
           </div>
         </div>
+      </div>
+
+      <div className="mt-10">
+        <GrievanceOfficer lang={isHi ? "hi" : "en"} variant="card" />
       </div>
     </div>
   );

@@ -44,6 +44,7 @@ export default function Footer() {
           <ul className="space-y-2 text-gray-300">
             <li><Link href="/privacy-policy">Privacy Policy</Link></li>
             <li><Link href="/terms">Terms & Conditions</Link></li>
+            <li><Link href={`${langPath}/contact#grievance-officer`}>{currentLang === "hi" ? "शिकायत अधिकारी" : "Grievance Officer"}</Link></li>
             <li><Link href="/refund-policy">Refund Policy</Link></li>
             <li><CookieSettingsLink /></li>
           </ul>

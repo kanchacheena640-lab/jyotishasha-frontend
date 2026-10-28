@@ -1,3 +1,5 @@
+import PolicyEffectiveDate from "@/components/legal/PolicyEffectiveDate";
+
 export const metadata = {
   title: "Refund & Cancellation Policy | Jyotishasha",
   description:
@@ -8,6 +10,7 @@ export default function RefundPolicyPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-20 text-white">
       <h1 className="text-4xl font-bold mb-6">Refund & Cancellation Policy</h1>
+      <PolicyEffectiveDate policy="refund" />
 
       <p className="text-gray-300 mb-4">
         This Refund & Cancellation Policy applies to purchases made on the

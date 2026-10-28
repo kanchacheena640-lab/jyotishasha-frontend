@@ -1,3 +1,6 @@
+import PolicyEffectiveDate from "@/components/legal/PolicyEffectiveDate";
+import GrievanceOfficer from "@/components/legal/GrievanceOfficer";
+
 export const metadata = {
   title: "Privacy Policy | Jyotishasha",
   description:
@@ -8,6 +11,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-20 text-white">
       <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
+      <PolicyEffectiveDate policy="privacy" />
 
       <p className="text-gray-300 mb-4">
         Spiritual Lifestyle Company (“we,” “our,” “us”) operates the Jyotishasha
@@ -46,6 +50,11 @@ export default function PrivacyPolicyPage() {
         <li>
           Sending service-related notifications or updates (only if enabled)
         </li>
+        <li>
+          Publishing verified buyer reviews you choose to submit, and preventing
+          misuse of the review system (see{" "}
+          <a href="#reviews" className="underline">Verified Buyer Reviews</a>)
+        </li>
       </ul>
       <p className="text-gray-300 mb-4">
         We do <strong>not</strong> sell or trade your personal data. Limited data
@@ -83,6 +92,101 @@ export default function PrivacyPolicyPage() {
         managed from your device settings.
       </p>
 
+      <h2 id="reviews" className="text-2xl font-semibold mt-6 mb-2 scroll-mt-24">
+        Verified Buyer Reviews
+      </h2>
+      <p className="text-gray-300 mb-4">
+        <strong>Who can write a review.</strong> Only customers who bought a
+        report on the Jyotishasha website, whose payment was confirmed and whose
+        report was emailed to them, can write a review. This includes buyers
+        who later received a refund, as long as the report was delivered to
+        them. Each order can have one review.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>How we verify it.</strong> The report delivery email contains a
+        personal review link. The link carries a signed code that identifies
+        your order and a one-way coded form of the order&apos;s email address
+        (not the email address itself). The link works for 365 days. Anyone who
+        opens it can write or edit the review for your order, so please do not
+        share it.
+      </p>
+      <p className="text-gray-300 mb-2">
+        <strong>What we collect.</strong> When you submit a review we store:
+      </p>
+      <ul className="list-disc list-inside text-gray-300 mb-4 space-y-1">
+        <li>your star rating (1 to 5) and the text you write;</li>
+        <li>
+          the display name shown with your review: we suggest your first name
+          and the initial of your last name from your order, and you can change
+          it;
+        </li>
+        <li>
+          the order and report the review belongs to, the order&apos;s language,
+          the dates it was written, edited and published, and how many times it
+          was edited;
+        </li>
+        <li>
+          its moderation status, any automatic check results, and the reason if
+          it was not published.
+        </li>
+      </ul>
+      <p className="text-gray-300 mb-4">
+        <strong>What is shown publicly.</strong> Your display name, star rating,
+        review text and date are shown on the report&apos;s page with a
+        &quot;Verified buyer&quot; label, together with the average rating and
+        number of reviews. The same details are included in the page code that
+        search engines read, so they may appear in search results. Your email
+        address, phone number, birth details, order number and payment details
+        are never shown.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>How reviews are checked.</strong> Automatic checks look for web
+        links, email addresses, phone numbers and HTML code. A review without
+        these is published straight away; a review with them is held until our
+        team checks it. Our team may decline or remove a review only if it is
+        spam, abusive, contains personal data, is off-topic or is not a review
+        of the report. We do not decline or remove a review because it is
+        negative or has a low rating, and we do not change the words of any
+        review. You can edit your review up to three times from the same link;
+        an edited review that had been declined goes back for checking.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>Preventing misuse.</strong> To limit repeated attempts, we
+        count review requests from each IP address over a short period (10
+        minutes or 1 hour). The IP address is turned into a one-way code before
+        it is counted, the count is used only for that period, and it is not
+        stored with your review.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>How long we keep reviews.</strong> We keep a review, whether
+        published or not, until you ask us to delete it or we remove it under
+        this policy. There is no automatic deletion date. If the order record
+        is deleted, its review is deleted with it.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>Correcting or deleting your review.</strong> You can correct
+        your review yourself using the link in your report email (up to three
+        edits). To have it deleted, or for any other request about your review,
+        email <strong>support@jyotishasha.com</strong> from the email address
+        used for the order, naming the report and the approximate order date.
+        After confirming the request came from that address, we delete the
+        review completely; no copy is kept in our review records. It is
+        removed from the report page straight away, but search engines may show
+        an older copy until they next visit the page. While your link is still valid,
+        you can use it to write a new review later if you wish.
+      </p>
+      <p className="text-gray-300 mb-4">
+        Reviews belong to website report orders, not to app accounts, so
+        deleting your Jyotishasha app account does not delete a review. To
+        remove a review as well, say so in your request.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>Security.</strong> Reviews are stored in our database with your
+        order records. Only authorised administrators can access the moderation
+        tools, and review links are signed with a secret key so they cannot be
+        made up or altered.
+      </p>
+
       <h2 className="text-2xl font-semibold mt-6 mb-2">
         Data Protection & Retention
       </h2>
@@ -108,12 +212,14 @@ export default function PrivacyPolicyPage() {
         reflected on this page with an updated effective date.
       </p>
 
+      <GrievanceOfficer />
+
       <h2 className="text-2xl font-semibold mt-6 mb-2">Contact Us</h2>
       <p className="text-gray-300">
         If you have any questions or concerns regarding this Privacy Policy,
         please contact us:
         <br />
-        <strong>Email:</strong> jraviom@gmail.com <br />
+        <strong>Email:</strong> support@jyotishasha.com or jraviom@gmail.com <br />
         <strong>Phone:</strong> +91 9118877495
       </p>
 
@@ -127,20 +233,27 @@ export default function PrivacyPolicyPage() {
       </h2>
       <p className="text-gray-300 mb-4">
         Users can request deletion of their Jyotishasha account and associated
-        personal data at any time. To request account deletion, please email
+        personal data at any time. In the app, open the Account tab and tap
+        Delete Account. Or email
+        <strong> support@jyotishasha.com </strong> or
         <strong> jraviom@gmail.com </strong>
         from your registered email address with the subject line
         <strong> “Account Deletion Request”</strong>.
       </p>
       <p className="text-gray-300 mb-4">
-        After verification, we will permanently delete the user account and
-        associated personal data, including profile details, birth information,
-        and usage data, within <strong>7 working days</strong>.
+        In-app deletion takes effect immediately; email requests are completed
+        within <strong>7 working days</strong> after verification. We delete
+        your sign-in account and the profiles, birth details and personalised
+        content saved in the app.
       </p>
       <p className="text-gray-300 mb-4">
         Certain transaction records or information required to be retained for
         legal, regulatory, or accounting purposes may be kept for the period
-        mandated by applicable laws.
+        mandated by applicable laws. This includes payment and purchase
+        records and website report orders. Records of app activity are also
+        not removed by account deletion. See our{" "}
+        <a href="/account-deletion" className="underline">Account Deletion</a>{" "}
+        page for exactly what is deleted and what is kept.
       </p>
 
     </div>
