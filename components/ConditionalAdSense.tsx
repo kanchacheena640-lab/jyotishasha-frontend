@@ -20,6 +20,7 @@ const AD_FREE_PREFIXES = [
   '/refund-policy',
   '/terms',
   '/account-deletion',
+  '/review', // private verified-buyer review form (emailed link)
 ];
 
 function isAdFreeRoute(pathname: string): boolean {
