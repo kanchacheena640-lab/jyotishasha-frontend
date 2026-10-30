@@ -51,6 +51,9 @@ const PILOT_KEYS = [
   // F12-P2.8 batch
   "best_business_periods", "new_venture_partnership_timing", "strongest_marriage_periods",
   "marriage_chances_timing", "marriage_delay_easing", "marriage_talks_current_period",
+  // F12-P2.9 batch
+  "relationship_to_marriage_window", "relationship_lead_to_marriage", "long_term_compatibility",
+  "kundali_match_for_marriage", "right_time_to_consider_marriage", "relationship_strengths_risks",
 ];
 /** How each backend horizon must be stated in the copy. */
 const HORIZON_PHRASE: Record<number, string> = { 12: "12 months", 36: "three years", 60: "five years" };
@@ -83,15 +86,15 @@ const shingles = (text: string, n = 5) => {
 const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; for (const x of a) if (b.has(x)) i++; return i / (a.size + b.size - i || 1); };
 
 console.log("\n=== tiers ===");
-check("exactly the 35 approved topics have SEO content, each a real catalog question", () => {
+check("exactly the 41 approved topics have SEO content, each a real catalog question", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORT_SEO_CONTENT).sort(), [...PILOT_KEYS].sort());
   for (const key of PILOT_KEYS) assert.ok(intentQuestions.some((q) => q.questionKey === key), key);
 });
-check("the resolver serves content-tier configs for the 35 topics; bespoke (2) unchanged, the other 26 stay generic", () => {
+check("the resolver serves content-tier configs for the 41 topics; bespoke (2) unchanged, the other 20 stay generic", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORTS_CONFIG).sort(), ["major-kundali-obstacles", "major-kundali-strengths"]);
   assert.equal(configs.length, 63);
   assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS].sort());
-  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 26);
+  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 20);
   for (const c of configs.filter((x) => x.seo)) assert.equal(c.seo!.questionKey, c.questionKey);
 });
 check("content-tier configs keep the authoritative product title, category and ₹51 price", () => {
@@ -209,7 +212,10 @@ check("'what you receive' lists exactly the PDF sections of the report's archety
 check("horizon, houses and transits stated in the copy match the content's grounding", () => {
   for (const c of contents) {
     const en = visibleText(c, "en").join(" ");
-    assert.ok(HORIZON_PHRASE[c.grounding.horizonMonths] && en.includes(HORIZON_PHRASE[c.grounding.horizonMonths]), `${c.questionKey}: horizon ${c.grounding.horizonMonths}`);
+    const months = c.grounding.horizonMonths;
+    // No timing evidence (dual compatibility overviews): the copy must not claim any horizon.
+    if (months === null) for (const phrase of Object.values(HORIZON_PHRASE)) assert.ok(!en.includes(phrase), `${c.questionKey}: no timing, but says "${phrase}"`);
+    else assert.ok(HORIZON_PHRASE[months] && en.includes(HORIZON_PHRASE[months]), `${c.questionKey}: horizon ${months}`);
     for (const planet of c.grounding.transits) assert.ok(en.includes(planet), `${c.questionKey}: ${planet}`);
     for (const planet of ["Jupiter", "Saturn", "Rahu", "Ketu", "Mars", "Venus"]) {
       if (!c.grounding.transits.includes(planet) && planet !== "Mars") assert.ok(!en.includes(planet), `${c.questionKey}: unsupported ${planet}`);
@@ -219,18 +225,52 @@ check("horizon, houses and transits stated in the copy match the content's groun
   }
 });
 const BACKEND = path.join(repo, "..", "..", "Python", "Jyotishasha_Backend-main", "modules", "focused_reports");
+// Ashtakoot component names as the backend keys them (relationship_keys.py ALL_KOOTAS).
+const KOOTA_NAMES: Record<string, string> = { varna: "Varna", vashya: "Vashya", tara: "Tara", yoni: "Yoni", graha_maitri: "Graha Maitri", gana: "Gana", bhakoot: "Bhakoot", nadi: "Nadi" };
+check("person mode is stated honestly: single-chart pages never claim a partner reading; two-chart pages say both charts are used and the dual checkout sends the partner", () => {
+  assert.ok(read("components/focused-reports/FocusedDualReportCheckout.tsx").includes("partner: {"), "dual checkout sends a partner payload");
+  for (const c of contents) {
+    const en = visibleText(c, "en").join(" ");
+    const q = intentQuestions.find((x) => x.questionKey === c.questionKey)!;
+    if (q.personMode === "dual") {
+      assert.match(en, /both (of your |people's )?(birth )?charts|both charts|both sets of birth details|both people's birth details/i, `${c.questionKey}: dual page must say both charts are read`);
+      // Only the Ashtakoot components the backend selects for this key may be named.
+      const selected = (fs.existsSync(BACKEND) ? fs.readFileSync(path.join(BACKEND, "relationship_keys.py"), "utf8") : "").match(new RegExp(`"${c.questionKey}": \\(\\([^)]*\\), (\\([^)]*\\)|ALL_KOOTAS)\\)`));
+      if (selected) {
+        const keys = selected[1] === "ALL_KOOTAS" ? Object.keys(KOOTA_NAMES) : [...selected[1].matchAll(/"([a-z_]+)"/g)].map((m) => m[1]);
+        for (const [key, name] of Object.entries(KOOTA_NAMES)) {
+          const named = new RegExp(`\\b${name}\\b`).test(en);
+          assert.equal(named, keys.includes(key), `${c.questionKey}: koota ${name} ${keys.includes(key) ? "missing" : "not selected by the backend"}`);
+        }
+      }
+    } else {
+      // A single-chart page may point to the two-chart reports, but never describes matching itself.
+      assert.doesNotMatch(en, /koota|Ashtakoot/i, `${c.questionKey}: single-chart page describes kundali matching`);
+      if (q.lens === "own_relationship") assert.match(en, /partner's chart is not used|does not read your partner/, `${c.questionKey}: must say the partner's chart is not read`);
+    }
+  }
+});
 if (fs.existsSync(BACKEND)) {
   const be = (f: string) => fs.readFileSync(path.join(BACKEND, f), "utf8");
   check("backend cross-check: PDF section headings match master_contract.py", () => {
     const contract = be("master_contract.py");
-    for (const arch of ["TIMING", "DIAGNOSTIC", "DIRECTION"] as const) {
-      for (let i = 0; i < 6; i++) assert.ok(contract.includes(`("${REPORT_SECTIONS[arch].en[i]}", "${REPORT_SECTIONS[arch].hi[i]}")`), `${arch} ${i}`);
+    for (const arch of ["TIMING", "DIAGNOSTIC", "DIRECTION", "COMPATIBILITY"] as const) {
+      for (let i = 0; i < REPORT_SECTIONS[arch].en.length; i++) assert.ok(contract.includes(`("${REPORT_SECTIONS[arch].en[i]}", "${REPORT_SECTIONS[arch].hi[i]}")`), `${arch} ${i}`);
     }
   });
   check("backend cross-check: horizons and house sets match the *_keys.py / *_evidence.py definitions for every content topic", () => {
     assert.match(be("marriage_keys.py"), /"marriage_delay_reason": 12,/);
     for (const [key, months] of [["strongest_marriage_periods", 60], ["marriage_chances_timing", 60], ["marriage_delay_easing", 60], ["marriage_talks_current_period", 12]] as const) assert.ok(be("marriage_keys.py").includes(`"${key}": ${months},`), key);
     assert.ok(be("marriage_evidence.py").includes('selected_planets=("Jupiter", "Saturn")'), "marriage transits are Jupiter/Saturn");
+    assert.ok(be("marriage_keys.py").includes('"relationship_to_marriage_window": 60,'), "relationship_to_marriage_window is a single-person 60-month marriage key");
+    // Dual relationship keys: the exact house set per key, 12 months only for RELATIONSHIP_TIMING_KEYS, Jupiter/Saturn for both people.
+    const rel = be("relationship_keys.py");
+    const timingKeys = (rel.match(/RELATIONSHIP_TIMING_KEYS = frozenset\(\(([^)]*)\)/) || [])[1] || "";
+    for (const c of contents.filter((x) => intentQuestions.find((q) => q.questionKey === x.questionKey)!.personMode === "dual")) {
+      assert.ok(c.grounding.houses && rel.includes(`"${c.questionKey}": ((${c.grounding.houses.join(", ")}),`), `${c.questionKey}: houses`);
+      assert.equal(c.grounding.horizonMonths, timingKeys.includes(`"${c.questionKey}"`) ? 12 : null, `${c.questionKey}: horizon`);
+    }
+    assert.ok(be("relationship_evidence.py").includes('selected_planets=("Jupiter", "Saturn")'), "relationship transits are Jupiter/Saturn");
     const foreign = be("foreign_keys.py");
     for (const [key, months, houses] of [["going_abroad_timing", 60, "3, 9, 12"], ["study_abroad", 12, "4, 5, 9, 12"], ["foreign_settlement_timing", 60, "4, 9, 12"], ["relocation_timing", 60, "3, 4, 12"]] as const) {
       assert.ok(foreign.includes(`"${key}": ${months},`) && foreign.includes(`"${key}": (${houses}),`), key);

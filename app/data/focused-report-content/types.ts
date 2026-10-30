@@ -22,7 +22,7 @@ import type { FocusedReportFaq } from "../focusedReportsConfig";
 export type Localized = { en: string; hi: string };
 
 /** Report shapes from the backend's master_contract.py::SECTIONS. */
-export type ReportArchetype = "TIMING" | "DIAGNOSTIC" | "DIRECTION";
+export type ReportArchetype = "TIMING" | "DIAGNOSTIC" | "DIRECTION" | "COMPATIBILITY";
 
 export interface FocusedReportInternalLink {
   /** English path; the Hindi page links to `/hi${path}` when `localized`. */
@@ -58,7 +58,8 @@ export interface FocusedReportSeoContent {
   faqs: FocusedReportFaq[];
   grounding: {
     archetype: ReportArchetype;
-    horizonMonths: number;
+    /** null when the backend supplies no timing evidence for this key (e.g. dual-chart compatibility overviews). */
+    horizonMonths: number | null;
     /** Natal houses the backend reads for this key, when it defines them explicitly (else null). */
     houses: number[] | null;
     transits: string[];
@@ -80,6 +81,10 @@ export const REPORT_SECTIONS: Record<ReportArchetype, { en: string[]; hi: string
   DIRECTION: {
     en: ["Direct Answer", "Natural Strengths and Tendencies", "Most Relevant Directions", "Current Timing Context", "Practical Focus", "Bottom Line"],
     hi: ["सीधा जवाब", "ताकतें और रुझान", "सबसे उपयोगी दिशाएँ", "अभी के समय का संदर्भ", "व्यावहारिक ध्यान", "सीधी बात"],
+  },
+  COMPATIBILITY: {
+    en: ["Direct Answer", "Where Your Charts Support Each Other", "Differences That Need Care", "Practical Relationship Focus", "Bottom Line"],
+    hi: ["सीधा जवाब", "चार्ट में तालमेल के संकेत", "किन फर्कों पर ध्यान दें", "रिश्ते के लिए उपयोगी ध्यान", "सीधी बात"],
   },
 };
 

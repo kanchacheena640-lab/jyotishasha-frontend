@@ -45,6 +45,13 @@ import { strongestMarriagePeriods } from "./strongest_marriage_periods";
 import { marriageChancesTiming } from "./marriage_chances_timing";
 import { marriageDelayEasing } from "./marriage_delay_easing";
 import { marriageTalksCurrentPeriod } from "./marriage_talks_current_period";
+// F12-P2.9 batch
+import { relationshipToMarriageWindow } from "./relationship_to_marriage_window";
+import { relationshipLeadToMarriage } from "./relationship_lead_to_marriage";
+import { longTermCompatibility } from "./long_term_compatibility";
+import { kundaliMatchForMarriage } from "./kundali_match_for_marriage";
+import { rightTimeToConsiderMarriage } from "./right_time_to_consider_marriage";
+import { relationshipStrengthsRisks } from "./relationship_strengths_risks";
 
 export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent> = {
   [newJobTiming.questionKey]: newJobTiming,
@@ -82,6 +89,12 @@ export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent>
   [marriageChancesTiming.questionKey]: marriageChancesTiming,
   [marriageDelayEasing.questionKey]: marriageDelayEasing,
   [marriageTalksCurrentPeriod.questionKey]: marriageTalksCurrentPeriod,
+  [relationshipToMarriageWindow.questionKey]: relationshipToMarriageWindow,
+  [relationshipLeadToMarriage.questionKey]: relationshipLeadToMarriage,
+  [longTermCompatibility.questionKey]: longTermCompatibility,
+  [kundaliMatchForMarriage.questionKey]: kundaliMatchForMarriage,
+  [rightTimeToConsiderMarriage.questionKey]: rightTimeToConsiderMarriage,
+  [relationshipStrengthsRisks.questionKey]: relationshipStrengthsRisks,
 };
 
 export { REPORT_SECTIONS, AI_DISCLOSURE } from "./types";
