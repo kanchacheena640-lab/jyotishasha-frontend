@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-labelledby="t d">
+  <title id="t">Illustration: marketing and growth</title>
+  <desc id="d">Abstract artwork of rising bars and an upward trend line among small stars. Not a portrait of any person.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1650"/>
+      <stop offset="1" stop-color="#0f0a1e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6366f1" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#a5b4fc" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="trend" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.28" r="0.5">
+      <stop offset="0" stop-color="#818cf8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#glow)"/>
+  <g fill="none" stroke="#a5b4fc" stroke-opacity="0.12" stroke-width="1">
+    <circle cx="300" cy="300" r="250"/>
+    <circle cx="300" cy="300" r="190"/>
+    <circle cx="300" cy="300" r="130"/>
+  </g>
+  <g fill="url(#bar)">
+    <rect x="130" y="370" width="52" height="110" rx="10"/>
+    <rect x="212" y="320" width="52" height="160" rx="10"/>
+    <rect x="294" y="262" width="52" height="218" rx="10"/>
+    <rect x="376" y="196" width="52" height="284" rx="10"/>
+  </g>
+  <path d="M120 360 L196 318 L278 270 L360 214 L470 136" fill="none" stroke="url(#trend)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M470 136 l-38 4 m38 -4 l-6 38" fill="none" stroke="#fde68a" stroke-width="10" stroke-linecap="round"/>
+  <g fill="#fde68a">
+    <circle cx="196" cy="318" r="7"/>
+    <circle cx="278" cy="270" r="7"/>
+    <circle cx="360" cy="214" r="7"/>
+  </g>
+  <g fill="#e0e7ff" fill-opacity="0.8">
+    <path d="M150 140 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z"/>
+    <path d="M500 330 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z"/>
+    <path d="M250 110 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/>
+  </g>
+  <rect x="210" y="526" width="180" height="40" rx="20" fill="#0f0a1e" fill-opacity="0.75" stroke="#a5b4fc" stroke-opacity="0.5"/>
+  <text x="300" y="552" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="18" font-weight="600" letter-spacing="2" fill="#e0e7ff">ILLUSTRATION</text>
+</svg>

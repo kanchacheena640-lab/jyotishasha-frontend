@@ -35,6 +35,7 @@ export default function Footer() {
             <li><Link href="/reports">Reports</Link></li>
             <li><Link href={`${langPath}/contact`}>Contact</Link></li>
             <li><Link href={`${langPath}/astrology-methodology`}>Methodology</Link></li>
+            <li><Link href={`${langPath}/about/our-team`}>{currentLang === "hi" ? "हमारी टीम" : "Our Team"}</Link></li>
           </ul>
         </div>
 

@@ -340,6 +340,8 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/rahu-kaal`, 0.65, "weekly"),
     createUrl(`${baseUrl}/astrology-methodology`, 0.5, "yearly"),
     createUrl(`${baseUrl}/hi/astrology-methodology`, 0.45, "yearly"),
+    createUrl(`${baseUrl}/about/our-team`, 0.5, "yearly"),
+    createUrl(`${baseUrl}/hi/about/our-team`, 0.45, "yearly"),
   ];
 
   // ---------------- AUTHORITY HUBS ----------------
