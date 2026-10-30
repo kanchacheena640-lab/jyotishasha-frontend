@@ -45,6 +45,9 @@ const PILOT_KEYS = [
   // F12-P2.6 batch
   "career_improvement_timing", "next_strong_career_period", "work_recognition_timing",
   "financial_improvement_timing", "financial_pressure_easing", "business_growth_timing",
+  // F12-P2.7 batch
+  "best_career_years", "job_search_start_timing", "job_gap_easing",
+  "money_growth_periods", "business_expansion_timing", "business_slowdown_easing",
 ];
 /** How each backend horizon must be stated in the copy. */
 const HORIZON_PHRASE: Record<number, string> = { 12: "12 months", 36: "three years", 60: "five years" };
@@ -77,15 +80,15 @@ const shingles = (text: string, n = 5) => {
 const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; for (const x of a) if (b.has(x)) i++; return i / (a.size + b.size - i || 1); };
 
 console.log("\n=== tiers ===");
-check("exactly the 23 approved topics have SEO content, each a real catalog question", () => {
+check("exactly the 29 approved topics have SEO content, each a real catalog question", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORT_SEO_CONTENT).sort(), [...PILOT_KEYS].sort());
   for (const key of PILOT_KEYS) assert.ok(intentQuestions.some((q) => q.questionKey === key), key);
 });
-check("the resolver serves content-tier configs for the 23 topics; bespoke (2) unchanged, the other 38 stay generic", () => {
+check("the resolver serves content-tier configs for the 29 topics; bespoke (2) unchanged, the other 32 stay generic", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORTS_CONFIG).sort(), ["major-kundali-obstacles", "major-kundali-strengths"]);
   assert.equal(configs.length, 63);
   assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS].sort());
-  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 38);
+  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 32);
   for (const c of configs.filter((x) => x.seo)) assert.equal(c.seo!.questionKey, c.questionKey);
 });
 check("content-tier configs keep the authoritative product title, category and ₹51 price", () => {
@@ -236,13 +239,15 @@ if (fs.existsSync(BACKEND)) {
       assert.ok(education.includes(`"${key}": ${months},`) && education.includes(`"${key}": (${houses}),`), key);
     }
     assert.match(be("education_evidence.py"), /TRANSIT_PLANETS = \("Jupiter", "Saturn"\)/);
-    // Career keys: 12 months unless the spec needs the multi-year dasha_sequence (none of these do).
-    for (const key of ["new_job_timing", "promotion_timing", "career_growth_delay_reason", "job_change_now", "salary_growth_timing", "career_improvement_timing", "next_strong_career_period", "work_recognition_timing"]) assert.ok(be("career_keys.py").includes(`"${key}"`), key);
+    // Career keys: 12 months unless the spec needs the multi-year dasha_sequence (only best_career_years does).
+    for (const key of ["new_job_timing", "promotion_timing", "career_growth_delay_reason", "job_change_now", "salary_growth_timing", "career_improvement_timing", "next_strong_career_period", "work_recognition_timing", "job_search_start_timing", "job_gap_easing", "best_career_years"]) assert.ok(be("career_keys.py").includes(`"${key}"`), key);
+    assert.ok(be("prompt_specs.py").includes('key == "best_career_years" or key in MULTI_YEAR_KEYS'), "best_career_years uses the multi-year dasha_sequence");
     assert.match(be("career_evidence.py"), /months = 60 if "dasha_sequence" in required else 12/);
     // Money/business keys: 12 months unless listed in MULTI_YEAR_KEYS.
     const money = be("money_business_keys.py");
     const multiYear = (money.match(/MULTI_YEAR_KEYS = \(([^)]*)\)/) || [])[1] || "";
-    for (const key of ["debt_pressure_easing", "business_start_timing", "income_increase_timing", "financial_improvement_timing", "financial_pressure_easing", "business_growth_timing"]) assert.ok(money.includes(`"${key}"`) && !multiYear.includes(key), key);
+    for (const key of ["debt_pressure_easing", "business_start_timing", "income_increase_timing", "financial_improvement_timing", "financial_pressure_easing", "business_growth_timing", "business_expansion_timing", "business_slowdown_easing"]) assert.ok(money.includes(`"${key}"`) && !multiYear.includes(key), key);
+    assert.ok(multiYear.includes('"money_growth_periods"'), "money_growth_periods is multi-year");
     assert.match(be("money_business_evidence.py"), /months = 60 if question_key in MULTI_YEAR_KEYS else 12/);
     // Promotion houses are named in its own prompt spec; transit planets per evidence module.
     assert.ok(be("prompt_specs.py").includes("2nd/6th/10th/11th houses and their lords"));

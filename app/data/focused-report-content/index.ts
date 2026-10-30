@@ -31,6 +31,13 @@ import { workRecognitionTiming } from "./work_recognition_timing";
 import { financialImprovementTiming } from "./financial_improvement_timing";
 import { financialPressureEasing } from "./financial_pressure_easing";
 import { businessGrowthTiming } from "./business_growth_timing";
+// F12-P2.7 batch
+import { bestCareerYears } from "./best_career_years";
+import { jobSearchStartTiming } from "./job_search_start_timing";
+import { jobGapEasing } from "./job_gap_easing";
+import { moneyGrowthPeriods } from "./money_growth_periods";
+import { businessExpansionTiming } from "./business_expansion_timing";
+import { businessSlowdownEasing } from "./business_slowdown_easing";
 
 export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent> = {
   [newJobTiming.questionKey]: newJobTiming,
@@ -56,6 +63,12 @@ export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent>
   [financialImprovementTiming.questionKey]: financialImprovementTiming,
   [financialPressureEasing.questionKey]: financialPressureEasing,
   [businessGrowthTiming.questionKey]: businessGrowthTiming,
+  [bestCareerYears.questionKey]: bestCareerYears,
+  [jobSearchStartTiming.questionKey]: jobSearchStartTiming,
+  [jobGapEasing.questionKey]: jobGapEasing,
+  [moneyGrowthPeriods.questionKey]: moneyGrowthPeriods,
+  [businessExpansionTiming.questionKey]: businessExpansionTiming,
+  [businessSlowdownEasing.questionKey]: businessSlowdownEasing,
 };
 
 export { REPORT_SECTIONS, AI_DISCLOSURE } from "./types";
