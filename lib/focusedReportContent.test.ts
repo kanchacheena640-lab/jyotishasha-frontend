@@ -54,6 +54,10 @@ const PILOT_KEYS = [
   // F12-P2.9 batch
   "relationship_to_marriage_window", "relationship_lead_to_marriage", "long_term_compatibility",
   "kundali_match_for_marriage", "right_time_to_consider_marriage", "relationship_strengths_risks",
+  // F12-P2.12 batch
+  "conflict_areas", "emotional_communication_fit", "strengthen_relationship", "relationship_care_periods",
+  "foreign_work_timing", "foreign_plans_delay_reason", "study_strong_period", "study_progress_improvement",
+  "property_current_period", "property_strongest_period",
 ];
 /** How each backend horizon must be stated in the copy. */
 const HORIZON_PHRASE: Record<number, string> = { 12: "12 months", 36: "three years", 60: "five years" };
@@ -86,15 +90,15 @@ const shingles = (text: string, n = 5) => {
 const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; for (const x of a) if (b.has(x)) i++; return i / (a.size + b.size - i || 1); };
 
 console.log("\n=== tiers ===");
-check("exactly the 41 approved topics have SEO content, each a real catalog question", () => {
+check("exactly the 51 approved topics have SEO content, each a real catalog question", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORT_SEO_CONTENT).sort(), [...PILOT_KEYS].sort());
   for (const key of PILOT_KEYS) assert.ok(intentQuestions.some((q) => q.questionKey === key), key);
 });
-check("the resolver serves content-tier configs for the 41 topics; bespoke (2) unchanged, the other 20 stay generic", () => {
+check("the resolver serves content-tier configs for the 51 topics; bespoke (2) unchanged, the other 10 stay generic", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORTS_CONFIG).sort(), ["major-kundali-obstacles", "major-kundali-strengths"]);
   assert.equal(configs.length, 63);
   assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS].sort());
-  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 20);
+  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 10);
   for (const c of configs.filter((x) => x.seo)) assert.equal(c.seo!.questionKey, c.questionKey);
 });
 check("content-tier configs keep the authoritative product title, category and ₹51 price", () => {
@@ -203,8 +207,12 @@ console.log("\n=== grounding in the backend's own report definitions ===");
 check("'what you receive' lists exactly the PDF sections of the report's archetype", () => {
   for (const c of contents) {
     for (const lang of ["en", "hi"] as const) {
-      for (const heading of REPORT_SECTIONS[c.grounding.archetype][lang]) {
-        assert.ok(c.sections.whatYouReceive[lang].includes(heading), `${c.questionKey} ${lang}: ${heading}`);
+      // master_contract.py omits "Current Timing Context" when no dated support exists (horizon null),
+      // so such a page must list the other headings and say that one is left out.
+      const untimed = c.grounding.archetype === "DIRECTION" && c.grounding.horizonMonths === null;
+      for (const [i, heading] of REPORT_SECTIONS[c.grounding.archetype][lang].entries()) {
+        if (untimed && i === 3) assert.ok(c.sections.whatYouReceive[lang].includes(heading) && /omitted|नहीं होता/.test(c.sections.whatYouReceive[lang]), `${c.questionKey} ${lang}: must say ${heading} is omitted`);
+        else assert.ok(c.sections.whatYouReceive[lang].includes(heading), `${c.questionKey} ${lang}: ${heading}`);
       }
     }
   }
@@ -272,15 +280,15 @@ if (fs.existsSync(BACKEND)) {
     }
     assert.ok(be("relationship_evidence.py").includes('selected_planets=("Jupiter", "Saturn")'), "relationship transits are Jupiter/Saturn");
     const foreign = be("foreign_keys.py");
-    for (const [key, months, houses] of [["going_abroad_timing", 60, "3, 9, 12"], ["study_abroad", 12, "4, 5, 9, 12"], ["foreign_settlement_timing", 60, "4, 9, 12"], ["relocation_timing", 60, "3, 4, 12"]] as const) {
+    for (const [key, months, houses] of [["going_abroad_timing", 60, "3, 9, 12"], ["study_abroad", 12, "4, 5, 9, 12"], ["foreign_settlement_timing", 60, "4, 9, 12"], ["relocation_timing", 60, "3, 4, 12"], ["foreign_work_timing", 60, "3, 6, 9, 10, 12"], ["foreign_plans_delay_reason", 12, "3, 4, 9, 12"]] as const) {
       assert.ok(foreign.includes(`"${key}": ${months},`) && foreign.includes(`"${key}": (${houses}),`), key);
     }
     const property = be("property_keys.py");
-    for (const [key, houses] of [["property_purchase_timing", "2, 4, 11"], ["own_home_timing", "2, 4, 11, 12"]] as const) {
-      assert.ok(property.includes(`"${key}": 60,`) && property.includes(`"${key}": (${houses}),`), key);
+    for (const [key, months, houses] of [["property_purchase_timing", 60, "2, 4, 11"], ["own_home_timing", 60, "2, 4, 11, 12"], ["property_current_period", 12, "2, 4, 11"], ["property_strongest_period", 60, "2, 4, 11"]] as const) {
+      assert.ok(property.includes(`"${key}": ${months},`) && property.includes(`"${key}": (${houses}),`), key);
     }
     const education = be("education_keys.py");
-    for (const [key, months, houses] of [["exam_preparation_period", 12, "3, 4, 5, 6"], ["higher_education_timing", 36, "4, 5, 9, 11"]] as const) {
+    for (const [key, months, houses] of [["exam_preparation_period", 12, "3, 4, 5, 6"], ["higher_education_timing", 36, "4, 5, 9, 11"], ["study_strong_period", 12, "4, 5, 9"], ["study_progress_improvement", 12, "3, 4, 5, 6, 9"]] as const) {
       assert.ok(education.includes(`"${key}": ${months},`) && education.includes(`"${key}": (${houses}),`), key);
     }
     assert.match(be("education_evidence.py"), /TRANSIT_PLANETS = \("Jupiter", "Saturn"\)/);

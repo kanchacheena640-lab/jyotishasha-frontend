@@ -73,7 +73,7 @@ const count = (html, re) => (html.match(re) || []).length;
     }
   }
   // Generic regression pages stay on the template, noindex; hub and sitemap unchanged in policy.
-  for (const p of ["/reports/focused/best-period-to-switch", "/hi/reports/focused/conflict-areas", "/reports/focused/property-strongest-period", "/reports/focused/major-kundali-obstacles"]) {
+  for (const p of ["/reports/focused/best-period-to-switch", "/hi/reports/focused/natural-strengths", "/reports/focused/property-delay-reason", "/reports/focused/major-kundali-obstacles"]) {
     const { status: st, html } = await get(p);
     ok(st === 200 && /<meta name="robots" content="noindex, follow"/.test(html) && /₹\s?51\b/.test(text(html)), `regression ${p}`);
   }

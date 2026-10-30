@@ -52,6 +52,17 @@ import { longTermCompatibility } from "./long_term_compatibility";
 import { kundaliMatchForMarriage } from "./kundali_match_for_marriage";
 import { rightTimeToConsiderMarriage } from "./right_time_to_consider_marriage";
 import { relationshipStrengthsRisks } from "./relationship_strengths_risks";
+// F12-P2.12 batch
+import { conflictAreas } from "./conflict_areas";
+import { emotionalCommunicationFit } from "./emotional_communication_fit";
+import { strengthenRelationship } from "./strengthen_relationship";
+import { relationshipCarePeriods } from "./relationship_care_periods";
+import { foreignWorkTiming } from "./foreign_work_timing";
+import { foreignPlansDelayReason } from "./foreign_plans_delay_reason";
+import { studyStrongPeriod } from "./study_strong_period";
+import { studyProgressImprovement } from "./study_progress_improvement";
+import { propertyCurrentPeriod } from "./property_current_period";
+import { propertyStrongestPeriod } from "./property_strongest_period";
 
 export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent> = {
   [newJobTiming.questionKey]: newJobTiming,
@@ -95,6 +106,16 @@ export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent>
   [kundaliMatchForMarriage.questionKey]: kundaliMatchForMarriage,
   [rightTimeToConsiderMarriage.questionKey]: rightTimeToConsiderMarriage,
   [relationshipStrengthsRisks.questionKey]: relationshipStrengthsRisks,
+  [conflictAreas.questionKey]: conflictAreas,
+  [emotionalCommunicationFit.questionKey]: emotionalCommunicationFit,
+  [strengthenRelationship.questionKey]: strengthenRelationship,
+  [relationshipCarePeriods.questionKey]: relationshipCarePeriods,
+  [foreignWorkTiming.questionKey]: foreignWorkTiming,
+  [foreignPlansDelayReason.questionKey]: foreignPlansDelayReason,
+  [studyStrongPeriod.questionKey]: studyStrongPeriod,
+  [studyProgressImprovement.questionKey]: studyProgressImprovement,
+  [propertyCurrentPeriod.questionKey]: propertyCurrentPeriod,
+  [propertyStrongestPeriod.questionKey]: propertyStrongestPeriod,
 };
 
 export { REPORT_SECTIONS, AI_DISCLOSURE } from "./types";
