@@ -48,6 +48,9 @@ const PILOT_KEYS = [
   // F12-P2.7 batch
   "best_career_years", "job_search_start_timing", "job_gap_easing",
   "money_growth_periods", "business_expansion_timing", "business_slowdown_easing",
+  // F12-P2.8 batch
+  "best_business_periods", "new_venture_partnership_timing", "strongest_marriage_periods",
+  "marriage_chances_timing", "marriage_delay_easing", "marriage_talks_current_period",
 ];
 /** How each backend horizon must be stated in the copy. */
 const HORIZON_PHRASE: Record<number, string> = { 12: "12 months", 36: "three years", 60: "five years" };
@@ -80,15 +83,15 @@ const shingles = (text: string, n = 5) => {
 const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; for (const x of a) if (b.has(x)) i++; return i / (a.size + b.size - i || 1); };
 
 console.log("\n=== tiers ===");
-check("exactly the 29 approved topics have SEO content, each a real catalog question", () => {
+check("exactly the 35 approved topics have SEO content, each a real catalog question", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORT_SEO_CONTENT).sort(), [...PILOT_KEYS].sort());
   for (const key of PILOT_KEYS) assert.ok(intentQuestions.some((q) => q.questionKey === key), key);
 });
-check("the resolver serves content-tier configs for the 29 topics; bespoke (2) unchanged, the other 32 stay generic", () => {
+check("the resolver serves content-tier configs for the 35 topics; bespoke (2) unchanged, the other 26 stay generic", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORTS_CONFIG).sort(), ["major-kundali-obstacles", "major-kundali-strengths"]);
   assert.equal(configs.length, 63);
   assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS].sort());
-  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 32);
+  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 26);
   for (const c of configs.filter((x) => x.seo)) assert.equal(c.seo!.questionKey, c.questionKey);
 });
 check("content-tier configs keep the authoritative product title, category and ₹51 price", () => {
@@ -226,6 +229,8 @@ if (fs.existsSync(BACKEND)) {
   });
   check("backend cross-check: horizons and house sets match the *_keys.py / *_evidence.py definitions for every content topic", () => {
     assert.match(be("marriage_keys.py"), /"marriage_delay_reason": 12,/);
+    for (const [key, months] of [["strongest_marriage_periods", 60], ["marriage_chances_timing", 60], ["marriage_delay_easing", 60], ["marriage_talks_current_period", 12]] as const) assert.ok(be("marriage_keys.py").includes(`"${key}": ${months},`), key);
+    assert.ok(be("marriage_evidence.py").includes('selected_planets=("Jupiter", "Saturn")'), "marriage transits are Jupiter/Saturn");
     const foreign = be("foreign_keys.py");
     for (const [key, months, houses] of [["going_abroad_timing", 60, "3, 9, 12"], ["study_abroad", 12, "4, 5, 9, 12"], ["foreign_settlement_timing", 60, "4, 9, 12"], ["relocation_timing", 60, "3, 4, 12"]] as const) {
       assert.ok(foreign.includes(`"${key}": ${months},`) && foreign.includes(`"${key}": (${houses}),`), key);
@@ -246,8 +251,8 @@ if (fs.existsSync(BACKEND)) {
     // Money/business keys: 12 months unless listed in MULTI_YEAR_KEYS.
     const money = be("money_business_keys.py");
     const multiYear = (money.match(/MULTI_YEAR_KEYS = \(([^)]*)\)/) || [])[1] || "";
-    for (const key of ["debt_pressure_easing", "business_start_timing", "income_increase_timing", "financial_improvement_timing", "financial_pressure_easing", "business_growth_timing", "business_expansion_timing", "business_slowdown_easing"]) assert.ok(money.includes(`"${key}"`) && !multiYear.includes(key), key);
-    assert.ok(multiYear.includes('"money_growth_periods"'), "money_growth_periods is multi-year");
+    for (const key of ["debt_pressure_easing", "business_start_timing", "income_increase_timing", "financial_improvement_timing", "financial_pressure_easing", "business_growth_timing", "business_expansion_timing", "business_slowdown_easing", "new_venture_partnership_timing"]) assert.ok(money.includes(`"${key}"`) && !multiYear.includes(key), key);
+    for (const key of ["money_growth_periods", "best_business_periods"]) assert.ok(multiYear.includes(`"${key}"`), `${key} is multi-year`);
     assert.match(be("money_business_evidence.py"), /months = 60 if question_key in MULTI_YEAR_KEYS else 12/);
     // Promotion houses are named in its own prompt spec; transit planets per evidence module.
     assert.ok(be("prompt_specs.py").includes("2nd/6th/10th/11th houses and their lords"));

@@ -38,6 +38,13 @@ import { jobGapEasing } from "./job_gap_easing";
 import { moneyGrowthPeriods } from "./money_growth_periods";
 import { businessExpansionTiming } from "./business_expansion_timing";
 import { businessSlowdownEasing } from "./business_slowdown_easing";
+// F12-P2.8 batch
+import { bestBusinessPeriods } from "./best_business_periods";
+import { newVenturePartnershipTiming } from "./new_venture_partnership_timing";
+import { strongestMarriagePeriods } from "./strongest_marriage_periods";
+import { marriageChancesTiming } from "./marriage_chances_timing";
+import { marriageDelayEasing } from "./marriage_delay_easing";
+import { marriageTalksCurrentPeriod } from "./marriage_talks_current_period";
 
 export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent> = {
   [newJobTiming.questionKey]: newJobTiming,
@@ -69,6 +76,12 @@ export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent>
   [moneyGrowthPeriods.questionKey]: moneyGrowthPeriods,
   [businessExpansionTiming.questionKey]: businessExpansionTiming,
   [businessSlowdownEasing.questionKey]: businessSlowdownEasing,
+  [bestBusinessPeriods.questionKey]: bestBusinessPeriods,
+  [newVenturePartnershipTiming.questionKey]: newVenturePartnershipTiming,
+  [strongestMarriagePeriods.questionKey]: strongestMarriagePeriods,
+  [marriageChancesTiming.questionKey]: marriageChancesTiming,
+  [marriageDelayEasing.questionKey]: marriageDelayEasing,
+  [marriageTalksCurrentPeriod.questionKey]: marriageTalksCurrentPeriod,
 };
 
 export { REPORT_SECTIONS, AI_DISCLOSURE } from "./types";
