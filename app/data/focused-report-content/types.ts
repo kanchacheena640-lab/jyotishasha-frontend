@@ -63,6 +63,9 @@ export interface FocusedReportSeoContent {
     /** Natal houses the backend reads for this key, when it defines them explicitly (else null). */
     houses: number[] | null;
     transits: string[];
+    /** Natal planets the backend reads as birth-chart placements (not transits), when it lists them explicitly
+     * (e.g. life_keys.py LIFE_NATAL_PLANETS). Naming one of these in the copy is not a transit claim. */
+    natalPlanets?: string[];
     remedies: false;
   };
 }

@@ -72,10 +72,12 @@ const count = (html, re) => (html.match(re) || []).length;
       }
     }
   }
-  // Generic regression pages stay on the template, noindex; hub and sitemap unchanged in policy.
-  for (const p of ["/reports/focused/best-period-to-switch", "/hi/reports/focused/natural-strengths", "/reports/focused/property-delay-reason", "/reports/focused/major-kundali-obstacles"]) {
-    const { status: st, html } = await get(p);
-    ok(st === 200 && /<meta name="robots" content="noindex, follow"/.test(html) && /₹\s?51\b/.test(text(html)), `regression ${p}`);
+  // Every catalog URL (content-tier and bespoke, EN and HI) renders, stays noindex and keeps ₹51.
+  for (const key of Object.keys(personMode)) {
+    for (const p of [`/reports/focused/${key.replace(/_/g, "-")}`, `/hi/reports/focused/${key.replace(/_/g, "-")}`]) {
+      const { status: st, html } = await get(p);
+      ok(st === 200 && /<meta name="robots" content="noindex, follow"/.test(html) && /₹\s?51\b/.test(text(html)), `catalog URL ${p}`);
+    }
   }
   const hub = await get("/reports/focused"); ok(hub.status === 200, "hub 200");
   const sm = await get("/sitemap.xml"); ok(sm.status === 200 && !sm.html.includes("/reports/focused"), "sitemap has no focused URLs");

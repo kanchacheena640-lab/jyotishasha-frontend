@@ -63,6 +63,17 @@ import { studyStrongPeriod } from "./study_strong_period";
 import { studyProgressImprovement } from "./study_progress_improvement";
 import { propertyCurrentPeriod } from "./property_current_period";
 import { propertyStrongestPeriod } from "./property_strongest_period";
+// F12-P2.13 batch
+import { bestPeriodToSwitch } from "./best_period_to_switch";
+import { propertyDelayReason } from "./property_delay_reason";
+import { majorTurningPoints } from "./major_turning_points";
+import { nextLifeChangePeriod } from "./next_life_change_period";
+import { importantYearsAhead } from "./important_years_ahead";
+import { currentPhaseMeaning } from "./current_phase_meaning";
+import { areasNeedingAttention } from "./areas_needing_attention";
+import { naturalStrengths } from "./natural_strengths";
+import { lifeDirection } from "./life_direction";
+import { focusToUseStrengths } from "./focus_to_use_strengths";
 
 export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent> = {
   [newJobTiming.questionKey]: newJobTiming,
@@ -116,6 +127,16 @@ export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent>
   [studyProgressImprovement.questionKey]: studyProgressImprovement,
   [propertyCurrentPeriod.questionKey]: propertyCurrentPeriod,
   [propertyStrongestPeriod.questionKey]: propertyStrongestPeriod,
+  [bestPeriodToSwitch.questionKey]: bestPeriodToSwitch,
+  [propertyDelayReason.questionKey]: propertyDelayReason,
+  [majorTurningPoints.questionKey]: majorTurningPoints,
+  [nextLifeChangePeriod.questionKey]: nextLifeChangePeriod,
+  [importantYearsAhead.questionKey]: importantYearsAhead,
+  [currentPhaseMeaning.questionKey]: currentPhaseMeaning,
+  [areasNeedingAttention.questionKey]: areasNeedingAttention,
+  [naturalStrengths.questionKey]: naturalStrengths,
+  [lifeDirection.questionKey]: lifeDirection,
+  [focusToUseStrengths.questionKey]: focusToUseStrengths,
 };
 
 export { REPORT_SECTIONS, AI_DISCLOSURE } from "./types";

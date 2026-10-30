@@ -58,6 +58,10 @@ const PILOT_KEYS = [
   "conflict_areas", "emotional_communication_fit", "strengthen_relationship", "relationship_care_periods",
   "foreign_work_timing", "foreign_plans_delay_reason", "study_strong_period", "study_progress_improvement",
   "property_current_period", "property_strongest_period",
+  // F12-P2.13 batch (final)
+  "best_period_to_switch", "property_delay_reason", "major_turning_points", "next_life_change_period",
+  "important_years_ahead", "current_phase_meaning", "areas_needing_attention", "natural_strengths",
+  "life_direction", "focus_to_use_strengths",
 ];
 /** How each backend horizon must be stated in the copy. */
 const HORIZON_PHRASE: Record<number, string> = { 12: "12 months", 36: "three years", 60: "five years" };
@@ -90,15 +94,15 @@ const shingles = (text: string, n = 5) => {
 const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; for (const x of a) if (b.has(x)) i++; return i / (a.size + b.size - i || 1); };
 
 console.log("\n=== tiers ===");
-check("exactly the 51 approved topics have SEO content, each a real catalog question", () => {
+check("exactly the 61 approved topics have SEO content, each a real catalog question", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORT_SEO_CONTENT).sort(), [...PILOT_KEYS].sort());
   for (const key of PILOT_KEYS) assert.ok(intentQuestions.some((q) => q.questionKey === key), key);
 });
-check("the resolver serves content-tier configs for the 51 topics; bespoke (2) unchanged, the other 10 stay generic", () => {
+check("the resolver serves content-tier configs for the 61 topics; bespoke (2) unchanged, none stay generic", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORTS_CONFIG).sort(), ["major-kundali-obstacles", "major-kundali-strengths"]);
   assert.equal(configs.length, 63);
   assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS].sort());
-  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 10);
+  assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 0);
   for (const c of configs.filter((x) => x.seo)) assert.equal(c.seo!.questionKey, c.questionKey);
 });
 check("content-tier configs keep the authoritative product title, category and â‚¹51 price", () => {
@@ -111,6 +115,13 @@ check("content-tier configs keep the authoritative product title, category and â
   }
 });
 
+check("63/63: every catalog question resolves to a custom page (content tier or bespoke), zero generic fallbacks", () => {
+  assert.equal(intentQuestions.length, 63);
+  for (const q of intentQuestions) {
+    const c = getFocusedReportConfigBySlug(questionKeyToHumanSlug(q.questionKey))!;
+    assert.ok(c.seo || FOCUSED_REPORTS_CONFIG[c.humanSlug], `${q.questionKey} is still generic`);
+  }
+});
 console.log("\n=== completeness and Hindi localisation ===");
 check("every field is filled in both languages, with >=2 intro paragraphs, >=3 factors, >=3 guide points, >=3 FAQs, >=2 links", () => {
   for (const c of contents) {
@@ -226,7 +237,8 @@ check("horizon, houses and transits stated in the copy match the content's groun
     else assert.ok(HORIZON_PHRASE[months] && en.includes(HORIZON_PHRASE[months]), `${c.questionKey}: horizon ${months}`);
     for (const planet of c.grounding.transits) assert.ok(en.includes(planet), `${c.questionKey}: ${planet}`);
     for (const planet of ["Jupiter", "Saturn", "Rahu", "Ketu", "Mars", "Venus"]) {
-      if (!c.grounding.transits.includes(planet) && planet !== "Mars") assert.ok(!en.includes(planet), `${c.questionKey}: unsupported ${planet}`);
+      // A planet may be named only if the backend reads it as a transit or as a listed natal placement.
+      if (!c.grounding.transits.includes(planet) && !(c.grounding.natalPlanets ?? []).includes(planet) && planet !== "Mars") assert.ok(!en.includes(planet), `${c.questionKey}: unsupported ${planet}`);
     }
     if (c.grounding.houses) assert.ok(en.includes(housePhrase(c.grounding.houses)), `${c.questionKey}: expected "${housePhrase(c.grounding.houses)}"`);
     else assert.doesNotMatch(en, /\b\d+(st|nd|rd|th) house/, `${c.questionKey}: house numbers not defined by the backend`);
@@ -284,7 +296,7 @@ if (fs.existsSync(BACKEND)) {
       assert.ok(foreign.includes(`"${key}": ${months},`) && foreign.includes(`"${key}": (${houses}),`), key);
     }
     const property = be("property_keys.py");
-    for (const [key, months, houses] of [["property_purchase_timing", 60, "2, 4, 11"], ["own_home_timing", 60, "2, 4, 11, 12"], ["property_current_period", 12, "2, 4, 11"], ["property_strongest_period", 60, "2, 4, 11"]] as const) {
+    for (const [key, months, houses] of [["property_purchase_timing", 60, "2, 4, 11"], ["own_home_timing", 60, "2, 4, 11, 12"], ["property_current_period", 12, "2, 4, 11"], ["property_strongest_period", 60, "2, 4, 11"], ["property_delay_reason", 12, "2, 4, 6, 11"]] as const) {
       assert.ok(property.includes(`"${key}": ${months},`) && property.includes(`"${key}": (${houses}),`), key);
     }
     const education = be("education_keys.py");
@@ -293,7 +305,17 @@ if (fs.existsSync(BACKEND)) {
     }
     assert.match(be("education_evidence.py"), /TRANSIT_PLANETS = \("Jupiter", "Saturn"\)/);
     // Career keys: 12 months unless the spec needs the multi-year dasha_sequence (only best_career_years does).
-    for (const key of ["new_job_timing", "promotion_timing", "career_growth_delay_reason", "job_change_now", "salary_growth_timing", "career_improvement_timing", "next_strong_career_period", "work_recognition_timing", "job_search_start_timing", "job_gap_easing", "best_career_years"]) assert.ok(be("career_keys.py").includes(`"${key}"`), key);
+    for (const key of ["new_job_timing", "promotion_timing", "career_growth_delay_reason", "job_change_now", "salary_growth_timing", "career_improvement_timing", "next_strong_career_period", "work_recognition_timing", "job_search_start_timing", "job_gap_easing", "best_career_years", "best_period_to_switch"]) assert.ok(be("career_keys.py").includes(`"${key}"`), key);
+    // Life keys: horizon (None = natal only), base house set, natal planets and transits exactly as life_keys.py defines them.
+    const life = be("life_keys.py");
+    const lifeNatal = ((life.match(/LIFE_NATAL_PLANETS = \(([^)]*)\)/) || [])[1] || "").match(/[A-Z][a-z]+/g) || [];
+    for (const c of contents.filter((x) => life.includes(`"${x.questionKey}": (`))) {
+      assert.ok(life.includes(`"${c.questionKey}": ${c.grounding.horizonMonths ?? "None"},`), `${c.questionKey}: life horizon`);
+      assert.ok(c.grounding.houses && life.includes(`"${c.questionKey}": (${c.grounding.houses.join(", ")}),`), `${c.questionKey}: life houses`);
+      assert.deepEqual(c.grounding.natalPlanets, lifeNatal, `${c.questionKey}: natal planets`);
+      assert.deepEqual(c.grounding.transits, c.grounding.horizonMonths === null ? [] : ["Jupiter", "Saturn"], `${c.questionKey}: life transits`);
+    }
+    assert.match(life, /LIFE_TRANSIT_PLANETS_DEFAULT = \("Jupiter", "Saturn"\)/);
     assert.ok(be("prompt_specs.py").includes('key == "best_career_years" or key in MULTI_YEAR_KEYS'), "best_career_years uses the multi-year dasha_sequence");
     assert.match(be("career_evidence.py"), /months = 60 if "dasha_sequence" in required else 12/);
     // Money/business keys: 12 months unless listed in MULTI_YEAR_KEYS.
