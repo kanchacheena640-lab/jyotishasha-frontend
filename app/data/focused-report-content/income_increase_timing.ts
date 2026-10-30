@@ -101,8 +101,8 @@ export const incomeIncreaseTiming: FocusedReportSeoContent = {
       hi: "फ़्रीलांसर, प्रोफ़ेशनल, बिज़नेस मालिक या एक से ज़्यादा आय-स्रोत वाले कर्मचारी के लिए, जो जानना चाहते हैं कि कुल कमाई कब बढ़ने की संभावना है।",
     },
     whatYouReceive: {
-      en: "Your PDF, roughly 400 to 500 words, contains Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, all generated from your birth details.",
-      hi: "आपकी PDF, लगभग 400 से 500 शब्दों की, में सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; सब आपकी जन्म जानकारी से तैयार।",
+      en: "Your PDF, roughly 400 to 500 words, contains Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, all generated from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF, लगभग 400 से 500 शब्दों की, में सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; सब आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrological context, not a certainty or a guaranteed outcome, and not investment, tax, lending or financial advice. It does not promise income, profit, returns or wealth.",

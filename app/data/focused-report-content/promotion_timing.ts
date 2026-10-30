@@ -42,7 +42,7 @@ export const promotionTiming: FocusedReportSeoContent = {
       "Jupiter, Saturn and Rahu: the sign and house each occupies from your Lagna, with their direct and retrograde phases",
     ],
     hi: [
-      "आपके दूसरे, छठे, दसवें और ग्यारहवें भाव और उनके स्वामी, जिन्हें यह रिपोर्ट काम में आय, सेवा, पद और लाभ के लिए पढ़ती है",
+      "आपके 2रे, 6ठे, 10वें और 11वें भाव और उनके स्वामी, जिन्हें यह रिपोर्ट काम में आय, सेवा, पद और लाभ के लिए पढ़ती है",
       "आपकी कुंडली में पहले से गणना किए गए करियर योग, केवल वहीं जहाँ वे सच में मौजूद हों",
       "आपकी मौजूदा महादशा और अंतर्दशा, और अगले 12 महीनों में शुरू होने वाली कोई उप-दशा",
       "गुरु, शनि और राहु: आपके लग्न से हर ग्रह किस राशि और भाव में है, और उनके मार्गी व वक्री चरण",
@@ -60,7 +60,7 @@ export const promotionTiming: FocusedReportSeoContent = {
       hi: [
         "“अभी” और “अगला अनुकूल समय” दो अलग जवाब हैं। कुंडली आज स्थिर परिस्थितियाँ और कुछ महीने बाद ज़्यादा मजबूत समय दिखा सकती है; रिपोर्ट बताती है कि आप पर कौन-सा लागू होता है।",
         "तरक्की के संकेत ज़िम्मेदारी और पहचान के बारे में होते हैं, किसी तय वेतन-वृद्धि के बारे में नहीं। कोई भी कुंडली-विश्लेषण वेतन की रकम नहीं बता सकता, इसलिए यह रिपोर्ट भी नहीं बताती।",
-        "धीमा समय तैयारी का संकेत है: अपने नतीजों को दर्ज करना, अपनी बात मज़बूत करना और ऐसा काम लेना जो दिखे, ताकि सहयोग बढ़ने पर आप तैयार रहें।",
+        "धीमा समय तैयारी का संकेत है: अपने नतीजों को दर्ज करना, अपनी बात मजबूत करना और ऐसा काम लेना जो दिखे, ताकि सहयोग बढ़ने पर आप तैयार रहें।",
         "आपकी संस्था का अप्रेज़ल कैलेंडर अब भी मायने रखता है। अनुकूल समय का उपयोग यह तय करने में करें कि कब बात करनी है, प्रक्रिया के विकल्प के रूप में नहीं।",
       ],
     },
@@ -83,7 +83,7 @@ export const promotionTiming: FocusedReportSeoContent = {
     ],
     hi: [
       "पहले मौजूदा अवधि का साफ़ जवाब, फिर आगे के मजबूत तरक्की वाले समय",
-      "दूसरे, छठे, दसवें और ग्यारहवें भाव को आपकी चल रही दशा और तीन मुख्य गोचरों के साथ पढ़ती है",
+      "2रे, 6ठे, 10वें और 11वें भाव को आपकी चल रही दशा और तीन मुख्य गोचरों के साथ पढ़ती है",
       "इस बात से जुड़ी व्यावहारिक करियर-सलाह कि सहयोग अभी मजबूत है या बाद में",
     ],
   },
@@ -94,15 +94,15 @@ export const promotionTiming: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "Your Lagna, placements, the 2nd, 6th, 10th and 11th houses with their lords, career yogas, Dasha periods and the transit dates for Jupiter, Saturn and Rahu are all calculated first. The written reading then weighs these together for advancement; it never alters a calculated position or date.",
-      hi: "आपका लग्न, ग्रह-स्थितियाँ, दूसरा, छठा, दसवाँ और ग्यारहवाँ भाव व उनके स्वामी, करियर योग, दशा की अवधियाँ और गुरु, शनि व राहु के गोचर की तारीखें पहले गणना की जाती हैं। इसके बाद लिखित विश्लेषण इन्हें तरक्की के लिए साथ में तौलता है; यह किसी गणना की गई स्थिति या तारीख को कभी नहीं बदलता।",
+      hi: "आपका लग्न, ग्रह-स्थितियाँ, 2रा, 6ठा, 10वाँ और 11वाँ भाव व उनके स्वामी, करियर योग, दशा की अवधियाँ और गुरु, शनि व राहु के गोचर की तारीखें पहले गणना की जाती हैं। इसके बाद लिखित विश्लेषण इन्हें तरक्की के लिए साथ में तौलता है; यह किसी गणना की गई स्थिति या तारीख को कभी नहीं बदलता।",
     },
     whoItIsFor: {
       en: "For someone already in a role who is approaching an appraisal, eyeing a senior opening, or deciding when to raise the subject with a manager.",
       hi: "उन लोगों के लिए जो पहले से किसी पद पर हैं और अप्रेज़ल के करीब हैं, किसी वरिष्ठ पद पर नज़र रखे हैं, या तय कर रहे हैं कि मैनेजर से यह बात कब करें।",
     },
     whatYouReceive: {
-      en: "Your PDF runs to roughly 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from your birth details and sent by email.",
-      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए और सीधी बात शामिल हैं; यह आपकी जन्म जानकारी से तैयार होकर ईमेल पर भेजी जाती है।",
+      en: "Your PDF runs to roughly 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from your birth details and sent by email. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए और सीधी बात शामिल हैं; यह आपकी जन्म जानकारी से तैयार होकर ईमेल पर भेजी जाती है। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise a promotion, a raise or a salary figure, and it does not predict continued employment or job loss.",

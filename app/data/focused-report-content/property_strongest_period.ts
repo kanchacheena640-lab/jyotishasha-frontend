@@ -31,7 +31,7 @@ export const propertyStrongestPeriod: FocusedReportSeoContent = {
       "This report compares the windows across your next five years for any kind of acquisition, whether land, a plot, a flat, a shop or an investment property. It reads the 2nd, 4th and 11th houses and their lords for savings, property and gains, against the dated sequence of your Dasha periods and Jupiter and Saturn. Its focus is the difference between windows: what puts the leading one ahead, and what holds the others back.",
     ],
     hi: [
-      "ज़मीन या प्रॉपर्टी लेना एक परियोजना है, कोई एक पल नहीं। डाउन पेमेंट जुटाना होता है, लोन तय करना होता है, तलाश महीनों चल सकती है, और उसके बाद कागज़ी काम। अगर आप जानते हैं कि आगे कौन-सा समय सबसे मज़बूत है, तो आप पीछे की ओर योजना बनाकर ये कदम ऐसे रख सकते हैं कि तैयार पहुँचें।",
+      "ज़मीन या प्रॉपर्टी लेना एक परियोजना है, कोई एक पल नहीं। डाउन पेमेंट जुटाना होता है, लोन तय करना होता है, तलाश महीनों चल सकती है, और उसके बाद कागज़ी काम। अगर आप जानते हैं कि आगे कौन-सा समय सबसे मजबूत है, तो आप पीछे की ओर योजना बनाकर ये कदम ऐसे रख सकते हैं कि तैयार पहुँचें।",
       "यह रिपोर्ट किसी भी तरह की संपत्ति लेने के लिए अगले पाँच वर्षों के समयों की तुलना करती है, चाहे ज़मीन हो, प्लॉट, फ़्लैट, दुकान या निवेश वाली प्रॉपर्टी। यह बचत, संपत्ति और लाभ के लिए 2रा, 4था और 11वाँ भाव और उनके स्वामी, तारीख-युक्त दशा-क्रम और गुरु व शनि के सामने पढ़ती है। इसका ध्यान समयों के बीच के फ़र्क पर है: सबसे आगे वाले समय को क्या आगे रखता है, और बाकी को क्या रोकता है।",
     ],
   },
@@ -62,13 +62,13 @@ export const propertyStrongestPeriod: FocusedReportSeoContent = {
         "दो-तीन साल पहले: डाउन पेमेंट जुटाएँ और अपना क्रेडिट रिकॉर्ड साफ़ रखें।",
         "लगभग एक साल पहले: लोन की पात्रता जँचवाएँ और जगहें चुनें।",
         "उस समय से ठीक पहले और दौरान: गंभीरता से तलाशें, मालिकाना हक जाँचें और मोल-भाव करें।",
-        "सबसे आगे वाला समय तुलना किए गए समयों में सबसे मज़बूत है, यह वादा नहीं कि सौदा पूरा होगा। रिपोर्ट कभी पूरे हुए सौदे की भविष्यवाणी नहीं करती।",
+        "सबसे आगे वाला समय तुलना किए गए समयों में सबसे मजबूत है, यह वादा नहीं कि सौदा पूरा होगा। रिपोर्ट कभी पूरे हुए सौदे की भविष्यवाणी नहीं करती।",
       ],
     },
   },
   differentiation: {
     en: "Property Purchase Timing uses the same five-year evidence to rank windows for committing to a purchase. Property Readiness Now looks at the present only. This report concentrates on how the windows differ, for any acquisition, so you can plan savings, loan and search steps backwards from the strongest one.",
-    hi: "'प्रॉपर्टी खरीदने का समय' उसी पाँच साल के प्रमाण से खरीद के लिए प्रतिबद्ध होने के समयों का क्रम बताती है। 'अभी प्रॉपर्टी की तैयारी' केवल वर्तमान देखती है। यह रिपोर्ट किसी भी तरह की संपत्ति के लिए इस पर केंद्रित है कि समय एक-दूसरे से कैसे अलग हैं, ताकि आप सबसे मज़बूत समय से पीछे की ओर बचत, लोन और तलाश के कदम तय कर सकें।",
+    hi: "'प्रॉपर्टी खरीदने का समय' उसी पाँच साल के प्रमाण से खरीद के लिए प्रतिबद्ध होने के समयों का क्रम बताती है। 'अभी प्रॉपर्टी की तैयारी' केवल वर्तमान देखती है। यह रिपोर्ट किसी भी तरह की संपत्ति के लिए इस पर केंद्रित है कि समय एक-दूसरे से कैसे अलग हैं, ताकि आप सबसे मजबूत समय से पीछे की ओर बचत, लोन और तलाश के कदम तय कर सकें।",
   },
   internalLinks: [
     { path: "/reports/focused/property-current-period", localized: true, label: { en: "Property Readiness Now report (₹51)", hi: "अभी प्रॉपर्टी की तैयारी रिपोर्ट (₹51)" } },
@@ -102,8 +102,8 @@ export const propertyStrongestPeriod: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो ज़मीन, प्लॉट या निवेश वाली प्रॉपर्टी के लिए बचत कर रहे हैं और जानना चाहते हैं कि किस समय के हिसाब से योजना बनाएँ।",
     },
     whatYouReceive: {
-      en: "Your PDF has about 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "आपकी PDF में लगभग 400 से 500 शब्द होते हैं, इन हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "Your PDF has about 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF में लगभग 400 से 500 शब्द होते हैं, इन हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict a completed deal, loan approval or price appreciation, and is not financial or legal advice.",

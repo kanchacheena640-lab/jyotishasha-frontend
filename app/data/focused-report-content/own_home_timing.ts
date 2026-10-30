@@ -19,7 +19,7 @@ export const ownHomeTiming: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report on when owning your own home looks supported in the next five years, from your 2nd, 4th, 11th and 12th houses and Dasha sequence.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके दूसरे, चौथे, ग्यारहवें और बारहवें भाव और दशा-क्रम से अगले पाँच वर्षों में अपना घर होने का अनुकूल समय।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 2रे, 4थे, 11वें और 12वें भाव और दशा-क्रम से अगले पाँच वर्षों में अपना घर होने का अनुकूल समय।",
   },
   h1: {
     en: "A Home of Your Own: When Ownership Looks Supported",
@@ -43,7 +43,7 @@ export const ownHomeTiming: FocusedReportSeoContent = {
       "Your wider birth-chart placements, read together with the above",
     ],
     hi: [
-      "आपके दूसरे, चौथे, ग्यारहवें और बारहवें भाव, जिन्हें रिपोर्ट बचत, घर, लाभ और बड़े खर्च के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 2रे, 4थे, 11वें और 12वें भाव, जिन्हें रिपोर्ट बचत, घर, लाभ और बड़े खर्च के लिए पढ़ती है, उनके स्वामियों के साथ",
       "अगले पाँच वर्षों में महादशा और अंतर्दशा का पूरा क्रम",
       "उस अवधि में आपके लग्न से गुरु और शनि, और वे कब आगे बढ़ते हैं",
       "आपकी जन्म कुंडली की व्यापक ग्रह-स्थिति, ऊपर के कारणों के साथ मिलाकर",
@@ -94,19 +94,19 @@ export const ownHomeTiming: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "The calculations cover your placements, the 2nd, 4th, 11th and 12th houses with their lords, a five-year Dasha sequence and Jupiter's and Saturn's dates. The interpretation compares only those dates and never extends past five years.",
-      hi: "गणना में आपकी ग्रह-स्थितियाँ, दूसरा, चौथा, ग्यारहवाँ और बारहवाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु व शनि की तारीखें शामिल हैं। व्याख्या केवल इन्हीं तारीखों की तुलना करती है और पाँच साल से आगे कभी नहीं जाती।",
+      hi: "सबसे पहले सॉफ़्टवेयर आपकी कुंडली निकालता है: घर से जुड़े 4था भाव, बचत का 2रा, लाभ का 11वाँ और बड़े खर्च का 12वाँ भाव, उनके स्वामी, आने वाले पाँच साल की दशाएँ और गुरु-शनि की चाल। लिखित हिस्सा इन्हीं तथ्यों से बनता है, अपनी ओर से कोई तारीख नहीं जोड़ता।",
     },
     whoItIsFor: {
       en: "For someone renting today, or a family saving towards a first home, who wants a sense of when ownership becomes realistic in their chart.",
       hi: "आज किराए पर रह रहे व्यक्ति, या पहले घर के लिए बचत कर रहे परिवार के लिए, जो जानना चाहते हैं कि उनकी कुंडली में घर का मालिक होना कब व्यावहारिक बनता है।",
     },
     whatYouReceive: {
-      en: "Around 400 to 500 words as a PDF: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, worked out from your birth details.",
-      hi: "PDF के रूप में लगभग 400 से 500 शब्द: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से निकाले गए।",
+      en: "Around 400 to 500 words as a PDF: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, worked out from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "PDF के रूप में लगभग 400 से 500 शब्द: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से निकाले गए। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome, and not financial, legal, mortgage or title advice. It does not promise ownership, a loan, registration or possession, and never tells you to buy.",
-      hi: "यह ज्योतिष-आधारित मार्गदर्शन है, कोई निश्चितता या पक्के नतीजे की गारंटी नहीं, और न ही वित्तीय, कानूनी, होम-लोन या टाइटल सलाह। यह मालिकाना हक, लोन, रजिस्ट्री या कब्ज़े का वादा नहीं करती, और कभी खरीदने को नहीं कहती।",
+      hi: "यह ज्योतिष-आधारित मार्गदर्शन है, कोई निश्चितता या पक्के नतीजे की गारंटी नहीं। अपना घर कब मिलेगा, यह बैंक की मंज़ूरी, बिल्डर और कागज़ात पर भी टिका है, जिन्हें कुंडली नहीं देख सकती; इसलिए यह रिपोर्ट वित्तीय या कानूनी सलाह नहीं देती और घर लेने का फ़ैसला आप पर छोड़ती है।",
     },
   },
   faqs: [
@@ -114,7 +114,7 @@ export const ownHomeTiming: FocusedReportSeoContent = {
       question: { en: "How is this different from Property Purchase Timing?", hi: "यह 'प्रॉपर्टी खरीदने का समय' से कैसे अलग है?" },
       answer: {
         en: "That report ranks windows for any property purchase, including investment. This one is about owning the home you live in and also reads the 12th house of major outlay.",
-        hi: "वह रिपोर्ट निवेश सहित किसी भी प्रॉपर्टी की खरीद के समय का क्रम बताती है। यह रिपोर्ट जिस घर में आप रहते हैं उसके मालिक बनने के बारे में है और बड़े खर्च से जुड़ा बारहवाँ भाव भी पढ़ती है।",
+        hi: "वह रिपोर्ट निवेश सहित किसी भी प्रॉपर्टी की खरीद के समय का क्रम बताती है। यह रिपोर्ट जिस घर में आप रहते हैं उसके मालिक बनने के बारे में है और बड़े खर्च से जुड़ा 12वाँ भाव भी पढ़ती है।",
       },
     },
     {

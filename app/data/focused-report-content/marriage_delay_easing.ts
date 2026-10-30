@@ -61,7 +61,7 @@ export const marriageDelayEasing: FocusedReportSeoContent = {
       hi: [
         "लगातार: अभी दबाव हावी रहता है। इंतज़ार के बजाय इस समय में उम्मीदें साफ़ करें और तलाश का दायरा बढ़ाएँ।",
         "मिली-जुली: शांत दौरों के बीच मौके आते हैं। बेहतर महीनों में कदम उठाने के लिए तैयार रहना फ़र्क लाता है।",
-        "कम होती: सहारा मज़बूत होता है। सक्रिय परिचय और परिवार की बातचीत को प्राथमिकता देना ठीक है।",
+        "कम होती: सहारा मजबूत होता है। सक्रिय परिचय और परिवार की बातचीत को प्राथमिकता देना ठीक है।",
         "देरी इनकार नहीं है। रिपोर्ट कभी शादी को असंभव नहीं बताती और कभी किसी पर दोष नहीं डालती।",
       ],
     },
@@ -102,8 +102,8 @@ export const marriageDelayEasing: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिनकी शादी कोशिश के बावजूद टल रही है, या ऐसे परिवार के लिए जो आगे न बढ़ने वाले रिश्तों से थक चुका है।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words covering Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से।",
+      en: "A PDF of about 400 to 500 words covering Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It sets no deadline, never calls marriage impossible, and does not include rituals or remedies; the separate Delay in Marriage report covers those.",

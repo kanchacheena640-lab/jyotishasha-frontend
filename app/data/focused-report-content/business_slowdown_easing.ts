@@ -102,8 +102,8 @@ export const businessSlowdownEasing: FocusedReportSeoContent = {
       hi: "दुकानदार, व्यापारी, एजेंसी या छोटे निर्माता के लिए जो सुस्त दौर से गुज़र रहे हैं और यह तय करने से पहले कि क्या घटाएँ या रखें, उसे समझना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "The PDF holds roughly 400 to 500 words: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details.",
-      hi: "PDF में लगभग 400 से 500 शब्द होते हैं: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "The PDF holds roughly 400 to 500 words: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "PDF में लगभग 400 से 500 शब्द होते हैं: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise recovery or profit, is not business advice, and never tells you to close or borrow.",

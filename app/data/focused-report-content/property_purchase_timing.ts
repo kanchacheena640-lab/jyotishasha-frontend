@@ -20,7 +20,7 @@ export const propertyPurchaseTiming: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report ranking your stronger property-buying windows over the next five years, from your 2nd, 4th and 11th houses, Dasha and transits.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके दूसरे, चौथे और ग्यारहवें भाव, दशा और गोचर से अगले पाँच वर्षों में प्रॉपर्टी खरीदने के मजबूत समय का क्रम।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 2रे, 4थे और 11वें भाव, दशा और गोचर से अगले पाँच वर्षों में प्रॉपर्टी खरीदने के मजबूत समय का क्रम।",
   },
   h1: {
     en: "Property Purchase Timing: Your Stronger Windows Over Five Years",
@@ -44,7 +44,7 @@ export const propertyPurchaseTiming: FocusedReportSeoContent = {
       "Your broader birth-chart placements, read together with the factors above",
     ],
     hi: [
-      "आपके दूसरे, चौथे और ग्यारहवें भाव, जिन्हें यह रिपोर्ट संचित संसाधनों, घर-प्रॉपर्टी और लाभ के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 2रे, 4थे और 11वें भाव, जिन्हें यह रिपोर्ट संचित संसाधनों, घर-प्रॉपर्टी और लाभ के लिए पढ़ती है, उनके स्वामियों के साथ",
       "अगले पाँच वर्षों में आपकी महादशा और अंतर्दशा का पूरा क्रम",
       "गुरु और शनि: उस अवधि में आपके लग्न से हर ग्रह किस राशि और भाव में है, और वे कब आगे बढ़ते हैं",
       "आपकी जन्म कुंडली की व्यापक ग्रह-स्थिति, ऊपर के कारणों के साथ मिलाकर",
@@ -84,7 +84,7 @@ export const propertyPurchaseTiming: FocusedReportSeoContent = {
     ],
     hi: [
       "पाँच वर्षों में प्रॉपर्टी खरीदने के आपके मजबूत समय, क्रम और कारण के साथ",
-      "दूसरे, चौथे और ग्यारहवें भाव को आपके पूरे दशा-क्रम के साथ पढ़ती है",
+      "2रे, 4थे और 11वें भाव को आपके पूरे दशा-क्रम के साथ पढ़ती है",
       "सामर्थ्य और टाइटल जाँच के साथ रखा जाने वाला समय-संदर्भ, खरीदने का निर्देश नहीं",
     ],
   },
@@ -95,15 +95,15 @@ export const propertyPurchaseTiming: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "Your placements, the 2nd, 4th and 11th houses with their lords, a five-year Dasha sequence and Jupiter's and Saturn's dates are calculated first. The reading compares only those windows and does not extend beyond the period it was given.",
-      hi: "आपकी ग्रह-स्थितियाँ, दूसरा, चौथा और ग्यारहवाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु व शनि की तारीखें पहले गणना की जाती हैं। विश्लेषण केवल इन्हीं अवधियों की तुलना करता है और दी गई अवधि से आगे नहीं जाता।",
+      hi: "आपकी ग्रह-स्थितियाँ, 2रा, 4था और 11वाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु व शनि की तारीखें पहले गणना की जाती हैं। विश्लेषण केवल इन्हीं अवधियों की तुलना करता है और दी गई अवधि से आगे नहीं जाता।",
     },
     whoItIsFor: {
       en: "For a buyer or family saving towards a flat, house or plot who wants to plan the purchase around supportive periods while doing the financial and legal groundwork.",
       hi: "किसी फ़्लैट, घर या प्लॉट के लिए बचत कर रहे खरीदार या परिवार के लिए, जो आर्थिक और कानूनी तैयारी करते हुए खरीदारी की योजना अनुकूल अवधियों के हिसाब से बनाना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "Your report is a PDF of about 400 to 500 words in six parts, Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, created from your birth details.",
-      hi: "आपकी रिपोर्ट लगभग 400 से 500 शब्दों की PDF है, छह हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "Your report is a PDF of about 400 to 500 words in six parts, Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, created from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी रिपोर्ट लगभग 400 से 500 शब्दों की PDF है, छह हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome, and not financial, legal, mortgage, tax or title advice. It does not promise a purchase, loan approval, registration, possession or price rise, and never tells you to buy a specific property.",

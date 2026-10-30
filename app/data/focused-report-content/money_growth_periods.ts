@@ -59,8 +59,8 @@ export const moneyGrowthPeriods: FocusedReportSeoContent = {
         "Five years is the limit of the evidence. The report does not rank years beyond it.",
       ],
       hi: [
-        "मज़बूत संचय वाला दौर वह है जिसमें बचत बनाए रखना आसान हो, न कि वह जिसमें अचानक पैसा आ जाए।",
-        "मज़बूत दौरों में बचत को नियमित बनाएँ और बफ़र तैयार करें; धीमे दौरों में जो पहले से है उसे सुरक्षित रखें।",
+        "मजबूत संचय वाला दौर वह है जिसमें बचत बनाए रखना आसान हो, न कि वह जिसमें अचानक पैसा आ जाए।",
+        "मजबूत दौरों में बचत को नियमित बनाएँ और बफ़र तैयार करें; धीमे दौरों में जो पहले से है उसे सुरक्षित रखें।",
         "रिपोर्ट साफ़ तौर पर स्थिर बढ़ोतरी को सट्टे जैसे दिखने वाले समय से अलग करती है और उन पर ट्रेडिंग या दाँव को बढ़ावा नहीं देती।",
         "पाँच साल प्रमाण की सीमा है। रिपोर्ट उससे आगे के वर्षों का क्रम नहीं बताती।",
       ],
@@ -102,8 +102,8 @@ export const moneyGrowthPeriods: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिनका कई वर्षों का पैसों का लक्ष्य है, जैसे घर का डाउन पेमेंट, बच्चे की पढ़ाई का फ़ंड या बस एक असली सुरक्षा कवच, और जो अपनी मेहनत का समय तय करना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "Your PDF has about 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "आपकी PDF में लगभग 400 से 500 शब्द होते हैं, इन हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "Your PDF has about 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF में लगभग 400 से 500 शब्द होते हैं, इन हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It is not investment advice, names no amounts, and does not recommend any product, trade or purchase.",
@@ -126,7 +126,7 @@ export const moneyGrowthPeriods: FocusedReportSeoContent = {
       },
     },
     {
-      question: { en: "Should I invest during the strongest phase?", hi: "क्या सबसे मज़बूत दौर में निवेश करना चाहिए?" },
+      question: { en: "Should I invest during the strongest phase?", hi: "क्या सबसे मजबूत दौर में निवेश करना चाहिए?" },
       answer: {
         en: "The report does not give investment advice. It describes when saving and building are better supported; specific choices belong with a qualified adviser.",
         hi: "रिपोर्ट निवेश सलाह नहीं देती। यह बताती है कि बचत और संसाधन बनाना कब ज़्यादा अनुकूल है; खास फ़ैसले किसी योग्य सलाहकार के साथ लें।",

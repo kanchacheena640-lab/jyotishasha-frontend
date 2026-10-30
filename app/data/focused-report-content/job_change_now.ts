@@ -61,7 +61,7 @@ export const jobChangeNow: FocusedReportSeoContent = {
         "रुकने और बदलने को दो परिस्थितियों की तरह तौलें, हाँ-या-ना वाले फ़ैसले की तरह नहीं। कुंडली सामान्य रूप से बदलाव का समर्थन कर सकती है, फिर भी आज के बजाय आगे का समय बेहतर बता सकती है।",
         "ऑफ़र को खुद जाँचें: पद, वेतन, नए नियोक्ता की स्थिरता और नोटिस की शर्तें। ज्योतिष समय की परिस्थितियाँ बता सकता है; किसी ऑफ़र की पुष्टि नहीं कर सकता।",
         "सिर्फ़ ज्योतिष के आधार पर नौकरी न छोड़ें। समझदारी का क्रम है: पहले ऑफ़र, फिर व्यावहारिक जाँच, फिर समय का संदर्भ।",
-        "अगर मौजूदा अवधि स्थिरता के पक्ष में है, तो इसका उपयोग अपनी स्थिति या कौशल मज़बूत करने में करें, और अनुकूल समय आने पर इस सवाल को फिर देखें।",
+        "अगर मौजूदा अवधि स्थिरता के पक्ष में है, तो इसका उपयोग अपनी स्थिति या कौशल मजबूत करने में करें, और अनुकूल समय आने पर इस सवाल को फिर देखें।",
       ],
     },
   },
@@ -101,8 +101,8 @@ export const jobChangeNow: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो अभी नौकरी में हैं और जिनके हाथ में कोई ऑफ़र है, जो कहीं और आवेदन करने की सोच रहे हैं, या जानना चाहते हैं कि उनकी बेचैनी बदलाव के अनुकूल समय से मेल खाती है या नहीं।",
     },
     whatYouReceive: {
-      en: "The PDF, about 400 to 500 words, is laid out as Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, and reaches your inbox after it is generated from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF इन हिस्सों में होती है: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार होने के बाद यह आपके इनबॉक्स में पहुँचती है।",
+      en: "The PDF, about 400 to 500 words, is laid out as Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, and reaches your inbox after it is generated from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF इन हिस्सों में होती है: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार होने के बाद यह आपके इनबॉक्स में पहुँचती है। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It will not tell you to resign, does not promise an offer or appointment, and cannot assess any specific employer.",

@@ -101,8 +101,8 @@ export const newJobTiming: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो सक्रिय रूप से नौकरी ढूँढ रहे हैं, दो नौकरियों के बीच हैं, या तय कर रहे हैं कि आने वाले महीने तलाश के लिए ठीक हैं या नहीं, और जो सामान्य करियर विवरण के बजाय कुंडली-आधारित समय की समझ चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words in six parts: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line. It is generated from your birth details and emailed to you.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, छह हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात। यह आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है।",
+      en: "A PDF of about 400 to 500 words in six parts: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line. It is generated from your birth details and emailed to you. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, छह हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात। यह आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise an offer, a selection or an appointment, and it will not tell you to resign. Hiring decisions depend on many practical factors outside the chart.",

@@ -101,8 +101,8 @@ export const rightTimeToConsiderMarriage: FocusedReportSeoContent = {
       hi: "उस जोड़े के लिए जो पहले से एक-दूसरे को सही मानता है और अब सोच रहा है कि क्या समय भी दोनों के लिए सही है।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from both people's birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; दोनों लोगों की जन्म जानकारी से।",
+      en: "A PDF of about 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from both people's birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; दोनों लोगों की जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not decide whether you should marry, sets no date and cannot speak for either person's wishes.",

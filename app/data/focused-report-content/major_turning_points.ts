@@ -102,8 +102,8 @@ export const majorTurningPoints: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो किसी दोराहे पर हैं, या बस अगले कुछ वर्षों का आकार जानना चाहते हैं, और भविष्यवाणियों के बजाय शांत झलक चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "A PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It names themes, not events, and never predicts death, illness, accidents or fixed life outcomes.",

@@ -17,11 +17,11 @@ export const studyStrongPeriod: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 report ranking the stretches of your next 12 months that best support concentration and steady learning, read from your 4th, 5th and 9th houses.",
-    hi: "₹51 की रिपोर्ट: आपके चौथे, पाँचवें और नौवें भाव से अगले 12 महीनों में एकाग्रता और लगातार पढ़ाई को सबसे ज़्यादा सहारा देने वाले दौरों का क्रम।",
+    hi: "₹51 की रिपोर्ट: आपके 4थे, 5वें और 9वें भाव से अगले 12 महीनों में एकाग्रता और लगातार पढ़ाई को सबसे ज़्यादा सहारा देने वाले दौरों का क्रम।",
   },
   h1: {
     en: "Study Support: Your Strongest Stretches for Learning This Year",
-    hi: "पढ़ाई के अनुकूल समय: इस साल सीखने के आपके सबसे मज़बूत दौर",
+    hi: "पढ़ाई के अनुकूल समय: इस साल सीखने के आपके सबसे मजबूत दौर",
   },
   intro: {
     en: [
@@ -57,7 +57,7 @@ export const studyStrongPeriod: FocusedReportSeoContent = {
         "The report does not predict marks, ranks or selection, only how supportive each stretch looks.",
       ],
       hi: [
-        "नया और कठिन पाठ मज़बूत दौरों में रखें; धीमे दौर दोहराव और अभ्यास के लिए रखें।",
+        "नया और कठिन पाठ मजबूत दौरों में रखें; धीमे दौर दोहराव और अभ्यास के लिए रखें।",
         "अच्छा दौर आदतें बनाने में मदद करता है। उसकी शुरुआत में रोज़ पढ़ाई का तय समय बनाएँ ताकि आदत शांत महीनों तक चले।",
         "यह किसी भी पढ़ाई पर लागू होता है: स्कूल, कॉलेज, कोई पेशेवर कोर्स या कोई नया कौशल।",
         "रिपोर्ट अंक, रैंक या चयन की भविष्यवाणी नहीं करती, केवल यह कि हर दौर कितना अनुकूल दिखता है।",
@@ -99,8 +99,8 @@ export const studyStrongPeriod: FocusedReportSeoContent = {
       hi: "पढ़ाई के साल की योजना बना रहे विद्यार्थियों के लिए, या कोई कोर्स या कौशल सीख रहे वयस्कों के लिए जो मेहनत वहाँ लगाना चाहते हैं जहाँ वह टिके।",
     },
     whatYouReceive: {
-      en: "One PDF, roughly 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details.",
-      hi: "एक PDF, लगभग 400 से 500 शब्द: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी।",
+      en: "One PDF, roughly 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "एक PDF, लगभग 400 से 500 शब्द: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict marks, ranks or admission, and steady effort matters in every period.",

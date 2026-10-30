@@ -100,8 +100,8 @@ export const jobSearchStartTiming: FocusedReportSeoContent = {
       hi: "नौकरी के बाज़ार में आ रहे ग्रेजुएट, काम पर लौट रहे लोग, या कोई भी जो गंभीर तलाश शुरू करने वाला है और मेहनत वहीं लगाना चाहता है जहाँ असर हो।",
     },
     whatYouReceive: {
-      en: "One PDF, roughly 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details.",
-      hi: "एक PDF, लगभग 400 से 500 शब्द: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी।",
+      en: "One PDF, roughly 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "एक PDF, लगभग 400 से 500 शब्द: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict interviews or offers, and it never tells you to resign.",
@@ -127,7 +127,7 @@ export const jobSearchStartTiming: FocusedReportSeoContent = {
       question: { en: "What if the chart says “prepare” right now?", hi: "अगर कुंडली अभी “तैयारी” कहे तो?" },
       answer: {
         en: "Then the useful move is strengthening your profile and contacts, so the outreach window that follows is not wasted.",
-        hi: "तब उपयोगी कदम है अपनी प्रोफ़ाइल और संपर्क मज़बूत करना, ताकि बाद में आने वाला संपर्क का समय बेकार न जाए।",
+        hi: "तब उपयोगी कदम है अपनी प्रोफ़ाइल और संपर्क मजबूत करना, ताकि बाद में आने वाला संपर्क का समय बेकार न जाए।",
       },
     },
     {

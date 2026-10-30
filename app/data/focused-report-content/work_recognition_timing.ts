@@ -100,8 +100,8 @@ export const workRecognitionTiming: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिन्हें काम पर नज़रअंदाज़ महसूस होता है, जिनका श्रेय दूसरों को जाता लगता है, या जो जानना चाहते हैं कि उनकी मेहनत कब नज़र में आएगी।",
     },
     whatYouReceive: {
-      en: "The PDF holds about 400 to 500 words under Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, created from your birth details.",
-      hi: "PDF में लगभग 400 से 500 शब्द इन शीर्षकों में होते हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "The PDF holds about 400 to 500 words under Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, created from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "PDF में लगभग 400 से 500 शब्द इन शीर्षकों में होते हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. Recognition is not presented as a promotion or a raise, and the report cannot predict any colleague's or manager's actions.",

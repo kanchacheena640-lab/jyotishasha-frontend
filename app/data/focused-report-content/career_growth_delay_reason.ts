@@ -101,8 +101,8 @@ export const careerGrowthDelayReason: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिन्हें बार-बार नज़रअंदाज़ किया गया, जो एक ही स्तर पर अटके महसूस करते हैं, या जिनकी मेहनत और इनाम में दूरी बढ़ रही है, और जो आगे का फ़ैसला लेने से पहले कारण समझना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "Expect around 400 to 500 words organised as Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, drawn from your birth details and delivered as a PDF by email.",
-      hi: "लगभग 400 से 500 शब्द, इन हिस्सों में: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से तैयार होकर PDF के रूप में ईमेल पर।",
+      en: "Expect around 400 to 500 words organised as Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, drawn from your birth details and delivered as a PDF by email. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "लगभग 400 से 500 शब्द, इन हिस्सों में: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से तैयार होकर PDF के रूप में ईमेल पर। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. A delay is never presented as permanent, and the report does not promise a promotion, a raise or job security.",

@@ -18,7 +18,7 @@ export const foreignSettlementTiming: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report on when long-term settlement abroad looks supported in the next five years, from your 4th, 9th and 12th houses and Dasha sequence.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके चौथे, नौवें और बारहवें भाव और पूरे दशा-क्रम से अगले पाँच वर्षों में विदेश में लंबे समय तक बसने के अनुकूल समय।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 4थे, 9वें और 12वें भाव और पूरे दशा-क्रम से अगले पाँच वर्षों में विदेश में लंबे समय तक बसने के अनुकूल समय।",
   },
   h1: {
     en: "Settling Abroad: When Long-Term Residence Looks Supported",
@@ -42,7 +42,7 @@ export const foreignSettlementTiming: FocusedReportSeoContent = {
       "Your wider birth-chart placements, read together with the factors above",
     ],
     hi: [
-      "आपके चौथे, नौवें और बारहवें भाव, जिन्हें यह रिपोर्ट घर, लंबी यात्राओं और विदेश में जीवन के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 4थे, 9वें और 12वें भाव, जिन्हें यह रिपोर्ट घर, लंबी यात्राओं और विदेश में जीवन के लिए पढ़ती है, उनके स्वामियों के साथ",
       "अगले पाँच वर्षों में महादशा और अंतर्दशा का पूरा क्रम",
       "उसी अवधि में गुरु, शनि और राहु: उनकी राशि, आपके लग्न से भाव, और उनकी गति",
       "आपकी जन्म कुंडली की व्यापक ग्रह-स्थिति, ऊपर के कारणों के साथ मिलाकर",
@@ -90,23 +90,23 @@ export const foreignSettlementTiming: FocusedReportSeoContent = {
   sections: {
     whatItTellsYou: {
       en: "This report answers one question, “When may I be able to settle abroad?”, across the next five years. It separates present conditions from the first supported window for settling, ranks the stronger stretches and names any slower periods.",
-      hi: "यह रिपोर्ट अगले पाँच वर्षों के लिए एक ही सवाल का जवाब देती है: “मेरे विदेश में बसने के योग कब बन सकते हैं?” यह मौजूदा परिस्थितियों को बसने की पहली अनुकूल अवधि से अलग करती है, मजबूत अवधियों का क्रम बताती है और धीमी अवधियाँ भी बताती है।",
+      hi: "यह रिपोर्ट अगले पाँच वर्षों के लिए एक ही सवाल का जवाब देती है: “मेरे विदेश में बसने के योग कब बन सकते हैं?” घर, परिवार और लंबे समय तक रहने से जुड़े संकेतों को पढ़कर यह बताती है कि अभी के हालात कैसे हैं, विदेश में टिककर रहने का पहला सहायक दौर कब खुलता है, और किन वर्षों में धैर्य रखना बेहतर होगा।",
     },
     howJyotishApproachesIt: {
       en: "The engine computes your placements, the 4th, 9th and 12th houses with their lords, a five-year Dasha sequence and the Jupiter, Saturn and Rahu dates. The reading compares those supplied windows only and never projects dates beyond them.",
-      hi: "इंजन आपकी ग्रह-स्थितियाँ, चौथा, नौवाँ और बारहवाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु, शनि व राहु की तारीखें गणना करता है। विश्लेषण केवल इन्हीं अवधियों की तुलना करता है और उनसे आगे की तारीखें कभी नहीं बताता।",
+      hi: "इंजन आपकी ग्रह-स्थितियाँ, 4था, 9वाँ और 12वाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु, शनि व राहु की तारीखें गणना करता है। विश्लेषण केवल इन्हीं अवधियों की तुलना करता है और उनसे आगे की तारीखें कभी नहीं बताता।",
     },
     whoItIsFor: {
       en: "For someone planning permanent residence, already living abroad on a temporary basis and hoping to stay, or a family weighing a long-term move.",
       hi: "उन लोगों के लिए जो स्थायी निवास की योजना बना रहे हैं, जो अस्थायी रूप से विदेश में रहकर वहीं रुकना चाहते हैं, या ऐसे परिवार के लिए जो लंबे समय के लिए शिफ्ट होने पर विचार कर रहा है।",
     },
     whatYouReceive: {
-      en: "A PDF of 400 to 500 words covering Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, generated from your birth details and sent to your email.",
-      hi: "400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है।",
+      en: "A PDF of 400 to 500 words covering Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, generated from your birth details and sent to your email. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not guarantee permanent residence, citizenship or a visa, gives no legal or immigration advice, and will not tell you to migrate.",
-      hi: "यह ज्योतिष-आधारित मार्गदर्शन है, कोई निश्चितता या पक्के नतीजे की गारंटी नहीं। यह स्थायी निवास, नागरिकता या वीज़ा की गारंटी नहीं देती, कोई कानूनी या इमिग्रेशन सलाह नहीं देती, और आपको विदेश जाने के लिए नहीं कहेगी।",
+      hi: "यह ज्योतिष-आधारित मार्गदर्शन है, कोई निश्चितता या पक्के नतीजे की गारंटी नहीं। PR, नागरिकता या किसी भी वीज़ा का फ़ैसला संबंधित देश की सरकार करती है, कुंडली नहीं; यह रिपोर्ट कानूनी या इमिग्रेशन सलाह नहीं है और देश छोड़ने का फ़ैसला पूरी तरह आपका रहता है।",
     },
   },
   faqs: [

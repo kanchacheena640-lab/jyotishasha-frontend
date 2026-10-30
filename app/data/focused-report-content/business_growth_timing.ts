@@ -61,7 +61,7 @@ export const businessGrowthTiming: FocusedReportSeoContent = {
       hi: [
         "ज़्यादा पूछताछ या ऑर्डर माँग का संकेत हैं। इन्हें बढ़ोतरी मानने से पहले देखें कि क्या मुनाफ़ा भी सुधर रहा है।",
         "अनुकूल समय उसे मजबूत करने के लिए ठीक है जो पहले से चल रहा है: दोबारा आने वाले ग्राहक, कीमतें और गुणवत्ता बनाए रखने वाली प्रक्रियाएँ।",
-        "धीमा समय मज़बूती के लिए है, जैसे खर्च कसना, बकाया वसूलना और कमज़ोर हिस्से ठीक करना, नकदी को खींचने के लिए नहीं।",
+        "धीमा समय मजबूती के लिए है, जैसे खर्च कसना, बकाया वसूलना और कमज़ोर हिस्से ठीक करना, नकदी को खींचने के लिए नहीं।",
         "रिपोर्ट आपको निवेश करने, उधार लेने, भर्ती करने, छोड़ने या बंद करने को नहीं कहती। ये फ़ैसले आपके और आपके सलाहकारों के हैं।",
       ],
     },
@@ -102,8 +102,8 @@ export const businessGrowthTiming: FocusedReportSeoContent = {
       hi: "दुकानदार, व्यापारी, क्लाइंट्स वाले फ्रीलांसर या छोटी फ़र्म के संस्थापक के लिए, जिनका बिज़नेस चल रहा है लेकिन उम्मीद के मुताबिक आगे नहीं बढ़ रहा।",
     },
     whatYouReceive: {
-      en: "Your PDF runs to about 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है, इन हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "Your PDF runs to about 400 to 500 words across Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है, इन हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It makes no revenue promise, is not business or financial advice, and never tells you to invest, borrow or close.",

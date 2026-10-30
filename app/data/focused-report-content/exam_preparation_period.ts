@@ -19,7 +19,7 @@ export const examPreparationPeriod: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report ranking the months ahead that best support disciplined exam preparation and revision, from your 3rd to 6th houses and Dasha.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके तीसरे से छठे भाव और दशा से आने वाले महीनों में अनुशासित परीक्षा-तैयारी और रिवीज़न के लिए सबसे अनुकूल समय का क्रम।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके तीसरे से 6ठे भाव और दशा से आने वाले महीनों में अनुशासित परीक्षा-तैयारी और रिवीज़न के लिए सबसे अनुकूल समय का क्रम।",
   },
   h1: {
     en: "Exam Preparation: The Months That Best Support Your Study",
@@ -43,7 +43,7 @@ export const examPreparationPeriod: FocusedReportSeoContent = {
       "Jupiter and Saturn from your Lagna, and the dates they change sign or direction",
     ],
     hi: [
-      "आपके तीसरे, चौथे, पाँचवें और छठे भाव, जिन्हें रिपोर्ट मेहनत, नियमित पढ़ाई, सीखने और अनुशासित दिनचर्या के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 3रे, 4थे, 5वें और 6ठे भाव, जिन्हें रिपोर्ट मेहनत, नियमित पढ़ाई, सीखने और अनुशासित दिनचर्या के लिए पढ़ती है, उनके स्वामियों के साथ",
       "जन्म कुंडली की वे स्थितियाँ जो आपकी एकाग्रता और याद रखने की क्षमता को आकार देती हैं",
       "अभी चल रही महादशा और अंतर्दशा, और 12 महीनों के भीतर शुरू होने वाली कोई उप-दशा",
       "आपके लग्न से गुरु और शनि, और वे तारीखें जब वे राशि या दिशा बदलते हैं",
@@ -94,15 +94,15 @@ export const examPreparationPeriod: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "Your placements, the 3rd, 4th, 5th and 6th houses with their lords, your Dasha periods and Jupiter's and Saturn's dates are computed first. The reading compares only those dated windows for study and invents no period beyond the 12 months.",
-      hi: "आपकी ग्रह-स्थितियाँ, तीसरा, चौथा, पाँचवाँ और छठा भाव व उनके स्वामी, आपकी दशा की अवधियाँ और गुरु व शनि की तारीखें पहले गणना की जाती हैं। विश्लेषण पढ़ाई के लिए केवल इन्हीं तारीख-युक्त अवधियों की तुलना करता है और 12 महीनों से आगे कोई अवधि नहीं गढ़ता।",
+      hi: "आपकी ग्रह-स्थितियाँ, 3रा, 4था, 5वाँ और 6ठा भाव व उनके स्वामी, आपकी दशा की अवधियाँ और गुरु व शनि की तारीखें पहले गणना की जाती हैं। विश्लेषण पढ़ाई के लिए केवल इन्हीं तारीख-युक्त अवधियों की तुलना करता है और 12 महीनों से आगे कोई अवधि नहीं गढ़ता।",
     },
     whoItIsFor: {
       en: "For a student preparing for board, entrance or competitive exams, or a parent planning a study schedule with them.",
       hi: "बोर्ड, प्रवेश या प्रतियोगी परीक्षाओं की तैयारी कर रहे विद्यार्थी, या उनके साथ पढ़ाई की योजना बना रहे माता-पिता के लिए।",
     },
     whatYouReceive: {
-      en: "A short PDF, about 400 to 500 words, covering Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from the student's birth details.",
-      hi: "लगभग 400 से 500 शब्दों की छोटी PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; विद्यार्थी की जन्म जानकारी से तैयार।",
+      en: "A short PDF, about 400 to 500 words, covering Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from the student's birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की छोटी PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; विद्यार्थी की जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict marks, ranks, a pass or selection, uses no success percentages, and never suggests giving up studies.",

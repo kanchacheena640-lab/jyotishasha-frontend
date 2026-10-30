@@ -60,7 +60,7 @@ export const foreignPlansDelayReason: FocusedReportSeoContent = {
       hi: [
         "पहले ठोस रुकावटें लिखें: अधूरे कागज़ात, परीक्षा के अंक, पैसे, अस्वीकार हुआ आवेदन। कुंडली कुछ भी कहे, इन पर सीधा काम चाहिए।",
         "ज्योतिषीय विश्लेषण को समय और धैर्य का संदर्भ मानें, किसी अस्वीकृति का कारण नहीं।",
-        "अगर दबाव लगातार दिखे, तो वही आवेदन दोबारा भेजने के बजाय इस समय में आवेदन को मज़बूत करें।",
+        "अगर दबाव लगातार दिखे, तो वही आवेदन दोबारा भेजने के बजाय इस समय में आवेदन को मजबूत करें।",
         "राहत की बात केवल वहीं होती है जहाँ तारीख-युक्त प्रमाण साथ दे। रिपोर्ट कभी जाने की तारीख तय नहीं करती।",
       ],
     },
@@ -100,8 +100,8 @@ export const foreignPlansDelayReason: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिनकी पढ़ाई, काम या परिवार के लिए विदेश जाने की योजना बार-बार टल रही है, और जो दिलासे के बजाय शांत व्याख्या चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of roughly 400 to 500 words: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "A PDF of roughly 400 to 500 words: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It cannot explain or overturn an embassy decision and is not visa or immigration advice.",
@@ -127,7 +127,7 @@ export const foreignPlansDelayReason: FocusedReportSeoContent = {
       question: { en: "Should I stop applying if the pressure looks strong?", hi: "अगर दबाव ज़्यादा दिखे तो क्या आवेदन रोक दूँ?" },
       answer: {
         en: "The report does not tell you to stop. It suggests using a heavier period to strengthen your application before trying again.",
-        hi: "रिपोर्ट रुकने को नहीं कहती। यह सुझाती है कि भारी दौर में दोबारा कोशिश से पहले आवेदन को मज़बूत करें।",
+        hi: "रिपोर्ट रुकने को नहीं कहती। यह सुझाती है कि भारी दौर में दोबारा कोशिश से पहले आवेदन को मजबूत करें।",
       },
     },
     {

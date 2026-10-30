@@ -101,8 +101,8 @@ export const nextLifeChangePeriod: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिन्हें लगता है कि कोई अध्याय बंद हो रहा है और जो मोटे तौर पर जानना चाहते हैं कि अगला कब शुरू होता है।",
     },
     whatYouReceive: {
-      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, drawn from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, drawn from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. A phase boundary is not an event, and the report predicts no specific life event.",

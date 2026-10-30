@@ -18,7 +18,7 @@ export const studyAbroad: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report on whether studying abroad fits your learning and relocation tendencies, from your 4th, 5th, 9th and 12th houses and current period.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके चौथे, पाँचवें, नौवें और बारहवें भाव और मौजूदा अवधि से यह आकलन कि विदेश में पढ़ाई आपके सीखने और नई जगह बसने के रुझानों के अनुकूल है या नहीं।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 4थे, 5वें, 9वें और 12वें भाव और मौजूदा अवधि से यह आकलन कि विदेश में पढ़ाई आपके सीखने और नई जगह बसने के रुझानों के अनुकूल है या नहीं।",
   },
   h1: {
     en: "Study Abroad: Does It Fit Your Chart and Your Current Phase?",
@@ -42,7 +42,7 @@ export const studyAbroad: FocusedReportSeoContent = {
       "Jupiter, Saturn and Rahu from your Lagna, as current timing context rather than a long-range forecast",
     ],
     hi: [
-      "आपके चौथे, पाँचवें, नौवें और बारहवें भाव, जिन्हें यह रिपोर्ट घर, सीखने, उच्च शिक्षा और विदेश में जीवन के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 4थे, 5वें, 9वें और 12वें भाव, जिन्हें यह रिपोर्ट घर, सीखने, उच्च शिक्षा और विदेश में जीवन के लिए पढ़ती है, उनके स्वामियों के साथ",
       "आपकी कुल ग्रह-स्थिति, उन स्वाभाविक ताकतों और रुझानों के लिए जो आपके पढ़ने और ढलने के तरीके को आकार देते हैं",
       "आपकी मौजूदा महादशा और अंतर्दशा, अगले 12 महीनों के संदर्भ के रूप में",
       "आपके लग्न से गुरु, शनि और राहु, लंबी अवधि के अनुमान के बजाय मौजूदा समय के संदर्भ के रूप में",
@@ -93,7 +93,7 @@ export const studyAbroad: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "The calculation step produces your placements, the 4th, 5th, 9th and 12th houses with their lords, your running Dasha and the Jupiter, Saturn and Rahu positions. The reading connects education and residence-abroad facts and uses timing only where those dates are relevant.",
-      hi: "गणना के चरण में आपकी ग्रह-स्थितियाँ, चौथा, पाँचवाँ, नौवाँ और बारहवाँ भाव व उनके स्वामी, आपकी चल रही दशा और गुरु, शनि व राहु की स्थिति निकाली जाती है। विश्लेषण शिक्षा और विदेश में निवास से जुड़े तथ्यों को जोड़ता है और समय का उपयोग केवल वहीं करता है जहाँ वे तारीखें प्रासंगिक हों।",
+      hi: "गणना के चरण में आपकी ग्रह-स्थितियाँ, 4था, 5वाँ, 9वाँ और 12वाँ भाव व उनके स्वामी, आपकी चल रही दशा और गुरु, शनि व राहु की स्थिति निकाली जाती है। विश्लेषण शिक्षा और विदेश में निवास से जुड़े तथ्यों को जोड़ता है और समय का उपयोग केवल वहीं करता है जहाँ वे तारीखें प्रासंगिक हों।",
     },
     whoItIsFor: {
       en: "For a student weighing an overseas degree, or a parent helping them decide, who wants a grounded view of fit before investing in applications.",

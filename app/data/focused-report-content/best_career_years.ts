@@ -19,7 +19,7 @@ export const bestCareerYears: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report mapping your career over the next five years: which Dasha phases favour building a base, consolidating, or being recognised.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: अगले पाँच वर्षों में आपके करियर का नक्शा, कौन-सी दशा नींव बनाने, मज़बूती लाने या पहचान पाने के पक्ष में है।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: अगले पाँच वर्षों में आपके करियर का नक्शा, कौन-सी दशा नींव बनाने, मजबूती लाने या पहचान पाने के पक्ष में है।",
   },
   h1: {
     en: "Best Career Years: Mapping the Next Five Years of Your Work Life",
@@ -32,7 +32,7 @@ export const bestCareerYears: FocusedReportSeoContent = {
     ],
     hi: [
       "कुछ करियर फ़ैसले सिर्फ़ लंबे समय के हिसाब से ही समझ में आते हैं: कब दोबारा पढ़ाई या कोई योग्यता लें, कब कोई धीमी लेकिन ज़्यादा सिखाने वाली भूमिका स्वीकार करें, कब नेतृत्व के लिए आगे बढ़ें। इनके लिए सिर्फ़ एक साल आगे देखना काफ़ी नहीं। आपको यह समझना होता है कि अगले कई साल किस तरह के हैं।",
-      "यह रिपोर्ट अगले पाँच वर्षों में आपकी महादशा और अंतर्दशा का पूरा क्रम आपकी जन्म कुंडली के करियर संकेतों के साथ पढ़ती है, और कुछ खास दौर चुनती है। हर दौर को नींव बनाने, बने हुए को मज़बूत करने, या पहचान पाने के समय के रूप में बताती है, ताकि आप उसी क्रम में योजना बना सकें।",
+      "यह रिपोर्ट अगले पाँच वर्षों में आपकी महादशा और अंतर्दशा का पूरा क्रम आपकी जन्म कुंडली के करियर संकेतों के साथ पढ़ती है, और कुछ खास दौर चुनती है। हर दौर को नींव बनाने, बने हुए को मजबूत करने, या पहचान पाने के समय के रूप में बताती है, ताकि आप उसी क्रम में योजना बना सकें।",
     ],
   },
   analyzes: {
@@ -50,7 +50,7 @@ export const bestCareerYears: FocusedReportSeoContent = {
     ],
   },
   readingGuide: {
-    heading: { en: "Foundation, consolidation and recognition", hi: "नींव, मज़बूती और पहचान" },
+    heading: { en: "Foundation, consolidation and recognition", hi: "नींव, मजबूती और पहचान" },
     points: {
       en: [
         "Foundation phases suit learning, switching domains or taking on hard, less visible work that pays off later.",
@@ -60,7 +60,7 @@ export const bestCareerYears: FocusedReportSeoContent = {
       ],
       hi: [
         "नींव वाले दौर सीखने, क्षेत्र बदलने या कठिन, कम दिखने वाले काम के लिए ठीक हैं, जिसका फल बाद में मिलता है।",
-        "मज़बूती वाले दौर भूमिका को गहरा करने, काम का रिकॉर्ड बनाने और कूदने के बजाय आमदनी को स्थिर करने के लिए ठीक हैं।",
+        "मजबूती वाले दौर भूमिका को गहरा करने, काम का रिकॉर्ड बनाने और कूदने के बजाय आमदनी को स्थिर करने के लिए ठीक हैं।",
         "पहचान वाले दौर दृश्यता के लिए ठीक हैं: वरिष्ठ भूमिकाओं के लिए आवेदन, नतीजे सामने रखना, कोई सार्वजनिक कदम।",
         "रिपोर्ट केवल कुछ अच्छी तरह समर्थित दौर चुनती है। यह हर साल पर फ़ैसला नहीं सुनाती, और पाँच साल से आगे का अनुमान नहीं लगाती।",
       ],
@@ -84,7 +84,7 @@ export const bestCareerYears: FocusedReportSeoContent = {
     ],
     hi: [
       "पूरे दशा-क्रम पर आधारित आपके करियर का पाँच साल का नज़रिया",
-      "हर चुने गए दौर को नींव, मज़बूती या पहचान के रूप में बताया गया",
+      "हर चुने गए दौर को नींव, मजबूती या पहचान के रूप में बताया गया",
       "पढ़ाई, क्षेत्र बदलने या नेतृत्व जैसे लंबे फ़ैसलों का क्रम तय करने में मदद",
     ],
   },
@@ -102,8 +102,8 @@ export const bestCareerYears: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो कई वर्षों का करियर रास्ता बना रहे हैं, जैसे करियर के बीच में पहुँचे पेशेवर जो आगे की पढ़ाई, क्षेत्र बदलने या नेतृत्व की ओर जाने पर विचार कर रहे हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से तैयार।",
+      en: "A PDF of about 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. Phases describe supportive conditions, not promotions, job offers or income figures.",

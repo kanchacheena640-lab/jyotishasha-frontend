@@ -17,7 +17,7 @@ export const goingAbroadTiming: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report ranking your strongest periods to go abroad over the next five years, from your 3rd, 9th and 12th houses, Dasha and transits.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके तीसरे, नौवें और बारहवें भाव, दशा और गोचर से अगले पाँच वर्षों में विदेश जाने के सबसे मजबूत समय का क्रम।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 3रे, 9वें और 12वें भाव, दशा और गोचर से अगले पाँच वर्षों में विदेश जाने के सबसे मजबूत समय का क्रम।",
   },
   h1: {
     en: "Going Abroad: Your Strongest Periods in the Next Five Years",
@@ -41,7 +41,7 @@ export const goingAbroadTiming: FocusedReportSeoContent = {
       "Your overall birth-chart placements, read together with the factors above",
     ],
     hi: [
-      "आपके तीसरे, नौवें और बारहवें भाव, जिन्हें यह रिपोर्ट यात्रा और विदेश में जीवन के लिए पढ़ती है: उनकी राशियाँ, और उनके स्वामी कहाँ स्थित हैं",
+      "आपके 3रे, 9वें और 12वें भाव, जिन्हें यह रिपोर्ट यात्रा और विदेश में जीवन के लिए पढ़ती है: उनकी राशियाँ, और उनके स्वामी कहाँ स्थित हैं",
       "अगले पाँच वर्षों में आपकी महादशा और अंतर्दशा का पूरा क्रम, सिर्फ मौजूदा दशा नहीं",
       "गुरु, शनि और राहु: इस अवधि में आपके लग्न से हर ग्रह किस राशि और भाव में है, और उनके मार्गी व वक्री चरण",
       "आपकी जन्म कुंडली की कुल ग्रह-स्थिति, ऊपर के कारणों के साथ मिलाकर",
@@ -83,7 +83,7 @@ export const goingAbroadTiming: FocusedReportSeoContent = {
     ],
     hi: [
       "अगले पाँच वर्षों में विदेश जाने के आपके सबसे मजबूत दौर, क्रम और कारण के साथ",
-      "आपके तीसरे, नौवें और बारहवें भाव को पूरी दशा-क्रम के साथ पढ़ती है, किसी एक गोचर को अलग से नहीं",
+      "आपके 3रे, 9वें और 12वें भाव को पूरी दशा-क्रम के साथ पढ़ती है, किसी एक गोचर को अलग से नहीं",
       "विदेश जाने के ज्योतिषीय सहयोग को वीज़ा, बुकिंग और पक्की यात्रा से अलग करके बताती है",
       "भुगतान के कुछ ही मिनटों में आपके ईमेल पर PDF के रूप में",
     ],
@@ -95,15 +95,15 @@ export const goingAbroadTiming: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "The backend calculates your Lagna and placements, your 3rd, 9th and 12th houses with their lords, your Dasha sequence for the next five years, and the sign and motion dates of Jupiter, Saturn and Rahu. The reading compares only those dated windows and does not calculate, change or invent any position or date.",
-      hi: "बैकएंड आपका लग्न और ग्रह-स्थितियाँ, आपके तीसरे, नौवें और बारहवें भाव व उनके स्वामी, अगले पाँच वर्षों का आपका दशा-क्रम, और गुरु, शनि व राहु की राशि और गति की तारीखें गणना करता है। विश्लेषण केवल इन्हीं तारीख-युक्त अवधियों की तुलना करता है और कोई स्थिति या तारीख न गणना करता है, न बदलता है, न गढ़ता है।",
+      hi: "बैकएंड आपका लग्न और ग्रह-स्थितियाँ, आपके 3रे, 9वें और 12वें भाव व उनके स्वामी, अगले पाँच वर्षों का आपका दशा-क्रम, और गुरु, शनि व राहु की राशि और गति की तारीखें गणना करता है। विश्लेषण केवल इन्हीं तारीख-युक्त अवधियों की तुलना करता है और कोई स्थिति या तारीख न गणना करता है, न बदलता है, न गढ़ता है।",
     },
     whoItIsFor: {
       en: "For someone planning to study, work or live abroad, or weighing when to start applying, who wants to see how the coming years compare in their own chart rather than a general reading.",
       hi: "उन लोगों के लिए जो विदेश में पढ़ाई, नौकरी या रहने की योजना बना रहे हैं, या सोच रहे हैं कि आवेदन कब शुरू करें, और जो सामान्य विश्लेषण के बजाय अपनी कुंडली में आने वाले वर्षों की तुलना देखना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words in six parts: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line. It is generated from your birth details and emailed to you.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, छह हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात। यह आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है।",
+      en: "A PDF of about 400 to 500 words in six parts: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line. It is generated from your birth details and emailed to you. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, छह हिस्सों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात। यह आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not guarantee a visa, immigration approval, residency, admission or a job abroad, it is not legal or immigration advice, and it will not tell you to resign, migrate or relocate.",

@@ -32,7 +32,7 @@ export const importantYearsAhead: FocusedReportSeoContent = {
       "This report compares whole years rather than single moments. Across the next five years it weighs how the dated Dasha periods, the houses ruled and occupied by their planets, starting from your 1st, 4th, 7th, 9th and 10th houses, and the slow movement of Jupiter and Saturn concentrate in particular years. It explains why the leading years deserve attention, while making clear that the quieter years still matter.",
     ],
     hi: [
-      "लोग वर्षों में योजना बनाते हैं: शादी का साल, स्थान बदलने का, करियर बदलने का, परिवार शुरू करने का, घर खरीदने का। जब कई बड़े फ़ैसले आपस में होड़ करें, तो यह जानना मदद करता है कि आगे के कौन-से साल आपके लिए सबसे अहम दिखते हैं, और कौन-से मज़बूती के स्थिर साल हैं।",
+      "लोग वर्षों में योजना बनाते हैं: शादी का साल, स्थान बदलने का, करियर बदलने का, परिवार शुरू करने का, घर खरीदने का। जब कई बड़े फ़ैसले आपस में होड़ करें, तो यह जानना मदद करता है कि आगे के कौन-से साल आपके लिए सबसे अहम दिखते हैं, और कौन-से मजबूती के स्थिर साल हैं।",
       "यह रिपोर्ट एक-एक पल के बजाय पूरे वर्षों की तुलना करती है। अगले पाँच वर्षों में यह तौलती है कि तारीख-युक्त दशाएँ, उनके ग्रहों के स्वामित्व और स्थिति वाले भाव, शुरुआत आपके 1ले, 4थे, 7वें, 9वें और 10वें भाव से, और गुरु व शनि की धीमी चाल किन खास वर्षों में इकट्ठा होती है। यह समझाती है कि सबसे आगे वाले साल ध्यान के लायक क्यों हैं, यह साफ़ रखते हुए कि शांत साल भी मायने रखते हैं।",
     ],
   },
@@ -61,7 +61,7 @@ export const importantYearsAhead: FocusedReportSeoContent = {
       ],
       hi: [
         "जहाँ हालात इजाज़त दें, अपने सबसे अहम फ़ैसलों को उन वर्षों के साथ रखें जिन्हें रिपोर्ट उभारती है।",
-        "स्थिर वर्षों का उपयोग बचत, सीखने और मज़बूती में करें, ताकि अहम साल आपको तैयार पाएँ।",
+        "स्थिर वर्षों का उपयोग बचत, सीखने और मजबूती में करें, ताकि अहम साल आपको तैयार पाएँ।",
         "एक साल कई क्षेत्रों के लिए अहम हो सकता है; रिपोर्ट बताती है कि हर साल में कौन-से विषय उभरते हैं।",
         "शांत साल खाली साल नहीं हैं। रिपोर्ट कभी उन्हें बेमतलब नहीं बताती।",
       ],
@@ -102,8 +102,8 @@ export const importantYearsAhead: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो अगले कुछ वर्षों में कई बड़े फ़ैसले सँभाल रहे हैं और जानना चाहते हैं कि सबसे ज़्यादा ज़ोर कहाँ दें।",
     },
     whatYouReceive: {
-      en: "The PDF has about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details.",
-      hi: "PDF में लगभग 400 से 500 शब्द होते हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी।",
+      en: "The PDF has about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "PDF में लगभग 400 से 500 शब्द होते हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. Important does not mean good or bad, and the report predicts no specific event.",
@@ -136,7 +136,7 @@ export const importantYearsAhead: FocusedReportSeoContent = {
       question: { en: "What happens in the years not highlighted?", hi: "जिन वर्षों को नहीं उभारा गया, उनमें क्या होता है?" },
       answer: {
         en: "Life goes on in them, usually more steadily. The report suggests using them to prepare and consolidate.",
-        hi: "उनमें भी जीवन चलता है, आमतौर पर ज़्यादा स्थिर ढंग से। रिपोर्ट सुझाती है कि उनका उपयोग तैयारी और मज़बूती में करें।",
+        hi: "उनमें भी जीवन चलता है, आमतौर पर ज़्यादा स्थिर ढंग से। रिपोर्ट सुझाती है कि उनका उपयोग तैयारी और मजबूती में करें।",
       },
     },
   ],

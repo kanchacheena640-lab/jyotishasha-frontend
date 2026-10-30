@@ -100,8 +100,8 @@ export const nextStrongCareerPeriod: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो काम के अगले साल की योजना बनाना चाहते हैं, जैसे कब कोई बड़ा काम लें, कोई प्रस्ताव आगे बढ़ाएँ या किसी कदम की तैयारी करें।",
     },
     whatYouReceive: {
-      en: "Delivered as a PDF of 400 to 500 words structured as Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "400 से 500 शब्दों की PDF के रूप में, इस संरचना में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "Delivered as a PDF of 400 to 500 words structured as Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "400 से 500 शब्दों की PDF के रूप में, इस संरचना में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise a promotion, raise or new role, and its ranking describes relative support, not events.",

@@ -31,7 +31,7 @@ export const marriageChancesTiming: FocusedReportSeoContent = {
       "This report keeps them apart. It describes the underlying marriage indications in your chart, then looks across the next five years for the first window where they are meaningfully activated. It also notes the readiness factors that make that opening easier to use.",
     ],
     hi: [
-      "जब लोग शादी के योग के बारे में पूछते हैं, तो दो अलग बातें अक्सर आपस में मिल जाती हैं। एक है जन्म कुंडली की संभावना: शादी से जुड़े कारण सामान्य रूप से कैसे हैं। दूसरी है सक्रियता: कब चल रही दशा और गुरु व शनि की चाल उन कारणों को सच में जगाती है। मज़बूत संभावना वर्षों तक शांत रह सकती है, और साधारण संभावना जल्दी सक्रिय हो सकती है।",
+      "जब लोग शादी के योग के बारे में पूछते हैं, तो दो अलग बातें अक्सर आपस में मिल जाती हैं। एक है जन्म कुंडली की संभावना: शादी से जुड़े कारण सामान्य रूप से कैसे हैं। दूसरी है सक्रियता: कब चल रही दशा और गुरु व शनि की चाल उन कारणों को सच में जगाती है। मजबूत संभावना वर्षों तक शांत रह सकती है, और साधारण संभावना जल्दी सक्रिय हो सकती है।",
       "यह रिपोर्ट दोनों को अलग रखती है। यह आपकी कुंडली के मूल वैवाहिक संकेत बताती है, फिर अगले पाँच वर्षों में वह पहला समय ढूँढती है जब वे ठीक से सक्रिय होते हैं। यह उन तैयारी वाले पहलुओं को भी बताती है जो उस मौके का उपयोग आसान बनाते हैं।",
     ],
   },
@@ -101,8 +101,8 @@ export const marriageChancesTiming: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिन्होंने अभी तक शादी की बात आगे बढ़ती नहीं देखी, या ऐसे परिवार के लिए जो सोच रहा है कि तलाश गंभीरता से कब शुरू करें।",
     },
     whatYouReceive: {
-      en: "The PDF contains about 400 to 500 words under Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details.",
-      hi: "PDF में लगभग 400 से 500 शब्द होते हैं, इन शीर्षकों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी।",
+      en: "The PDF contains about 400 to 500 words under Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "PDF में लगभग 400 से 500 शब्द होते हैं, इन शीर्षकों में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से बनी। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. An opening is not a promise of marriage, and the report gives no wedding date.",
@@ -111,7 +111,7 @@ export const marriageChancesTiming: FocusedReportSeoContent = {
   },
   faqs: [
     {
-      question: { en: "My chart is said to have strong marriage yog. Why has nothing happened?", hi: "कहा गया है कि मेरी कुंडली में शादी के मज़बूत योग हैं। फिर कुछ हुआ क्यों नहीं?" },
+      question: { en: "My chart is said to have strong marriage yog. Why has nothing happened?", hi: "कहा गया है कि मेरी कुंडली में शादी के मजबूत योग हैं। फिर कुछ हुआ क्यों नहीं?" },
       answer: {
         en: "Promise and activation are different. The report shows whether your running Dasha is activating those factors yet, and when it may.",
         hi: "संभावना और सक्रियता अलग हैं। रिपोर्ट दिखाती है कि क्या आपकी चल रही दशा उन कारणों को अभी सक्रिय कर रही है, और कब कर सकती है।",

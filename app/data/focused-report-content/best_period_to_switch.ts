@@ -18,7 +18,7 @@ export const bestPeriodToSwitch: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 report ranking your stronger windows to change employer or role over the next 12 months, with the tradeoffs of switching in each one.",
-    hi: "₹51 की रिपोर्ट: अगले 12 महीनों में नियोक्ता या भूमिका बदलने के मज़बूत समयों का क्रम, और हर समय में बदलने के नफ़े-नुकसान।",
+    hi: "₹51 की रिपोर्ट: अगले 12 महीनों में नियोक्ता या भूमिका बदलने के मजबूत समयों का क्रम, और हर समय में बदलने के नफ़े-नुकसान।",
   },
   h1: {
     en: "Job Switch Windows: Ranking the Year Ahead for a Planned Move",
@@ -30,7 +30,7 @@ export const bestPeriodToSwitch: FocusedReportSeoContent = {
       "This report assumes the decision is made and compares the coming 12 months. It reads the balance between continuity and transition in your career factors, your current and next Dasha, and Jupiter, Saturn and Rahu, and ranks the windows where a switch looks best supported. For each window it notes the tradeoff, such as what you might gain or give up by moving then.",
     ],
     hi: [
-      "बहुत से लोग जानते हैं कि वे मौजूदा नौकरी छोड़ेंगे; खुला सवाल यह है कि कब। बहुत जल्दी छोड़ें तो कोई बोनस, कोई वेस्टिंग तारीख या ऐसा प्रोजेक्ट छूट सकता है जो CV मज़बूत करता। बहुत देर करें तो अच्छा मौका निकल जाता है। सोची-समझी बदली का समय तय करना, बदलें या नहीं, इस सवाल से अलग है।",
+      "बहुत से लोग जानते हैं कि वे मौजूदा नौकरी छोड़ेंगे; खुला सवाल यह है कि कब। बहुत जल्दी छोड़ें तो कोई बोनस, कोई वेस्टिंग तारीख या ऐसा प्रोजेक्ट छूट सकता है जो CV मजबूत करता। बहुत देर करें तो अच्छा मौका निकल जाता है। सोची-समझी बदली का समय तय करना, बदलें या नहीं, इस सवाल से अलग है।",
       "यह रिपोर्ट मानकर चलती है कि फ़ैसला हो चुका है और आने वाले 12 महीनों की तुलना करती है। यह आपके करियर कारणों में निरंतरता और बदलाव का संतुलन, मौजूदा और अगली दशा, और गुरु, शनि व राहु पढ़ती है, और उन समयों का क्रम बताती है जहाँ बदलना सबसे ज़्यादा अनुकूल दिखता है। हर समय के लिए यह नफ़ा-नुकसान बताती है, जैसे उस समय बदलने पर आप क्या पा सकते हैं या क्या छोड़ सकते हैं।",
     ],
   },
@@ -81,7 +81,7 @@ export const bestPeriodToSwitch: FocusedReportSeoContent = {
       "Practical steps to line up the move with the window you choose",
     ],
     hi: [
-      "अगले 12 महीनों में सोची-समझी नौकरी बदली के मज़बूत समयों का क्रम",
+      "अगले 12 महीनों में सोची-समझी नौकरी बदली के मजबूत समयों का क्रम",
       "हर समय आपको क्या दे या क्या ले सकता है, सिर्फ़ उसकी ताकत नहीं",
       "चुने गए समय के साथ बदली तय करने के व्यावहारिक कदम",
     ],
@@ -100,8 +100,8 @@ export const bestPeriodToSwitch: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिन्होंने अपने नियोक्ता या भूमिका से आगे बढ़ने का फ़ैसला कर लिया है और समय अच्छे से चुनना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "A PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise an offer or a better job, and it never tells you to resign.",

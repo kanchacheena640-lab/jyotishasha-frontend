@@ -19,7 +19,7 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report comparing the phases of your next five years for business progress and consolidation, and the preparation each one suits.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: अगले पाँच वर्षों के दौरों की बिज़नेस में प्रगति और मज़बूती के लिए तुलना, और हर दौर किस तैयारी के लिए ठीक है।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: अगले पाँच वर्षों के दौरों की बिज़नेस में प्रगति और मजबूती के लिए तुलना, और हर दौर किस तैयारी के लिए ठीक है।",
   },
   h1: {
     en: "Business Opportunity Windows: Your Next Five Years Compared",
@@ -32,7 +32,7 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
     ],
     hi: [
       "बिज़नेस के फ़ैसले एक क्रम में आते हैं। हो सकता है आप पहले नकदी स्थिर करना चाहें, फिर लोगों या व्यवस्था में लगाना, फिर किसी बड़े बाज़ार में उतरना। गलत क्रम में ये करना महँगा पड़ता है, और सिर्फ़ एक साल का नज़रिया यह क्रम साफ़ नहीं दिखाता।",
-      "यह रिपोर्ट आपकी महादशा और अंतर्दशा के पूरे क्रम, आपकी जन्म कुंडली में उद्यम के सहारे और दबाव, करियर और धन योग, और गुरु व शनि के आधार पर आपके अगले पाँच वर्षों के दौरों की तुलना करती है। यह सबसे मज़बूत दौरों का क्रम बताती है और समझाती है कि हर दौर किसके लिए बेहतर है: आगे बढ़ने के लिए या जो है उसे मज़बूत करने के लिए।",
+      "यह रिपोर्ट आपकी महादशा और अंतर्दशा के पूरे क्रम, आपकी जन्म कुंडली में उद्यम के सहारे और दबाव, करियर और धन योग, और गुरु व शनि के आधार पर आपके अगले पाँच वर्षों के दौरों की तुलना करती है। यह सबसे मजबूत दौरों का क्रम बताती है और समझाती है कि हर दौर किसके लिए बेहतर है: आगे बढ़ने के लिए या जो है उसे मजबूत करने के लिए।",
     ],
   },
   analyzes: {
@@ -50,7 +50,7 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
     ],
   },
   readingGuide: {
-    heading: { en: "Progress phases and consolidation phases", hi: "प्रगति के दौर और मज़बूती के दौर" },
+    heading: { en: "Progress phases and consolidation phases", hi: "प्रगति के दौर और मजबूती के दौर" },
     points: {
       en: [
         "Progress phases suit outward moves: new customers, partnerships, launches and bigger commitments that need momentum.",
@@ -60,7 +60,7 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
       ],
       hi: [
         "प्रगति के दौर बाहर की ओर कदमों के लिए ठीक हैं: नए ग्राहक, साझेदारी, लॉन्च और बड़ी ज़िम्मेदारियाँ जिनके लिए रफ़्तार चाहिए।",
-        "मज़बूती के दौर अंदर के काम के लिए ठीक हैं: प्रक्रियाएँ सुधारना, बकाया निपटाना, लोगों को प्रशिक्षित करना और मुनाफ़ा मज़बूत करना।",
+        "मजबूती के दौर अंदर के काम के लिए ठीक हैं: प्रक्रियाएँ सुधारना, बकाया निपटाना, लोगों को प्रशिक्षित करना और मुनाफ़ा मजबूत करना।",
         "अच्छी योजना दोनों का उपयोग करती है। रिपोर्ट मोटे तौर पर बताती है कि कौन-सा कब है, ताकि आप फ़ैसलों को सही क्रम में रख सकें।",
         "तुलना उन्हीं पाँच वर्षों के भीतर रहती है जिनकी बैकएंड गणना करता है, और उनसे आगे के वर्षों का क्रम नहीं बताती।",
       ],
@@ -68,7 +68,7 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
   },
   differentiation: {
     en: "Business Growth and Business Expansion each answer a single near-term question within 12 months. This report is the planning view: it compares five years of phases so you can see which to push in and which to consolidate in.",
-    hi: "'बिज़नेस की बढ़ोतरी' और 'बिज़नेस बढ़ाने का समय' दोनों 12 महीनों के भीतर एक नज़दीकी सवाल का जवाब देती हैं। यह रिपोर्ट योजना का नज़रिया है: यह पाँच वर्षों के दौरों की तुलना करती है ताकि आप देख सकें कि किसमें आगे बढ़ें और किसमें मज़बूती लाएँ।",
+    hi: "'बिज़नेस की बढ़ोतरी' और 'बिज़नेस बढ़ाने का समय' दोनों 12 महीनों के भीतर एक नज़दीकी सवाल का जवाब देती हैं। यह रिपोर्ट योजना का नज़रिया है: यह पाँच वर्षों के दौरों की तुलना करती है ताकि आप देख सकें कि किसमें आगे बढ़ें और किसमें मजबूती लाएँ।",
   },
   internalLinks: [
     { path: "/reports/focused/business-growth-timing", localized: true, label: { en: "Business Growth report (₹51)", hi: "बिज़नेस की बढ़ोतरी रिपोर्ट (₹51)" } },
@@ -84,14 +84,14 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
     ],
     hi: [
       "बिज़नेस में प्रगति के लिए आपके अगले पाँच वर्षों के दौरों की तुलना",
-      "हर मज़बूत दौर को आगे बढ़ने या मज़बूती लाने के लिए बेहतर बताया गया",
+      "हर मजबूत दौर को आगे बढ़ने या मजबूती लाने के लिए बेहतर बताया गया",
       "बड़े फ़ैसलों को एक साथ लेने के बजाय क्रम में रखने में मदद",
     ],
   },
   sections: {
     whatItTellsYou: {
       en: "This report answers one question, “Which coming periods are best for my business?”. It ranks the comparatively strongest phases of the next five years and explains what kind of preparation each one supports.",
-      hi: "यह रिपोर्ट एक ही सवाल का जवाब देती है: “मेरे बिज़नेस के लिए आने वाले कौन-से समय सबसे अच्छे हैं?” यह अगले पाँच वर्षों के तुलनात्मक रूप से सबसे मज़बूत दौरों का क्रम बताती है और समझाती है कि हर दौर किस तरह की तैयारी को सहारा देता है।",
+      hi: "यह रिपोर्ट एक ही सवाल का जवाब देती है: “मेरे बिज़नेस के लिए आने वाले कौन-से समय सबसे अच्छे हैं?” यह अगले पाँच वर्षों के तुलनात्मक रूप से सबसे मजबूत दौरों का क्रम बताती है और समझाती है कि हर दौर किस तरह की तैयारी को सहारा देता है।",
     },
     howJyotishApproachesIt: {
       en: "Your placements, enterprise houses and lords, career and wealth yogas, the multi-year Dasha sequence and Jupiter and Saturn dates are computed first. The reading ranks only those phases and invents no year.",
@@ -102,8 +102,8 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
       hi: "उन संस्थापकों या मालिकों के लिए जो कई वर्षों की योजना बना रहे हैं, या जो तय कर रहे हैं कि किन वर्षों में बिज़नेस में सबसे ज़्यादा लगाएँ।",
     },
     whatYouReceive: {
-      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, prepared from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It promises no revenue, is not business or financial advice, and never tells you to invest, borrow or close.",
@@ -122,14 +122,14 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
       question: { en: "Why compare five years instead of one?", hi: "एक साल की बजाय पाँच साल की तुलना क्यों?" },
       answer: {
         en: "Because the order of decisions matters. A five-year view shows where progress and consolidation phases sit relative to each other.",
-        hi: "क्योंकि फ़ैसलों का क्रम मायने रखता है। पाँच साल का नज़रिया दिखाता है कि प्रगति और मज़बूती के दौर एक-दूसरे के सापेक्ष कहाँ हैं।",
+        hi: "क्योंकि फ़ैसलों का क्रम मायने रखता है। पाँच साल का नज़रिया दिखाता है कि प्रगति और मजबूती के दौर एक-दूसरे के सापेक्ष कहाँ हैं।",
       },
     },
     {
-      question: { en: "Does a consolidation phase mean my business will struggle?", hi: "क्या मज़बूती वाले दौर का मतलब है कि बिज़नेस में मुश्किल होगी?" },
+      question: { en: "Does a consolidation phase mean my business will struggle?", hi: "क्या मजबूती वाले दौर का मतलब है कि बिज़नेस में मुश्किल होगी?" },
       answer: {
         en: "No. It means the period suits strengthening over stretching. Many businesses do their most durable work in such phases.",
-        hi: "नहीं। इसका मतलब है कि वह समय फैलाने के बजाय मज़बूत करने के लिए ठीक है। कई बिज़नेस अपना सबसे टिकाऊ काम ऐसे ही दौरों में करते हैं।",
+        hi: "नहीं। इसका मतलब है कि वह समय फैलाने के बजाय मजबूत करने के लिए ठीक है। कई बिज़नेस अपना सबसे टिकाऊ काम ऐसे ही दौरों में करते हैं।",
       },
     },
     {

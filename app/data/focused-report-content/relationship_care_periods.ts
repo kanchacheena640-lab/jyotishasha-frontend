@@ -101,8 +101,8 @@ export const relationshipCarePeriods: FocusedReportSeoContent = {
       hi: "उस जोड़े के लिए जो किसी व्यस्त या अनिश्चित साल में जा रहा है और कठिन दौरों का अंदाज़ा साथ मिलकर लगाना चाहता है।",
     },
     whatYouReceive: {
-      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from both people's birth details.",
-      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; दोनों लोगों की जन्म जानकारी से।",
+      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from both people's birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; दोनों लोगों की जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It never predicts separation or infidelity and cannot know what either person will do.",

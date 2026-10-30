@@ -101,8 +101,8 @@ export const salaryGrowthTiming: FocusedReportSeoContent = {
       hi: "उस नौकरीपेशा व्यक्ति के लिए जिसे लगता है कि उसे कम वेतन मिल रहा है, जो अप्रेज़ल के करीब है, या तय कर रहा है कि वेतन बढ़ाने की बात कब करे या बाज़ार में दूसरे मौके देखे।",
     },
     whatYouReceive: {
-      en: "The report comes as a PDF of 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, based on your birth details.",
-      hi: "रिपोर्ट 400 से 500 शब्दों की PDF के रूप में आती है, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी पर आधारित।",
+      en: "The report comes as a PDF of 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, based on your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "रिपोर्ट 400 से 500 शब्दों की PDF के रूप में आती है, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी पर आधारित। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise a raise, a salary amount or a promotion, and does not predict job security or job loss.",

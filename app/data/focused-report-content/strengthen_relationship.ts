@@ -19,7 +19,7 @@ export const strengthenRelationship: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 report that turns the main contrasts between both your birth charts into a few shared practices for a stronger, steadier relationship.",
-    hi: "₹51 की रिपोर्ट: आप दोनों की जन्म कुंडलियों के मुख्य फ़र्कों को कुछ साझा आदतों में बदलती है, ताकि रिश्ता ज़्यादा मज़बूत और स्थिर हो।",
+    hi: "₹51 की रिपोर्ट: आप दोनों की जन्म कुंडलियों के मुख्य फ़र्कों को कुछ साझा आदतों में बदलती है, ताकि रिश्ता ज़्यादा मजबूत और स्थिर हो।",
   },
   h1: {
     en: "Strengthening Your Relationship: Shared Practices From Both Charts",

@@ -102,8 +102,8 @@ export const marriageDelayReason: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिनकी शादी में उम्मीद से ज़्यादा समय लग रहा है, या जिनका परिवार रिश्ता ढूँढ रहा है, और जो सामान्य लेख या उपायों की सूची के बजाय मौजूदा दौर की शांत, कुंडली-आधारित व्याख्या चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words in six parts: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line. It is generated from your birth details and emailed to you.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, छह हिस्सों में: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात। यह आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है।",
+      en: "A PDF of about 400 to 500 words in six parts: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line. It is generated from your birth details and emailed to you. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, छह हिस्सों में: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात। यह आपकी जन्म जानकारी से तैयार होकर आपके ईमेल पर भेजी जाती है। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict a marriage date, a partner or a family's decision, and it is not a substitute for personal, family or legal advice.",

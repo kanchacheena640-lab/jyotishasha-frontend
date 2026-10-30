@@ -100,8 +100,8 @@ export const marriageTalksCurrentPeriod: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिनके पास कोई रिश्ता आया है, उस जोड़े के लिए जो परिवारों को शामिल करने वाला है, या माता-पिता के लिए जो तय कर रहे हैं कि अगला कदम कब उठाएँ।",
     },
     whatYouReceive: {
-      en: "Delivered as a PDF of 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "400 से 500 शब्दों की PDF के रूप में, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से।",
+      en: "Delivered as a PDF of 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "400 से 500 शब्दों की PDF के रूप में, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It reads your chart only, cannot predict the other family's response, and never replaces anyone's free choice.",

@@ -102,8 +102,8 @@ export const businessStartTiming: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जिनके पास बिज़नेस का विचार या चल रही योजना है और जो शुरुआत का समय सोच-समझकर तय करना चाहते हैं, चाहे वे नौकरी छोड़ रहे हों, साथ-साथ शुरू कर रहे हों या किसी शौक को बढ़ा रहे हों।",
     },
     whatYouReceive: {
-      en: "It arrives as a 400 to 500 word PDF with the parts Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, produced from your birth details.",
-      hi: "यह 400 से 500 शब्दों की PDF के रूप में आती है, जिसके हिस्से हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "It arrives as a 400 to 500 word PDF with the parts Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, produced from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "यह 400 से 500 शब्दों की PDF के रूप में आती है, जिसके हिस्से हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrological context, not a certainty or a guaranteed outcome, and not investment, lending or business advice. It does not promise profit, funding or success, and it will not tell you to quit a job, borrow or invest.",

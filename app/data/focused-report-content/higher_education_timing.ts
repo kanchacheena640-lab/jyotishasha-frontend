@@ -19,7 +19,7 @@ export const higherEducationTiming: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report ranking the strongest windows to begin higher study over the next three years, from your 4th, 5th, 9th and 11th houses and Dasha.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके चौथे, पाँचवें, नौवें और ग्यारहवें भाव और दशा से अगले तीन वर्षों में उच्च शिक्षा शुरू करने के सबसे मजबूत समय का क्रम।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 4थे, 5वें, 9वें और 11वें भाव और दशा से अगले तीन वर्षों में उच्च शिक्षा शुरू करने के सबसे मजबूत समय का क्रम।",
   },
   h1: {
     en: "Higher Education: When Beginning Advanced Study Looks Supported",
@@ -43,7 +43,7 @@ export const higherEducationTiming: FocusedReportSeoContent = {
       "Jupiter and Saturn from your Lagna over the same three years, including their direct and retrograde phases",
     ],
     hi: [
-      "आपके चौथे, पाँचवें, नौवें और ग्यारहवें भाव, जिन्हें रिपोर्ट शिक्षा, बुद्धि, उच्च ज्ञान और उससे मिलने वाले लाभ के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 4थे, 5वें, 9वें और 11वें भाव, जिन्हें रिपोर्ट शिक्षा, बुद्धि, उच्च ज्ञान और उससे मिलने वाले लाभ के लिए पढ़ती है, उनके स्वामियों के साथ",
       "व्यापक जन्म कुंडली से, एक विद्यार्थी के रूप में आपके स्वाभाविक रुझान",
       "अगले तीन वर्षों में महादशा और अंतर्दशा का पूरा क्रम",
       "उन्हीं तीन वर्षों में आपके लग्न से गुरु और शनि, जिसमें उनके मार्गी और वक्री चरण शामिल हैं",
@@ -84,7 +84,7 @@ export const higherEducationTiming: FocusedReportSeoContent = {
     hi: [
       "अगले तीन वर्षों में आगे की पढ़ाई शुरू करने के सबसे मजबूत समय, क्रम से",
       "पढ़ाई की तैयारी को दाखिले के फ़ैसलों से अलग रखती है",
-      "चौथे, पाँचवें, नौवें और ग्यारहवें भाव को आपके पूरे दशा-क्रम के साथ पढ़ती है",
+      "4थे, 5वें, 9वें और 11वें भाव को आपके पूरे दशा-क्रम के साथ पढ़ती है",
     ],
   },
   sections: {
@@ -94,15 +94,15 @@ export const higherEducationTiming: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "First the facts are calculated: your placements, the 4th, 5th, 9th and 11th houses with their lords, a three-year Dasha sequence, and Jupiter's and Saturn's dates. The reading then ranks only those windows and never looks beyond three years.",
-      hi: "पहले तथ्य गणना किए जाते हैं: आपकी ग्रह-स्थितियाँ, चौथा, पाँचवाँ, नौवाँ और ग्यारहवाँ भाव व उनके स्वामी, तीन साल का दशा-क्रम, और गुरु व शनि की तारीखें। इसके बाद विश्लेषण केवल इन्हीं अवधियों का क्रम बताता है और तीन साल से आगे कभी नहीं देखता।",
+      hi: "पहले तथ्य गणना किए जाते हैं: आपकी ग्रह-स्थितियाँ, 4था, 5वाँ, 9वाँ और 11वाँ भाव व उनके स्वामी, तीन साल का दशा-क्रम, और गुरु व शनि की तारीखें। इसके बाद विश्लेषण केवल इन्हीं अवधियों का क्रम बताता है और तीन साल से आगे कभी नहीं देखता।",
     },
     whoItIsFor: {
       en: "For a graduate or working professional weighing a master's, MBA, PhD or professional qualification, and deciding whether to start now or later.",
       hi: "उस ग्रेजुएट या कामकाजी व्यक्ति के लिए जो मास्टर्स, MBA, PhD या किसी प्रोफ़ेशनल योग्यता पर विचार कर रहा है, और तय कर रहा है कि अभी शुरू करे या बाद में।",
     },
     whatYouReceive: {
-      en: "You get a PDF of around 400 to 500 words divided into Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details.",
-      hi: "आपको लगभग 400 से 500 शब्दों की PDF मिलती है, जो सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात में बँटी होती है; आपकी जन्म जानकारी से तैयार।",
+      en: "You get a PDF of around 400 to 500 words divided into Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, made from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपको लगभग 400 से 500 शब्दों की PDF मिलती है, जो सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात में बँटी होती है; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise admission, a scholarship, exam success or degree completion, and gives no probabilities or scores.",

@@ -100,8 +100,8 @@ export const studyProgressImprovement: FocusedReportSeoContent = {
       hi: "उस विद्यार्थी के लिए जिसके अंक या प्रेरणा गिर रहे हैं, या उन माता-पिता के लिए जो दबाव बढ़ाए बिना बच्चे की गिरावट समझना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "The PDF holds about 400 to 500 words under Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "PDF में लगभग 400 से 500 शब्द इन शीर्षकों में होते हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "The PDF holds about 400 to 500 words under Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "PDF में लगभग 400 से 500 शब्द इन शीर्षकों में होते हैं: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise better marks, and persistent difficulty with learning deserves a teacher's or specialist's view.",

@@ -18,7 +18,7 @@ export const relocationTiming: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report ranking your stronger windows to move to a new city or country over five years, from your 3rd, 4th and 12th houses and Dasha.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके तीसरे, चौथे और बारहवें भाव और दशा से पाँच वर्षों में नए शहर या देश में शिफ्ट होने के मजबूत समय का क्रम।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: आपके 3रे, 4थे और 12वें भाव और दशा से पाँच वर्षों में नए शहर या देश में शिफ्ट होने के मजबूत समय का क्रम।",
   },
   h1: {
     en: "Relocation Timing: When a Move to a New City Looks Supported",
@@ -42,7 +42,7 @@ export const relocationTiming: FocusedReportSeoContent = {
       "The rest of your birth chart, read together with these factors",
     ],
     hi: [
-      "आपके तीसरे, चौथे और बारहवें भाव, जिन्हें रिपोर्ट आवाजाही, घर और अपनी जड़ों से दूर रहने के लिए पढ़ती है, उनके स्वामियों के साथ",
+      "आपके 3रे, 4थे और 12वें भाव, जिन्हें रिपोर्ट आवाजाही, घर और अपनी जड़ों से दूर रहने के लिए पढ़ती है, उनके स्वामियों के साथ",
       "पाँच वर्षों में आपकी महादशा और अंतर्दशा का पूरा क्रम",
       "उस अवधि में आपके लग्न से गुरु, शनि और राहु, उनके वक्री चरणों सहित",
       "आपकी बाकी जन्म कुंडली, इन कारणों के साथ मिलाकर",
@@ -93,15 +93,15 @@ export const relocationTiming: FocusedReportSeoContent = {
     },
     howJyotishApproachesIt: {
       en: "Computed in advance: your placements, the 3rd, 4th and 12th houses with their lords, a five-year Dasha sequence and dates for Jupiter, Saturn and Rahu. The reading ranks only those windows and does not speculate beyond them.",
-      hi: "पहले से गणना किया जाता है: आपकी ग्रह-स्थितियाँ, तीसरा, चौथा और बारहवाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु, शनि व राहु की तारीखें। विश्लेषण केवल इन्हीं अवधियों का क्रम बताता है और उनसे आगे अनुमान नहीं लगाता।",
+      hi: "पहले से गणना किया जाता है: आपकी ग्रह-स्थितियाँ, 3रा, 4था और 12वाँ भाव व उनके स्वामी, पाँच साल का दशा-क्रम और गुरु, शनि व राहु की तारीखें। विश्लेषण केवल इन्हीं अवधियों का क्रम बताता है और उनसे आगे अनुमान नहीं लगाता।",
     },
     whoItIsFor: {
       en: "For someone weighing a transfer, a new job in another city, a move back home or a family relocation, who wants to know which coming years support the change.",
       hi: "तबादले, दूसरे शहर में नई नौकरी, अपने शहर लौटने या परिवार के साथ शिफ्ट होने पर विचार कर रहे व्यक्ति के लिए, जो जानना चाहते हैं कि आने वाले कौन-से साल इस बदलाव में साथ देते हैं।",
     },
     whatYouReceive: {
-      en: "A 400 to 500 word PDF laid out as Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, put together from your birth details.",
-      hi: "400 से 500 शब्दों की PDF, इस रूप में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "A 400 to 500 word PDF laid out as Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, put together from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "400 से 500 शब्दों की PDF, इस रूप में: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not guarantee a relocation, job or visa, gives no legal or immigration advice and no probabilities, and will not tell you to move.",

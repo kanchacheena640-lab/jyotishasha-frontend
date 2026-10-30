@@ -102,8 +102,8 @@ export const currentPhaseMeaning: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो किसी तीव्र, उलझन भरे या धीमे दौर में हैं और कुछ बदलने का फ़ैसला करने से पहले उसे समझना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "Your PDF runs to about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "Your PDF runs to about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It describes themes of emphasis, not fate, and does not diagnose health or emotional conditions.",

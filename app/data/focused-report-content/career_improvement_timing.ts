@@ -100,8 +100,8 @@ export const careerImprovementTiming: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो कुछ समय से एक ही भूमिका या दिनचर्या में अटके महसूस करते हैं और जानना चाहते हैं कि चीज़ें फिर से कब चलनी शुरू हो सकती हैं।",
     },
     whatYouReceive: {
-      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, drawn up from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "One PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, drawn up from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की एक PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not promise a promotion, a raise or job security, and gives no date for change.",

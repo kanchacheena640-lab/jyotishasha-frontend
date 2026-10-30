@@ -100,8 +100,8 @@ export const financialPressureEasing: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो खर्चों या पारिवारिक ज़िम्मेदारियों से दबे हैं, जहाँ सिर्फ़ आमदनी समस्या नहीं है, और जो योजना बनाने से पहले दबाव को समझना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of roughly 400 to 500 words covering Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से।",
+      en: "A PDF of roughly 400 to 500 words covering Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "लगभग 400 से 500 शब्दों की PDF, जिसमें सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It is not financial or debt advice, and it does not tell you to borrow, invest or cut any specific obligation.",

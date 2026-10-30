@@ -22,7 +22,7 @@ import type { FocusedReportFaq } from "../focusedReportsConfig";
 export type Localized = { en: string; hi: string };
 
 /** Report shapes from the backend's master_contract.py::SECTIONS. */
-export type ReportArchetype = "TIMING" | "DIAGNOSTIC" | "DIRECTION" | "COMPATIBILITY";
+export type ReportArchetype = "TIMING" | "DIAGNOSTIC" | "DIRECTION" | "COMPATIBILITY" | "OBSTACLES" | "STRENGTHS_NOW";
 
 export interface FocusedReportInternalLink {
   /** English path; the Hindi page links to `/hi${path}` when `localized`. */
@@ -66,7 +66,8 @@ export interface FocusedReportSeoContent {
     /** Natal planets the backend reads as birth-chart placements (not transits), when it lists them explicitly
      * (e.g. life_keys.py LIFE_NATAL_PLANETS). Naming one of these in the copy is not a transit claim. */
     natalPlanets?: string[];
-    remedies: false;
+    /** true only for the backend's REMEDY_KEYS (prompt_specs.py: major_kundali_obstacles); false everywhere else. */
+    remedies: boolean;
   };
 }
 
@@ -84,6 +85,14 @@ export const REPORT_SECTIONS: Record<ReportArchetype, { en: string[]; hi: string
   DIRECTION: {
     en: ["Direct Answer", "Natural Strengths and Tendencies", "Most Relevant Directions", "Current Timing Context", "Practical Focus", "Bottom Line"],
     hi: ["सीधा जवाब", "ताकतें और रुझान", "सबसे उपयोगी दिशाएँ", "अभी के समय का संदर्भ", "व्यावहारिक ध्यान", "सीधी बात"],
+  },
+  OBSTACLES: {
+    en: ["Direct Answer", "Birth Chart Obstacles", "Current Active Obstacles", "Remedies and What Helps", "Bottom Line"],
+    hi: ["सीधा जवाब", "कुंडली की जन्मजात बाधाएँ", "अभी सक्रिय बाधाएँ", "उपाय और क्या मदद करता है", "सीधी बात"],
+  },
+  STRENGTHS_NOW: {
+    en: ["Direct Answer", "Birth Chart Strengths", "Currently Active Strengths", "How To Use Them Now", "Bottom Line"],
+    hi: ["सीधा जवाब", "कुंडली की जन्मजात शक्तियाँ", "अभी सक्रिय शक्तियाँ", "अभी इनका इस्तेमाल कैसे करें", "सीधी बात"],
   },
   COMPATIBILITY: {
     en: ["Direct Answer", "Where Your Charts Support Each Other", "Differences That Need Care", "Practical Relationship Focus", "Bottom Line"],

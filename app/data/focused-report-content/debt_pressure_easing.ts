@@ -102,8 +102,8 @@ export const debtPressureEasing: FocusedReportSeoContent = {
       hi: "उन लोगों के लिए जो लोन, EMI या निजी उधार चुका रहे हैं और अपनी वित्तीय योजना के साथ-साथ यह शांत, कुंडली-आधारित नज़रिया चाहते हैं कि आने वाले महीने हल्के दिखते हैं या नहीं।",
     },
     whatYouReceive: {
-      en: "You receive a PDF of around 400 to 500 words in the sequence Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, built from your birth details.",
-      hi: "आपको लगभग 400 से 500 शब्दों की PDF मिलती है, इस क्रम में: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से तैयार।",
+      en: "You receive a PDF of around 400 to 500 words in the sequence Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, built from your birth details. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "आपको लगभग 400 से 500 शब्दों की PDF मिलती है, इस क्रम में: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से तैयार। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrological context, not a certainty or a guaranteed outcome, and not financial, lending, investment or tax advice. It never claims a debt will disappear or be repaid by a particular date.",

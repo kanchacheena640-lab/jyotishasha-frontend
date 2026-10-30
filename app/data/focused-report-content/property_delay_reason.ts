@@ -100,8 +100,8 @@ export const propertyDelayReason: FocusedReportSeoContent = {
       hi: "उस खरीदार के लिए जो कुछ समय से कोशिश कर रहा है और बार-बार देरी झेल रहा है, और अपनी व्यावहारिक जाँच के साथ शांत विश्लेषण चाहता है।",
     },
     whatYouReceive: {
-      en: "A PDF of roughly 400 to 500 words: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "A PDF of roughly 400 to 500 words: Direct Answer, Main Astrological Factors, Why This Phase Feels Difficult, When Pressure May Ease, What You Can Do, and Bottom Line, from your birth details. The When Pressure May Ease section appears only when your dated evidence supports easing.",
+      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, मुख्य ज्योतिषीय कारण, यह समय कठिन क्यों लगता है, दबाव कब कम हो सकता है, आप क्या कर सकते हैं, और सीधी बात; आपकी जन्म जानकारी से। 'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी राहत का समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It cannot identify a legal, title or loan problem and is not financial or legal advice.",

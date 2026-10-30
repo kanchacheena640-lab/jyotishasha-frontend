@@ -19,11 +19,11 @@ export const strongestMarriagePeriods: FocusedReportSeoContent = {
   },
   metaDescription: {
     en: "A ₹51 personalised report ranking the windows in your next five years with the strongest combined support for marriage, without promising a wedding date.",
-    hi: "₹51 की व्यक्तिगत रिपोर्ट: अगले पाँच वर्षों में शादी के लिए सबसे मज़बूत संयुक्त सहारे वाले समयों का क्रम, बिना शादी की तारीख का वादा किए।",
+    hi: "₹51 की व्यक्तिगत रिपोर्ट: अगले पाँच वर्षों में शादी के लिए सबसे मजबूत संयुक्त सहारे वाले समयों का क्रम, बिना शादी की तारीख का वादा किए।",
   },
   h1: {
     en: "Marriage Windows: Ranking Your Strongest Periods Ahead",
-    hi: "शादी के मजबूत समय: आगे के सबसे मज़बूत दौरों का क्रम",
+    hi: "शादी के मजबूत समय: आगे के सबसे मजबूत दौरों का क्रम",
   },
   intro: {
     en: [
@@ -31,8 +31,8 @@ export const strongestMarriagePeriods: FocusedReportSeoContent = {
       "This report reads the marriage-related placements and houses in your birth chart against the dated sequence of your Dasha periods and Jupiter and Saturn over the next five years. It ranks the windows where these factors line up best and explains what makes one stronger than another. It does not name a wedding date.",
     ],
     hi: [
-      "शादी की योजना बना रहे परिवार अक्सर अलग-अलग शब्दों में एक ही बात पूछते हैं: क्या आगे कोई ऐसा समय है जो खास तौर पर अच्छा दिखता है? क्रम वाला नज़रिया मदद करता है। यह दिखाता है कि सहारा कहाँ सबसे मज़बूत है, कहाँ मध्यम और कहाँ शांत, ताकि तलाश अंदाज़े जैसी न लगे।",
-      "यह रिपोर्ट आपकी जन्म कुंडली की शादी से जुड़ी ग्रह-स्थितियों और भावों को अगले पाँच वर्षों के तारीख-युक्त दशा-क्रम और गुरु व शनि के साथ पढ़ती है। यह उन समयों का क्रम बताती है जहाँ ये कारण सबसे अच्छे से मिलते हैं, और समझाती है कि कोई समय दूसरे से मज़बूत क्यों है। यह शादी की कोई तारीख नहीं बताती।",
+      "शादी की योजना बना रहे परिवार अक्सर अलग-अलग शब्दों में एक ही बात पूछते हैं: क्या आगे कोई ऐसा समय है जो खास तौर पर अच्छा दिखता है? क्रम वाला नज़रिया मदद करता है। यह दिखाता है कि सहारा कहाँ सबसे मजबूत है, कहाँ मध्यम और कहाँ शांत, ताकि तलाश अंदाज़े जैसी न लगे।",
+      "यह रिपोर्ट आपकी जन्म कुंडली की शादी से जुड़ी ग्रह-स्थितियों और भावों को अगले पाँच वर्षों के तारीख-युक्त दशा-क्रम और गुरु व शनि के साथ पढ़ती है। यह उन समयों का क्रम बताती है जहाँ ये कारण सबसे अच्छे से मिलते हैं, और समझाती है कि कोई समय दूसरे से मजबूत क्यों है। यह शादी की कोई तारीख नहीं बताती।",
     ],
   },
   analyzes: {
@@ -59,7 +59,7 @@ export const strongestMarriagePeriods: FocusedReportSeoContent = {
         "Personal choice and compatibility matter more than any window. The report supports a decision, it does not make one.",
       ],
       hi: [
-        "मज़बूत समय का मतलब है कि कुंडली के शादी से जुड़े कारणों को एक ही समय पर अच्छा सहारा है। यह तलाश में सक्रिय रहने का अच्छा समय है, कोई तारीख नहीं।",
+        "मजबूत समय का मतलब है कि कुंडली के शादी से जुड़े कारणों को एक ही समय पर अच्छा सहारा है। यह तलाश में सक्रिय रहने का अच्छा समय है, कोई तारीख नहीं।",
         "संयुक्त सहारा ही किसी समय का क्रम तय करता है: जन्मजात संभावना, चल रही दशा और गुरु व शनि, सब एक ही दिशा में।",
         "मध्यम समय भी काम के हैं, खासकर अगर कोई उपयुक्त रिश्ता पहले से नज़र में हो।",
         "किसी भी समय से ज़्यादा अहम निजी पसंद और आपसी तालमेल है। रिपोर्ट फ़ैसले में मदद करती है, फ़ैसला नहीं करती।",
@@ -68,7 +68,7 @@ export const strongestMarriagePeriods: FocusedReportSeoContent = {
   },
   differentiation: {
     en: "Marriage Prospects asks when chances first begin to open. Marriage Discussions looks only at the present phase. This report compares the whole five-year stretch and ranks its strongest windows.",
-    hi: "'शादी की संभावनाओं का समय' पूछती है कि मौके पहली बार कब खुलने लगते हैं। 'शादी की बातचीत' केवल मौजूदा दौर को देखती है। यह रिपोर्ट पूरे पाँच वर्षों की तुलना करती है और उसके सबसे मज़बूत समयों का क्रम बताती है।",
+    hi: "'शादी की संभावनाओं का समय' पूछती है कि मौके पहली बार कब खुलने लगते हैं। 'शादी की बातचीत' केवल मौजूदा दौर को देखती है। यह रिपोर्ट पूरे पाँच वर्षों की तुलना करती है और उसके सबसे मजबूत समयों का क्रम बताती है।",
   },
   internalLinks: [
     { path: "/reports/focused/marriage-chances-timing", localized: true, label: { en: "Marriage Prospects report (₹51)", hi: "शादी की संभावनाओं का समय रिपोर्ट (₹51)" } },
@@ -83,8 +83,8 @@ export const strongestMarriagePeriods: FocusedReportSeoContent = {
       "Never presents a window as a wedding date",
     ],
     hi: [
-      "अगले पाँच वर्षों में शादी के लिए सबसे मज़बूत सहारे वाले समयों का क्रम",
-      "समझाती है कि कोई समय दूसरे से मज़बूत क्यों है",
+      "अगले पाँच वर्षों में शादी के लिए सबसे मजबूत सहारे वाले समयों का क्रम",
+      "समझाती है कि कोई समय दूसरे से मजबूत क्यों है",
       "किसी समय को शादी की तारीख के रूप में नहीं रखती",
     ],
   },
@@ -99,11 +99,11 @@ export const strongestMarriagePeriods: FocusedReportSeoContent = {
     },
     whoItIsFor: {
       en: "For someone ready to marry, or a family supporting the search, who wants to know which stretches ahead look strongest.",
-      hi: "उन लोगों के लिए जो शादी के लिए तैयार हैं, या तलाश में साथ दे रहे परिवार के लिए, जो जानना चाहते हैं कि आगे कौन-से दौर सबसे मज़बूत दिखते हैं।",
+      hi: "उन लोगों के लिए जो शादी के लिए तैयार हैं, या तलाश में साथ दे रहे परिवार के लिए, जो जानना चाहते हैं कि आगे कौन-से दौर सबसे मजबूत दिखते हैं।",
     },
     whatYouReceive: {
-      en: "Your PDF runs to about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "Your PDF runs to about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "आपकी PDF लगभग 400 से 500 शब्दों की होती है: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict a wedding date, a particular match or anyone's decision.",

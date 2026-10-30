@@ -31,7 +31,7 @@ export const foreignWorkTiming: FocusedReportSeoContent = {
       "This report reads both sides. It connects your 3rd, 6th, 9th, 10th and 12th houses and their lords, which cover effort, service, long journeys, career and foreign residence, with the dated sequence of your Dasha periods and the movement of Jupiter, Saturn and Rahu over the next five years. It separates durable promise in your birth chart from what the coming periods actually activate, and ranks the windows where career and overseas movement line up best.",
     ],
     hi: [
-      "विदेश में काम के लिए दो चीज़ें साथ आनी चाहिए: ऐसा करियर जो विदेशी भूमिका के लिए तैयार हो, और ऐसी परिस्थितियाँ जो सच में जाने का साथ दें। जाने के बिना मज़बूत पेशेवर दौर आपको वहीं रखता है; करियर के सहारे के बिना जाना घर से दूर कोई कामचलाऊ नौकरी हो सकता है।",
+      "विदेश में काम के लिए दो चीज़ें साथ आनी चाहिए: ऐसा करियर जो विदेशी भूमिका के लिए तैयार हो, और ऐसी परिस्थितियाँ जो सच में जाने का साथ दें। जाने के बिना मजबूत पेशेवर दौर आपको वहीं रखता है; करियर के सहारे के बिना जाना घर से दूर कोई कामचलाऊ नौकरी हो सकता है।",
       "यह रिपोर्ट दोनों पक्ष पढ़ती है। यह आपके 3रे, 6ठे, 9वें, 10वें और 12वें भाव और उनके स्वामियों को, जो मेहनत, सेवा, लंबी यात्राओं, करियर और विदेश में रहने से जुड़े हैं, अगले पाँच वर्षों के तारीख-युक्त दशा-क्रम और गुरु, शनि व राहु की चाल से जोड़ती है। यह जन्म कुंडली की टिकाऊ संभावना को आने वाले दौरों की असली सक्रियता से अलग करती है, और उन समयों का क्रम बताती है जहाँ करियर और विदेश जाना सबसे अच्छे से मिलते हैं।",
     ],
   },
@@ -60,7 +60,7 @@ export const foreignWorkTiming: FocusedReportSeoContent = {
       ],
       hi: [
         "धीमे काम जल्दी शुरू करें: योग्यता प्रमाण, भाषा परीक्षाएँ, लाइसेंस और दस्तावेज़ों की जाँच अक्सर नौकरी ढूँढने से ज़्यादा समय लेती है।",
-        "मज़बूत समयों में आवेदन और इंटरव्यू करें, और धीमे समयों में वह प्रोफ़ाइल बनाएँ जिसकी उन आवेदनों को ज़रूरत है।",
+        "मजबूत समयों में आवेदन और इंटरव्यू करें, और धीमे समयों में वह प्रोफ़ाइल बनाएँ जिसकी उन आवेदनों को ज़रूरत है।",
         "किसी भी विदेशी प्रस्ताव की स्वतंत्र जाँच करें, नियोक्ता, अनुबंध और वीज़ा के रास्ते सहित।",
         "कोई कुंडली वीज़ा मंज़ूर नहीं कर सकती या प्रस्ताव की गारंटी नहीं दे सकती। रिपोर्ट जाने के सहारे को बताती है, नतीजे को नहीं।",
       ],
@@ -91,7 +91,7 @@ export const foreignWorkTiming: FocusedReportSeoContent = {
   sections: {
     whatItTellsYou: {
       en: "This report answers one question, “When is a good time to go abroad for work?”. It ranks the supported windows of the next five years and explains what makes one stronger than another.",
-      hi: "यह रिपोर्ट एक ही सवाल का जवाब देती है: “विदेश में काम के लिए जाने का सही समय कब है?” यह अगले पाँच वर्षों के अनुकूल समयों का क्रम बताती है और समझाती है कि कोई समय दूसरे से मज़बूत क्यों है।",
+      hi: "यह रिपोर्ट एक ही सवाल का जवाब देती है: “विदेश में काम के लिए जाने का सही समय कब है?” यह अगले पाँच वर्षों के अनुकूल समयों का क्रम बताती है और समझाती है कि कोई समय दूसरे से मजबूत क्यों है।",
     },
     howJyotishApproachesIt: {
       en: "The backend calculates your five career and travel houses and their lords, the multi-year Dasha sequence and Jupiter, Saturn and Rahu dates. The reading ranks only those windows and names nothing beyond them.",
@@ -102,8 +102,8 @@ export const foreignWorkTiming: FocusedReportSeoContent = {
       hi: "उन पेशेवरों के लिए जो विदेश में नौकरी, अंतरराष्ट्रीय ट्रांसफ़र या विदेश में अनुबंध पर विचार कर रहे हैं और मेहनत का समय तय करना चाहते हैं।",
     },
     whatYouReceive: {
-      en: "A PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से।",
+      en: "A PDF of about 400 to 500 words: Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "लगभग 400 से 500 शब्दों की PDF: सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It does not predict a job offer, visa approval or employer decision, and is not immigration advice.",
@@ -133,7 +133,7 @@ export const foreignWorkTiming: FocusedReportSeoContent = {
       },
     },
     {
-      question: { en: "What if the strongest window is a few years away?", hi: "अगर सबसे मज़बूत समय कुछ साल दूर हो तो?" },
+      question: { en: "What if the strongest window is a few years away?", hi: "अगर सबसे मजबूत समय कुछ साल दूर हो तो?" },
       answer: {
         en: "Then the years before it are a good time to build credentials and savings so you are ready when it arrives.",
         hi: "तब उससे पहले के साल योग्यता और बचत बनाने का अच्छा समय हैं, ताकि वह समय आने पर आप तैयार हों।",

@@ -27,12 +27,12 @@ export const propertyCurrentPeriod: FocusedReportSeoContent = {
   },
   intro: {
     en: [
-      "Sometimes the question is immediate. A flat you like is available, a plot has come up in the right area, the builder wants a booking amount by the end of the month. The long-range question of when to buy has turned into a short one: is this a reasonable time to go ahead?",
-      "This report answers that short question first. It reads the 2nd, 4th and 11th houses and their lords, which relate to savings, home and property, and gains, alongside your current Dasha and Jupiter and Saturn. It says whether the present period looks supportive, mixed or constrained, then compares it with the useful windows in the next 12 months. It sits beside, never in place of, your financial and legal checks.",
+      "A booking deadline changes how a buyer thinks. The builder wants a token amount by Friday, the seller of a resale flat has another interested party, or a plot in the right colony has just been listed. Savings, loan eligibility and the site visit are done; what remains is whether to commit to this property in this period.",
+      "That decision rests on three things in your chart: the 2nd house of accumulated savings, the 4th of home and fixed assets, and the 11th of gains, each with its lord. This report reads them against the Dasha you are in right now and the current positions of Jupiter and Saturn, and says whether the period looks supportive, mixed or constrained for taking on a property commitment. It then sets this period beside the next 12 months, so you can see whether waiting a few months would change much.",
     ],
     hi: [
-      "कभी-कभी सवाल तुरंत का होता है। पसंद का फ़्लैट उपलब्ध है, सही इलाके में प्लॉट आया है, बिल्डर महीने के आखिर तक बुकिंग राशि चाहता है। प्रॉपर्टी कब खरीदें, यह लंबा सवाल एक छोटे सवाल में बदल गया है: क्या आगे बढ़ने का यह ठीक समय है?",
-      "यह रिपोर्ट पहले उसी छोटे सवाल का जवाब देती है। यह 2रा, 4था और 11वाँ भाव और उनके स्वामी पढ़ती है, जो बचत, घर व संपत्ति, और लाभ से जुड़े हैं, साथ में आपकी मौजूदा दशा और गुरु व शनि। यह बताती है कि मौजूदा दौर अनुकूल, मिला-जुला या बंधा हुआ दिखता है, फिर अगले 12 महीनों के उपयोगी समयों से उसकी तुलना करती है। यह आपकी वित्तीय और कानूनी जाँच के साथ रहती है, कभी उनकी जगह नहीं लेती।",
+      "बुकिंग की आखिरी तारीख खरीदार की सोच बदल देती है। बिल्डर शुक्रवार तक टोकन राशि चाहता है, रीसेल फ़्लैट के विक्रेता के पास कोई और खरीदार भी है, या सही कॉलोनी में कोई प्लॉट अभी-अभी आया है। बचत, लोन की पात्रता और जगह देखना हो चुका है; बचा है बस यह फ़ैसला कि इसी दौर में इस प्रॉपर्टी के लिए प्रतिबद्ध हों या नहीं।",
+      "यह फ़ैसला आपकी कुंडली की तीन बातों पर टिका है: जमा बचत का 2रा भाव, घर और अचल संपत्ति का 4था भाव, और लाभ का 11वाँ भाव, हर एक अपने स्वामी के साथ। यह रिपोर्ट इन्हें उस दशा के सामने पढ़ती है जिसमें आप अभी हैं, और गुरु व शनि की मौजूदा स्थिति के साथ, और बताती है कि प्रॉपर्टी की प्रतिबद्धता लेने के लिए यह दौर अनुकूल, मिला-जुला या बंधा हुआ दिखता है। फिर यह इस दौर को अगले 12 महीनों के साथ रखती है, ताकि आप देख सकें कि कुछ महीने रुकने से कितना फ़र्क पड़ेगा।",
     ],
   },
   analyzes: {
@@ -101,8 +101,8 @@ export const propertyCurrentPeriod: FocusedReportSeoContent = {
       hi: "उस खरीदार के लिए जिसके सामने कोई खास फ़्लैट, प्लॉट या दुकान है और जो बुकिंग राशि देने से पहले समय की राय चाहता है।",
     },
     whatYouReceive: {
-      en: "Delivered as a PDF of 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details.",
-      hi: "400 से 500 शब्दों की PDF के रूप में, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से।",
+      en: "Delivered as a PDF of 400 to 500 words with Direct Answer, Why Your Chart Says This, Strongest Periods, Slower or Watch Period, What You Should Do, and Bottom Line, from your birth details. The Slower or Watch Period section appears only when your dated evidence supports it.",
+      hi: "400 से 500 शब्दों की PDF के रूप में, जिसमें सीधा जवाब, आपकी Chart ऐसा क्यों कहती है, सबसे मजबूत समय, धीमा या ध्यान रखने वाला समय, आपको क्या करना चाहिए, और सीधी बात शामिल हैं; आपकी जन्म जानकारी से। 'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है जब आपकी तारीख-युक्त जानकारी उसका समर्थन करे।",
     },
     trustAndLimitations: {
       en: "This is astrology-based guidance, not a certainty or a guaranteed outcome. It is not financial, legal or title advice, and it does not judge any particular property or seller.",
@@ -118,17 +118,17 @@ export const propertyCurrentPeriod: FocusedReportSeoContent = {
       },
     },
     {
-      question: { en: "What if the present looks mixed?", hi: "अगर मौजूदा दौर मिला-जुला दिखे तो?" },
+      question: { en: "Should I pay the booking amount if the reading is mixed?", hi: "अगर विश्लेषण मिला-जुला हो तो क्या बुकिंग राशि दे दूँ?" },
       answer: {
-        en: "The report explains what is mixed and points to a better window within 12 months, if there is one.",
-        hi: "रिपोर्ट बताती है कि क्या मिला-जुला है और अगर कोई बेहतर समय हो तो 12 महीनों के भीतर उसकी ओर इशारा करती है।",
+        en: "That depends on the refund terms. A mixed period is a reason to ask for a longer cancellation window or a smaller token, not to skip your checks; the report also shows whether a later month in the year looks steadier.",
+        hi: "यह रिफ़ंड की शर्तों पर निर्भर है। मिला-जुला दौर ज़्यादा लंबी रद्द करने की अवधि या छोटी टोकन राशि माँगने की वजह है, जाँच छोड़ने की नहीं; रिपोर्ट यह भी दिखाती है कि साल का कोई बाद का महीना ज़्यादा स्थिर दिखता है या नहीं।",
       },
     },
     {
-      question: { en: "Is this the same as fixing a muhurat for registration?", hi: "क्या यह रजिस्ट्रेशन का मुहूर्त निकालने जैसा है?" },
+      question: { en: "Does it apply to a plot, a resale flat and an under-construction project alike?", hi: "क्या यह प्लॉट, रीसेल फ़्लैट और बन रहे प्रोजेक्ट, सब पर लागू होती है?" },
       answer: {
-        en: "No. It reads the broader period, not an auspicious date or hour for signing.",
-        hi: "नहीं। यह बड़ा दौर पढ़ती है, हस्ताक्षर के लिए कोई शुभ तारीख या समय नहीं।",
+        en: "Yes. It reads your readiness to take on a property commitment of any kind. Possession dates and builder delays are outside what a chart can show.",
+        hi: "हाँ। यह किसी भी तरह की प्रॉपर्टी की प्रतिबद्धता लेने की आपकी तैयारी पढ़ती है। कब्ज़े की तारीख और बिल्डर की देरी ऐसी बातें हैं जिन्हें कुंडली नहीं दिखा सकती।",
       },
     },
     {

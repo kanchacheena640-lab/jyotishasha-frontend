@@ -67,7 +67,9 @@ const PILOT_KEYS = [
 const HORIZON_PHRASE: Record<number, string> = { 12: "12 months", 36: "three years", 60: "five years" };
 const ordinal = (n: number) => `${n}${n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th"}`;
 const housePhrase = (houses: number[]) => `${houses.slice(0, -1).map(ordinal).join(", ")} and ${ordinal(houses[houses.length - 1])} houses`;
-const contents = Object.values(FOCUSED_REPORT_SEO_CONTENT);
+const BESPOKE_KEYS = ["major_kundali_obstacles", "major_kundali_strengths"];
+// The 61 registry topics plus the 2 bespoke pilots' seo modules (F12-P3.2), all held to the same rules.
+const contents = [...Object.values(FOCUSED_REPORT_SEO_CONTENT), ...Object.values(FOCUSED_REPORTS_CONFIG).map((c) => c.seo!)];
 const configs = listFocusedReportHumanSlugs().map((slug) => getFocusedReportConfigBySlug(slug)!);
 
 /** Every visible string of a content entry, per language. */
@@ -101,7 +103,7 @@ check("exactly the 61 approved topics have SEO content, each a real catalog ques
 check("the resolver serves content-tier configs for the 61 topics; bespoke (2) unchanged, none stay generic", () => {
   assert.deepEqual(Object.keys(FOCUSED_REPORTS_CONFIG).sort(), ["major-kundali-obstacles", "major-kundali-strengths"]);
   assert.equal(configs.length, 63);
-  assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS].sort());
+  assert.deepEqual(configs.filter((c) => c.seo).map((c) => c.questionKey).sort(), [...PILOT_KEYS, ...BESPOKE_KEYS].sort());
   assert.equal(configs.filter((c) => !c.seo && !FOCUSED_REPORTS_CONFIG[c.humanSlug]).length, 0);
   for (const c of configs.filter((x) => x.seo)) assert.equal(c.seo!.questionKey, c.questionKey);
 });
@@ -197,9 +199,10 @@ check("no guarantees, accuracy claims, credentials or human-authorship claims", 
     }
   }
 });
-check("remedies=False topics never offer remedies themselves (they may only point to the separate report that has them)", () => {
+check("only the backend's REMEDY_KEYS topic offers remedies; every other topic never does (it may only point to a report that has them)", () => {
   for (const c of contents) {
-    assert.equal(c.grounding.remedies, false);
+    assert.equal(c.grounding.remedies, c.questionKey === "major_kundali_obstacles", `${c.questionKey}: remedies flag`);
+    if (c.grounding.remedies) continue;
     for (const sentence of visibleText(c, "en").join(" ").split(/(?<=[.?!])\s+/)) {
       // A question ("Does this report suggest remedies?") is answered by the following sentence.
       if (/remed/i.test(sentence) && !sentence.endsWith("?")) assert.match(sentence, /does not|\bNo\b|rather than|Delay in Marriage/, `${c.questionKey}: ${sentence}`);
@@ -215,6 +218,27 @@ check("AI-assisted writing is disclosed truthfully on every content-tier page, i
 });
 
 console.log("\n=== grounding in the backend's own report definitions ===");
+check("conditional PDF sections are never promised: TIMING/DIAGNOSTIC pages say when Slower/Watch or easing appears", () => {
+  // master_contract.py: the Slower or Watch Period appears only if the astrology justifies it, and any easing/timing
+  // section is omitted when dated support is absent.
+  const rule: Record<string, [RegExp, RegExp]> = {
+    TIMING: [/Slower or Watch Period section appears only when your dated evidence supports it/, /'धीमा या ध्यान रखने वाला समय' वाला हिस्सा तभी आता है/],
+    DIAGNOSTIC: [/When Pressure May Ease section appears only when your dated evidence supports easing/, /'दबाव कब कम हो सकता है' वाला हिस्सा तभी आता है/],
+  };
+  for (const c of contents.filter((x) => rule[x.grounding.archetype])) {
+    const [en, hi] = rule[c.grounding.archetype];
+    assert.match(c.sections.whatYouReceive.en, en, `${c.questionKey} en`);
+    assert.match(c.sections.whatYouReceive.hi, hi, `${c.questionKey} hi`);
+  }
+});
+check("Hindi copy is normalised: backend spelling मजबूत, digit house ordinals, no malformed 2वें", () => {
+  for (const c of contents) {
+    const hi = visibleText(c, "hi").join(" ");
+    assert.doesNotMatch(hi, /म(?:\u091C\u093C|\u095B)बूत/, `${c.questionKey}: use मजबूत (as the PDF headings do)`);
+    assert.doesNotMatch(hi, /(?<![0-9])2वें/, `${c.questionKey}: 2वें should be 2रे`);
+    assert.doesNotMatch(hi, /(?:दूसरे|तीसरे|चौथे|पाँचवें|छठे|सातवें|आठवें|नौवें|दसवें|ग्यारहवें|बारहवें|दूसरा|तीसरा|चौथा|पाँचवाँ|छठा|सातवाँ|आठवाँ|नौवाँ|दसवाँ|ग्यारहवाँ|बारहवाँ),? (?:\S+ )?भाव/, `${c.questionKey}: use digit house ordinals`);
+  }
+});
 check("'what you receive' lists exactly the PDF sections of the report's archetype", () => {
   for (const c of contents) {
     for (const lang of ["en", "hi"] as const) {
@@ -274,7 +298,7 @@ if (fs.existsSync(BACKEND)) {
   const be = (f: string) => fs.readFileSync(path.join(BACKEND, f), "utf8");
   check("backend cross-check: PDF section headings match master_contract.py", () => {
     const contract = be("master_contract.py");
-    for (const arch of ["TIMING", "DIAGNOSTIC", "DIRECTION", "COMPATIBILITY"] as const) {
+    for (const arch of ["TIMING", "DIAGNOSTIC", "DIRECTION", "COMPATIBILITY", "OBSTACLES", "STRENGTHS_NOW"] as const) {
       for (let i = 0; i < REPORT_SECTIONS[arch].en.length; i++) assert.ok(contract.includes(`("${REPORT_SECTIONS[arch].en[i]}", "${REPORT_SECTIONS[arch].hi[i]}")`), `${arch} ${i}`);
     }
   });
@@ -309,13 +333,27 @@ if (fs.existsSync(BACKEND)) {
     // Life keys: horizon (None = natal only), base house set, natal planets and transits exactly as life_keys.py defines them.
     const life = be("life_keys.py");
     const lifeNatal = ((life.match(/LIFE_NATAL_PLANETS = \(([^)]*)\)/) || [])[1] || "").match(/[A-Z][a-z]+/g) || [];
-    for (const c of contents.filter((x) => life.includes(`"${x.questionKey}": (`))) {
+    for (const c of contents.filter((x) => !BESPOKE_KEYS.includes(x.questionKey) && life.includes(`"${x.questionKey}": (`))) {
       assert.ok(life.includes(`"${c.questionKey}": ${c.grounding.horizonMonths ?? "None"},`), `${c.questionKey}: life horizon`);
       assert.ok(c.grounding.houses && life.includes(`"${c.questionKey}": (${c.grounding.houses.join(", ")}),`), `${c.questionKey}: life houses`);
       assert.deepEqual(c.grounding.natalPlanets, lifeNatal, `${c.questionKey}: natal planets`);
       assert.deepEqual(c.grounding.transits, c.grounding.horizonMonths === null ? [] : ["Jupiter", "Saturn"], `${c.questionKey}: life transits`);
     }
     assert.match(life, /LIFE_TRANSIT_PLANETS_DEFAULT = \("Jupiter", "Saturn"\)/);
+    // Bespoke whole-chart pilots: 12 months, all 12 houses, all 9 natal planets, Jupiter/Saturn/Rahu, remedies only for obstacles.
+    const lifeAll = ((life.match(/LIFE_ALL_NATAL_PLANETS = \(([^)]*)\)/) || [])[1] || "").match(/[A-Z][a-z]+/g) || [];
+    for (const key of BESPOKE_KEYS) {
+      const c = contents.find((x) => x.questionKey === key)!;
+      assert.ok(life.includes(`"${key}": 12,`) && life.includes(`"${key}": _ALL_HOUSES,`), `${key}: horizon/houses`);
+      assert.equal(c.grounding.horizonMonths, 12);
+      assert.equal(c.grounding.houses, null, `${key}: whole chart is described as all twelve houses`);
+      assert.deepEqual(c.grounding.natalPlanets, lifeAll, `${key}: natal planets`);
+      assert.deepEqual(c.grounding.transits, ["Jupiter", "Saturn", "Rahu"], `${key}: transits`);
+    }
+    assert.match(life, /"major_kundali_obstacles": \("Jupiter", "Saturn", "Rahu"\)/);
+    assert.ok(be("prompt_specs.py").includes('REMEDY_KEYS = frozenset({"major_kundali_obstacles"})'), "REMEDY_KEYS");
+    assert.equal(contents.find((x) => x.questionKey === "major_kundali_obstacles")!.grounding.archetype, "OBSTACLES");
+    assert.equal(contents.find((x) => x.questionKey === "major_kundali_strengths")!.grounding.archetype, "STRENGTHS_NOW");
     assert.ok(be("prompt_specs.py").includes('key == "best_career_years" or key in MULTI_YEAR_KEYS'), "best_career_years uses the multi-year dasha_sequence");
     assert.match(be("career_evidence.py"), /months = 60 if "dasha_sequence" in required else 12/);
     // Money/business keys: 12 months unless listed in MULTI_YEAR_KEYS.
