@@ -35,6 +35,7 @@ import FocusedReportHero from "@/components/focused-reports/FocusedReportHero";
 import FocusedReportCheckout from "@/components/focused-reports/FocusedReportCheckout";
 import FocusedDualReportCheckout from "@/components/focused-reports/FocusedDualReportCheckout";
 import FocusedReportDetails from "@/components/focused-reports/FocusedReportDetails";
+import FocusedReportGuide from "@/components/focused-reports/FocusedReportGuide";
 import RelatedFocusedReports from "@/components/focused-reports/RelatedFocusedReports";
 import FocusedReportSeoSchema from "@/components/focused-reports/FocusedReportSeoSchema";
 import ProductBreadcrumb from "@/components/reports/ProductBreadcrumb";
@@ -63,7 +64,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!config) return {};
 
   const locale = toLocale(params.locale);
-  const title = config.title[locale];
+  const title = config.seo?.seoTitle[locale] ?? config.title[locale];
 
   const path = `/reports/focused/${config.humanSlug}`;
   const canonical = `${SITE_URL}${locale === "hi" ? "/hi" : ""}${path}`;
@@ -105,7 +106,8 @@ export default async function FocusedReportPage({ params }: { params: Params }) 
   ]);
 
   const locale = toLocale(params.locale);
-  const title = config.title[locale];
+  // H1 and Product name: a topic's own SEO H1 when it has one, else the backend title.
+  const title = config.seo?.h1[locale] ?? config.title[locale];
   // The exact customer question/hook -- read live from intentCatalog (never hand-typed), so
   // this can never drift from the backend's own authoritative wording.
   const { question } = getFocusedReportCatalogEntry(config);
@@ -133,7 +135,7 @@ export default async function FocusedReportPage({ params }: { params: Params }) 
             { name: locale === "hi" ? "होम" : "Home", path: locale === "hi" ? "/hi" : "" },
             { name: locale === "hi" ? "रिपोर्ट्स" : "Reports", path: "/reports" },
             { name: locale === "hi" ? "फोकस्ड रिपोर्ट्स" : "Focused Reports", path: `${locale === "hi" ? "/hi" : ""}/reports/focused` },
-            { name: title, path: `${locale === "hi" ? "/hi" : ""}/reports/focused/${config.humanSlug}` },
+            { name: config.title[locale], path: `${locale === "hi" ? "/hi" : ""}/reports/focused/${config.humanSlug}` },
           ]}
         />
       </div>
@@ -145,6 +147,7 @@ export default async function FocusedReportPage({ params }: { params: Params }) 
       )}
       {/* The checkouts already show secure-payment and WhatsApp-support lines. */}
       <PurchasePolicyLinks lang={locale === "hi" ? "hi" : "en"} variant="refund" />
+      <FocusedReportGuide config={config} locale={locale} />
       <FocusedReportDetails config={config} locale={locale} />
       <ProductReviews summary={reviews} lang={locale === "hi" ? "hi" : "en"} />
       <RelatedFocusedReports items={relatedItems} locale={locale} />

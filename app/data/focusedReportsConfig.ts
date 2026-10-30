@@ -44,6 +44,7 @@ import {
   type IntentCategoryId, type IntentQuestion,
 } from "./intentCatalog";
 import focusedReportTitlesData from "./focusedReportTitles.json";
+import { FOCUSED_REPORT_SEO_CONTENT, type FocusedReportSeoContent } from "./focused-report-content";
 // Relative, not the @/ alias -- matches this file's own existing import
 // convention (everything else here is relative), and keeps this file
 // compilable standalone by the plain `tsc` invocation
@@ -84,6 +85,8 @@ export interface FocusedReportConfig {
   faqs: FocusedReportFaq[];
   /** SEO meta description (distinct from the H1/hook, which always comes from intentCatalog). */
   metaDescription: { en: string; hi: string };
+  /** F12-P2.1: topic-specific SEO content (app/data/focused-report-content). Absent on bespoke and generic configs. */
+  seo?: FocusedReportSeoContent;
 }
 
 export const FOCUSED_REPORTS_CONFIG: Record<string, FocusedReportConfig> = {
@@ -399,8 +402,9 @@ function buildGenericFocusedReportConfig(question: IntentQuestion): FocusedRepor
 }
 
 /** The ONLY function that turns a public URL segment into the trusted
- * question_key + full page config. Tier 1 (bespoke) first, tier 2
- * (generic, any real catalog question) second. Returns undefined for
+ * question_key + full page config. Tier 1 (bespoke) first, then topics
+ * with their own SEO content (app/data/focused-report-content), then the
+ * generic template for any other real catalog question. Returns undefined for
  * anything that isn't a real question_key's slug -- the route calls
  * notFound() in that case. Never guesses, never falls back to treating
  * the slug itself as a question_key. */
@@ -417,7 +421,30 @@ export function getFocusedReportConfigBySlug(humanSlug: string): FocusedReportCo
   const question = getIntentQuestion(questionKey);
   if (!question) return undefined;
 
+  const content = FOCUSED_REPORT_SEO_CONTENT[questionKey];
+  if (content) return buildContentFocusedReportConfig(question, content);
+
   return buildGenericFocusedReportConfig(question);
+}
+
+/** Tier 2 (F12-P2.1): a topic with its own SEO content. Title and category
+ * still come from the authoritative sources (focusedReportTitles.json and the
+ * catalog); every page-copy field comes from the topic's content file. */
+function buildContentFocusedReportConfig(question: IntentQuestion, content: FocusedReportSeoContent): FocusedReportConfig {
+  const title = FOCUSED_REPORT_TITLES[question.questionKey];
+  if (!title) throw new Error(`focusedReportsConfig: no title for questionKey ${question.questionKey}`);
+  return {
+    humanSlug: questionKeyToHumanSlug(question.questionKey),
+    questionKey: question.questionKey,
+    category: question.category,
+    priceRupees: 51,
+    title,
+    benefits: content.benefits,
+    sections: content.sections,
+    faqs: content.faqs,
+    metaDescription: content.metaDescription,
+    seo: content,
+  };
 }
 
 /** Bilingual title/question, read live from the authoritative catalog --
