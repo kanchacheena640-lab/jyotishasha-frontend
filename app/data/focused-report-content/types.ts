@@ -22,7 +22,7 @@ import type { FocusedReportFaq } from "../focusedReportsConfig";
 export type Localized = { en: string; hi: string };
 
 /** Report shapes from the backend's master_contract.py::SECTIONS. */
-export type ReportArchetype = "TIMING" | "DIAGNOSTIC";
+export type ReportArchetype = "TIMING" | "DIAGNOSTIC" | "DIRECTION";
 
 export interface FocusedReportInternalLink {
   /** English path; the Hindi page links to `/hi${path}` when `localized`. */
@@ -76,6 +76,10 @@ export const REPORT_SECTIONS: Record<ReportArchetype, { en: string[]; hi: string
   DIAGNOSTIC: {
     en: ["Direct Answer", "Main Astrological Factors", "Why This Phase Feels Difficult", "When Pressure May Ease", "What You Can Do", "Bottom Line"],
     hi: ["सीधा जवाब", "मुख्य ज्योतिषीय कारण", "यह समय कठिन क्यों लगता है", "दबाव कब कम हो सकता है", "आप क्या कर सकते हैं", "सीधी बात"],
+  },
+  DIRECTION: {
+    en: ["Direct Answer", "Natural Strengths and Tendencies", "Most Relevant Directions", "Current Timing Context", "Practical Focus", "Bottom Line"],
+    hi: ["सीधा जवाब", "ताकतें और रुझान", "सबसे उपयोगी दिशाएँ", "अभी के समय का संदर्भ", "व्यावहारिक ध्यान", "सीधी बात"],
   },
 };
 
