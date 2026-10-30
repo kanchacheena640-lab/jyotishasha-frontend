@@ -17,6 +17,13 @@ import { businessStartTiming } from "./business_start_timing";
 import { studyAbroad } from "./study_abroad";
 import { foreignSettlementTiming } from "./foreign_settlement_timing";
 import { propertyPurchaseTiming } from "./property_purchase_timing";
+// F12-P2.5 batch
+import { examPreparationPeriod } from "./exam_preparation_period";
+import { higherEducationTiming } from "./higher_education_timing";
+import { salaryGrowthTiming } from "./salary_growth_timing";
+import { incomeIncreaseTiming } from "./income_increase_timing";
+import { ownHomeTiming } from "./own_home_timing";
+import { relocationTiming } from "./relocation_timing";
 
 export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent> = {
   [newJobTiming.questionKey]: newJobTiming,
@@ -30,6 +37,12 @@ export const FOCUSED_REPORT_SEO_CONTENT: Record<string, FocusedReportSeoContent>
   [studyAbroad.questionKey]: studyAbroad,
   [foreignSettlementTiming.questionKey]: foreignSettlementTiming,
   [propertyPurchaseTiming.questionKey]: propertyPurchaseTiming,
+  [examPreparationPeriod.questionKey]: examPreparationPeriod,
+  [higherEducationTiming.questionKey]: higherEducationTiming,
+  [salaryGrowthTiming.questionKey]: salaryGrowthTiming,
+  [incomeIncreaseTiming.questionKey]: incomeIncreaseTiming,
+  [ownHomeTiming.questionKey]: ownHomeTiming,
+  [relocationTiming.questionKey]: relocationTiming,
 };
 
 export { REPORT_SECTIONS, AI_DISCLOSURE } from "./types";
