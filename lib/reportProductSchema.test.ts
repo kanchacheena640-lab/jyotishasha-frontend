@@ -134,7 +134,7 @@ check("63 focused products", () => assert.equal(focusedSlugs.length, 63));
 for (const slug of focusedSlugs) {
   const config = getFocusedReportConfigBySlug(slug)!;
   for (const locale of ["en", "hi"] as const) {
-    check(`${slug} [${locale}]: one Product, unchanged fields, no availability/image claims`, async () => {
+    check(`${slug} [${locale}]: one Product, unchanged fields, topic image, no availability claim`, async () => {
       const blocks = jsonLdScripts(await FocusedReportSeoSchema({ config, title: config.title[locale], locale }));
       const products = blocks.filter((b) => b["@type"] === "Product");
       assert.equal(products.length, 1);
@@ -144,7 +144,9 @@ for (const slug of focusedSlugs) {
       assert.equal(p.offers.priceCurrency, "INR");
       assert.equal(p.offers.url, `${SITE}${locale === "hi" ? "/hi" : ""}/reports/focused/${slug}`);
       assert.equal(p.offers.availability, undefined);
-      assert.equal(p.image, undefined);
+      assert.equal(p.image.length, 1);
+      assert.ok(p.image[0].startsWith(`${SITE}/reports/`) && p.image[0].endsWith(".webp"), "absolute topic image URL");
+      assert.ok(fs.existsSync(`public${p.image[0].slice(SITE.length)}`), "image asset exists");
       assert.equal(blocks.filter((b) => b["@type"] === "BreadcrumbList").length, 0, "breadcrumb comes from ProductBreadcrumb");
     });
   }
