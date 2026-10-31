@@ -122,7 +122,7 @@ for (const report of standard) {
   });
 }
 
-section("\n=== 3. focused reports (server-rendered, still noindex, no new claims) ===");
+section("\n=== 3. focused reports (server-rendered, indexable since F12, no new claims) ===");
 const FocusedReportSeoSchema = load("components/focused-reports/FocusedReportSeoSchema.tsx", {
   ...runtime,
   "@/lib/seo/articleSchema": { SITE_URL: SITE },
@@ -149,8 +149,8 @@ for (const slug of focusedSlugs) {
     });
   }
 }
-check("focused routes keep noindex in metadata (hub and product)", () => {
-  assert.ok(/robots: \{ index: false, follow: true \}/.test(fs.readFileSync("app/[locale]/reports/focused/[slug]/page.tsx", "utf8")));
+check("focused product route is index, follow (F12 SEO launch); the hub keeps noindex, follow", () => {
+  assert.ok(/robots: \{ index: true, follow: true \}/.test(fs.readFileSync("app/[locale]/reports/focused/[slug]/page.tsx", "utf8")));
   assert.ok(/robots: \{ index: false, follow: true \}/.test(fs.readFileSync("app/[locale]/reports/focused/page.tsx", "utf8")));
 });
 

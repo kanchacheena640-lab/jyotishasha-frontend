@@ -359,14 +359,14 @@ check("generateStaticParams is driven by listFocusedReportHumanSlugs(), not a ha
   assert.ok(/generateStaticParams[\s\S]{0,120}listFocusedReportHumanSlugs\(\)/.test(src));
   assert.equal(listFocusedReportHumanSlugs().length, 63, "the route must now generate all 63, not a pilot-only subset");
 });
-check("metadata sets canonical + en/hi/x-default alternates and robots noindex for every product (SEO rollout is a later, separate step)", () => {
+check("metadata sets canonical + en/hi/x-default alternates and robots index, follow for every product (F12 SEO launch)", () => {
   const src = read("app/[locale]/reports/focused/[slug]/page.tsx");
   assert.ok(/alternates:\s*{/.test(src));
   assert.ok(/canonical/.test(src));
   assert.ok(/en:\s*`\$\{SITE_URL\}\$\{path\}`/.test(src), "expected an EN alternate distinct from the HI one (the old /reports/[slug] hreflang gap must not repeat)");
   assert.ok(/hi:\s*`\$\{SITE_URL\}\/hi\$\{path\}`/.test(src), "expected a real, distinct HI URL, not a client-side toggle");
   assert.ok(/"x-default":\s*`\$\{SITE_URL\}\$\{path\}`/.test(src));
-  assert.ok(/robots:\s*{\s*index:\s*false,\s*follow:\s*true\s*}/.test(src));
+  assert.ok(/robots:\s*{\s*index:\s*true,\s*follow:\s*true\s*}/.test(src));
 });
 check("the canonical/hreflang URLs this route would emit are correct for the 2 pilots AND a sample of generic products", () => {
   const sampleSlugs = [...PILOT_SLUGS, questionKeyToHumanSlug("promotion_timing"), questionKeyToHumanSlug("relationship_lead_to_marriage")];
@@ -526,20 +526,21 @@ check("the /en/ duplicate-URL redirect no longer treats /en/reports/focused (hub
 // running dev server as part of P0.5 and is documented in that report,
 // not re-derived here.
 
-console.log("\n=== P0.7 Phase 7: no premature sitewide exposure -- hub and all 63 product pages stay out of the sitemap ===");
-check("sitemap generation is untouched by this task -- neither the hub nor any focused product page is added to it yet", () => {
-  const sitemapCandidates = ["app/sitemap.ts", "app/sitemap.xml.ts", "app/sitemap/route.ts"];
-  for (const candidate of sitemapCandidates) {
-    if (fs.existsSync(path.join(repo, candidate))) {
-      const src = read(candidate);
-      assert.ok(!src.includes("focusedReportsConfig"), `${candidate} must not reference the focused-reports config yet`);
-      assert.ok(!/reports\/focused/.test(src), `${candidate} must not hardcode a /reports/focused URL either`);
-    }
-  }
+console.log("\n=== F12 SEO launch: the 126 product pages are indexed and listed; the hub is not ===");
+check("the sitemap lists focused product pages from listFocusedReportHumanSlugs() (exact URL set: lib/productSitemap.test.ts)", () => {
+  const src = read("app/sitemap.ts");
+  assert.ok(src.includes("listFocusedReportHumanSlugs()"));
+  assert.ok(src.includes("`${baseUrl}/reports/focused/${slug}`") && src.includes("`${baseUrl}/hi/reports/focused/${slug}`"));
 });
-check("both the hub and the [slug] route stay noindex, follow -- SEO/indexing is a deliberately separate, later step", () => {
+check("the indexable /reports page server-renders links to the featured focused product pages and the hub", () => {
+  const src = read("app/reports/page.tsx");
+  assert.ok(src.includes("FEATURED_FOCUSED_QUESTION_KEYS") && src.includes("`/reports/focused/${config.humanSlug}`"));
+  assert.ok(src.includes('href="/reports/focused"'));
+  for (const key of FEATURED_FOCUSED_QUESTION_KEYS) assert.ok(getFocusedReportConfigBySlug(questionKeyToHumanSlug(key)), key);
+});
+check("the [slug] route is index, follow; the hub stays noindex, follow", () => {
   assert.ok(/robots:\s*{\s*index:\s*false,\s*follow:\s*true\s*}/.test(read(HUB_PAGE)));
-  assert.ok(/robots:\s*{\s*index:\s*false,\s*follow:\s*true\s*}/.test(read("app/[locale]/reports/focused/[slug]/page.tsx")));
+  assert.ok(/robots:\s*{\s*index:\s*true,\s*follow:\s*true\s*}/.test(read("app/[locale]/reports/focused/[slug]/page.tsx")));
 });
 
 console.log("\n=== no technical/debug field is ever shown to the customer as visible text ===");
@@ -716,12 +717,12 @@ check("no broken report URLs: every one of the 63 + every featured key + every r
 });
 
 console.log("\n=== hub redesign: everything from the prior phase is preserved ===");
-check("63 routable, 54 SELF, 9 DUAL, EN bare canonical, HI /hi/, noindex -- all unchanged", () => {
+check("63 routable, 54 SELF, 9 DUAL, EN bare canonical, HI /hi/, index (F12 SEO launch)", () => {
   assert.equal(listFocusedReportHumanSlugs().length, 63);
   assert.equal(intentQuestions.filter((q) => q.personMode === "single").length, 54);
   assert.equal(intentQuestions.filter((q) => q.personMode === "dual").length, 9);
   const src = read("app/[locale]/reports/focused/[slug]/page.tsx");
-  assert.ok(/robots:\s*{\s*index:\s*false,\s*follow:\s*true\s*}/.test(src));
+  assert.ok(/robots:\s*{\s*index:\s*true,\s*follow:\s*true\s*}/.test(src));
 });
 check("#62/#63 sample links and ₹51 pricing remain intact", () => {
   assert.ok(focusedReportHasSample("major_kundali_obstacles"));

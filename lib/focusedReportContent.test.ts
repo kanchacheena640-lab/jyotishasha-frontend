@@ -405,12 +405,12 @@ check("each pilot's copy shares < 15% of 5-word phrases with any other focused p
   }
 });
 
-console.log("\n=== indexing unchanged ===");
-check("every focused page and the hub stay noindex, follow; no focused URL is in the sitemap", () => {
-  assert.ok(read("app/[locale]/reports/focused/[slug]/page.tsx").includes("robots: { index: false, follow: true },"));
+console.log("\n=== indexing (F12 SEO launch) ===");
+check("product pages are index, follow and in the sitemap; the hub and example-preview stay noindex, follow", () => {
+  assert.ok(read("app/[locale]/reports/focused/[slug]/page.tsx").includes("robots: { index: true, follow: true },"));
   assert.ok(read("app/[locale]/reports/focused/page.tsx").includes("robots: { index: false, follow: true },"));
   assert.ok(read("app/[locale]/reports/focused/example-preview/page.tsx").includes("robots: { index: false, follow: true },"));
-  assert.doesNotMatch(read("app/sitemap.ts"), /reports\/focused/);
+  assert.match(read("app/sitemap.ts"), /listFocusedReportHumanSlugs\(\)/);
   for (const dir of ["app/data/focused-report-content", "components/focused-reports"]) {
     for (const f of fs.readdirSync(path.join(repo, dir))) assert.doesNotMatch(read(`${dir}/${f}`), /robots\s*:|index:\s*true/, `${dir}/${f}`);
   }

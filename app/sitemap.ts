@@ -12,6 +12,7 @@ import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 import { getAuthorityDomain, getAllTopicSlugs } from "@/lib/authority-engine/resolver";
 import { getReportProductPath, RELATIONSHIP_REPORT_PATH } from "@/lib/reportProductSeo";
+import { listFocusedReportHumanSlugs } from "@/app/data/focusedReportsConfig";
 
 export default async function sitemap() {
   const baseUrl = SITE_URL;
@@ -122,11 +123,18 @@ export default async function sitemap() {
   // ---------------- REPORTS ----------------
   // Only reports whose canonical product page IS /reports/<slug>. The ₹199
   // relationship report's /reports URL is a permanent redirect; its real EN/HI
-  // product pages are listed in the LOVE block below. Focused reports are
-  // noindex and deliberately never listed.
+  // product pages are listed in the LOVE block below.
   const reportUrls = reportsData
     .filter((report) => getReportProductPath(report.slug) === `/reports/${report.slug}`)
     .map((report) => createProductUrl(`${baseUrl}/reports/${report.slug}`, 0.75));
+
+  // Focused report product pages: all 63 x EN/HI (126 URLs). The hub
+  // (/reports/focused) and the generic example-preview page stay noindex
+  // and are not listed.
+  const focusedReportUrls = listFocusedReportHumanSlugs().flatMap((slug) => [
+    createProductUrl(`${baseUrl}/reports/focused/${slug}`, 0.7),
+    createProductUrl(`${baseUrl}/hi/reports/focused/${slug}`, 0.7),
+  ]);
 
 
   // ---------------- FREE KUNDALI ----------------
@@ -428,6 +436,7 @@ export default async function sitemap() {
     ...toolUrls,
     ...toolUrlsHi,
     ...reportUrls,
+    ...focusedReportUrls,
     ...kundaliUrls,
     ...transitUrls,
     ...holiUrls,

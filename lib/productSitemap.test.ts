@@ -65,10 +65,23 @@ async function main() {
   check("the /reports catalogue hub is listed once", () => {
     assert.equal(urls.filter((u) => u === `${SITE}/reports`).length, 1);
   });
-  check("no focused report (EN or HI, product or hub) and no /hi/reports URL is listed", () => {
-    assert.equal(listFocusedReportHumanSlugs().length, 63);
-    assert.ok(!urls.some((u) => u.includes("/reports/focused")), "focused URL in sitemap");
-    assert.ok(!urls.some((u) => u.startsWith(`${SITE}/hi/reports`)), "/hi/reports URL in sitemap");
+  check("F12 SEO launch: exactly the 126 focused product URLs (63 EN + 63 HI), each once, with no fabricated lastModified", () => {
+    const slugs = listFocusedReportHumanSlugs();
+    assert.equal(slugs.length, 63);
+    const expected = slugs.flatMap((s) => [`${SITE}/reports/focused/${s}`, `${SITE}/hi/reports/focused/${s}`]).sort();
+    const focused = urls.filter((u) => u.includes("/reports/focused"));
+    assert.equal(focused.length, 126);
+    assert.deepEqual([...focused].sort(), expected);
+    for (const u of focused) assert.ok(!("lastModified" in byUrl.get(u)), `${u} has lastModified`);
+  });
+  check("the noindex focused hub and example-preview pages are NOT listed", () => {
+    for (const u of [`${SITE}/reports/focused`, `${SITE}/hi/reports/focused`,
+                     `${SITE}/reports/focused/example-preview`, `${SITE}/hi/reports/focused/example-preview`]) {
+      assert.ok(!byUrl.has(u), `${u} listed`);
+    }
+  });
+  check("no other /hi/reports URL is listed (standard reports have no Hindi product URL)", () => {
+    assert.ok(!urls.some((u) => u.startsWith(`${SITE}/hi/reports`) && !u.startsWith(`${SITE}/hi/reports/focused/`)));
   });
   check("product URLs carry no fabricated lastModified", () => {
     const productUrls = [...reportEntries.map((e) => e.url), `${SITE}/reports`, `${SITE}${RELATIONSHIP_REPORT_PATH}`, `${SITE}/hi${RELATIONSHIP_REPORT_PATH}`];

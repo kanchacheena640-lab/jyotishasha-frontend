@@ -51,10 +51,7 @@ function toLocale(raw: string): Locale {
   return raw === "hi" ? "hi" : "en";
 }
 
-// SSG for all 63 real catalog products -- pilot-only discovery ended once
-// #62/#63 were approved for production activation; every other product is
-// reachable for QA/browsing (see Phase 5's own "accessible but not
-// purchasable" requirement), still noindex (see generateMetadata below).
+// SSG for all 63 real catalog products (indexable; see generateMetadata below).
 export async function generateStaticParams() {
   return listFocusedReportHumanSlugs().map((slug) => ({ slug }));
 }
@@ -80,11 +77,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
         "x-default": `${SITE_URL}${path}`,
       },
     },
-    // P0.7 Phase 7 -- deliberately still noindex for ALL 63 (not just the
-    // 61 inactive ones): SEO/indexing is a separate, later step taken
-    // only after product activation and commercial-page selection. The
-    // page is directly reachable by URL for QA/manual browsing either way.
-    robots: { index: false, follow: true },
+    // F12 SEO launch -- all 126 product pages (63 x EN/HI) are indexable and
+    // listed in app/sitemap.ts. The hub (/reports/focused) and the generic
+    // example-preview page stay noindex, follow.
+    robots: { index: true, follow: true },
     openGraph: {
       title,
       description: config.metaDescription[locale],
