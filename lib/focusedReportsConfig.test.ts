@@ -46,7 +46,7 @@ function check(label: string, test: () => void) {
   passed++;
   console.log(`PASS: ${label}`);
 }
-const read = (file: string) => fs.readFileSync(path.join(repo, file), "utf8");
+const read = (file: string) => fs.readFileSync(path.join(repo, file), "utf8").replace(/\r\n/g, "\n");
 
 const PILOT_SLUGS = ["major-kundali-obstacles", "major-kundali-strengths"];
 const PILOT_KEYS = ["major_kundali_obstacles", "major_kundali_strengths"];
