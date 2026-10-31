@@ -131,7 +131,7 @@ for (const key of KEYS) {
   if (href !== REPORTS_CATALOG_PATH) {
     const report = reportBySlug.get(href.slice("/reports/".length));
     check(`1d: ${key} -> ${href} exists in reportsData`, !!report);
-    check(`1e: ${key} -> single-person ₹51 report`, report?.price === 51 && report?.slug !== "relationship_future_report");
+    check(`1e: ${key} -> single-person ₹99 report`, report?.price === 99 && report?.slug !== "relationship_future_report");
   }
 }
 check("1f: app/reports/[slug] and app/reports routes exist",

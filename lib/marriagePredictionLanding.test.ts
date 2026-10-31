@@ -53,7 +53,7 @@ check("mobile-visible microcopy carries the scope limit (the intro is hidden on 
   /विवाह की निश्चित तारीख या सटीक उम्र नहीं/.test(offer.microcopy.hi));
 check("sample title = catalogue title (EN + HI)", offer.sampleTitle.en === product?.title.en && offer.sampleTitle.hi === product?.title.hi);
 check("catalogue rep_004: key / ID / price / category / titles unchanged; full description is a single-chart outlook (no compatibility claim, EN + HI)",
-  product?.slug === "marriage_report" && product.price === 51 && product.category.en === "Marriage" && product.title.en === "Marriage Report" &&
+  product?.slug === "marriage_report" && product.price === 99 && product.category.en === "Marriage" && product.title.en === "Marriage Report" &&
   product.fullDescription.en === "Explore your marriage outlook, supportive Dasha periods and married-life dynamics through a personalized birth-chart reading." &&
   !/compatibility/i.test(product.fullDescription.en) && !/अनुकूलता/.test(product.fullDescription.hi) && /सहायक दशा अवधियाँ/.test(product.fullDescription.hi));
 check("unused topic fields corrected without deterministic / promotional wording (metaTitle 40–60, headline 40–90 chars)",

@@ -106,7 +106,7 @@ check("1d: mangal-dosh is a real free tool in toolsData", toolSlugs.has("mangal-
 for (const slug of Object.values(EXPECTED_REPORT)) {
   const report = reportBySlug.get(slug);
   check(`1e: ${slug} exists in reportsData`, !!report);
-  check(`1f: ${slug} is a single-person ₹51 report`, report?.price === 51 && slug !== "relationship_future_report");
+  check(`1f: ${slug} is a single-person ₹99 report`, report?.price === 99 && slug !== "relationship_future_report");
 }
 
 // ------------------------------------------------------------------------------------------------

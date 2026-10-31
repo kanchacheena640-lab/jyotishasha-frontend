@@ -166,7 +166,7 @@ section("5. server render: checkout + every report detail page");
     check("5b: reassurance rendered with both links", html.includes("Secure payment via Razorpay") && html.includes('href="/refund-policy"') && html.includes('href="https://wa.me/919118877495"'));
     check("5c: no email error before interaction", !html.includes("checkout-email-error") && !html.includes("valid email address"));
     check("5d: no Places error before a load failure", !html.includes("City search could not load"));
-    check("5e: Pay button still renders the catalog price", html.includes("Proceed to Pay ₹51"));
+    check("5e: Pay button still renders the catalog price", html.includes("Proceed to Pay ₹99"));
 
     const ReportContent = load("components/reports/ReportContent").default;
     for (const price of [51, 199, 75]) {

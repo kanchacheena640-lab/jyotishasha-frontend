@@ -35,7 +35,7 @@ const offerText = (l: "en" | "hi") => [offer.eyebrow[l], offer.heading[l], offer
 console.log("=== A. Dedicated report product ===");
 const product = reportsData.find((r) => r.slug === offer.reportSlug);
 check("offer points at spouse_nature_report (rep_026)", offer.reportSlug === "spouse_nature_report" && product?.id === "rep_026");
-check("price comes from reportsData (currently 51)", product?.price === 51);
+check("price comes from reportsData (currently 99)", product?.price === 99);
 check("CTA labels use the {price} placeholder (no hard-coded price)", offer.ctaLabel.en.includes("{price}") && offer.ctaLabel.hi.includes("{price}") && !/₹\s*\d/.test(offer.ctaLabel.en + offer.ctaLabel.hi));
 check("card heading is the official product title (EN + HI)", offer.heading.en === product?.title.en && offer.heading.hi === product?.title.hi);
 check("offer never promises identity, certainty, exact income, diagnosis or lifespan",

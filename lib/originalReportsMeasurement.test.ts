@@ -108,7 +108,7 @@ async function main() {
     check("1a: the catalog holds exactly 26 original products (25 standard incl. spouse_nature_report + relationship_future_report)",
       reportsData.length === 26 && reportsData.filter((r) => r.slug !== RELATIONSHIP).length === 25 && reportsData.some((r) => r.slug === RELATIONSHIP)
       && reportsData.some((r) => r.slug === "spouse_nature_report"));
-    check("1b: prices -- 25 standard at 51, relationship_future_report at 199", reportsData.every((r) => (r.slug === RELATIONSHIP ? r.price === 199 : r.price === 51)));
+    check("1b: prices -- 25 standard at 99, relationship_future_report at 199", reportsData.every((r) => (r.slug === RELATIONSHIP ? r.price === 199 : r.price === 99)));
     check("1c: approved families -- focused_report vs original_report", FOCUSED_PRODUCT_FAMILY === "focused_report" && ORIGINAL_PRODUCT_FAMILY === "original_report");
     check("1d: catalog slugs equal the backend's 26 mapped products exactly", new Set(reportsData.map((r) => r.slug)).size === 26 && reportsData.every((r) => r.slug in BACKEND_CATEGORIES) && Object.keys(BACKEND_CATEGORIES).length === 26);
     check("1d2: catalog ids are unique and rep_026 is spouse_nature_report", new Set(reportsData.map((r) => r.id)).size === 26
@@ -146,15 +146,15 @@ async function main() {
         && JSON.stringify(v.ecommerce) === JSON.stringify(b.ecommerce);
       if (good) ok += 1;
     }
-    check("2a: all 26 originals produce correct GA4 view_item and begin_checkout (51 for 25, 199 for relationship, INR, English title, mapped category)", ok === 26);
+    check("2a: all 26 originals produce correct GA4 view_item and begin_checkout (99 for 25, 199 for relationship, INR, English title, mapped category)", ok === 26);
     const spouse = buildViewItemEvent(funnelInputFor(reportsData.find((r) => r.slug === "spouse_nature_report")!)) as any;
-    check("2a2: spouse_nature_report -> original_report / standard, value 51, item_id spouse_nature_report, category marriage",
-      spouse.product_family === "original_report" && spouse.report_type === "standard" && spouse.ecommerce.value === 51
+    check("2a2: spouse_nature_report -> original_report / standard, value 99, item_id spouse_nature_report, category marriage",
+      spouse.product_family === "original_report" && spouse.report_type === "standard" && spouse.ecommerce.value === 99
       && spouse.ecommerce.items[0].item_id === "spouse_nature_report" && spouse.ecommerce.items[0].item_category === "marriage");
     const rel = buildViewItemEvent(funnelInputFor(reportsData.find((r) => r.slug === RELATIONSHIP)!)) as any;
     check("2b: relationship_future_report -> original_report / relationship, value 199", rel.product_family === "original_report" && rel.report_type === "relationship" && rel.ecommerce.value === 199);
     const std = buildViewItemEvent(funnelInputFor(reportsData.find((r) => r.slug === "career_report")!)) as any;
-    check("2c: a standard report -> original_report / standard, value 51", std.product_family === "original_report" && std.report_type === "standard" && std.ecommerce.value === 51);
+    check("2c: a standard report -> original_report / standard, value 99", std.product_family === "original_report" && std.report_type === "standard" && std.ecommerce.value === 99);
     check("2d: catalog EN/HI -- every original has non-empty Hindi AND English title/category (the funnel item_name uses the English title in both languages)",
       reportsData.every((r) => r.title.en && r.title.hi && r.category.en && r.category.hi));
   }

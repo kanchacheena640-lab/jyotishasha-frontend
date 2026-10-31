@@ -3497,8 +3497,8 @@ spouse_nature_report: {
   },
 
   seoDescription: {
-    en: "Personalized Spouse Nature Report based on your birth chart. Discover future spouse personality, communication, health and wealth tendencies. ₹51 PDF.",
-    hi: "जन्म कुंडली पर आधारित व्यक्तिगत जीवनसाथी स्वभाव रिपोर्ट। भावी जीवनसाथी का व्यक्तित्व, संवाद शैली, स्वास्थ्य और धन की प्रवृत्तियाँ जानें। ₹51 PDF।",
+    en: "Personalized Spouse Nature Report based on your birth chart. Discover future spouse personality, communication, health and wealth tendencies. ₹99 PDF.",
+    hi: "जन्म कुंडली पर आधारित व्यक्तिगत जीवनसाथी स्वभाव रिपोर्ट। भावी जीवनसाथी का व्यक्तित्व, संवाद शैली, स्वास्थ्य और धन की प्रवृत्तियाँ जानें। ₹99 PDF।",
   },
 
   whyImportant: {

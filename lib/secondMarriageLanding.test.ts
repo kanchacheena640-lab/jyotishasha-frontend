@@ -52,7 +52,7 @@ check("never assumes the reader is divorced or separated", !/divorce|separat|aft
 check("mobile-visible microcopy states the scope limit (the intro is hidden on phones) — EN + HI",
   /Shows tendencies — not a guaranteed remarriage or an exact date\./.test(offer.microcopy.en) && /दूसरे विवाह की गारंटी या सटीक तारीख नहीं/.test(offer.microcopy.hi));
 check("catalogue rep_022: key / ID / price / route unchanged; descriptions no longer assume a prior divorce or separation",
-  product?.slug === "second_marriage_report" && product.price === 51 && product.title.en === "Second Marriage Report" &&
+  product?.slug === "second_marriage_report" && product.price === 99 && product.title.en === "Second Marriage Report" &&
   product.title.hi === "दूसरे विवाह की रिपोर्ट" && offer.sampleTitle.hi === product.title.hi &&
   /second marriage or significant later union/.test(product.fullDescription.en) && /दूसरे विवाह या जीवन में आगे/.test(product.fullDescription.hi) &&
   !/separation|divorce|तलाक|अलगाव/i.test(JSON.stringify([product.description, product.fullDescription])));

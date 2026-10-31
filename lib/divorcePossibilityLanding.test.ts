@@ -99,7 +99,7 @@ check("hero subtext: EN unchanged; HI 'नेविगेट' replaced with natu
   topic.includes("subtext_hi:  'वैदिक ज्योतिष तलाक की संभावना को एक निश्चित भाग्य के रूप में नहीं बल्कि एक कार्मिक संभावना के रूप में देखता है — संभावित टकराव और समय-समय पर आने वाली चुनौतियों का एक नक्शा, जिन्हें परिपक्वता, सचेत प्रयास और गहरी आत्म-समझ से संभाला जा सकता है।',") &&
   !/नेविगेट/.test(topic));
 check("catalogue rep_023: key / ID / price / EN title / category unchanged; HI title corrected; EN description no transit claim",
-  product?.slug === "divorce_possibility_report" && product.price === 51 && product.title.en === "Divorce Possibility Report" &&
+  product?.slug === "divorce_possibility_report" && product.price === 99 && product.title.en === "Divorce Possibility Report" &&
   product.title.hi === "तलाक की संभावना रिपोर्ट" && product.category.en === "Self" && !/transit/i.test(product.fullDescription.en) &&
   /Dasha context/.test(product.fullDescription.en));
 const rep018 = reportsData.find((r) => r.id === "rep_018");

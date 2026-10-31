@@ -134,9 +134,9 @@ check("every one of the 63 resolved configs (bespoke + generic) prices at exactl
     assert.equal(config.priceRupees, 51, q.questionKey);
   }
 });
-check("components/cta/CtaReport.tsx shows Rs 51, not the old Rs 49", () => {
+check("components/cta/CtaReport.tsx shows the standard-report Rs 99 price", () => {
   const src = read("components/cta/CtaReport.tsx");
-  assert.ok(src.includes("₹51"), "expected the fixed ₹51 price");
+  assert.ok(src.includes("₹99"), "expected the standard-report ₹99 price");
   assert.ok(!src.includes("₹49"), "the ₹49 bug must be fully gone");
 });
 

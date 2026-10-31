@@ -35,7 +35,7 @@ const topic = src("lib/domains/marriage-astrology/topics/love-marriage.ts");
 console.log("=== A. Report product + CTA source of truth ===");
 const product = reportsData.find((r) => r.slug === offer.reportSlug);
 check("offer points at the existing love_marriage_report product", offer.reportSlug === "love_marriage_report" && !!product);
-check("product price comes from reportsData (currently 51)", product?.price === 51);
+check("product price comes from reportsData (currently 99)", product?.price === 99);
 check("CTA labels take the price from a {price} placeholder, never a hardcoded amount",
   offer.ctaLabel.en.includes("{price}") && offer.ctaLabel.hi.includes("{price}") && !/₹\s*\d/.test(offer.ctaLabel.en + offer.ctaLabel.hi));
 check("landing is registered for the love-marriage slug", marriageTopicLandings["love-marriage"] === loveMarriageLanding);

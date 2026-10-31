@@ -164,7 +164,7 @@ export default function GemstoneConsultation() {
               href="/reports/gemstone_consultation"
               className="inline-block bg-white text-black font-bold px-5 py-2 rounded hover:bg-gray-100 border border-[#007BFF] transition-all"
             >
-              अभी प्राप्त करें – ₹51 में
+              अभी प्राप्त करें – ₹99 में
             </Link>
           </div>
         </div>

@@ -44,7 +44,7 @@ const bodyOf = (b: string) => (b.match(/body:\s+'((?:[^'\\]|\\.)*)'/) || [, ""])
 console.log("=== A. Dedicated report product ===");
 const product = reportsData.find((r) => r.slug === offer.reportSlug);
 check("offer points at delay_in_marriage_report (rep_013)", offer.reportSlug === "delay_in_marriage_report" && product?.id === "rep_013");
-check("price comes from reportsData (currently 51)", product?.price === 51);
+check("price comes from reportsData (currently 99)", product?.price === 99);
 check("CTA labels use the {price} placeholder", offer.ctaLabel.en.includes("{price}") && offer.ctaLabel.hi.includes("{price}") && !/₹\s*\d/.test(offer.ctaLabel.en + offer.ctaLabel.hi));
 check("card heading is the official product title", offer.heading.en === "Delay in Marriage Report" && offer.heading.hi === "विवाह में देरी रिपोर्ट");
 check("focused marriage_delay_reason / easing products are not used", !/marriage_delay_reason|marriage_delay_easing|marriage-delay/.test(JSON.stringify(delayedMarriageLanding)));
