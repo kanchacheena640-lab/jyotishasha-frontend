@@ -57,12 +57,21 @@
  *   do with it. No second consent system, and this module imports nothing
  *   from consent.
  *
+ * OPENAI ADS: pushPurchaseOnce can also hand the same verified, de-duplicated
+ * measurement to lib/openaiPixel.ts (order_created). It is called only after
+ * the GA4 purchase was pushed, is isolated so it can never affect that push,
+ * the dedupe markers or navigation, and is a no-op unless the OpenAI Pixel is
+ * loaded. lib/openaiPixel.ts imports nothing, so this module still imports
+ * nothing from consent.
+ *
  * PII: the purchase object is rebuilt from an allowlist of ten backend
  * fields; extras are dropped. No name/email/phone/birth data, payment ids,
  * click ids or UTMs ever enter an event. (Reports Ads P0.2 supersedes the
  * earlier "no browser-side purchase" rule of Task 6/7 -- but only in this
  * module, and only for backend-confirmed report purchases.)
  */
+
+import { measureOpenAiOrderCreated } from "./openaiPixel";
 
 export interface PurchaseMeasurement {
   transaction_id: string;
@@ -205,6 +214,9 @@ export interface PushPurchaseOptions {
   timeoutMs?: number;
   /** Called exactly once when it is safe to navigate. */
   onDone?: () => void;
+  /** OpenAI Ads order_created for the same verified, de-duplicated purchase
+   * (lib/openaiPixel.ts). Called at most once, after the GA4 push. */
+  openAiMeasure?: (measurement: PurchaseMeasurement) => void;
 }
 
 /**
@@ -250,6 +262,9 @@ export function pushPurchaseOnce(raw: unknown, options: PushPurchaseOptions): bo
     }
     options.dataLayer.push(event);
     pushCompleted = true;
+    if (options.openAiMeasure) {
+      try { options.openAiMeasure(measurement); } catch { /* never affects GA4, dedupe or navigation */ }
+    }
 
     if (waitForCallback) {
       // GTM invokes eventCallback when its tags have run (or its own
@@ -367,7 +382,10 @@ export function trackBackendVerifiedPurchase(raw: unknown, onDone?: () => void):
     if (!dl) { onDone?.(); return false; }
     let storage: MeasuredStorageLike | null = null;
     try { storage = window.localStorage; } catch { storage = null; }
-    return pushPurchaseOnce(raw, { storage, dataLayer: dl, waitForTags: gtmIsLoaded(), onDone });
+    return pushPurchaseOnce(raw, {
+      storage, dataLayer: dl, waitForTags: gtmIsLoaded(), onDone,
+      openAiMeasure: (m) => { measureOpenAiOrderCreated(m); },
+    });
   } catch {
     try { onDone?.(); } catch { /* never throws */ }
     return false;

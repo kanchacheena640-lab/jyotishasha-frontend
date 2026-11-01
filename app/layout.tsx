@@ -5,6 +5,10 @@ import ConditionalAdSense from "../components/ConditionalAdSense";
 import { ConsentProvider } from "@/context/ConsentContext";
 import ConsentBanner from "@/components/consent/ConsentBanner";
 import WebsiteAnalyticsInit from "@/components/analytics/WebsiteAnalyticsInit";
+import { buildOpenAiPixelBootstrap, getOpenAiPixelId } from "@/lib/openaiPixel";
+
+// OpenAI Ads Measurement Pixel: loaded only when NEXT_PUBLIC_OPENAI_PIXEL_ID is set.
+const OPENAI_PIXEL_ID = getOpenAiPixelId();
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jyotishasha.com"),
@@ -141,6 +145,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })();
           `}
         </Script>
+
+        {/* OpenAI Ads Measurement Pixel (lib/openaiPixel.ts): the official
+            snippet, with oaiq("consent", ...) resolved like ad attribution
+            BEFORE oaiq("init", ...). It only measures order_created for
+            backend-verified purchases (lib/ecommerceMeasurement.ts). */}
+        {OPENAI_PIXEL_ID && (
+          <Script id="openai-pixel" strategy="beforeInteractive">
+            {buildOpenAiPixelBootstrap(OPENAI_PIXEL_ID)}
+          </Script>
+        )}
 
         {/* ✅ Google Tag Manager (noscript) */}
         <noscript>

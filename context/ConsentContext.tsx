@@ -46,6 +46,8 @@ import {
   writeConsent,
 } from "@/lib/consent";
 import type { ConsentGeoPolicy } from "@/lib/geo";
+import { isAdvertisingIdentifierStorageAllowed } from "@/lib/adAttribution";
+import { setOpenAiConsent } from "@/lib/openaiPixel";
 
 interface ConsentContextValue {
   /** null until a real decision has been made (or restored from storage). */
@@ -129,6 +131,9 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
     // failure here (e.g. dataLayer unavailable) never prevents the
     // user's own choice from being recorded/reflected in the UI.
     pushConsentUpdate(choice);
+    // OpenAI Ads Pixel follows the same advertising-identifier rule as ad
+    // attribution (EUROPE_CONSENT always false). Never throws.
+    setOpenAiConsent(isAdvertisingIdentifierStorageAllowed(policy, next));
   };
 
   const value: ConsentContextValue = {
