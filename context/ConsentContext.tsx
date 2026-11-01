@@ -41,6 +41,7 @@ import {
   ConsentChoice,
   ConsentState,
   readConsentGeoPolicyCookie,
+  isConsentPreferencesAvailable,
   pushConsentUpdate,
   readStoredConsent,
   writeConsent,
@@ -64,6 +65,9 @@ interface ConsentContextValue {
    * needed) and EUROPE_CONSENT (Google's CMP is authoritative there);
    * true only for SAFE_FALLBACK. See this file's own module docstring. */
   bannerEligible: boolean;
+  /** Whether the "Cookie Settings" panel may be offered: every policy except
+   * EUROPE_CONSENT (lib/consent.ts::isConsentPreferencesAvailable). */
+  preferencesAvailable: boolean;
   isPreferencesOpen: boolean;
   openPreferences: () => void;
   closePreferences: () => void;
@@ -142,6 +146,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
     checked,
     policy,
     bannerEligible: policy === "SAFE_FALLBACK",
+    preferencesAvailable: isConsentPreferencesAvailable(policy),
     isPreferencesOpen,
     openPreferences: () => setIsPreferencesOpen(true),
     closePreferences: () => setIsPreferencesOpen(false),

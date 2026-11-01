@@ -60,7 +60,9 @@ export default function PrivacyPolicyPage() {
         We do <strong>not</strong> sell or trade your personal data. Limited data
         may be shared with trusted third-party services such as payment gateways,
         analytics, notification services, and hosting providers solely for
-        service delivery, security, and legal compliance.
+        service delivery, security, and legal compliance, and with advertising
+        measurement partners as described under{" "}
+        <a href="#advertising-measurement" className="underline">Advertising Measurement</a>.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">
@@ -80,6 +82,60 @@ export default function PrivacyPolicyPage() {
         functionality, remember preferences, and analyze traffic. You can
         disable cookies in your browser or device settings, though some features
         may not work as intended.
+      </p>
+
+      <h2 id="advertising-measurement" className="text-2xl font-semibold mt-6 mb-2 scroll-mt-24">
+        Advertising Measurement
+      </h2>
+      <p className="text-gray-300 mb-4">
+        We use advertising measurement tools to understand whether our ads
+        lead to report purchases. These tools may be provided by Google
+        (including Google Analytics and Google advertising services, loaded
+        through Google Tag Manager), Meta, and OpenAI (advertising in ChatGPT).
+        They may automatically collect information such as your browser and
+        device type, the pages you visit on our website, and identifiers stored
+        in cookies or similar technologies.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>When we share purchase information.</strong> Only after a
+        payment has been confirmed by our payment system, we may share a
+        purchase event containing an order reference number, the amount and
+        currency, and product information. With OpenAI we share only a general
+        product type (for example, &quot;focused report&quot;), never the
+        report title or topic. Google Analytics may receive the report name and
+        category. We do not include your name, email address, phone number,
+        date, time or place of birth, or the content of your report in these
+        purchase events.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>Cookies used for advertising measurement.</strong> When
+        advertising measurement is allowed, OpenAI&apos;s measurement tool may
+        store two first-party cookies on our website: <code>__oppref</code>,
+        which records the reference of an ad you clicked in ChatGPT (kept for
+        up to 30 days), and <code>__obref</code>, a randomly generated browser
+        reference (kept for up to 365 days). Google and Meta may set their own
+        cookies as described in their policies. Your browser settings or
+        clearing cookies can shorten these periods.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>Your choices.</strong> In most countries outside the European
+        Economic Area, the United Kingdom and Switzerland, advertising
+        measurement is on by default, and you can turn it off at any time using
+        the &quot;Cookie Settings&quot; link at the bottom of our website
+        pages. Turning off
+        Advertising stops OpenAI&apos;s measurement on that browser, removes
+        its cookies, and sends your updated choice to Google&apos;s tags. In
+        the European Economic Area, the United Kingdom and Switzerland, your
+        choices are managed through the consent message shown on our website,
+        and OpenAI measurement is not used. You can also block or delete
+        cookies in your browser settings.
+      </p>
+      <p className="text-gray-300 mb-4">
+        <strong>Retention.</strong> Information received by these partners is
+        handled and retained under their own privacy policies:{" "}
+        <a href="https://policies.google.com/privacy" className="underline" target="_blank" rel="noopener noreferrer">Google</a>,{" "}
+        <a href="https://www.facebook.com/privacy/policy/" className="underline" target="_blank" rel="noopener noreferrer">Meta</a> and{" "}
+        <a href="https://openai.com/policies/privacy-policy/" className="underline" target="_blank" rel="noopener noreferrer">OpenAI</a>.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">

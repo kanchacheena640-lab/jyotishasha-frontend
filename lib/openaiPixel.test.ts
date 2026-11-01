@@ -17,8 +17,8 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vm from "vm";
 import {
-  OPENAI_ORDER_CREATED, OPENAI_PIXEL_SDK_URL, buildOpenAiOrderCreated, buildOpenAiPixelBootstrap,
-  currencyMinorDigits, getOpenAiPixelId, measureOpenAiOrderCreated, setOpenAiConsent,
+  OPENAI_NEUTRAL_PRODUCT_IDS, OPENAI_ORDER_CREATED, OPENAI_PIXEL_SDK_URL, buildOpenAiOrderCreated, buildOpenAiPixelBootstrap,
+  currencyMinorDigits, getOpenAiPixelId, measureOpenAiOrderCreated, neutralProductId, setOpenAiConsent,
 } from "./openaiPixel";
 import {
   PURCHASE_MEASURED_KEY_PREFIX, parsePurchaseMeasurement, pushPurchaseOnce, resetMeasuredMemoryForTest,
@@ -84,18 +84,42 @@ async function main() {
   check("2b: only documented fields are sent (data: type/amount/currency/contents; options: event_id)",
     JSON.stringify(Object.keys(e.data).sort()) === JSON.stringify(["amount", "contents", "currency", "type"]) &&
     JSON.stringify(Object.keys(e.options)) === JSON.stringify(["event_id"]));
-  check("2c: contents[] item uses only documented Content fields",
-    JSON.stringify(e.data.contents) === JSON.stringify([{ id: "career_report", content_type: "product", quantity: 1, name: "Career Report" }]));
-  check("2d: item name omitted when the backend did not supply one", !("name" in buildOpenAiOrderCreated(base({ item_name: undefined }))!.data.contents[0]));
+  check("2c: contents[] carries only documented fields and a neutral id (no name)",
+    JSON.stringify(e.data.contents) === JSON.stringify([{ id: "original_report", content_type: "product", quantity: 1 }]));
+  check("2d: neutral ids -- focused -> focused_report, base and relationship -> original_report, anything else -> report",
+    buildOpenAiOrderCreated(FAMILIES[1][1])!.data.contents[0].id === "focused_report" &&
+    buildOpenAiOrderCreated(FAMILIES[2][1])!.data.contents[0].id === "focused_report" &&
+    buildOpenAiOrderCreated(FAMILIES[3][1])!.data.contents[0].id === "original_report" &&
+    neutralProductId("something_new") === "report" && neutralProductId(undefined) === "report" &&
+    [...OPENAI_NEUTRAL_PRODUCT_IDS].join() === "focused_report,original_report,report");
   check("2e: zero-decimal currency uses its own minor unit (JPY 500 -> 500)", currencyMinorDigits("JPY") === 0 && buildOpenAiOrderCreated(base({ currency: "JPY", value: 500 }))!.data.amount === 500);
   check("2f: fractional rupees round to whole paise (99.5 -> 9950)", buildOpenAiOrderCreated(base({ value: 99.5 }))!.data.amount === 9950);
   check("2g: invalid inputs produce no event",
-    [base({ value: 0 }), base({ value: -1 }), base({ value: NaN }), base({ currency: "inr" }), base({ transaction_id: "" }), base({ item_id: "" })]
+    [base({ value: 0 }), base({ value: -1 }), base({ value: NaN }), base({ currency: "inr" }), base({ transaction_id: "" })]
       .every((m) => buildOpenAiOrderCreated(m) === null));
   const parsed = parsePurchaseMeasurement({ ...base(), email: "a@b.com", phone: "9999999999", name: "Asha", dob: "1994-01-26", pob: "Delhi", razorpay_payment_id: "pay_1", gclid: "G1" })!;
   const blob = JSON.stringify(buildOpenAiOrderCreated(parsed));
   check("2h: no personal or birth data can reach OpenAI (extras dropped by the existing allowlist)",
     !/a@b\.com|9999999999|Asha|1994-01-26|Delhi|pay_1|G1|email|phone|dob|gclid|user/.test(blob));
+  const SENSITIVE: Array<[string, string, string, string]> = [
+    ["mood_mental_health_report", "Mood & Mental Health Report", "health", "standard"],
+    ["divorce_possibility_report", "Divorce Possibility Report", "marriage", "standard"],
+    ["legal_disputes_report", "Legal Disputes Report", "legal", "standard"],
+    ["problem_in_marriage_report", "Problem in Marriage Report", "marriage", "standard"],
+    ["love_disappointment_report", "Love Disappointment Report", "love", "standard"],
+    ["delay_in_marriage_report", "Delay in Marriage Report", "marriage", "standard"],
+    ["second_marriage_report", "Second Marriage Report", "marriage", "standard"],
+    ["children_parenting_report", "Children Parenting Report", "family", "standard"],
+    ["debt_pressure_easing", "Debt Pressure", "money_business", "self"],
+    ["conflict_areas", "Understanding Conflict", "relationship", "dual"],
+  ];
+  check("2i: no report slug, title, category or report_type ever reaches OpenAI -- only a neutral product id",
+    SENSITIVE.every(([slug, title, category, reportType]) => {
+      const fam = reportType === "standard" ? "original_report" : "focused_report";
+      const out = JSON.stringify(buildOpenAiOrderCreated(base({ item_id: slug, item_name: title, item_category: category, report_type: reportType, product_family: fam })));
+      return !out.includes(slug) && !out.includes(title) && !out.includes(`"${category}"`) && !out.includes(`"${reportType}"`) &&
+        !/"name"/.test(out) && out.includes(`"id":"${fam}"`);
+    }));
 
   console.log("\n=== 3. measure call ===");
   const calls: unknown[][] = [];
@@ -223,6 +247,23 @@ async function main() {
     /OPENAI_PIXEL_ID && \(\s*<Script id="openai-pixel" strategy="beforeInteractive">/.test(layout) && /getOpenAiPixelId\(\)/.test(layout));
   check("7g: GTM container and consent-default bootstrap are still present", /GTM-WLP7T2DP/.test(layout) && /id="consent-default"/.test(layout));
   check("7h: no direct Meta fbq code was introduced", sources.every((f) => !/\bfbq\s*\(/.test(stripComments(read(f)))));
+
+  console.log("\n=== 8. privacy policy disclosures (wording pending owner approval) ===");
+  const policy = read("app/privacy-policy/page.tsx");
+  const text = policy.replace(/\s+/g, " ");
+  check("8a: effective date component unchanged", policy.includes('<PolicyEffectiveDate policy="privacy" />'));
+  check("8b: existing 'do not sell' commitment preserved", /We do <strong>not<\/strong> sell or trade your personal data/.test(text));
+  check("8c: Advertising Measurement section present and linked from the sharing clause",
+    policy.includes('id="advertising-measurement"') && policy.includes('href="#advertising-measurement"'));
+  check("8d: names the partners (Google, Meta, OpenAI)", /Google/.test(text) && /Meta/.test(text) && /OpenAI/.test(text));
+  check("8e: discloses __oppref (30 days) and __obref (365 days)",
+    /__oppref<\/code>.*30 days/.test(text) && /__obref<\/code>.*365 days/.test(text));
+  check("8f: purchase events only after confirmed payment, with no name/contact/birth data, OpenAI gets only a product type",
+    /Only after a payment has been confirmed/.test(text) && /general product type/.test(text) && /date, time or place of birth/.test(text));
+  check("8g: explains withdrawal via Cookie Settings and the European consent message",
+    /Cookie Settings/.test(text) && /European Economic Area/.test(text) && /OpenAI measurement is not used/.test(text));
+  check("8h: makes no claim about advanced matching or hashed contact matching (unverified in Ads Manager)",
+    !/advanced matching|hashed|sha-?256/i.test(text));
 
   console.log(`\n${"=".repeat(50)}\nTOTAL: ${passed} passed, ${failed} failed\n${"=".repeat(50)}`);
   if (failed > 0) process.exit(1);

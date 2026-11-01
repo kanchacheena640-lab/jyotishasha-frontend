@@ -202,6 +202,30 @@ export function pushConsentUpdate(choice: ConsentChoice): void {
  * SAFE_FALLBACK -- the same "fail closed" principle this module already
  * applies to a malformed stored consent record.
  */
+/**
+ * Whether the Jyotishasha "Cookie Settings" panel may be offered: everywhere
+ * except EUROPE_CONSENT, where Google's certified CMP is the sole consent
+ * authority. Unlike bannerEligible (SAFE_FALLBACK only), this never shows the
+ * first-visit banner or changes any default -- it only gives NORMAL /
+ * US_PRIVACY visitors a way to review and withdraw their choice.
+ */
+export function isConsentPreferencesAvailable(policy: ConsentGeoPolicy): boolean {
+  return policy !== "EUROPE_CONSENT";
+}
+
+/**
+ * What is actually in effect for this visitor, shown as the panel's starting
+ * state so that opening and saving without changes never alters behavior:
+ * a stored choice wins; with none, NORMAL / US_PRIVACY run with analytics and
+ * advertising on (no Consent Mode default is set there -- app/layout.tsx), and
+ * every other policy is off.
+ */
+export function effectiveConsentChoice(policy: ConsentGeoPolicy, stored: ConsentChoice | null): ConsentChoice {
+  if (stored) return { analytics: stored.analytics === true, advertising: stored.advertising === true };
+  if (policy === "NORMAL" || policy === "US_PRIVACY") return { analytics: true, advertising: true };
+  return { analytics: false, advertising: false };
+}
+
 const KNOWN_GEO_POLICIES: readonly ConsentGeoPolicy[] = [
   "NORMAL",
   "US_PRIVACY",

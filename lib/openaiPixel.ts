@@ -21,12 +21,16 @@
  *   event for (Pixel ID, event name, event_id) and ignore later duplicates.
  *
  * PAYLOAD (documented fields only)
- *   { type: "contents", amount, currency, contents: [{ id, name,
- *   content_type, quantity }] } with { event_id } as the options argument.
- *   amount is an integer in the currency's ISO 4217 minor unit (Rs99 -> 9900).
- *   No user object, no name/email/phone/birth data, no click ids: nothing
- *   beyond the transaction id, the report id/name and the amount. Automatic
- *   advanced matching is an Ads Manager setting and must stay off there.
+ *   { type: "contents", amount, currency, contents: [{ id, content_type,
+ *   quantity }] } with { event_id } as the options argument. amount is an
+ *   integer in the currency's ISO 4217 minor unit (Rs99 -> 9900).
+ *   contents[].id is a NEUTRAL product identifier (OPENAI_NEUTRAL_PRODUCT_IDS:
+ *   focused_report / original_report / report) -- never the report title,
+ *   slug or category, several of which name sensitive life topics (mental
+ *   health, divorce, legal disputes, ...). No user object, no
+ *   name/email/phone/birth data, no click ids. Automatic advanced matching
+ *   is an Ads Manager setting (per-pixel config the SDK downloads), not
+ *   something this code enables; its state must be checked there.
  *
  * CONSENT
  *   The Pixel stores advertising identifiers (__oppref, __obref), so it
@@ -53,20 +57,27 @@ export function getOpenAiPixelId(raw: string | undefined = process.env.NEXT_PUBL
   return PIXEL_ID_RE.test(id) ? id : null;
 }
 
-/** Minimal shape read from lib/ecommerceMeasurement.ts's PurchaseMeasurement. */
+/** Minimal shape read from lib/ecommerceMeasurement.ts's PurchaseMeasurement.
+ * Deliberately excludes item_id / item_name / item_category / report_type. */
 export interface OpenAiPurchaseInput {
   transaction_id: string;
   value: number;
   currency: string;
-  item_id: string;
-  item_name?: string;
+  product_family: string;
 }
 
 export interface OpenAiContent {
   id: string;
-  name?: string;
   content_type: "product";
   quantity: number;
+}
+
+/** The only product identifiers OpenAI ever receives. */
+export const OPENAI_NEUTRAL_PRODUCT_IDS = ["focused_report", "original_report", "report"] as const;
+
+/** focused_report / original_report as the backend classifies them; anything else -> "report". */
+export function neutralProductId(productFamily: unknown): string {
+  return productFamily === "focused_report" || productFamily === "original_report" ? productFamily : "report";
 }
 
 export interface OpenAiOrderCreated {
@@ -89,11 +100,9 @@ export function buildOpenAiOrderCreated(m: OpenAiPurchaseInput): OpenAiOrderCrea
   if (!m || typeof m.transaction_id !== "string" || !m.transaction_id) return null;
   if (typeof m.value !== "number" || !Number.isFinite(m.value) || m.value <= 0) return null;
   if (typeof m.currency !== "string" || !/^[A-Z]{3}$/.test(m.currency)) return null;
-  if (typeof m.item_id !== "string" || !m.item_id) return null;
   const amount = Math.round(m.value * 10 ** currencyMinorDigits(m.currency));
   if (!Number.isSafeInteger(amount) || amount <= 0) return null;
-  const content: OpenAiContent = { id: m.item_id, content_type: "product", quantity: 1 };
-  if (typeof m.item_name === "string" && m.item_name) content.name = m.item_name;
+  const content: OpenAiContent = { id: neutralProductId(m.product_family), content_type: "product", quantity: 1 };
   return {
     data: { type: "contents", amount, currency: m.currency, contents: [content] },
     options: { event_id: m.transaction_id },

@@ -7,29 +7,38 @@
  * (first visit) or from CookieSettingsLink (Footer, any time after --
  * Task 8 S10's required discoverable withdrawal entry point).
  *
- * No pre-checked advertising, no dark patterns -- both toggles default
- * to their CURRENT stored state (or off, for a first-time visitor who
- * opened preferences directly instead of using Accept All/Reject).
+ * No dark patterns -- both toggles start at what is ACTUALLY in effect
+ * (lib/consent.ts::effectiveConsentChoice): the stored choice; with none,
+ * on for NORMAL/US_PRIVACY (their unchanged default) and off elsewhere.
+ * They are re-read each time the panel opens, so opening and saving
+ * without changes never alters behavior.
  *
- * Geo-Aware Consent v1 Phase 2C: also gated on bannerEligible, as a
- * defense-in-depth twin to CookieSettingsLink's own gate -- even if
- * some future code path ever called openPreferences() for a
- * non-SAFE_FALLBACK visitor, this panel still refuses to render rather
- * than letting a Jyotishasha consent update compete with Google's
- * certified CMP (EUROPE_CONSENT) or appear where no gate is needed
- * (NORMAL/US_PRIVACY).
+ * Also gated on preferencesAvailable, as a defense-in-depth twin to
+ * CookieSettingsLink's own gate -- even if some future code path ever
+ * called openPreferences() for an EUROPE_CONSENT visitor, this panel
+ * still refuses to render rather than letting a Jyotishasha consent
+ * update compete with Google's certified CMP.
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useConsent } from "@/context/ConsentContext";
+import { effectiveConsentChoice } from "@/lib/consent";
 
 export default function ConsentPreferences() {
-  const { consent, isPreferencesOpen, bannerEligible, closePreferences, setPreferences } = useConsent();
+  const { consent, policy, isPreferencesOpen, preferencesAvailable, closePreferences, setPreferences } = useConsent();
 
-  const [analytics, setAnalytics] = useState(consent?.analytics ?? false);
-  const [advertising, setAdvertising] = useState(consent?.advertising ?? false);
+  const [analytics, setAnalytics] = useState(() => effectiveConsentChoice(policy, consent).analytics);
+  const [advertising, setAdvertising] = useState(() => effectiveConsentChoice(policy, consent).advertising);
 
-  if (!isPreferencesOpen || !bannerEligible) return null;
+  // Start from what is in effect every time the panel opens.
+  useEffect(() => {
+    if (!isPreferencesOpen) return;
+    const current = effectiveConsentChoice(policy, consent);
+    setAnalytics(current.analytics);
+    setAdvertising(current.advertising);
+  }, [isPreferencesOpen, policy, consent]);
+
+  if (!isPreferencesOpen || !preferencesAvailable) return null;
 
   return (
     <div

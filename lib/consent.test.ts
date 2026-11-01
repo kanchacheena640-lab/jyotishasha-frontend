@@ -30,6 +30,8 @@ import {
   CONSENT_STORAGE_KEY,
   CONSENT_VERSION,
   ConsentStorageLike,
+  effectiveConsentChoice,
+  isConsentPreferencesAvailable,
   pushConsentUpdate,
   readConsentGeoPolicyCookie,
   readStoredConsent,
@@ -437,27 +439,61 @@ console.log("\n=== 29. ConsentBanner.tsx has zero geo logic of its own ===");
 }
 
 // ===========================================================================
-// 30. Geo-Aware Consent v1 Phase 2C -- CookieSettingsLink/ConsentPreferences
-// are gated on bannerEligible, so a EUROPE_CONSENT visitor cannot use the
-// Jyotishasha "Cookie Settings" UI to compete with Google's certified CMP,
-// and NORMAL/US_PRIVACY get no unnecessary Jyotishasha consent UI either.
+// 30. Cookie Settings availability (OpenAI Ads final corrections). The
+// "Cookie Settings" link and panel are offered for every policy EXCEPT
+// EUROPE_CONSENT (Google's certified CMP stays the sole authority there), so
+// NORMAL/US_PRIVACY visitors can review and withdraw their choice. The
+// first-visit banner stays SAFE_FALLBACK-only (28d/29a) and no default changes.
 // ===========================================================================
-console.log("\n=== 30. CookieSettingsLink/ConsentPreferences gated on bannerEligible ===");
+console.log("\n=== 30. Cookie Settings available outside EUROPE_CONSENT, banner unchanged ===");
 {
+  check("30a: preferences available for NORMAL, US_PRIVACY and SAFE_FALLBACK",
+    isConsentPreferencesAvailable("NORMAL") && isConsentPreferencesAvailable("US_PRIVACY") && isConsentPreferencesAvailable("SAFE_FALLBACK"));
+  check("30b: never for EUROPE_CONSENT", isConsentPreferencesAvailable("EUROPE_CONSENT") === false);
+
   const linkSrc = readSource("components/consent/CookieSettingsLink.tsx");
-  check("30a: CookieSettingsLink destructures bannerEligible from useConsent", linkSrc.includes("bannerEligible"));
-  check("30b: CookieSettingsLink returns null when !bannerEligible", /if \(!bannerEligible\) return null;/.test(linkSrc));
+  const linkCode = linkSrc.replace(/\/\*[\s\S]*?\*\//g, "");
+  check("30c: CookieSettingsLink returns null when !preferencesAvailable (no longer gated on bannerEligible)",
+    /if \(!preferencesAvailable\) return null;/.test(linkSrc) && !linkCode.includes("bannerEligible"));
 
   const prefsSrc = readSource("components/consent/ConsentPreferences.tsx");
-  check("30c: ConsentPreferences destructures bannerEligible from useConsent", prefsSrc.includes("bannerEligible"));
-  check("30d: ConsentPreferences returns null when !bannerEligible (defense-in-depth alongside !isPreferencesOpen)",
-    /if \(!isPreferencesOpen \|\| !bannerEligible\) return null;/.test(prefsSrc));
+  check("30d: ConsentPreferences returns null when !preferencesAvailable (defense-in-depth alongside !isPreferencesOpen)",
+    /if \(!isPreferencesOpen \|\| !preferencesAvailable\) return null;/.test(prefsSrc));
+  check("30e: ConsentPreferences starts from the effective state and re-reads it each time it opens",
+    prefsSrc.includes("effectiveConsentChoice(policy, consent)") && prefsSrc.includes("[isPreferencesOpen, policy, consent]"));
+
+  const ctxSrc = readSource("context/ConsentContext.tsx");
+  check("30f: context exposes preferencesAvailable from isConsentPreferencesAvailable(policy)",
+    ctxSrc.includes("preferencesAvailable: isConsentPreferencesAvailable(policy)"));
+  check("30g: the first-visit banner gate is unchanged (SAFE_FALLBACK only)", ctxSrc.includes('bannerEligible: policy === "SAFE_FALLBACK"'));
 
   // Footer.tsx itself must remain untouched -- the gate lives inside
   // CookieSettingsLink, not in how/whether Footer renders it.
   const footerSrc = readSource("components/Footer.tsx");
-  check("30e: Footer.tsx still unconditionally renders <CookieSettingsLink /> (gating is internal to the component)",
+  check("30h: Footer.tsx still unconditionally renders <CookieSettingsLink /> (gating is internal to the component)",
     footerSrc.includes("<CookieSettingsLink"));
+  const bannerSrc = readSource("components/consent/ConsentBanner.tsx");
+  check("30i: the panel is rendered outside the banner's SAFE_FALLBACK condition, so the link can open it",
+    /\)\}\s*<ConsentPreferences \/>/.test(bannerSrc));
+}
+
+// ===========================================================================
+// 31. effectiveConsentChoice -- the panel shows what is actually in effect, so
+// opening and saving without changes never alters behavior.
+// ===========================================================================
+console.log("\n=== 31. effectiveConsentChoice ===");
+{
+  const on = { analytics: true, advertising: true };
+  const off = { analytics: false, advertising: false };
+  const same = (a: { analytics: boolean; advertising: boolean }, b: { analytics: boolean; advertising: boolean }) =>
+    a.analytics === b.analytics && a.advertising === b.advertising;
+  check("31a: NORMAL with no stored choice -> both on (its unchanged default)", same(effectiveConsentChoice("NORMAL", null), on));
+  check("31b: US_PRIVACY with no stored choice -> both on (its unchanged default)", same(effectiveConsentChoice("US_PRIVACY", null), on));
+  check("31c: SAFE_FALLBACK with no stored choice -> both off", same(effectiveConsentChoice("SAFE_FALLBACK", null), off));
+  check("31d: EUROPE_CONSENT with no stored choice -> both off", same(effectiveConsentChoice("EUROPE_CONSENT", null), off));
+  const mixed = { analytics: true, advertising: false };
+  check("31e: a stored choice always wins, in every policy",
+    (["NORMAL", "US_PRIVACY", "SAFE_FALLBACK", "EUROPE_CONSENT"] as const).every((p) => same(effectiveConsentChoice(p, mixed), mixed)));
 }
 
 console.log("\n==================================================");
