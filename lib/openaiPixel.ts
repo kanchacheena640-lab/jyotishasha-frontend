@@ -30,7 +30,8 @@
  *   health, divorce, legal disputes, ...). No user object, no
  *   name/email/phone/birth data, no click ids. Automatic advanced matching
  *   is an Ads Manager setting (per-pixel config the SDK downloads), not
- *   something this code enables; its state must be checked there.
+ *   something this code enables; its state must be checked there. Until it
+ *   is confirmed OFF the Pixel stays unloaded (getEnabledOpenAiPixelId).
  *
  * CONSENT
  *   The Pixel stores advertising identifiers (__oppref, __obref), so it
@@ -55,6 +56,21 @@ const PIXEL_ID_RE = /^[A-Za-z0-9_-]{8,64}$/;
 export function getOpenAiPixelId(raw: string | undefined = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID): string | null {
   const id = (raw ?? "").trim();
   return PIXEL_ID_RE.test(id) ? id : null;
+}
+
+/**
+ * RELEASE GATE -- the Pixel ID to load, or null (the default: not loaded).
+ * Requires a valid NEXT_PUBLIC_OPENAI_PIXEL_ID AND NEXT_PUBLIC_OPENAI_PIXEL_ENABLED
+ * set to exactly "true". Automatic advanced matching is controlled only in
+ * Ads Manager (the SDK reads it from OpenAI's per-pixel config; the docs
+ * offer no code-side opt-out), so the flag is set only after that setting
+ * has been confirmed OFF there.
+ */
+export function getEnabledOpenAiPixelId(
+  rawId: string | undefined = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID,
+  rawEnabled: string | undefined = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ENABLED,
+): string | null {
+  return (rawEnabled ?? "").trim() === "true" ? getOpenAiPixelId(rawId) : null;
 }
 
 /** Minimal shape read from lib/ecommerceMeasurement.ts's PurchaseMeasurement.

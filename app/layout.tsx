@@ -5,10 +5,11 @@ import ConditionalAdSense from "../components/ConditionalAdSense";
 import { ConsentProvider } from "@/context/ConsentContext";
 import ConsentBanner from "@/components/consent/ConsentBanner";
 import WebsiteAnalyticsInit from "@/components/analytics/WebsiteAnalyticsInit";
-import { buildOpenAiPixelBootstrap, getOpenAiPixelId } from "@/lib/openaiPixel";
+import { buildOpenAiPixelBootstrap, getEnabledOpenAiPixelId } from "@/lib/openaiPixel";
 
-// OpenAI Ads Measurement Pixel: loaded only when NEXT_PUBLIC_OPENAI_PIXEL_ID is set.
-const OPENAI_PIXEL_ID = getOpenAiPixelId();
+// OpenAI Ads Measurement Pixel: off by default; loaded only when
+// NEXT_PUBLIC_OPENAI_PIXEL_ID is set AND NEXT_PUBLIC_OPENAI_PIXEL_ENABLED=true.
+const OPENAI_PIXEL_ID = getEnabledOpenAiPixelId();
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jyotishasha.com"),

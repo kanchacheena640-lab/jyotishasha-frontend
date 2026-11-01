@@ -18,7 +18,7 @@ import * as path from "path";
 import * as vm from "vm";
 import {
   OPENAI_NEUTRAL_PRODUCT_IDS, OPENAI_ORDER_CREATED, OPENAI_PIXEL_SDK_URL, buildOpenAiOrderCreated, buildOpenAiPixelBootstrap,
-  currencyMinorDigits, getOpenAiPixelId, measureOpenAiOrderCreated, neutralProductId, setOpenAiConsent,
+  currencyMinorDigits, getEnabledOpenAiPixelId, getOpenAiPixelId,measureOpenAiOrderCreated, neutralProductId, setOpenAiConsent,
 } from "./openaiPixel";
 import {
   PURCHASE_MEASURED_KEY_PREFIX, parsePurchaseMeasurement, pushPurchaseOnce, resetMeasuredMemoryForTest,
@@ -73,6 +73,21 @@ async function main() {
   let threw = false;
   try { buildOpenAiPixelBootstrap("</script><script>"); } catch { threw = true; }
   check("1d: the bootstrap builder refuses an invalid Pixel ID", threw);
+  check("1e: release gate -- disabled by default (ID set, flag unset/empty)",
+    getEnabledOpenAiPixelId(PIXEL, undefined) === null && getEnabledOpenAiPixelId(PIXEL, "") === null);
+  check("1f: release gate -- only the exact value \"true\" enables",
+    ["false", "0", "1", "yes", "TRUE", "True", "on"].every((v) => getEnabledOpenAiPixelId(PIXEL, v) === null));
+  check("1g: release gate -- flag true + valid ID loads; flag true + missing/invalid ID does not",
+    getEnabledOpenAiPixelId(PIXEL, "true") === PIXEL && getEnabledOpenAiPixelId(PIXEL, " true ") === PIXEL
+    && getEnabledOpenAiPixelId(undefined, "true") === null && getEnabledOpenAiPixelId('x"});', "true") === null);
+  const savedEnv = { id: process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID, on: process.env.NEXT_PUBLIC_OPENAI_PIXEL_ENABLED };
+  process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID = PIXEL;
+  delete process.env.NEXT_PUBLIC_OPENAI_PIXEL_ENABLED;
+  check("1h: release gate reads the environment -- ID alone does not load the Pixel", getEnabledOpenAiPixelId() === null);
+  process.env.NEXT_PUBLIC_OPENAI_PIXEL_ENABLED = "true";
+  check("1i: release gate reads the environment -- ID + ENABLED=true loads it", getEnabledOpenAiPixelId() === PIXEL);
+  if (savedEnv.id === undefined) delete process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID; else process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID = savedEnv.id;
+  if (savedEnv.on === undefined) delete process.env.NEXT_PUBLIC_OPENAI_PIXEL_ENABLED; else process.env.NEXT_PUBLIC_OPENAI_PIXEL_ENABLED = savedEnv.on;
 
   console.log("\n=== 2. documented order_created payload ===");
   for (const [label, m, minor] of FAMILIES) {
@@ -243,8 +258,9 @@ async function main() {
   const ctx = read("context/ConsentContext.tsx");
   check("7e: consent changes are mirrored with the existing advertising rule", /setOpenAiConsent\(isAdvertisingIdentifierStorageAllowed\(policy, next\)\)/.test(ctx));
   const layout = read("app/layout.tsx");
-  check("7f: layout loads the Pixel only when NEXT_PUBLIC_OPENAI_PIXEL_ID is configured, beforeInteractive",
-    /OPENAI_PIXEL_ID && \(\s*<Script id="openai-pixel" strategy="beforeInteractive">/.test(layout) && /getOpenAiPixelId\(\)/.test(layout));
+  check("7f: layout loads the Pixel only through the release gate, beforeInteractive",
+    /OPENAI_PIXEL_ID && \(\s*<Script id="openai-pixel" strategy="beforeInteractive">/.test(layout) && /const OPENAI_PIXEL_ID = getEnabledOpenAiPixelId\(\);/.test(layout)
+    && !/getOpenAiPixelId\(/.test(layout));
   check("7g: GTM container and consent-default bootstrap are still present", /GTM-WLP7T2DP/.test(layout) && /id="consent-default"/.test(layout));
   check("7h: no direct Meta fbq code was introduced", sources.every((f) => !/\bfbq\s*\(/.test(stripComments(read(f)))));
 
