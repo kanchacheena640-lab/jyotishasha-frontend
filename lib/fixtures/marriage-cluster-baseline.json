@@ -8332,8 +8332,8 @@
       "locale": "en",
       "path": "/marriage-astrology",
       "seo": {
-        "title": "Marriage Astrology: Vedic Guide to Love, Timing & Compatibility",
-        "description": "Discover Vedic astrology insights on marriage timing, love marriage, compatibility, spouse nature, and marital life — guided by your birth chart and Navamsa.",
+        "title": "Marriage Astrology: Vedic Guide, Free Tools & Reports",
+        "description": "Vedic marriage astrology on timing, love or arranged marriage, delays, spouse and compatibility, with free Kundli matching, Mangal Dosh check and reports.",
         "keywords": [
           "marriage astrology",
           "vedic marriage prediction",
@@ -8351,7 +8351,7 @@
         "openGraph": {
           "type": "website",
           "url": "https://www.jyotishasha.com/marriage-astrology",
-          "title": "Marriage Astrology: Vedic Guide to Love, Timing & Compatibility"
+          "title": "Marriage Astrology: Vedic Guide, Free Tools & Reports"
         }
       },
       "headings": {
@@ -8359,28 +8359,29 @@
           "Marriage Astrology"
         ],
         "h2": [
-          "What do you want to know?",
-          "Marriage topics",
-          "Marriage Astrology: Vedic Guide to Love, Timing & Compatibility",
-          "Planning the wedding?"
+          "Do You Have These Questions About Your Marriage Too?",
+          "Explore Free Marriage Tools",
+          "Get Personalized Answers About Your Marriage",
+          "Explore Marriage & Relationships Through Vedic Astrology",
+          "Marriage Astrology: Vedic Guide to Love, Timing & Compatibility"
         ],
         "h3": [
-          "Marriage Timing",
-          "Love Marriage",
-          "Arranged Marriage",
-          "Delayed Marriage",
-          "Spouse Nature",
-          "Compatibility",
-          "Married Life",
-          "Intercaste Marriage",
-          "Early Marriage",
-          "Second Marriage",
-          "Divorce Possibility",
-          "Marriage Prediction"
+          "Kundli Matching",
+          "Mangal Dosh Calculator",
+          "Marriage Path Calculator",
+          "Love Life Calculator",
+          "Ask One Specific Question",
+          "Marriage Prediction & Timing",
+          "Love & Arranged Marriage",
+          "Spouse & Married Life",
+          "Compatibility & Matching",
+          "Marriage Challenges"
         ]
       },
       "links": {
         "internal": [
+          "/love",
+          "/love/report/relationship_future_report",
           "/marriage-astrology/arranged-marriage",
           "/marriage-astrology/compatibility",
           "/marriage-astrology/delayed-marriage",
@@ -8393,11 +8394,40 @@
           "/marriage-astrology/married-life",
           "/marriage-astrology/second-marriage",
           "/marriage-astrology/spouse-nature",
-          "/panchang/muhurat/marriage-muhurat"
+          "/panchang/muhurat/marriage-muhurat",
+          "/reports",
+          "/reports/delay_in_marriage_report",
+          "/reports/focused",
+          "/reports/focused/kundali-match-for-marriage",
+          "/reports/focused/marriage-chances-timing",
+          "/reports/focused/marriage-delay-easing",
+          "/reports/focused/marriage-delay-reason",
+          "/reports/focused/relationship-lead-to-marriage",
+          "/reports/focused/strongest-marriage-periods",
+          "/reports/love_marriage_report",
+          "/reports/marriage_report",
+          "/tools/love-life",
+          "/tools/mangal-dosh",
+          "/tools/marriage-path"
         ],
-        "reports": [],
+        "reports": [
+          "/reports/delay_in_marriage_report",
+          "/reports/focused",
+          "/reports/focused/kundali-match-for-marriage",
+          "/reports/focused/marriage-chances-timing",
+          "/reports/focused/marriage-delay-easing",
+          "/reports/focused/marriage-delay-reason",
+          "/reports/focused/relationship-lead-to-marriage",
+          "/reports/focused/strongest-marriage-periods",
+          "/reports/love_marriage_report",
+          "/reports/marriage_report"
+        ],
         "samples": [],
-        "tools": [],
+        "tools": [
+          "/tools/love-life",
+          "/tools/mangal-dosh",
+          "/tools/marriage-path"
+        ],
         "marriageTopics": [
           "/marriage-astrology/arranged-marriage",
           "/marriage-astrology/compatibility",
@@ -8420,7 +8450,7 @@
         "objects": []
       },
       "server": {
-        "wordCount": 328,
+        "wordCount": 704,
         "detailsElements": 0
       }
     },
@@ -8430,8 +8460,8 @@
       "locale": "hi",
       "path": "/hi/marriage-astrology",
       "seo": {
-        "title": "विवाह ज्योतिष: प्रेम, समय और अनुकूलता की वैदिक मार्गदर्शिका",
-        "description": "विवाह के समय, प्रेम विवाह, अनुकूलता, जीवनसाथी के स्वभाव और वैवाहिक जीवन पर वैदिक ज्योतिष की अंतर्दृष्टि — आपकी जन्मकुंडली और नवांश द्वारा निर्देशित।",
+        "title": "विवाह ज्योतिष: वैदिक मार्गदर्शिका, फ्री टूल्स और रिपोर्ट | ज्योतिष आशा",
+        "description": "विवाह का समय, प्रेम या अरेंज्ड विवाह, देरी, जीवनसाथी और अनुकूलता पर वैदिक मार्गदर्शन, फ्री कुंडली मिलान, मंगल दोष जाँच और व्यक्तिगत रिपोर्ट के साथ।",
         "keywords": [
           "विवाह ज्योतिष",
           "वैदिक विवाह भविष्यवाणी",
@@ -8448,7 +8478,7 @@
         "openGraph": {
           "type": "website",
           "url": "https://www.jyotishasha.com/hi/marriage-astrology",
-          "title": "विवाह ज्योतिष: प्रेम, समय और अनुकूलता की वैदिक मार्गदर्शिका"
+          "title": "विवाह ज्योतिष: वैदिक मार्गदर्शिका, फ्री टूल्स और रिपोर्ट | ज्योतिष आशा"
         }
       },
       "headings": {
@@ -8456,28 +8486,29 @@
           "विवाह ज्योतिष"
         ],
         "h2": [
-          "आप क्या जानना चाहते हैं?",
-          "विवाह के विषय",
-          "विवाह ज्योतिष: प्रेम, समय और अनुकूलता की वैदिक मार्गदर्शिका",
-          "विवाह की तैयारी कर रहे हैं?"
+          "क्या आपकी शादी को लेकर आपके मन में भी ये सवाल हैं?",
+          "विवाह के फ्री टूल्स",
+          "अपनी शादी से जुड़े सवालों के व्यक्तिगत जवाब पाएं",
+          "वैदिक ज्योतिष से विवाह और रिश्तों को समझें",
+          "विवाह ज्योतिष: प्रेम, समय और अनुकूलता की वैदिक मार्गदर्शिका"
         ],
         "h3": [
-          "विवाह का समय",
-          "प्रेम विवाह",
-          "व्यवस्थित विवाह",
-          "विलंबित विवाह",
-          "जीवनसाथी का स्वभाव",
-          "अनुकूलता",
-          "वैवाहिक जीवन",
-          "अंतरजातीय विवाह",
-          "प्रारंभिक विवाह",
-          "दूसरा विवाह",
-          "तलाक की संभावना",
-          "विवाह भविष्यवाणी"
+          "कुंडली मिलान",
+          "मंगल दोष कैलकुलेटर",
+          "विवाह मार्ग कैलकुलेटर",
+          "प्रेम जीवन कैलकुलेटर",
+          "एक खास सवाल पूछें",
+          "विवाह भविष्यवाणी और समय",
+          "प्रेम और अरेंज्ड विवाह",
+          "जीवनसाथी और वैवाहिक जीवन",
+          "अनुकूलता और कुंडली मिलान",
+          "विवाह की चुनौतियाँ"
         ]
       },
       "links": {
         "internal": [
+          "/hi/love",
+          "/hi/love/report/relationship_future_report",
           "/hi/marriage-astrology/arranged-marriage",
           "/hi/marriage-astrology/compatibility",
           "/hi/marriage-astrology/delayed-marriage",
@@ -8490,11 +8521,40 @@
           "/hi/marriage-astrology/married-life",
           "/hi/marriage-astrology/second-marriage",
           "/hi/marriage-astrology/spouse-nature",
-          "/hi/panchang/muhurat/marriage-muhurat"
+          "/hi/panchang/muhurat/marriage-muhurat",
+          "/hi/reports/focused",
+          "/hi/reports/focused/kundali-match-for-marriage",
+          "/hi/reports/focused/marriage-chances-timing",
+          "/hi/reports/focused/marriage-delay-easing",
+          "/hi/reports/focused/marriage-delay-reason",
+          "/hi/reports/focused/relationship-lead-to-marriage",
+          "/hi/reports/focused/strongest-marriage-periods",
+          "/hi/tools/love-life",
+          "/hi/tools/mangal-dosh",
+          "/hi/tools/marriage-path",
+          "/reports",
+          "/reports/delay_in_marriage_report",
+          "/reports/love_marriage_report",
+          "/reports/marriage_report"
         ],
-        "reports": [],
+        "reports": [
+          "/hi/reports/focused",
+          "/hi/reports/focused/kundali-match-for-marriage",
+          "/hi/reports/focused/marriage-chances-timing",
+          "/hi/reports/focused/marriage-delay-easing",
+          "/hi/reports/focused/marriage-delay-reason",
+          "/hi/reports/focused/relationship-lead-to-marriage",
+          "/hi/reports/focused/strongest-marriage-periods",
+          "/reports/delay_in_marriage_report",
+          "/reports/love_marriage_report",
+          "/reports/marriage_report"
+        ],
         "samples": [],
-        "tools": [],
+        "tools": [
+          "/hi/tools/love-life",
+          "/hi/tools/mangal-dosh",
+          "/hi/tools/marriage-path"
+        ],
         "marriageTopics": [
           "/hi/marriage-astrology/arranged-marriage",
           "/hi/marriage-astrology/compatibility",
@@ -8517,7 +8577,7 @@
         "objects": []
       },
       "server": {
-        "wordCount": 348,
+        "wordCount": 826,
         "detailsElements": 0
       }
     }

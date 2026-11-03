@@ -25,7 +25,12 @@ const ts = require("typescript");
 const NodeModule: any = require("module");
 const originalResolve = NodeModule._resolveFilename;
 NodeModule._resolveFilename = function (request: string, parent: any, ...rest: any[]) {
-  return originalResolve.call(this, request.startsWith("@/") ? path.join(root, request.slice(2)) : request, parent, ...rest);
+  let mapped = request.startsWith("@/") ? path.join(root, request.slice(2)) : request;
+  // Like the Next bundler, a .ts module wins over a same-named .json sibling
+  // (app/data/intentCatalog.ts vs intentCatalog.json); Node alone would pick the JSON.
+  const abs = mapped.startsWith(".") && parent?.filename ? path.resolve(path.dirname(parent.filename), mapped) : mapped;
+  if (path.isAbsolute(abs) && !path.extname(abs) && fs.existsSync(`${abs}.ts`) && fs.existsSync(`${abs}.json`)) mapped = `${abs}.ts`;
+  return originalResolve.call(this, mapped, parent, ...rest);
 };
 for (const ext of [".ts", ".tsx"]) {
   NodeModule._extensions[ext] = (m: any, filename: string) => {
