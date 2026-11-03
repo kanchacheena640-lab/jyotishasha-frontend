@@ -50,7 +50,9 @@ check("card heading is the official product title", offer.heading.en === "Delay 
 check("focused marriage_delay_reason / easing products are not used", !/marriage_delay_reason|marriage_delay_easing|marriage-delay/.test(JSON.stringify(delayedMarriageLanding)));
 const offerEn = [offer.eyebrow.en, offer.heading.en, offer.intro.en, offer.ctaLabel.en, ...offer.bullets.en].join(" ");
 check("offer never claims Navamsa, transits, an exact date or a guaranteed end of delay",
-  !/navamsa|D9|transit|guarantee|will end|end of (the )?delay/i.test(offerEn) && /does not predict an exact marriage date/.test(offer.intro.en));
+  !/navamsa|D9|transit|guarantee|will end|end of (the )?delay|exact (marriage )?date|when you will marry/i.test(offerEn) &&
+  // Scope stated positively (JYOTISHASHA_EDITORIAL_RULES.md): the intro names exactly what the four bullets cover.
+  /delay factors in your own birth chart/.test(offer.intro.en) && /current Dasha window/.test(offer.intro.en) && /support the pattern/.test(offer.intro.en));
 check("bullets stay within the sample (delay signal, 7th house/lord, Saturn/Mars/Rahu-Ketu, Dasha + support)",
   offer.bullets.en.length === 4 && offer.bullets.hi.length === 4 &&
   /delay signal/.test(offer.bullets.en[0]) && /7th house and 7th lord/.test(offer.bullets.en[1]) &&
@@ -68,10 +70,12 @@ for (const loc of ["en", "hi"] as const) {
 
 console.log("\n=== C. No video; SSR FAQ + long-form opt-ins ===");
 // MC Shorts: the only video is the approved inline Short after the intro; the lead/offer unit stays video-free.
-// Video placement stage B: the approved Short sits in the top report card; no inline copy in the article.
-check("lead video is the approved tNHyYsD3x5M (play event, Hindi label, desktop CTA kept high) + sample-hook lead",
+// Editorial V1: the approved Short moves from the report card into the Main Reasons section it explains.
+check("editorial template on; video is the approved tNHyYsD3x5M (play event, Hindi label) in Main Reasons",
+  delayedMarriageLanding.theme === "editorial" &&
   delayedMarriageLanding.video?.youtubeId === "tNHyYsD3x5M" && delayedMarriageLanding.video.playFeatureName === "delayed_marriage_video_play" &&
-  /\(in Hindi\)$/.test(delayedMarriageLanding.video.caption.en) && delayedMarriageLanding.video.desktopCtaFirst === true && !!offer.sampleHookLead);
+  /\(in Hindi\)$/.test(delayedMarriageLanding.video.caption.en) && delayedMarriageLanding.video.articleSectionId === "delay-reasons" &&
+  delayedMarriageLanding.video.desktopCtaFirst === undefined && !!offer.sampleHookLead);
 check("no inline Short (exactly one video on the page)", delayedMarriageLanding.inlineVideo === undefined);
 check("ssrFaq and longForm enabled", delayedMarriageLanding.ssrFaq === true && delayedMarriageLanding.longForm === true);
 check("topic has no accordion sections (all content already server-rendered)", !/layout:\s*'accordion'/.test(topic));
@@ -79,11 +83,18 @@ check("topic has no accordion sections (all content already server-rendered)", !
 console.log("\n=== D. Direct answer ===");
 const da = delayedMarriageLanding.directAnswer.en;
 check("direct answer present EN/HI", da.length > 300 && delayedMarriageLanding.directAnswer.hi.length > 300);
-check("direct answer: no single placement + 7th house/lord + Saturn/Mars/Rahu/Ketu + Venus/Jupiter + Navamsa + Dasha",
-  /does not trace a delay in marriage to one placement/.test(da) && /7th house and its lord/.test(da) && /Saturn, Mars, Rahu and Ketu/.test(da) &&
+check("direct answer: a combination of factors + 7th house/lord + Saturn/Mars/Rahu/Ketu + Venus/Jupiter + Navamsa + Dasha",
+  /combination of factors/.test(da) && /7th house and its lord/.test(da) && /Saturn, Mars, Rahu and Ketu/.test(da) &&
   /Venus and Jupiter/.test(da) && /Navamsa/.test(da) && /Dasha/.test(da));
-check("direct answer: not 'no marriage', and real-world circumstances matter",
-  /not that marriage will not happen/.test(da) && /Real-world circumstances/.test(da));
+// The delay-vs-no-marriage reassurance lives once, in its own H2 section + FAQ (editorial rules §2.4/§2.7).
+check("direct answer: supportive factors balance delay factors, and real-world circumstances matter",
+  /supportive factors/.test(da) && /Real-world circumstances/.test(da));
+check("delay-vs-no-marriage reassurance kept only in its H2 section + FAQ (not in subtitle, answer, meta or intro card)",
+  !/not the same as no marriage|delay is not denial|Not a Missing Promise|marriage will not happen/.test(
+    da + (topic.match(/subtext:\s+'[^']*'/) || [""])[0] + (topic.match(/metaDescription:\s+'[^']*'/) || [""])[0] + block("intro")) &&
+  !/विवाह न होना नहीं|विवाह नहीं होगा|योग का अभाव नहीं/.test(
+    delayedMarriageLanding.directAnswer.hi + (topic.match(/subtext_hi:\s+'[^']*'/) || [""])[0] + (topic.match(/metaDescription_hi:\s+'[^']*'/) || [""])[0]) &&
+  /It does not mean marriage will not happen/.test(block("delay-not-denial")) && /faq-never-marry/.test(block("faqs")));
 check("direct answer avoids absolute words", !/guarantee|ensure|\bcertain\b|destined|\balways\b|inevitable/i.test(da));
 
 console.log("\n=== E. Topic: titles, meta, fatalism cleanup ===");
@@ -117,7 +128,7 @@ check("real-world factors mention education/career, choice, family, expectations
 check("Dasha section is activation and hands off timing to Marriage Timing",
   topic.includes("title:    'Dasha: Are Delay Factors Active?'") && /Marriage Timing guide linked below/.test(block("dasha-activation")) &&
   !/transit-analysis|timing-transit/.test(topic));
-check("main reasons section has the no-single-placement card + 6 indicators", countItems(block("delay-reasons")) === 7 && /No Single Placement Decides It/.test(block("delay-reasons")));
+check("main reasons section has the several-indications card + 6 indicators", countItems(block("delay-reasons")) === 7 && /Several Indications Read Together/.test(block("delay-reasons")));
 check("houses kept: 7th, 2nd, 8th, 1st, 12th", ["house-7th", "house-2nd", "house-8th", "house-1st", "house-12th"].every((id) => block("delay-houses").includes(`id:       '${id}'`)));
 check("Darakaraka hands off to Spouse Nature", /Spouse Nature guide/.test(block("structural-analysis")));
 const faqCount = countItems(block("faqs"));

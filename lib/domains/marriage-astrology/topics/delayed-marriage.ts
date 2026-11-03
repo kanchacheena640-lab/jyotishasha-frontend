@@ -25,16 +25,16 @@ export const delayedMarriage: DomainTopic = {
 
   seo: {
     metaTitle:          'Delayed Marriage in Vedic Astrology: Causes, Timing, Remedies',
-    metaDescription:    'Why is my marriage getting delayed? See how Vedic astrology reads delay in marriage in a kundli — the 7th house and lord, Saturn, Mars, Rahu-Ketu, Venus, Navamsa — and why delay is not denial.',
-    metaDescription_hi: 'मेरी शादी में देरी क्यों हो रही है? जानें कुंडली में विवाह में देरी के ज्योतिषीय कारण — सप्तम भाव और सप्तमेश, शनि, मंगल, राहु-केतु, शुक्र, नवांश — और क्यों देरी का अर्थ विवाह न होना नहीं है।',
+    metaDescription:    'Why is my marriage getting delayed? See how Vedic astrology reads delay in marriage in a kundli — the 7th house and lord, Saturn, Mars, Rahu-Ketu, Venus, Navamsa — and what helps when marriage takes longer.',
+    metaDescription_hi: 'मेरी शादी में देरी क्यों हो रही है? जानें कुंडली में विवाह में देरी के ज्योतिषीय कारण — सप्तम भाव और सप्तमेश, शनि, मंगल, राहु-केतु, शुक्र, नवांश — और शादी में अधिक समय लगे तो क्या सहायक होता है।',
     robots:             'noindex,follow',
   },
 
   hero: {
     headline:    'Delayed Marriage in Vedic Astrology: Causes, Timing & Remedies',
     headline_hi: 'वैदिक ज्योतिष में विलंबित विवाह: कारण, समय और उपाय',
-    subtext:     'Why marriage can take longer in some charts — the 7th house and its lord, Saturn, Mars, Rahu-Ketu, Venus and Jupiter, the Navamsa and Dasha — and why a delay in marriage is not the same as no marriage.',
-    subtext_hi:  'कुछ कुंडलियों में शादी में अधिक समय क्यों लगता है — सप्तम भाव और सप्तमेश, शनि, मंगल, राहु-केतु, शुक्र और गुरु, नवांश और दशा — और क्यों विवाह में देरी का अर्थ विवाह न होना नहीं है।',
+    subtext:     'Why marriage can take longer in some charts — the 7th house and its lord, Saturn, Mars, Rahu-Ketu, Venus and Jupiter, the Navamsa and Dasha — and what helps when the path to marriage is slower.',
+    subtext_hi:  'कुछ कुंडलियों में शादी में अधिक समय क्यों लगता है — सप्तम भाव और सप्तमेश, शनि, मंगल, राहु-केतु, शुक्र और गुरु, नवांश और दशा — और विवाह का मार्ग धीमा हो तो क्या सहायक होता है।',
   },
 
   taxonomy: {
@@ -56,8 +56,8 @@ export const delayedMarriage: DomainTopic = {
         items: [
           {
             id:       'intro-what-delay-means',
-            label:    'Slower Progress, Not a Missing Promise',
-            label_hi: 'धीमी प्रगति, विवाह के योग का अभाव नहीं',
+            label:    'A Slower Path to Marriage',
+            label_hi: 'विवाह का धीमा मार्ग',
             body:     'In Vedic astrology, a delay in marriage means that the chart shows factors traditionally associated with slower progress, extra effort or a longer search before marriage. It describes the path, not a verdict on the person, and it says nothing about anyone’s worth. Astrologers look at why the chart may lean this way — which houses, lords and planets are involved — and read that alongside the person’s real circumstances.',
             body_hi:  'वैदिक ज्योतिष में शादी में देरी (विलंबित विवाह) का अर्थ है कि कुंडली में ऐसे कारक दिखते हैं जिन्हें परंपरागत रूप से धीमी प्रगति, अधिक प्रयास या विवाह से पहले लंबी खोज से जोड़ा जाता है। यह मार्ग का वर्णन है, व्यक्ति पर कोई निर्णय नहीं, और इससे किसी के मूल्य के बारे में कुछ नहीं कहा जाता। ज्योतिषी देखते हैं कि कुंडली इस ओर क्यों झुक सकती है — कौन-से भाव, स्वामी और ग्रह शामिल हैं — और इसे व्यक्ति की वास्तविक परिस्थितियों के साथ मिलाकर पढ़ते हैं।',
           },
@@ -80,10 +80,10 @@ export const delayedMarriage: DomainTopic = {
           {
             id:       'reason-no-single-placement',
             icon:     '🧩',
-            label:    'No Single Placement Decides It',
-            label_hi: 'कोई एक ग्रह-स्थिति निर्णय नहीं करती',
-            body:     'There is no one “marriage delay yog” that settles the question. The factors below are potential delay indicators. Astrologers look for several appearing together, check how strongly benefics such as Jupiter and Venus support the 7th house, and only then describe a tendency.',
-            body_hi:  'कोई एक "विवाह में देरी का योग" ऐसा नहीं है जो इस प्रश्न का अंतिम उत्तर दे। नीचे दिए कारक देरी के संभावित संकेत हैं। ज्योतिषी देखते हैं कि इनमें से कई एक साथ हैं या नहीं, गुरु और शुक्र जैसे शुभ ग्रह सप्तम भाव का कितना समर्थन करते हैं, और उसके बाद ही किसी प्रवृत्ति का वर्णन करते हैं।',
+            label:    'Several Indications Read Together',
+            label_hi: 'कई संकेतों को साथ मिलाकर पढ़ना',
+            body:     'Delay indications are read as a pattern. The factors below are potential delay indicators. Astrologers look for several appearing together, check how strongly benefics such as Jupiter and Venus support the 7th house, and only then describe a tendency.',
+            body_hi:  'विवाह में देरी के संकेत एक समग्र पैटर्न के रूप में पढ़े जाते हैं। नीचे दिए कारक देरी के संभावित संकेत हैं। ज्योतिषी देखते हैं कि इनमें से कई एक साथ हैं या नहीं, गुरु और शुक्र जैसे शुभ ग्रह सप्तम भाव का कितना समर्थन करते हैं, और उसके बाद ही किसी प्रवृत्ति का वर्णन करते हैं।',
           },
           {
             id:       'reason-seventh-lord',
@@ -225,8 +225,8 @@ export const delayedMarriage: DomainTopic = {
             id:       'delay-vs-no-marriage',
             label:    'Delay and “No Marriage” Are Different Questions',
             label_hi: 'देरी और "विवाह न होना" अलग-अलग प्रश्न हैं',
-            body:     'If you are asking “why am I not getting married?”, the first point is this: a delay indication means the path to marriage may be slower or need more effort. It does not mean marriage will not happen. No single placement, dosha or Dasha shows that a person will never marry — not Saturn in the 7th, not Rahu or Ketu, not a combust or retrograde 7th lord. Supportive factors such as a well-placed Jupiter or Venus often balance difficult ones, and the overall picture can only come from a careful whole-chart assessment. Even then, astrology describes tendencies, not certainties, and personal choices and circumstances keep shaping the outcome. If you feel worried by a single combination you have read about, it is a reason for a fuller reading — not for a conclusion.',
-            body_hi:  'यदि आप सोच रहे हैं कि मेरी शादी क्यों नहीं हो रही, तो पहली बात यह है: देरी के संकेत का अर्थ है कि विवाह का मार्ग धीमा हो सकता है या उसमें अधिक प्रयास लग सकता है। इसका अर्थ यह नहीं कि विवाह नहीं होगा। कोई एक ग्रह-स्थिति, दोष या दशा यह नहीं दिखाती कि व्यक्ति का विवाह कभी नहीं होगा — न सप्तम भाव में शनि, न राहु या केतु, न अस्त या वक्री सप्तमेश। अच्छी स्थिति वाले गुरु या शुक्र जैसे सहायक कारक अक्सर कठिन कारकों को संतुलित करते हैं, और समग्र चित्र केवल पूरी कुंडली के सावधान विश्लेषण से ही बनता है। तब भी ज्योतिष प्रवृत्तियाँ बताता है, निश्चितताएँ नहीं, और व्यक्तिगत निर्णय तथा परिस्थितियाँ परिणाम को आकार देती रहती हैं। यदि किसी एक योग के बारे में पढ़कर आप चिंतित हैं, तो यह पूरे विश्लेषण का कारण है — किसी निष्कर्ष का नहीं।',
+            body:     'If you are asking “why am I not getting married?”, the first point is this: a delay indication means the path to marriage may be slower or need more effort. It does not mean marriage will not happen. No single placement, dosha or Dasha shows that a person will never marry — whether Saturn in the 7th, Rahu or Ketu, or a combust or retrograde 7th lord. Supportive factors such as a well-placed Jupiter or Venus often balance difficult ones, and the overall picture comes from a careful whole-chart assessment. Astrology describes tendencies, and personal choices and circumstances keep shaping the outcome. If a single combination you have read about worries you, a fuller reading of the whole chart gives the clearer picture.',
+            body_hi:  'यदि आप सोच रहे हैं कि मेरी शादी क्यों नहीं हो रही, तो पहली बात यह है: देरी के संकेत का अर्थ है कि विवाह का मार्ग धीमा हो सकता है या उसमें अधिक प्रयास लग सकता है। इसका अर्थ यह नहीं कि विवाह नहीं होगा। कोई एक ग्रह-स्थिति, दोष या दशा यह नहीं दिखाती कि व्यक्ति का विवाह कभी नहीं होगा — चाहे सप्तम भाव में शनि हो, राहु या केतु हो, या अस्त अथवा वक्री सप्तमेश। अच्छी स्थिति वाले गुरु या शुक्र जैसे सहायक कारक अक्सर कठिन कारकों को संतुलित करते हैं, और समग्र चित्र पूरी कुंडली के सावधान विश्लेषण से बनता है। ज्योतिष प्रवृत्तियाँ बताता है, और व्यक्तिगत निर्णय तथा परिस्थितियाँ परिणाम को आकार देती रहती हैं। यदि किसी एक योग के बारे में पढ़कर आप चिंतित हैं, तो पूरी कुंडली का विस्तृत विश्लेषण अधिक स्पष्ट चित्र देता है।',
           },
         ],
       },
@@ -246,10 +246,10 @@ export const delayedMarriage: DomainTopic = {
           },
           {
             id:       'timing-handoff',
-            label:    'When marriage may happen is a separate question',
-            label_hi: 'विवाह कब हो सकता है, यह अलग प्रश्न है',
-            body:     'Knowing that delay factors are active does not tell you when marriage will take place or when a delay will end. Estimating supportive periods combines Dasha with the Navamsa and the transits of Jupiter and Saturn — that method is explained in the Marriage Timing guide linked below.',
-            body_hi:  'यह जानना कि देरी के कारक सक्रिय हैं, यह नहीं बताता कि विवाह कब होगा या देरी कब समाप्त होगी। सहायक अवधियों का अनुमान दशा, नवांश और गुरु-शनि के गोचर को मिलाकर लगाया जाता है — यह विधि नीचे दी गई विवाह के समय की मार्गदर्शिका में समझाई गई है।',
+            label:    'Supportive periods are read with Dasha, Navamsa and transits',
+            label_hi: 'सहायक अवधियाँ दशा, नवांश और गोचर से देखी जाती हैं',
+            body:     'Active delay factors describe the current phase. Supportive periods for marriage are estimated by combining Dasha with the Navamsa and the transits of Jupiter and Saturn — that method is explained in the Marriage Timing guide linked below.',
+            body_hi:  'सक्रिय देरी के कारक वर्तमान चरण का वर्णन करते हैं। विवाह के लिए सहायक अवधियों का अनुमान दशा, नवांश और गुरु-शनि के गोचर को मिलाकर लगाया जाता है — यह विधि नीचे दी गई विवाह के समय की मार्गदर्शिका में समझाई गई है।',
           },
         ],
       },
@@ -449,8 +449,9 @@ export const delayedMarriage: DomainTopic = {
   authority: {
     reviewStatus:   'not-reviewed',
     contentVersion: 2,
-    // DM-2 restructure (direct answer, delay-vs-no-marriage, real-world factors, SSR FAQ).
-    lastUpdated:    '2026-10-06',
+    // DM-2 restructure (direct answer, delay-vs-no-marriage, real-world factors, SSR FAQ);
+    // Editorial V1 (2026-11-04): positive rewording per JYOTISHASHA_EDITORIAL_RULES.md.
+    lastUpdated:    '2026-11-04',
   },
 
   publishing: {

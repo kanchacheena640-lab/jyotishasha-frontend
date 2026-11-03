@@ -7,7 +7,7 @@
  *     like Marriage Timing -- CTA first on phones, CTA kept near its old desktop position (desktopCtaFirst);
  *   - free-tool pages (no report card): the standalone Short card right after the top tool card
  *     (inlineVideo placement 'after-lead' -> MarriageYouTubeShort);
- *   - editorial pages (theme 'editorial', e.g. Arranged Marriage): the same lead video, rendered
+ *   - editorial pages (theme 'editorial': Arranged Marriage, Delayed Marriage): the same lead video, rendered
  *     inside the article after the section it explains (video.articleSectionId -> EditorialVideo).
  *
  * Same standalone check()/pass-fail-counter convention as every other
@@ -73,8 +73,8 @@ function shortOf(slug: string): Short | null {
     captionEn: `${iv.heading.en} ${iv.description.en}`, captionHi: iv.heading.hi, playLabel: iv.playLabel, playFeatureName: iv.playFeatureName };
   return null;
 }
-const REPORT_LED = ["delayed-marriage", "love-marriage", "spouse-nature", "married-life"];
-const EDITORIAL = ["arranged-marriage"];
+const REPORT_LED = ["love-marriage", "spouse-nature", "married-life"];
+const EDITORIAL = ["arranged-marriage", "delayed-marriage"];
 const TOOL_LED = ["compatibility", "intercaste-marriage"];
 
 // ===========================================================================

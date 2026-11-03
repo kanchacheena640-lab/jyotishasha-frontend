@@ -237,10 +237,10 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
 
 // Dedicated product: the Delay in Marriage Report (its own sample covers delay
 // signal, 7th house/lord, Saturn/Mars/Rahu-Ketu, current Dasha, what can
-// support the pattern). No timing promise, no Navamsa/transit claims. No video yet.
+// support the pattern). No timing promise, no Navamsa/transit claims.
 export const delayedMarriageLanding: TopicLandingConfig = {
-  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
-  // video beside the report on desktop with the CTA kept near its original position.
+  // Editorial article template (as Marriage Timing / Arranged Marriage; EN + HI share this config).
+  theme: 'editorial',
   video: {
     youtubeId: 'tNHyYsD3x5M',
     posterSrc: '/media/delayed-marriage-short-poster.webp',
@@ -249,13 +249,14 @@ export const delayedMarriageLanding: TopicLandingConfig = {
     caption: { en: 'Watch: Delayed Marriage in Vedic Astrology (in Hindi)', hi: 'देखें: कुंडली में शादी में देरी क्यों होती है?' },
     playLabel: { en: 'Play video: Delayed Marriage in Vedic Astrology', hi: 'वीडियो चलाएं: कुंडली में शादी में देरी क्यों होती है?' },
     playFeatureName: 'delayed_marriage_video_play',
-    desktopCtaFirst: true,
+    // Editorial: shown inside "Main Astrological Reasons for Marriage Delay", the section it explains.
+    articleSectionId: 'delay-reasons',
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'Astrology does not trace a delay in marriage to one placement. Astrologers read a combination: the condition of the 7th house and its lord; the influence of Saturn, Mars, Rahu and Ketu on them; the strength of Venus and Jupiter; supporting factors such as a combust or retrograde 7th lord; the Navamsa (D9) as supporting evidence; and the running Dasha, which can activate these factors. Together they may indicate a tendency toward slower progress or extra effort — not a fixed outcome, and not that marriage will not happen. Real-world circumstances such as education, career, family and personal choice matter too.',
-    hi: 'ज्योतिष में शादी में देरी को किसी एक ग्रह-स्थिति से नहीं जोड़ा जाता। ज्योतिषी कई कारकों को मिलाकर देखते हैं: सप्तम भाव और सप्तमेश की स्थिति; उन पर शनि, मंगल, राहु और केतु का प्रभाव; शुक्र और गुरु की शक्ति; अस्त या वक्री सप्तमेश जैसे सहायक कारक; सहायक प्रमाण के रूप में नवांश (D9); और चल रही दशा, जो इन कारकों को सक्रिय कर सकती है। ये मिलकर धीमी प्रगति या अधिक प्रयास की प्रवृत्ति का संकेत दे सकते हैं — कोई तय परिणाम नहीं, और न ही यह कि विवाह नहीं होगा। पढ़ाई, करियर, परिवार और अपनी पसंद जैसी वास्तविक परिस्थितियाँ भी मायने रखती हैं।',
+    en: 'In Vedic astrology, a delay in marriage is read from a combination of factors: the condition of the 7th house and its lord; the influence of Saturn, Mars, Rahu and Ketu on them; the strength of Venus and Jupiter; supporting factors such as a combust or retrograde 7th lord; the Navamsa (D9) as supporting evidence; and the running Dasha, which brings these factors into focus. Together they show where the path to marriage may need more time or effort, and which supportive factors, such as a strong Jupiter or Venus, balance them. Real-world circumstances such as education, career, family and personal choice shape the path as well.',
+    hi: 'वैदिक ज्योतिष में शादी में देरी को कई कारकों को मिलाकर देखा जाता है: सप्तम भाव और सप्तमेश की स्थिति; उन पर शनि, मंगल, राहु और केतु का प्रभाव; शुक्र और गुरु की शक्ति; अस्त या वक्री सप्तमेश जैसे सहायक कारक; सहायक प्रमाण के रूप में नवांश (D9); और चल रही दशा, जो इन कारकों को सक्रिय करती है। ये मिलकर दिखाते हैं कि विवाह के मार्ग में कहाँ अधिक समय या प्रयास लग सकता है, और मज़बूत गुरु या शुक्र जैसे कौन-से सहायक कारक उन्हें संतुलित करते हैं। पढ़ाई, करियर, परिवार और अपनी पसंद जैसी वास्तविक परिस्थितियाँ भी इस मार्ग को आकार देती हैं।',
   },
 
   offer: {
@@ -263,8 +264,8 @@ export const delayedMarriageLanding: TopicLandingConfig = {
     eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
     heading: { en: 'Delay in Marriage Report', hi: 'विवाह में देरी रिपोर्ट' },
     intro: {
-      en: 'General rules cannot show which delay factors apply to your own chart. The report reads them in your birth chart — it does not predict an exact marriage date.',
-      hi: 'सामान्य नियम यह नहीं बता सकते कि आपकी अपनी कुंडली में देरी के कौन-से कारक लागू होते हैं। यह रिपोर्ट इन्हें आपकी जन्मकुंडली में पढ़ती है — यह विवाह की कोई सटीक तारीख नहीं बताती।',
+      en: 'Your report reads these delay factors in your own birth chart: which of them apply, the reasons behind them, your current Dasha window and what can support the pattern.',
+      hi: 'आपकी रिपोर्ट इन देरी के कारकों को आपकी अपनी जन्मकुंडली में पढ़ती है: कौन-से कारक लागू होते हैं, उनके पीछे के कारण, आपकी वर्तमान दशा और इस प्रवृत्ति में क्या सहायक हो सकता है।',
     },
     bullets: {
       en: [
