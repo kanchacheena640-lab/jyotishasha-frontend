@@ -23,11 +23,20 @@ interface Props {
   reportCtaId: string
   sampleCtaId: string
   screenName: string
+  /** Optional class overrides (editorial theme); the defaults below are the dark card's. */
+  ctaClassName?: string
+  sampleTriggerClassName?: string
 }
+
+const DEFAULT_CTA_CLASS =
+  'flex min-h-[52px] w-full items-center justify-center rounded-xl bg-rose-600 px-5 py-3 text-center text-base font-bold text-white shadow-lg shadow-rose-900/30 transition-colors hover:bg-rose-700 active:bg-rose-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-rose-300'
+const DEFAULT_SAMPLE_TRIGGER_CLASS =
+  'inline-flex min-h-[44px] items-center gap-1.5 rounded-xl px-4 text-[15px] font-medium text-rose-200 underline-offset-4 hover:text-white hover:underline'
 
 export default function LeadOfferActions({
   locale, reportHref, ctaLabel, priceRupees, sampleHref, sampleLabel, sampleTitle,
   reportCtaId, sampleCtaId, screenName,
+  ctaClassName = DEFAULT_CTA_CLASS, sampleTriggerClassName = DEFAULT_SAMPLE_TRIGGER_CLASS,
 }: Props) {
   const trackReportIntent = () => {
     WebsiteEvents.ctaClick(reportCtaId, screenName)
@@ -47,7 +56,7 @@ export default function LeadOfferActions({
       <Link
         href={reportHref}
         onClick={trackReportIntent}
-        className="flex min-h-[52px] w-full items-center justify-center rounded-xl bg-rose-600 px-5 py-3 text-center text-base font-bold text-white shadow-lg shadow-rose-900/30 transition-colors hover:bg-rose-700 active:bg-rose-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-rose-300"
+        className={ctaClassName}
       >
         {ctaLabel}
       </Link>
@@ -59,7 +68,7 @@ export default function LeadOfferActions({
           title={sampleTitle}
           purchaseHref={reportHref}
           triggerLabel={sampleLabel}
-          triggerClassName="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl px-4 text-[15px] font-medium text-rose-200 underline-offset-4 hover:text-white hover:underline"
+          triggerClassName={sampleTriggerClassName}
         />
       </div>
     </div>

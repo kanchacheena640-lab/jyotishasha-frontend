@@ -6,10 +6,13 @@
 import type { AnyTopicLandingConfig, TopicLandingConfig, ToolLedLandingConfig } from '../../authority-engine/landing-types'
 
 export const marriageTimingLanding: TopicLandingConfig = {
+  // Pilot of the editorial article template (EN + HI share this config).
+  theme: 'editorial',
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'Vedic astrology does not judge marriage timing from one planet or one house. An astrologer combines the 7th house and its lord, the running Mahadasha–Antardasha periods, the Navamsa (D9) chart and supporting transits of Jupiter and Saturn to find the periods when marriage is most strongly supported. The result is a likely timing window — not a guaranteed date.',
-    hi: 'वैदिक ज्योतिष में शादी का समय किसी एक ग्रह या एक भाव से तय नहीं होता। ज्योतिषी सप्तम भाव और सप्तमेश, चल रही महादशा–अंतर्दशा, नवांश (D9) कुंडली और गुरु-शनि के गोचर को साथ मिलाकर देखते हैं कि किन अवधियों में विवाह के योग सबसे मज़बूत हैं। इससे विवाह की संभावित समय-अवधि का संकेत मिलता है — कोई पक्की तारीख नहीं।',
+    // Owner-approved wording (2026-11-03), per JYOTISHASHA_EDITORIAL_RULES.md.
+    en: 'In Vedic astrology, marriage timing is determined through a combined analysis of the 7th house, its lord, the running Mahadasha–Antardasha periods, the Navamsa (D9) chart and the transits of Jupiter and Saturn. These astrological indicators reveal the favourable time for marriage, the key marriage yogas and the likely period of marriage in your life.',
+    hi: 'वैदिक ज्योतिष में विवाह का समय जानने के लिए सप्तम भाव, सप्तमेश, चल रही महादशा–अंतर्दशा, नवांश (D9) कुंडली और गुरु-शनि के गोचर का संयुक्त विश्लेषण किया जाता है। इन ज्योतिषीय संकेतों के आधार पर विवाह के अनुकूल समय, प्रमुख विवाह योग और जीवन में विवाह की संभावित अवधि का आकलन किया जाता है।',
   },
 
   video: {
@@ -26,6 +29,8 @@ export const marriageTimingLanding: TopicLandingConfig = {
       hi: 'वीडियो चलाएं: शादी का समय जानने के लिए पूरी कुंडली क्यों ज़रूरी है',
     },
     playFeatureName: 'marriage_timing_video_play',
+    // Editorial: shown inside "How Marriage Timing Is Assessed in a Kundli", the section it explains.
+    articleSectionId: 'foundational-indicators',
   },
 
   offer: {
@@ -40,13 +45,13 @@ export const marriageTimingLanding: TopicLandingConfig = {
       en: [
         'Your birth chart with 7th house and 7th lord analysis',
         'Current and upcoming Mahadasha–Antardasha periods',
-        'Periods that support marriage — indications, not a fixed date',
+        'The periods in your chart that most strongly support marriage',
         'Key planetary influences and practical guidance',
       ],
       hi: [
         'सप्तम भाव और सप्तमेश के विश्लेषण के साथ आपकी जन्मकुंडली',
         'वर्तमान और आने वाली महादशा–अंतर्दशा अवधियाँ',
-        'विवाह के लिए सहायक अवधियाँ — संकेत, कोई पक्की तारीख नहीं',
+        'आपकी कुंडली में विवाह के लिए सबसे सहायक अवधियाँ',
         'प्रमुख ग्रह प्रभाव और व्यावहारिक मार्गदर्शन',
       ],
     },

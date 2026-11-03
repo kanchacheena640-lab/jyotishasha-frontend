@@ -1,0 +1,128 @@
+/* components/authority-engine/editorial/editorial.module.css
+ * Opt-in editorial (ivory) theme for topic articles (landing config `theme: 'editorial'`).
+ * Like landing.module.css, it restyles the SHARED section components' existing markup by
+ * descendant selectors scoped to `.editorial`, so their source, copy and DOM stay untouched and
+ * every page without the theme (Financial Astrology, the other Marriage topics) is unaffected.
+ * Tokens = Marriage Hub: ivory #FBF8F2, navy #1B2A4A, body #45516A, muted #5B667D,
+ * line #E8DDC9, terracotta #A8461F, gold #C9A227.
+ */
+
+/* ---- Article body: a 46rem reading column; on large screens the video moves into a
+ * sticky side column beside the content sections (same DOM node, placed by grid). ---- */
+.article {
+  max-width: 46rem;
+}
+@media (min-width: 1024px) {
+  .article {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 46rem) minmax(0, 1fr);
+    column-gap: 3rem;
+    align-items: start;
+  }
+  .article > :global(*) {
+    grid-column: 1;
+  }
+  .article > .aside {
+    grid-column: 2;
+    /* Set by the route: from the video's own section to the last content section before the FAQ. */
+    grid-row: var(--editorial-aside-rows, 1 / span 1);
+    position: sticky;
+    top: 7.5rem;
+    margin-bottom: 0;
+  }
+}
+
+/* ---- Section rhythm + headings (SectionShell) ---- */
+.editorial :global(section.mb-10) {
+  margin-bottom: 3rem;
+}
+.editorial :global(section.mb-10 > h2.text-base) {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1B2A4A;
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  .editorial :global(section.mb-10 > h2.text-base) {
+    font-size: 1.75rem;
+  }
+}
+
+/* ---- Cards (CardsSection) ---- */
+.editorial :global(article.rounded-xl) {
+  background: #fff;
+  border-color: #E8DDC9;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  gap: 0.625rem;
+}
+.editorial :global(article.rounded-xl h3.text-sm) {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #1B2A4A;
+}
+.editorial :global(article.rounded-xl p.text-xs) {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #45516A;
+}
+
+/* ---- Checklists (ChecklistSection): label as a sub-heading, readable body ---- */
+.editorial :global(ul.space-y-3 > li ~ li) {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E8DDC9;
+}
+.editorial :global(ul.space-y-3 > li > span.rounded-full) {
+  margin-top: 0.6rem;
+  background: #C9A227;
+}
+.editorial :global(ul.space-y-3 > li > div > p.text-sm) {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #1B2A4A;
+}
+.editorial :global(ul.space-y-3 > li > div > p.text-xs) {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #45516A;
+  margin-top: 0.5rem;
+}
+
+/* ---- FAQ (StaticFaqSection: native <details>) ---- */
+.editorial :global(details.rounded-xl) {
+  background: #fff;
+  border-color: #E8DDC9;
+}
+.editorial :global(details.rounded-xl > summary) {
+  color: #1B2A4A;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.editorial :global(details.rounded-xl > summary > span[aria-hidden]) {
+  color: #A8461F;
+}
+.editorial :global(details.rounded-xl > summary:focus-visible) {
+  outline: 2px solid #1B2A4A;
+  outline-offset: 2px;
+  border-radius: 0.75rem;
+}
+.editorial :global(details.rounded-xl > div) {
+  border-color: #EFE7D8;
+  color: #45516A;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* ---- Hindi typography: Devanagari needs a taller line ---- */
+.editorial:lang(hi) :global(p),
+.editorial:lang(hi) :global(li),
+.editorial:lang(hi) :global(details.rounded-xl > div) {
+  line-height: 1.85;
+}

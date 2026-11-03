@@ -13,7 +13,12 @@ import {
 import {
   generateAuthorityTopicMetadata,
   buildAuthorityBreadcrumbSchema,
+  authorityHomeUrl,
 } from '@/lib/authority-engine/seo'
+import type { AnyTopicLandingConfig, TopicLandingConfig } from '@/lib/authority-engine/landing-types'
+import {
+  EditorialLead, EditorialRelatedGuides, EditorialVideo,
+} from '@/components/authority-engine/editorial/EditorialArticle'
 import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDetailRenderer'
 import TopicLandingLead from '@/components/authority-engine/landing/TopicLandingLead'
 import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
@@ -27,6 +32,27 @@ import { buildMarriageArticleSchema } from '@/lib/domains/marriage-astrology/art
 const DOMAIN_SLUG = 'marriage-astrology'
 
 export const revalidate = 86400
+
+/** The editorial template needs a report-led landing (direct answer + offer). */
+function editorialLanding(landing: AnyTopicLandingConfig | undefined): TopicLandingConfig | null {
+  return landing?.theme === 'editorial' && landing.offer ? (landing as TopicLandingConfig) : null
+}
+
+/**
+ * Editorial side-column rows for the video: from its own section to the last article-column item
+ * before the FAQ. Article-column items = every section plus any inline tool rendered after one.
+ */
+function editorialVideoRows(sections: { id: string; layout: string }[], videoSectionId: string, inlineToolSectionId?: string): string {
+  let row = 0
+  let startRow = 1
+  for (const s of sections) {
+    if (s.layout === 'faq') break
+    row += 1
+    if (s.id === videoSectionId) startRow = row
+    if (s.id === inlineToolSectionId) row += 1
+  }
+  return `${startRow} / span ${Math.max(1, row - startRow + 1)}`
+}
 
 export async function generateStaticParams() {
   return getAuthorityStaticParams(getAuthorityDomain(DOMAIN_SLUG))
@@ -55,7 +81,9 @@ export default function MarriageAstrologyTopic({
 
   if (!topic) notFound()
 
-  const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, topic!, locale)
+  // Home crumb = the final URL ('/hi/' 308-redirects to '/hi'); the visible breadcrumb uses the same.
+  const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, topic!, locale, authorityHomeUrl(locale))
+  const breadcrumbHomeHref = locale === 'hi' ? '/hi' : '/'
   // MC-07: shared Article builder + marriage-scoped integrity (no empty dates, canonical Organization author).
   const articleSchema    = buildMarriageArticleSchema(domain, topic!, locale)
   // MC-06: FAQPage built from the same FAQ items the page renders (null when a topic has no FAQ).
@@ -75,6 +103,9 @@ export default function MarriageAstrologyTopic({
     />
   )
 
+  // Opt-in editorial article template (docs/seo/JYOTISHASHA_ARTICLE_STANDARD.md); all other topics as before.
+  const editorial = editorialLanding(landing)
+
   return (
     <>
       <script
@@ -91,10 +122,41 @@ export default function MarriageAstrologyTopic({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
+      {editorial ? (
+        <AuthorityDetailRenderer
+          domain={domain}
+          topic={topic!}
+          locale={locale}
+          theme="editorial"
+          breadcrumbHomeHref={breadcrumbHomeHref}
+          ssrFaq={editorial.ssrFaq}
+          lead={<EditorialLead config={editorial} topic={topic!} locale={locale} />}
+          related={<EditorialRelatedGuides config={editorial} domain={domain} topic={topic!} locale={locale} />}
+          {...(editorial.inlineTool && {
+            afterSection: {
+              sectionId: editorial.inlineTool.afterSectionId,
+              node: <LandingInlineTool tool={editorial.inlineTool} locale={locale} />,
+            },
+          })}
+          {...(editorial.video?.articleSectionId && {
+            afterSections: [{
+              sectionId: editorial.video.articleSectionId,
+              node: (
+                <EditorialVideo
+                  video={editorial.video}
+                  locale={locale}
+                  gridRows={editorialVideoRows(topic!.sections, editorial.video.articleSectionId, editorial.inlineTool?.afterSectionId)}
+                />
+              ),
+            }],
+          })}
+        />
+      ) : (
       <AuthorityDetailRenderer
         domain={domain}
         topic={topic!}
         locale={locale}
+        breadcrumbHomeHref={breadcrumbHomeHref}
         // MC-05: every Marriage topic renders FAQ answers and accordion bodies in server HTML
         // (native <details>, collapsed by default). A landing config can still set its own ssrFaq.
         ssrFaq={landing?.ssrFaq ?? true}
@@ -121,6 +183,7 @@ export default function MarriageAstrologyTopic({
           }),
         })}
       />
+      )}
     </>
   )
 }

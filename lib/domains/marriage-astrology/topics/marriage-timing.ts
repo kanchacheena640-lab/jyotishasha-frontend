@@ -142,10 +142,10 @@ export const marriageTiming: DomainTopic = {
         items: [
           {
             id:       'window-not-date',
-            label:    'A Likely Window, Not a Fixed Date',
-            label_hi: 'संभावित अवधि, कोई तय तारीख नहीं',
-            body:     'In the Sidereal (Lahiri) Vedic tradition, marriage is read as an event that manifests when the relevant parts of the birth chart are activated — through houses (Bhāvas), Dasha periods and transits, rather than chance. What this analysis produces is a period in which marriage is strongly supported, not a guaranteed date. If the indicated window is later than hoped, it is understood as a requirement for maturity — not a denial of partnership.',
-            body_hi:  'सिद्धांत (लाहिड़ी) वैदिक परंपरा में विवाह को ऐसी घटना माना जाता है जो जन्मकुंडली के संबंधित भागों — भाव, दशा और गोचर — के सक्रिय होने पर घटित होती है, संयोग से नहीं। इस विश्लेषण से वह अवधि पता चलती है जिसमें विवाह के योग मज़बूत हों, कोई पक्की तारीख नहीं। अगर संकेतित अवधि अपेक्षा से देर की हो, तो उसे परिपक्वता की आवश्यकता समझा जाता है — विवाह न होना नहीं।',
+            label:    'The Most Supportive Marriage Window',
+            label_hi: 'विवाह की सबसे अनुकूल अवधि',
+            body:     'In the Sidereal (Lahiri) Vedic tradition, marriage is read as an event that manifests when the relevant parts of the birth chart are activated — through houses (Bhāvas), Dasha periods and transits, rather than chance. This analysis identifies the period in which marriage is most strongly supported. If the indicated window falls later than hoped, it is read as a phase of growing maturity that prepares the ground for partnership.',
+            body_hi:  'सिद्धांत (लाहिड़ी) वैदिक परंपरा में विवाह को ऐसी घटना माना जाता है जो जन्मकुंडली के संबंधित भागों — भाव, दशा और गोचर — के सक्रिय होने पर घटित होती है, संयोग से नहीं। इस विश्लेषण से वह अवधि पहचानी जाती है जिसमें विवाह के योग सबसे मज़बूत होते हैं। अगर संकेतित अवधि अपेक्षा से देर की हो, तो उसे परिपक्वता के ऐसे चरण के रूप में देखा जाता है जो साझेदारी की नींव तैयार करता है।',
           },
           {
             id:       'guidance-why-differs',

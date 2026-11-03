@@ -27,6 +27,11 @@ export interface TopicLandingVideo {
    * so the video column does not push the CTA down. Phones and the markup order are unchanged.
    */
   desktopCtaFirst?: boolean
+  /**
+   * Editorial theme only: render the video inside the article, right after the content section
+   * with this id, instead of inside the report card. Ignored by the default (dark) layout.
+   */
+  articleSectionId?: string
 }
 
 export interface TopicLandingOffer {
@@ -134,6 +139,12 @@ export interface TopicLandingPrimaryAction {
 
 /** Fields shared by every landing overlay. */
 interface TopicLandingBase {
+  /**
+   * Opt-in ivory "editorial" article template (docs/seo/JYOTISHASHA_ARTICLE_STANDARD.md):
+   * breadcrumb + H1 + direct answer -> free tool -> compact report -> sections (video in context)
+   * -> FAQ -> related guides. Absent = the default dark layout, unchanged.
+   */
+  theme?: 'editorial'
   directAnswerLabel: LocalizedString
   directAnswer: LocalizedString
   /** Optional: without it the report card renders alone (no video slot, no play tracking). */

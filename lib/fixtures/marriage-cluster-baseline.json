@@ -494,7 +494,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -646,24 +646,23 @@
           "Marriage Timing in Vedic Astrology: When Will I Get Married?"
         ],
         "h2": [
+          "Find Your Marriage Window",
           "Know Your Marriage Timing",
           "How Marriage Timing Is Assessed in a Kundli",
           "Mahadasha and Antardasha: The Timing Window",
           "Transits and the Convergence Rule",
           "How Astrologers Combine the Indicators — and Why Predictions Differ",
-          "Early or Delayed Marriage?",
           "Frequently Asked Questions",
-          "Related Topics"
+          "Related Marriage Guides"
         ],
         "h3": [
           "7th House and 7th Lord — The Primary Timekeeper",
           "Venus and Jupiter — The Essential Karakas",
           "Navamsa (D9) — The Validation Layer",
-          "Find Your Marriage Window",
-          "Get Your Marriage Report",
-          "Love Marriage in Vedic Astrology: Will I Have a Love Marriage?",
+          "Early Marriage in Vedic Astrology",
           "Delayed Marriage in Vedic Astrology: Why Is My Marriage Getting Delayed?",
-          "Early Marriage in Vedic Astrology"
+          "Love Marriage in Vedic Astrology: Will I Have a Love Marriage?",
+          "Marriage Prediction in Vedic Astrology"
         ]
       },
       "faq": {
@@ -916,7 +915,7 @@
         ]
       },
       "server": {
-        "wordCount": 1743,
+        "wordCount": 1683,
         "detailsElements": 11
       },
       "facts": {
@@ -924,7 +923,7 @@
         "faqPageSchema": true,
         "faqAnswersInServer": "11/11",
         "collapsedBodiesInServer": "11/11",
-        "reportDestinationsRepeated": true
+        "reportDestinationsRepeated": false
       }
     },
     "marriage-timing|hi": {
@@ -960,24 +959,23 @@
           "वैदिक ज्योतिष में विवाह का समय: मेरी शादी कब होगी?"
         ],
         "h2": [
+          "अपने विवाह का समय जानें",
           "अपनी शादी का समय जानें",
           "कुंडली में विवाह का समय कैसे देखा जाता है",
           "महादशा और अंतर्दशा: विवाह की समय-अवधि",
           "गोचर और अभिसरण नियम",
           "संकेतों को साथ कैसे देखा जाता है — और भविष्यवाणियाँ अलग क्यों होती हैं",
-          "जल्दी या देर से विवाह?",
           "अक्सर पूछे जाने वाले प्रश्न",
-          "संबंधित विषय"
+          "विवाह से जुड़ी अन्य मार्गदर्शिकाएँ"
         ],
         "h3": [
           "सप्तम भाव और सप्तमेश — प्राथमिक समयपाल",
           "शुक्र और गुरु — आवश्यक कारक",
           "नवांश (D9) — सत्यापन परत",
-          "अपने विवाह का समय जानें",
-          "अपनी विवाह रिपोर्ट प्राप्त करें",
-          "वैदिक ज्योतिष में प्रेम विवाह: क्या मेरा प्रेम विवाह होगा?",
+          "वैदिक ज्योतिष में प्रारंभिक विवाह",
           "वैदिक ज्योतिष में शादी में देरी: मेरी शादी में देरी क्यों हो रही है?",
-          "वैदिक ज्योतिष में प्रारंभिक विवाह"
+          "वैदिक ज्योतिष में प्रेम विवाह: क्या मेरा प्रेम विवाह होगा?",
+          "वैदिक ज्योतिष में विवाह भविष्यवाणी"
         ]
       },
       "faq": {
@@ -1098,7 +1096,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -1230,7 +1228,7 @@
         ]
       },
       "server": {
-        "wordCount": 1639,
+        "wordCount": 1583,
         "detailsElements": 11
       },
       "facts": {
@@ -1238,7 +1236,7 @@
         "faqPageSchema": true,
         "faqAnswersInServer": "11/11",
         "collapsedBodiesInServer": "11/11",
-        "reportDestinationsRepeated": true
+        "reportDestinationsRepeated": false
       }
     },
     "love-marriage|en": {
@@ -1806,7 +1804,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -2534,7 +2532,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -3267,7 +3265,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -3936,7 +3934,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -4662,7 +4660,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -5332,7 +5330,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -6037,7 +6035,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -6716,7 +6714,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -7399,7 +7397,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",
@@ -8193,7 +8191,7 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "होम",
-                "item": "https://www.jyotishasha.com/hi/"
+                "item": "https://www.jyotishasha.com/hi"
               },
               {
                 "@type": "ListItem",

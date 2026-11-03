@@ -11,6 +11,7 @@ import CtaBlock from './CtaBlock'
 import RelatedTopics from './RelatedTopics'
 import CrossDomainLinks from './CrossDomainLinks'
 import landingStyles from './landing/landing.module.css'
+import editorialStyles from './editorial/editorial.module.css'
 
 /** Optional per-topic landing slots. All absent = the original layout, unchanged. */
 interface LandingSlots {
@@ -29,33 +30,65 @@ interface LandingSlots {
   afterSection?: { sectionId: string; node: ReactNode }
   /** Optional extra nodes after content sections (e.g. an inline video), rendered after `afterSection`. */
   afterSections?: { sectionId: string; node: ReactNode }[]
+  /**
+   * Opt-in ivory article template: hub-width container, the `lead` slot carries the answer and the
+   * page's CTAs (the topic's CtaBlocks are not rendered), the article body sits in a reading column
+   * and the related links come from `related`.
+   */
+  theme?: 'editorial'
+  /** Editorial: one related-guides block replacing RelatedTopics + CrossDomainLinks. */
+  related?: ReactNode
+  /** Breadcrumb Home override (the final, non-redirecting URL); default unchanged. */
+  breadcrumbHomeHref?: string
 }
 
 export default function AuthorityDetailRenderer({
   domain, topic, locale, lead, beforeFaq, ssrFaq, longForm, afterSection, afterSections,
+  theme, related: relatedSlot, breadcrumbHomeHref,
 }: AuthorityDetailProps & LandingSlots) {
   const related = getRelatedTopics(domain, topic)
   const hasFaq = topic.sections.some(section => section.layout === 'faq')
 
+  const sections = topic.sections.map(section => (
+    <Fragment key={section.id}>
+      {section.layout === 'faq' && beforeFaq}
+      {ssrFaq && (section.layout === 'faq' || section.layout === 'accordion')
+        ? <StaticFaqSection section={section} locale={locale} />
+        : <SectionRouter section={section} locale={locale} />}
+      {afterSection?.sectionId === section.id && afterSection.node}
+      {afterSections?.map((slot, i) =>
+        slot.sectionId === section.id ? <Fragment key={`after-${i}`}>{slot.node}</Fragment> : null
+      )}
+    </Fragment>
+  ))
+
+  if (theme === 'editorial') {
+    return (
+      // lang marks the Hindi content's language (the shared root <html> is always "en").
+      <main lang={locale === 'hi' ? 'hi' : undefined} className="min-h-screen bg-[#FBF8F2] text-[#45516A]">
+        {/* Hub-width container; hero and actions use it fully, the article body keeps a reading column. */}
+        <div className={`mx-auto max-w-6xl px-4 pb-16 pt-4 md:px-6 md:pt-8 ${editorialStyles.editorial}`}>
+          <AuthorityBreadcrumb domain={domain} topic={topic} locale={locale} homeHref={breadcrumbHomeHref} variant="editorial" />
+          <TopicHero domain={domain} topic={topic} locale={locale} variant="editorial" />
+          {lead}
+          <div className={editorialStyles.article}>
+            {sections}
+            {!hasFaq && beforeFaq}
+          </div>
+          {relatedSlot}
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main className={`min-h-screen bg-[#0b1120] text-white ${lead ? 'pt-2' : 'pt-12'}`}>
       <div className={`max-w-4xl mx-auto px-4 md:px-6 ${lead ? `pt-4 pb-10 md:py-10 ${landingStyles.landing}${longForm ? ` ${landingStyles.longform}` : ''}` : 'py-10'}`}>
-        <AuthorityBreadcrumb domain={domain} topic={topic} locale={locale} />
+        <AuthorityBreadcrumb domain={domain} topic={topic} locale={locale} homeHref={breadcrumbHomeHref} />
         <TopicHero domain={domain} topic={topic} locale={locale} />
         {lead}
 
-        {topic.sections.map(section => (
-          <Fragment key={section.id}>
-            {section.layout === 'faq' && beforeFaq}
-            {ssrFaq && (section.layout === 'faq' || section.layout === 'accordion')
-              ? <StaticFaqSection section={section} locale={locale} />
-              : <SectionRouter section={section} locale={locale} />}
-            {afterSection?.sectionId === section.id && afterSection.node}
-            {afterSections?.map((slot, i) =>
-              slot.sectionId === section.id ? <Fragment key={`after-${i}`}>{slot.node}</Fragment> : null
-            )}
-          </Fragment>
-        ))}
+        {sections}
         {!hasFaq && beforeFaq}
 
         {topic.ctas.map((cta, i) => (

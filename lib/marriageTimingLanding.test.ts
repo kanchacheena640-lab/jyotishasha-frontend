@@ -80,7 +80,12 @@ for (const loc of ["en", "hi"] as const) {
 }
 const offerText = [offer.intro.en, offer.heading.en, offer.ctaLabel.en, ...offer.bullets.en].join(" ");
 check("offer copy never claims a guaranteed / exact / confirmed date", !/guarantee|exact date|confirmed date|will marry on/i.test(offerText));
-check("direct answer frames a window, not a guaranteed date", /not a guaranteed date/.test(marriageTimingLanding.directAnswer.en));
+// JYOTISHASHA_EDITORIAL_RULES.md: the answer states what the chart analysis shows -- no guarantee or
+// certainty language, and no unsolicited limitation refrain.
+check("direct answer frames an assessment of the likely period, with no guarantee / certainty language",
+  /likely period/.test(marriageTimingLanding.directAnswer.en) && /संभावित अवधि/.test(marriageTimingLanding.directAnswer.hi) &&
+  !/guarantee|will definitely|exact date|100%/i.test(marriageTimingLanding.directAnswer.en) &&
+  !/गारंटी|पक्का होगा|निश्चित रूप से|पक्की तारीख/.test(marriageTimingLanding.directAnswer.hi));
 
 console.log("\n=== E. Scope + indexability protection ===");
 check("landing opt-in is limited to the reviewed topics (marriage-timing, love-marriage, arranged-marriage, delayed-marriage, spouse-nature, compatibility, married-life, intercaste-marriage, early-marriage, second-marriage, divorce-possibility, marriage-prediction)", JSON.stringify(Object.keys(marriageTopicLandings)) === '["marriage-timing","love-marriage","arranged-marriage","delayed-marriage","spouse-nature","compatibility","married-life","intercaste-marriage","early-marriage","second-marriage","divorce-possibility","marriage-prediction"]');

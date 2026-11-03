@@ -109,8 +109,13 @@ check("spouse-nature: Spouse Lagna tool stays in the article after the intro", m
 const renderer = read("components/authority-engine/AuthorityDetailRenderer.tsx");
 const page = read("app/[locale]/marriage-astrology/[slug]/page.tsx");
 const leadSrc = read("components/authority-engine/landing/TopicLandingLead.tsx");
+// The section list is built once (`const sections = topic.sections.map(`) and rendered as `{sections}`
+// by both the default and the editorial layout; in each, `{lead}` must come first.
 check("lead slot (direct answer + report/tool unit + after-lead Short) renders before the article sections",
-  renderer.indexOf("{lead}") > 0 && renderer.indexOf("{lead}") < renderer.indexOf("topic.sections.map("));
+  /const sections = topic\.sections\.map\(/.test(renderer) &&
+  (renderer.match(/\{lead\}/g) || []).length >= 1 &&
+  renderer.split("{lead}").slice(1).every((after) => after.indexOf("{sections}") >= 0) &&
+  renderer.split("{sections}").slice(0, -1).every((before) => before.lastIndexOf("{lead}") > before.lastIndexOf("return (")));
 check("page renders the after-lead Short card inside the lead slot, right after TopicLandingLead",
   /<TopicLandingLead config=\{landing\} locale=\{locale\} \/>\s*\{shortCard && landing\.inlineVideo\?\.placement === 'after-lead' && shortCard\}/.test(page));
 check("page builds the Short card from inlineVideo with MarriageYouTubeShort",
