@@ -33,8 +33,8 @@ export const arrangedMarriage: DomainTopic = {
   hero: {
     headline:    'Arranged Marriage in Vedic Astrology',
     headline_hi: 'वैदिक ज्योतिष में व्यवस्थित विवाह',
-    subtext:     'How a kundli is read for arranged-marriage indications — the 7th, 2nd, 9th and 11th houses, Jupiter and Venus, the Navamsa and Dasha — and what kind of answer it can realistically give.',
-    subtext_hi:  'कुंडली में अरेंज मैरिज (व्यवस्थित विवाह) के योग कैसे देखे जाते हैं — सप्तम, द्वितीय, नवम और एकादश भाव, गुरु और शुक्र, नवांश और दशा — और इससे किस तरह का उत्तर मिल सकता है।',
+    subtext:     'How a kundli is read for arranged-marriage indications — the 7th, 2nd, 9th and 11th houses, Jupiter and Venus, the Navamsa and Dasha — and what these factors reveal about your path to marriage.',
+    subtext_hi:  'कुंडली में अरेंज मैरिज (व्यवस्थित विवाह) के योग कैसे देखे जाते हैं — सप्तम, द्वितीय, नवम और एकादश भाव, गुरु और शुक्र, नवांश और दशा — और ये कारक आपके विवाह के मार्ग के बारे में क्या बताते हैं।',
   },
 
   taxonomy: {
@@ -80,10 +80,10 @@ export const arrangedMarriage: DomainTopic = {
           {
             id:       'no-single-placement',
             icon:     '🧩',
-            label:    'No Single Placement Decides It',
-            label_hi: 'कोई एक ग्रह-स्थिति निर्णय नहीं करती',
-            body:     'There is no one "arranged marriage yog" that settles the question. Astrologers look for several of the indications below appearing together, then weigh them against any romance-leaning factors in the same chart. One placement on its own only adds to the picture.',
-            body_hi:  'कोई एक "अरेंज मैरिज योग" ऐसा नहीं है जो इस प्रश्न का अंतिम उत्तर दे। ज्योतिषी देखते हैं कि नीचे दिए गए कई संकेत एक साथ मौजूद हैं या नहीं, और फिर उन्हें उसी कुंडली के प्रेम-संबंधी संकेतों के साथ तौलते हैं। अकेली कोई ग्रह-स्थिति केवल पूरे चित्र में एक कड़ी जोड़ती है।',
+            label:    'Several Indications Read Together',
+            label_hi: 'कई संकेतों को साथ मिलाकर पढ़ना',
+            body:     'Arranged-marriage indications are read as a pattern. Astrologers look for several of the indications below appearing together, then weigh them against any romance-leaning factors in the same chart. Each placement adds one piece to the overall picture.',
+            body_hi:  'अरेंज मैरिज के संकेत एक समग्र पैटर्न के रूप में पढ़े जाते हैं। ज्योतिषी देखते हैं कि नीचे दिए गए कई संकेत एक साथ मौजूद हैं या नहीं, और फिर उन्हें उसी कुंडली के प्रेम-संबंधी संकेतों के साथ तौलते हैं। हर ग्रह-स्थिति पूरे चित्र में एक कड़ी जोड़ती है।',
           },
           {
             id:       'seventh-lord-family-links',
@@ -335,10 +335,10 @@ export const arrangedMarriage: DomainTopic = {
           },
           {
             id:       'dasha-not-a-date',
-            label:    'Activation is not a marriage date',
-            label_hi: 'सक्रियता का अर्थ विवाह की तारीख नहीं',
-            body:     'An active period suggests that marriage-related indications are relevant now. It does not decide whether the marriage will be arranged, and it does not fix when it will happen. Estimating timing combines Dasha with the Navamsa and the transits of Jupiter and Saturn — that method is explained in the Marriage Timing guide linked below.',
-            body_hi:  'सक्रिय अवधि यह संकेत देती है कि विवाह से जुड़े योग अभी प्रासंगिक हैं। यह न तो तय करती है कि विवाह अरेंज होगा, न ही यह कि विवाह कब होगा। समय का अनुमान दशा, नवांश और गुरु-शनि के गोचर को मिलाकर लगाया जाता है — यह विधि नीचे दी गई विवाह के समय की मार्गदर्शिका में समझाई गई है।',
+            label:    'Activation brings marriage themes forward',
+            label_hi: 'सक्रियता विवाह के विषयों को आगे लाती है',
+            body:     'An active period shows that marriage-related indications are relevant now. The birth chart itself shows how strongly an arranged path is supported, while timing is estimated by combining Dasha with the Navamsa and the transits of Jupiter and Saturn — that method is explained in the Marriage Timing guide linked below.',
+            body_hi:  'सक्रिय अवधि यह संकेत देती है कि विवाह से जुड़े योग अभी प्रासंगिक हैं। अरेंज मार्ग को कितना समर्थन है, यह जन्मकुंडली स्वयं दिखाती है, और समय का अनुमान दशा, नवांश और गुरु-शनि के गोचर को मिलाकर लगाया जाता है — यह विधि नीचे दी गई विवाह के समय की मार्गदर्शिका में समझाई गई है।',
           },
         ],
       },
@@ -519,8 +519,9 @@ export const arrangedMarriage: DomainTopic = {
   authority: {
     reviewStatus:   'not-reviewed',
     contentVersion: 2,
-    // AM-2 restructure (direct answer, arranged-marriage indications, SSR houses/planets + FAQ).
-    lastUpdated:    '2026-10-05',
+    // AM-2 restructure (direct answer, arranged-marriage indications, SSR houses/planets + FAQ);
+    // Editorial V1 (2026-11-04): positive rewording per JYOTISHASHA_EDITORIAL_RULES.md.
+    lastUpdated:    '2026-11-04',
   },
   publishing: {
     isIndexable:     false,

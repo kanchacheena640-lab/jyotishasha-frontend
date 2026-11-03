@@ -161,8 +161,8 @@ export const loveMarriageLanding: TopicLandingConfig = {
 // Report, framed only as a personalised marriage reading (no love-vs-arranged
 // verdict -- the sample does not contain one). No approved video yet.
 export const arrangedMarriageLanding: TopicLandingConfig = {
-  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
-  // video beside the report on desktop with the CTA kept near its original position.
+  // Editorial article template (as Marriage Timing; EN + HI share this config).
+  theme: 'editorial',
   video: {
     youtubeId: '5-7nLtnnpfs',
     posterSrc: '/media/arranged-marriage-short-poster.webp',
@@ -171,13 +171,14 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
     caption: { en: 'Watch: Arranged Marriage Yogas in Your Kundli (in Hindi)', hi: 'देखें: कुंडली में अरेंज मैरिज के योग' },
     playLabel: { en: 'Play video: Arranged Marriage Yogas in Your Kundli', hi: 'वीडियो चलाएं: कुंडली में अरेंज मैरिज के योग' },
     playFeatureName: 'arranged_marriage_video_play',
-    desktopCtaFirst: true,
+    // Editorial: shown inside "Arranged-Marriage Indications in a Kundli", the section it explains.
+    articleSectionId: 'arranged-indications',
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'No single placement decides whether a marriage will be arranged. An astrologer reads a combination: the 7th house of marriage and its lord, and how they connect with the 2nd house (family), the 9th house (tradition and elders) and the 11th house (wider social and community network); the influence of Jupiter and Venus; the Navamsa (D9) as supporting evidence; and the running Dasha, which can activate these factors without deciding the outcome. When the family-related factors are prominent, the chart tends to support a family-assisted path — and many charts show both arranged and love indications. Personal choice, family circumstances and real-world factors matter too.',
-    hi: 'कोई एक ग्रह-स्थिति यह तय नहीं करती कि विवाह अरेंज होगा। ज्योतिषी कई कारकों को मिलाकर देखते हैं: विवाह का सप्तम भाव और सप्तमेश, और इनका द्वितीय भाव (परिवार), नवम भाव (परंपरा और बड़े-बुज़ुर्ग) तथा एकादश भाव (व्यापक सामाजिक दायरा) से संबंध; गुरु और शुक्र का प्रभाव; सहायक प्रमाण के रूप में नवांश (D9); और चल रही दशा, जो इन कारकों को सक्रिय कर सकती है पर परिणाम तय नहीं करती। जब परिवार से जुड़े कारक प्रमुख हों, तो कुंडली परिवार की सहायता वाले मार्ग (व्यवस्थित विवाह) का समर्थन करती है — और कई कुंडलियों में अरेंज और लव दोनों के संकेत होते हैं। आपकी अपनी पसंद, पारिवारिक परिस्थितियाँ और जीवन की वास्तविकताएँ भी मायने रखती हैं।',
+    en: 'In Vedic astrology, arranged-marriage indications are read from a combination of factors: the 7th house of marriage and its lord, and how they connect with the 2nd house (family), the 9th house (tradition and elders) and the 11th house (wider social and community network); the influence of Jupiter and Venus; the Navamsa (D9) as supporting evidence; and the running Dasha, which brings these factors into focus. When the family-related factors are prominent, the chart points to a family-assisted path — and many charts show both arranged and love indications. Personal choice, family circumstances and real-world factors together shape the path to marriage.',
+    hi: 'वैदिक ज्योतिष में अरेंज मैरिज के योग कई कारकों को मिलाकर देखे जाते हैं: विवाह का सप्तम भाव और सप्तमेश, और इनका द्वितीय भाव (परिवार), नवम भाव (परंपरा और बड़े-बुज़ुर्ग) तथा एकादश भाव (व्यापक सामाजिक दायरा) से संबंध; गुरु और शुक्र का प्रभाव; सहायक प्रमाण के रूप में नवांश (D9); और चल रही दशा, जो इन कारकों को सक्रिय करती है। जब परिवार से जुड़े कारक प्रमुख हों, तो कुंडली परिवार की सहायता वाले मार्ग (व्यवस्थित विवाह) की ओर संकेत करती है — और कई कुंडलियों में अरेंज और लव दोनों के संकेत होते हैं। आपकी अपनी पसंद, पारिवारिक परिस्थितियाँ और जीवन की वास्तविकताएँ मिलकर विवाह का मार्ग तय करती हैं।',
   },
 
   offer: {
@@ -185,8 +186,8 @@ export const arrangedMarriageLanding: TopicLandingConfig = {
     eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
     heading: { en: 'Personalised Marriage Reading', hi: 'व्यक्तिगत विवाह विश्लेषण' },
     intro: {
-      en: 'This page explains arranged-marriage indications in general. The report reads the core marriage factors in your own chart — it does not label your marriage as love or arranged.',
-      hi: 'यह पृष्ठ अरेंज मैरिज के संकेतों को सामान्य रूप से समझाता है। रिपोर्ट आपकी अपनी कुंडली के मुख्य विवाह-कारकों का विश्लेषण करती है — यह आपके विवाह को लव या अरेंज घोषित नहीं करती।',
+      en: 'This page explains arranged-marriage indications in general. Your report reads the core marriage factors in your own chart and focuses on your overall marriage outlook, whichever path your marriage takes.',
+      hi: 'यह पृष्ठ अरेंज मैरिज के संकेतों को सामान्य रूप से समझाता है। आपकी रिपोर्ट आपकी अपनी कुंडली के मुख्य विवाह-कारकों का विश्लेषण करती है और आपके विवाह की समग्र संभावनाओं पर केंद्रित है — विवाह का मार्ग चाहे जो भी हो।',
     },
     bullets: {
       en: [

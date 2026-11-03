@@ -51,8 +51,11 @@ const offerEn = [offer.eyebrow.en, offer.heading.en, offer.ctaLabel.en, ...offer
 check("card is framed as a personalised marriage reading", offer.heading.en === "Personalised Marriage Reading");
 check("card never claims an arranged / love-vs-arranged verdict or a guarantee",
   !/arranged|love|verdict|guarantee|find out whether/i.test(offerEn));
-check("card intro states the report does not label the marriage love or arranged",
-  /does not label your marriage as love or arranged/.test(offer.intro.en) && /लव या अरेंज घोषित नहीं करती/.test(offer.intro.hi));
+// Accurate scope, stated positively (JYOTISHASHA_EDITORIAL_RULES.md): an overall marriage outlook for any path.
+check("card intro: general page vs your own chart's core factors, overall outlook whichever path (no verdict claim)",
+  /core marriage factors in your own chart/.test(offer.intro.en) && /overall marriage outlook, whichever path/.test(offer.intro.en) &&
+  /समग्र संभावनाओं/.test(offer.intro.hi) && /चाहे जो भी हो/.test(offer.intro.hi) &&
+  !/will be (love|arranged)|tells you whether|guarantee/i.test(offer.intro.en));
 check("bullets cover only sample-proven sections (7th house/lord, planets, Dasha window, guidance)",
   offer.bullets.en.length === 4 && offer.bullets.hi.length === 4 &&
   /7th house and its lord/.test(offer.bullets.en[0]) && /planetary influences/.test(offer.bullets.en[1]) &&
@@ -68,10 +71,12 @@ for (const loc of ["en", "hi"] as const) {
 }
 
 console.log("\n=== C. Video ===");
-// Video placement stage B: the approved Short sits in the top report card; no inline copy in the article.
-check("lead video is the approved 5-7nLtnnpfs (play event, Hindi label, desktop CTA kept high) + sample-hook lead",
+// Editorial V1: the approved Short moves from the report card into the Indications section it explains.
+check("editorial template on; video is the approved 5-7nLtnnpfs (play event, Hindi label) in the Indications section",
+  arrangedMarriageLanding.theme === "editorial" &&
   arrangedMarriageLanding.video?.youtubeId === "5-7nLtnnpfs" && arrangedMarriageLanding.video.playFeatureName === "arranged_marriage_video_play" &&
-  /\(in Hindi\)$/.test(arrangedMarriageLanding.video.caption.en) && arrangedMarriageLanding.video.desktopCtaFirst === true && !!offer.sampleHookLead);
+  /\(in Hindi\)$/.test(arrangedMarriageLanding.video.caption.en) && arrangedMarriageLanding.video.articleSectionId === "arranged-indications" &&
+  arrangedMarriageLanding.video.desktopCtaFirst === undefined && !!offer.sampleHookLead);
 check("no inline Short (exactly one video on the page)", arrangedMarriageLanding.inlineVideo === undefined);
 
 console.log("\n=== D. SSR accordions: opt-in only ===");
@@ -104,8 +109,8 @@ check("Marriage Timing / Love Marriage topics have no accordion sections (unaffe
 console.log("\n=== E. Copy: direct answer + topic content ===");
 const da = arrangedMarriageLanding.directAnswer.en;
 check("direct answer present EN/HI", da.length > 300 && arrangedMarriageLanding.directAnswer.hi.length > 300);
-check("direct answer: no single placement + 7th/2nd/9th/11th + Jupiter/Venus + Navamsa + Dasha",
-  /No single placement/.test(da) && /7th house/.test(da) && /2nd house/.test(da) && /9th house/.test(da) &&
+check("direct answer: a combination of factors + 7th/2nd/9th/11th + Jupiter/Venus + Navamsa + Dasha",
+  /combination of factors/.test(da) && /7th house/.test(da) && /2nd house/.test(da) && /9th house/.test(da) &&
   /11th house/.test(da) && /Jupiter and Venus/.test(da) && /Navamsa/.test(da) && /Dasha/.test(da));
 check("direct answer: personal choice and family circumstances matter", /Personal choice, family circumstances/.test(da));
 check("direct answer avoids absolute words", !/guarantee|ensure|\bcertain\b|destined|\balways\b/i.test(da));
@@ -124,7 +129,7 @@ check("sections exist in the approved order", positions.every((p) => p > 0) && p
 check("indications section covers 7th-lord family links, Jupiter, Saturn, weak 5th-7th, 10th/Navamsa",
   /7th Lord Linked With the 2nd, 9th or 11th/.test(block("arranged-indications")) && /Jupiter’s Influence on the 7th/.test(block("arranged-indications")) &&
   /Saturn: Structure and Maturity/.test(block("arranged-indications")) && /never proof of an arranged marriage/.test(block("arranged-indications")) &&
-  /10th House and Navamsa/.test(block("arranged-indications")) && /No Single Placement Decides It/.test(block("arranged-indications")));
+  /10th House and Navamsa/.test(block("arranged-indications")) && /Several Indications Read Together/.test(block("arranged-indications")));
 check("Key Houses keeps 2nd, 7th, 9th, 11th first, then 4th and 5th (accordion)",
   /layout:\s*'accordion'/.test(block("key-house-analysis")) &&
   ["2nd-house", "7th-house", "9th-house", "11th-house", "4th-house", "5th-house"].map((id) => block("key-house-analysis").indexOf(`id:       '${id}'`))
@@ -136,7 +141,11 @@ check("Love-or-Arranged section is a single brief comparison that hands off to L
   countItems(block("love-or-arranged")) === 1 && /Love Marriage guide linked below/.test(block("love-or-arranged")) &&
   !/Gandharva|Venus-Rahu|Venus-Mars/.test(block("love-or-arranged")));
 check("Dasha section is activation, not timing, and hands off to Marriage Timing",
-  /Activation is not a marriage date/.test(block("dasha-activation")) && /Marriage Timing guide linked below/.test(block("dasha-activation")));
+  /Activation brings marriage themes forward/.test(block("dasha-activation")) && /Marriage Timing guide linked below/.test(block("dasha-activation")));
+// JYOTISHASHA_EDITORIAL_RULES.md §2.3: no unsolicited limitation refrains in the hero, answer, card or Dasha copy.
+check("no unsolicited limitation refrains (hero subtext, direct answer, card intro, Dasha, indications lead card)",
+  !/realistically give|without deciding the outcome|does not label|not a marriage date|No Single Placement/.test(topic + da + offer.intro.en) &&
+  !/किस तरह का उत्तर मिल सकता|परिणाम तय नहीं करती|घोषित नहीं करती|विवाह की तारीख नहीं|निर्णय नहीं करती/.test(topic + arrangedMarriageLanding.directAnswer.hi + offer.intro.hi));
 check("matching hands off to Compatibility", /Compatibility guide linked below/.test(block("family-introductions-matching")));
 check("Darakaraka hands off to Spouse Nature", /Spouse Nature guide/.test(block("navamsa-supporting")));
 const faqCount = countItems(block("faq-section"));

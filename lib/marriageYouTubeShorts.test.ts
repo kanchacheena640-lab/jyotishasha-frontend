@@ -6,7 +6,9 @@
  *   - report-led pages: the report card's own video slot (TopicLandingConfig.video -> TopicLandingLead),
  *     like Marriage Timing -- CTA first on phones, CTA kept near its old desktop position (desktopCtaFirst);
  *   - free-tool pages (no report card): the standalone Short card right after the top tool card
- *     (inlineVideo placement 'after-lead' -> MarriageYouTubeShort).
+ *     (inlineVideo placement 'after-lead' -> MarriageYouTubeShort);
+ *   - editorial pages (theme 'editorial', e.g. Arranged Marriage): the same lead video, rendered
+ *     inside the article after the section it explains (video.articleSectionId -> EditorialVideo).
  *
  * Same standalone check()/pass-fail-counter convention as every other
  * lib/*.test.ts file in this repo (no test runner installed).
@@ -71,7 +73,8 @@ function shortOf(slug: string): Short | null {
     captionEn: `${iv.heading.en} ${iv.description.en}`, captionHi: iv.heading.hi, playLabel: iv.playLabel, playFeatureName: iv.playFeatureName };
   return null;
 }
-const REPORT_LED = ["delayed-marriage", "arranged-marriage", "love-marriage", "spouse-nature", "married-life"];
+const REPORT_LED = ["delayed-marriage", "love-marriage", "spouse-nature", "married-life"];
+const EDITORIAL = ["arranged-marriage"];
 const TOOL_LED = ["compatibility", "intercaste-marriage"];
 
 // ===========================================================================
@@ -99,6 +102,13 @@ for (const slug of REPORT_LED) {
   const c = marriageTopicLandings[slug];
   check(`${slug}: Short in the top report card's video slot, CTA kept high on desktop (desktopCtaFirst)`,
     !!c.offer && c.video?.youtubeId === APPROVED[slug] && c.video.desktopCtaFirst === true && c.inlineVideo === undefined);
+}
+for (const slug of EDITORIAL) {
+  const c = marriageTopicLandings[slug];
+  check(`${slug}: editorial page -> Short inside the article after an existing content section (no desktopCtaFirst)`,
+    c.theme === "editorial" && !!c.offer && c.video?.youtubeId === APPROVED[slug] && c.inlineVideo === undefined &&
+    c.video.desktopCtaFirst === undefined && !!c.video.articleSectionId &&
+    read(`lib/domains/marriage-astrology/topics/${slug}.ts`).includes(`id:       '${c.video.articleSectionId}'`));
 }
 for (const slug of TOOL_LED) {
   const c = marriageTopicLandings[slug];
@@ -190,7 +200,7 @@ console.log("5c. Sample hook: report-led pages only, verified sample PDFs");
 // ===========================================================================
 for (const [slug] of withShort) {
   const c = marriageTopicLandings[slug];
-  if (REPORT_LED.includes(slug)) {
+  if (REPORT_LED.includes(slug) || EDITORIAL.includes(slug)) {
     const files = ["en", "hi"].map((l) => path.join(ROOT, "public", "report-samples", `${c.offer?.reportSlug}_${l}.pdf`));
     check(`${slug}: sample hook under the lead video for ${c.offer?.reportSlug}, EN+HI sample PDFs exist`,
       !!c.offer?.sampleHookLead && files.every((f) => fs.existsSync(f)));

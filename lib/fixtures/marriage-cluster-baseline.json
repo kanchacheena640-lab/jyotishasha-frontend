@@ -297,7 +297,7 @@
         ]
       },
       "server": {
-        "wordCount": 2383,
+        "wordCount": 2384,
         "detailsElements": 8
       },
       "facts": {
@@ -600,7 +600,7 @@
         ]
       },
       "server": {
-        "wordCount": 2389,
+        "wordCount": 2393,
         "detailsElements": 8
       },
       "facts": {
@@ -1958,6 +1958,7 @@
           "Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?"
         ],
         "h2": [
+          "Explore Your Marriage Path",
           "Personalised Marriage Reading",
           "What Arranged Marriage Means in a Birth Chart",
           "Arranged-Marriage Indications in a Kundli",
@@ -1969,19 +1970,21 @@
           "Dasha: Are Arranged-Marriage Indications Active?",
           "Common Misconceptions",
           "Balanced, Optional Remedies",
-          "Related Marriage Questions",
           "Frequently Asked Questions",
-          "Related Topics"
+          "Related Marriage Guides"
         ],
         "h3": [
-          "No Single Placement Decides It",
+          "Several Indications Read Together",
           "7th Lord Linked With the 2nd, 9th or 11th",
           "Jupiter’s Influence on the 7th",
           "Saturn: Structure and Maturity",
           "A Weaker 5th–7th Emphasis",
           "Supporting Factors: 10th House and Navamsa",
-          "Explore Your Marriage Path",
-          "Get a Personalised Marriage Report",
+          "Love Marriage in Vedic Astrology: Will I Have a Love Marriage?",
+          "Marriage Timing in Vedic Astrology: When Will I Get Married?",
+          "Compatibility in Vedic Astrology: Complete Guide",
+          "Spouse Nature in Vedic Astrology: Houses & Planets",
+          "Married Life in Vedic Astrology: A Complete Guide",
           "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
           "Intercaste Marriage in Vedic Astrology: Karmic Analysis",
           "Marriage Prediction in Vedic Astrology"
@@ -2192,7 +2195,7 @@
             "description": "Will I have an arranged marriage? See how Vedic astrology reads arranged-marriage indications in a kundli — the 7th, 2nd, 9th and 11th houses, Jupiter, Venus, Navamsa and Dasha.",
             "url": "https://www.jyotishasha.com/marriage-astrology/arranged-marriage",
             "datePublished": "2026-07-20",
-            "dateModified": "2026-10-05",
+            "dateModified": "2026-11-04",
             "author": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -2277,7 +2280,7 @@
         ]
       },
       "server": {
-        "wordCount": 3819,
+        "wordCount": 3908,
         "detailsElements": 23
       },
       "facts": {
@@ -2285,7 +2288,7 @@
         "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "23/23",
-        "reportDestinationsRepeated": true
+        "reportDestinationsRepeated": false
       }
     },
     "arranged-marriage|hi": {
@@ -2321,6 +2324,7 @@
           "वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?"
         ],
         "h2": [
+          "अपना विवाह मार्ग देखें",
           "व्यक्तिगत विवाह विश्लेषण",
           "कुंडली में अरेंज मैरिज का अर्थ",
           "कुंडली में अरेंज मैरिज के योग और संकेत",
@@ -2332,19 +2336,21 @@
           "दशा: क्या अरेंज मैरिज के योग सक्रिय हैं?",
           "सामान्य भ्रांतियाँ",
           "संतुलित और वैकल्पिक उपाय",
-          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
-          "संबंधित विषय"
+          "विवाह से जुड़ी अन्य मार्गदर्शिकाएँ"
         ],
         "h3": [
-          "कोई एक ग्रह-स्थिति निर्णय नहीं करती",
+          "कई संकेतों को साथ मिलाकर पढ़ना",
           "सप्तमेश का द्वितीय, नवम या एकादश भाव से संबंध",
           "सप्तम भाव पर गुरु का प्रभाव",
           "शनि: व्यवस्था और परिपक्वता",
           "पंचम–सप्तम संबंध का कमज़ोर होना",
           "सहायक कारक: दशम भाव और नवांश",
-          "अपना विवाह मार्ग देखें",
-          "व्यक्तिगत विवाह रिपोर्ट प्राप्त करें",
+          "वैदिक ज्योतिष में प्रेम विवाह: क्या मेरा प्रेम विवाह होगा?",
+          "वैदिक ज्योतिष में विवाह का समय: मेरी शादी कब होगी?",
+          "वैदिक ज्योतिष में अनुकूलता",
+          "वैदिक ज्योतिष में जीवनसाथी का स्वभाव",
+          "वैदिक ज्योतिष में वैवाहिक जीवन",
           "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
           "वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण",
           "वैदिक ज्योतिष में विवाह भविष्यवाणी"
@@ -2555,7 +2561,7 @@
             "description": "क्या मेरी अरेंज मैरिज होगी? जानें कुंडली में अरेंज मैरिज (व्यवस्थित विवाह) के योग कैसे देखे जाते हैं — सप्तम, द्वितीय, नवम और एकादश भाव, गुरु, शुक्र, नवांश और दशा।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/arranged-marriage",
             "datePublished": "2026-07-20",
-            "dateModified": "2026-10-05",
+            "dateModified": "2026-11-04",
             "author": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -2640,7 +2646,7 @@
         ]
       },
       "server": {
-        "wordCount": 4224,
+        "wordCount": 4337,
         "detailsElements": 23
       },
       "facts": {
@@ -2648,7 +2654,7 @@
         "faqPageSchema": true,
         "faqAnswersInServer": "8/8",
         "collapsedBodiesInServer": "23/23",
-        "reportDestinationsRepeated": true
+        "reportDestinationsRepeated": false
       }
     },
     "delayed-marriage|en": {
@@ -4419,7 +4425,7 @@
         ]
       },
       "server": {
-        "wordCount": 2276,
+        "wordCount": 2277,
         "detailsElements": 15
       },
       "facts": {
@@ -4782,7 +4788,7 @@
         ]
       },
       "server": {
-        "wordCount": 2454,
+        "wordCount": 2458,
         "detailsElements": 15
       },
       "facts": {
@@ -7916,7 +7922,7 @@
         ]
       },
       "server": {
-        "wordCount": 3600,
+        "wordCount": 3601,
         "detailsElements": 25
       },
       "facts": {
@@ -8313,7 +8319,7 @@
         ]
       },
       "server": {
-        "wordCount": 3985,
+        "wordCount": 3989,
         "detailsElements": 25
       },
       "facts": {
