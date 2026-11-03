@@ -150,10 +150,46 @@ export const marriageAstrologyHub: IntentHubConfig = {
     { slug: 'second-marriage',     group: 'challenges', title: 'Second Marriage',     title_hi: 'दूसरा विवाह' },
   ],
 
-  aboutExtra:
-    'A Vedic marriage reading centres on the 7th house and its lord, the Navamsa (D9) chart and the Dasha periods that activate them. ' +
-    'For couples, Kundli Matching (Guna Milan) compares both charts before marriage.',
-  aboutExtra_hi:
-    'वैदिक ज्योतिष में विवाह का आकलन मुख्य रूप से सप्तम भाव और उसके स्वामी, नवांश (D9) कुंडली तथा उन्हें सक्रिय करने वाली दशाओं से किया जाता है। ' +
-    'दंपति के लिए कुंडली मिलान (गुण मिलान) विवाह से पहले दोनों कुंडलियों की तुलना करता है।',
+  // Section 5 -- the four factors a Vedic marriage reading rests on, each linked to the
+  // existing guide that treats it in depth (and the natal 7th-house placement pages).
+  basics: {
+    heading:    'How Vedic Astrology Reads Marriage',
+    heading_hi: 'वैदिक ज्योतिष विवाह को कैसे पढ़ता है',
+    intro:    'A Vedic marriage reading rests on four chart factors. No single factor decides the outcome; astrologers weigh them together.',
+    intro_hi: 'विवाह के वैदिक विश्लेषण में मुख्य रूप से चार कारक देखे जाते हैं। कोई एक कारक परिणाम तय नहीं करता; ज्योतिषी इन्हें साथ मिलाकर पढ़ते हैं।',
+    items: [
+      { id: 'seventh-house', icon: '🏠',
+        title: 'The 7th house', title_hi: 'सप्तम भाव',
+        body: 'The house of marriage and partnership. Its sign, the planets placed in it and the planets aspecting it describe the nature of partnership and the qualities associated with a spouse. An empty 7th house is still read through its sign and its lord.',
+        body_hi: 'विवाह और साझेदारी का भाव। इसकी राशि, इसमें बैठे ग्रह और इस पर दृष्टि डालने वाले ग्रह साझेदारी के स्वभाव और जीवनसाथी से जुड़े गुणों को दर्शाते हैं। खाली सप्तम भाव को भी उसकी राशि और स्वामी से पढ़ा जाता है।',
+        links: [
+          { href: '/marriage-astrology/marriage-prediction', label: 'Marriage Prediction', label_hi: 'विवाह भविष्यवाणी' },
+          { href: '/planet-in-house/venus-in-7th-house', label: 'Venus in the 7th house', label_hi: 'सप्तम भाव में शुक्र' },
+          { href: '/planet-in-house/mars-in-7th-house', label: 'Mars in the 7th house', label_hi: 'सप्तम भाव में मंगल' },
+          { href: '/planet-in-house/saturn-in-7th-house', label: 'Saturn in the 7th house', label_hi: 'सप्तम भाव में शनि' },
+        ] },
+      { id: 'seventh-lord', icon: '🪐',
+        title: 'The 7th lord', title_hi: 'सप्तमेश',
+        body: 'The planet that rules the sign on the 7th house. Its placement and strength show how well marriage is supported in the chart; a weak or afflicted 7th lord is one traditional sign of delay.',
+        body_hi: 'सप्तम भाव की राशि का स्वामी ग्रह। इसकी स्थिति और बल बताते हैं कि कुंडली में विवाह को कितना सहारा मिलता है; कमज़ोर या पीड़ित सप्तमेश देरी का एक पारंपरिक संकेत है।',
+        links: [
+          { href: '/marriage-astrology/spouse-nature', label: 'Spouse Nature', label_hi: 'जीवनसाथी का स्वभाव' },
+          { href: '/marriage-astrology/delayed-marriage', label: 'Delayed Marriage', label_hi: 'विलंबित विवाह' },
+        ] },
+      { id: 'navamsa', icon: '🧭',
+        title: 'Navamsa (D9)', title_hi: 'नवांश (D9)',
+        body: 'The ninth divisional chart. Astrologers use it to confirm the marriage indications seen in the birth chart and to judge the strength of married life.',
+        body_hi: 'नौवीं वर्ग कुंडली। ज्योतिषी इससे जन्मकुंडली में दिखे विवाह-संकेतों की पुष्टि करते हैं और वैवाहिक जीवन की मज़बूती आँकते हैं।',
+        links: [
+          { href: '/marriage-astrology/married-life', label: 'Married Life', label_hi: 'वैवाहिक जीवन' },
+        ] },
+      { id: 'dasha', icon: '🕰️',
+        title: 'Dasha periods', title_hi: 'दशा',
+        body: 'Mahadasha and Antardasha periods bring the chart’s indications into focus. Marriage indications are traditionally read as active in periods of the 7th lord, Venus or planets linked to the 7th house, especially when Jupiter or Saturn transits support them. Periods show tendencies, not fixed dates.',
+        body_hi: 'महादशा और अंतर्दशा कुंडली के संकेतों को सक्रिय करती हैं। परंपरा के अनुसार विवाह के योग सप्तमेश, शुक्र या सप्तम भाव से जुड़े ग्रहों की दशा में सक्रिय माने जाते हैं, विशेषकर जब गुरु या शनि का गोचर साथ दे। दशाएँ प्रवृत्ति बताती हैं, कोई तय तारीख नहीं।',
+        links: [
+          { href: '/marriage-astrology/marriage-timing', label: 'Marriage Timing', label_hi: 'विवाह का समय' },
+        ] },
+    ],
+  },
 }

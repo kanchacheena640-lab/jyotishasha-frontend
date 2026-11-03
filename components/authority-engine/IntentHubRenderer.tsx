@@ -1,8 +1,8 @@
 // components/authority-engine/IntentHubRenderer.tsx
-// Mobile-first subject hub (currently Marriage only): compact hero ->
-// question cards -> free tools + muhurat -> personalised reports (standard,
-// relationship, focused question cards) -> topic groups -> the domain's
-// existing hub copy. AuthorityHubRenderer and TopicCard are untouched.
+// Mobile-first subject hub (currently Marriage only): breadcrumb -> compact
+// hero -> question cards -> free tools + muhurat -> personalised reports
+// (standard, relationship, focused question cards) -> topic groups -> the
+// subject basics. AuthorityHubRenderer and TopicCard are untouched.
 // Server component: every link is a plain crawlable <a>, all text is
 // server-rendered. Report names, prices and focused questions are read from
 // the catalogs, never typed into the hub config.
@@ -10,6 +10,7 @@
 import Link from 'next/link'
 import type { AuthorityDomain, Locale } from '@/lib/authority-engine/types'
 import { loc } from '@/lib/authority-engine/i18n'
+import { UI_LABELS } from '@/lib/authority-engine/constants'
 import { reportsData } from '@/app/data/reportsData'
 import {
   getFocusedReportCatalogEntry, getFocusedReportConfigBySlug, questionKeyToHumanSlug,
@@ -100,9 +101,33 @@ export interface IntentHubConfig {
   topicsHeading_hi: string
   topicGroups: IntentHubTopicGroup[]
   topics: IntentHubTopic[]
-  /** Optional extra sentence(s) appended to the lower hub-copy section. */
-  aboutExtra?: string
-  aboutExtra_hi?: string
+  /** Optional closing explainer of how the subject is read, linking to existing guides. */
+  basics?: IntentHubBasics
+}
+
+export interface IntentHubBasicsLink {
+  /** Locale-neutral path of an existing route; HI is served under /hi. */
+  href: string
+  label: string
+  label_hi: string
+}
+
+export interface IntentHubBasicsItem {
+  id: string
+  icon: string
+  title: string
+  title_hi: string
+  body: string
+  body_hi: string
+  links: IntentHubBasicsLink[]
+}
+
+export interface IntentHubBasics {
+  heading: string
+  heading_hi: string
+  intro: string
+  intro_hi: string
+  items: IntentHubBasicsItem[]
 }
 
 interface Props {
@@ -112,6 +137,7 @@ interface Props {
 }
 
 const T = {
+  breadcrumb: { en: 'Breadcrumb', hi: 'ब्रेडक्रम्ब' },
   readGuide: { en: 'Read the guide', hi: 'गाइड पढ़ें' },
   openTool: { en: 'Open free tool', hi: 'फ्री टूल खोलें' },
   free: { en: 'Free', hi: 'फ्री' },
@@ -165,8 +191,27 @@ export default function IntentHubRenderer({ domain, hub, locale }: Props) {
   const isEnglishOnly = (slug: string) => getReportProductPath(slug, locale) === `/reports/${slug}`
 
   return (
-    <main className="min-h-screen bg-[#FBF8F2] text-[#45516A]">
-      <div className="mx-auto max-w-6xl px-4 pb-16 pt-6 md:px-6 md:pt-10">
+    // lang marks the Hindi content's language (the shared root <html> is always "en").
+    <main lang={locale === 'hi' ? 'hi' : undefined} className="min-h-screen bg-[#FBF8F2] text-[#45516A]">
+      <div className="mx-auto max-w-6xl px-4 pb-16 pt-4 md:px-6 md:pt-8">
+
+        {/* Visible breadcrumb; the BreadcrumbList JSON-LD in the route carries the same two items */}
+        <nav aria-label={T.breadcrumb[locale]} className="mb-3 md:mb-4">
+          <ol className="flex flex-wrap items-center gap-1 text-[14px] text-[#5B667D]">
+            <li>
+              <Link
+                href={locale === 'hi' ? '/hi' : '/'}
+                className="inline-flex min-h-[44px] min-w-[44px] items-center px-1 font-medium text-[#A8461F] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A]"
+              >
+                {UI_LABELS.home[locale]}
+              </Link>
+            </li>
+            <li aria-hidden="true" className="text-[#5B667D]">›</li>
+            <li>
+              <span aria-current="page" className="px-1 font-medium text-[#1B2A4A]">{loc(domain, 'label', locale)}</span>
+            </li>
+          </ol>
+        </nav>
 
         {/* Hero -- H1, one supporting line, then the eight questions */}
         <header className="mb-12 md:mb-16">
@@ -362,16 +407,36 @@ export default function IntentHubRenderer({ domain, hub, locale }: Props) {
           </ul>
         </section>
 
-        {/* The domain's existing hub copy, kept server-rendered lower on the page */}
-        <section className="rounded-2xl border border-[#E8DDC9] bg-[#F5EEDF] p-5 md:p-7">
-          <h2 className="text-[20px] md:text-[24px] font-bold leading-snug text-[#1B2A4A]">
-            {loc(domain, 'hubTitle', locale)}
-          </h2>
-          <p className="mt-3 max-w-4xl text-[16px] leading-7">{loc(domain, 'hubSubtitle', locale)}</p>
-          {hub.aboutExtra && (
-            <p className="mt-3 max-w-4xl text-[16px] leading-7">{loc(hub, 'aboutExtra', locale)}</p>
-          )}
-        </section>
+        {/* How the subject is read -- short explainer linking to the in-depth guides */}
+        {hub.basics && (
+          <section aria-labelledby="hub-basics" className="rounded-3xl border border-[#E8DDC9] bg-[#F5EEDF] p-4 md:p-7">
+            <h2 id="hub-basics" className={h2Class}>{loc(hub.basics, 'heading', locale)}</h2>
+            <p className="mt-2 max-w-3xl text-[16px] leading-7">{loc(hub.basics, 'intro', locale)}</p>
+            <ul className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
+              {hub.basics.items.map(item => (
+                <li key={item.id} className="rounded-2xl border border-[#E8DDC9] bg-white p-5">
+                  <div className="flex items-center gap-3">
+                    <span aria-hidden="true" className={`${iconTile} h-10 w-10`}>{item.icon}</span>
+                    <h3 className="text-[18px] font-bold leading-snug text-[#1B2A4A]">{loc(item, 'title', locale)}</h3>
+                  </div>
+                  <p className="mt-2 text-[15px] leading-6">{loc(item, 'body', locale)}</p>
+                  <ul className="mt-2 flex flex-wrap gap-x-4">
+                    {item.links.map(link => (
+                      <li key={link.href}>
+                        <Link
+                          href={`${localePath}${link.href}`}
+                          className="inline-flex min-h-[44px] items-center gap-1 text-[15px] font-semibold text-[#A8461F] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A]"
+                        >
+                          {loc(link, 'label', locale)} <span aria-hidden="true">→</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </main>
   )

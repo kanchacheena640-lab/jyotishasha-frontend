@@ -5,7 +5,7 @@
 import type { Metadata } from 'next'
 import type { Locale } from '@/lib/authority-engine/types'
 import { getAuthorityDomain } from '@/lib/authority-engine/resolver'
-import { generateAuthorityHubMetadata } from '@/lib/authority-engine/seo'
+import { authorityHomeUrl, buildAuthorityBreadcrumbSchema, generateAuthorityHubMetadata } from '@/lib/authority-engine/seo'
 import { loc } from '@/lib/authority-engine/i18n'
 import IntentHubRenderer from '@/components/authority-engine/IntentHubRenderer'
 import { marriageAstrologyHub } from '@/lib/domains/marriage-astrology/_hub'
@@ -33,11 +33,20 @@ export default function MarriageAstrologyHub({
   params: { locale: string }
 }) {
   const locale = (params.locale === 'hi' ? 'hi' : 'en') as Locale
+  const domain = getAuthorityDomain(DOMAIN_SLUG)
+  // Home -> Marriage Astrology; matches the visible breadcrumb in IntentHubRenderer.
+  const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, null, locale, authorityHomeUrl(locale))
   return (
-    <IntentHubRenderer
-      domain={getAuthorityDomain(DOMAIN_SLUG)}
-      hub={marriageAstrologyHub}
-      locale={locale}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <IntentHubRenderer
+        domain={domain}
+        hub={marriageAstrologyHub}
+        locale={locale}
+      />
+    </>
   )
 }

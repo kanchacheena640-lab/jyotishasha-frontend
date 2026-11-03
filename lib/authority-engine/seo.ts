@@ -72,15 +72,23 @@ export function generateAuthorityTopicMetadata(
   }
 }
 
+/** The home page's final URL: `/` (EN) or `/hi` (HI) -- `/hi/` 308-redirects to `/hi`. */
+export function authorityHomeUrl(locale: Locale): string {
+  return locale === 'hi' ? `${SITE_URL}/hi` : `${SITE_URL}/`
+}
+
 export function buildAuthorityBreadcrumbSchema(
   domain: AuthorityDomain,
   topic: AuthorityTopic | null,
-  locale: Locale
+  locale: Locale,
+  // Default kept as-is for topic pages (their schema is pinned by committed baselines);
+  // hub pages pass authorityHomeUrl(locale) so no breadcrumb item redirects.
+  homeUrl: string = `${SITE_URL}${lp(locale)}/`
 ): Record<string, unknown> {
   const base = `${SITE_URL}${lp(locale)}`
   const homeLabel = locale === 'hi' ? 'होम' : 'Home'
   const items = [
-    { name: homeLabel,                           item: `${base}/` },
+    { name: homeLabel,                           item: homeUrl },
     { name: loc(domain, 'label', locale),        item: `${base}${domain.basePath}` },
     ...(topic
       ? [{ name: loc(topic, 'title', locale), item: `${base}${domain.basePath}/${topic.slug}` }]

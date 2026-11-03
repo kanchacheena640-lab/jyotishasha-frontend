@@ -8363,7 +8363,7 @@
           "Explore Free Marriage Tools",
           "Get Personalized Answers About Your Marriage",
           "Explore Marriage & Relationships Through Vedic Astrology",
-          "Marriage Astrology: Vedic Guide to Love, Timing & Compatibility"
+          "How Vedic Astrology Reads Marriage"
         ],
         "h3": [
           "Kundli Matching",
@@ -8375,11 +8375,16 @@
           "Love & Arranged Marriage",
           "Spouse & Married Life",
           "Compatibility & Matching",
-          "Marriage Challenges"
+          "Marriage Challenges",
+          "The 7th house",
+          "The 7th lord",
+          "Navamsa (D9)",
+          "Dasha periods"
         ]
       },
       "links": {
         "internal": [
+          "/",
           "/love",
           "/love/report/relationship_future_report",
           "/marriage-astrology/arranged-marriage",
@@ -8395,6 +8400,9 @@
           "/marriage-astrology/second-marriage",
           "/marriage-astrology/spouse-nature",
           "/panchang/muhurat/marriage-muhurat",
+          "/planet-in-house/mars-in-7th-house",
+          "/planet-in-house/saturn-in-7th-house",
+          "/planet-in-house/venus-in-7th-house",
           "/reports",
           "/reports/delay_in_marriage_report",
           "/reports/focused",
@@ -8446,11 +8454,32 @@
         "embeds": []
       },
       "schema": {
-        "types": [],
-        "objects": []
+        "types": [
+          "BreadcrumbList"
+        ],
+        "objects": [
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.jyotishasha.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Marriage Astrology",
+                "item": "https://www.jyotishasha.com/marriage-astrology"
+              }
+            ]
+          }
+        ]
       },
       "server": {
-        "wordCount": 704,
+        "wordCount": 867,
         "detailsElements": 0
       }
     },
@@ -8490,7 +8519,7 @@
           "विवाह के फ्री टूल्स",
           "अपनी शादी से जुड़े सवालों के व्यक्तिगत जवाब पाएं",
           "वैदिक ज्योतिष से विवाह और रिश्तों को समझें",
-          "विवाह ज्योतिष: प्रेम, समय और अनुकूलता की वैदिक मार्गदर्शिका"
+          "वैदिक ज्योतिष विवाह को कैसे पढ़ता है"
         ],
         "h3": [
           "कुंडली मिलान",
@@ -8502,11 +8531,16 @@
           "प्रेम और अरेंज्ड विवाह",
           "जीवनसाथी और वैवाहिक जीवन",
           "अनुकूलता और कुंडली मिलान",
-          "विवाह की चुनौतियाँ"
+          "विवाह की चुनौतियाँ",
+          "सप्तम भाव",
+          "सप्तमेश",
+          "नवांश (D9)",
+          "दशा"
         ]
       },
       "links": {
         "internal": [
+          "/hi",
           "/hi/love",
           "/hi/love/report/relationship_future_report",
           "/hi/marriage-astrology/arranged-marriage",
@@ -8522,6 +8556,9 @@
           "/hi/marriage-astrology/second-marriage",
           "/hi/marriage-astrology/spouse-nature",
           "/hi/panchang/muhurat/marriage-muhurat",
+          "/hi/planet-in-house/mars-in-7th-house",
+          "/hi/planet-in-house/saturn-in-7th-house",
+          "/hi/planet-in-house/venus-in-7th-house",
           "/hi/reports/focused",
           "/hi/reports/focused/kundali-match-for-marriage",
           "/hi/reports/focused/marriage-chances-timing",
@@ -8573,11 +8610,32 @@
         "embeds": []
       },
       "schema": {
-        "types": [],
-        "objects": []
+        "types": [
+          "BreadcrumbList"
+        ],
+        "objects": [
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "होम",
+                "item": "https://www.jyotishasha.com/hi"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "विवाह ज्योतिष",
+                "item": "https://www.jyotishasha.com/hi/marriage-astrology"
+              }
+            ]
+          }
+        ]
       },
       "server": {
-        "wordCount": 826,
+        "wordCount": 973,
         "detailsElements": 0
       }
     }
