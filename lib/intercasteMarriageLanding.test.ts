@@ -39,8 +39,8 @@ check("primary action points at the existing /tools/marriage-path route (toolsDa
 check("CTA copy claims only what the tool reads (7th house occupants, Venus/Jupiter, dominant planet, Rahu with the 7th lord)",
   ["7th house", "Venus and Jupiter", "strongest influence", "Rahu", "7th lord"].every((w) => action.body.en.includes(w)) &&
   !/Navamsa|D9|Dasha|caste|family|timing/i.test(action.body.en + action.heading.en + action.ctaLabel.en));
-check("microcopy states the tool does not assess caste or family acceptance (EN + HI)",
-  /does not assess caste or family acceptance/.test(action.microcopy.en) && /जाति या पारिवारिक स्वीकृति का आकलन नहीं/.test(action.microcopy.hi));
+check("microcopy is positive and names what the tool reads (EN + HI); the caste disclosure is said once, in the short answer",
+  action.microcopy.en === "A free snapshot of your 7th house from your birth chart." && action.microcopy.hi === "आपकी जन्मकुंडली से सप्तम भाव की फ्री झलक।");
 check("free, no price in the primary action", /Free/.test(action.ctaLabel.en) && !/₹/.test(JSON.stringify(action)));
 check("analytics ids", action.ctaId === "intercaste_marriage_path_cta" && action.screenName === "intercaste_marriage_topic");
 check("bottom block keeps only the free tool CTA (with accurate copy); no bottom report CTA",
@@ -58,7 +58,8 @@ if (inline?.kind === "contextual-report") {
     inline.heading.en === "Want to Understand Your Love-Marriage Tendency?" && /प्रेम विवाह की प्रवृत्ति/.test(inline.heading.hi));
   check("never presented as an intercaste / caste / family-acceptance report",
     !/intercaste (marriage )?report|will i marry outside|will my family|intercaste prediction/i.test(JSON.stringify(inline)) &&
-    /does not assess caste, intercaste indications or family acceptance/.test(inline.body.en) && /आकलन नहीं करती/.test(inline.body.hi));
+    /It focuses on love-marriage tendency; caste and family acceptance are outside its scope\./.test(inline.body.en) &&
+    /यह प्रेम विवाह की प्रवृत्ति पर केंद्रित है; जाति और पारिवारिक स्वीकृति इसके दायरे में नहीं हैं।/.test(inline.body.hi));
   check("names only what the report reads (5th house, 7th house, the link, Venus / Mars / Jupiter)",
     ["5th house", "7th house", "the link between them", "Venus, Mars and Jupiter"].every((w) => inline.body.en.includes(w)));
   check("CTA label uses the {price} placeholder", inline.ctaLabel.en.includes("{price}") && inline.ctaLabel.hi.includes("{price}") && !/₹\s*\d/.test(JSON.stringify(landing)));
@@ -69,10 +70,15 @@ console.log("\n=== C. Short answer ===");
 const da = landing.directAnswer;
 check("EN: traditional association, Rahu/Ketu + 7th, 5th–7th link, 9th house, Navamsa (D9), Dasha",
   /traditionally links certain combinations/.test(da.en) && ["Rahu or Ketu", "7th house", "5th house", "9th house", "Navamsa (D9)", "Dasha"].every((w) => da.en.includes(w)));
-check("EN: no single planet or yoga proves it; no caste identity; no family-acceptance verdict",
-  /No single planet or yoga proves an intercaste marriage/.test(da.en) && /does not show anyone’s caste/.test(da.en) && /cannot say whether a family will accept/.test(da.en));
-check("HI covers the same factors and limits",
-  ["राहु या केतु", "पंचम भाव", "नवम भाव", "नवांश (D9)", "दशा", "कोई एक ग्रह या योग", "जाति नहीं बताती", "स्वीकार करेगा या नहीं"].every((w) => da.hi.includes(w)));
+check("EN (Editorial V1): describes the tendency; the caste/identity disclaimer is said once; the choice stays personal",
+  /Together they show how strongly a chart leans toward a partner from outside the familiar community\./.test(da.en) &&
+  /it does not show anyone’s caste, and the choice of partner is always your own/.test(da.en) &&
+  !/No single planet or yoga proves|cannot say whether a family/.test(da.en));
+check("HI covers the same factors and the same single disclaimer",
+  ["राहु या केतु", "पंचम भाव", "नवम भाव", "नवांश (D9)", "दशा", "किसी की जाति नहीं", "जीवनसाथी का चुनाव हमेशा आपका अपना होता है"].every((w) => da.hi.includes(w)) &&
+  !/सिद्ध नहीं करता|स्वीकार करेगा या नहीं/.test(da.hi));
+check("family acceptance is still answered (FAQ 2 + family section), not in the short answer",
+  topic.includes("label: 'Can astrology tell whether my family will accept my partner?'") && /a chart cannot tell how a specific family will respond/.test(topic));
 check("short answer contains no sales copy", !/report|₹|price|buy|रिपोर्ट/i.test(da.en + da.hi));
 
 console.log("\n=== D. Related links ===");
@@ -81,16 +87,36 @@ check("context links: love-marriage / arranged-marriage; overview marriage-predi
   JSON.stringify(ctx.topicSlugs) === '["love-marriage","arranged-marriage"]' && ctx.overviewSlug === "marriage-prediction");
 check("every context link exists and is not the page itself",
   [...ctx.topicSlugs, ctx.overviewSlug].every((s) => s !== "intercaste-marriage" && fs.existsSync(path.join(root, `lib/domains/marriage-astrology/topics/${s}.ts`))));
-check("ssrFaq + longForm on, no video", landing.ssrFaq === true && landing.longForm === true && landing.video === undefined);
+check("editorial template on; ssrFaq + longForm kept", landing.theme === "editorial" && landing.ssrFaq === true && landing.longForm === true);
+check("one video (0Ldyl0oygJQ) inside the article after the opening section; no standalone after-lead card",
+  landing.video?.youtubeId === "0Ldyl0oygJQ" && landing.video.articleSectionId === "what-is-intercaste-marriage" &&
+  landing.video.playFeatureName === "intercaste_marriage_video_play" && landing.video.desktopCtaFirst === undefined &&
+  landing.inlineVideo === undefined && topic.includes("id: 'what-is-intercaste-marriage',"));
+const editorialSrc = src("components/authority-engine/editorial/EditorialArticle.tsx");
+const pageSrc = src("app/[locale]/marriage-astrology/[slug]/page.tsx");
+check("tool-led editorial hero: the tracked primaryAction card (light variant), no hero report card without an offer",
+  /const toolLedAction = !offer && primaryAction\s*\?\s*<LeadPrimaryAction action=\{primaryAction\} locale=\{locale\} variant="editorial" \/>/.test(editorialSrc) &&
+  editorialSrc.includes("{offer && <EditorialReportCard offer={offer} locale={locale} />}") &&
+  /landing\?\.theme === 'editorial' && \(landing\.offer \|\| landing\.primaryAction\)/.test(pageSrc));
+check("contextual report card rendered in the article with the light variant",
+  pageSrc.includes('node: <LandingInlineTool tool={articleTool} locale={locale} variant="editorial" />') &&
+  src("components/authority-engine/landing/LandingInlineTool.tsx").includes("priceRupees={product.price} variant={variant} />"));
 
 console.log("\n=== E. Page identity and structure ===");
-check("title / H1 unchanged (EN + HI)",
-  topic.includes("title:      'Intercaste Marriage in Vedic Astrology: Karmic Analysis',") && topic.includes("title_hi:   'वैदिक ज्योतिष में अंतरजातीय विवाह: एक कार्मिक विश्लेषण',"));
-check("canonical path and EN meta unchanged",
+check("title / H1 = approved question-led Editorial V1 title (EN + HI)",
+  topic.includes("title:      'Intercaste Marriage in Vedic Astrology: Will I Have an Intercaste Marriage?',") &&
+  topic.includes("title_hi:   'वैदिक ज्योतिष में अंतरजातीय विवाह: क्या मेरा अंतरजातीय विवाह होगा?',"));
+check("canonical path unchanged; EN meta = approved Editorial V1 text",
   topic.includes("canonicalPath: '/marriage-astrology/intercaste-marriage',") &&
-  topic.includes("metaDescription: 'Understand the astrological promise of intercaste marriage in Vedic Astrology. Explore planetary influences, house analysis, and karmic timing.',"));
+  topic.includes("metaDescription: 'Will you have an intercaste marriage? See the kundli yogas Vedic astrology links with it — Rahu or Ketu and the 7th house, the 5th–7th link, the 9th house, Venus, Navamsa (D9) and Dasha.',"));
+check("subtitle rewritten (EN + HI)",
+  topic.includes("subtext:     'The kundli yogas traditionally linked with intercaste marriage") && topic.includes("subtext_hi:  'कुंडली के वे योग जिन्हें परंपरागत रूप से अंतरजातीय विवाह से जोड़ा जाता है"));
+check("Article schema dates: datePublished 2026-07-20, lastUpdated 2026-11-04",
+  topic.includes("datePublished: '2026-07-20',") && topic.includes("lastUpdated:    '2026-11-04',"));
 const hiMeta = (topic.match(/metaDescription_hi: '([^']+)'/) || [, ""])[1] as string;
 check("Hindi meta present and informational", hiMeta.length >= 80 && /अंतरजातीय विवाह/.test(hiMeta) && /राहु/.test(hiMeta) && !/रिपोर्ट|₹/.test(hiMeta));
+check("Hindi meta leads with the question and ends without a limitation refrain",
+  hiMeta.startsWith("क्या मेरा अंतरजातीय विवाह होगा?") && !/क्या नहीं बता सकता/.test(hiMeta));
 const ids = [...topic.matchAll(/\n {8}id: '([a-z0-9-]+)',/g)].map((m) => m[1]);
 check("sections: the two one-item timing sections merged (Dasha + Transit); every other section kept in order",
   JSON.stringify(ids) === '["what-is-intercaste-marriage","astrological-promise-vs-reality","key-house-analysis","planetary-influences","advanced-indicators","dasha-analysis","astrological-combinations","family-opposition-acceptance","love-vs-intercaste","common-misconceptions","practical-remedies","ethical-interpretation","summary","faq-section"]');
@@ -111,7 +137,18 @@ for (const [label, re] of [
   ["no 'the spouse will come from' / 'will defy'", /spouse will come from|will defy/],
   ["no 'undisputed' / 'ensuring the couple' / 'collapses under'", /undisputed|ensuring the couple|collapses under/],
   ["no 'karmic necessity' framing", /karmic necessity/],
+  ["Editorial V1: no 'afflicted' framing for the Sun / Moon / Jupiter readings", /An afflicted Sun|An afflicted Moon|When Jupiter is afflicted|पीड़ित सूर्य|पीड़ित चंद्रमा|जब गुरु पीड़ित/],
+  ["Editorial V1: Rahu without 'obsession' / 'the forbidden' / 'forbidden fruit'", /obsession, the forbidden|forbidden fruit|वर्जित/],
+  ["Editorial V1: no 'rarely fully within one's control' / 'simply a karmic reality'", /rarely fully within|simply a karmic reality|शायद ही कभी|केवल एक कार्मिक वास्तविकता/],
 ] as [string, RegExp][]) check(label, !re.test(topic));
+check("neutral planet readings present (Sun / Moon / Jupiter / Rahu, EN + HI)",
+  /When the Sun is less bound to family authority in the chart/.test(topic) && /When the Moon is linked with Rahu, Ketu or the 9th house/.test(topic) &&
+  /When Jupiter is influenced by Rahu or Saturn/.test(topic) && /intense attraction, the unfamiliar and the wish to step beyond established social boundaries/.test(topic) &&
+  /जब कुंडली में सूर्य पारिवारिक अधिकार से कम बंधा हो/.test(topic) && /जब चंद्रमा राहु, केतु या नवम भाव से जुड़ा हो/.test(topic) &&
+  /जब गुरु पर राहु या शनि का प्रभाव हो/.test(topic) && /अपरिचित के प्रति रुचि/.test(topic));
+check("FAQ 4 and FAQ 9 answered positively (EN)",
+  /id: 'faq-4'[^\n]*body: 'Remedies such as seva and mantra are traditionally used for patience and inner balance\./.test(topic) &&
+  /id: 'faq-9'[^\n]*body: 'No\. A chart that supports an intercaste union is neither good nor bad/.test(topic));
 check("explicitly: a horoscope does not reveal caste (intro + 9th house)",
   /a horoscope does not reveal anyone’s caste/.test(topic) && /though it does not reveal a person’s caste/.test(topic));
 check("explicitly: a chart cannot tell how a specific family will respond (family section + 2nd house + misconception)",

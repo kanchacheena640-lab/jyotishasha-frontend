@@ -87,8 +87,8 @@ check("video is the approved Short yl9kprGsEZg, inside the article after the ope
   spouseNatureLanding.video.desktopCtaFirst === undefined && spouseNatureLanding.inlineVideo === undefined);
 check("free Spouse Lagna tool leads the editorial hero (before the report card)",
   spouseNatureLanding.inlineTool?.kind === "spouse-lagna" && spouseNatureLanding.inlineTool.editorialHero === true &&
-  src("components/authority-engine/editorial/EditorialArticle.tsx").includes("{heroTool ?? (tool && (") &&
-  src("components/authority-engine/editorial/EditorialArticle.tsx").indexOf("{heroTool ?? (tool && (") < src("components/authority-engine/editorial/EditorialArticle.tsx").indexOf('aria-labelledby="topic-landing-offer"'));
+  src("components/authority-engine/editorial/EditorialArticle.tsx").includes("{heroTool ?? toolLedAction ?? (tool && (") &&
+  src("components/authority-engine/editorial/EditorialArticle.tsx").indexOf("{heroTool ?? toolLedAction ?? (tool && (") < src("components/authority-engine/editorial/EditorialArticle.tsx").indexOf("{offer && <EditorialReportCard"));
 
 console.log("\n=== F. Existing page identity protected ===");
 check("H1/title = approved question-led Editorial V1 title (EN)", topic.includes("title:      'Spouse Nature in Vedic Astrology: What Will My Future Spouse Be Like?',"));

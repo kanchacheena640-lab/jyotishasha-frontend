@@ -8,7 +8,7 @@
 
 import Link from 'next/link'
 import type { AuthorityDomain, AuthorityTopic, Locale } from '@/lib/authority-engine/types'
-import type { TopicLandingConfig, TopicLandingVideo } from '@/lib/authority-engine/landing-types'
+import type { AnyTopicLandingConfig, TopicLandingOffer, TopicLandingVideo } from '@/lib/authority-engine/landing-types'
 import { loc } from '@/lib/authority-engine/i18n'
 import { CTA_ACTION_LABELS, CTA_BASE_PATHS } from '@/lib/authority-engine/constants'
 import { getRelatedTopics } from '@/lib/authority-engine/resolver'
@@ -17,6 +17,7 @@ import { getReportSampleLabel, getReportSampleUrl } from '@/lib/reportSamples'
 import type { CSSProperties, ReactNode } from 'react'
 import YouTubeShortFacade from '../landing/YouTubeShortFacade'
 import LeadOfferActions from '../landing/LeadOfferActions'
+import LeadPrimaryAction from '../landing/LeadPrimaryAction'
 import styles from './editorial.module.css'
 
 const T = {
@@ -30,16 +31,18 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
  * 1-3. Hero row: the direct answer (reading width) and the two user actions -- the free
  * calculator first and prominent, then a compact report offer. Desktop: actions beside the
  * answer; tablet: side by side under it; phones: stacked in that order. `heroTool` (optional):
- * an interactive on-page tool shown in place of the free-tool link card.
+ * an interactive on-page tool shown in place of the free-tool link card. Tool-led pages (no
+ * report offer): the landing's own tracked `primaryAction` card is the only hero action.
  */
 export function EditorialLead({ config, topic, locale, heroTool }: {
-  config: TopicLandingConfig; topic: AuthorityTopic; locale: Locale; heroTool?: ReactNode
+  config: AnyTopicLandingConfig; topic: AuthorityTopic; locale: Locale; heroTool?: ReactNode
 }) {
-  const { offer } = config
-  const product = reportsData.find(r => r.slug === offer.reportSlug)
+  const { offer, primaryAction } = config
   const localePath = locale === 'hi' ? '/hi' : ''
   const tool = topic.ctas.find(cta => cta.type === 'tool')
-  const reportHref = `/reports/${offer.reportSlug}`
+  const toolLedAction = !offer && primaryAction
+    ? <LeadPrimaryAction action={primaryAction} locale={locale} variant="editorial" />
+    : undefined
 
   return (
     <div className="mb-14 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,46rem)_minmax(0,1fr)] lg:items-start lg:gap-x-12">
@@ -49,7 +52,7 @@ export function EditorialLead({ config, topic, locale, heroTool }: {
       </section>
 
       <div className="grid grid-cols-1 gap-4">
-        {heroTool ?? (tool && (
+        {heroTool ?? toolLedAction ?? (tool && (
           <aside aria-labelledby="editorial-tool-cta" className="flex flex-col rounded-2xl bg-[#1B2A4A] p-5 text-[#E6E1D6] sm:flex-row sm:items-center sm:gap-6 sm:p-6 lg:flex-col lg:items-stretch lg:gap-0">
             <div className="flex-1">
               <span className="inline-block rounded-full bg-[#E8C766] px-2.5 py-0.5 text-[13px] font-bold text-[#1B2A4A]">{T.free[locale]}</span>
@@ -65,6 +68,18 @@ export function EditorialLead({ config, topic, locale, heroTool }: {
           </aside>
         ))}
 
+        {offer && <EditorialReportCard offer={offer} locale={locale} />}
+      </div>
+    </div>
+  )
+}
+
+/** 3. The compact report offer in the hero (report-led pages only). */
+function EditorialReportCard({ offer, locale }: { offer: TopicLandingOffer; locale: Locale }) {
+  const product = reportsData.find(r => r.slug === offer.reportSlug)
+  const reportHref = `/reports/${offer.reportSlug}`
+
+  return (
         <aside aria-labelledby="topic-landing-offer" className="rounded-2xl border-2 border-[#C9A227] bg-white p-5">
           <p className="text-[13px] font-semibold uppercase tracking-wider text-[#7A5A00]">{offer.eyebrow[locale]}</p>
           <div className="mt-1 flex items-start justify-between gap-3">
@@ -100,8 +115,6 @@ export function EditorialLead({ config, topic, locale, heroTool }: {
             </div>
           )}
         </aside>
-      </div>
-    </div>
   )
 }
 
@@ -136,7 +149,7 @@ export function EditorialVideo({ video, locale, gridRows }: { video: TopicLandin
 
 /** 6. One related-guides block: the context links' topics, related topics, the overview guide and cross-domain links. */
 export function EditorialRelatedGuides({ config, domain, topic, locale }: {
-  config: TopicLandingConfig; domain: AuthorityDomain; topic: AuthorityTopic; locale: Locale
+  config: AnyTopicLandingConfig; domain: AuthorityDomain; topic: AuthorityTopic; locale: Locale
 }) {
   const localePath = locale === 'hi' ? '/hi' : ''
   const { contextLinks } = config

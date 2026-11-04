@@ -24,7 +24,7 @@ export default function LandingInlineTool({ tool, locale, variant = 'dark' }: Pr
     case 'contextual-report': {
       const product = reportsData.find(r => r.slug === tool.reportSlug)
       if (!product) return null
-      return <ContextualReportCard unit={tool} locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product.price} />
+      return <ContextualReportCard unit={tool} locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product.price} variant={variant} />
     }
     default:
       return null

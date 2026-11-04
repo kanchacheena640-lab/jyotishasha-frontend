@@ -72,6 +72,24 @@
   color: #45516A;
 }
 
+/* ---- Comparison (ComparisonSection): light panels, readable label + body ---- */
+.editorial :global(div.grid > div.rounded-xl.border.p-5) {
+  background: #fff;
+  border-color: #E8DDC9;
+  border-radius: 1rem;
+}
+.editorial :global(div.grid > div.rounded-xl.border.p-5 h3.text-sm) {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #1B2A4A;
+}
+.editorial :global(div.grid > div.rounded-xl.border.p-5 p.text-xs) {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #45516A;
+}
+
 /* ---- Checklists (ChecklistSection): label as a sub-heading, readable body ---- */
 .editorial :global(ul.space-y-3 > li ~ li) {
   margin-top: 1.5rem;

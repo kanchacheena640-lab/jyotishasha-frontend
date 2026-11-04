@@ -15,7 +15,7 @@ import {
   buildAuthorityBreadcrumbSchema,
   authorityHomeUrl,
 } from '@/lib/authority-engine/seo'
-import type { AnyTopicLandingConfig, TopicLandingConfig } from '@/lib/authority-engine/landing-types'
+import type { AnyTopicLandingConfig } from '@/lib/authority-engine/landing-types'
 import {
   EditorialLead, EditorialRelatedGuides, EditorialVideo,
 } from '@/components/authority-engine/editorial/EditorialArticle'
@@ -33,9 +33,12 @@ const DOMAIN_SLUG = 'marriage-astrology'
 
 export const revalidate = 86400
 
-/** The editorial template needs a report-led landing (direct answer + offer). */
-function editorialLanding(landing: AnyTopicLandingConfig | undefined): TopicLandingConfig | null {
-  return landing?.theme === 'editorial' && landing.offer ? (landing as TopicLandingConfig) : null
+/**
+ * The editorial template needs a direct answer plus a hero action: a report offer (report-led)
+ * or, on a tool-led landing, its tracked free-tool `primaryAction`.
+ */
+function editorialLanding(landing: AnyTopicLandingConfig | undefined): AnyTopicLandingConfig | null {
+  return landing?.theme === 'editorial' && (landing.offer || landing.primaryAction) ? landing : null
 }
 
 /**
@@ -146,7 +149,7 @@ export default function MarriageAstrologyTopic({
           {...(articleTool && {
             afterSection: {
               sectionId: articleTool.afterSectionId,
-              node: <LandingInlineTool tool={articleTool} locale={locale} />,
+              node: <LandingInlineTool tool={articleTool} locale={locale} variant="editorial" />,
             },
           })}
           {...(editorial.video?.articleSectionId && {
