@@ -11,13 +11,15 @@ import ContextualReportCard from './ContextualReportCard'
 interface Props {
   tool: TopicLandingInlineTool
   locale: Locale
+  /** Visual style of interactive tools; 'dark' (default) = the original landing styling. */
+  variant?: 'dark' | 'editorial'
 }
 
-export default function LandingInlineTool({ tool, locale }: Props) {
+export default function LandingInlineTool({ tool, locale, variant = 'dark' }: Props) {
   switch (tool.kind) {
     case 'spouse-lagna': {
       const product = reportsData.find(r => r.slug === tool.reportSlug)
-      return <SpouseLagnaTool locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product?.price} />
+      return <SpouseLagnaTool locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product?.price} variant={variant} />
     }
     case 'contextual-report': {
       const product = reportsData.find(r => r.slug === tool.reportSlug)

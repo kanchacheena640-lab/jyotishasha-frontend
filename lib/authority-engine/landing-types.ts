@@ -69,6 +69,11 @@ export interface TopicLandingSpouseLagnaTool {
   afterSectionId: string
   /** Catalogue report the tool's result CTA links to. */
   reportSlug: string
+  /**
+   * Editorial theme only: render the tool in the hero as the primary free action (in place of the
+   * topic's free-tool link card, before the report card) instead of after `afterSectionId`.
+   */
+  editorialHero?: boolean
 }
 
 /**

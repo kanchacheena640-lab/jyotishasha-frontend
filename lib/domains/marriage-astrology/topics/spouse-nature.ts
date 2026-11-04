@@ -5,8 +5,8 @@ export const spouseNature: DomainTopic = {
   identity: {
     id:         'marriage-astrology:spouse-nature',
     slug:       'spouse-nature',
-    title:      'Spouse Nature in Vedic Astrology: Houses & Planets',
-    title_hi:   'वैदिक ज्योतिष में जीवनसाथी का स्वभाव',
+    title:      'Spouse Nature in Vedic Astrology: What Will My Future Spouse Be Like?',
+    title_hi:   'वैदिक ज्योतिष में जीवनसाथी का स्वभाव: मेरा जीवनसाथी कैसा होगा?',
     domain:     'astrology',
     subdomain:  'marriage-astrology',
     category:   'marriage',
@@ -25,16 +25,16 @@ export const spouseNature: DomainTopic = {
 
   seo: {
     metaTitle:       'Spouse Nature in Vedic Astrology: Complete Guide',
-    metaDescription: 'Discover how Vedic astrology reveals your spouse\'s nature through the 7th house, planetary karakas, Navamsa, and Darakaraka for clearer understanding.',
-    metaDescription_hi: 'जानें वैदिक ज्योतिष में सप्तम भाव, सप्तमेश, शुक्र-गुरु, नवांश (D9) और दारकारक से जीवनसाथी के स्वभाव, व्यवहार और रिश्ते की प्रवृत्तियाँ कैसे समझी जाती हैं।',
+    metaDescription: 'What will your future spouse be like? See how Vedic astrology reads a spouse\'s nature in a kundli — the 7th house and its lord, Venus and Jupiter, Navamsa (D9) and Darakaraka.',
+    metaDescription_hi: 'मेरा जीवनसाथी कैसा होगा? जानें वैदिक ज्योतिष में सप्तम भाव, सप्तमेश, शुक्र-गुरु, नवांश (D9) और दारकारक से जीवनसाथी के स्वभाव, व्यवहार और रिश्ते की प्रवृत्तियाँ कैसे समझी जाती हैं।',
     robots:          'noindex,follow',
   },
 
   hero: {
     headline:    'Spouse Nature in Vedic Astrology: Your Complete Guide',
     headline_hi: 'वैदिक ज्योतिष में जीवनसाथी का स्वभाव: एक संपूर्ण मार्गदर्शिका',
-    subtext:     'Vedic astrology offers profound insights into your future spouse\'s temperament, values, and relationship patterns through the 7th house, planetary karakas, Navamsa, and Darakaraka — helping you understand your partner before and during marriage.',
-    subtext_hi:  'वैदिक ज्योतिष 7वें भाव, ग्रह कारकों, नवांश और दारकारक के माध्यम से आपके जीवनसाथी के स्वभाव, मूल्यों और संबंध पैटर्न में गहरी अंतर्दृष्टि प्रदान करता है — विवाह से पहले और दौरान आपके साथी को समझने में सहायता करता है।',
+    subtext:     'How a kundli describes your future spouse\'s temperament, values and relationship style — through the 7th house and its lord, Venus and Jupiter, the Navamsa (D9) and the Darakaraka.',
+    subtext_hi:  'कुंडली आपके भावी जीवनसाथी के स्वभाव, मूल्यों और रिश्ते की शैली के बारे में क्या बताती है — सप्तम भाव और सप्तमेश, शुक्र और गुरु, नवांश (D9) और दारकारक के माध्यम से।',
   },
 
   taxonomy: {
@@ -49,16 +49,16 @@ export const spouseNature: DomainTopic = {
     contentBlocks: [
       {
         id:       'introduction',
-        title:    'Introduction',
-        title_hi: 'परिचय',
+        title:    'What Spouse Nature Means in a Birth Chart',
+        title_hi: 'कुंडली में जीवनसाथी के स्वभाव का अर्थ',
         layout:   'list',
         items: [
           {
             id:       'what-is-spouse-nature',
             label:    'Understanding Spouse Nature in Jyotisha',
             label_hi: 'ज्योतिष में जीवनसाथी के स्वभाव को समझना',
-            body:     'Vedic astrology, or Jyotisha, is a profound system designed not merely to predict events but to provide a deeper understanding of the soul\'s journey. Among the most earnest inquiries in astrology is the nature of a future spouse. In Jyotisha, spouse nature encompasses the totality of the partner\'s likely temperament, values, communication style, strengths and challenges, and their natural relationship patterns. Understanding these factors allows individuals to enter a relationship with greater clarity, fostering empathy and informed communication.',
-            body_hi:  'वैदिक ज्योतिष, या ज्योतिषा, एक गहन प्रणाली है जो केवल घटनाओं की भविष्यवाणी के लिए नहीं, बल्कि आत्मा की यात्रा की गहरी समझ प्रदान करने के लिए डिज़ाइन की गई है। ज्योतिष में सबसे प्रमुख जिज्ञासाओं में से एक भविष्य के जीवनसाथी का स्वभाव है। ज्योतिषा में, जीवनसाथी का स्वभाव साथी के संभावित स्वभाव, मूल्यों, संचार शैली, शक्तियों और चुनौतियों तथा उनके स्वाभाविक संबंध पैटर्न की समग्रता को समाहित करता है। इन कारकों को समझने से व्यक्ति अधिक स्पष्टता के साथ रिश्ते में प्रवेश कर सकते हैं, सहानुभूति और सूचित संवाद को बढ़ावा देते हैं।',
+            body:     'In Vedic astrology (Jyotisha), the nature of a future spouse is one of the most common questions people bring to a birth chart. Spouse nature encompasses the totality of the partner\'s likely temperament, values, communication style, strengths and challenges, and their natural relationship patterns. Understanding these factors allows individuals to enter a relationship with greater clarity, fostering empathy and informed communication.',
+            body_hi:  'वैदिक ज्योतिष (ज्योतिषा) में भावी जीवनसाथी का स्वभाव कुंडली से पूछे जाने वाले सबसे आम प्रश्नों में से एक है। जीवनसाथी का स्वभाव साथी के संभावित स्वभाव, मूल्यों, संचार शैली, शक्तियों और चुनौतियों तथा उनके स्वाभाविक संबंध पैटर्न की समग्रता को समाहित करता है। इन कारकों को समझने से व्यक्ति अधिक स्पष्टता के साथ रिश्ते में प्रवेश कर सकते हैं, सहानुभूति और सूचित संवाद को बढ़ावा देते हैं।',
           },
           {
             id:       'promise-vs-probability',
@@ -228,8 +228,8 @@ export const spouseNature: DomainTopic = {
             id:       'jupiter-female-chart',
             label:    'Jupiter in Female Charts',
             label_hi: 'महिला कुंडली में बृहस्पति',
-            body:     'In a female chart, Jupiter is the Karaka for the husband or spouse. It reflects her expectations regarding his guidance, wisdom, and the ethical foundation of their union — indicating the qualities she seeks in a long-term partner.',
-            body_hi:  'महिला कुंडली में, बृहस्पति पति या जीवनसाथी का कारक है। यह उनके मार्गदर्शन, ज्ञान और उनके मिलन की नैतिक नींव के बारे में उसकी अपेक्षाओं को दर्शाता है — जो गुण वह दीर्घकालिक साथी में चाहती है।',
+            body:     'In a female chart, Jupiter is the Karaka for the husband or spouse. It reflects her expectations regarding his guidance, wisdom, and the ethical foundation of their union — indicating the qualities she seeks in a long-term partner. Modern readings examine both Venus and Jupiter in every chart.',
+            body_hi:  'महिला कुंडली में, बृहस्पति पति या जीवनसाथी का कारक है। यह उनके मार्गदर्शन, ज्ञान और उनके मिलन की नैतिक नींव के बारे में उसकी अपेक्षाओं को दर्शाता है — जो गुण वह दीर्घकालिक साथी में चाहती है। आधुनिक विश्लेषण में हर कुंडली में शुक्र और गुरु दोनों देखे जाते हैं।',
           },
           {
             id:       'navamsa-d9',
@@ -550,11 +550,15 @@ export const spouseNature: DomainTopic = {
 
   schemaSignals: {
     expertise: 'Authored by Vedic astrologers specializing in spouse nature, 7th house analysis, Navamsa, and Darakaraka.',
+    // First authored in commit 7cd8637 (2026-07-20, "marriage hub").
+    datePublished: '2026-07-20',
   },
 
   authority: {
     reviewStatus:   'not-reviewed',
     contentVersion: 1,
+    // Editorial V1 (2026-11-04): question-led H1/meta, positive rewording per JYOTISHASHA_EDITORIAL_RULES.md.
+    lastUpdated:    '2026-11-04',
   },
 
   publishing: {

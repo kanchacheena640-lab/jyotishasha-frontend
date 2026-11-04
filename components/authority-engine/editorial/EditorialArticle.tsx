@@ -14,7 +14,7 @@ import { CTA_ACTION_LABELS, CTA_BASE_PATHS } from '@/lib/authority-engine/consta
 import { getRelatedTopics } from '@/lib/authority-engine/resolver'
 import { reportsData } from '@/app/data/reportsData'
 import { getReportSampleLabel, getReportSampleUrl } from '@/lib/reportSamples'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import YouTubeShortFacade from '../landing/YouTubeShortFacade'
 import LeadOfferActions from '../landing/LeadOfferActions'
 import styles from './editorial.module.css'
@@ -29,9 +29,12 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
 /**
  * 1-3. Hero row: the direct answer (reading width) and the two user actions -- the free
  * calculator first and prominent, then a compact report offer. Desktop: actions beside the
- * answer; tablet: side by side under it; phones: stacked in that order.
+ * answer; tablet: side by side under it; phones: stacked in that order. `heroTool` (optional):
+ * an interactive on-page tool shown in place of the free-tool link card.
  */
-export function EditorialLead({ config, topic, locale }: { config: TopicLandingConfig; topic: AuthorityTopic; locale: Locale }) {
+export function EditorialLead({ config, topic, locale, heroTool }: {
+  config: TopicLandingConfig; topic: AuthorityTopic; locale: Locale; heroTool?: ReactNode
+}) {
   const { offer } = config
   const product = reportsData.find(r => r.slug === offer.reportSlug)
   const localePath = locale === 'hi' ? '/hi' : ''
@@ -46,7 +49,7 @@ export function EditorialLead({ config, topic, locale }: { config: TopicLandingC
       </section>
 
       <div className="grid grid-cols-1 gap-4">
-        {tool && (
+        {heroTool ?? (tool && (
           <aside aria-labelledby="editorial-tool-cta" className="flex flex-col rounded-2xl bg-[#1B2A4A] p-5 text-[#E6E1D6] sm:flex-row sm:items-center sm:gap-6 sm:p-6 lg:flex-col lg:items-stretch lg:gap-0">
             <div className="flex-1">
               <span className="inline-block rounded-full bg-[#E8C766] px-2.5 py-0.5 text-[13px] font-bold text-[#1B2A4A]">{T.free[locale]}</span>
@@ -60,7 +63,7 @@ export function EditorialLead({ config, topic, locale }: { config: TopicLandingC
               {CTA_ACTION_LABELS.tool[locale]} <span aria-hidden="true" className="ml-1">→</span>
             </Link>
           </aside>
-        )}
+        ))}
 
         <aside aria-labelledby="topic-landing-offer" className="rounded-2xl border-2 border-[#C9A227] bg-white p-5">
           <p className="text-[13px] font-semibold uppercase tracking-wider text-[#7A5A00]">{offer.eyebrow[locale]}</p>

@@ -315,11 +315,11 @@ export const delayedMarriageLanding: TopicLandingConfig = {
 // Dedicated product: the Spouse Nature Report (rep_026). Bullets stay within its
 // sample (nature/temperament, communication and emotional style, the 7th-house,
 // Navamsa and Darakaraka basis, health and financial tendencies). It never names
-// a specific person. The bottom report CTA stays the broader Marriage Report, so
-// the dedicated report is offered once. No approved video yet.
+// a specific person. Editorial V1: the free Spouse Lagna tool leads the hero, then
+// the report card (the editorial template does not render the bottom topic CTAs).
 export const spouseNatureLanding: TopicLandingConfig = {
-  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
-  // video beside the report on desktop with the CTA kept near its original position.
+  theme: 'editorial',
+  // Editorial: the Short sits after the opening section and stays beside the article on desktop.
   video: {
     youtubeId: 'yl9kprGsEZg',
     posterSrc: '/media/spouse-nature-short-poster.webp',
@@ -328,13 +328,13 @@ export const spouseNatureLanding: TopicLandingConfig = {
     caption: { en: 'Watch: What Your Kundli Says About Your Life Partner (in Hindi)', hi: 'देखें: आपका जीवनसाथी कैसा होगा?' },
     playLabel: { en: 'Play video: What Your Kundli Says About Your Life Partner', hi: 'वीडियो चलाएं: आपका जीवनसाथी कैसा होगा?' },
     playFeatureName: 'spouse_nature_video_play',
-    desktopCtaFirst: true,
+    articleSectionId: 'introduction',
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'Vedic astrology does not read a spouse\'s nature from one placement. An astrologer combines the sign on the 7th house and the condition of its lord, the planets placed in or influencing the 7th house, Venus and Jupiter as significators of the partner, the Navamsa (D9) chart for the inner nature of the partnership, and supporting indicators such as the Darakaraka. Together they point to likely tendencies in temperament, communication and relationship style — not a fixed description of one particular person.',
-    hi: 'वैदिक ज्योतिष में जीवनसाथी का स्वभाव किसी एक ग्रह-स्थिति से तय नहीं होता। ज्योतिषी सप्तम भाव की राशि और सप्तमेश की स्थिति, सप्तम भाव में बैठे या उस पर प्रभाव डालने वाले ग्रह, जीवनसाथी के कारक शुक्र और गुरु, रिश्ते की आंतरिक प्रकृति के लिए नवांश (D9) कुंडली और दारकारक जैसे सहायक संकेतकों को साथ मिलाकर देखते हैं। इनसे जीवनसाथी के स्वभाव, बातचीत के तरीके और रिश्ते में व्यवहार की संभावित प्रवृत्तियों का संकेत मिलता है — किसी एक विशेष व्यक्ति का तय विवरण नहीं।',
+    en: 'In Vedic astrology, a spouse\'s nature is read from a combination of factors: the sign on the 7th house and the condition of its lord, the planets placed in or influencing the 7th house, Venus and Jupiter as significators of the partner, the Navamsa (D9) chart for the inner nature of the partnership, and supporting indicators such as the Darakaraka. Together they describe the likely temperament, communication and relationship style of your future spouse.',
+    hi: 'वैदिक ज्योतिष में जीवनसाथी का स्वभाव कई कारकों को साथ मिलाकर पढ़ा जाता है: सप्तम भाव की राशि और सप्तमेश की स्थिति, सप्तम भाव में बैठे या उस पर प्रभाव डालने वाले ग्रह, जीवनसाथी के कारक शुक्र और गुरु, रिश्ते की आंतरिक प्रकृति के लिए नवांश (D9) कुंडली और दारकारक जैसे सहायक संकेतक। इनसे आपके भावी जीवनसाथी के संभावित स्वभाव, बातचीत के तरीके और रिश्ते में व्यवहार की तस्वीर मिलती है।',
   },
 
   offer: {
@@ -342,21 +342,21 @@ export const spouseNatureLanding: TopicLandingConfig = {
     eyebrow: { en: 'Based on your birth chart', hi: 'आपकी जन्मकुंडली पर आधारित' },
     heading: { en: 'Spouse Nature Report', hi: 'जीवनसाथी स्वभाव रिपोर्ट' },
     intro: {
-      en: 'This page explains the general principles. The report reads these factors in your own birth chart to describe your spouse\'s likely tendencies — it does not identify a specific person.',
-      hi: 'यह पृष्ठ सामान्य सिद्धांत समझाता है। रिपोर्ट इन्हीं कारकों को आपकी अपनी जन्मकुंडली में पढ़कर जीवनसाथी की संभावित प्रवृत्तियों का वर्णन करती है — यह किसी विशेष व्यक्ति की पहचान नहीं बताती।',
+      en: 'Your report reads these factors in your own birth chart and describes the temperament, communication style and tendencies it shows for your spouse.',
+      hi: 'आपकी रिपोर्ट इन्हीं कारकों को आपकी अपनी जन्मकुंडली में पढ़कर बताती है कि वह आपके जीवनसाथी के स्वभाव, बातचीत की शैली और प्रवृत्तियों के बारे में क्या दर्शाती है।',
     },
     bullets: {
       en: [
         'Your spouse\'s likely nature, temperament and personality',
         'Communication and emotional style',
         'The 7th house, Navamsa (D9) and Darakaraka basis behind each reading',
-        'Health and financial tendencies — indications, not certainties',
+        'Your spouse\'s likely health and financial tendencies',
       ],
       hi: [
         'जीवनसाथी का संभावित स्वभाव, मिज़ाज और व्यक्तित्व',
         'बातचीत और भावनात्मक शैली',
         'हर निष्कर्ष के पीछे का सप्तम भाव, नवांश (D9) और दारकारक आधार',
-        'स्वास्थ्य और आर्थिक प्रवृत्तियाँ — संकेत, निश्चितता नहीं',
+        'जीवनसाथी की संभावित स्वास्थ्य और आर्थिक प्रवृत्तियाँ',
       ],
     },
     ctaLabel: { en: 'Get Spouse Nature Report – ₹{price}', hi: 'जीवनसाथी स्वभाव रिपोर्ट पाएं – ₹{price}' },
@@ -390,9 +390,10 @@ export const spouseNatureLanding: TopicLandingConfig = {
   // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
   longForm: true,
 
-  // MC-04: free Lagna -> 7th-house sign check, placed after the Introduction (before the deep
-  // house/planet analysis). Its result CTA is a compact text link to the same report.
-  inlineTool: { kind: 'spouse-lagna', afterSectionId: 'introduction', reportSlug: 'spouse_nature_report' },
+  // MC-04: free Lagna -> 7th-house sign check. Editorial V1: rendered in the hero as the primary free
+  // action, before the report card (`editorialHero`); the default layout would place it after the
+  // opening section. Its result CTA is a compact text link to the same report.
+  inlineTool: { kind: 'spouse-lagna', afterSectionId: 'introduction', reportSlug: 'spouse_nature_report', editorialHero: true },
 }
 
 // Tool-led (P1): the primary action is the EXISTING free Kundli Matching calculator (/love). Its result

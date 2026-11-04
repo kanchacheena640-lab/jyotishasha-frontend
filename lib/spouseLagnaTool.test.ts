@@ -137,8 +137,8 @@ console.log("\n=== 4. CTA, links, analytics ===");
 const tool = spouseNatureLanding.inlineTool;
 const product = reportsData.find((r) => r.slug === tool?.reportSlug);
 check("inline tool configured on spouse-nature: spouse-lagna -> spouse_nature_report", tool?.kind === "spouse-lagna" && tool.reportSlug === "spouse_nature_report" && product?.id === "rep_026");
-check("placed after the Introduction section (which exists on the topic)",
-  tool?.afterSectionId === "introduction" && src("lib/domains/marriage-astrology/topics/spouse-nature.ts").includes("id:       'introduction',"));
+check("editorial hero placement (editorialHero); default-layout slot stays after the opening section (which exists on the topic)",
+  tool?.kind === "spouse-lagna" && tool.editorialHero === true && tool?.afterSectionId === "introduction" && src("lib/domains/marriage-astrology/topics/spouse-nature.ts").includes("id:       'introduction',"));
 check("CTA label uses the {price} placeholder (price comes from the catalogue)", COPY.ctaLabel.en.includes("{price}") && COPY.ctaLabel.hi.includes("{price}") && !/₹\s*\d/.test(COPY.ctaLabel.en + COPY.ctaLabel.hi));
 const registry = src("components/authority-engine/landing/LandingInlineTool.tsx");
 check("server registry builds /reports/<slug> and reads the price from reportsData",
@@ -155,16 +155,27 @@ check("analytics reuse WebsiteEvents (featureUsed on result, ctaClick on CTA) wi
 console.log("\n=== 5. No API / no calculation / minimal server HTML ===");
 const dataSrc = src("lib/domains/marriage-astrology/spouseLagnaTool.ts");
 check("tool + data make no network request", ![component, dataSrc, registry].some((s) => /fetch\(|axios|XMLHttpRequest|\/api\/|NEXT_PUBLIC_[A-Z_]*API/.test(s)));
-check("descriptions are not passed as server props (only locale, href, price)",
-  registry.includes("<SpouseLagnaTool locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product?.price} />"));
+check("descriptions are not passed as server props (only locale, href, price, style variant)",
+  registry.includes("<SpouseLagnaTool locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product?.price} variant={variant} />"));
+check("dark variant is the default and keeps the original landing classes",
+  component.includes("variant = 'dark'") && registry.includes("variant = 'dark'") &&
+  component.includes("section: 'mb-10 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-5 sm:px-6',") &&
+  component.includes("ctaLink: 'mt-2 inline-flex min-h-[44px] items-center text-sm font-semibold text-rose-300 underline underline-offset-2 hover:text-white',"));
+check("editorial variant: light card, 44px links, both variants share one render path",
+  /editorial: \{\s*section: 'rounded-2xl border-2 border-\[#1B2A4A\] bg-\[#FFFFFF\]/.test(component) &&
+  (component.match(/min-h-\[44px\]/g) || []).length >= 3 && (component.match(/<select\b/g) || []).length === 1);
+const pageSrc = src("app/[locale]/marriage-astrology/[slug]/page.tsx");
+check("page: hero tool rendered with variant=\"editorial\" in the lead, and then not repeated in the article",
+  pageSrc.includes('heroTool: <LandingInlineTool tool={heroTool} locale={locale} variant="editorial" />') &&
+  pageSrc.includes("const articleTool = heroTool ? undefined : editorialTool"));
 check("result renders only after a selection (initial state empty)", component.includes("useState('')") && component.includes("{seventh && card && ("));
 check("selector is a labelled native <select> with an aria-live result region",
   /<label htmlFor=\{selectId\}/.test(component) && /<select\s+id=\{selectId\}/.test(component) && component.includes('aria-live="polite"'));
 
 console.log("\n=== 6. MC-03 page identity untouched ===");
 const topic = src("lib/domains/marriage-astrology/topics/spouse-nature.ts");
-check("title / H1 unchanged", topic.includes("title:      'Spouse Nature in Vedic Astrology: Houses & Planets',") && topic.includes("title_hi:   'वैदिक ज्योतिष में जीवनसाथी का स्वभाव',"));
-check("EN + HI meta unchanged", topic.includes("metaDescription: 'Discover how Vedic astrology reveals your spouse\\'s nature") && topic.includes("metaDescription_hi: 'जानें वैदिक ज्योतिष में सप्तम भाव"));
+check("title / H1 = approved Editorial V1 question-led title", topic.includes("title:      'Spouse Nature in Vedic Astrology: What Will My Future Spouse Be Like?',") && topic.includes("title_hi:   'वैदिक ज्योतिष में जीवनसाथी का स्वभाव: मेरा जीवनसाथी कैसा होगा?',"));
+check("EN + HI meta = approved Editorial V1 text", topic.includes("metaDescription: 'What will your future spouse be like?") && topic.includes("metaDescription_hi: 'मेरा जीवनसाथी कैसा होगा? जानें वैदिक ज्योतिष में सप्तम भाव"));
 check("report card unchanged (spouse_nature_report) and ssrFaq / longForm kept", spouseNatureLanding.offer.reportSlug === "spouse_nature_report" && spouseNatureLanding.ssrFaq === true && spouseNatureLanding.longForm === true);
 
 console.log("\n=== 7. Analytics dedupe (MC-04A) ===");

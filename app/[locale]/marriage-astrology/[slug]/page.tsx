@@ -105,6 +105,10 @@ export default function MarriageAstrologyTopic({
 
   // Opt-in editorial article template (docs/seo/JYOTISHASHA_ARTICLE_STANDARD.md); all other topics as before.
   const editorial = editorialLanding(landing)
+  // Editorial: an inline Spouse Lagna tool flagged `editorialHero` leads the hero instead of the article.
+  const editorialTool = editorial?.inlineTool
+  const heroTool = editorialTool?.kind === 'spouse-lagna' && editorialTool.editorialHero ? editorialTool : undefined
+  const articleTool = heroTool ? undefined : editorialTool
 
   return (
     <>
@@ -130,12 +134,19 @@ export default function MarriageAstrologyTopic({
           theme="editorial"
           breadcrumbHomeHref={breadcrumbHomeHref}
           ssrFaq={editorial.ssrFaq}
-          lead={<EditorialLead config={editorial} topic={topic!} locale={locale} />}
+          lead={(
+            <EditorialLead
+              config={editorial}
+              topic={topic!}
+              locale={locale}
+              {...(heroTool && { heroTool: <LandingInlineTool tool={heroTool} locale={locale} variant="editorial" /> })}
+            />
+          )}
           related={<EditorialRelatedGuides config={editorial} domain={domain} topic={topic!} locale={locale} />}
-          {...(editorial.inlineTool && {
+          {...(articleTool && {
             afterSection: {
-              sectionId: editorial.inlineTool.afterSectionId,
-              node: <LandingInlineTool tool={editorial.inlineTool} locale={locale} />,
+              sectionId: articleTool.afterSectionId,
+              node: <LandingInlineTool tool={articleTool} locale={locale} />,
             },
           })}
           {...(editorial.video?.articleSectionId && {
@@ -145,7 +156,7 @@ export default function MarriageAstrologyTopic({
                 <EditorialVideo
                   video={editorial.video}
                   locale={locale}
-                  gridRows={editorialVideoRows(topic!.sections, editorial.video.articleSectionId, editorial.inlineTool?.afterSectionId)}
+                  gridRows={editorialVideoRows(topic!.sections, editorial.video.articleSectionId, articleTool?.afterSectionId)}
                 />
               ),
             }],

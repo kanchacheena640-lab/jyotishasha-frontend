@@ -73,8 +73,8 @@ function shortOf(slug: string): Short | null {
     captionEn: `${iv.heading.en} ${iv.description.en}`, captionHi: iv.heading.hi, playLabel: iv.playLabel, playFeatureName: iv.playFeatureName };
   return null;
 }
-const REPORT_LED = ["love-marriage", "spouse-nature", "married-life"];
-const EDITORIAL = ["arranged-marriage", "delayed-marriage"];
+const REPORT_LED = ["love-marriage", "married-life"];
+const EDITORIAL = ["arranged-marriage", "delayed-marriage", "spouse-nature"];
 const TOOL_LED = ["compatibility", "intercaste-marriage"];
 
 // ===========================================================================
@@ -115,7 +115,9 @@ for (const slug of TOOL_LED) {
   check(`${slug}: free-tool page -> standalone Short card right after the top tool card (no invented report card)`,
     !c.offer && !!c.primaryAction && c.video === undefined && c.inlineVideo?.placement === "after-lead" && c.inlineVideo.afterSectionId === undefined);
 }
-check("spouse-nature: Spouse Lagna tool stays in the article after the intro", marriageTopicLandings["spouse-nature"].inlineTool?.afterSectionId === "introduction");
+check("spouse-nature: Spouse Lagna tool leads the editorial hero (default-layout slot after the intro kept)",
+  marriageTopicLandings["spouse-nature"].inlineTool?.kind === "spouse-lagna" && marriageTopicLandings["spouse-nature"].inlineTool?.editorialHero === true &&
+  marriageTopicLandings["spouse-nature"].inlineTool?.afterSectionId === "introduction");
 const renderer = read("components/authority-engine/AuthorityDetailRenderer.tsx");
 const page = read("app/[locale]/marriage-astrology/[slug]/page.tsx");
 const leadSrc = read("components/authority-engine/landing/TopicLandingLead.tsx");
