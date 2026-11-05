@@ -12,7 +12,15 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   onPlaceSelected: (place: Place) => void;
+  /** Optional -- lets a form associate its own <label htmlFor> with this input. */
+  id?: string;
+  /** Optional -- defaults to the original English placeholder. */
+  placeholder?: string;
+  /** Optional -- replaces the default input classes (the default styling is unchanged when omitted). */
+  className?: string;
 }
+
+const DEFAULT_INPUT_CLASS = "w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-black placeholder-gray-500";
 
 const GOOGLE_MAPS_SCRIPT_ID = 'google-maps-places-script';
 const GOOGLE_MAPS_SRC = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&v=weekly`;
@@ -59,7 +67,7 @@ export function loadGoogleMapsPlaces(): Promise<void> {
   return mapsLoadingPromise;
 }
 
-const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelected }) => {
+const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelected, id, placeholder, className }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // onChange/onPlaceSelected are re-created on every render by the callers
@@ -121,11 +129,12 @@ const PlaceAutocompleteInput: React.FC<Props> = ({ value, onChange, onPlaceSelec
   return (
     <input
       ref={inputRef}
+      id={id}
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-black placeholder-gray-500"
-      placeholder="Enter place of birth"
+      className={className ?? DEFAULT_INPUT_CLASS}
+      placeholder={placeholder ?? "Enter place of birth"}
     />
   );
 };

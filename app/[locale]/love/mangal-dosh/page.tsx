@@ -4,6 +4,8 @@ import { Metadata } from "next";
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
   return {
+    // Session-only page (rendered from this browser's sessionStorage): kept out of search results.
+    robots: { index: false, follow: true },
     title: isHi ? "मंगल दोष विश्लेषण | ज्‍योतिष आशा" : "Mangal Dosh Analysis | Jyotishasha",
     description: isHi 
       ? "अपनी कुंडली में मंगल दोष की स्थिति, प्रभाव और सटीक वैदिक उपाय जानें।" 

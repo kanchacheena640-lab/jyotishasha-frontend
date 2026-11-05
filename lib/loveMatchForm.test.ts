@@ -101,9 +101,11 @@ const mangal = read("app/[locale]/love/mangal-dosh/MangalDoshDetail.tsx");
 check("Mangal detail: missing data is an explained state, not an endless spinner", mangal.includes("setLoaded(true)") && mangal.includes("view.explanation"));
 const page = read("app/[locale]/love/page.tsx");
 check("unsupported claims removed", !/NASA-Grade|Verified by Vedic Experts|high probability of a stable marriage|unmatched by generic/.test(page));
-check("metadata unchanged", page.includes('"Free Kundli Matching for Marriage | Love Compatibility & Guna Milan"') &&
-  page.includes('"फ्री कुंडली मिलान: शादी के लिए 36 गुण और लव कंपैटिबिलिटी"'));
-check("FAQ (and FAQPage schema) text unchanged", page.includes("a score above 18 is considered acceptable, while 25 to 32 is regarded as very good"));
+check("metadata = approved Phase 1 title (EN + HI)", page.includes('"Free Kundli Matching for Marriage – 36 Guna Milan Calculator"') &&
+  page.includes('"फ्री कुंडली मिलान – शादी के लिए 36 गुण मिलान कैलकुलेटर"'));
+check("FAQ (and FAQPage schema) use the contiguous guna bands shared with the Compatibility guide",
+  page.includes("below 18 calls for a careful review of both charts; 18 to 24 is considered average; above 24 and up to 32 is good; above 32 is excellent") &&
+  page.includes("mainEntity: FAQS.map("));
 
 console.log(`\nRESULT: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

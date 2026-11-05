@@ -4,8 +4,10 @@ import { Metadata } from "next";
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
   return {
+    // Session-only page (rendered from this browser's sessionStorage): kept out of search results.
+    robots: { index: false, follow: true },
     title: isHi ? "विवाह संभावना | ज्‍योतिष आशा" : "Marriage Potential | Jyotishasha",
-    description: isHi ? "आपके विवाह की सफलता की संभावना।" : "Your marriage success probability.",
+    description: isHi ? "आपकी विवाह की प्रवृत्ति का संकेतात्मक स्कोर।" : "Your indicative marriage-tendency score.",
   };
 }
 

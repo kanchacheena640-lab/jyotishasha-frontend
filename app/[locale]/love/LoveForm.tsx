@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { useRouter } from "next/navigation";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
 import { WebsiteEvents } from "@/lib/websiteEvents";
@@ -161,104 +161,88 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
     }
   };
 
-  const inputClass = "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm";
-  const labelClass = "block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider";
+  // Presentation only (Phase 1 redesign): every field has a programmatic label, 16px text (no iOS
+  // focus zoom), 48px targets and the Marriage Hub ivory/navy palette. The submit logic above is unchanged.
+  const uid = useId();
+  const fieldId = (section: "boy" | "girl", field: string) => `${uid}-${section}-${field}`;
+  const inputClass = "block w-full min-h-[48px] rounded-xl border border-[#B9AE9C] bg-[#FFFFFF] px-4 text-[16px] text-[#1B2A4A] placeholder:text-[#6B7489] focus:border-[#1B2A4A] focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/30";
+  const labelClass = "mb-1.5 block text-[14px] font-semibold text-[#1B2A4A]";
+  const people = [
+    { key: "boy" as const, legend: isHi ? "वर (लड़का)" : "Groom (Boy)" },
+    { key: "girl" as const, legend: isHi ? "वधू (लड़की)" : "Bride (Girl)" },
+  ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 min-h-screen">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
-          {isHi ? "💍 वैदिक मिलान" : "💍 Vedic Matchmaking"}
-        </h2>
-        <p className="text-gray-400 text-sm">
-          {isHi ? "कुंडली और 36 गुण मिलान" : "Kundli & 36 Guna Milan"}
-        </p>
+    <section aria-labelledby={`${uid}-heading`} className="rounded-2xl border border-[#E8DDC9] bg-[#FFFFFF] p-5 shadow-[0_1px_2px_rgba(27,42,74,0.06)] sm:p-7">
+      <h2 id={`${uid}-heading`} className="text-[20px] font-bold leading-snug text-[#1B2A4A] sm:text-[22px]">
+        {isHi ? "दोनों की जन्म जानकारी दर्ज करें" : "Enter both partners' birth details"}
+      </h2>
+      <p className="mt-1 text-[15px] leading-6 text-[#45516A]">
+        {isHi
+          ? "दोनों की जन्म तिथि, सटीक जन्म समय और जन्म स्थान ज़रूरी हैं — इन्हीं से चंद्र राशि और नक्षत्र निकलते हैं।"
+          : "Date, exact time and place of birth are needed for both — they set each person's Moon sign and nakshatra."}
+      </p>
+
+      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+        {people.map(({ key, legend }) => (
+          <fieldset key={key} className="min-w-0 rounded-xl border border-[#E8DDC9] bg-[#FBF8F2] px-4 pb-4 pt-2 sm:px-5 sm:pb-5">
+            <legend className="px-1 text-[16px] font-bold text-[#1B2A4A]">{legend}</legend>
+            <div className="space-y-3">
+              <div>
+                <label htmlFor={fieldId(key, "name")} className={labelClass}>{isHi ? "पूरा नाम" : "Full name"}</label>
+                <input
+                  id={fieldId(key, "name")}
+                  className={inputClass}
+                  value={form[key].name}
+                  onChange={(e) => update(key, "name", e.target.value)}
+                  placeholder={isHi ? "नाम लिखें" : "Enter name"}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="min-w-0">
+                  <label htmlFor={fieldId(key, "dob")} className={labelClass}>{isHi ? "जन्म तिथि" : "Date of birth"}</label>
+                  <input id={fieldId(key, "dob")} type="date" className={inputClass} value={form[key].dob} onChange={(e) => update(key, "dob", e.target.value)} />
+                </div>
+                <div className="min-w-0">
+                  <label htmlFor={fieldId(key, "tob")} className={labelClass}>{isHi ? "जन्म समय" : "Time of birth"}</label>
+                  <input id={fieldId(key, "tob")} type="time" className={inputClass} value={form[key].tob} onChange={(e) => update(key, "tob", e.target.value)} />
+                </div>
+              </div>
+              <div>
+                <label htmlFor={fieldId(key, "pob")} className={labelClass}>{isHi ? "जन्म स्थान" : "Place of birth"}</label>
+                <PlaceAutocompleteInput
+                  id={fieldId(key, "pob")}
+                  className={inputClass}
+                  placeholder={isHi ? "जन्म स्थान लिखें और सूची से चुनें" : "Type and pick your birth place"}
+                  value={form[key].pob}
+                  onChange={(val) => editPob(key, val)}
+                  onPlaceSelected={(p) => selectPlace(key, p)}
+                />
+              </div>
+            </div>
+          </fieldset>
+        ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* BOY CARD */}
-        <div className="rounded-3xl bg-white/5 border border-white/10 p-6 space-y-4 backdrop-blur-sm relative group">
-          <h2 className="text-lg font-bold text-blue-400">♂ {isHi ? "लड़का" : "Boy's Details"}</h2>
-          <div>
-            <label className={labelClass}>{isHi ? "पूरा नाम" : "Full Name"}</label>
-            <input
-              className={inputClass}
-              value={form.boy.name}
-              onChange={(e) => update("boy", "name", e.target.value)}
-              placeholder={isHi ? "नाम लिखें..." : "Enter name..."}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelClass}>{isHi ? "जन्म तिथि" : "DOB"}</label>
-              <input type="date" className={inputClass} value={form.boy.dob} onChange={(e) => update("boy", "dob", e.target.value)} />
-            </div>
-            <div>
-              <label className={labelClass}>{isHi ? "समय" : "Time"}</label>
-              <input type="time" className={inputClass} value={form.boy.tob} onChange={(e) => update("boy", "tob", e.target.value)} />
-            </div>
-          </div>
-          <div>
-            <label className={labelClass}>{isHi ? "जन्म स्थान" : "Place of Birth"}</label>
-            <PlaceAutocompleteInput
-              value={form.boy.pob}
-              onChange={(val) => editPob("boy", val)}
-              onPlaceSelected={(p) => selectPlace("boy", p)}
-            />
-          </div>
-        </div>
-
-        {/* GIRL CARD */}
-        <div className="rounded-3xl bg-white/5 border border-white/10 p-6 space-y-4 backdrop-blur-sm relative group">
-          <h2 className="text-lg font-bold text-pink-400">♀ {isHi ? "लड़की" : "Girl's Details"}</h2>
-          <div>
-            <label className={labelClass}>{isHi ? "पूरा नाम" : "Full Name"}</label>
-            <input
-              className={inputClass}
-              value={form.girl.name}
-              onChange={(e) => update("girl", "name", e.target.value)}
-              placeholder={isHi ? "नाम लिखें..." : "Enter name..."}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelClass}>{isHi ? "जन्म तिथि" : "DOB"}</label>
-              <input type="date" className={inputClass} value={form.girl.dob} onChange={(e) => update("girl", "dob", e.target.value)} />
-            </div>
-            <div>
-              <label className={labelClass}>{isHi ? "समय" : "Time"}</label>
-              <input type="time" className={inputClass} value={form.girl.tob} onChange={(e) => update("girl", "tob", e.target.value)} />
-            </div>
-          </div>
-          <div>
-            <label className={labelClass}>{isHi ? "जन्म स्थान" : "Place of Birth"}</label>
-            <PlaceAutocompleteInput
-              value={form.girl.pob}
-              onChange={(val) => editPob("girl", val)}
-              onPlaceSelected={(p) => selectPlace("girl", p)}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-12 max-w-sm mx-auto">
+      <div className="mt-6">
         {error && (
-          <p role="alert" data-testid="love-form-error" className="mb-4 rounded-xl border border-rose-400/40 bg-rose-500/10 px-4 py-3 text-sm leading-snug text-rose-100">
+          <p role="alert" data-testid="love-form-error" className="mb-4 rounded-xl border border-[#C0392B]/40 bg-[#FDF0EE] px-4 py-3 text-[15px] leading-snug text-[#8A2A1F]">
             {error}
           </p>
         )}
         <button
+          type="button"
           onClick={submit}
           disabled={loading}
-          className="w-full relative group overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-rose-600 p-px shadow-2xl transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+          aria-busy={loading}
+          className="flex min-h-[52px] w-full items-center justify-center rounded-xl bg-[#A8461F] px-6 text-[17px] font-bold text-[#FFFFFF] transition hover:bg-[#8A3818] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2 disabled:opacity-60 md:mx-auto md:w-auto md:min-w-[320px]"
         >
-          <div className="bg-[#0f0a1e] py-4 rounded-2xl">
-            <span className="text-lg font-bold text-white uppercase tracking-widest">
-              {loading ? (isHi ? "गणना जारी है..." : "Analyzing...") : (isHi ? "शुभ मिलान चेक करें" : "Check Match")}
-            </span>
-          </div>
+          {loading ? (isHi ? "गणना जारी है..." : "Calculating...") : (isHi ? "फ्री में कुंडली मिलान करें" : "Check Kundli Match — Free")}
         </button>
+        <p className="mt-2 text-center text-[13px] leading-5 text-[#5B667D]">
+          {isHi ? "फ्री: 36 गुण स्कोर, कूट-वार विवरण और मंगल दोष जाँच।" : "Free: 36 Guna score, koota-wise breakdown and Mangal Dosh check."}
+        </p>
       </div>
-    </div>
+    </section>
   );
 }

@@ -33,7 +33,7 @@ check("tool-led: no report card in the hero (the free calculator leads; paid ste
 check("primary action points at the existing Kundli Matching calculator route (/love)",
   action.href === "/love" && fs.existsSync(path.join(root, "app/[locale]/love/page.tsx")));
 check("/love is the Kundli Matching / Guna Milan calculator (its own metadata)",
-  /Free Kundli Matching for Marriage \| Love Compatibility & Guna Milan/.test(src("app/[locale]/love/page.tsx")));
+  /Free Kundli Matching for Marriage – 36 Guna Milan Calculator/.test(src("app/[locale]/love/page.tsx")));
 check("calculator collects both partners' birth details and opens /love/result",
   /boy: \{ name: "", dob: "", tob: "", pob: ""/.test(src("app/[locale]/love/LoveForm.tsx")) &&
   /girl: \{ name: "", dob: "", tob: "", pob: ""/.test(src("app/[locale]/love/LoveForm.tsx")) &&
@@ -49,8 +49,8 @@ check("primary action card: localised href (/hi prefix) and WebsiteEvents.ctaCli
 console.log("\n=== B. Existing paid step after the free result (preserved, not changed) ===");
 const rel = reportsData.find((r) => r.slug === "relationship_future_report");
 check("relationship_future_report exists in the catalogue (price comes from the catalogue)", !!rel && typeof rel.price === "number" && rel.price > 0);
-check("result summary offers the report after the free result",
-  src("app/[locale]/love/result/LoveResultSummaryDetail.tsx").includes('go("/love/report/relationship_future_report")'));
+check("result summary offers the report after the free result (one real link, locale-aware)",
+  src("app/[locale]/love/result/LoveResultSummaryDetail.tsx").includes("href={`${lp}/love/report/relationship_future_report`}"));
 check("Ashtakoot detail page offers the report",
   src("app/[locale]/love/matchmaking-compatibility/MatchmakingCompatibilityDetail.tsx").includes("/love/report/relationship_future_report"));
 

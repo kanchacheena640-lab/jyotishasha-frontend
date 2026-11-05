@@ -293,14 +293,11 @@ export default async function sitemap() {
   ];
 
   // ---------------- LOVE ----------------
+  // Landing + the ₹199 product page only. The session-only result pages (/result, /matchmaking-compatibility,
+  // /mangal-dosh, /marriage-potential, /truth-or-dare) render from sessionStorage and are noindex.
   const loveSubPaths = [
     "",
-    "/mangal-dosh",
-    "/marriage-potential",
-    "/matchmaking-compatibility",
     "/report/relationship_future_report",
-    "/result",
-    "/truth-or-dare",
   ];
 
   // The ₹199 product page gets no fabricated lastModified (see createProductUrl).

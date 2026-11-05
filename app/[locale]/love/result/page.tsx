@@ -4,6 +4,8 @@ import { Metadata } from "next";
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
   return {
+    // Session-only page (rendered from this browser's sessionStorage): kept out of search results.
+    robots: { index: false, follow: true },
     title: isHi ? "आपका मिलान परिणाम | ज्‍योतिष आशा" : "Your Matchmaking Result | Jyotishasha",
     description: isHi 
       ? "जानिए अपनी अष्टकूट अनुकूलता और मंगल दोष का विवरण।" 
@@ -15,13 +17,14 @@ export default function LoveResultPage({ params }: { params: { locale: string } 
   const isHi = params.locale === "hi";
   return (
     <>
-      <div className="text-center bg-[#0f0a1e] pt-10 pb-2 px-4">
-        <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-orange-300">
-          {isHi ? "मिलान परिणाम" : "Matchmaking Result"}
+      <main lang={isHi ? "hi" : undefined} className="bg-[#FBF8F2]">
+      <div className="text-center bg-[#FBF8F2] pt-8 pb-1 px-4">
+        <h1 className="text-[30px] md:text-[40px] font-bold leading-tight tracking-tight text-[#1B2A4A]">
+          {isHi ? "कुंडली मिलान परिणाम" : "Kundli Matching Result"}
         </h1>
       </div>
-      {/* Locale ko direct client component mein bhej rahe hain */}
       <LoveResultSummaryDetail locale={params.locale} />
+      </main>
     </>
   );
 }
