@@ -110,6 +110,16 @@ const DUPLICATE_REPORT_CTA_ALLOWLIST: Readonly<Record<string, string>> = {
 };
 
 /**
+ * Compatibility only (Editorial V1, CTO-approved): the Relationship Future Report stays in the topic's
+ * CTA data (documented minimum of one CTA) while the page shows it once, as the in-article card. Valid
+ * ONLY while the page uses the editorial template, which never renders bottom CTAs -- if the page
+ * leaves that template the duplicate would be visible again and check D fails.
+ */
+const EDITORIAL_DATA_ONLY_DUPLICATE: Readonly<Record<string, string>> = {
+  "compatibility": "relationship_future_report",
+};
+
+/**
  * CTAs present in topic data but never rendered, because the adapter only renders 'tool' / 'report'
  * types ('topic' / 'page' / 'external' are dropped). Known at MC-01; resolved when the page adopts
  * the framework (e.g. converted into a contextual/related-question link in MC-10).
@@ -251,7 +261,8 @@ for (const slug of slugs) {
     ...ctas.filter((c) => c.type === "report").map((c) => c.slug),
   ];
   const dupes = [...new Set(offered.filter((s, i) => offered.indexOf(s) !== i))];
-  const allowedDupe = DUPLICATE_REPORT_CTA_ALLOWLIST[slug];
+  const allowedDupe = DUPLICATE_REPORT_CTA_ALLOWLIST[slug]
+    ?? (landing?.theme === "editorial" ? EDITORIAL_DATA_ONLY_DUPLICATE[slug] : undefined);
   const unexpectedDupes = dupes.filter((s) => s !== allowedDupe);
   check(t(`D no new duplicate paid-report CTA (duplicates: ${JSON.stringify(dupes)}, allowlisted: ${JSON.stringify(allowedDupe ?? null)})`), unexpectedDupes.length === 0);
   if (allowedDupe) {

@@ -64,7 +64,8 @@ if (inline?.kind === "contextual-report") {
 }
 const registry = src("components/authority-engine/landing/LandingInlineTool.tsx");
 check("server registry resolves /reports/<slug> + catalogue price for the contextual card",
-  registry.includes("case 'contextual-report'") && registry.includes("reportHref={`/reports/${tool.reportSlug}`} priceRupees={product.price}"));
+  registry.includes("case 'contextual-report'") && registry.includes("reportHref={getReportProductPath(tool.reportSlug, locale)} priceRupees={product.price}") &&
+  src("lib/reportProductSeo.ts").includes("return `/reports/${slug}`;"));
 const card = src("components/authority-engine/landing/ContextualReportCard.tsx");
 check("contextual card is compact and secondary (no large panel / shadow / filled accent button) and tracks clicks",
   !/rounded-3xl|shadow-xl|bg-rose-600/.test(card) && card.includes("bg-white/10") && card.includes("WebsiteEvents.ctaClick(unit.ctaId, unit.screenName)"));

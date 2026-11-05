@@ -75,9 +75,9 @@ function shortOf(slug: string): Short | null {
 }
 const REPORT_LED = ["love-marriage", "married-life"];
 const EDITORIAL = ["arranged-marriage", "delayed-marriage", "spouse-nature"];
-const TOOL_LED = ["compatibility"];
+const TOOL_LED: string[] = [];
 // Tool-led pages on the editorial template: the free-tool card leads the hero; the Short sits in the article.
-const EDITORIAL_TOOL_LED = ["intercaste-marriage"];
+const EDITORIAL_TOOL_LED = ["intercaste-marriage", "compatibility"];
 
 // ===========================================================================
 console.log("1. Mapping: exactly the 7 approved Shorts, one per page");
@@ -117,7 +117,7 @@ for (const slug of EDITORIAL_TOOL_LED) {
   check(`${slug}: editorial tool-led page -> Short inside the article after an existing content section (no report card, no after-lead card)`,
     c.theme === "editorial" && !c.offer && !!c.primaryAction && c.video?.youtubeId === APPROVED[slug] && c.inlineVideo === undefined &&
     c.video.desktopCtaFirst === undefined && !!c.video.articleSectionId &&
-    read(`lib/domains/marriage-astrology/topics/${slug}.ts`).includes(`id: '${c.video.articleSectionId}',`));
+    new RegExp(`id: +'${c.video.articleSectionId}',`).test(read(`lib/domains/marriage-astrology/topics/${slug}.ts`)));
 }
 for (const slug of TOOL_LED) {
   const c = marriageTopicLandings[slug];

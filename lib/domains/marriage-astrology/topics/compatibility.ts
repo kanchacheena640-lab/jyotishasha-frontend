@@ -5,8 +5,8 @@ export const compatibility: DomainTopic = {
   identity: {
     id:         'marriage-astrology:compatibility',
     slug:       'compatibility',
-    title:      'Compatibility in Vedic Astrology: Complete Guide',
-    title_hi:   'वैदिक ज्योतिष में अनुकूलता',
+    title:      'Marriage Compatibility in Vedic Astrology: How Compatible Are We?',
+    title_hi:   'वैदिक ज्योतिष में विवाह अनुकूलता: हम दोनों की अनुकूलता कितनी है?',
     domain:     'astrology',
     subdomain:  'marriage-astrology',
     category:   'marriage',
@@ -25,16 +25,16 @@ export const compatibility: DomainTopic = {
 
   seo: {
     metaTitle:       'Compatibility in Vedic Astrology: Complete Guide',
-    metaDescription: 'Explore Vedic compatibility through Kundli matching, Ashtakoota, Navamsa, and Dasha cycles — a complete guide to karmic alignment and marital harmony.',
-    metaDescription_hi: 'वैदिक ज्योतिष में विवाह अनुकूलता कैसे देखी जाती है — कुंडली मिलान, अष्टकूट गुण मिलान, नाड़ी, भकूट, मंगल दोष, नवांश और दोनों कुंडलियों के सप्तम भाव की पूरी मार्गदर्शिका।',
+    metaDescription: 'How compatible are you as a couple? See how Vedic astrology reads marriage compatibility — Guna Milan and the eight kootas, Mangal Dosha, the Moon, the 7th house, Venus, Jupiter and the Navamsa (D9).',
+    metaDescription_hi: 'हम दोनों की अनुकूलता कितनी है? जानें वैदिक ज्योतिष में विवाह अनुकूलता कैसे देखी जाती है — गुण मिलान और अष्टकूट, मंगल दोष, चंद्रमा, सप्तम भाव, शुक्र, गुरु और नवांश (D9)।',
     robots:          'noindex,follow',
   },
 
   hero: {
     headline:    'Compatibility in Vedic Astrology: Your Karmic Blueprint',
     headline_hi: 'वैदिक ज्योतिष में अनुकूलता: आपका कार्मिक खाका',
-    subtext:     'Vedic astrology evaluates compatibility through Kundli matching, Ashtakoota analysis, planetary karakas, and the Navamsa chart — helping you understand the karmic alignment, shared values, and long-term potential of your partnership.',
-    subtext_hi:  'वैदिक ज्योतिष कुंडली मिलान, अष्टकूट विश्लेषण, ग्रह कारकों और नवांश चार्ट के माध्यम से अनुकूलता का मूल्यांकन करता है — आपको अपनी साझेदारी के कार्मिक तालमेल, साझे मूल्यों और दीर्घकालिक क्षमता को समझने में सहायता करता है।',
+    subtext:     'How two birth charts are read together for marriage — Guna Milan and the eight kootas, Mangal Dosha, the Moon, the 7th house and its lord, Venus, Jupiter and the Navamsa (D9).',
+    subtext_hi:  'विवाह के लिए दो जन्मकुंडलियों को साथ कैसे पढ़ा जाता है — गुण मिलान और अष्टकूट, मंगल दोष, चंद्रमा, सप्तम भाव और सप्तमेश, शुक्र, गुरु और नवांश (D9)।',
   },
 
   taxonomy: {
@@ -49,16 +49,16 @@ export const compatibility: DomainTopic = {
     contentBlocks: [
       {
         id:       'introduction',
-        title:    'Introduction',
-        title_hi: 'परिचय',
+        title:    'What Marriage Compatibility Means in Jyotisha',
+        title_hi: 'ज्योतिष में विवाह अनुकूलता का अर्थ',
         layout:   'list',
         items: [
           {
             id:       'karmic-union',
             label:    'Compatibility as Karmic Assessment',
             label_hi: 'कार्मिक मूल्यांकन के रूप में अनुकूलता',
-            body:     'Vedic astrology, or Jyotisha Vedanga, is a profound system designed to understand the karmic blueprints of human life. Marriage is considered one of the most significant Samskaras (sacraments) — a profound karmic union rooted in Rina-anubandha, the debts and bonds carried forward from previous lifetimes. Evaluating compatibility is not merely about checking scores; it is about assessing the karmic alignment and potential harmony between two souls. Compatibility in Jyotisha is the assessment of energetic resonance and karmic synergy between two individuals — a holistic evaluation of temperaments, values, life goals, and potential for shared growth, encompassing emotional, physical, financial, and spiritual alignment.',
-            body_hi:  'वैदिक ज्योतिष, या ज्योतिष वेदांग, मानव जीवन के कार्मिक खाकों को समझने के लिए डिज़ाइन की गई एक गहन प्रणाली है। विवाह को सबसे महत्वपूर्ण संस्कारों में से एक माना जाता है — एक गहन कार्मिक मिलन जो ऋण-अनुबंध में निहित है। अनुकूलता का मूल्यांकन करना केवल अंक जांचना नहीं है; यह दो आत्माओं के बीच कार्मिक तालमेल और संभावित सद्भाव का आकलन करना है। ज्योतिष में अनुकूलता दो व्यक्तियों के बीच ऊर्जा के मेल और कार्मिक तालमेल का आकलन है।',
+            body:     'In Vedic astrology (Jyotisha), marriage is one of the most important Samskaras, and compatibility is read to understand how two people\'s charts support a shared life — traditionally described as Rina-anubandha, the bond two people carry together. Evaluating compatibility is not merely about checking scores; it is about assessing the karmic alignment and potential harmony between two souls. Compatibility in Jyotisha is the assessment of energetic resonance and karmic synergy between two individuals — a holistic evaluation of temperaments, values, life goals, and potential for shared growth, encompassing emotional, physical, financial, and spiritual alignment.',
+            body_hi:  'वैदिक ज्योतिष में विवाह सबसे महत्वपूर्ण संस्कारों में से एक है, और अनुकूलता यह समझने के लिए देखी जाती है कि दो लोगों की कुंडलियाँ साथ के जीवन को कैसे सहारा देती हैं — जिसे परंपरा में ऋणानुबंध, यानी दो लोगों का साझा बंधन, कहा जाता है। अनुकूलता का मूल्यांकन करना केवल अंक जांचना नहीं है; यह दो आत्माओं के बीच कार्मिक तालमेल और संभावित सद्भाव का आकलन करना है। ज्योतिष में अनुकूलता दो व्यक्तियों के बीच ऊर्जा के मेल और कार्मिक तालमेल का आकलन है।',
           },
           {
             id:       'why-it-matters',
@@ -121,8 +121,8 @@ export const compatibility: DomainTopic = {
             id:       'nadi-dosha',
             label:    'Nadi Dosha',
             label_hi: 'नाड़ी दोष',
-            body:     'Nadi relates to the constitution and elemental balance of the two individuals. It is considered important for health and procreative potential, and carries the highest weight in the Ashtakoota system. Nadi Dosha is significant, but it is also subject to many classical exceptions (Dosha Parihara) — a thorough reading always considers these cancellation rules before forming conclusions.',
-            body_hi:  'नाड़ी दो व्यक्तियों की संरचना और तात्विक संतुलन से संबंधित है। यह स्वास्थ्य और प्रजनन क्षमता के लिए महत्वपूर्ण माना जाता है, और अष्टकूट प्रणाली में सबसे अधिक भार वहन करता है। नाड़ी दोष महत्वपूर्ण है, लेकिन यह कई शास्त्रीय अपवादों (दोष परिहार) के अधीन भी है।',
+            body:     'Nadi relates to the constitution and elemental balance of the two individuals. It is traditionally linked with health and children, and carries the highest weight in the Ashtakoota system. Nadi Dosha is significant, but it is also subject to many classical exceptions (Dosha Parihara) — a thorough reading always considers these cancellation rules before forming conclusions.',
+            body_hi:  'नाड़ी दो व्यक्तियों की संरचना और तात्विक संतुलन से संबंधित है। इसे परंपरागत रूप से स्वास्थ्य और संतान से जोड़ा जाता है, और अष्टकूट प्रणाली में सबसे अधिक भार वहन करता है। नाड़ी दोष महत्वपूर्ण है, लेकिन यह कई शास्त्रीय अपवादों (दोष परिहार) के अधीन भी है।',
           },
           {
             id:       'yoni-matching',
@@ -142,15 +142,15 @@ export const compatibility: DomainTopic = {
             id:       'tara-matching',
             label:    'Tara Matching',
             label_hi: 'तारा मिलान',
-            body:     'Tara matching assesses compatibility based on the Nakshatras of the individuals, focusing on health, longevity, and overall well-being of the partnership. A favorable Tara indicates that the couple\'s combined Nakshatra energies support mutual vitality and the endurance of the bond through time.',
-            body_hi:  'तारा मिलान व्यक्तियों के नक्षत्रों के आधार पर अनुकूलता का आकलन करती है, साझेदारी के स्वास्थ्य, दीर्घायु और समग्र कल्याण पर ध्यान केंद्रित करती है। एक अनुकूल तारा इंगित करती है कि जोड़े की संयुक्त नक्षत्र ऊर्जाएं पारस्परिक जीवन शक्ति और बंधन की स्थायित्व का समर्थन करती हैं।',
+            body:     'Tara matching assesses compatibility based on the Nakshatras of the individuals and is traditionally read for the well-being of the partnership. A favorable Tara indicates that the couple\'s combined Nakshatra energies support mutual vitality and the endurance of the bond through time.',
+            body_hi:  'तारा मिलान व्यक्तियों के नक्षत्रों के आधार पर अनुकूलता का आकलन करता है और परंपरागत रूप से साझेदारी के कल्याण के लिए देखा जाता है। एक अनुकूल तारा इंगित करती है कि जोड़े की संयुक्त नक्षत्र ऊर्जाएं पारस्परिक जीवन शक्ति और बंधन की स्थायित्व का समर्थन करती हैं।',
           },
           {
             id:       'mahendra-stree',
             label:    'Mahendra and Stree Deergha',
             label_hi: 'महेंद्र और स्त्री दीर्घ',
-            body:     'Mahendra promotes prosperity and longevity of the union by assessing the energetic support between the two Nakshatras, while Stree Deergha is associated with the longevity of the partner and the stability of the family structure. Together they address the durability and material foundation of the shared life.',
-            body_hi:  'महेंद्र दो नक्षत्रों के बीच ऊर्जावान समर्थन का आकलन करके मिलन की समृद्धि और दीर्घायु को बढ़ावा देता है, जबकि स्त्री दीर्घ साथी की दीर्घायु और पारिवारिक संरचना की स्थिरता से जुड़ा है। साथ मिलकर वे साझे जीवन की स्थायित्व और भौतिक नींव को संबोधित करते हैं।',
+            body:     'Mahendra is traditionally read for the prosperity and growth of the union, assessing the energetic support between the two Nakshatras, while Stree Deergha is traditionally associated with the stability of the family structure. Together they address the durability and material foundation of the shared life.',
+            body_hi:  'महेंद्र को परंपरागत रूप से मिलन की समृद्धि और वृद्धि के लिए देखा जाता है, जो दो नक्षत्रों के बीच ऊर्जावान समर्थन का आकलन करता है, जबकि स्त्री दीर्घ को परंपरागत रूप से पारिवारिक संरचना की स्थिरता से जोड़ा जाता है। साथ मिलकर वे साझे जीवन की स्थायित्व और भौतिक नींव को संबोधित करते हैं।',
           },
         ],
       },
@@ -434,8 +434,8 @@ export const compatibility: DomainTopic = {
             id:       'summary',
             label:    'Summary',
             label_hi: 'सारांश',
-            body:     'Assessing compatibility through Jyotisha is a journey into understanding karmic blueprints. By integrating houses, planetary Karakas, divisional charts like the Navamsa, and Dasha cycles, Jyotisha provides a structured framework for navigating partnership. The chart is not a constraint but a roadmap — a tool for developing the maturity, compassion, and self-knowledge required to build a genuinely fulfilling union.',
-            body_hi:  'ज्योतिष के माध्यम से अनुकूलता का आकलन करना कार्मिक खाकों को समझने की एक यात्रा है। भावों, ग्रह कारकों, नवांश जैसे विभागीय चार्टों और दशा चक्रों को एकीकृत करके, ज्योतिष साझेदारी को समझने और संभालने के लिए एक व्यवस्थित ढांचा प्रदान करता है। कुंडली एक बाधा नहीं बल्कि एक रोडमैप है — परिपक्वता, करुणा और आत्म-ज्ञान विकसित करने के लिए एक उपकरण।',
+            body:     'Assessing compatibility through Jyotisha helps two people understand how their charts work together. By integrating houses, planetary Karakas, divisional charts like the Navamsa, and Dasha cycles, Jyotisha provides a structured framework for navigating partnership. The chart is not a constraint but a roadmap — a tool for developing the maturity, compassion, and self-knowledge required to build a genuinely fulfilling union.',
+            body_hi:  'ज्योतिष के माध्यम से अनुकूलता का आकलन दो लोगों को यह समझने में मदद करता है कि उनकी कुंडलियाँ साथ मिलकर कैसे काम करती हैं। भावों, ग्रह कारकों, नवांश जैसे विभागीय चार्टों और दशा चक्रों को एकीकृत करके, ज्योतिष साझेदारी को समझने और संभालने के लिए एक व्यवस्थित ढांचा प्रदान करता है। कुंडली एक बाधा नहीं बल्कि एक रोडमैप है — परिपक्वता, करुणा और आत्म-ज्ञान विकसित करने के लिए एक उपकरण।',
           },
         ],
       },
@@ -463,8 +463,8 @@ export const compatibility: DomainTopic = {
             id:       'faq-3',
             label:    'Does the Navamsa reveal my partner\'s nature?',
             label_hi: 'क्या नवांश मेरे साथी की प्रकृति को प्रकट करता है?',
-            body:     'Yes. The Navamsa reveals the inner nature of the partner and the underlying strength and health of the union itself — the qualities and dynamics that emerge in the intimacy and sustained reality of marriage, which the Rashi chart alone cannot fully predict.',
-            body_hi:  'हां। नवांश साथी की आंतरिक प्रकृति और मिलन की अंतर्निहित शक्ति और स्वास्थ्य को प्रकट करता है — वे गुण और व्यवहार जो विवाह की अंतरंगता और निरंतर वास्तविकता में उभरती हैं, जिसे राशि चार्ट अकेले पूरी तरह से भविष्यवाणी नहीं कर सकता।',
+            body:     'It adds depth. The Navamsa (D9) shows the inner quality of the partnership — how the marriage feels once it is lived day to day — alongside what the birth chart shows.',
+            body_hi:  'यह गहराई जोड़ता है। नवांश (D9) साझेदारी की आंतरिक गुणवत्ता दिखाता है — रोज़मर्रा के वैवाहिक जीवन में रिश्ता कैसा महसूस होता है — जिसे जन्मकुंडली के साथ मिलाकर पढ़ा जाता है।',
           },
           {
             id:       'faq-4',
@@ -496,10 +496,10 @@ export const compatibility: DomainTopic = {
           },
           {
             id:       'faq-8',
-            label:    'Can astrology tell if I will have a love or arranged marriage?',
-            label_hi: 'क्या ज्योतिष बता सकता है कि मेरा प्रेम विवाह होगा या व्यवस्थित?',
-            body:     'Astrology can show the nature of the partnership and the likely circumstances of meeting — a strong 5th house suggests romance-driven connection, while a strong 9th house suggests a family-mediated process — but not with absolute certainty. The individual\'s own choices and the timing of Dashas ultimately shape which pathway the union takes.',
-            body_hi:  'ज्योतिष साझेदारी की प्रकृति और मिलने की संभावित परिस्थितियों को दिखा सकता है — एक मजबूत पंचम भाव रोमांस-चालित संबंध का सुझाव देता है, जबकि एक मजबूत नवम भाव परिवार-मध्यस्थ प्रक्रिया का — लेकिन पूर्ण निश्चितता के साथ नहीं।',
+            label:    'Does Mangal Dosha in one chart stop a match?',
+            label_hi: 'क्या एक कुंडली में मंगल दोष मिलान को रोक देता है?',
+            body:     'Not on its own. Mangal Dosha is compared across both charts; when both partners have it, or when classical cancellations apply, it is traditionally considered balanced. The free Kundli Matching result includes a Mangal Dosh check.',
+            body_hi:  'अकेले नहीं। मंगल दोष दोनों कुंडलियों में साथ देखा जाता है; जब दोनों में हो, या शास्त्रीय परिहार लागू हों, तो इसे परंपरागत रूप से संतुलित माना जाता है। फ्री कुंडली मिलान परिणाम में मंगल दोष की जाँच शामिल है।',
           },
           {
             id:       'faq-9',
@@ -510,25 +510,18 @@ export const compatibility: DomainTopic = {
           },
           {
             id:       'faq-10',
-            label:    'Is compatibility analysis the same as predicting marriage success?',
-            label_hi: 'क्या अनुकूलता विश्लेषण विवाह सफलता की भविष्यवाणी के समान है?',
-            body:     'No. Compatibility analysis is a snapshot of current karmic alignment between two charts, whereas predicting success requires a deep understanding of ongoing karmic evolution — how both partners grow, adapt, and choose over time. Compatibility creates the conditions for success; the partners\' conscious, sustained effort builds it day by day.',
-            body_hi:  'नहीं। अनुकूलता विश्लेषण दो कुंडलियों के बीच वर्तमान कार्मिक तालमेल की एक झलक है, जबकि सफलता की भविष्यवाणी के लिए निरंतर कार्मिक विकास की गहरी समझ की आवश्यकता होती है। अनुकूलता सफलता की स्थितियां बनाती है; साझेदारों का सचेत, निरंतर प्रयास इसे दिन-प्रतिदिन बनाता है।',
+            label:    'How many gunas should match for marriage?',
+            label_hi: 'विवाह के लिए कितने गुण मिलने चाहिए?',
+            body:     'Guna Milan scores are traditionally read in bands out of 36: below 18 calls for a careful review of both charts; 18 to 24 is considered average; above 24 and up to 32 is good; above 32 is excellent. The score alone does not decide compatibility — astrologers also weigh Nadi and Bhakoot, Mangal Dosha and both full birth charts.',
+            body_hi:  'गुण मिलान के अंक परंपरागत रूप से 36 में से इन श्रेणियों में पढ़े जाते हैं: 18 से कम होने पर दोनों कुंडलियों की सावधानी से जाँच की जाती है; 18 से 24 तक औसत; 24 से अधिक और 32 तक अच्छा; और 32 से अधिक उत्तम माना जाता है। केवल अंक अनुकूलता तय नहीं करते — ज्योतिषी नाड़ी और भकूट, मंगल दोष और दोनों पूरी जन्मकुंडलियाँ भी देखते हैं।',
           },
         ],
       },
     ],
+    // Editorial V1: the editorial template does not render these bottom CTAs; the Relationship Future
+    // Report is shown once, as the in-article card (_landing.ts). The separate Mangal Dosh tool CTA was
+    // removed (the free match result already includes the check).
     ctas: [
-      {
-        id:             'cta-mangal-dosh',
-        type:           'tool',
-        slug:           'mangal-dosh',
-        label:          'Also Check Manglik Dosha',
-        label_hi:       'मांगलिक दोष भी जाँचें',
-        description:    'Mars placement is one factor in Kundli matching — check it separately for each partner.',
-        description_hi: 'मंगल की स्थिति कुंडली मिलान का एक कारक है — इसे हर साथी के लिए अलग से जाँचें।',
-        variant:        'secondary',
-      },
       {
         id:             'cta-relationship-future-report',
         type:           'report',
@@ -562,11 +555,15 @@ export const compatibility: DomainTopic = {
 
   schemaSignals: {
     expertise: 'Authored by Vedic astrologers specializing in compatibility, Kundli matching, Ashtakoota, and Navamsa analysis.',
+    // First authored in commit 7cd8637 (2026-07-20, "marriage hub").
+    datePublished: '2026-07-20',
   },
 
   authority: {
     reviewStatus:   'not-reviewed',
     contentVersion: 1,
+    // Editorial V1 (2026-11-05): question-led H1/meta, guna-band and Mangal Dosha FAQs, positive rewording.
+    lastUpdated:    '2026-11-05',
   },
 
   publishing: {

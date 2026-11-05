@@ -3,6 +3,7 @@
 // hard-code a product price. Topics without an inlineTool never render this.
 
 import { reportsData } from '@/app/data/reportsData'
+import { getReportProductPath } from '@/lib/reportProductSeo'
 import type { Locale } from '@/lib/authority-engine/types'
 import type { TopicLandingInlineTool } from '@/lib/authority-engine/landing-types'
 import SpouseLagnaTool from './SpouseLagnaTool'
@@ -24,7 +25,8 @@ export default function LandingInlineTool({ tool, locale, variant = 'dark' }: Pr
     case 'contextual-report': {
       const product = reportsData.find(r => r.slug === tool.reportSlug)
       if (!product) return null
-      return <ContextualReportCard unit={tool} locale={locale} reportHref={`/reports/${tool.reportSlug}`} priceRupees={product.price} variant={variant} />
+      // The real, locale-aware product page (= /reports/<slug> for every report except the Relationship Future Report).
+      return <ContextualReportCard unit={tool} locale={locale} reportHref={getReportProductPath(tool.reportSlug, locale)} priceRupees={product.price} variant={variant} />
     }
     default:
       return null

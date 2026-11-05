@@ -396,27 +396,28 @@ export const spouseNatureLanding: TopicLandingConfig = {
   inlineTool: { kind: 'spouse-lagna', afterSectionId: 'introduction', reportSlug: 'spouse_nature_report', editorialHero: true },
 }
 
-// Tool-led (P1): the primary action is the EXISTING free Kundli Matching calculator (/love). Its result
-// pages already offer the Relationship Future Report, so this page carries no report card of its own
-// (the existing bottom report CTA stays as a secondary option).
+// Tool-led (P1): the primary action is the EXISTING free Kundli Matching calculator (/love); its result
+// pages already offer the Relationship Future Report. Editorial V1: ivory template, tool-led hero (no
+// hero report); the ₹199 Relationship Future Report is a secondary card after the Ashtakoota section,
+// described only by what its sample shows (kootas, both 5th/7th houses, Venus, Dasha -- no D9 or Mangal).
 export const compatibilityLanding: ToolLedLandingConfig = {
-  inlineVideo: {
+  theme: 'editorial',
+  // Editorial: the Short sits after the opening section and stays beside the article on desktop.
+  video: {
     youtubeId: '_BEtbbOlCOQ',
     posterSrc: '/media/compatibility-short-poster.webp',
     posterWidth: 480,
     posterHeight: 854,
-    // Free-tool page (no report card): the Short card sits right after the top tool card.
-    placement: 'after-lead',
-    heading: { en: 'Watch: Why Kundli Matching Matters Before Marriage', hi: 'देखें: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
-    description: { en: 'A short video (in Hindi) on why compatibility is checked before marriage.', hi: 'विवाह से पहले अनुकूलता जाँचने के महत्व पर एक छोटा वीडियो।' },
+    caption: { en: 'Watch: Why Kundli Matching Matters Before Marriage (in Hindi)', hi: 'देखें: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
     playLabel: { en: 'Play video: Why Kundli Matching Matters Before Marriage', hi: 'वीडियो चलाएं: शादी से पहले कुंडली मिलान क्यों ज़रूरी है?' },
     playFeatureName: 'compatibility_video_play',
+    articleSectionId: 'introduction',
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'Marriage compatibility in Vedic astrology is broader than a single Guna Milan score. Kundli matching usually starts with the Ashtakoota system — 36 gunas, including Nadi, Bhakoot and Graha Maitri — and a Mangal Dosha check, and is then read alongside both full birth charts: the Moon for emotional fit, the 7th house and its lord, Venus and Jupiter, and the Navamsa (D9). A high score does not by itself mean a happy marriage, and a low score is not a verdict on its own.',
-    hi: 'वैदिक ज्योतिष में विवाह की अनुकूलता केवल गुण मिलान के अंकों तक सीमित नहीं है। कुंडली मिलान आमतौर पर अष्टकूट पद्धति — 36 गुण, जिनमें नाड़ी, भकूट और ग्रह मैत्री शामिल हैं — और मंगल दोष की जाँच से शुरू होता है, और फिर दोनों की पूरी जन्मकुंडली के साथ पढ़ा जाता है: भावनात्मक मेल के लिए चंद्रमा, सप्तम भाव और सप्तमेश, शुक्र और गुरु, और नवांश (D9)। अधिक गुण अपने आप सुखी विवाह का प्रमाण नहीं हैं, और कम गुण अकेले कोई अंतिम फैसला नहीं हैं।',
+    en: 'Marriage compatibility in Vedic astrology is broader than a single Guna Milan score. Kundli matching usually starts with the Ashtakoota system — 36 gunas, including Nadi, Bhakoot and Graha Maitri — and a Mangal Dosha check, and is then read alongside both full birth charts: the Moon for emotional fit, the 7th house and its lord, Venus and Jupiter, and the Navamsa (D9). The Guna score is the starting point; the full reading of both charts shows how well the two of you fit together.',
+    hi: 'वैदिक ज्योतिष में विवाह की अनुकूलता केवल गुण मिलान के अंकों तक सीमित नहीं है। कुंडली मिलान आमतौर पर अष्टकूट पद्धति — 36 गुण, जिनमें नाड़ी, भकूट और ग्रह मैत्री शामिल हैं — और मंगल दोष की जाँच से शुरू होता है, और फिर दोनों की पूरी जन्मकुंडली के साथ पढ़ा जाता है: भावनात्मक मेल के लिए चंद्रमा, सप्तम भाव और सप्तमेश, शुक्र और गुरु, और नवांश (D9)। गुण मिलान का स्कोर शुरुआत है; दोनों कुंडलियों का पूरा विश्लेषण बताता है कि आप दोनों का तालमेल कितना अच्छा है।',
   },
 
   primaryAction: {
@@ -453,6 +454,21 @@ export const compatibilityLanding: ToolLedLandingConfig = {
   ssrFaq: true,
   // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
   longForm: true,
+
+  inlineTool: {
+    kind: 'contextual-report',
+    afterSectionId: 'kundli-matching-system',
+    reportSlug: 'relationship_future_report',
+    eyebrow: { en: 'Relationship Future Report', hi: 'रिलेशनशिप फ्यूचर रिपोर्ट' },
+    heading: { en: 'Want the Full Two-Chart Reading?', hi: 'दोनों कुंडलियों का पूरा विश्लेषण चाहते हैं?' },
+    body: {
+      en: 'The Relationship Future Report reads both of your charts together — every koota of your Ashtakoot match, both charts\' 5th and 7th houses and Venus, and your current Dasha periods.',
+      hi: 'रिलेशनशिप फ्यूचर रिपोर्ट आप दोनों की कुंडलियाँ साथ पढ़ती है — अष्टकूट मिलान का हर कूट, दोनों कुंडलियों के पंचम और सप्तम भाव व शुक्र, और आपकी वर्तमान दशाएँ।',
+    },
+    ctaLabel: { en: 'Get Relationship Future Report – ₹{price}', hi: 'रिलेशनशिप फ्यूचर रिपोर्ट पाएं – ₹{price}' },
+    ctaId: 'compatibility_relationship_future_report_cta',
+    screenName: 'compatibility_topic',
+  },
 }
 
 // Report-led (P2): most readers want to know what married life may be like, not to fix an existing
