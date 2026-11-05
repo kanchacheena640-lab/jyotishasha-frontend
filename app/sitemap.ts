@@ -12,6 +12,7 @@ import { hinduMonthsData } from "@/lib/data/hinduMonthsData";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 import { getAuthorityDomain, getAllTopicSlugs } from "@/lib/authority-engine/resolver";
 import { getReportProductPath, RELATIONSHIP_REPORT_PATH } from "@/lib/reportProductSeo";
+import { KUNDLI_MATCHING_PATH } from "@/lib/kundliMatchingRoute";
 import { listFocusedReportHumanSlugs } from "@/app/data/focusedReportsConfig";
 
 export default async function sitemap() {
@@ -292,24 +293,20 @@ export default async function sitemap() {
     createUrl(`${baseUrl}/hi/blogs`, 0.65, "daily"),
   ];
 
-  // ---------------- LOVE ----------------
-  // Landing + the ₹199 product page only. The session-only result pages (/result, /matchmaking-compatibility,
-  // /mangal-dosh, /marriage-potential, /truth-or-dare) render from sessionStorage and are noindex.
-  const loveSubPaths = [
-    "",
-    "/report/relationship_future_report",
+  // ---------------- KUNDLI MATCHING / LOVE ----------------
+  // The Free Kundli Matching landing is /kundli-matching (the old /love URL 308-redirects there, so it is not
+  // listed). Under /love only the ₹199 product page is listed; the session-only result pages (/result,
+  // /matchmaking-compatibility, /mangal-dosh, /marriage-potential, /truth-or-dare) are noindex.
+  const loveUrls = [
+    createUrl(`${baseUrl}${KUNDLI_MATCHING_PATH}`, 0.75, "monthly"),
+    // The ₹199 product page gets no fabricated lastModified (see createProductUrl).
+    createProductUrl(`${baseUrl}${RELATIONSHIP_REPORT_PATH}`, 0.6, "monthly"),
   ];
 
-  // The ₹199 product page gets no fabricated lastModified (see createProductUrl).
-  const isProductPath = (path: string) => `/love${path}` === RELATIONSHIP_REPORT_PATH;
-
-  const loveUrls = loveSubPaths.map((path) =>
-    (isProductPath(path) ? createProductUrl : createUrl)(`${baseUrl}/love${path}`, path === "" ? 0.75 : 0.6, "monthly")
-  );
-
-  const loveUrlsHi = loveSubPaths.map((path) =>
-    (isProductPath(path) ? createProductUrl : createUrl)(`${baseUrl}/hi/love${path}`, path === "" ? 0.7 : 0.55, "monthly")
-  );
+  const loveUrlsHi = [
+    createUrl(`${baseUrl}/hi${KUNDLI_MATCHING_PATH}`, 0.7, "monthly"),
+    createProductUrl(`${baseUrl}/hi${RELATIONSHIP_REPORT_PATH}`, 0.55, "monthly"),
+  ];
 
   // ---------------- MARRIAGE ASTROLOGY (authority cluster) ----------------
   // Hub + every topic registered in the authority engine (the same registry

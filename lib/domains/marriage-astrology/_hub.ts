@@ -46,7 +46,7 @@ export const marriageAstrologyHub: IntentHubConfig = {
   toolsHeading:    'Explore Free Marriage Tools',
   toolsHeading_hi: 'विवाह के फ्री टूल्स',
   tools: [
-    { href: '/love', icon: '💍',
+    { href: '/kundli-matching', icon: '💍',
       title: 'Kundli Matching', title_hi: 'कुंडली मिलान',
       benefit: '36-guna Ashtakoot score with a koota breakdown and Mangal Dosh check for both partners.',
       benefit_hi: 'दोनों के लिए 36 गुणों का अष्टकूट स्कोर, हर कूट का ब्योरा और मंगल दोष जाँच।' },

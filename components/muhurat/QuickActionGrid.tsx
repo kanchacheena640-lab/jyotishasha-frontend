@@ -25,7 +25,7 @@ export const QuickActionGrid = ({ activity, locale, isHi }: QuickActionProps) =>
         return {
           title: isHi ? "बेस्ट मैच मेकिंग: अष्टकूट मिलान के 36 गुणों की जांच" : "Best Match Making: Check 8 Factors of Compatibility",
           desc: isHi ? "मुहूर्त के साथ-साथ आपसी तालमेल और मांगलिक दोष की जानकारी बहुत जरूरी है।" : "Compatibility and Manglik Dosha analysis is crucial.",
-          link: `${locale === "hi" ? "/hi" : ""}/love`,
+          link: `${locale === "hi" ? "/hi" : ""}/kundli-matching`,
           icon: "❤️",
           color: "from-rose-900/60 to-pink-900/60",
           border: "border-pink-400/30"

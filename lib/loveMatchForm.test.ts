@@ -99,7 +99,7 @@ check("approximate result shows no number", tile.includes('precision === "approx
 check("Mangal tile shows plain labels, never the raw signal or CHECK", tile.includes("mangalView.label") && !tile.includes('"CHECK"'));
 const mangal = read("app/[locale]/love/mangal-dosh/MangalDoshDetail.tsx");
 check("Mangal detail: missing data is an explained state, not an endless spinner", mangal.includes("setLoaded(true)") && mangal.includes("view.explanation"));
-const page = read("app/[locale]/love/page.tsx");
+const page = read("app/[locale]/kundli-matching/page.tsx");
 check("unsupported claims removed", !/NASA-Grade|Verified by Vedic Experts|high probability of a stable marriage|unmatched by generic/.test(page));
 check("metadata = approved Phase 1 title (EN + HI)", page.includes('"Free Kundli Matching for Marriage – 36 Guna Milan Calculator"') &&
   page.includes('"फ्री कुंडली मिलान – शादी के लिए 36 गुण मिलान कैलकुलेटर"'));

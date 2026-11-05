@@ -88,7 +88,7 @@ async function main() {
     for (const u of productUrls) assert.ok(!("lastModified" in byUrl.get(u)), `${u} has lastModified`);
   });
   check("scope: non-product URLs are unchanged (still emitted with lastModified)", () => {
-    for (const u of [`${SITE}/love`, `${SITE}/hi/love`, `${SITE}/privacy-policy`, `${SITE}/tools`]) {
+    for (const u of [`${SITE}/kundli-matching`, `${SITE}/hi/kundli-matching`, `${SITE}/privacy-policy`, `${SITE}/tools`]) {
       assert.ok(byUrl.has(u), `${u} missing`);
       assert.ok("lastModified" in byUrl.get(u), `${u} lost lastModified`);
     }

@@ -432,7 +432,7 @@ export const compatibilityLanding: ToolLedLandingConfig = {
       en: 'After your free result you can choose a detailed two-chart report.',
       hi: 'फ्री परिणाम के बाद आप दोनों कुंडलियों की विस्तृत रिपोर्ट चुन सकते हैं।',
     },
-    href: '/love',
+    href: '/kundli-matching',
     ctaId: 'compatibility_kundli_matching_cta',
     screenName: 'compatibility_topic',
   },

@@ -1,5 +1,6 @@
 import MatchmakingCompatibilityDetail from "./MatchmakingCompatibilityDetail";
 import { Metadata } from "next";
+import { DetailPageFrame } from "../loveDetailUi";
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
@@ -16,14 +17,12 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 export default function MatchmakingCompatibilityPage({ params }: { params: { locale: string } }) {
   const isHi = params.locale === "hi";
   return (
-    <>
-      <div className="text-center bg-[#0f0a1e] pt-10 pb-2 px-4">
-        <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-300">
-          🧿 {isHi ? "अष्टकूट मिलान" : "Matchmaking Compatibility"}
-        </h1>
-      </div>
-      {/* Locale ko Client Component mein bhej rahe hain */}
+    <DetailPageFrame
+      isHi={isHi}
+      title={isHi ? "अष्टकूट मिलान: कूट-वार विवरण" : "Ashtakoot Matching: Koota by Koota"}
+      subtitle={isHi ? "आपके 36 गुण मिलान का हर कूट और उसका अर्थ" : "Every koota of your 36 Guna Milan and what it means"}
+    >
       <MatchmakingCompatibilityDetail locale={params.locale} />
-    </>
+    </DetailPageFrame>
   );
 }

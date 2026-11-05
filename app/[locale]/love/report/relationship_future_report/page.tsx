@@ -98,7 +98,7 @@ export default async function ReportPage({ params }: { params: { locale: string 
         <ProductBreadcrumb
           items={[
             { name: isHi ? "होम" : "Home", path: prefix },
-            { name: isHi ? "प्रेम" : "Love", path: `${prefix}/love` },
+            { name: isHi ? "कुंडली मिलान" : "Kundli Matching", path: `${prefix}/kundli-matching` },
             { name, path: `${prefix}${RELATIONSHIP_REPORT_PATH}` },
           ]}
         />

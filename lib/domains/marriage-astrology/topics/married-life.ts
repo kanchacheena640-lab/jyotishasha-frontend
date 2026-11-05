@@ -511,7 +511,7 @@ export const marriedLife: DomainTopic = {
   relationships: {
     crossLinks: [
       {
-        domain:   'love',
+        domain:   'kundli-matching',
         slug:     '',
         relation: 'cross-domain-ref',
         label:    'Check Compatibility — Free Kundli Matching',

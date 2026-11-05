@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loadLoveTools } from "@/lib/loveTools";
+import { kundliMatchingHref } from "@/lib/kundliMatchingRoute";
+import { DetailBody, DetailLoading, DetailNextSteps, DetailUnavailable, detailCard } from "../loveDetailUi";
 
 export default function TruthOrDareDetail({ locale }: { locale: string }) {
   const router = useRouter();
@@ -21,7 +23,7 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
       payload = null;
     }
     if (!payload || !sessionStorage.getItem("love_summary")) {
-      router.replace(`${isHi ? "/hi" : ""}/love`);
+      router.replace(kundliMatchingHref(isHi));
       return;
     }
     // Loaded after the main result (lib/loveTools.ts): reuses the load in flight, or loads it again after a reload.
@@ -37,90 +39,54 @@ export default function TruthOrDareDetail({ locale }: { locale: string }) {
 
   if (unavailable) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#0f0a1e] px-4">
-        <div className="max-w-md text-center space-y-5 text-white">
-          <p className="text-gray-300">{isHi ? "यह हिस्सा अभी नहीं निकल सका। कृपया थोड़ी देर बाद फिर से देखें।" : "This part couldn't be calculated right now. Please try again in a little while."}</p>
-          <button onClick={() => router.push(`${isHi ? "/hi" : ""}/love/result`)} className="px-6 py-3 rounded-xl bg-white text-rose-900 font-bold">
-            {isHi ? "परिणाम पर वापस जाएँ" : "Back to result"}
-          </button>
-        </div>
-      </div>
+      <DetailUnavailable
+        isHi={isHi}
+        message={isHi ? "यह हिस्सा अभी नहीं निकल सका। कृपया थोड़ी देर बाद फिर से देखें।" : "This part couldn't be calculated right now. Please try again in a little while."}
+      />
     );
   }
 
   if (!data) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-[#0f0a1e]">
-        <div className="w-10 h-10 border-4 border-rose-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
+    return <DetailLoading isHi={isHi} />;
   }
 
   // Verdict logic based on API (TRUTH or DARE)
   const isTruth = data.verdict === "TRUTH";
 
+  // Presentation only (editorial redesign): the data logic above is unchanged.
+  const verdictLabel = data.verdict === "TRUTH" ? (isHi ? "ट्रुथ" : "Truth") : data.verdict === "DARE" ? (isHi ? "डेयर" : "Dare") : data.verdict;
+  const accent = isTruth ? "border-[#9CCBAE] bg-[#E8F3EC] text-[#1E6B3A]" : "border-[#E6C28A] bg-[#FDF3E3] text-[#8A4B00]";
+
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-10 bg-[#0f0a1e] min-h-screen text-white">
-      
-      {/* 🔮 Header */}
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-orange-300 uppercase tracking-tighter">
-          {isHi ? "ट्रुथ या डेयर" : "Truth or Dare"}
-        </h2>
-        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">
-          {isHi ? "रिलेशनशिप रियलिटी चेक" : "Relationship Reality Check"}
-        </p>
-      </div>
+    <DetailBody>
+      <section aria-labelledby="truth-verdict-heading" className={detailCard}>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 id="truth-verdict-heading" className="text-[20px] font-bold leading-snug text-[#1B2A4A]">
+            {isHi ? "आपका परिणाम" : "Your verdict"}
+          </h2>
+          {verdictLabel && (
+            <span data-testid="truth-verdict" className={`rounded-lg border px-3 py-1 text-[16px] font-bold ${accent}`}>{verdictLabel}</span>
+          )}
+        </div>
+        {data.verdict_line && <p className="mt-3 text-[17px] leading-8 text-[#1B2A4A]">{data.verdict_line}</p>}
+      </section>
 
-      {/* 🚥 Verdict Card (Dynamic Color & Text) */}
-      <div className={`rounded-[2.5rem] p-10 text-center border-4 shadow-2xl transition-all duration-700 ${
-        isTruth 
-          ? "bg-emerald-600/10 border-emerald-500/30 shadow-emerald-500/10" 
-          : "bg-rose-600/10 border-rose-500/30 shadow-rose-500/10"
-      }`}>
-        <p className={`text-7xl md:text-9xl font-black italic mb-4 drop-shadow-2xl ${isTruth ? 'text-emerald-400' : 'text-rose-500'}`}>
-          {data.verdict}
-        </p>
-        <p className="text-lg md:text-2xl font-medium text-gray-200">
-          {data.verdict_line}
-        </p>
-      </div>
+      {Array.isArray(data.blocks) && data.blocks.length > 0 && (
+        <ul className="space-y-3">
+          {data.blocks.map((block: any, i: number) => (
+            <li key={block.id || i} className={detailCard}>
+              {block.title && <h3 className="text-[17px] font-bold text-[#1B2A4A]">{block.title}</h3>}
+              {block.text && <p className="mt-1.5 text-[16px] leading-7 text-[#45516A]">{block.text}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
 
-      {/* 📊 Analysis Blocks (Looping through API blocks) */}
-      <div className="grid gap-4">
-        {data.blocks?.map((block: any, i: number) => (
-          <div 
-            key={block.id || i} 
-            className="rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/[0.08] transition-all group"
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <div className={`w-2 h-2 rounded-full ${isTruth ? 'bg-emerald-500' : 'bg-rose-500'}`}></div>
-              <h3 className="font-black text-white uppercase text-xs tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
-                {block.title}
-              </h3>
-            </div>
-            <p className="text-sm md:text-lg text-gray-300 leading-relaxed font-medium">
-              {block.text}
-            </p>
-          </div>
-        ))}
-      </div>
+      {data.disclaimers?.[0] && (
+        <p className="text-[14px] leading-6 text-[#5B667D]">{data.disclaimers[0]}</p>
+      )}
 
-      {/* 🛡️ Disclaimer Footer */}
-      <div className="text-center">
-        <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-10">
-          {data.disclaimers?.[0]}
-        </p>
-        
-        {/* 🚀 Premium CTA */}
-        <button
-          onClick={() => router.push(`${isHi ? "/hi" : ""}/love/report/relationship_future_report`)}
-          className="w-full py-6 bg-white text-rose-900 font-black text-xl rounded-2xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all"
-        >
-          {isHi ? "पूरी रिपोर्ट अनलॉक करें" : "Unlock Full Report"}
-        </button>
-      </div>
-
-    </div>
+      <DetailNextSteps isHi={isHi} reportHref={`${isHi ? "/hi" : ""}/love/report/relationship_future_report`} />
+    </DetailBody>
   );
 }

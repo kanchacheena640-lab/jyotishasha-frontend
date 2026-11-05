@@ -30,10 +30,10 @@ const action = compatibilityLanding.primaryAction;
 console.log("=== A. Tool-led landing -> existing calculator ===");
 check("landing registered for compatibility", marriageTopicLandings["compatibility"] === compatibilityLanding);
 check("tool-led: no report card in the hero (the free calculator leads; paid step after the result or the Ashtakoota section)", compatibilityLanding.offer === undefined);
-check("primary action points at the existing Kundli Matching calculator route (/love)",
-  action.href === "/love" && fs.existsSync(path.join(root, "app/[locale]/love/page.tsx")));
-check("/love is the Kundli Matching / Guna Milan calculator (its own metadata)",
-  /Free Kundli Matching for Marriage – 36 Guna Milan Calculator/.test(src("app/[locale]/love/page.tsx")));
+check("primary action points at the Kundli Matching calculator route (/kundli-matching)",
+  action.href === "/kundli-matching" && fs.existsSync(path.join(root, "app/[locale]/kundli-matching/page.tsx")));
+check("/kundli-matching is the Kundli Matching / Guna Milan calculator (its own metadata)",
+  /Free Kundli Matching for Marriage – 36 Guna Milan Calculator/.test(src("app/[locale]/kundli-matching/page.tsx")));
 check("calculator collects both partners' birth details and opens /love/result",
   /boy: \{ name: "", dob: "", tob: "", pob: ""/.test(src("app/[locale]/love/LoveForm.tsx")) &&
   /girl: \{ name: "", dob: "", tob: "", pob: ""/.test(src("app/[locale]/love/LoveForm.tsx")) &&

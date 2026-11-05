@@ -41,6 +41,12 @@ const nextConfig = {
         destination: '/holi-:year',
         permanent: true,
       },
+      // Free Kundli Matching landing moved /love -> /kundli-matching (permanent, 308). Exact paths only:
+      // every /love/* child route (session results, ₹199 product page) keeps its URL. /en/love is matched
+      // here too so it lands in one hop instead of chaining through the middleware's /en/* redirect.
+      { source: '/love', destination: '/kundli-matching', permanent: true },
+      { source: '/hi/love', destination: '/hi/kundli-matching', permanent: true },
+      { source: '/en/love', destination: '/kundli-matching', permanent: true },
       // F10-P03: obsolete ₹199 product URL -> the real product page (was an
       // empty server page with a client-side redirect).
       {

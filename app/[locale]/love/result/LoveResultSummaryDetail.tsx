@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LOVE_APPROXIMATE_COPY, loveScorePrecision } from "@/lib/loveApproximate";
 import { mangalSignalView } from "@/lib/loveMangalSignal";
 import { loadLoveTools, type LoveToolsState } from "@/lib/loveTools";
+import { kundliMatchingHref } from "@/lib/kundliMatchingRoute";
 
 export default function LoveResultSummaryDetail({ locale }: { locale: string }) {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
     const s = sessionStorage.getItem("love_summary");
 
     if (!s) {
-      router.replace(`${isHi ? "/hi" : ""}/love`);
+      router.replace(kundliMatchingHref(isHi));
       return;
     }
 
@@ -48,7 +49,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
         setTools({ status: "failed" });
       }
     } catch (e) {
-      router.replace(`${isHi ? "/hi" : ""}/love`);
+      router.replace(kundliMatchingHref(isHi));
     }
     return () => { cancelled = true; };
   }, [router, locale]);
@@ -209,7 +210,7 @@ export default function LoveResultSummaryDetail({ locale }: { locale: string }) 
         </section>
 
         <div className="flex flex-wrap gap-x-6 gap-y-1">
-          <Link href={`${lp}/love`} className={textLink}>{isHi ? "दूसरा मिलान करें" : "Check another match"}</Link>
+          <Link href={kundliMatchingHref(isHi)} className={textLink}>{isHi ? "दूसरा मिलान करें" : "Check another match"}</Link>
           <Link href={`${lp}/marriage-astrology/compatibility`} className={textLink}>{isHi ? "विवाह अनुकूलता मार्गदर्शिका" : "Marriage compatibility guide"}</Link>
         </div>
       </div>

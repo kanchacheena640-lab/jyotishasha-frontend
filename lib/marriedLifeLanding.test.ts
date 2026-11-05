@@ -103,9 +103,9 @@ check("context links: compatibility / spouse-nature / divorce-possibility; overv
   JSON.stringify(ctx.topicSlugs) === '["compatibility","spouse-nature","divorce-possibility"]' && ctx.overviewSlug === "marriage-prediction");
 check("every context link exists and is not the page itself",
   [...ctx.topicSlugs, ctx.overviewSlug].every((s) => s !== "married-life" && fs.existsSync(path.join(root, `lib/domains/marriage-astrology/topics/${s}.ts`))));
-check("couples get the existing free Kundli Matching calculator (/love) as a cross-link, not a report",
-  /domain: +'love',\s+slug: +'',/.test(topic) && topic.includes("label:    'Check Compatibility — Free Kundli Matching',") &&
-  fs.existsSync(path.join(root, "app/[locale]/love/page.tsx")));
+check("couples get the free Kundli Matching calculator (/kundli-matching) as a cross-link, not a report",
+  /domain: +'kundli-matching',\s+slug: +'',/.test(topic) && topic.includes("label:    'Check Compatibility — Free Kundli Matching',") &&
+  fs.existsSync(path.join(root, "app/[locale]/kundli-matching/page.tsx")));
 check("relationship_future_report is not offered on the page", !JSON.stringify(marriedLifeLanding).includes("relationship_future_report") && !topic.includes("relationship_future_report"));
 check("ssrFaq + longForm on", marriedLifeLanding.ssrFaq === true && marriedLifeLanding.longForm === true);
 check("editorial template on", marriedLifeLanding.theme === "editorial");

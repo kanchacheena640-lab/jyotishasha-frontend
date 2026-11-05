@@ -136,7 +136,7 @@ export interface TopicLandingPrimaryAction {
   body: LocalizedString
   ctaLabel: LocalizedString
   microcopy: LocalizedString
-  /** Locale-less internal path of an existing route, e.g. '/love'. The /hi prefix is added for Hindi. */
+  /** Locale-less internal path of an existing route, e.g. '/kundli-matching'. The /hi prefix is added for Hindi. */
   href: string
   ctaId: string
   screenName: string

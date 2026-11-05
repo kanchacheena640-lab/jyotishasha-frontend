@@ -1,9 +1,11 @@
 import Link from "next/link";
-import LoveFormPage from "./LoveForm";
+import LoveFormPage from "../love/LoveForm";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo/articleSchema";
+import { KUNDLI_MATCHING_PATH } from "@/lib/kundliMatchingRoute";
 
-// Free Kundli Matching landing (Phase 1 redesign, URL stays /love). Server-rendered content around the
+// Free Kundli Matching landing at /kundli-matching (moved from /love, which now 308-redirects here; the
+// form and the /love/* result and product routes are unchanged). Server-rendered content around the
 // existing client form: hero -> form -> what you get -> the 8 kootas -> reading the score -> Mangal Dosh
 // -> how it is calculated -> FAQ -> related guides. Ivory/navy palette of the Marriage Hub.
 // Claims stay within what the free calculator returns (36-guna score, koota-wise notes, Mangal Dosh
@@ -23,7 +25,7 @@ const DESCRIPTION: L = {
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
-  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}/love`;
+  const canonicalUrl = `${SITE_URL}${isHi ? "/hi" : ""}${KUNDLI_MATCHING_PATH}`;
 
   return {
     title: t(TITLE, isHi),
@@ -31,9 +33,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        en: `${SITE_URL}/love`,
-        hi: `${SITE_URL}/hi/love`,
-        "x-default": `${SITE_URL}/love`,
+        en: `${SITE_URL}${KUNDLI_MATCHING_PATH}`,
+        hi: `${SITE_URL}/hi${KUNDLI_MATCHING_PATH}`,
+        "x-default": `${SITE_URL}${KUNDLI_MATCHING_PATH}`,
       },
     },
   };
@@ -118,15 +120,15 @@ const tokens = {
   link: "font-semibold text-[#A8461F] underline underline-offset-4 hover:text-[#8A3818] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2 rounded-sm",
 };
 
-export default function LovePage({ params }: { params: { locale: string } }) {
+export default function KundliMatchingPage({ params }: { params: { locale: string } }) {
   const isHi = params.locale === "hi";
   const lp = isHi ? "/hi" : "";
-  const pageUrl = `${SITE_URL}${lp}/love`;
+  const pageUrl = `${SITE_URL}${lp}${KUNDLI_MATCHING_PATH}`;
 
   const crumbs = [
     { name: isHi ? "होम" : "Home", href: lp || "/", item: isHi ? `${SITE_URL}/hi` : `${SITE_URL}/` },
     { name: isHi ? "विवाह ज्योतिष" : "Marriage Astrology", href: `${lp}/marriage-astrology`, item: `${SITE_URL}${lp}/marriage-astrology` },
-    { name: isHi ? "कुंडली मिलान" : "Kundli Matching", href: `${lp}/love`, item: pageUrl },
+    { name: isHi ? "कुंडली मिलान" : "Kundli Matching", href: `${lp}${KUNDLI_MATCHING_PATH}`, item: pageUrl },
   ];
 
   const related = [

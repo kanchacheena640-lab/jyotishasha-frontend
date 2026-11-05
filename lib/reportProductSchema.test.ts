@@ -318,7 +318,7 @@ for (const locale of ["en", "hi"] as const) {
     assert.equal(p.offers.availability, undefined, "no availability claim (unresolved item)");
     const crumbEl = findType(tree, "ProductBreadcrumb");
     assert.ok(crumbEl, "visible breadcrumb rendered");
-    assert.deepEqual(crumbEl.props.items.map((c: any) => c.path), [prefix, `${prefix}/love`, `${prefix}${RELATIONSHIP_REPORT_PATH}`]);
+    assert.deepEqual(crumbEl.props.items.map((c: any) => c.path), [prefix, `${prefix}/kundli-matching`, `${prefix}${RELATIONSHIP_REPORT_PATH}`]);
     assert.equal(crumbEl.props.items[2].name, p.name, "last crumb = H1/Product name");
     assert.equal(blocks.filter((b) => b["@type"] === "BreadcrumbList").length, 0, "no duplicate BreadcrumbList");
     const policy = findType(tree, "PurchasePolicyLinks");

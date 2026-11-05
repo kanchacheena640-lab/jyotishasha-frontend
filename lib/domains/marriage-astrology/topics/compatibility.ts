@@ -538,7 +538,7 @@ export const compatibility: DomainTopic = {
   relationships: {
     crossLinks: [
       {
-        domain:   'love',
+        domain:   'kundli-matching',
         slug:     '',
         relation: 'cross-domain-ref',
         label:    'Free Kundli Matching (Guna Milan)',

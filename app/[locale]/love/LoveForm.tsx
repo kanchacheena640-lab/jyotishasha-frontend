@@ -2,7 +2,11 @@
 
 import { useState, useRef, useEffect, useId } from "react";
 import { useRouter } from "next/navigation";
+import DatePicker, { registerLocale } from "react-datepicker";
+import { hi as hiLocale } from "date-fns/locale/hi";
+import "react-datepicker/dist/react-datepicker.css";
 import PlaceAutocompleteInput from "@/components/PlaceAutocompleteInput";
+import { formatCalendarDob } from "@/lib/formatCalendarDob";
 import { WebsiteEvents } from "@/lib/websiteEvents";
 import { pushMarketingMeasurementEvent } from "@/lib/marketingMeasurementBridge";
 import { applyPlaceSelection, applyPobEdit, type SelectedPlace } from "@/lib/relationshipPlaceValidation";
@@ -16,6 +20,10 @@ import {
 import { loadLoveTools, pendingToolsRecord } from "@/lib/loveTools";
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "https://jyotishasha-backend.onrender.com";
+
+// Hindi month and weekday names in the /hi calendar. Display only: the field still shows and parses
+// DD-MM-YYYY with Western digits, and the stored value stays YYYY-MM-DD.
+registerLocale("hi", hiLocale);
 
 interface LoveFormProps {
   locale: string;
@@ -166,6 +174,8 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
   const uid = useId();
   const fieldId = (section: "boy" | "girl", field: string) => `${uid}-${section}-${field}`;
   const inputClass = "block w-full min-h-[48px] rounded-xl border border-[#B9AE9C] bg-[#FFFFFF] px-4 text-[16px] text-[#1B2A4A] placeholder:text-[#6B7489] focus:border-[#1B2A4A] focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/30";
+  // Date and time sit side by side: 12px side padding so "DD-MM-YYYY" and the browser's "hh:mm AM" fit at 380px+.
+  const compactInputClass = inputClass.replace("px-4", "px-3");
   const labelClass = "mb-1.5 block text-[14px] font-semibold text-[#1B2A4A]";
   const people = [
     { key: "boy" as const, legend: isHi ? "वर (लड़का)" : "Groom (Boy)" },
@@ -198,14 +208,32 @@ export default function LoveFormPage({ locale }: LoveFormProps) {
                   placeholder={isHi ? "नाम लिखें" : "Enter name"}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              {/* Date and time side by side from 380px; stacked on the narrowest phones so DD-MM-YYYY and the calendar fit. */}
+              <div className="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2">
                 <div className="min-w-0">
                   <label htmlFor={fieldId(key, "dob")} className={labelClass}>{isHi ? "जन्म तिथि" : "Date of birth"}</label>
-                  <input id={fieldId(key, "dob")} type="date" className={inputClass} value={form[key].dob} onChange={(e) => update(key, "dob", e.target.value)} />
+                  {/* Shown as DD-MM-YYYY on every device (same picker and helpers as the report checkouts); the form
+                      state, payload and validation keep YYYY-MM-DD. Local-midnight parse + local getters: no timezone shift. */}
+                  <DatePicker
+                    id={fieldId(key, "dob")}
+                    selected={form[key].dob ? new Date(`${form[key].dob}T00:00:00`) : null}
+                    onChange={(date: Date | null) => update(key, "dob", date ? formatCalendarDob(date) : "")}
+                    dateFormat="dd-MM-yyyy"
+                    placeholderText="DD-MM-YYYY"
+                    className={compactInputClass}
+                    wrapperClassName="block w-full"
+                    autoComplete="off"
+                    locale={isHi ? "hi" : undefined}
+                    minDate={new Date(1900, 0, 1)}
+                    maxDate={new Date()}
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                  />
                 </div>
                 <div className="min-w-0">
                   <label htmlFor={fieldId(key, "tob")} className={labelClass}>{isHi ? "जन्म समय" : "Time of birth"}</label>
-                  <input id={fieldId(key, "tob")} type="time" className={inputClass} value={form[key].tob} onChange={(e) => update(key, "tob", e.target.value)} />
+                  <input id={fieldId(key, "tob")} type="time" className={compactInputClass} value={form[key].tob} onChange={(e) => update(key, "tob", e.target.value)} />
                 </div>
               </div>
               <div>

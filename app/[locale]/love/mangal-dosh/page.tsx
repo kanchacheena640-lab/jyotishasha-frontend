@@ -1,5 +1,6 @@
 import MangalDoshDetail from "./MangalDoshDetail";
 import { Metadata } from "next";
+import { DetailPageFrame } from "../loveDetailUi";
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const isHi = params.locale === "hi";
@@ -7,21 +8,21 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     // Session-only page (rendered from this browser's sessionStorage): kept out of search results.
     robots: { index: false, follow: true },
     title: isHi ? "मंगल दोष विश्लेषण | ज्‍योतिष आशा" : "Mangal Dosh Analysis | Jyotishasha",
-    description: isHi 
-      ? "अपनी कुंडली में मंगल दोष की स्थिति, प्रभाव और सटीक वैदिक उपाय जानें।" 
-      : "Detailed Mangal Dosh analysis, its effects on marriage, and Vedic remedies.",
+    description: isHi
+      ? "वर और वधू की कुंडलियों में मंगल दोष की तुलना।"
+      : "Mangal Dosh compared across the groom's and bride's charts.",
   };
 }
 
 export default function MangalDoshPage({ params }: { params: { locale: string } }) {
   const isHi = params.locale === "hi";
   return (
-    <>
-      <h1 className="text-3xl md:text-5xl font-black text-center text-red-500 uppercase bg-[#0f0a1e] pt-10 pb-2 px-4">
-        🔥 {isHi ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
-      </h1>
-      {/* Locale ko direct child mein bhej rahe hain */}
+    <DetailPageFrame
+      isHi={isHi}
+      title={isHi ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
+      subtitle={isHi ? "दोनों कुंडलियों में मंगल की स्थिति की तुलना" : "How Mars is placed in both charts, compared"}
+    >
       <MangalDoshDetail locale={params.locale} />
-    </>
+    </DetailPageFrame>
   );
 }

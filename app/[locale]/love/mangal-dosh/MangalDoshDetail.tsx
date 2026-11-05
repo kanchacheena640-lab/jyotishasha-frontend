@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { MANGAL_TONE_CLASS, mangalSignalView } from "@/lib/loveMangalSignal";
+import { mangalSignalView } from "@/lib/loveMangalSignal";
+import { kundliMatchingHref } from "@/lib/kundliMatchingRoute";
+import { DetailBody, DetailLoading, DetailNextSteps, MANGAL_TONE_LIGHT, detailCard } from "../loveDetailUi";
 
 export default function MangalDoshDetail({ locale }: { locale: string }) {
   const router = useRouter();
@@ -16,7 +18,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
 
     const s = sessionStorage.getItem("love_summary");
     if (!s) {
-      router.replace(`${isHi ? "/hi" : ""}/love`);
+      router.replace(kundliMatchingHref(isHi));
       return;
     }
 
@@ -27,7 +29,7 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
       setData(mangalData || null);
       setLoaded(true);
     } catch (e) {
-      router.replace(`${isHi ? "/hi" : ""}/love`);
+      router.replace(kundliMatchingHref(isHi));
     }
   }, [router, locale]);
 
@@ -35,81 +37,60 @@ export default function MangalDoshDetail({ locale }: { locale: string }) {
   if (!mounted) return null;
 
   if (!loaded) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-[#0f0a1e]">
-        <div className="text-center space-y-4">
-          <div className="w-12 h-12 border-4 border-red-500/30 border-t-red-500 rounded-full animate-spin mx-auto"></div>
-          <p className="text-gray-400 animate-pulse font-medium">
-            {isHi ? "मंगल दोष विश्लेषण लोड हो रहा है…" : "Analyzing Mangal Dosh…"}
-          </p>
-        </div>
-      </div>
-    );
+    return <DetailLoading isHi={isHi} label={isHi ? "मंगल दोष विश्लेषण लोड हो रहा है…" : "Loading the Mangal Dosh comparison…"} />;
   }
 
   // GREEN / RED / missing -> plain wording (never the raw codes, never an endless spinner).
   const view = mangalSignalView(data, isHi);
   const showCharts = view.tone !== "unavailable" && data;
 
-  return (
-    <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-10 bg-[#0f0a1e] min-h-screen text-white">
+  // Presentation only (editorial redesign): the data logic above is unchanged.
+  const people = [
+    { key: "boy", title: isHi ? "वर (लड़का) की कुंडली" : "Groom's chart", d: data?.boy },
+    { key: "girl", title: isHi ? "वधू (लड़की) की कुंडली" : "Bride's chart", d: data?.girl },
+  ];
 
-      {/* 🏁 Header & Signal Section */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl md:text-5xl font-black text-red-500 uppercase">
-          🔥 {isHi ? "मंगल दोष विश्लेषण" : "Mangal Dosh Analysis"}
-        </h2>
-        <div data-testid="mangal-signal" className={`inline-block px-8 py-3 rounded-full border-2 font-black tracking-widest ${MANGAL_TONE_CLASS[view.tone]}`}>
-          {isHi ? "तुलना" : "Comparison"}: {view.label}
+  return (
+    <DetailBody>
+      <section aria-labelledby="mangal-compare-heading" className={detailCard}>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 id="mangal-compare-heading" className="text-[20px] font-bold leading-snug text-[#1B2A4A]">
+            {isHi ? "दोनों कुंडलियों की तुलना" : "Comparison of both charts"}
+          </h2>
+          <span data-testid="mangal-signal" className={`rounded-lg border px-3 py-1 text-[15px] font-semibold ${MANGAL_TONE_LIGHT[view.tone] ?? MANGAL_TONE_LIGHT.unavailable}`}>
+            {view.label}
+          </span>
         </div>
         {view.explanation ? (
-          <p className="max-w-xl mx-auto text-sm leading-relaxed text-gray-300">{view.explanation}</p>
+          <p className="mt-3 text-[16px] leading-7 text-[#45516A]">{view.explanation}</p>
         ) : (
           typeof data?.summary === "string" && data.summary && (
-            <p className="max-w-xl mx-auto text-sm leading-relaxed text-gray-300">{data.summary}</p>
+            <p className="mt-3 text-[16px] leading-7 text-[#45516A]">{data.summary}</p>
           )
         )}
-      </div>
+      </section>
 
-      {/* 📊 Profiles (Boy & Girl) */}
       {showCharts && (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Boy Card */}
-        <div className="bg-white/5 p-8 rounded-[2.5rem] border border-white/10">
-          <h2 className="text-xl font-bold text-blue-400 mb-4">{isHi ? "लड़के की कुंडली" : "Boy's Chart"}</h2>
-          <p className="text-sm font-semibold mb-4 text-gray-200 border-l-4 border-blue-500 pl-3">
-             {data?.boy?.status?.is_mangalic}
-          </p>
-          <ul className="space-y-2">
-            {data?.boy?.summary_block?.points?.map((p: string, i: number) => (
-              <li key={i} className="text-xs text-gray-400">• {p}</li>
-            ))}
-          </ul>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {people.map(({ key, title, d }) => (
+            <section key={key} aria-labelledby={`mangal-${key}-heading`} className={detailCard}>
+              <h2 id={`mangal-${key}-heading`} className="text-[18px] font-bold leading-snug text-[#1B2A4A]">{title}</h2>
+              {d?.status?.is_mangalic && (
+                <p className="mt-2 border-l-4 border-[#C9A227] pl-3 text-[16px] font-semibold leading-7 text-[#1B2A4A]">{d.status.is_mangalic}</p>
+              )}
+              {Array.isArray(d?.summary_block?.points) && d.summary_block.points.length > 0 && (
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[15px] leading-7 text-[#45516A] marker:text-[#A8461F]">
+                  {d.summary_block.points.map((p: string, i: number) => (
+                    <li key={i}>{p}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
         </div>
-
-        {/* Girl Card */}
-        <div className="bg-white/5 p-8 rounded-[2.5rem] border border-white/10">
-          <h2 className="text-xl font-bold text-pink-400 mb-4">{isHi ? "लड़की की कुंडली" : "Girl's Chart"}</h2>
-          <p className="text-sm font-semibold mb-4 text-gray-200 border-l-4 border-pink-500 pl-3">
-             {data?.girl?.status?.is_mangalic}
-          </p>
-          <ul className="space-y-2">
-            {data?.girl?.summary_block?.points?.map((p: string, i: number) => (
-              <li key={i} className="text-xs text-gray-400">• {p}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
       )}
 
-      <div className="w-full md:w-auto text-center mt-12">
-        <button
-          onClick={() => router.push(`${isHi ? "/hi" : ""}/love/report/relationship_future_report`)}
-          className="w-full md:w-auto px-10 py-5 bg-white text-indigo-900 font-black text-lg rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-2xl"
-        >
-          {isHi ? "अभी पूरी रिपोर्ट प्राप्त करें" : "Unlock Full Report"}
-        </button>
-      </div>
-    </div>
+      <DetailNextSteps isHi={isHi} reportHref={`${isHi ? "/hi" : ""}/love/report/relationship_future_report`} />
+    </DetailBody>
   );
 }
