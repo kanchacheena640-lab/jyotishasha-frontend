@@ -31,8 +31,18 @@ const offer = landing.offer;
 console.log("=== A. Primary: the dedicated Second Marriage Report ===");
 const product = reportsData.find((r) => r.slug === "second_marriage_report");
 check("landing registered for second-marriage", marriageTopicLandings["second-marriage"] === landing);
-check("report-led: offer = second_marriage_report (catalogue rep_022, price from the catalogue), no primary tool card",
-  offer.reportSlug === "second_marriage_report" && product?.id === "rep_022" && typeof product.price === "number" && product.price > 0 && landing.primaryAction === undefined);
+check("report-led: offer = second_marriage_report (catalogue rep_022, price from the catalogue)",
+  offer.reportSlug === "second_marriage_report" && product?.id === "rep_022" && typeof product.price === "number" && product.price > 0);
+const action = landing.primaryAction;
+check("editorial hero: tracked free Marriage Path card (new id only) before the report card",
+  landing.theme === "editorial" && action?.href === "/tools/marriage-path" && action.ctaId === "second_marriage_marriage_path_cta" &&
+  action.screenName === "second_marriage_topic" &&
+  src("components/authority-engine/editorial/EditorialArticle.tsx").indexOf("{heroTool ?? freeToolAction ?? (tool && (") <
+  src("components/authority-engine/editorial/EditorialArticle.tsx").indexOf("{offer && <EditorialReportCard"));
+check("free card claims only what the tool reads and points to the report for the 9th house; free, no price, no D9 / Dasha / date",
+  !!action && ["7th house", "Venus and Jupiter", "strongest influence"].every((w) => action.body.en.includes(w)) &&
+  /adds the 9th house and later-union indications/.test(action.microcopy.en) && /नवम भाव और बाद के विवाह के संकेत/.test(action.microcopy.hi) &&
+  /Free/.test(action.ctaLabel.en) && !/₹|Navamsa|D9|Dasha|date|divorce|तलाक/i.test(JSON.stringify(action)));
 check("purchase route exists (/reports/[slug])", fs.existsSync(path.join(root, "app/reports/[slug]/page.tsx")));
 for (const loc of ["en", "hi"] as const) {
   const url = getReportSampleUrl(offer.reportSlug, loc);
@@ -46,11 +56,12 @@ check("bullets name only what the report reads (L/M/E indication, 7th + 9th hous
   /Venus and Jupiter/.test(offer.bullets.en[2]) && /Dasha context and practical guidance/.test(offer.bullets.en[3]) && offer.bullets.hi.length === 4);
 const sold = JSON.stringify([offer.eyebrow, offer.heading, offer.intro, offer.bullets]);
 check("no unsupported claims: D9 / Navamsa / transit / exact date / age / guarantee",
-  !/Navamsa|D9|नवांश|transit|गोचर|exact date(?! —)|marriage age|will (re)?marry/i.test(sold.replace("not a guaranteed remarriage or an exact marriage date", "")) &&
-  /not a guaranteed remarriage or an exact marriage date/.test(offer.intro.en));
+  !/Navamsa|D9|नवांश|transit|गोचर|exact date|marriage age|will (re)?marry|guarantee|गारंटी/i.test(sold) &&
+  offer.intro.en === "A personalised reading of later-union indications in your own chart — the supportive and challenging factors, and the periods when they are emphasised.");
 check("never assumes the reader is divorced or separated", !/divorce|separat|after your|तलाक|अलगाव/i.test(sold));
-check("mobile-visible microcopy states the scope limit (the intro is hidden on phones) — EN + HI",
-  /Shows tendencies — not a guaranteed remarriage or an exact date\./.test(offer.microcopy.en) && /दूसरे विवाह की गारंटी या सटीक तारीख नहीं/.test(offer.microcopy.hi));
+check("standard microcopy (EN + HI); the exact-date question is answered once, in FAQ 8",
+  offer.microcopy.en === "Personalised using your Date, Time & Place of Birth." && offer.microcopy.hi === "आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।" &&
+  /id: 'faq-8', label: 'Can astrology predict the exact date of a second marriage\?',[^\n]*body: 'No\./.test(topic));
 check("catalogue rep_022: key / ID / price / route unchanged; descriptions no longer assume a prior divorce or separation",
   product?.slug === "second_marriage_report" && product.price === 99 && product.title.en === "Second Marriage Report" &&
   product.title.hi === "दूसरे विवाह की रिपोर्ट" && offer.sampleTitle.hi === product.title.hi &&
@@ -68,10 +79,13 @@ console.log("\n=== C. Short answer ===");
 const da = landing.directAnswer;
 check("EN names the article's factors (7th house + lord, 9th, 2nd, Venus and Jupiter, Dasha, Navamsa D9)",
   ["7th house and its lord", "9th", "2nd", "Venus and Jupiter", "Dasha periods", "Navamsa (D9)"].every((w) => da.en.includes(w)));
-check("EN: no single placement guarantees it; 7th-house difficulty ≠ divorce; no one must leave a present relationship",
-  /A single placement does not guarantee a second marriage/.test(da.en) && /do not automatically mean divorce/.test(da.en) && /must leave a present relationship/.test(da.en));
-check("HI covers the same factors and limits",
-  ["सप्तम भाव और सप्तमेश", "नवम भाव", "द्वितीय भाव", "शुक्र और गुरु", "दशाएँ", "नवांश (D9)", "गारंटी नहीं", "अपने आप तलाक नहीं", "वर्तमान संबंध छोड़ना"].every((w) => da.hi.includes(w)));
+check("EN (Editorial V1): positive reading, relationship safeguard said once, no divorce/separation prediction",
+  /a second marriage is read from several factors together/.test(da.en) &&
+  /Together they show how strongly a chart indicates a later union and when it may be emphasised\./.test(da.en) &&
+  (da.en.match(/do not mean a present relationship must end/g) || []).length === 1 && !/divorce|separat|guarantee/i.test(da.en));
+check("HI covers the same factors and the same single safeguard",
+  ["सप्तम भाव और सप्तमेश", "नवम भाव", "द्वितीय भाव", "शुक्र और गुरु", "दशाएँ", "नवांश (D9)", "किसी वर्तमान संबंध को समाप्त होना चाहिए"].every((w) => da.hi.includes(w)) &&
+  !/तलाक|अलगाव|गारंटी/.test(da.hi));
 check("short answer contains no sales copy", !/report|₹|price|buy|रिपोर्ट/i.test(da.en + da.hi));
 
 console.log("\n=== D. Related links ===");
@@ -83,17 +97,29 @@ check("every context link exists and is not the page itself",
 check("ssrFaq + longForm on, no video", landing.ssrFaq === true && landing.longForm === true && landing.video === undefined);
 
 console.log("\n=== E. Identity / shared text protected ===");
-check("title / H1 unchanged (EN + HI)",
-  topic.includes("title:      'Second Marriage in Vedic Astrology: Karmic Timing and Analysis',") && topic.includes("title_hi:   'वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण',"));
-check("canonical + EN meta unchanged",
+check("title / H1 = approved question-led Editorial V1 title (EN + HI)",
+  topic.includes("title:      'Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?',") &&
+  topic.includes("title_hi:   'वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?',"));
+check("canonical unchanged; EN meta = approved Editorial V1 text",
   topic.includes("canonicalPath: '/marriage-astrology/second-marriage',") &&
-  topic.includes("metaDescription: 'Understand the astrological promise of a second marriage in Vedic Astrology. Explore key house analysis, Dasha timing, and the role of the 9th house.',"));
-check("hero subtext: EN unchanged; HI corrected without 'कार्मिक वादा' (shown on other pages' related-topic cards)",
-  topic.includes("subtext:     'Analyze the karmic promise, planetary conditions, and Dasha-Bhukti timing for a second marital union in Vedic Astrology.',") &&
-  topic.includes("subtext_hi:  'वैदिक ज्योतिष में दूसरे विवाह के संकेतों, ग्रह स्थितियों और दशा-भुक्ति के समय का विश्लेषण करें।',") &&
-  !/कार्मिक वादा/.test(topic));
+  topic.includes("metaDescription: 'Is a second marriage indicated in your horoscope? See how Vedic astrology reads later-union yogas — the 7th and 9th houses, Venus and Jupiter, the running Dasha and the Navamsa (D9).',"));
+check("hero subtext = approved Editorial V1 text (EN + HI), no 'karmic promise' / 'कार्मिक वादा'",
+  topic.includes("subtext:     'How a horoscope is read for a second or later marriage — the 7th and 9th houses, Venus and Jupiter, the running Dasha and the Navamsa (D9).',") &&
+  topic.includes("subtext_hi:  'कुंडली में दूसरे या बाद के विवाह के योग कैसे पढ़े जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, चल रही दशा और नवांश (D9)।',") &&
+  !/कार्मिक वादा|karmic promise, planetary conditions/.test(topic));
+check("Article schema dates: datePublished 2026-07-20, lastUpdated 2026-11-05",
+  topic.includes("datePublished: '2026-07-20',") && topic.includes("lastUpdated:    '2026-11-05',"));
+check("neutral wording: Rahu / Saturn / Venus / 'specific indication' / Summary (EN + HI)",
+  /Rahu, the planet of intensity and unconventionality/.test(topic) && /with a more mature and committed nature/.test(topic) &&
+  /it is traditionally read as suggesting the potential for more than one significant partnership/.test(topic) &&
+  /A second marriage is read as a specific indication in the chart\./.test(topic) &&
+  /Vedic astrology reads a second marriage as a theme in the chart, shaped together with real-life circumstances and decisions\./.test(topic) &&
+  /राहु तीव्रता और अपरंपरागतता का ग्रह है/.test(topic) && /अधिक परिपक्व और प्रतिबद्ध स्वभाव का हो/.test(topic) &&
+  !/planet of obsession|universal right|restrictive nature|mere matter of choice|सार्वभौमिक अधिकार/.test(topic));
 const hiMeta = (topic.match(/metaDescription_hi: '([^']+)'/) || [, ""])[1] as string;
-check("Hindi meta present and informational", hiMeta.length >= 80 && /दूसरे विवाह के योग/.test(hiMeta) && /पुनर्विवाह/.test(hiMeta) && !/रिपोर्ट|₹/.test(hiMeta));
+check("Hindi meta: leads with the Hub question, informational, no report/price, no guarantee refrain",
+  hiMeta.length >= 80 && hiMeta.startsWith("क्या मेरी कुंडली में दूसरे विवाह का योग है?") && /पुनर्विवाह के योग/.test(hiMeta) &&
+  !/रिपोर्ट|₹|गारंटी/.test(hiMeta));
 const ids = [...topic.matchAll(/\n {8}id: {5}'([a-z0-9-]+)',/g)].map((m) => m[1]);
 check("sections unchanged in number and order",
   JSON.stringify(ids) === '["promise-vs-possibility","key-house-analysis","planetary-influences","advanced-indicators","timing-dashas-transits","separation-divorce","ethical-interpretation","common-misconceptions","practical-remedies","summary","faq-section"]');

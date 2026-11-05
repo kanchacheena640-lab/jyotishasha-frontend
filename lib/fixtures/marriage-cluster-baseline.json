@@ -57,7 +57,7 @@
           "Navamsa (D9) — The Fruit of Marriage",
           "Explore Your Marriage Indicators",
           "Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?",
-          "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
+          "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?",
           "Intercaste Marriage in Vedic Astrology: Will I Have an Intercaste Marriage?"
         ]
       },
@@ -297,7 +297,7 @@
         ]
       },
       "server": {
-        "wordCount": 2408,
+        "wordCount": 2420,
         "detailsElements": 8
       },
       "facts": {
@@ -360,7 +360,7 @@
           "नवांश (D9) — विवाह का फल",
           "अपने विवाह संकेत देखें",
           "वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?",
-          "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
+          "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?",
           "वैदिक ज्योतिष में अंतरजातीय विवाह: क्या मेरा अंतरजातीय विवाह होगा?"
         ]
       },
@@ -600,7 +600,7 @@
         ]
       },
       "server": {
-        "wordCount": 2421,
+        "wordCount": 2437,
         "detailsElements": 8
       },
       "facts": {
@@ -1985,7 +1985,7 @@
           "Marriage Compatibility in Vedic Astrology: How Compatible Are We?",
           "Spouse Nature in Vedic Astrology: What Will My Future Spouse Be Like?",
           "Married Life in Vedic Astrology: Will My Married Life Be Happy?",
-          "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
+          "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?",
           "Intercaste Marriage in Vedic Astrology: Will I Have an Intercaste Marriage?",
           "Marriage Prediction in Vedic Astrology"
         ]
@@ -2280,7 +2280,7 @@
         ]
       },
       "server": {
-        "wordCount": 3934,
+        "wordCount": 3946,
         "detailsElements": 23
       },
       "facts": {
@@ -2351,7 +2351,7 @@
           "वैदिक ज्योतिष में विवाह अनुकूलता: हम दोनों की अनुकूलता कितनी है?",
           "वैदिक ज्योतिष में जीवनसाथी का स्वभाव: मेरा जीवनसाथी कैसा होगा?",
           "वैदिक ज्योतिष में वैवाहिक जीवन: क्या मेरा वैवाहिक जीवन सुखी रहेगा?",
-          "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
+          "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?",
           "वैदिक ज्योतिष में अंतरजातीय विवाह: क्या मेरा अंतरजातीय विवाह होगा?",
           "वैदिक ज्योतिष में विवाह भविष्यवाणी"
         ]
@@ -2646,7 +2646,7 @@
         ]
       },
       "server": {
-        "wordCount": 4350,
+        "wordCount": 4366,
         "detailsElements": 23
       },
       "facts": {
@@ -4087,8 +4087,8 @@
       "locale": "en",
       "path": "/marriage-astrology/second-marriage",
       "seo": {
-        "title": "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
-        "description": "Understand the astrological promise of a second marriage in Vedic Astrology. Explore key house analysis, Dasha timing, and the role of the 9th house.",
+        "title": "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?",
+        "description": "Is a second marriage indicated in your horoscope? See how Vedic astrology reads later-union yogas — the 7th and 9th houses, Venus and Jupiter, the running Dasha and the Navamsa (D9).",
         "keywords": [
           "second marriage in vedic astrology",
           "astrology for second marriage",
@@ -4105,14 +4105,15 @@
         "openGraph": {
           "type": "article",
           "url": "https://www.jyotishasha.com/marriage-astrology/second-marriage",
-          "title": "Second Marriage in Vedic Astrology: Karmic Timing and Analysis"
+          "title": "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?"
         }
       },
       "headings": {
         "h1": [
-          "Second Marriage in Vedic Astrology: Karmic Timing and Analysis"
+          "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?"
         ],
         "h2": [
+          "Start With Your 7th House",
           "Explore Your Second-Marriage Indications",
           "Astrological Promise vs. Possibility",
           "Key House Analysis",
@@ -4124,12 +4125,12 @@
           "Common Misconceptions",
           "Practical Remedies",
           "Summary",
-          "Related Marriage Questions",
           "Frequently Asked Questions",
-          "Related Topics"
+          "Related Marriage Guides"
         ],
         "h3": [
-          "Explore Your General Marriage Indicators",
+          "Divorce Possibility in Vedic Astrology: A Guide",
+          "Married Life in Vedic Astrology: Will My Married Life Be Happy?",
           "Intercaste Marriage in Vedic Astrology: Will I Have an Intercaste Marriage?",
           "Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?",
           "Marriage Prediction in Vedic Astrology"
@@ -4322,7 +4323,7 @@
               {
                 "@type": "ListItem",
                 "position": 3,
-                "name": "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
+                "name": "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?",
                 "item": "https://www.jyotishasha.com/marriage-astrology/second-marriage"
               }
             ]
@@ -4330,9 +4331,11 @@
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
-            "description": "Understand the astrological promise of a second marriage in Vedic Astrology. Explore key house analysis, Dasha timing, and the role of the 9th house.",
+            "headline": "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?",
+            "description": "Is a second marriage indicated in your horoscope? See how Vedic astrology reads later-union yogas — the 7th and 9th houses, Venus and Jupiter, the running Dasha and the Navamsa (D9).",
             "url": "https://www.jyotishasha.com/marriage-astrology/second-marriage",
+            "datePublished": "2026-07-20",
+            "dateModified": "2026-11-05",
             "author": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -4433,7 +4436,7 @@
         ]
       },
       "server": {
-        "wordCount": 2297,
+        "wordCount": 2357,
         "detailsElements": 15
       },
       "facts": {
@@ -4450,8 +4453,8 @@
       "locale": "hi",
       "path": "/hi/marriage-astrology/second-marriage",
       "seo": {
-        "title": "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
-        "description": "कुंडली में दूसरे विवाह के योग कैसे देखे जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, दशा और नवांश। जानें पुनर्विवाह के पारंपरिक संकेत, और क्यों कोई एक योग दूसरे विवाह या तलाक की गारंटी नहीं देता।",
+        "title": "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?",
+        "description": "क्या मेरी कुंडली में दूसरे विवाह का योग है? जानें वैदिक ज्योतिष में पुनर्विवाह के योग कैसे देखे जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, चल रही दशा और नवांश (D9)।",
         "keywords": [
           "वैदिक ज्योतिष में दूसरा विवाह",
           "दूसरे विवाह के लिए ज्योतिष",
@@ -4468,14 +4471,15 @@
         "openGraph": {
           "type": "article",
           "url": "https://www.jyotishasha.com/hi/marriage-astrology/second-marriage",
-          "title": "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण"
+          "title": "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?"
         }
       },
       "headings": {
         "h1": [
-          "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण"
+          "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?"
         ],
         "h2": [
+          "सप्तम भाव से शुरुआत करें",
           "अपने दूसरे विवाह के संकेत जानें",
           "कुंडली के संकेत बनाम संभावना",
           "प्रमुख भाव विश्लेषण",
@@ -4487,12 +4491,12 @@
           "सामान्य भ्रांतियां",
           "व्यावहारिक उपाय",
           "सारांश",
-          "विवाह से जुड़े अन्य प्रश्न",
           "अक्सर पूछे जाने वाले प्रश्न",
-          "संबंधित विषय"
+          "विवाह से जुड़ी अन्य मार्गदर्शिकाएँ"
         ],
         "h3": [
-          "अपने सामान्य विवाह संकेत देखें",
+          "वैदिक ज्योतिष में तलाक की संभावना",
+          "वैदिक ज्योतिष में वैवाहिक जीवन: क्या मेरा वैवाहिक जीवन सुखी रहेगा?",
           "वैदिक ज्योतिष में अंतरजातीय विवाह: क्या मेरा अंतरजातीय विवाह होगा?",
           "वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?",
           "वैदिक ज्योतिष में विवाह भविष्यवाणी"
@@ -4685,7 +4689,7 @@
               {
                 "@type": "ListItem",
                 "position": 3,
-                "name": "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
+                "name": "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?",
                 "item": "https://www.jyotishasha.com/hi/marriage-astrology/second-marriage"
               }
             ]
@@ -4693,9 +4697,11 @@
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
-            "description": "कुंडली में दूसरे विवाह के योग कैसे देखे जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, दशा और नवांश। जानें पुनर्विवाह के पारंपरिक संकेत, और क्यों कोई एक योग दूसरे विवाह या तलाक की गारंटी नहीं देता।",
+            "headline": "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?",
+            "description": "क्या मेरी कुंडली में दूसरे विवाह का योग है? जानें वैदिक ज्योतिष में पुनर्विवाह के योग कैसे देखे जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, चल रही दशा और नवांश (D9)।",
             "url": "https://www.jyotishasha.com/hi/marriage-astrology/second-marriage",
+            "datePublished": "2026-07-20",
+            "dateModified": "2026-11-05",
             "author": {
               "@type": "Organization",
               "name": "Jyotishasha",
@@ -4796,7 +4802,7 @@
         ]
       },
       "server": {
-        "wordCount": 2481,
+        "wordCount": 2562,
         "detailsElements": 15
       },
       "facts": {
@@ -5133,7 +5139,7 @@
         ]
       },
       "server": {
-        "wordCount": 3512,
+        "wordCount": 3514,
         "detailsElements": 27
       },
       "facts": {
@@ -5466,7 +5472,7 @@
         ]
       },
       "server": {
-        "wordCount": 3525,
+        "wordCount": 3530,
         "detailsElements": 27
       },
       "facts": {
@@ -7618,7 +7624,7 @@
           "Want to Understand Your Love-Marriage Tendency?",
           "Love Marriage in Vedic Astrology: Will I Have a Love Marriage?",
           "Arranged Marriage in Vedic Astrology: Will I Have an Arranged Marriage?",
-          "Second Marriage in Vedic Astrology: Karmic Timing and Analysis",
+          "Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?",
           "Marriage Prediction in Vedic Astrology"
         ]
       },
@@ -7949,7 +7955,7 @@
         ]
       },
       "server": {
-        "wordCount": 3553,
+        "wordCount": 3565,
         "detailsElements": 25
       },
       "facts": {
@@ -8016,7 +8022,7 @@
           "अपनी प्रेम विवाह की प्रवृत्ति समझना चाहते हैं?",
           "वैदिक ज्योतिष में प्रेम विवाह: क्या मेरा प्रेम विवाह होगा?",
           "वैदिक ज्योतिष में अरेंज मैरिज: क्या मेरी अरेंज मैरिज होगी?",
-          "वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण",
+          "वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?",
           "वैदिक ज्योतिष में विवाह भविष्यवाणी"
         ]
       },
@@ -8347,7 +8353,7 @@
         ]
       },
       "server": {
-        "wordCount": 3921,
+        "wordCount": 3937,
         "detailsElements": 25
       },
       "facts": {

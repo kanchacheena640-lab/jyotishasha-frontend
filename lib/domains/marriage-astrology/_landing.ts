@@ -732,12 +732,35 @@ export const earlyMarriageLanding: ToolLedLandingConfig = {
 // the report reads (Low / Moderate / Elevated second-union indication; 7th + 9th house evidence;
 // Venus / Jupiter; current Dasha context; guidance) -- no D9, no transits, no date, no guarantee, and it
 // never assumes the reader is divorced or separated. The free Marriage Path tool stays a secondary,
-// honestly-labelled bottom action (it is not a second-marriage calculator).
+// honestly-labelled bottom action (it is not a second-marriage calculator). Editorial V1: ivory template;
+// the hero shows a tracked free Marriage Path card ("start with your 7th house") before the report card.
+// No video (none approved) and no in-article report card.
 export const secondMarriageLanding: TopicLandingConfig = {
+  theme: 'editorial',
+
+  // Free, tracked hero action. Copy names only what the tool reads (7th-house planets, Venus/Jupiter,
+  // strongest influence) and says plainly that the report adds the 9th house and later-union indications.
+  primaryAction: {
+    eyebrow: { en: 'Free Marriage Path Check', hi: 'फ्री विवाह मार्ग जाँच' },
+    heading: { en: 'Start With Your 7th House', hi: 'सप्तम भाव से शुरुआत करें' },
+    body: {
+      en: 'Every marriage reading begins with the 7th house. Enter your birth details for a free reading of the planets in your 7th house, the strength of Venus and Jupiter, and the strongest influence on your marriage.',
+      hi: 'हर विवाह विश्लेषण सप्तम भाव से शुरू होता है। अपना जन्म विवरण दर्ज करें और सप्तम भाव के ग्रहों, शुक्र और गुरु की स्थिति और विवाह पर सबसे प्रबल प्रभाव का फ्री विश्लेषण पाएं।',
+    },
+    ctaLabel: { en: 'Check Marriage Path — Free', hi: 'फ्री में विवाह मार्ग जाँचें' },
+    microcopy: {
+      en: 'A free general snapshot; the Second Marriage Report adds the 9th house and later-union indications.',
+      hi: 'एक फ्री सामान्य झलक; दूसरे विवाह की रिपोर्ट नवम भाव और बाद के विवाह के संकेत भी पढ़ती है।',
+    },
+    href: '/tools/marriage-path',
+    ctaId: 'second_marriage_marriage_path_cta',
+    screenName: 'second_marriage_topic',
+  },
+
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'Vedic astrology does not read a second marriage from one placement. Astrologers weigh several factors together: the 7th house and its lord, which describe the first marriage and one’s approach to partnership; the houses traditionally used for a later union — most often the 9th, with some approaches also examining the 2nd; the condition of Venus and Jupiter; the Dasha periods that could activate these houses; and the Navamsa (D9) as a supporting layer. A single placement does not guarantee a second marriage, difficulties in the 7th house do not automatically mean divorce, and later-union indications do not mean anyone must leave a present relationship.',
-    hi: 'वैदिक ज्योतिष दूसरे विवाह को किसी एक ग्रह-स्थिति से नहीं पढ़ता। ज्योतिषी कई कारकों को साथ देखते हैं: सप्तम भाव और सप्तमेश, जो पहले विवाह और साझेदारी के प्रति दृष्टिकोण को दर्शाते हैं; बाद के विवाह के लिए परंपरागत रूप से देखे जाने वाले भाव — सबसे अधिक नवम भाव, और कुछ पद्धतियों में द्वितीय भाव भी; शुक्र और गुरु की स्थिति; इन भावों को सक्रिय करने वाली दशाएँ; और सहायक स्तर के रूप में नवांश (D9)। कोई एक ग्रह-स्थिति दूसरे विवाह की गारंटी नहीं देती, सप्तम भाव की कठिनाइयों का अर्थ अपने आप तलाक नहीं है, और बाद के विवाह के संकेतों का अर्थ यह नहीं कि किसी को अपना वर्तमान संबंध छोड़ना होगा।',
+    en: 'In Vedic astrology, a second marriage is read from several factors together: the 7th house and its lord, which describe the first marriage and one’s approach to partnership; the houses traditionally used for a later union — most often the 9th, with some approaches also examining the 2nd; the condition of Venus and Jupiter; the Dasha periods that could activate these houses; and the Navamsa (D9) as a supporting layer. Together they show how strongly a chart indicates a later union and when it may be emphasised. These indications describe a possibility in the chart — they do not mean a present relationship must end.',
+    hi: 'वैदिक ज्योतिष में दूसरा विवाह कई कारकों को साथ मिलाकर पढ़ा जाता है: सप्तम भाव और सप्तमेश, जो पहले विवाह और साझेदारी के प्रति दृष्टिकोण को दर्शाते हैं; बाद के विवाह के लिए परंपरागत रूप से देखे जाने वाले भाव — सबसे अधिक नवम भाव, और कुछ पद्धतियों में द्वितीय भाव भी; शुक्र और गुरु की स्थिति; इन भावों को सक्रिय करने वाली दशाएँ; और सहायक स्तर के रूप में नवांश (D9)। ये मिलकर बताते हैं कि कुंडली बाद के विवाह का कितना संकेत देती है और यह कब अधिक सक्रिय हो सकता है। ये संकेत कुंडली में एक संभावना बताते हैं — इनका अर्थ यह नहीं कि किसी वर्तमान संबंध को समाप्त होना चाहिए।',
   },
 
   offer: {
@@ -745,8 +768,8 @@ export const secondMarriageLanding: TopicLandingConfig = {
     eyebrow: { en: 'Personalised Second Marriage Report', hi: 'व्यक्तिगत दूसरे विवाह की रिपोर्ट' },
     heading: { en: 'Explore Your Second-Marriage Indications', hi: 'अपने दूसरे विवाह के संकेत जानें' },
     intro: {
-      en: 'A personalised reading of possible later-union indications in your own chart. It discusses supportive and challenging factors — not a guaranteed remarriage or an exact marriage date.',
-      hi: 'आपकी अपनी कुंडली में बाद के विवाह के संभावित संकेतों का व्यक्तिगत विश्लेषण। यह सहायक और चुनौतीपूर्ण कारकों की चर्चा करती है — दूसरे विवाह की गारंटी या विवाह की सटीक तारीख नहीं।',
+      en: 'A personalised reading of later-union indications in your own chart — the supportive and challenging factors, and the periods when they are emphasised.',
+      hi: 'आपकी अपनी कुंडली में बाद के विवाह के संकेतों का व्यक्तिगत विश्लेषण — सहायक और चुनौतीपूर्ण कारक, और वे अवधियाँ जब ये अधिक सक्रिय होते हैं।',
     },
     bullets: {
       en: [
@@ -763,10 +786,10 @@ export const secondMarriageLanding: TopicLandingConfig = {
       ],
     },
     ctaLabel: { en: 'Get Second Marriage Report – ₹{price}', hi: 'दूसरे विवाह की रिपोर्ट प्राप्त करें – ₹{price}' },
-    // Visible on phones (the intro sentence is hidden there), so it carries the scope limit too.
+    // Editorial: the intro is visible at every width; the exact-date question is answered once, in FAQ 8.
     microcopy: {
-      en: 'Personalised from your birth details. Shows tendencies — not a guaranteed remarriage or an exact date.',
-      hi: 'आपके जन्म विवरण पर आधारित। यह प्रवृत्तियाँ बताती है — दूसरे विवाह की गारंटी या सटीक तारीख नहीं।',
+      en: 'Personalised using your Date, Time & Place of Birth.',
+      hi: 'आपकी जन्म तिथि, समय और स्थान के आधार पर तैयार।',
     },
     sampleTitle: { en: 'Second Marriage Report', hi: 'दूसरे विवाह की रिपोर्ट' },
     reportCtaId: 'second_marriage_report_cta',

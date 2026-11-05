@@ -5,8 +5,8 @@ export const secondMarriage: DomainTopic = {
   identity: {
     id:         'marriage-astrology:second-marriage',
     slug:       'second-marriage',
-    title:      'Second Marriage in Vedic Astrology: Karmic Timing and Analysis',
-    title_hi:   'वैदिक ज्योतिष में दूसरा विवाह: कार्मिक समय और विश्लेषण',
+    title:      'Second Marriage in Vedic Astrology: Is It Indicated in My Horoscope?',
+    title_hi:   'वैदिक ज्योतिष में दूसरा विवाह: क्या मेरी कुंडली में दूसरे विवाह का योग है?',
     domain:     'astrology',
     subdomain:  'marriage-astrology',
     category:   'marriage',
@@ -25,16 +25,16 @@ export const secondMarriage: DomainTopic = {
 
   seo: {
     metaTitle:       'Second Marriage in Vedic Astrology: Karmic Timing & Analysis',
-    metaDescription: 'Understand the astrological promise of a second marriage in Vedic Astrology. Explore key house analysis, Dasha timing, and the role of the 9th house.',
-    metaDescription_hi: 'कुंडली में दूसरे विवाह के योग कैसे देखे जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, दशा और नवांश। जानें पुनर्विवाह के पारंपरिक संकेत, और क्यों कोई एक योग दूसरे विवाह या तलाक की गारंटी नहीं देता।',
+    metaDescription: 'Is a second marriage indicated in your horoscope? See how Vedic astrology reads later-union yogas — the 7th and 9th houses, Venus and Jupiter, the running Dasha and the Navamsa (D9).',
+    metaDescription_hi: 'क्या मेरी कुंडली में दूसरे विवाह का योग है? जानें वैदिक ज्योतिष में पुनर्विवाह के योग कैसे देखे जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, चल रही दशा और नवांश (D9)।',
     robots:          'noindex,follow',
   },
 
   hero: {
     headline:    'Second Marriage in Vedic Astrology',
     headline_hi: 'वैदिक ज्योतिष में दूसरा विवाह',
-    subtext:     'Analyze the karmic promise, planetary conditions, and Dasha-Bhukti timing for a second marital union in Vedic Astrology.',
-    subtext_hi:  'वैदिक ज्योतिष में दूसरे विवाह के संकेतों, ग्रह स्थितियों और दशा-भुक्ति के समय का विश्लेषण करें।',
+    subtext:     'How a horoscope is read for a second or later marriage — the 7th and 9th houses, Venus and Jupiter, the running Dasha and the Navamsa (D9).',
+    subtext_hi:  'कुंडली में दूसरे या बाद के विवाह के योग कैसे पढ़े जाते हैं — सप्तम और नवम भाव, शुक्र और गुरु, चल रही दशा और नवांश (D9)।',
   },
 
   taxonomy: {
@@ -64,8 +64,8 @@ export const secondMarriage: DomainTopic = {
             id:    'karmic-outcome',
             label: 'Second Marriage as a Karmic Outcome',
             label_hi: 'एक विशेष कार्मिक संकेत के रूप में दूसरा विवाह',
-            body:  'A second marriage is not a universal right or a guarantee; it is a specific karmic indication. Astrologers traditionally associate a higher potential for a second union with charts where the promise for partnership is strong but the first marriage shows significant afflictions. Afflictions describe strain, not a certain ending — many such marriages endure — and a second marriage can also follow widowhood.',
-            body_hi: 'दूसरा विवाह कोई सार्वभौमिक अधिकार या गारंटी नहीं है; यह एक विशेष कार्मिक संकेत है। ज्योतिषी परंपरागत रूप से दूसरे विवाह की अधिक संभावना उन कुंडलियों से जोड़ते हैं जिनमें साझेदारी के संकेत मज़बूत हों, लेकिन पहले विवाह पर गंभीर पीड़ा दिखे। पीड़ा तनाव बताती है, निश्चित अंत नहीं — ऐसे कई विवाह टिके रहते हैं — और दूसरा विवाह जीवनसाथी के निधन के बाद भी हो सकता है।'
+            body:  'A second marriage is read as a specific indication in the chart. Astrologers traditionally associate a higher potential for a second union with charts where the promise for partnership is strong but the first marriage shows significant afflictions. Afflictions describe strain, not a certain ending — many such marriages endure — and a second marriage can also follow widowhood.',
+            body_hi: 'दूसरे विवाह को कुंडली में एक विशेष संकेत के रूप में पढ़ा जाता है। ज्योतिषी परंपरागत रूप से दूसरे विवाह की अधिक संभावना उन कुंडलियों से जोड़ते हैं जिनमें साझेदारी के संकेत मज़बूत हों, लेकिन पहले विवाह पर गंभीर पीड़ा दिखे। पीड़ा तनाव बताती है, निश्चित अंत नहीं — ऐसे कई विवाह टिके रहते हैं — और दूसरा विवाह जीवनसाथी के निधन के बाद भी हो सकता है।'
           }
         ]
       },
@@ -122,8 +122,8 @@ export const secondMarriage: DomainTopic = {
             id:    'venus',
             label: 'Venus',
             label_hi: 'शुक्र',
-            body:  'As the Karaka of passion and the partner, Venus’s placement is always central. If Venus is in a dual sign or has multiple connections to marital houses, it suggests the potential for more than one significant partnership.',
-            body_hi: 'प्रेम, आकर्षण और वैवाहिक संबंधों के कारक शुक्र की स्थिति दूसरे विवाह के विश्लेषण में अत्यंत महत्वपूर्ण होती है। यदि शुक्र द्विस्वभाव राशि में हो या वैवाहिक भावों से अनेक प्रकार से जुड़ा हो, तो यह जीवन में एक से अधिक महत्वपूर्ण वैवाहिक या प्रेम संबंधों की संभावना का संकेत दे सकता है।'
+            body:  'As the Karaka of passion and the partner, Venus’s placement is always central. If Venus is in a dual sign or has multiple connections to marital houses, it is traditionally read as suggesting the potential for more than one significant partnership.',
+            body_hi: 'प्रेम, आकर्षण और वैवाहिक संबंधों के कारक शुक्र की स्थिति दूसरे विवाह के विश्लेषण में अत्यंत महत्वपूर्ण होती है। यदि शुक्र द्विस्वभाव राशि में हो या वैवाहिक भावों से अनेक प्रकार से जुड़ा हो, तो इसे परंपरागत रूप से जीवन में एक से अधिक महत्वपूर्ण वैवाहिक या प्रेम संबंधों की संभावना के संकेत के रूप में पढ़ा जाता है।'
           },
           {
             id:    'jupiter',
@@ -143,15 +143,15 @@ export const secondMarriage: DomainTopic = {
             id:    'rahu-ketu',
             label: 'Rahu and Ketu',
             label_hi: 'राहु और केतु',
-            body:  'Rahu, the planet of obsession and unconventionality, when influencing the 7th, 8th, or 9th houses, is traditionally associated with an unconventional or late-life second marriage. Ketu brings detachment; its influence can show distance within the first marriage or a distinctive quality in a second union.',
-            body_hi: 'राहु तीव्र आकर्षण और अपरंपरागत प्रवृत्ति का ग्रह है; सप्तम, अष्टम या नवम भाव पर इसका प्रभाव परंपरागत रूप से अपरंपरागत या जीवन के बाद के दौर में होने वाले दूसरे विवाह से जोड़ा जाता है। केतु वैराग्य लाता है; इसका प्रभाव पहले विवाह में दूरी या दूसरे विवाह की विशेष प्रकृति दिखा सकता है।'
+            body:  'Rahu, the planet of intensity and unconventionality, when influencing the 7th, 8th, or 9th houses, is traditionally associated with an unconventional or late-life second marriage. Ketu brings detachment; its influence can show distance within the first marriage or a distinctive quality in a second union.',
+            body_hi: 'राहु तीव्रता और अपरंपरागतता का ग्रह है; सप्तम, अष्टम या नवम भाव पर इसका प्रभाव परंपरागत रूप से अपरंपरागत या जीवन के बाद के दौर में होने वाले दूसरे विवाह से जोड़ा जाता है। केतु वैराग्य लाता है; इसका प्रभाव पहले विवाह में दूरी या दूसरे विवाह की विशेष प्रकृति दिखा सकता है।'
           },
           {
             id:    'saturn',
             label: 'Saturn',
             label_hi: 'शनि',
-            body:  'Saturn is the planet of endurance. While it often brings delay, its placement in the 7th or 9th house can indicate a second marriage that occurs later in life, characterized by a more serious or restrictive nature.',
-            body_hi: 'शनि सहनशक्ति का ग्रह है। यह अक्सर देरी लाता है, फिर भी सप्तम या नवम भाव में इसकी स्थिति जीवन में बाद में होने वाले ऐसे दूसरे विवाह का संकेत दे सकती है जो अधिक गंभीर और ज़िम्मेदारी भरा हो।'
+            body:  'Saturn is the planet of endurance. While it often brings delay, its placement in the 7th or 9th house can indicate a second marriage that occurs later in life, with a more mature and committed nature.',
+            body_hi: 'शनि सहनशक्ति का ग्रह है। यह अक्सर देरी लाता है, फिर भी सप्तम या नवम भाव में इसकी स्थिति जीवन में बाद में होने वाले ऐसे दूसरे विवाह का संकेत दे सकती है जो अधिक परिपक्व और प्रतिबद्ध स्वभाव का हो।'
           }
         ]
       },
@@ -297,8 +297,8 @@ export const secondMarriage: DomainTopic = {
             id:    'summary-body',
             label: 'Understanding the Karmic Journey',
             label_hi: 'कार्मिक यात्रा को समझना',
-            body:  'Vedic Astrology reads a second marriage as a complex karmic theme rather than a mere matter of choice — though real-life circumstances and decisions always play their part. Astrologers look for it in the natal chart, check it in the Navamsa (D9), and relate it to the Dasha-Bhukti sequence. By understanding the roles of the 7th, 2nd, and 9th houses, the influence of planets like Rahu, Saturn, and Jupiter, and the timing of events, we gain meaningful insights — as tendencies, not certainties. The goal of this analysis is not just prediction, but empowerment—helping the individual understand their karmic journey and move toward future partnerships with wisdom, clarity, and emotional maturity.',
-            body_hi: 'वैदिक ज्योतिष दूसरे विवाह को केवल एक विकल्प नहीं, बल्कि एक जटिल कार्मिक विषय के रूप में देखता है — हालांकि जीवन की वास्तविक परिस्थितियाँ और निर्णय हमेशा भूमिका निभाते हैं। ज्योतिषी इसे जन्मकुंडली में देखते हैं, नवांश (D9) में इसकी पुष्टि करते हैं और दशा-भुक्ति के क्रम से जोड़ते हैं। सप्तम, द्वितीय और नवम भाव की भूमिका, राहु, शनि और गुरु जैसे ग्रहों के प्रभाव और घटनाओं के समय को समझकर सार्थक अंतर्दृष्टि मिलती है — प्रवृत्तियों के रूप में, निश्चितता के रूप में नहीं। इस विश्लेषण का लक्ष्य केवल भविष्यवाणी नहीं, बल्कि सशक्तिकरण है — व्यक्ति को अपनी कार्मिक यात्रा समझने और समझदारी, स्पष्टता व भावनात्मक परिपक्वता के साथ भविष्य के संबंधों की ओर बढ़ने में मदद करना।'
+            body:  'Vedic astrology reads a second marriage as a theme in the chart, shaped together with real-life circumstances and decisions. Astrologers look for it in the natal chart, check it in the Navamsa (D9), and relate it to the Dasha-Bhukti sequence. By understanding the roles of the 7th, 2nd, and 9th houses, the influence of planets like Rahu, Saturn, and Jupiter, and the timing of events, we gain meaningful insights — as tendencies, not certainties. The goal of this analysis is not just prediction, but empowerment—helping the individual understand their karmic journey and move toward future partnerships with wisdom, clarity, and emotional maturity.',
+            body_hi: 'वैदिक ज्योतिष दूसरे विवाह को कुंडली के एक विषय के रूप में पढ़ता है, जो वास्तविक परिस्थितियों और निर्णयों के साथ मिलकर आकार लेता है। ज्योतिषी इसे जन्मकुंडली में देखते हैं, नवांश (D9) में इसकी पुष्टि करते हैं और दशा-भुक्ति के क्रम से जोड़ते हैं। सप्तम, द्वितीय और नवम भाव की भूमिका, राहु, शनि और गुरु जैसे ग्रहों के प्रभाव और घटनाओं के समय को समझकर सार्थक अंतर्दृष्टि मिलती है — प्रवृत्तियों के रूप में, निश्चितता के रूप में नहीं। इस विश्लेषण का लक्ष्य केवल भविष्यवाणी नहीं, बल्कि सशक्तिकरण है — व्यक्ति को अपनी कार्मिक यात्रा समझने और समझदारी, स्पष्टता व भावनात्मक परिपक्वता के साथ भविष्य के संबंधों की ओर बढ़ने में मदद करना।'
           }
         ]
       },
@@ -344,11 +344,15 @@ export const secondMarriage: DomainTopic = {
 
   schemaSignals: {
     expertise: 'Analysis of complex karmic patterns in Vedic Astrology regarding marital dissolution and subsequent unions.',
+    // First authored in commit 7cd8637 (2026-07-20, "marriage hub").
+    datePublished: '2026-07-20',
   },
 
   authority: {
     reviewStatus:   'approved',
     contentVersion: 1,
+    // Editorial V1 (2026-11-05): question-led H1/meta, tracked free Marriage Path, disclaimer said once.
+    lastUpdated:    '2026-11-05',
   },
 
   publishing: {
