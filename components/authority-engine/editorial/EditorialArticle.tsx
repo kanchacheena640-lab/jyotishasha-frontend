@@ -31,8 +31,9 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
  * 1-3. Hero row: the direct answer (reading width) and the two user actions -- the free
  * calculator first and prominent, then a compact report offer. Desktop: actions beside the
  * answer; tablet: side by side under it; phones: stacked in that order. `heroTool` (optional):
- * an interactive on-page tool shown in place of the free-tool link card. Tool-led pages (no
- * report offer): the landing's own tracked `primaryAction` card is the only hero action.
+ * an interactive on-page tool shown in place of the free-tool link card. A landing's own tracked
+ * `primaryAction` card also replaces that link card: alone on tool-led pages (no report offer),
+ * or before the report card on report-led pages.
  */
 export function EditorialLead({ config, topic, locale, heroTool }: {
   config: AnyTopicLandingConfig; topic: AuthorityTopic; locale: Locale; heroTool?: ReactNode
@@ -40,7 +41,7 @@ export function EditorialLead({ config, topic, locale, heroTool }: {
   const { offer, primaryAction } = config
   const localePath = locale === 'hi' ? '/hi' : ''
   const tool = topic.ctas.find(cta => cta.type === 'tool')
-  const toolLedAction = !offer && primaryAction
+  const freeToolAction = primaryAction
     ? <LeadPrimaryAction action={primaryAction} locale={locale} variant="editorial" />
     : undefined
 
@@ -52,7 +53,7 @@ export function EditorialLead({ config, topic, locale, heroTool }: {
       </section>
 
       <div className="grid grid-cols-1 gap-4">
-        {heroTool ?? toolLedAction ?? (tool && (
+        {heroTool ?? freeToolAction ?? (tool && (
           <aside aria-labelledby="editorial-tool-cta" className="flex flex-col rounded-2xl bg-[#1B2A4A] p-5 text-[#E6E1D6] sm:flex-row sm:items-center sm:gap-6 sm:p-6 lg:flex-col lg:items-stretch lg:gap-0">
             <div className="flex-1">
               <span className="inline-block rounded-full bg-[#E8C766] px-2.5 py-0.5 text-[13px] font-bold text-[#1B2A4A]">{T.free[locale]}</span>

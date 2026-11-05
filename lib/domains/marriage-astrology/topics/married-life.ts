@@ -5,8 +5,8 @@ export const marriedLife: DomainTopic = {
   identity: {
     id:         'marriage-astrology:married-life',
     slug:       'married-life',
-    title:      'Married Life in Vedic Astrology: A Complete Guide',
-    title_hi:   'वैदिक ज्योतिष में वैवाहिक जीवन',
+    title:      'Married Life in Vedic Astrology: Will My Married Life Be Happy?',
+    title_hi:   'वैदिक ज्योतिष में वैवाहिक जीवन: क्या मेरा वैवाहिक जीवन सुखी रहेगा?',
     domain:     'astrology',
     subdomain:  'marriage-astrology',
     category:   'marriage',
@@ -25,16 +25,16 @@ export const marriedLife: DomainTopic = {
 
   seo: {
     metaTitle:       'Married Life in Vedic Astrology: Houses & Timing',
-    metaDescription: 'Explore how Vedic astrology assesses married life through the 7th house, Navamsa, and Dasha cycles — a guide to harmony, challenges, and karmic growth.',
-    metaDescription_hi: 'वैदिक ज्योतिष में वैवाहिक जीवन कैसे देखा जाता है — सप्तम भाव और सप्तमेश, शुक्र-गुरु, चंद्रमा, नवांश और दशा से सुखी वैवाहिक जीवन, स्थिरता और चुनौतियों के संकेत समझें।',
+    metaDescription: 'Will your married life be happy? See how Vedic astrology reads married life — the 7th house and its lord, Venus and Jupiter, the Moon, the Navamsa (D9) and the running Dasha.',
+    metaDescription_hi: 'क्या मेरा वैवाहिक जीवन सुखी रहेगा? जानें वैदिक ज्योतिष में वैवाहिक जीवन कैसे देखा जाता है — सप्तम भाव और सप्तमेश, शुक्र और गुरु, चंद्रमा, नवांश (D9) और चल रही दशा।',
     robots:          'noindex,follow',
   },
 
   hero: {
     headline:    'Married Life in Vedic Astrology: Your Karmic Roadmap',
     headline_hi: 'वैदिक ज्योतिष में वैवाहिक जीवन: आपका कार्मिक रोडमैप',
-    subtext:     'Vedic astrology views married life as a profound karmic union. Discover how houses, planetary karakas, the Navamsa chart, and Dasha cycles reveal the harmony, challenges, and spiritual evolution within your marriage.',
-    subtext_hi:  'वैदिक ज्योतिष वैवाहिक जीवन को एक गहन कार्मिक मिलन के रूप में देखता है। जानिए कैसे भाव, ग्रह कारक, नवांश चार्ट और दशा चक्र आपके विवाह में सद्भाव, चुनौतियों और आध्यात्मिक विकास को प्रकट करते हैं।',
+    subtext:     'How a birth chart describes married life — harmony, emotional connection and shared stability — through the 7th house and its lord, Venus and Jupiter, the Moon, the Navamsa (D9) and Dasha.',
+    subtext_hi:  'जन्मकुंडली वैवाहिक जीवन — सामंजस्य, भावनात्मक जुड़ाव और साझा स्थिरता — के बारे में क्या बताती है: सप्तम भाव और सप्तमेश, शुक्र और गुरु, चंद्रमा, नवांश (D9) और दशा के माध्यम से।',
   },
 
   taxonomy: {
@@ -49,16 +49,16 @@ export const marriedLife: DomainTopic = {
     contentBlocks: [
       {
         id:       'introduction',
-        title:    'Introduction',
-        title_hi: 'परिचय',
+        title:    'How Jyotisha Reads Married Life',
+        title_hi: 'ज्योतिष वैवाहिक जीवन को कैसे पढ़ता है',
         layout:   'list',
         items: [
           {
             id:       'karmic-foundation',
             label:    'Marriage as a Karmic Sacrament',
             label_hi: 'एक कार्मिक संस्कार के रूप में विवाह',
-            body:     'In Vedic astrology, or Jyotisha Vedanga, marriage is regarded as one of the most significant Samskaras (sacraments) of life. It is not merely a social contract but a profound karmic union, deeply rooted in the concept of Rina-anubandha — the debts and bonds carried forward from previous lifetimes. As a limb of the Vedas, Jyotisha serves as a map to understand these karmic blueprints. Assessing the quality, harmony, and evolution of married life is ultimately a search for understanding the mirror that will reflect one\'s own karmic patterns.',
-            body_hi:  'वैदिक ज्योतिष, या ज्योतिष वेदांग में, विवाह को जीवन के सबसे महत्वपूर्ण संस्कारों में से एक माना जाता है। यह केवल एक सामाजिक अनुबंध नहीं है, बल्कि एक गहन कार्मिक मिलन है, जो ऋण-अनुबंध की अवधारणा में गहराई से निहित है — पिछले जन्मों से आगे ले जाए गए ऋण और बंधन। वेदों के एक अंग के रूप में, ज्योतिष इन कार्मिक खाकों को समझने के लिए एक नक्शे के रूप में कार्य करता है।',
+            body:     'In Vedic astrology (Jyotisha), marriage is one of the most important Samskaras of life — more than a social contract, it is a lifelong partnership traditionally described through Rina-anubandha, the bond two people carry together. Reading married life in a chart helps you understand the strengths you bring to that partnership and where it asks for care.',
+            body_hi:  'वैदिक ज्योतिष में विवाह जीवन के सबसे महत्वपूर्ण संस्कारों में से एक है — केवल सामाजिक अनुबंध नहीं, बल्कि जीवन भर की साझेदारी, जिसे परंपरा में ऋणानुबंध, यानी दो लोगों का साझा बंधन, कहा जाता है। कुंडली में वैवाहिक जीवन को पढ़ने से समझ आता है कि आप इस साझेदारी में कौन-सी शक्तियाँ लाते हैं और कहाँ अधिक देखभाल की ज़रूरत है।',
           },
           {
             id:       'what-married-life-means',
@@ -157,22 +157,22 @@ export const marriedLife: DomainTopic = {
             id:       'moon',
             label:    'Moon',
             label_hi: 'चंद्रमा',
-            body:     'The Moon governs emotional connectivity and the nurturing dimension of married life. A strong Moon supports an empathetic, caring bond. A weak or afflicted Moon can introduce moodiness, emotional dependency, or shifting needs that require the partner to develop exceptional patience and attunement.',
-            body_hi:  'चंद्रमा भावनात्मक संपर्क और वैवाहिक जीवन के पोषण आयाम को नियंत्रित करता है। एक मजबूत चंद्रमा एक सहानुभूतिपूर्ण, देखभाल करने वाले बंधन का समर्थन करता है। एक कमजोर या पीड़ित चंद्रमा मनोदशा में बदलाव, भावनात्मक निर्भरता या बदलती जरूरतें ला सकता है।',
+            body:     'The Moon governs emotional connectivity and the nurturing dimension of married life. A strong Moon supports an empathetic, caring bond. A weak or afflicted Moon can bring emotional ups and downs, which patience and attunement from both partners help to steady.',
+            body_hi:  'चंद्रमा भावनात्मक संपर्क और वैवाहिक जीवन के पोषण आयाम को नियंत्रित करता है। एक मजबूत चंद्रमा एक सहानुभूतिपूर्ण, देखभाल करने वाले बंधन का समर्थन करता है। एक कमज़ोर या पीड़ित चंद्रमा भावनात्मक उतार-चढ़ाव ला सकता है, जिन्हें दोनों साथियों का धैर्य और समझ संतुलित करने में मदद करते हैं।',
           },
           {
             id:       'mars',
             label:    'Mars',
             label_hi: 'मंगल',
-            body:     'Mars brings passion and courage into the marriage but also the potential for argument or domineering behavior if poorly placed. A strong Mars creates a protective, energetic partner; an afflicted Mars demands conscious work on impulse control and respectful communication to prevent recurring conflict.',
-            body_hi:  'मंगल विवाह में जुनून और साहस लाता है, लेकिन यदि खराब स्थित हो तो बहस या दबदबे वाले व्यवहार की संभावना भी। एक मजबूत मंगल एक रक्षात्मक, ऊर्जावान साथी बनाता है; एक पीड़ित मंगल आवेग नियंत्रण पर सचेत कार्य की मांग करता है।',
+            body:     'Mars brings passion and courage into the marriage, and if poorly placed can bring heated disagreements. A strong Mars creates a protective, energetic partner; an afflicted Mars demands conscious work on impulse control and respectful communication to prevent recurring conflict.',
+            body_hi:  'मंगल विवाह में जुनून और साहस लाता है, और यदि अनुकूल स्थिति में न हो तो तीखी बहस की संभावना भी ला सकता है। एक मजबूत मंगल एक रक्षात्मक, ऊर्जावान साथी बनाता है; एक पीड़ित मंगल आवेग नियंत्रण पर सचेत कार्य की मांग करता है।',
           },
           {
             id:       'mercury',
             label:    'Mercury',
             label_hi: 'बुध',
-            body:     'Mercury shapes the intellectual and communicative quality of the marriage. A well-placed Mercury fosters clear, adaptable communication and intellectual companionship. If weakened, it may manifest as an overly critical or restless partner, creating a climate where misunderstandings accumulate faster than they are resolved.',
-            body_hi:  'बुध विवाह की बौद्धिक और संचार गुणवत्ता को आकार देता है। एक अच्छी तरह से स्थित बुध स्पष्ट, अनुकूलनीय संचार और बौद्धिक साहचर्य को बढ़ावा देता है। यदि कमजोर हो, तो यह अत्यधिक आलोचनात्मक या बेचैन साथी के रूप में प्रकट हो सकता है।',
+            body:     'Mercury shapes the intellectual and communicative quality of the marriage. A well-placed Mercury fosters clear, adaptable communication and intellectual companionship. If weakened, it can call for extra patience in communication, so that small misunderstandings are cleared quickly.',
+            body_hi:  'बुध विवाह की बौद्धिक और संचार गुणवत्ता को आकार देता है। एक अच्छी तरह से स्थित बुध स्पष्ट, अनुकूलनीय संचार और बौद्धिक साहचर्य को बढ़ावा देता है। यदि कमज़ोर हो, तो बातचीत में अधिक धैर्य की ज़रूरत हो सकती है, ताकि छोटी गलतफहमियाँ जल्दी दूर हों।',
           },
           {
             id:       'jupiter',
@@ -185,8 +185,8 @@ export const marriedLife: DomainTopic = {
             id:       'venus',
             label:    'Venus',
             label_hi: 'शुक्र',
-            body:     'Venus represents the romantic and diplomatic dimension of the marital bond. Its strength determines the quality of affection, shared pleasure, and aesthetic harmony within the relationship. An afflicted Venus may introduce self-indulgence, shallow values, or an over-attachment to comfort that eventually strains the deeper bond.',
-            body_hi:  'शुक्र वैवाहिक बंधन के प्रेम और व्यवहार-कुशलता वाले पक्ष का प्रतिनिधित्व करता है। इसकी शक्ति रिश्ते के भीतर स्नेह, साझा आनंद और सौंदर्य सद्भाव की गुणवत्ता निर्धारित करती है। एक पीड़ित शुक्र आत्म-भोग, उथले मूल्यों या आराम के प्रति अत्यधिक आसक्ति ला सकता है।',
+            body:     'Venus represents the romantic and diplomatic dimension of the marital bond. Its strength determines the quality of affection, shared pleasure, and aesthetic harmony within the relationship. An afflicted Venus may ask the couple to balance comfort and pleasure with shared responsibility.',
+            body_hi:  'शुक्र वैवाहिक बंधन के प्रेम और व्यवहार-कुशलता वाले पक्ष का प्रतिनिधित्व करता है। इसकी शक्ति रिश्ते के भीतर स्नेह, साझा आनंद और सौंदर्य सद्भाव की गुणवत्ता निर्धारित करती है। एक पीड़ित शुक्र जोड़े से आराम और आनंद को साझा ज़िम्मेदारी के साथ संतुलित करने की अपेक्षा कर सकता है।',
           },
           {
             id:       'saturn',
@@ -304,8 +304,8 @@ export const marriedLife: DomainTopic = {
           },
           {
             id:       'separation-planets',
-            label:    'Separation-inducing Planets in the 7th House',
-            label_hi: 'सप्तम भाव में अलगाव उत्पन्न करने वाले ग्रह',
+            label:    'Planets That Bring Distance to the 7th House',
+            label_hi: 'सप्तम भाव में दूरी लाने वाले ग्रह',
             body:     'Certain placements — particularly Saturn\'s separative influence, the Sun\'s ego-driven independence, or Rahu\'s unconventional pull — in the 7th house can introduce emotional distance or periodic withdrawal into the marriage. These are not absolute negatives but karmic signals requiring conscious bridging work.',
             body_hi:  'कुछ स्थितियां — विशेष रूप से शनि का अलगाव प्रभाव, सूर्य की अहंकार-चालित स्वतंत्रता, या राहु का अपरंपरागत खिंचाव — सप्तम भाव में होने पर विवाह में भावनात्मक दूरी या समय-समय पर अलग-थलग रहने की प्रवृत्ति ला सकती हैं। ये पूरी तरह नकारात्मक नहीं हैं, बल्कि ऐसे कार्मिक संकेत हैं जिनमें दूरी को सचेत रूप से पाटने की आवश्यकता होती है।',
           },
@@ -406,8 +406,8 @@ export const marriedLife: DomainTopic = {
             id:       'summary',
             label:    'Summary',
             label_hi: 'सारांश',
-            body:     'Assessing the quality and evolution of married life through Vedic astrology is an exercise in understanding one\'s own karmic blueprint. By integrating the analysis of houses, planetary Karakas, divisional charts like the Navamsa, and the influence of Dasha cycles, Jyotisha provides a structured framework for navigating the profound experience of marital union. The chart serves not as a prison, but as a roadmap for developing the maturity, compassion, and insight necessary to transform a karmic bond into a supportive partnership.',
-            body_hi:  'वैदिक ज्योतिष के माध्यम से वैवाहिक जीवन की गुणवत्ता और विकास का आकलन करना अपने कार्मिक खाके को समझने का एक अभ्यास है। भावों, ग्रह कारकों, नवांश जैसे विभागीय चार्टों और दशा चक्रों के प्रभाव के विश्लेषण को एकीकृत करके, ज्योतिष वैवाहिक जीवन के गहरे अनुभव को समझने और संभालने के लिए एक व्यवस्थित ढांचा देता है।',
+            body:     'Assessing married life through Vedic astrology helps you understand the strengths your chart brings to marriage and where it asks for care. By integrating the analysis of houses, planetary Karakas, divisional charts like the Navamsa, and the influence of Dasha cycles, Jyotisha provides a structured framework for navigating the profound experience of marital union. The chart serves not as a prison, but as a roadmap for developing the maturity, compassion, and insight necessary to transform a karmic bond into a supportive partnership.',
+            body_hi:  'वैदिक ज्योतिष के माध्यम से वैवाहिक जीवन का आकलन यह समझने में मदद करता है कि आपकी कुंडली विवाह में कौन-सी शक्तियाँ लाती है और कहाँ देखभाल की ज़रूरत है। भावों, ग्रह कारकों, नवांश जैसे विभागीय चार्टों और दशा चक्रों के प्रभाव के विश्लेषण को एकीकृत करके, ज्योतिष वैवाहिक जीवन के गहरे अनुभव को समझने और संभालने के लिए एक व्यवस्थित ढांचा देता है।',
           },
         ],
       },
@@ -435,8 +435,8 @@ export const marriedLife: DomainTopic = {
             id:       'faq-3',
             label:    'Does the Navamsa chart reveal my partner\'s nature?',
             label_hi: 'क्या नवांश चार्ट मेरे साथी की प्रकृति को प्रकट करता है?',
-            body:     'Yes. The Navamsa reveals the deeper, inner nature of the partner and the stability of the marital union itself — the qualities and dynamics that emerge in the intimacy and day-to-day reality of marriage, which may not be visible in the Rashi chart alone.',
-            body_hi:  'हां। नवांश साथी की गहरी, आंतरिक प्रकृति और वैवाहिक मिलन की स्थिरता को प्रकट करता है — वे गुण और व्यवहार जो विवाह की अंतरंगता और दिन-प्रतिदिन की वास्तविकता में उभरती हैं, जो केवल राशि चार्ट में दिखाई नहीं दे सकती।',
+            body:     'It adds depth. The Navamsa (D9) shows the inner quality of the marriage — how it feels once it is lived day to day — alongside what the birth chart shows.',
+            body_hi:  'यह गहराई जोड़ता है। नवांश (D9) विवाह की आंतरिक गुणवत्ता दिखाता है — रोज़मर्रा के जीवन में रिश्ता कैसा महसूस होता है — जिसे जन्मकुंडली के साथ मिलाकर पढ़ा जाता है।',
           },
           {
             id:       'faq-4',
@@ -492,7 +492,20 @@ export const marriedLife: DomainTopic = {
     ],
     // Reports are offered by the landing overlay (_landing.ts): marriage_report as the primary card,
     // problem_in_marriage_report as a contextual card after 'harmony-and-challenges'.
-    ctas: [],
+    // Minimum-one-CTA contract. The editorial template does not render bottom CTAs: the hero shows the
+    // landing's tracked Marriage Path card (_landing.ts primaryAction) and the Marriage Report card.
+    ctas: [
+      {
+        id:             'cta-marriage-path',
+        type:           'tool',
+        slug:           'marriage-path',
+        label:          'Check Your Marriage Path',
+        label_hi:       'अपना विवाह मार्ग जाँचें',
+        description:    'A free check of your 7th house — the planets placed there, Venus and Jupiter, and the strongest influence on your marriage.',
+        description_hi: 'आपके सप्तम भाव की फ्री जाँच — उसमें स्थित ग्रह, शुक्र और गुरु, और विवाह पर सबसे प्रबल प्रभाव।',
+        variant:        'primary',
+      },
+    ],
   },
 
   relationships: {
@@ -515,11 +528,15 @@ export const marriedLife: DomainTopic = {
 
   schemaSignals: {
     expertise: 'Authored by Vedic astrologers specializing in married life, Navamsa analysis, marriage yogas, and Dasha-based timing.',
+    // First authored in commit 7cd8637 (2026-07-20, "marriage hub").
+    datePublished: '2026-07-20',
   },
 
   authority: {
     reviewStatus:   'not-reviewed',
     contentVersion: 1,
+    // Editorial V1 (2026-11-05): question-led H1/meta, tracked free Marriage Path, neutral planet wording.
+    lastUpdated:    '2026-11-05',
   },
 
   publishing: {

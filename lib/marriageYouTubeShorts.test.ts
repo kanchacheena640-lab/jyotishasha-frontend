@@ -73,8 +73,8 @@ function shortOf(slug: string): Short | null {
     captionEn: `${iv.heading.en} ${iv.description.en}`, captionHi: iv.heading.hi, playLabel: iv.playLabel, playFeatureName: iv.playFeatureName };
   return null;
 }
-const REPORT_LED = ["love-marriage", "married-life"];
-const EDITORIAL = ["arranged-marriage", "delayed-marriage", "spouse-nature"];
+const REPORT_LED = ["love-marriage"];
+const EDITORIAL = ["arranged-marriage", "delayed-marriage", "spouse-nature", "married-life"];
 const TOOL_LED: string[] = [];
 // Tool-led pages on the editorial template: the free-tool card leads the hero; the Short sits in the article.
 const EDITORIAL_TOOL_LED = ["intercaste-marriage", "compatibility"];

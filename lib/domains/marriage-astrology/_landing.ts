@@ -476,10 +476,11 @@ export const compatibilityLanding: ToolLedLandingConfig = {
 // areas needing attention; it does not read the Navamsa, so the card never claims D9). The Problem in
 // Marriage Report is offered only as a compact contextual card after the harmony/challenges section,
 // for readers already facing difficulties. Couples comparing two charts get the free /love calculator
-// via the topic's own cross-link.
+// via the topic's own cross-link. Editorial V1: ivory template; the hero shows the tracked free Marriage
+// Path card (primaryAction) before the Marriage Report card.
 export const marriedLifeLanding: TopicLandingConfig = {
-  // Short in the top report card (same slot as Marriage Timing / Love Marriage): CTA first on phones,
-  // video beside the report on desktop with the CTA kept near its original position.
+  theme: 'editorial',
+  // Editorial: the Short sits after the opening section and stays beside the article on desktop.
   video: {
     youtubeId: 'KyKc4_EjLoY',
     posterSrc: '/media/married-life-short-poster.webp',
@@ -488,13 +489,32 @@ export const marriedLifeLanding: TopicLandingConfig = {
     caption: { en: 'Watch: Married Life in Vedic Astrology (in Hindi)', hi: 'देखें: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
     playLabel: { en: 'Play video: Married Life in Vedic Astrology', hi: 'वीडियो चलाएं: शादी के बाद वैवाहिक जीवन कैसा होगा?' },
     playFeatureName: 'married_life_video_play',
-    desktopCtaFirst: true,
+    articleSectionId: 'introduction',
   },
 
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
-    en: 'Married life astrology does not judge a marriage from one planet or one yoga. An astrologer reads the 7th house and its lord together with the houses linked to family, home, intimacy and shared values (the 2nd, 4th, 8th and 9th), the marital karakas Venus and Jupiter, the Moon for emotional temperament, and the supportive or challenging combinations in the chart — then checks the Navamsa (D9) and the running Dasha. The result describes tendencies: where married life is naturally supported and where it may need more conscious effort. It is not a verdict on whether a marriage will be happy or will last.',
-    hi: 'वैवाहिक जीवन का आकलन किसी एक ग्रह या एक योग से नहीं होता। ज्योतिषी सप्तम भाव और सप्तमेश को परिवार, घर, अंतरंगता और साझे मूल्यों से जुड़े भावों (द्वितीय, चतुर्थ, अष्टम और नवम) के साथ पढ़ते हैं; विवाह के कारक शुक्र और गुरु, भावनात्मक स्वभाव के लिए चंद्रमा, और कुंडली के सहायक या चुनौतीपूर्ण योगों को देखते हैं — फिर नवांश (D9) और चल रही दशा से इसकी पुष्टि करते हैं। इससे प्रवृत्तियों का पता चलता है: वैवाहिक जीवन में कहाँ स्वाभाविक सहारा है और कहाँ अधिक सचेत प्रयास की आवश्यकता हो सकती है। यह इस बात का फैसला नहीं है कि विवाह सुखी होगा या टिकेगा।',
+    en: 'In Vedic astrology, married life is read from several factors together: the 7th house and its lord, the houses linked to family, home, intimacy and shared values (the 2nd, 4th, 8th and 9th), the marital karakas Venus and Jupiter, the Moon for emotional temperament, and the supportive or challenging combinations in the chart — then checked in the Navamsa (D9) and the running Dasha. Together they show where your married life is naturally supported and where a little more conscious effort helps it thrive.',
+    hi: 'वैदिक ज्योतिष में वैवाहिक जीवन कई कारकों को साथ मिलाकर पढ़ा जाता है: सप्तम भाव और सप्तमेश, परिवार, घर, अंतरंगता और साझे मूल्यों से जुड़े भाव (द्वितीय, चतुर्थ, अष्टम और नवम), विवाह के कारक शुक्र और गुरु, भावनात्मक स्वभाव के लिए चंद्रमा, और कुंडली के सहायक या चुनौतीपूर्ण योग — जिनकी पुष्टि नवांश (D9) और चल रही दशा में की जाती है। ये मिलकर बताते हैं कि आपके वैवाहिक जीवन में कहाँ स्वाभाविक सहारा है और कहाँ थोड़ा अधिक सचेत प्रयास उसे और सुखी बनाता है।',
+  },
+
+  // Free, tracked hero action -- shown before the report card. Copy names only what the tool reads
+  // (7th-house occupants, Venus/Jupiter dignity, strongest influence); no D9 or Dasha.
+  primaryAction: {
+    eyebrow: { en: 'Free Marriage Path Check', hi: 'फ्री विवाह मार्ग जाँच' },
+    heading: { en: 'Check Your Marriage Path', hi: 'अपना विवाह मार्ग जाँचें' },
+    body: {
+      en: 'Enter your birth details for a free 7th-house reading: the planets placed in your 7th house, the strength of Venus and Jupiter, and the planet with the strongest influence on your marriage.',
+      hi: 'अपना जन्म विवरण दर्ज करें और सप्तम भाव का फ्री विश्लेषण पाएं: आपके सप्तम भाव में स्थित ग्रह, शुक्र और गुरु की स्थिति, और विवाह पर सबसे प्रबल प्रभाव वाला ग्रह।',
+    },
+    ctaLabel: { en: 'Check Marriage Path — Free', hi: 'फ्री में विवाह मार्ग जाँचें' },
+    microcopy: {
+      en: 'A free snapshot of your 7th house from your birth chart.',
+      hi: 'आपकी जन्मकुंडली से सप्तम भाव की फ्री झलक।',
+    },
+    href: '/tools/marriage-path',
+    ctaId: 'married_life_marriage_path_cta',
+    screenName: 'married_life_topic',
   },
 
   offer: {

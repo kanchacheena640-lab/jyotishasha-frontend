@@ -69,16 +69,32 @@ check("server registry resolves /reports/<slug> + catalogue price for the contex
 const card = src("components/authority-engine/landing/ContextualReportCard.tsx");
 check("contextual card is compact and secondary (no large panel / shadow / filled accent button) and tracks clicks",
   !/rounded-3xl|shadow-xl|bg-rose-600/.test(card) && card.includes("bg-white/10") && card.includes("WebsiteEvents.ctaClick(unit.ctaId, unit.screenName)"));
-check("no bottom report CTA left on the topic (no duplicate / competing report card)", /\n {4}ctas: \[\],/.test(topic) && !/type: +'report'/.test(topic));
+check("no bottom report CTA on the topic (no duplicate / competing report card); one Marriage Path tool entry keeps the minimum-one-CTA contract",
+  !/type: +'report'/.test(topic) && (topic.match(/type: +'tool'/g) || []).length === 1 && /slug: +'marriage-path'/.test(topic));
+
+console.log("\n=== B2. Tracked free Marriage Path card in the editorial hero (before the report card) ===");
+const action = marriedLifeLanding.primaryAction;
+check("primaryAction -> existing /tools/marriage-path route, new tracking id, screen name kept",
+  action?.href === "/tools/marriage-path" && action.ctaId === "married_life_marriage_path_cta" && action.screenName === "married_life_topic" &&
+  fs.existsSync(path.join(root, "app/[locale]/tools/[toolId]/page.tsx")));
+check("card copy claims only what the tool reads (7th-house planets, Venus/Jupiter, strongest influence); free, no price, no D9/Dasha",
+  !!action && ["7th house", "Venus and Jupiter", "strongest influence"].every((w) => action.body.en.includes(w)) &&
+  /Free/.test(action.ctaLabel.en) && !/₹|Navamsa|D9|Dasha/.test(JSON.stringify(action)));
+const lead = src("components/authority-engine/editorial/EditorialArticle.tsx");
+check("editorial hero renders the tracked card whenever configured, before the report card",
+  /const freeToolAction = primaryAction\s*\?\s*<LeadPrimaryAction action=\{primaryAction\} locale=\{locale\} variant="editorial" \/>/.test(lead) &&
+  lead.indexOf("{heroTool ?? freeToolAction ?? (tool && (") < lead.indexOf("{offer && <EditorialReportCard"));
 
 console.log("\n=== C. Short answer ===");
 const da = marriedLifeLanding.directAnswer;
-check("EN: not one planet or one yoga; 7th house + lord, 2nd/4th/8th/9th, Venus and Jupiter, Moon, Navamsa (D9), Dasha",
-  /not judge a marriage from one planet or one yoga/.test(da.en) &&
+check("EN: read from several factors together; 7th house + lord, 2nd/4th/8th/9th, Venus and Jupiter, Moon, Navamsa (D9), Dasha",
+  /married life is read from several factors together/.test(da.en) &&
   ["7th house and its lord", "2nd, 4th, 8th and 9th", "Venus and Jupiter", "Moon", "Navamsa (D9)", "Dasha"].every((w) => da.en.includes(w)));
-check("EN: tendencies, not a verdict", /describes tendencies/.test(da.en) && /not a verdict/.test(da.en));
-check("HI covers the same factors and limit",
-  ["एक ग्रह या एक योग", "सप्तम भाव और सप्तमेश", "द्वितीय, चतुर्थ, अष्टम और नवम", "शुक्र और गुरु", "चंद्रमा", "नवांश (D9)", "दशा", "फैसला नहीं"].every((w) => da.hi.includes(w)));
+check("EN (Editorial V1): ends positively (natural support + conscious effort), no verdict refrain",
+  /where your married life is naturally supported and where a little more conscious effort helps it thrive\./.test(da.en) && !/not a verdict|does not judge/.test(da.en));
+check("HI covers the same factors and the same positive ending",
+  ["कई कारकों को साथ मिलाकर", "सप्तम भाव और सप्तमेश", "द्वितीय, चतुर्थ, अष्टम और नवम", "शुक्र और गुरु", "चंद्रमा", "नवांश (D9)", "दशा", "स्वाभाविक सहारा"].every((w) => da.hi.includes(w)) &&
+  !/फैसला नहीं/.test(da.hi));
 check("short answer contains no sales copy", !/report|₹|price|buy|रिपोर्ट/i.test(da.en + da.hi));
 
 console.log("\n=== D. Related links + compatibility path ===");
@@ -92,14 +108,35 @@ check("couples get the existing free Kundli Matching calculator (/love) as a cro
   fs.existsSync(path.join(root, "app/[locale]/love/page.tsx")));
 check("relationship_future_report is not offered on the page", !JSON.stringify(marriedLifeLanding).includes("relationship_future_report") && !topic.includes("relationship_future_report"));
 check("ssrFaq + longForm on", marriedLifeLanding.ssrFaq === true && marriedLifeLanding.longForm === true);
-check("lead video is the approved Short KyKc4_EjLoY; no inline copy (exactly one video)",
-  marriedLifeLanding.video?.youtubeId === "KyKc4_EjLoY" && marriedLifeLanding.video.desktopCtaFirst === true && marriedLifeLanding.inlineVideo === undefined);
+check("editorial template on", marriedLifeLanding.theme === "editorial");
+check("video is the approved Short KyKc4_EjLoY inside the article after the opening section; tracking kept; no inline copy",
+  marriedLifeLanding.video?.youtubeId === "KyKc4_EjLoY" && marriedLifeLanding.video.articleSectionId === "introduction" &&
+  marriedLifeLanding.video.desktopCtaFirst === undefined && marriedLifeLanding.video.playFeatureName === "married_life_video_play" &&
+  marriedLifeLanding.inlineVideo === undefined);
 
 console.log("\n=== E. Page identity and content protected ===");
-check("title / H1 unchanged (EN + HI)",
-  topic.includes("title:      'Married Life in Vedic Astrology: A Complete Guide',") && topic.includes("title_hi:   'वैदिक ज्योतिष में वैवाहिक जीवन',"));
+check("title / H1 = approved question-led Editorial V1 title (EN + HI)",
+  topic.includes("title:      'Married Life in Vedic Astrology: Will My Married Life Be Happy?',") &&
+  topic.includes("title_hi:   'वैदिक ज्योतिष में वैवाहिक जीवन: क्या मेरा वैवाहिक जीवन सुखी रहेगा?',"));
 check("canonical path unchanged", topic.includes("canonicalPath: '/marriage-astrology/married-life',"));
-check("EN meta unchanged", topic.includes("metaDescription: 'Explore how Vedic astrology assesses married life through the 7th house, Navamsa, and Dasha cycles — a guide to harmony, challenges, and karmic growth.',"));
+check("EN meta = approved Editorial V1 text",
+  topic.includes("metaDescription: 'Will your married life be happy? See how Vedic astrology reads married life — the 7th house and its lord, Venus and Jupiter, the Moon, the Navamsa (D9) and the running Dasha.',"));
+check("subtitle rewritten (EN + HI)",
+  topic.includes("subtext:     'How a birth chart describes married life — harmony, emotional connection and shared stability") &&
+  topic.includes("subtext_hi:  'जन्मकुंडली वैवाहिक जीवन — सामंजस्य, भावनात्मक जुड़ाव और साझा स्थिरता"));
+check("Article schema dates: datePublished 2026-07-20, lastUpdated 2026-11-05",
+  topic.includes("datePublished: '2026-07-20',") && topic.includes("lastUpdated:    '2026-11-05',"));
+check("opening heading + plain opening (EN + HI); no 'karmic blueprint' left",
+  topic.includes("title:    'How Jyotisha Reads Married Life',") && topic.includes("title_hi: 'ज्योतिष वैवाहिक जीवन को कैसे पढ़ता है',") &&
+  /body: {5}'In Vedic astrology \(Jyotisha\), marriage is one of the most important Samskaras of life/.test(topic) &&
+  !/karmic blueprint|कार्मिक खाक/.test(topic));
+check("neutral planet wording (Moon / Mars / Mercury / Venus) and the renamed 7th-house distance heading",
+  /emotional ups and downs, which patience and attunement from both partners help to steady/.test(topic) &&
+  /if poorly placed can bring heated disagreements/.test(topic) && /call for extra patience in communication/.test(topic) &&
+  /balance comfort and pleasure with shared responsibility/.test(topic) &&
+  topic.includes("label:    'Planets That Bring Distance to the 7th House',") && topic.includes("label_hi: 'सप्तम भाव में दूरी लाने वाले ग्रह',") &&
+  !/domineering|shallow values|overly critical|moodiness|Separation-inducing|अलगाव उत्पन्न करने वाले/.test(topic));
+check("FAQ 3 no longer a flat 'Yes'", /id: {7}'faq-3',[\s\S]*?body: {5}'It adds depth\./.test(topic));
 const hiMeta = (topic.match(/metaDescription_hi: '([^']+)'/) || [, ""])[1] as string;
 check("Hindi meta present and informational", hiMeta.length >= 80 && /वैवाहिक जीवन/.test(hiMeta) && /सप्तम भाव/.test(hiMeta) && !/रिपोर्ट|₹/.test(hiMeta));
 const ids = [...topic.matchAll(/\n {8}id: {7}'([a-z0-9-]+)',/g)].map((m) => m[1]);

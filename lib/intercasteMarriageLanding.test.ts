@@ -95,7 +95,8 @@ check("one video (0Ldyl0oygJQ) inside the article after the opening section; no 
 const editorialSrc = src("components/authority-engine/editorial/EditorialArticle.tsx");
 const pageSrc = src("app/[locale]/marriage-astrology/[slug]/page.tsx");
 check("tool-led editorial hero: the tracked primaryAction card (light variant), no hero report card without an offer",
-  /const toolLedAction = !offer && primaryAction\s*\?\s*<LeadPrimaryAction action=\{primaryAction\} locale=\{locale\} variant="editorial" \/>/.test(editorialSrc) &&
+  /const freeToolAction = primaryAction\s*\?\s*<LeadPrimaryAction action=\{primaryAction\} locale=\{locale\} variant="editorial" \/>/.test(editorialSrc) &&
+  !landing.offer &&
   editorialSrc.includes("{offer && <EditorialReportCard offer={offer} locale={locale} />}") &&
   /landing\?\.theme === 'editorial' && \(landing\.offer \|\| landing\.primaryAction\)/.test(pageSrc));
 check("contextual report card rendered in the article with the light variant",
