@@ -90,6 +90,9 @@ check("₹99 Marriage Report CTA: price from reportsData, path from getReportPro
   cta.includes("₹${report.price}") && cta.includes("trackYogaReportCtaClick(MANGAL_DOSH_REPORT_CTA)") && cta.includes("'tools_mangal-dosh_report_cta'"));
 check("no Sade Sati upsell on the Mangal Dosh result (own suggestions, no unrelated report)",
   /'mangal-dosh': \[[\s\S]*?\],/.test(sugg) && !/'mangal-dosh': \[[^\]]*sadhesati/.test(sugg));
+check("result grid: chart column fits the 320px chart (no third-width track below xl), columns can shrink",
+  trs.includes("lg:grid-cols-[340px_minmax(0,1fr)]") && trs.includes("'xl:grid-cols-3'") && !trs.includes("md:grid-cols-3") &&
+  trs.includes('className="min-w-0 flex justify-center items-start"') && trs.includes('className="w-full max-w-[360px] mx-auto"'));
 check("ToolResultSection keeps exactly one onClick and no WebsiteEvents", (trs.match(/onClick=/g) || []).length === 1 && !trs.includes("WebsiteEvents"));
 
 console.log("\n=== E. Shared form + calculator wrapper ===");

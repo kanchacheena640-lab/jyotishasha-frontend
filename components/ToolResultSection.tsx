@@ -260,19 +260,22 @@ type PhaseKey = typeof keys[number];
       </div>
 
       {/* 🧩 Result Main Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white rounded-lg shadow-md p-6 md:p-8">
+      {/* The chart is 320px wide, so its column must be at least that wide: Mangal Dosh sits in a narrower
+          page container and gets a fixed chart column from lg up; other tools use thirds from xl up (a third
+          is under 320px below that). Narrower screens stack the chart above the analysis. */}
+      <div className={`grid grid-cols-1 ${result.toolId === 'mangal-dosh' ? 'lg:grid-cols-[340px_minmax(0,1fr)]' : 'xl:grid-cols-3'} gap-6 bg-white rounded-lg shadow-md p-6 md:p-8`}>
 
         {/* 🪐 Kundali Chart (Left side on desktop) */}
-        <div className="md:col-span-1 flex justify-center items-start">
+        <div className="min-w-0 flex justify-center items-start">
           {safePlanets.length > 0 && (
-            <div className="max-w-[360px] mx-auto">
+            <div className="w-full max-w-[360px] mx-auto">
               <KundaliChartNorth planets={safePlanets} lagnaRashi={safeLagna} size={320} />
             </div>
           )}
         </div>
 
         {/* 📜 Main Result Content (Center) */}
-        <div className="md:col-span-2 space-y-4">
+        <div className={`min-w-0 space-y-4 ${result.toolId === 'mangal-dosh' ? '' : 'xl:col-span-2'}`}>
           {/* 🔎 Description */}
           {result.description && (
             <div className="p-4 bg-blue-50 border border-blue-200 rounded shadow-sm">
