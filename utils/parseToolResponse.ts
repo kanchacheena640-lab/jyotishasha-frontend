@@ -1,3 +1,5 @@
+import { signName } from '../lib/rashi';
+
 export type ParsedResult = {
   title: string;
   subtitle?: string;
@@ -9,22 +11,24 @@ export type ParsedResult = {
 export async function parseToolResponse(data: any, toolId: string, lang: string = 'en'): Promise<ParsedResult> {
   const { name, rashi, lagna_sign } = data;
   const isHi = lang === 'hi';
+  const rashiHi = signName(rashi, true);
+  const lagnaHi = signName(lagna_sign, true);
 
   switch (toolId) {
     case 'rashi-finder':
       return {
-        title: isHi ? `आपकी चंद्र राशि ${rashi} है` : `Your Moon Sign is ${rashi}`,
+        title: isHi ? `आपकी चंद्र राशि ${rashiHi} है` : `Your Moon Sign is ${rashi}`,
         summary: isHi 
-          ? `प्रिय ${name}, आपकी चंद्र राशि ${rashi} है। यह आपके भावनात्मक स्वभाव और जन्मजात प्रतिक्रियाओं को परिभाषित करती है।`
+          ? `प्रिय ${name}, आपकी चंद्र राशि ${rashiHi} है। यह आपके भावनात्मक स्वभाव और जन्मजात प्रतिक्रियाओं को परिभाषित करती है।`
           : `Dear ${name}, your Moon Sign is ${rashi}. This defines your emotional nature and instinctive reactions.`,
         toolId,
       };
 
     case 'lagna-finder':
       return {
-        title: isHi ? `आपका लग्न ${lagna_sign} है` : `Your Ascendant (Lagna) is ${lagna_sign}`,
+        title: isHi ? `आपका लग्न ${lagnaHi} है` : `Your Ascendant (Lagna) is ${lagna_sign}`,
         summary: isHi
-          ? `${name}, आपका लग्न ${lagna_sign} है। यह आपके बाहरी व्यक्तित्व और दुनिया आपको कैसे देखती है, इसे नियंत्रित करता है।`
+          ? `${name}, आपका लग्न ${lagnaHi} है। यह आपके बाहरी व्यक्तित्व और दुनिया आपको कैसे देखती है, इसे नियंत्रित करता है।`
           : `${name}, your Lagna is ${lagna_sign}. This governs your outer personality and how the world sees you.`,
         toolId,
       };

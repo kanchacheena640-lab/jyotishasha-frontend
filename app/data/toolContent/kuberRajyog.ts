@@ -39,11 +39,11 @@ export const kuberRajyogContent = {
     faq: [
       {
         q: "Does Kuber Rajyog guarantee that a person will become a billionaire?",
-        a: "It indicates a very high cosmic potential for building massive assets and financial security. The scale depends on the overall strength of the planets involved and the native's commitment to financial discipline and ethical 'Karma'.",
+        a: "No. It indicates potential for building assets and financial security. The scale depends on the overall strength of the planets involved, your dashas and your own financial discipline.",
       },
       {
         q: "How is Kuber Rajyog different from a standard Dhan Yog?",
-        a: "A Dhan Yog focuses primarily on the ability to 'earn' money or generate income. Kuber Rajyog goes a step further—it focuses on the ability to 'keep' and 'multiply' that money, leading to permanent financial stability and assets.",
+        a: "A Dhan Yog focuses primarily on the ability to 'earn' money. Kuber Rajyog is read as going a step further, towards the ability to 'keep' and grow that money.",
       },
       {
         q: "When can I expect the best financial results from this yoga?",
@@ -90,11 +90,11 @@ export const kuberRajyogContent = {
     faq: [
       {
         q: "क्या कुबेर राजयोग होने से व्यक्ति निश्चित रूप से अरबपति बन जाता है?",
-        a: "यह विशाल संपत्ति और वित्तीय सुरक्षा बनाने की एक बहुत उच्च ब्रह्मांडीय क्षमता का संकेत देता है। परिणाम का स्तर ग्रहों के वास्तविक बल और जातक के वित्तीय अनुशासन और सही कर्म के प्रति समर्पण पर निर्भर करता है।",
+        a: "नहीं। यह संपत्ति और वित्तीय सुरक्षा बनाने की संभावना दर्शाता है। परिणाम का स्तर ग्रहों के वास्तविक बल, आपकी दशाओं और आपके वित्तीय अनुशासन पर निर्भर करता है।",
       },
       {
         q: "कुबेर राजयोग एक सामान्य धन योग से कैसे भिन्न है?",
-        a: "धन योग मुख्य रूप से पैसा 'कमाने' की क्षमता पर केंद्रित होता है। कुबेर राजयोग उससे एक कदम आगे है—यह उस पैसे को 'सहेजने' और उसे 'कई गुना बढ़ाने' की क्षमता पर केंद्रित है, जिससे स्थायी संपत्ति बनती है।",
+        a: "धन योग मुख्य रूप से पैसा 'कमाने' की क्षमता पर केंद्रित होता है। कुबेर राजयोग को उससे एक कदम आगे, यानी पैसे को 'सहेजने' और बढ़ाने की क्षमता से जोड़ा जाता है।",
       },
       {
         q: "मुझे इस योग के सबसे अच्छे वित्तीय परिणाम कब मिलने की उम्मीद करनी चाहिए?",

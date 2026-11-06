@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { reportsData } from '@/app/data/reportsData';
 import YogaReportCta from '@/components/YogaReportCta';
 import MangalDoshResult from '@/components/tools/mangal-dosh/MangalDoshResult';
+import RashiResult from '@/components/tools/rashi-finder/RashiResult';
+import { signName } from '@/lib/rashi';
 
 // Marriage Path result -> paid continuation: the existing Marriage Report (route + price from the catalogue).
 const MARRIAGE_PATH_REPORT = reportsData.find((r) => r.slug === 'marriage_report');
@@ -200,6 +202,7 @@ export default function ToolResult({ result, kundaliData }: Props) {
   const localePrefix = routeParams?.locale === 'hi' ? '/hi' : '';
   // Report CTA copy follows the route locale, like the Marriage Path CTA below.
   const ctaLocale: 'en' | 'hi' = localePrefix === '/hi' ? 'hi' : 'en';
+  const editorialLayout = result.toolId === 'mangal-dosh' || result.toolId === 'rashi-finder';
 
   function pickText(v?: string | { en: string; hi: string }): string {
   if (!v) return '';
@@ -248,7 +251,7 @@ type PhaseKey = typeof keys[number];
 
       {/* 📄 User Info */}
       <p className="text-sm text-center font-mono text-gray-700 mb-6">
-        {kundaliData.name} | {ctaLocale === 'hi' ? 'जन्म तिथि' : 'DOB'}: {/^\d{4}-\d{2}-\d{2}$/.test(String(kundaliData.dob)) ? formatDate(kundaliData.dob) : kundaliData.dob} | {ctaLocale === 'hi' ? 'समय' : 'TOB'}: {kundaliData.tob} | {ctaLocale === 'hi' ? 'राशि' : 'Rashi'}: {kundaliData.rashi} | {ctaLocale === 'hi' ? 'लग्न' : 'Lagna'}: {kundaliData.lagna_sign}
+        {kundaliData.name} | {ctaLocale === 'hi' ? 'जन्म तिथि' : 'DOB'}: {/^\d{4}-\d{2}-\d{2}$/.test(String(kundaliData.dob)) ? formatDate(kundaliData.dob) : kundaliData.dob} | {ctaLocale === 'hi' ? 'समय' : 'TOB'}: {kundaliData.tob} | {ctaLocale === 'hi' ? 'राशि' : 'Rashi'}: {signName(kundaliData.rashi, ctaLocale === 'hi')} | {ctaLocale === 'hi' ? 'लग्न' : 'Lagna'}: {signName(kundaliData.lagna_sign, ctaLocale === 'hi')}
       </p>
 
       {/* 🔗 Quick Tool Links */}
@@ -260,10 +263,10 @@ type PhaseKey = typeof keys[number];
       </div>
 
       {/* 🧩 Result Main Grid */}
-      {/* The chart is 320px wide, so its column must be at least that wide: Mangal Dosh sits in a narrower
-          page container and gets a fixed chart column from lg up; other tools use thirds from xl up (a third
-          is under 320px below that). Narrower screens stack the chart above the analysis. */}
-      <div className={`grid grid-cols-1 ${result.toolId === 'mangal-dosh' ? 'lg:grid-cols-[340px_minmax(0,1fr)]' : 'xl:grid-cols-3'} gap-6 bg-white rounded-lg shadow-md p-6 md:p-8`}>
+      {/* The chart is 320px wide, so its column must be at least that wide: the editorial pages (Mangal Dosh,
+          Rashi Finder) sit in a narrower page container and get a fixed chart column from lg up; other tools use
+          thirds from xl up (a third is under 320px below that). Narrower screens stack the chart above the analysis. */}
+      <div className={`grid grid-cols-1 ${editorialLayout ? 'lg:grid-cols-[340px_minmax(0,1fr)]' : 'xl:grid-cols-3'} gap-6 bg-white rounded-lg shadow-md p-6 md:p-8`}>
 
         {/* 🪐 Kundali Chart (Left side on desktop) */}
         <div className="min-w-0 flex justify-center items-start">
@@ -275,7 +278,7 @@ type PhaseKey = typeof keys[number];
         </div>
 
         {/* 📜 Main Result Content (Center) */}
-        <div className={`min-w-0 space-y-4 ${result.toolId === 'mangal-dosh' ? '' : 'xl:col-span-2'}`}>
+        <div className={`min-w-0 space-y-4 ${editorialLayout ? '' : 'xl:col-span-2'}`}>
           {/* 🔎 Description */}
           {result.description && (
             <div className="p-4 bg-blue-50 border border-blue-200 rounded shadow-sm">
@@ -295,7 +298,7 @@ type PhaseKey = typeof keys[number];
                     className="p-5 bg-green-50 border border-green-200 rounded-2xl shadow-sm"
                   >
                     <h2 className="text-xl font-semibold text-green-900 mb-1">
-                      Ascendant (Lagna): {kundaliData.lagna_sign || p.summary.split(',')[0].replace('• Position: ', '')}
+                      {ctaLocale === 'hi' ? 'लग्न' : 'Ascendant (Lagna)'}: {kundaliData.lagna_sign ? signName(kundaliData.lagna_sign, ctaLocale === 'hi') : p.summary.split(',')[0].replace('• Position: ', '')}
                     </h2>
                     <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">
                       {p.text}
@@ -305,13 +308,9 @@ type PhaseKey = typeof keys[number];
             )}
 
 
-          {/* 🌙 Rashi Traits */}
-          {result.toolId === 'rashi-finder' && kundaliData.moon_traits && (
-            <div className="p-4 bg-pink-50 border border-pink-200 rounded shadow-sm">
-              <p className="text-base text-pink-900 font-medium mb-2">{kundaliData.moon_traits.title}</p>
-              
-              <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">{kundaliData.moon_traits.personality}</p>
-            </div>
+          {/* 🌙 Rashi Finder: structured result card (Moon sign, Nakshatra, pada, ruling planet, element, degree). */}
+          {result.toolId === 'rashi-finder' && (
+            <RashiResult rashi={kundaliData.rashi} planets={(kundaliData as { Planets?: unknown }).Planets} traits={kundaliData.moon_traits} locale={ctaLocale} />
           )}
 
           {/* 🪔 Grah Dasha Insights */}

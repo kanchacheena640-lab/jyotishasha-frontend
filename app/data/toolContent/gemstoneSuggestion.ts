@@ -44,11 +44,11 @@ export const gemstoneSuggestionContent = {
       },
       {
         q: "Can wearing the wrong gemstone actually cause life problems?",
-        a: "Yes. Gemstones amplify energy. If you wear a stone for a planet that is a 'functional malefic' in your chart, it can increase mental stress, cause financial setbacks, or disturb physical health.",
+        a: "Traditionally, a gemstone is believed to strengthen its planet's influence, so a stone for a 'functional malefic' in your chart is avoided. Check suitability against your full chart before wearing one.",
       },
       {
         q: "Do gemstones require specific mantras or rituals to work?",
-        a: "While a correctly selected gemstone starts working by its physical contact, traditional purification (Shuddhikaran) and planet-specific mantras significantly activate and enhance its beneficial resonance.",
+        a: "Traditionally, a gemstone is worn after purification (Shuddhikaran) with planet-specific mantras. These practices are a matter of tradition and personal faith.",
       },
     ],
   },
@@ -95,11 +95,11 @@ export const gemstoneSuggestionContent = {
       },
       {
         q: "क्या गलत रत्न पहनने से वास्तव में समस्या हो सकती है?",
-        a: "हाँ। यदि आप अपनी कुंडली के किसी 'अकारक' या मारक ग्रह का रत्न पहनते हैं, तो यह मानसिक तनाव, आर्थिक हानि या स्वास्थ्य संबंधी समस्याओं को बढ़ा सकता है।",
+        a: "परंपरा में माना जाता है कि रत्न अपने ग्रह के प्रभाव को बढ़ाता है, इसलिए कुंडली के 'अकारक' ग्रह का रत्न नहीं पहना जाता। रत्न पहनने से पहले पूरी कुंडली से उसकी उपयुक्तता जाँच लें।",
       },
       {
         q: "क्या रत्न बिना मंत्र या पूजा के काम करते हैं?",
-        a: "सही रत्न पहनने मात्र से प्रभाव दिखाना शुरू कर देता है, लेकिन उसकी शुद्धिकरण और मंत्रों द्वारा सक्रियण (प्राण प्रतिष्ठा) उसकी प्रभावशीलता को कई गुना बढ़ा देती है।",
+        a: "परंपरा में रत्न को शुद्धिकरण और ग्रह के मंत्रों के बाद पहना जाता है। ये प्रथाएँ परंपरा और व्यक्तिगत आस्था का विषय हैं।",
       },
     ],
   },

@@ -39,15 +39,15 @@ export const shubhKartariYogContent = {
     faq: [
       {
         q: "How does Shubh Kartari Yog actually help in daily life?",
-        a: "It acts like an insurance policy for a house. For example, if your 10th house of career has Shubh Kartari, you may face office politics, but you will remain protected from job loss or major reputation damage.",
+        a: "It is read as a supportive influence on a house: benefic planets on both sides of it are traditionally seen as easing that area of life. Its effect depends on the whole chart.",
       },
       {
         q: "Can a malefic planet's aspect destroy the Shubh Kartari effect?",
-        a: "A strong malefic aspect can 'stress' the house, but as long as the benefic planets occupy the flanking houses, the core protection remains intact. It is only weakened if the benefic planets themselves are debilitated or combust.",
+        a: "A strong malefic aspect can stress the house. The yoga is read as weaker when the benefic planets themselves are debilitated or combust.",
       },
       {
         q: "Which houses are the most beneficial to have under Shubh Kartari?",
-        a: "While every house benefits, having Shubh Kartari around the Lagna (Self), the 2nd house (Wealth), or the 9th house (Fortune) is considered exceptionally lucky for overall life stability.",
+        a: "Shubh Kartari around the Lagna (Self), the 2nd house (Wealth) or the 9th house (Fortune) is traditionally given particular importance.",
       },
     ],
   },
@@ -89,15 +89,15 @@ export const shubhKartariYogContent = {
     faq: [
       {
         q: "शुभ कर्तरी योग दैनिक जीवन में वास्तव में कैसे मदद करता है?",
-        a: "यह किसी भाव के लिए बीमा पॉलिसी की तरह काम करता है। उदाहरण के लिए, यदि आपके करियर के 10वें भाव में शुभ कर्तरी है, तो आप ऑफिस की राजनीति का सामना कर सकते हैं, लेकिन आप नौकरी जाने या बड़े अपमान से सुरक्षित रहेंगे।",
+        a: "इसे किसी भाव पर सहायक प्रभाव माना जाता है: भाव के दोनों ओर शुभ ग्रह परंपरागत रूप से जीवन के उस क्षेत्र को सहज बनाने वाले माने जाते हैं। इसका प्रभाव पूरी कुंडली पर निर्भर करता है।",
       },
       {
         q: "क्या किसी पापी ग्रह की दृष्टि शुभ कर्तरी प्रभाव को नष्ट कर सकती है? ",
-        a: "एक मजबूत पापी दृष्टि भाव पर 'तनाव' पैदा कर सकती है, लेकिन जब तक शुभ ग्रह आसपास के भावों में मौजूद हैं, मूल सुरक्षा बरकरार रहती है। यह केवल तब कमजोर होता है जब शुभ ग्रह स्वयं नीच के या अस्त हों।",
+        a: "मजबूत पापी दृष्टि भाव पर तनाव डाल सकती है। जब शुभ ग्रह स्वयं नीच के या अस्त हों, तब यह योग कमजोर माना जाता है।",
       },
       {
         q: "शुभ कर्तरी योग के लिए कौन से भाव सबसे फायदेमंद माने जाते हैं?",
-        a: "यद्यपि हर भाव को लाभ मिलता है, लग्न (स्वयं), द्वितीय भाव (धन) या नवम भाव (भाग्य) के आसपास शुभ कर्तरी होना समग्र जीवन की स्थिरता के लिए अत्यंत शुभ माना जाता है।",
+        a: "लग्न (स्वयं), द्वितीय भाव (धन) या नवम भाव (भाग्य) के आसपास शुभ कर्तरी को परंपरा में विशेष महत्व दिया जाता है।",
       },
     ],
   },

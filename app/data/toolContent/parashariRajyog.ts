@@ -44,7 +44,7 @@ export const parashariRajyogContent = {
       },
       {
         q: "Can more than one Parashari Rajyog exist in a single birth chart?",
-        a: "Yes. Many powerful horoscopes contain multiple Rajyog combinations. The more pure and strong these combinations are, the more multi-dimensional and stable the person's success and recognition will be.",
+        a: "Yes. A chart can contain several Rajyog combinations. Their strength and purity are read together with the rest of the chart.",
       },
       {
         q: "When exactly will my Rajyog start giving its results?",
@@ -95,7 +95,7 @@ export const parashariRajyogContent = {
       },
       {
         q: "क्या एक ही जन्म कुंडली में एक से अधिक पाराशरी राजयोग हो सकते हैं?",
-        a: "हाँ। कई शक्तिशाली कुंडलियों में एक साथ कई राजयोग संयोजन होते हैं। ये संयोजन जितने शुद्ध और मजबूत होंगे, व्यक्ति की सफलता और मान्यता उतनी ही बहुआयामी और स्थिर होगी।",
+        a: "हाँ। एक कुंडली में कई राजयोग हो सकते हैं। उनका बल और शुद्धता पूरी कुंडली के साथ मिलाकर देखी जाती है।",
       },
       {
         q: "मेरा राजयोग वास्तव में अपने परिणाम देना कब शुरू करेगा?",

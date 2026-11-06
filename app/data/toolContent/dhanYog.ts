@@ -40,7 +40,7 @@ export const dhanYogContent = {
     faq: [
       {
         q: "Does every birth chart contain some form of Dhan Yog?",
-        a: "Almost every chart has basic indicators for livelihood. However, for significant wealth, high-status living, and financial empires, specific and high-strength Dhan Yog combinations (like Maha Dhan Yog) must be present and well-placed.",
+        a: "Almost every chart has basic indicators for livelihood. Stronger wealth indications are read from specific Dhan Yog combinations and how well placed and strong they are in the chart.",
       },
       {
         q: "Can a strong Dhan Yog be cancelled or neutralized?",
@@ -91,7 +91,7 @@ export const dhanYogContent = {
     faq: [
       {
         q: "क्या हर जन्म कुंडली में किसी न किसी प्रकार का धन योग होता है?",
-        a: "लगभग हर कुंडली में आजीविका के बुनियादी संकेत होते हैं। हालाँकि, महत्वपूर्ण धन, उच्च-स्तरीय जीवनशैली और वित्तीय साम्राज्य के लिए, विशिष्ट और उच्च-शक्ति वाले धन योगों (जैसे महा धन योग) का होना और उनका शुभ भावों में स्थित होना आवश्यक है।",
+        a: "लगभग हर कुंडली में आजीविका के बुनियादी संकेत होते हैं। धन के अधिक मजबूत संकेत विशिष्ट धन योगों और कुंडली में उनकी स्थिति व बल से देखे जाते हैं।",
       },
       {
         q: "क्या एक मजबूत धन योग रद्द या बेअसर हो सकता है?",

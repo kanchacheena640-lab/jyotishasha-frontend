@@ -40,15 +40,15 @@ export const sadeSatiCalculatorContent = {
     faq: [
       {
         q: "Does Sade Sati always bring bad luck or financial loss?",
-        a: "Not at all. Sade Sati is a period of 'Reaping what you Sow'. For many people, this period brings marriage, the birth of a child, or a significant rise in career status, provided they have worked with discipline and integrity.",
+        a: "Not at all. Sade Sati is traditionally read as a period of discipline and the consequences of past effort. Its effects vary with your chart, and it is not only a time of difficulty.",
       },
       {
         q: "What are the three distinct phases of Sade Sati?",
-        a: "The first phase (Rising) affects the feet and finances; the second phase (Peak) affects the mind and core life; the third phase (Setting) affects the health and long-term stability. Each phase lasts about 2.5 years.",
+        a: "Traditionally, the first phase (Rising) is linked with finances, the second (Peak) with the mind and core life matters, and the third (Setting) with long-term stability. Each phase lasts about 2.5 years.",
       },
       {
         q: "How can I balance the heavy energy of Saturn during this period?",
-        a: "Vedic astrology emphasizes 'Karma Yoga'—hard work, helping the underprivileged, maintaining ethical conduct, and emotional patience. Specific mantras and rituals aligned with your unique chart can further harmonize Saturn's influence.",
+        a: "Vedic astrology emphasizes 'Karma Yoga': hard work, helping the underprivileged, ethical conduct and emotional patience. Mantras and rituals are a matter of tradition and personal faith.",
       },
     ],
   },
@@ -91,15 +91,15 @@ export const sadeSatiCalculatorContent = {
     faq: [
       {
         q: "क्या साढ़े साती हमेशा दुर्भाग्य या आर्थिक हानि ही लाती है?",
-        a: "बिल्कुल नहीं। साढ़े साती 'जैसा बोओगे, वैसा काटोगे' की अवधि है। कई लोगों के लिए, यह अवधि विवाह, संतान के जन्म या करियर में बड़ी उन्नति लाती है, बशर्ते उन्होंने ईमानदारी और अनुशासन के साथ काम किया हो।",
+        a: "बिल्कुल नहीं। परंपरा में साढ़े साती को अनुशासन और पिछले कर्मों के परिणाम की अवधि माना जाता है। इसका प्रभाव कुंडली के अनुसार अलग होता है और यह केवल कठिनाई का समय नहीं है।",
       },
       {
         q: "साढ़े साती के तीन अलग-अलग चरण क्या हैं?",
-        a: "पहला चरण (उदय) धन और पैरों को प्रभावित करता है; दूसरा चरण (शिखर) मन और जीवन के मूल को प्रभावित करता है; तीसरा चरण (अस्त) स्वास्थ्य और दीर्घकालिक स्थिरता को प्रभावित करता है।",
+        a: "परंपरा में पहला चरण (उदय) धन से, दूसरा (शिखर) मन और जीवन के मूल विषयों से और तीसरा (अस्त) दीर्घकालिक स्थिरता से जुड़ा माना जाता है। हर चरण लगभग ढाई वर्ष का होता है।",
       },
       {
         q: "मैं इस अवधि के दौरान शनि की भारी ऊर्जा को कैसे संतुलित कर सकता हूँ?",
-        a: "वैदिक ज्योतिष 'कर्म योग'—कड़ी मेहनत, जरूरतमंदों की मदद, नैतिक आचरण और भावनात्मक धैर्य पर जोर देता है। आपके चार्ट के अनुसार विशिष्ट मंत्र और उपाय शनि के प्रभाव को और अधिक सकारात्मक बना सकते हैं।",
+        a: "वैदिक ज्योतिष 'कर्म योग' पर जोर देता है: कड़ी मेहनत, जरूरतमंदों की मदद, नैतिक आचरण और धैर्य। मंत्र और अनुष्ठान परंपरा और व्यक्तिगत आस्था का विषय हैं।",
       },
     ],
   },

@@ -40,7 +40,7 @@ export const vipreetRajyogContent = {
     faq: [
       {
         q: "Does Vipreet Rajyog mean that I will always have to suffer before succeeding?",
-        a: "It indicates that your greatest successes will come from overcoming significant challenges. The 'struggle' acts as a training ground, making the eventual victory much more stable and rewarding.",
+        a: "Not necessarily. It is read as gains that come through handling difficult situations. How it shows up depends on the whole chart.",
       },
       {
         q: "What are the specific types of Vipreet Rajyog?",
@@ -91,7 +91,7 @@ export const vipreetRajyogContent = {
     faq: [
       {
         q: "क्या विपरीत राजयोग का अर्थ यह है कि मुझे सफल होने से पहले हमेशा कष्ट सहना होगा?",
-        a: "इसका अर्थ यह है कि आपकी सबसे बड़ी सफलताएं बड़ी चुनौतियों पर विजय पाने से मिलेंगी। यह 'संघर्ष' एक प्रशिक्षण की तरह काम करता है, जो अंततः मिलने वाली जीत को बहुत अधिक स्थिर और मूल्यवान बनाता है।",
+        a: "ज़रूरी नहीं। इसे कठिन परिस्थितियों को संभालने से मिलने वाले लाभ के रूप में देखा जाता है। इसका रूप पूरी कुंडली पर निर्भर करता है।",
       },
       {
         q: "विपरीत राजयोग के विशिष्ट प्रकार कौन से हैं?",

@@ -47,7 +47,7 @@ export const governmentJobContent = {
       },
       {
         q: "Why do some talented candidates face repeated failures in government exams?",
-        a: "Frequent setbacks are often caused by a weak or afflicted Moon (mental stress), an unfavorable Dasha period, or malefic influences on the 6th house (the house of competition), despite the candidate's sincere hard work.",
+        a: "Frequent setbacks are often read through a weak or afflicted Moon (mental stress), an unfavorable Dasha period, or malefic influences on the 6th house (the house of competition).",
       },
     ],
   },
@@ -97,7 +97,7 @@ export const governmentJobContent = {
       },
       {
         q: "कुछ लोग कड़ी मेहनत के बावजूद प्रतियोगी परीक्षाओं में बार-बार असफल क्यों होते हैं?",
-        a: "बार-बार की असफलता अक्सर कमजोर चंद्रमा (मानसिक दबाव), प्रतिकूल ग्रह दशा, या छठे भाव (प्रतियोगिता भाव) पर पाप ग्रहों के प्रभाव के कारण होती है, भले ही जातक का प्रयास सच्चा हो।",
+        a: "बार-बार की असफलता को अक्सर कमजोर चंद्रमा (मानसिक दबाव), प्रतिकूल ग्रह दशा, या छठे भाव (प्रतियोगिता भाव) पर पाप ग्रहों के प्रभाव से देखा जाता है।",
       },
     ],
   },

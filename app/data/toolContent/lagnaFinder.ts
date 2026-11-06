@@ -49,7 +49,7 @@ export const lagnaFinderContent = {
       },
       {
         q: "Is it possible for my Lagna and Moon Rashi to be the same?",
-        a: "Yes. This occurs when the Moon was transiting the same zodiac sign that was rising on the eastern horizon at the time of your birth. This is often called a 'Lagnadi' or strong personality alignment.",
+        a: "Yes. This occurs when the Moon was in the same zodiac sign that was rising on the eastern horizon at the time of your birth.",
       },
     ],
   },
@@ -100,7 +100,7 @@ export const lagnaFinderContent = {
       },
       {
         q: "क्या मेरा लग्न और चंद्र राशि एक ही हो सकते हैं?",
-        a: "हाँ। ऐसा तब होता है जब चंद्रमा उसी राशि में गोचर कर रहा हो जो आपके जन्म के समय पूर्वी क्षितिज पर उदय हो रही थी। इसे अक्सर एक बहुत मजबूत व्यक्तित्व का संकेत माना जाता है।",
+        a: "हाँ। ऐसा तब होता है जब जन्म के समय चंद्रमा उसी राशि में हो जो पूर्वी क्षितिज पर उदय हो रही थी।",
       },
     ],
   },

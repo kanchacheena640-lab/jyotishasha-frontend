@@ -44,11 +44,11 @@ export const panchMahapurushYogContent = {
       },
       {
         q: "Does every person with a Mahapurush Yog become famous or powerful?",
-        a: "The yoga provides the 'DNA' for greatness. However, the scale of success depends on the planet's strength (Shadbala) and whether the person is running the correct Dasha to trigger the yoga's results.",
+        a: "Not necessarily. The yoga indicates potential. The scale of results depends on the planet's strength (Shadbala) and your Dasha periods.",
       },
       {
         q: "Is it possible to have more than one Mahapurush Yog in a single birth chart?",
-        a: "Yes. Rare and powerful birth charts can contain two, three, or even more Mahapurush Yogas. Multiple yogas significantly multiply a person's impact, authority, and multi-dimensional success.",
+        a: "Yes. Some birth charts contain two or more Mahapurush Yogas, which are read as adding to a person's range of strengths.",
       },
     ],
   },
@@ -95,11 +95,11 @@ export const panchMahapurushYogContent = {
       },
       {
         q: "क्या महापुरुष योग वाले हर व्यक्ति को निश्चित रूप से सफलता मिलती है?",
-        a: "यह योग महानता के लिए आवश्यक 'Cosmic DNA' प्रदान करता है। हालाँकि, सफलता का स्तर ग्रह के बल (षडबल) और इस बात पर निर्भर करता है कि व्यक्ति योग के परिणामों को सक्रिय करने के लिए सही दशा से गुजर रहा है या नहीं।",
+        a: "ज़रूरी नहीं। यह योग संभावना दर्शाता है। परिणाम का स्तर ग्रह के बल (षडबल) और आपकी दशाओं पर निर्भर करता है।",
       },
       {
         q: "क्या एक ही जन्म कुंडली में एक से अधिक महापुरुष योग हो सकते हैं?",
-        a: "हाँ। दुर्लभ और शक्तिशाली कुंडलियों में दो, तीन या उससे भी अधिक महापुरुष योग हो सकते हैं। एक से अधिक योग व्यक्ति के प्रभाव, अधिकार और बहुआयामी सफलता को कई गुना बढ़ा देते हैं।",
+        a: "हाँ। कुछ कुंडलियों में दो या अधिक महापुरुष योग होते हैं, जिन्हें व्यक्ति की क्षमताओं का दायरा बढ़ाने वाला माना जाता है।",
       },
     ],
   },

@@ -40,15 +40,15 @@ export const loveLifeContent = {
     faq: [
       {
         q: "Can Vedic astrology accurately predict when I will find true love?",
-        a: "Astrology identifies the 'Planetary Seasons' of your life. It can pinpoint specific timeframes (Dashas) when your capacity for attraction and commitment is at its peak, making it much easier to meet a compatible partner.",
+        a: "Astrology reads the 'Planetary Seasons' of your life. It can highlight periods (Dashas) when attraction and commitment are read as stronger, though it does not give a specific date.",
       },
       {
         q: "Which specific planet should I strengthen for a better love life?",
-        a: "Venus is the universal significator of love. However, for a lasting relationship, the Moon (for emotional understanding) and the lord of your 7th house are equally vital. Our tool helps identify which of these needs support in your specific chart.",
+        a: "Venus is the universal significator of love. For a lasting relationship, the Moon (emotional understanding) and the lord of your 7th house are read as equally important.",
       },
       {
         q: "Why do some people face repeated heartbreaks despite being good partners?",
-        a: "Frequent relationship challenges are often caused by the placement of malefic planets in the 5th or 7th houses, or an afflicted Venus. These 'Karmic Lessons' often require specific remedies and a shift in emotional perspective.",
+        a: "Repeated relationship challenges are often read through malefic planets in the 5th or 7th houses, or an afflicted Venus. These are patterns to understand, not fixed outcomes.",
       },
     ],
   },
@@ -98,7 +98,7 @@ export const loveLifeContent = {
       },
       {
         q: "रिश्तों में बार-बार समस्याएं क्यों आती हैं?",
-        a: "शुक्र, चंद्रमा या सप्तम भाव पर पाप ग्रहों का प्रभाव और प्रतिकूल महादशा रिश्तों में बार-बार तनाव या अलगाव की स्थिति पैदा कर सकती है, जिसे सही ज्योतिषीय उपायों और समझ से ठीक किया जा सकता है।",
+        a: "शुक्र, चंद्रमा या सप्तम भाव पर पाप ग्रहों का प्रभाव और प्रतिकूल महादशा को रिश्तों में बार-बार तनाव के कारकों के रूप में देखा जाता है। ये समझने योग्य पैटर्न हैं, तय परिणाम नहीं।",
       },
     ],
   },

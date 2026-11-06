@@ -40,7 +40,7 @@ export const kaalsarpDoshContent = {
     faq: [
       {
         q: "Is Kaalsarp Dosh always a sign of bad luck or misfortune?",
-        a: "No. Its effects vary tremendously. For many, it simply indicates a life of intense struggle followed by significant rewards. It is a yoga of 'Extreme Results', not necessarily 'Bad Results'.",
+        a: "No. Its effects vary from chart to chart. It is traditionally read as a yoga of strong ups and downs rather than only difficulty.",
       },
       {
         q: "Can Kaalsarp Dosh be completely cancelled in a Kundali?",
@@ -48,7 +48,7 @@ export const kaalsarpDoshContent = {
       },
       {
         q: "Does Kaalsarp Dosh cause problems throughout one's entire life?",
-        a: "Usually, the intensity of Kaalsarp Dosh is felt most during the Rahu or Ketu Mahadasha. Many people find that after a certain age (typically 33 or 36), the restrictive influence of this yoga begins to fade.",
+        a: "Usually, the intensity of Kaalsarp Dosh is read most during the Rahu or Ketu Mahadasha rather than evenly across a whole life.",
       },
     ],
   },
@@ -91,7 +91,7 @@ export const kaalsarpDoshContent = {
     faq: [
       {
         q: "क्या कालसर्प दोष हमेशा दुर्भाग्य या असफलता का कारण बनता है?",
-        a: "नहीं। इसका प्रभाव हर कुंडली में अलग होता है। कई लोगों के लिए यह शुरुआती संघर्ष के बाद अपार सफलता का योग बनता है। यह 'अतिवादी परिणामों' का योग है, न कि केवल 'बुरे परिणामों' का।",
+        a: "नहीं। इसका प्रभाव हर कुंडली में अलग होता है। परंपरा में इसे केवल कठिनाई का नहीं, बल्कि उतार-चढ़ाव का योग माना जाता है।",
       },
       {
         q: "क्या कुंडली में कालसर्प दोष पूरी तरह से रद्द हो सकता है?",
@@ -99,7 +99,7 @@ export const kaalsarpDoshContent = {
       },
       {
         q: "क्या कालसर्प दोष जीवन भर समस्या पैदा करता है?",
-        a: "आमतौर पर, कालसर्प दोष की तीव्रता राहु या केतु की महादशा के दौरान अधिक महसूस होती है। कई लोग पाते हैं कि 33 या 36 वर्ष की आयु के बाद, इस योग का प्रतिबंधात्मक प्रभाव स्वतः ही कम होने लगता है।",
+        a: "आमतौर पर कालसर्प दोष की तीव्रता पूरे जीवन में समान नहीं, बल्कि राहु या केतु की महादशा के दौरान अधिक मानी जाती है।",
       },
     ],
   },

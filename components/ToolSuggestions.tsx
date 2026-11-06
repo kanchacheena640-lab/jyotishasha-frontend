@@ -18,11 +18,10 @@ const suggestionsMap: Record<string, { title: string; title_hi?: string; href: s
     { title: 'Full Kundali', title_hi: 'पूरी कुंडली', href: '/free-kundali', type: 'tool', emoji: '🌠' },
   ],
   'rashi-finder': [
-    { title: 'Check Lagna (Ascendant)', href: '/tools/lagna-finder', type: 'tool', emoji: '📜' },
-    { title: 'Full Kundali Generator', href: '/free-kundali', type: 'tool', emoji: '🌠' },
-    { title: 'Planet Overview', href: '/tools/planet-overview', type: 'tool', emoji: '🪐' },
-    { title: 'Grah Dasha', href: '/tools/grah-dasha-finder', type: 'tool', emoji: '🌀' },
-    { title: 'Love Life Prediction', href: '/reports/love_relationship_report', type: 'report', emoji: '❤️' },
+    { title: 'Check Lagna (Ascendant)', title_hi: 'लग्न जानें', href: '/tools/lagna-finder', type: 'tool', emoji: '📜' },
+    { title: 'Full Kundali Generator', title_hi: 'पूरी कुंडली', href: '/free-kundali', type: 'tool', emoji: '🌠' },
+    { title: 'Planet Overview', title_hi: 'ग्रह परिचय', href: '/tools/planet-overview', type: 'tool', emoji: '🪐' },
+    { title: 'Grah Dasha', title_hi: 'ग्रह दशा', href: '/tools/grah-dasha-finder', type: 'tool', emoji: '🌀' },
   ],
   'lagna-finder': [
     { title: 'Rashi Finder', href: '/tools/rashi-finder', type: 'tool', emoji: '🔱' },

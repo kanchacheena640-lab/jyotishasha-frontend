@@ -44,7 +44,7 @@ export const neechbhangRajyogContent = {
       },
       {
         q: "Can a debilitated planet with Neechbhang really give better results than an exalted planet?",
-        a: "In many cases, yes. Because Neechbhang involves overcoming struggle, the success it brings is often more stable, grounded, and profound compared to the 'easy' success of a naturally strong planet.",
+        a: "It can. Classical texts value Neechbhang because it describes strength gained by overcoming difficulty, but the results depend on the whole chart.",
       },
       {
         q: "When exactly will I start seeing the positive results of this yoga?",
@@ -94,7 +94,7 @@ export const neechbhangRajyogContent = {
       },
       {
         q: "क्या नीचभंग वाला ग्रह वास्तव में उच्च के ग्रह से बेहतर परिणाम दे सकता है?",
-        a: "कई मामलों में, हाँ। चूंकि नीचभंग में संघर्ष को पार करना शामिल होता है, इसलिए इससे मिलने वाली सफलता अक्सर स्वाभाविक रूप से मजबूत ग्रह की 'आसान' सफलता की तुलना में अधिक स्थिर और गहरी होती है।",
+        a: "ऐसा हो सकता है। शास्त्रों में नीचभंग को कठिनाई पार करके मिलने वाली शक्ति के रूप में महत्व दिया गया है, पर परिणाम पूरी कुंडली पर निर्भर करते हैं।",
       },
       {
         q: "मुझे इस योग के सकारात्मक परिणाम कब मिलने शुरू होंगे?",

@@ -48,7 +48,7 @@ export const grahDashaFinderContent = {
       },
       {
         q: "Why am I suddenly facing unexpected changes or stress in my life?",
-        a: "Sudden life shifts are almost always triggered by a change in your Mahadasha or Antardasha, especially when a 'Functional Malefic' or a planet in a difficult house becomes active in your timeline.",
+        a: "In Vedic astrology, major life changes are often read through a change in your Mahadasha or Antardasha, especially when a 'Functional Malefic' or a planet in a difficult house becomes active in your timeline.",
       },
     ],
   },
@@ -99,7 +99,7 @@ export const grahDashaFinderContent = {
       },
       {
         q: "मुझे जीवन में अचानक बदलाव का सामना क्यों करना पड़ रहा है?",
-        a: "जीवन में अचानक बदलाव अक्सर महादशा या अंतर्दशा में परिवर्तन के कारण होते हैं, विशेष रूप से तब जब कुंडली के चुनौतीपूर्ण ग्रह आपकी समयरेखा में सक्रिय हो जाते हैं।",
+        a: "वैदिक ज्योतिष में जीवन के बड़े बदलावों को अक्सर महादशा या अंतर्दशा में परिवर्तन से देखा जाता है, विशेष रूप से तब जब कुंडली के चुनौतीपूर्ण ग्रह आपकी समयरेखा में सक्रिय हों।",
       },
     ],
   },

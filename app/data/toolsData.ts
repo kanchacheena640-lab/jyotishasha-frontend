@@ -4,7 +4,7 @@ export const toolsData = [
     emoji: "🌙",
     category: { en: "Basic", hi: "बुनियादी" }, // ✅ String nahi, Object hona chahiye
     title: { en: "Moon Sign Finder", hi: "राशि खोजें" },
-    description: { en: "Find your moon sign...", hi: "अपनी चंद्र राशि जानें..." },
+    description: { en: "Find your Moon sign with your Nakshatra, pada and ruling planet.", hi: "नक्षत्र, पद और राशि स्वामी के साथ अपनी चंद्र राशि जानें।" },
     badge: { en: "Popular", hi: "लोकप्रिय" }
   },
   {

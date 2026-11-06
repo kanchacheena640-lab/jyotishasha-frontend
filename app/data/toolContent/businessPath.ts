@@ -39,7 +39,7 @@ export const businessPathContent = {
     faq: [
       {
         q: "Can astrology tell if business is better for me than a job?",
-        a: "Yes. Astrology highlights your natural tendencies, risk appetite, and planetary support, helping you accurately compare your business potential versus the stability of a job.",
+        a: "Astrology highlights your natural tendencies, risk appetite and planetary support, which helps you compare your business potential with the stability of a job.",
       },
       {
         q: "Which planet is the most important for business success?",
@@ -47,7 +47,7 @@ export const businessPathContent = {
       },
       {
         q: "Why do some businesses fail despite having good yogas in the chart?",
-        a: "Unfavorable planetary periods (dashas), a severely afflicted Moon, or poor timing can delay, block, or ruin results even when strong business yogas exist in the birth chart.",
+        a: "Unfavorable planetary periods (dashas), an afflicted Moon or poor timing are read as factors that can delay or reduce results, even when strong business yogas exist in the birth chart.",
       },
     ],
   },
@@ -89,7 +89,7 @@ export const businessPathContent = {
     faq: [
       {
         q: "क्या ज्योतिष स्पष्ट रूप से बता सकता है कि मेरे लिए नौकरी से बेहतर व्यापार है?",
-        a: "हाँ। ज्योतिष आपकी स्वाभाविक प्रवृत्तियों, जोखिम लेने की क्षमता और ग्रहों के समर्थन पर प्रकाश डालता है, जिससे आपको यह समझने में मदद मिलती है कि आपके लिए व्यापार की अपार संभावनाएं बेहतर हैं या नौकरी की स्थिरता।",
+        a: "ज्योतिष आपकी स्वाभाविक प्रवृत्तियों, जोखिम लेने की क्षमता और ग्रहों के समर्थन पर प्रकाश डालता है, जिससे आपको व्यापार की संभावनाओं और नौकरी की स्थिरता की तुलना करने में मदद मिलती है।",
       },
       {
         q: "व्यापार में सफलता के लिए कौन सा ग्रह सबसे महत्वपूर्ण है?",
@@ -97,7 +97,7 @@ export const businessPathContent = {
       },
       {
         q: "अच्छे योग होने के बावजूद कुछ व्यापार विफल क्यों हो जाते हैं?",
-        a: "प्रतिकूल दशाएं (खराब समय), एक कमजोर या पीड़ित चंद्रमा, या गलत समय पर व्यापार शुरू करना अच्छे व्यापार योग होने पर भी परिणामों में देरी या गंभीर बाधा उत्पन्न कर सकते हैं।",
+        a: "प्रतिकूल दशाएं, पीड़ित चंद्रमा या गलत समय को ऐसे कारक माना जाता है जो अच्छे व्यापार योग होने पर भी परिणामों में देरी या कमी ला सकते हैं।",
       },
     ],
   },

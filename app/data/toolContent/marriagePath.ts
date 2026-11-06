@@ -44,11 +44,11 @@ export const marriagePathContent = {
       },
       {
         q: "Which specific planet is the most important for a successful marriage?",
-        a: "Venus is the primary planet for love and marriage. For women, Jupiter is also vital as it signifies the husband. However, the Lord of your 7th house is the ultimate authority on your specific marital destiny.",
+        a: "Venus is the primary planet for love and marriage. For women, Jupiter is also traditionally important as it signifies the husband. The lord of your 7th house is the most direct indicator in your own chart.",
       },
       {
         q: "Why do some people face significant delays in getting married?",
-        a: "Delays are often caused by the influence of Saturn on the 7th house, a weak or combust Venus, or the native running an unfavorable Dasha period. These periods often indicate a time meant for personal growth before entering a long-term partnership.",
+        a: "Delays are often read through the influence of Saturn on the 7th house, a weak or combust Venus, or an unfavorable Dasha period.",
       },
     ],
   },
@@ -95,11 +95,11 @@ export const marriagePathContent = {
       },
       {
         q: "सफल वैवाहिक जीवन के लिए सबसे महत्वपूर्ण ग्रह कौन सा है?",
-        a: "शुक्र प्रेम और विवाह का प्राथमिक ग्रह है। महिलाओं के लिए बृहस्पति भी उतना ही महत्वपूर्ण है क्योंकि वह पति का कारक है। हालांकि, आपके सप्तम भाव का स्वामी आपके व्यक्तिगत वैवाहिक भाग्य का अंतिम अधिकारी होता है।",
+        a: "शुक्र प्रेम और विवाह का प्राथमिक ग्रह है। महिलाओं के लिए बृहस्पति भी परंपरागत रूप से महत्वपूर्ण है क्योंकि वह पति का कारक है। आपके सप्तम भाव का स्वामी आपकी कुंडली का सबसे प्रत्यक्ष संकेतक है।",
       },
       {
         q: "कुछ लोगों के विवाह में बहुत अधिक देरी क्यों होती है?",
-        a: "विवाह में देरी अक्सर सप्तम भाव पर शनि के प्रभाव, कमजोर या अस्त शुक्र, या प्रतिकूल महादशा के कारण होती है। ये अवधियाँ अक्सर जातक को विवाह बंधन में बंधने से पहले स्वयं के विकास के लिए समय देने का संकेत देती हैं।",
+        a: "विवाह में देरी को अक्सर सप्तम भाव पर शनि के प्रभाव, कमजोर या अस्त शुक्र, या प्रतिकूल महादशा से देखा जाता है।",
       },
     ],
   },

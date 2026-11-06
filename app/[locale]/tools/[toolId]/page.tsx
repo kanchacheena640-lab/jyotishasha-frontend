@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { toolContentMap } from "@/app/data/toolContent";
 import ToolDynamicPage from "./ToolDynamicPage";
 import MangalDoshLanding from "@/components/tools/mangal-dosh/MangalDoshLanding";
+import RashiFinderLanding from "@/components/tools/rashi-finder/RashiFinderLanding";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 
 // Every tool page is known at build time (the content map), so it is prerendered per locale instead of being
@@ -44,13 +45,13 @@ function buildBreadcrumbJsonLd(
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
+        name: lang === "hi" ? "होम" : "Home",
         item: base,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Tools",
+        name: lang === "hi" ? "टूल्स" : "Tools",
         item: `${base}/tools`,
       },
       {
@@ -110,9 +111,13 @@ export function generateMetadata(
   if (params.toolId === "mangal-dosh") {
     return <MangalDoshLanding locale={lang} />;
   }
+  if (params.toolId === "rashi-finder") {
+    return <RashiFinderLanding locale={lang} />;
+  }
 
+  // Breadcrumb name: the tool's own name, without the title tag's tagline and brand.
   const breadcrumbSchema = buildBreadcrumbJsonLd(
-    tool.seo.title,
+    tool.seo.title.split(/[–|]/)[0].trim(),
     params.toolId,
     lang
   );
@@ -125,7 +130,7 @@ export function generateMetadata(
 
     description: tool.seo.description,
 
-    applicationCategory: "AstrologyApplication",
+    applicationCategory: "LifestyleApplication",
 
     operatingSystem: "Any",
 
@@ -201,6 +206,23 @@ export function generateMetadata(
               />
             </div>
           </div>
+        )}
+
+        {/* Visible FAQ: the same questions as the FAQPage schema below. */}
+        {tool.faq && tool.faq.length > 0 && (
+          <section aria-labelledby="tool-faq-heading" className="pt-4">
+            <h2 id="tool-faq-heading" className="text-2xl font-semibold text-purple-300">
+              {lang === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'Frequently Asked Questions'}
+            </h2>
+            <div className="mt-4 divide-y divide-white/10 rounded-xl border border-white/10 bg-white/5 px-4">
+              {tool.faq.map((item: { q: string; a: string }) => (
+                <details key={item.q} className="py-1">
+                  <summary className="min-h-[44px] cursor-pointer py-3 text-lg font-medium text-purple-100">{item.q}</summary>
+                  <p className="pb-3 text-gray-200 leading-relaxed">{item.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
         )}
 
                 {/* ✅ FAQ SCHEMA (Google Rich Snippets ke liye) */}

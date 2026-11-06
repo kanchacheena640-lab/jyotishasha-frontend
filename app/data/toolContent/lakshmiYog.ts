@@ -39,15 +39,15 @@ export const lakshmiYogContent = {
     faq: [
       {
         q: "Does having Lakshmi Yog guarantee that I will never face financial issues?",
-        a: "It indicates a very strong cosmic potential for recovery and abundance. While life has its cycles, Lakshmi Yog provides a 'safety net' of fortune that helps you bounce back and maintain a high standard of living.",
+        a: "No. It indicates supportive potential for financial recovery and stability. Results depend on the strength of the planets involved, your dashas and your own decisions.",
       },
       {
         q: "Can this yoga be weakened or cancelled by other planets?",
-        a: "Severe afflictions by functional malefic planets or the placement of the involved lords in 'Dusthana' houses (6, 8, 12) can reduce its intensity. Our tool specifically checks for these mitigating factors.",
+        a: "Severe afflictions by functional malefic planets, or the involved lords being placed in 'Dusthana' houses (6, 8, 12), are read as reducing its intensity.",
       },
       {
         q: "When is the most auspicious time for Lakshmi Yog to deliver results?",
-        a: "The peak results—such as acquiring property, luxury vehicles, or significant wealth—usually manifest during the major or sub-periods (Dasha/Antardasha) of the planets forming the yoga.",
+        a: "Its results are usually read during the major or sub-periods (Dasha/Antardasha) of the planets forming the yoga.",
       },
     ],
   },
@@ -90,15 +90,15 @@ export const lakshmiYogContent = {
     faq: [
       {
         q: "क्या लक्ष्मी योग होने से यह गारंटी है कि मुझे कभी आर्थिक समस्या नहीं होगी?",
-        a: "यह भाग्य और प्रचुरता की एक बहुत मजबूत ब्रह्मांडीय क्षमता को दर्शाता है। हालाँकि जीवन के अपने चक्र होते हैं, लेकिन लक्ष्मी योग भाग्य का एक 'सुरक्षा जाल' प्रदान करता है जो आपको वापस उभरने और जीवन स्तर बनाए रखने में मदद करता है।",
+        a: "नहीं। यह आर्थिक सुधार और स्थिरता की सहायक संभावना दर्शाता है। परिणाम ग्रहों के बल, आपकी दशाओं और आपके निर्णयों पर निर्भर करते हैं।",
       },
       {
         q: "क्या यह योग अन्य ग्रहों द्वारा कमजोर या रद्द किया जा सकता है?",
-        a: "अशुभ ग्रहों का भारी प्रभाव या योग बनाने वाले ग्रहों का त्रिक भावों (6, 8, 12) में स्थित होना इसकी तीव्रता को कम कर सकता है। हमारा टूल विशेष रूप से इन कारकों की जाँच करता है।",
+        a: "अशुभ ग्रहों का भारी प्रभाव या योग बनाने वाले ग्रहों का त्रिक भावों (6, 8, 12) में होना इसकी तीव्रता को कम करने वाला माना जाता है।",
         },
       {
         q: "लक्ष्मी योग के परिणाम देने के लिए सबसे शुभ समय कौन सा है?",
-        a: "संपत्ति, विलासिता के वाहन या महत्वपूर्ण धन प्राप्ति जैसे चरम परिणाम आमतौर पर योग बनाने वाले ग्रहों की महादशा या अंतर्दशा के दौरान प्राप्त होते हैं।",
+        a: "इसके परिणाम आमतौर पर योग बनाने वाले ग्रहों की महादशा या अंतर्दशा के दौरान देखे जाते हैं।",
       },
     ],
   },
