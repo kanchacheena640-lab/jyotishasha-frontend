@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { toolContentMap } from "@/app/data/toolContent";
 import ToolDynamicPage from "./ToolDynamicPage";
+import MangalDoshLanding from "@/components/tools/mangal-dosh/MangalDoshLanding";
 import { SITE_URL } from "@/lib/seo/articleSchema";
+
+// Every tool page is known at build time (the content map), so it is prerendered per locale instead of being
+// rendered on every request. The page HTML holds no personal data: the calculation runs in the browser.
+export function generateStaticParams() {
+  return Object.keys(toolContentMap).filter((toolId) => toolId !== "all-tools").map((toolId) => ({ toolId }));
+}
 
 // 🔹 Question-Answer Schema (Google Search Results ke liye)
 function buildFaqJsonLd(faq: { q: string; a: string }[]) {
@@ -94,12 +102,13 @@ export function generateMetadata(
     const lang = params.locale === 'hi' ? 'hi' : 'en';
     const tool = toolRaw ? toolRaw[lang] : null;
 
-  if (!tool) {
-    return (
-      <div className="text-white text-center py-20">
-        Tool Content Not Found
-      </div>
-    );
+  // An unknown tool id is a real 404 (it used to answer 200 with a "Tool Content Not Found" page).
+  if (!tool) notFound();
+
+  // Mangal Dosh: server-rendered editorial page (H1, introduction, sections, visible FAQ, schema) around the
+  // shared calculator island. Every other tool keeps the generic layout below.
+  if (params.toolId === "mangal-dosh") {
+    return <MangalDoshLanding locale={lang} />;
   }
 
   const breadcrumbSchema = buildBreadcrumbJsonLd(

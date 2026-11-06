@@ -63,7 +63,7 @@ export async function fetchFullKundali(req: KundaliRequest) {
   toolId: req.toolId,
 };
 
-  console.log("🧪 Validating payload:", payload);
+  // No console logging of the payload: it carries the visitor's name, birth date/time and coordinates.
 
   const isValid = (
     typeof payload.name === 'string' && payload.name.trim() !== '' &&
@@ -74,11 +74,8 @@ export async function fetchFullKundali(req: KundaliRequest) {
   );
 
   if (!isValid) {
-    console.error("❌ Validation failed for:", payload);
     throw new Error('Missing or invalid required parameters.');
   }
-
-  console.log("🚀 Payload to backend:", payload);
 
   const key = `kundali:${payload.name}:${payload.dob}:${payload.tob}:${payload.latitude}:${payload.longitude}:${payload.language}`;
   try {
@@ -92,10 +89,6 @@ export async function fetchFullKundali(req: KundaliRequest) {
     }
   } catch {}
 
-  // 🔍 LOG what is going to be fetched
-  console.log("📡 Fetching from backend:", `${BACKEND}/api/full-kundali`);
-  console.log("📤 Payload sent:", payload);
-
   const res = await fetch(`${BACKEND}/api/full-kundali`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -104,7 +97,7 @@ export async function fetchFullKundali(req: KundaliRequest) {
 
   if (!res.ok) {
     const text = await res.text().catch(() => '');
-    console.error("❌ Backend error:", res.status, text || res.statusText);
+    console.error("Backend error:", res.status);
     throw new Error(`Backend error ${res.status}: ${text || res.statusText}`);
   }
 
@@ -122,9 +115,6 @@ export async function fetchFullKundali(req: KundaliRequest) {
   try {
     localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data: out }));
   } catch {}
-
-  // ✅ LOG Final normalized output
-  console.log("✅ Normalized kundali response:", out);
 
   return out;
 }

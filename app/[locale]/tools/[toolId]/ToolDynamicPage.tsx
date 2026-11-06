@@ -10,15 +10,18 @@
 import '@/i18n';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'react-i18next'; // 👈 Translation ke liye zaroori
 import ToolInputForm, { FormData } from '@/components/ToolInputForm';
-import ToolResultSection from '@/components/ToolResultSection';
+// The result UI (all 27 tools' result blocks) is only needed after a successful calculation: loaded on demand
+// instead of in every tool page's first-load JavaScript.
+const ToolResultSection = dynamic(() => import('@/components/ToolResultSection'));
 import { fetchFullKundali } from '@/utils/fetchFullKundali';
 import { fetchLifeTool } from '@/utils/fetchLifeTool';
 import { parseToolResponse, ParsedResult } from '@/utils/parseToolResponse';
 import { WebsiteEvents } from '@/lib/websiteEvents';
 
-export default function ToolDynamicPage() {
+export default function ToolDynamicPage({ submitLabel }: { submitLabel?: string } = {}) {
   const { toolId, locale } = useParams() as { toolId: string; locale?: string };
   const { i18n } = useTranslation();
   
@@ -28,6 +31,10 @@ export default function ToolDynamicPage() {
   const [kundaliData, setKundaliData] = useState<any>(null);
   const [result, setResult] = useState<ParsedResult | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  // Calculation in progress / failed: shown to the visitor (no analytics change).
+  const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const formLocale: 'en' | 'hi' = locale === 'hi' ? 'hi' : 'en';
 
   const handleSubmit = async (formData: FormData) => {
     if (!toolId) return;
@@ -47,6 +54,9 @@ export default function ToolDynamicPage() {
     // automatically by WebsiteEvents itself (Task 9A), no extra code
     // needed here.
     WebsiteEvents.ctaClick(`tools_${toolId}_generate`, `tools_${toolId}`);
+
+    setFailed(false);
+    setLoading(true);
 
     // 🔹 API ko bhasha batana zaroori hai taaki result Hindi mein aaye
     const requestData = { ...formData, toolId, lang: currentLang };
@@ -88,15 +98,24 @@ export default function ToolDynamicPage() {
       // identity, exactly like Free Kundali's own "kundali_generate".
       WebsiteEvents.featureUsed(`tool_${toolId}_generate`);
     } catch (error) {
-      // Yahan aap koi error message state set kar sakte hain
-      // (unchanged -- Task 13B adds no error-path analytics; a failed
-      // calculation deliberately produces no feature_used at all).
+      // A failed calculation is shown to the visitor (the form stays, so they can retry).
+      // Task 13B adds no error-path analytics; a failed calculation deliberately produces no feature_used at all.
+      setFailed(true);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="space-y-6">
-      {!submitted && <ToolInputForm toolId={toolId} onSubmit={handleSubmit} />}
+      {!submitted && failed && (
+        <p role="alert" data-testid="tool-calc-error" className="max-w-xl mx-auto rounded-xl border border-[#C0392B]/40 bg-[#FDF0EE] px-4 py-3 text-[15px] leading-snug text-[#8A2A1F]">
+          {formLocale === 'hi'
+            ? 'अभी गणना नहीं हो सकी। कृपया अपना विवरण जाँचें और थोड़ी देर बाद फिर से कोशिश करें।'
+            : "We couldn't calculate this right now. Please check your details and try again in a minute."}
+        </p>
+      )}
+      {!submitted && <ToolInputForm toolId={toolId} onSubmit={handleSubmit} locale={formLocale} submitLabel={submitLabel} busy={loading} />}
       
       {kundaliData && result ? (
         <div className="space-y-6">

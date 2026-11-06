@@ -23,7 +23,7 @@ export async function fetchLifeTool(req: LifeToolRequest) {
     toolId: req.toolId,
   };
 
-  console.log("📦 LifeTool payload:", payload);
+  // No console logging of the payload or response: both carry the visitor's birth details.
 
   const res = await fetch(`${BACKEND}/api/life-tool`, {
     method: "POST",
@@ -33,12 +33,10 @@ export async function fetchLifeTool(req: LifeToolRequest) {
 
   if (!res.ok) {
     const errorText = await res.text();
-    console.error("❌ LifeTool backend error:", res.status, errorText);
+    console.error("LifeTool backend error:", res.status);
     throw new Error(`Backend Error ${res.status}: ${errorText}`);
   }
 
   const json = await res.json();
-  console.log("✅ LifeTool response received:", json);
-
   return json;
 }

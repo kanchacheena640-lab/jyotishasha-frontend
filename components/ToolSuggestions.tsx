@@ -8,7 +8,15 @@ import { X } from 'lucide-react';
 
 // hrefs are locale-neutral: free pages get the /hi prefix at render time (localizeHref below);
 // /reports/* stays unprefixed because the paid report catalog is English-only.
-const suggestionsMap: Record<string, { title: string; href: string; type: 'tool' | 'report'; emoji?: string }[]> = {
+const suggestionsMap: Record<string, { title: string; title_hi?: string; href: string; type: 'tool' | 'report'; emoji?: string }[]> = {
+  // Mangal Dosh: marriage-related free next steps only -- its single paid next step is the Marriage Report card
+  // in the result (components/tools/mangal-dosh/MangalDoshReportCta.tsx), so no unrelated report here.
+  'mangal-dosh': [
+    { title: 'Kundli Matching', title_hi: 'कुंडली मिलान', href: '/kundli-matching', type: 'tool', emoji: '💍' },
+    { title: 'Marriage Path', title_hi: 'विवाह मार्ग', href: '/tools/marriage-path', type: 'tool', emoji: '💞' },
+    { title: 'Chandra-Mangal Yog', title_hi: 'चंद्र-मंगल योग', href: '/tools/chandra-mangal', type: 'tool', emoji: '🌙' },
+    { title: 'Full Kundali', title_hi: 'पूरी कुंडली', href: '/free-kundali', type: 'tool', emoji: '🌠' },
+  ],
   'rashi-finder': [
     { title: 'Check Lagna (Ascendant)', href: '/tools/lagna-finder', type: 'tool', emoji: '📜' },
     { title: 'Full Kundali Generator', href: '/free-kundali', type: 'tool', emoji: '🌠' },
@@ -49,11 +57,13 @@ function SuggestionCard({
   href,
   type,
   emoji,
+  isHi,
 }: {
   title: string;
   href: string;
   type: 'tool' | 'report';
   emoji?: string;
+  isHi?: boolean;
 }) {
   return (
     <Link
@@ -69,7 +79,7 @@ function SuggestionCard({
             : 'text-yellow-800 bg-yellow-100 ring-yellow-200'
         }`}
       >
-        {type === 'tool' ? 'Free' : 'Premium'}
+        {type === 'tool' ? (isHi ? 'फ्री' : 'Free') : (isHi ? 'प्रीमियम' : 'Premium')}
       </span>
     </Link>
   );
@@ -89,10 +99,10 @@ export default function ToolSuggestions({ toolId }: { toolId?: string | null }) 
     <>
       {/* ✅ Suggestions Visible on All Screens */}
       <div className="flex flex-col gap-3 pr-2 pl-6">
-        <h2 className="text-xl font-semibold text-center text-gray-700 mb-1 tracking-wide">More About You</h2>
+        <h2 className="text-xl font-semibold text-center text-gray-700 mb-1 tracking-wide">{isHi ? 'आपके बारे में और जानें' : 'More About You'}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {suggestions.map((sug, i) => (
-            <SuggestionCard key={i} {...sug} href={localizeHref(sug.href, isHi)} />
+            <SuggestionCard key={i} title={isHi && sug.title_hi ? sug.title_hi : sug.title} type={sug.type} emoji={sug.emoji} isHi={isHi} href={localizeHref(sug.href, isHi)} />
           ))}
         </div>
       </div>

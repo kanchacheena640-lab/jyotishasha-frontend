@@ -9,6 +9,7 @@ import { replaceIsoDates } from '@/utils/dateReplacer';
 import Link from 'next/link';
 import { reportsData } from '@/app/data/reportsData';
 import YogaReportCta from '@/components/YogaReportCta';
+import MangalDoshResult from '@/components/tools/mangal-dosh/MangalDoshResult';
 
 // Marriage Path result -> paid continuation: the existing Marriage Report (route + price from the catalogue).
 const MARRIAGE_PATH_REPORT = reportsData.find((r) => r.slug === 'marriage_report');
@@ -247,15 +248,15 @@ type PhaseKey = typeof keys[number];
 
       {/* 📄 User Info */}
       <p className="text-sm text-center font-mono text-gray-700 mb-6">
-        {kundaliData.name} | DOB: {kundaliData.dob} | TOB: {kundaliData.tob} | Rashi: {kundaliData.rashi} | Lagna: {kundaliData.lagna_sign}
+        {kundaliData.name} | {ctaLocale === 'hi' ? 'जन्म तिथि' : 'DOB'}: {/^\d{4}-\d{2}-\d{2}$/.test(String(kundaliData.dob)) ? formatDate(kundaliData.dob) : kundaliData.dob} | {ctaLocale === 'hi' ? 'समय' : 'TOB'}: {kundaliData.tob} | {ctaLocale === 'hi' ? 'राशि' : 'Rashi'}: {kundaliData.rashi} | {ctaLocale === 'hi' ? 'लग्न' : 'Lagna'}: {kundaliData.lagna_sign}
       </p>
 
       {/* 🔗 Quick Tool Links */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
-        <a href={`${localePrefix}/tools/rashi-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Rashi Finder</a>
-        <a href={`${localePrefix}/tools/lagna-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Lagna Finder</a>
-        <a href={`${localePrefix}/tools/grah-dasha-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">Grah-Dasha</a>
-        <a href={`${localePrefix}/tools/planet-overview`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">All Planets</a>
+        <a href={`${localePrefix}/tools/rashi-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">{ctaLocale === 'hi' ? 'राशि खोजें' : 'Rashi Finder'}</a>
+        <a href={`${localePrefix}/tools/lagna-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">{ctaLocale === 'hi' ? 'लग्न खोजें' : 'Lagna Finder'}</a>
+        <a href={`${localePrefix}/tools/grah-dasha-finder`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">{ctaLocale === 'hi' ? 'ग्रह दशा' : 'Grah-Dasha'}</a>
+        <a href={`${localePrefix}/tools/planet-overview`} className="text-sm bg-primary text-white px-3 py-1 rounded-full shadow">{ctaLocale === 'hi' ? 'सभी ग्रह' : 'All Planets'}</a>
       </div>
 
       {/* 🧩 Result Main Grid */}
@@ -375,37 +376,10 @@ type PhaseKey = typeof keys[number];
               )}
             </div>
           )}
+          {/* Mangal Dosh: structured result card (status, Mars from Lagna/Moon, Jupiter, 3 cancellation checks). */}
           {result.toolId === 'mangal-dosh' && kundaliData.manglik_dosh && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded shadow-sm space-y-4">
-            
-            {/* 🔴 Manglik Status */}
-            {kundaliData.manglik_dosh.status?.is_mangalic && (
-              <div className="bg-red-100 border border-red-300 p-3 rounded text-sm text-red-900 font-semibold">
-                Status: {kundaliData.manglik_dosh.status.is_mangalic}
-              </div>
-            )}
-
-            {/* 🔖 Main Heading */}
-            <p className="text-lg font-semibold text-red-700">
-              {kundaliData.manglik_dosh.heading}
-            </p>
-
-            {/* 🔎 Report Paragraphs */}
-            {kundaliData.manglik_dosh.report_paragraphs.map((para: string, idx: number) => (
-              <p key={idx} className="text-sm text-gray-800 whitespace-pre-line">
-                {para}
-              </p>
-            ))}
-
-            {/* 📚 General Explanation */}
-            {kundaliData.manglik_dosh.general_explanation && (
-              <details className="text-sm text-gray-600 mt-2">
-                <summary className="cursor-pointer text-blue-600 underline">Read about Mangal Dosh</summary>
-                <p className="mt-2 whitespace-pre-line">{kundaliData.manglik_dosh.general_explanation}</p>
-              </details>
-            )}
-          </div>
-        )}
+            <MangalDoshResult data={kundaliData.manglik_dosh} locale={ctaLocale} />
+          )}
       {/* 📚 KAALSARP DOSH */}
       {result.toolId === 'kaalsarp-dosh' && kundaliData.kaalsarp_dosh && (
         <div className="p-4 bg-indigo-50 border border-indigo-200 rounded shadow-sm space-y-4">
