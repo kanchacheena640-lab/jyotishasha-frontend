@@ -1,105 +1,244 @@
+// Marriage Path calculator content (EN + HI), rendered on the server by
+// components/tools/marriage-path/MarriagePathLanding.tsx. Positioned as a 7th-house marriage analysis -- the
+// calculator does NOT predict marriage timing or partner compatibility (those intents belong to the Marriage
+// Timing guide and Kundli Matching). What it computes (services/marriage_path.py):
+//   * the 7th house sign, its lord and the house the lord occupies;
+//   * planets placed in the 7th house (whole sign);
+//   * Venus and Jupiter exalted or debilitated;
+//   * Rahu in the same house as the 7th lord;
+//   * a "key influence": the first planet one of these rules finds (not a strength ranking).
+
 export const marriagePathContent = {
   toolId: "marriage-path",
 
   en: {
     seo: {
-      title: "Marriage Path Astrology – Marriage Timing & Compatibility | Vedic Astrology",
-      description: "Analyze your marriage path using authentic Vedic astrology. Understand marriage timing, relationship stability, spouse indicators, and marital harmony through your Kundali.",
+      title: "Marriage Path Calculator – 7th House Marriage Analysis | Jyotishasha",
+      description:
+        "Free 7th house marriage analysis: enter your birth details to see your 7th house sign and lord, the planets placed there, and the Venus and Jupiter checks read for marriage.",
       keywords: [
-        "marriage astrology online",
+        "7th house marriage analysis",
+        "7th house lord calculator",
+        "marriage house in kundali",
+        "planets in 7th house",
         "marriage path by kundali",
-        "marriage timing astrology",
-        "when will I get married astrology",
-        "marriage prediction vedic astrology",
-        "marriage compatibility kundali",
-        "spouse nature astrology calculator", // Abroad SEO keyword
-        "authentic vedic marriage reading"     // High intent keyword
+        "venus jupiter marriage astrology",
       ],
     },
 
-    content: {
-      intro: "Marriage is a profound life milestone, representing the union of two souls and the beginning of a shared journey. In authentic Vedic astrology, your 'Marriage Path' is not a matter of luck; it is a cosmic blueprint found in your birth chart. By analyzing specific planetary alignments, astrology provides deep insights into the timing of your union, the nature of your future spouse, and the long-term stability of your marital bond.",
-      whatIsRashi: "The analysis of marriage primarily centers on the 7th house (the house of partnerships), its ruling planet, and Venus—the universal significator of love and relationships. For women, Jupiter's strength is also crucial as it represents the husband and marital wisdom. Together, these factors describe the physical and emotional nature of your spouse, the quality of your commitment, and your overall relationship patterns.",
-      whyMoonRashiImportant: "Your Moon Rashi (Sign) reflects your inner emotional needs and how you respond to intimacy. Even if your chart has strong marriage yogas, emotional incompatibility or a weak Moon can lead to dissatisfaction and stress within the partnership. A stable Moon ensures the mental flexibility and empathy required to navigate the complexities of a lifelong commitment.",
-      howToolWorks: "The Jyotishasha Marriage Path tool gives a free snapshot of your 7th house, the house of marriage: the planets placed there, whether Venus and Jupiter are exalted or debilitated, and whether Rahu sits with the lord of the 7th house. It then names the planet with the strongest influence on your marriage and lists the supportive and challenging points it found. It does not analyse the Navamsa (D9) chart or your Dasha periods.",
-      benefits: [
-        "Gives a quick snapshot of the main marriage indicators in your 7th house",
-        "Analyzes the inherent stability of your relationships and key spouse indicators",
-        "Offers valuable insights into the dynamics of love marriage versus arranged marriage",
-        "Explains the astrological reasons behind delays, obstacles, or periods of growth",
-        "Strictly grounded in classical Parashari principles of authentic Vedic astrology",
+    landing: {
+      breadcrumb: { home: "Home", tools: "Tools", current: "Marriage Path" },
+      h1: "Marriage Path: 7th House Marriage Analysis",
+      intro:
+        "In Vedic astrology the 7th house is the house of marriage and partnership. Enter your date, time and place of birth to see your 7th house sign and lord, the planets placed there, and the Venus and Jupiter checks traditionally read for marriage.",
+      method: "Calculated with the Swiss Ephemeris and Lahiri Ayanamsa.",
+      submitLabel: "Check My 7th House — Free",
+      shows: {
+        h2: "What the Free Result Shows",
+        items: [
+          { title: "7th house sign and lord", body: "The sign on your 7th house and the planet that rules it." },
+          { title: "Where the 7th lord sits", body: "The house your 7th lord occupies in your chart." },
+          { title: "Planets in your 7th house", body: "Any planets placed in the house of marriage." },
+          { title: "Venus, Jupiter and Rahu checks", body: "Venus or Jupiter exalted or debilitated, and Rahu with your 7th lord." },
+        ],
+      },
+      sections: [
+        {
+          id: "mp-house",
+          h2: "What the 7th House Shows",
+          body: [
+            "The 7th house is counted from your Lagna (Ascendant) and is traditionally read for marriage, the spouse and long-term partnerships. Its sign and the planet that rules it, called the 7th lord, are the first things an astrologer looks at.",
+            "Venus is the traditional significator of love and marriage, and Jupiter is also read for marriage, especially in a woman's chart, where it is traditionally linked with the husband.",
+          ],
+        },
+        {
+          id: "mp-checks",
+          h2: "What This Calculator Checks",
+          body: [
+            "It finds your 7th house sign, its lord and the house the lord occupies, and lists any planets placed in your 7th house. It checks whether Venus or Jupiter is exalted or debilitated, and whether Rahu sits in the same house as your 7th lord.",
+            "The key influence it names is the first planet one of these checks finds. It is a pointer for reading, not a ranking of strength.",
+            "It does not analyse the Navamsa (D9) chart or your Dasha periods, so it does not predict when you will marry or how compatible you are with a partner.",
+          ],
+        },
+        {
+          id: "mp-reading",
+          h2: "Reading Your Result",
+          body: [
+            "Supportive and challenging points are traditional indicators, not fixed outcomes. A full reading weighs them together with the rest of your chart.",
+            "If no rule applies to your chart, you will still see your 7th house sign, its lord and where the lord sits. An empty 7th house is common.",
+          ],
+        },
+        {
+          id: "mp-more",
+          h2: "Marriage Timing and Compatibility",
+          body: [
+            "Marriage timing is read from Dasha periods and transits, and compatibility from both partners' charts. Those questions have their own guides and calculator.",
+          ],
+          links: [
+            { href: "/marriage-astrology/marriage-timing", label: "Marriage Timing guide" },
+            { href: "/kundli-matching", label: "Free Kundli Matching" },
+            { href: "/marriage-astrology/compatibility", label: "Marriage Compatibility guide" },
+          ],
+        },
       ],
-      sunVsMoonRashi: "Marital outcomes are deeply influenced by your planetary timeline. Favorable marriage periods typically coincide with the activation of your 7th house lord, Venus, or Jupiter through Dashas and Transits. Conversely, challenging planetary periods may cause temporary delays or relationship stress, requiring patience and conscious effort to maintain harmony.",
-    },
-
-    video: {
-      title: "Marriage Path Astrology Explained – Timing, Stability & Spouse in Your Kundali",
-      youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
+      related: {
+        h2: "Related Marriage Guides and Tools",
+        links: [
+          { href: "/marriage-astrology", label: "Marriage Astrology", note: "Every marriage question, free tools and reports" },
+          { href: "/kundli-matching", label: "Free Kundli Matching", note: "36 Guna Milan for you and your partner" },
+          { href: "/tools/mangal-dosh", label: "Mangal Dosh Calculator", note: "Mars from your Lagna and Moon, with cancellation checks" },
+          { href: "/marriage-astrology/spouse-nature", label: "What Will My Spouse Be Like?", note: "How the 7th house is read for the spouse" },
+          { href: "/marriage-astrology/delayed-marriage", label: "Why Is My Marriage Delayed?", note: "The chart factors read for a later marriage" },
+          { href: "/marriage-astrology/marriage-timing", label: "When Will I Get Married?", note: "How Dasha periods are read for timing" },
+        ],
+      },
+      faqH2: "Frequently Asked Questions",
     },
 
     faq: [
       {
-        q: "Can Vedic astrology accurately predict the exact date of my marriage?",
-        a: "Astrology identifies the most favorable 'Time Windows' or 'Seasons' for marriage based on your Dashas and planetary transits. While it doesn't provide a specific calendar date, it reveals the periods when your chances of finding a partner and getting married are at their peak.",
+        q: "What does the 7th house show in a birth chart?",
+        a: "The 7th house is traditionally read for marriage, the spouse and long-term partnerships. It is counted from your Lagna, so its sign depends on your birth time and place.",
       },
       {
-        q: "Which specific planet is the most important for a successful marriage?",
-        a: "Venus is the primary planet for love and marriage. For women, Jupiter is also traditionally important as it signifies the husband. The lord of your 7th house is the most direct indicator in your own chart.",
+        q: "How do I find my 7th house lord?",
+        a: "Your 7th house lord is the planet that rules the sign on your 7th house. The calculator shows the sign, its lord and the house the lord occupies.",
       },
       {
-        q: "Why do some people face significant delays in getting married?",
-        a: "Delays are often read through the influence of Saturn on the 7th house, a weak or combust Venus, or an unfavorable Dasha period.",
+        q: "What if there is no planet in my 7th house?",
+        a: "An empty 7th house is common. Astrologers then read the 7th house sign and its lord. The result shows both, along with where the lord sits.",
+      },
+      {
+        q: "Does this calculator predict when I will get married?",
+        a: "No. It does not analyse Dasha periods or the Navamsa (D9) chart, which are used for timing. The Marriage Timing guide explains how timing is read.",
+      },
+      {
+        q: "Can it check compatibility with my partner?",
+        a: "No. It reads one chart. Free Kundli Matching compares both partners' charts with the 36 Guna Milan score and Mangal Dosh.",
+      },
+      {
+        q: "What does an exalted or debilitated Venus or Jupiter mean here?",
+        a: "Exalted Venus or Jupiter is traditionally read as supportive for marriage. Debilitated Venus or Jupiter is traditionally read as an area that needs more conscious care. Neither is a fixed outcome.",
+      },
+      {
+        q: "Why does the calculator need my birth time?",
+        a: "Your Lagna changes about every two hours, and it decides which sign falls on your 7th house. The birth place gives the coordinates used to calculate the Lagna.",
       },
     ],
   },
 
   hi: {
     seo: {
-      title: "विवाह मार्ग ज्योतिष – कुंडली से जानें विवाह का समय और अनुकूलता | ज्‍योतिष आशा",
-      description: "प्रामाणिक वैदिक ज्योतिष के माध्यम से अपने विवाह मार्ग का विश्लेषण करें। कुंडली विश्लेषण के माध्यम से विवाह के समय, संबंधों की स्थिरता और जीवनसाथी के गुणों को जानें।",
+      title: "विवाह मार्ग कैलकुलेटर – सप्तम भाव से विवाह विश्लेषण | ज्‍योतिष आशा",
+      description:
+        "फ्री सप्तम भाव विवाह विश्लेषण: जन्म विवरण डालें और जानें अपने सप्तम भाव की राशि, सप्तमेश, उसमें स्थित ग्रह, और विवाह के लिए देखी जाने वाली शुक्र व गुरु की जाँच।",
       keywords: [
-        "विवाह ज्योतिष",
-        "कुंडली से विवाह योग",
-        "विवाह का समय ज्योतिष",
-        "मेरी शादी कब होगी",
-        "विवाह भविष्यवाणी",
-        "कुंडली मिलान ज्योतिष",
-        "जीवनसाथी का स्वभाव"
+        "सप्तम भाव विवाह विश्लेषण",
+        "सप्तमेश कैलकुलेटर",
+        "कुंडली में विवाह भाव",
+        "सप्तम भाव में ग्रह",
+        "कुंडली से विवाह मार्ग",
+        "शुक्र गुरु विवाह ज्योतिष",
       ],
     },
 
-    content: {
-      intro: "विवाह जीवन का एक महत्वपूर्ण मील का पत्थर है, जो दो आत्माओं के मिलन और एक साझा यात्रा की शुरुआत का प्रतिनिधित्व करता है। प्रामाणिक वैदिक ज्योतिष में, आपका 'विवाह मार्ग' कोई संयोग नहीं है; यह आपकी जन्म कुंडली में अंकित एक ब्रह्मांडीय खाका है। विशिष्ट ग्रहों के संरेखण का विश्लेषण करके, ज्योतिष आपके विवाह के समय, आपके भविष्य के जीवनसाथी के स्वभाव और आपके वैवाहिक बंधन की दीर्घकालिक स्थिरता के बारे में गहरी जानकारी प्रदान करता है।",
-      whatIsRashi: "विवाह का विश्लेषण मुख्य रूप से सप्तम भाव (साझेदारी का भाव), उसके स्वामी ग्रह और शुक्र पर केंद्रित होता है—जो प्रेम और संबंधों का सार्वभौमिक कारक है। महिलाओं के लिए, बृहस्पति की शक्ति भी महत्वपूर्ण है क्योंकि यह पति और वैवाहिक सद्भाव का प्रतिनिधित्व करता है। ये कारक मिलकर आपके जीवनसाथी के स्वभाव, आपके संबंधों की गुणवत्ता और प्रतिबद्धता के पैटर्न का वर्णन करते हैं।",
-      whyMoonRashiImportant: "आपकी चंद्र राशि आपकी आंतरिक भावनात्मक जरूरतों और आपकी प्रतिक्रियाओं को दर्शाती है। यदि कुंडली में विवाह के मजबूत योग होने के बावजूद चंद्रमा कमजोर या पीड़ित है, तो यह वैवाहिक जीवन में असंतोष और तनाव का कारण बन सकता है। एक स्थिर चंद्रमा आजीवन प्रतिबद्धता की जटिलताओं को सुलझाने के लिए आवश्यक मानसिक लचीलापन और सहानुभूति सुनिश्चित करता है।",
-      howToolWorks: "ज्‍योतिष आशा का 'मैरिज पाथ' टूल आपके सप्तम भाव (विवाह भाव) की फ्री झलक देता है: उसमें स्थित ग्रह, शुक्र और बृहस्पति उच्च या नीच हैं या नहीं, और राहु सप्तमेश के साथ है या नहीं। फिर यह विवाह पर सबसे प्रबल प्रभाव वाले ग्रह को बताता है और मिले हुए सहायक व चुनौतीपूर्ण बिंदुओं की सूची देता है। यह नवमांश (D9) कुंडली या आपकी दशाओं का विश्लेषण नहीं करता।",
-      benefits: [
-        "आपके सप्तम भाव के मुख्य विवाह संकेतों की त्वरित झलक देता है",
-        "रिश्तों की स्थिरता और जीवनसाथी के प्रमुख गुणों का सटीक विश्लेषण करता है",
-        "प्रेम विवाह बनाम अरेंज मैरिज की संभावनाओं के बारे में मूल्यवान जानकारी देता है",
-        "विवाह में देरी, बाधाओं या सुधार के ज्योतिषीय कारणों को स्पष्ट करता है",
-        "पूरी तरह से शास्त्रीय वैदिक ज्योतिष के प्रामाणिक सिद्धांतों पर आधारित",
+    landing: {
+      breadcrumb: { home: "होम", tools: "टूल्स", current: "विवाह मार्ग" },
+      h1: "विवाह मार्ग: सप्तम भाव से विवाह विश्लेषण",
+      intro:
+        "वैदिक ज्योतिष में सप्तम भाव विवाह और साझेदारी का भाव है। अपनी जन्म तिथि, समय और स्थान डालें और जानें अपने सप्तम भाव की राशि और स्वामी, उसमें स्थित ग्रह, और विवाह के लिए परंपरा से देखी जाने वाली शुक्र व गुरु की जाँच।",
+      method: "गणना स्विस एफेमेरिस और लाहिरी अयनांश से।",
+      submitLabel: "फ्री में सप्तम भाव जाँचें",
+      shows: {
+        h2: "फ्री परिणाम में क्या मिलता है",
+        items: [
+          { title: "सप्तम भाव की राशि और स्वामी", body: "आपके सप्तम भाव की राशि और उस पर शासन करने वाला ग्रह।" },
+          { title: "सप्तमेश की स्थिति", body: "आपका सप्तमेश कुंडली के किस भाव में है।" },
+          { title: "सप्तम भाव में ग्रह", body: "विवाह भाव में स्थित ग्रह, यदि कोई हों।" },
+          { title: "शुक्र, गुरु और राहु की जाँच", body: "शुक्र या गुरु उच्च या नीच के, और राहु सप्तमेश के साथ।" },
+        ],
+      },
+      sections: [
+        {
+          id: "mp-house",
+          h2: "सप्तम भाव क्या दर्शाता है",
+          body: [
+            "सप्तम भाव आपके लग्न से गिना जाता है और परंपरा में इसे विवाह, जीवनसाथी और दीर्घकालिक साझेदारी के लिए देखा जाता है। इसकी राशि और उस राशि का स्वामी ग्रह, जिसे सप्तमेश कहते हैं, सबसे पहले देखे जाते हैं।",
+            "शुक्र प्रेम और विवाह का पारंपरिक कारक है, और गुरु भी विवाह के लिए देखा जाता है, विशेषकर स्त्री की कुंडली में, जहाँ परंपरा में इसे पति से जोड़ा जाता है।",
+          ],
+        },
+        {
+          id: "mp-checks",
+          h2: "यह कैलकुलेटर क्या जाँचता है",
+          body: [
+            "यह आपके सप्तम भाव की राशि, सप्तमेश और सप्तमेश का भाव निकालता है, और सप्तम भाव में स्थित ग्रहों की सूची देता है। यह जाँचता है कि शुक्र या गुरु उच्च या नीच के हैं या नहीं, और राहु सप्तमेश वाले भाव में है या नहीं।",
+            "जिस प्रमुख प्रभाव का नाम यह देता है, वह इन जाँचों में मिलने वाला पहला ग्रह है। यह पढ़ने का एक संकेत है, बल की तुलना नहीं।",
+            "यह नवमांश (D9) कुंडली या आपकी दशाओं का विश्लेषण नहीं करता, इसलिए यह विवाह का समय या जीवनसाथी से अनुकूलता नहीं बताता।",
+          ],
+        },
+        {
+          id: "mp-reading",
+          h2: "अपना परिणाम कैसे पढ़ें",
+          body: [
+            "सहायक और चुनौतीपूर्ण बिंदु पारंपरिक संकेत हैं, तय परिणाम नहीं। पूरा विश्लेषण इन्हें आपकी बाकी कुंडली के साथ मिलाकर किया जाता है।",
+            "यदि आपकी कुंडली पर कोई नियम लागू नहीं होता, तब भी आपको सप्तम भाव की राशि, सप्तमेश और उसका भाव दिखेगा। खाली सप्तम भाव आम बात है।",
+          ],
+        },
+        {
+          id: "mp-more",
+          h2: "विवाह का समय और अनुकूलता",
+          body: [
+            "विवाह का समय दशा और गोचर से, और अनुकूलता दोनों साथियों की कुंडलियों से देखी जाती है। इन प्रश्नों के लिए अलग मार्गदर्शिकाएँ और कैलकुलेटर हैं।",
+          ],
+          links: [
+            { href: "/marriage-astrology/marriage-timing", label: "विवाह के समय की मार्गदर्शिका" },
+            { href: "/kundli-matching", label: "फ्री कुंडली मिलान" },
+            { href: "/marriage-astrology/compatibility", label: "विवाह अनुकूलता मार्गदर्शिका" },
+          ],
+        },
       ],
-      sunVsMoonRashi: "विवाह के परिणाम आपकी ग्रहों की समयरेखा से गहराई से प्रभावित होते हैं। अनुकूल विवाह अवधि आमतौर पर दशा और गोचर के माध्यम से आपके सप्तम भाव के स्वामी, शुक्र या बृहस्पति के सक्रिय होने के साथ मेल खाती है। इसके विपरीत, चुनौतीपूर्ण ग्रह अवधि अस्थायी देरी या रिश्तों में तनाव का कारण बन सकती है, जिसे सही समझ और प्रयासों से संतुलित किया जा सकता है।",
-    },
-
-    video: {
-      title: "विवाह ज्योतिष विश्लेषण – कुंडली में विवाह का समय और स्थिरता",
-      youtubeUrl: "https://www.youtube.com/watch?v=ortAvdqzFjo",
+      related: {
+        h2: "विवाह से जुड़ी मार्गदर्शिकाएँ और टूल",
+        links: [
+          { href: "/marriage-astrology", label: "विवाह ज्योतिष", note: "विवाह से जुड़े सभी प्रश्न, फ्री टूल और रिपोर्ट" },
+          { href: "/kundli-matching", label: "फ्री कुंडली मिलान", note: "आपके और आपके साथी के लिए 36 गुण मिलान" },
+          { href: "/tools/mangal-dosh", label: "मंगल दोष कैलकुलेटर", note: "लग्न और चंद्र से मंगल, दोष भंग जाँच के साथ" },
+          { href: "/marriage-astrology/spouse-nature", label: "मेरा जीवनसाथी कैसा होगा?", note: "जीवनसाथी के लिए सप्तम भाव कैसे पढ़ा जाता है" },
+          { href: "/marriage-astrology/delayed-marriage", label: "मेरी शादी में देरी क्यों हो रही है?", note: "देर से विवाह के लिए देखे जाने वाले कारक" },
+          { href: "/marriage-astrology/marriage-timing", label: "मेरी शादी कब होगी?", note: "समय के लिए दशाएँ कैसे पढ़ी जाती हैं" },
+        ],
+      },
+      faqH2: "अक्सर पूछे जाने वाले प्रश्न",
     },
 
     faq: [
       {
-        q: "क्या ज्योतिष मेरे विवाह की सटीक तारीख बता सकता है?",
-        a: "ज्योतिष आपकी दशाओं और गोचर के आधार पर विवाह के लिए सबसे अनुकूल 'समय अवधि' (Time Windows) की पहचान करता है। हालाँकि यह कोई कैलेंडर तारीख नहीं देता, लेकिन यह उन अवधियों को उजागर करता है जब आपके विवाह के योग सबसे प्रबल होते हैं।",
+        q: "जन्म कुंडली में सप्तम भाव क्या दर्शाता है?",
+        a: "परंपरा में सप्तम भाव विवाह, जीवनसाथी और दीर्घकालिक साझेदारी के लिए देखा जाता है। यह आपके लग्न से गिना जाता है, इसलिए इसकी राशि आपके जन्म समय और स्थान पर निर्भर करती है।",
       },
       {
-        q: "सफल वैवाहिक जीवन के लिए सबसे महत्वपूर्ण ग्रह कौन सा है?",
-        a: "शुक्र प्रेम और विवाह का प्राथमिक ग्रह है। महिलाओं के लिए बृहस्पति भी परंपरागत रूप से महत्वपूर्ण है क्योंकि वह पति का कारक है। आपके सप्तम भाव का स्वामी आपकी कुंडली का सबसे प्रत्यक्ष संकेतक है।",
+        q: "अपना सप्तमेश कैसे जानें?",
+        a: "आपके सप्तम भाव की राशि पर शासन करने वाला ग्रह आपका सप्तमेश है। कैलकुलेटर राशि, उसका स्वामी और स्वामी का भाव दिखाता है।",
       },
       {
-        q: "कुछ लोगों के विवाह में बहुत अधिक देरी क्यों होती है?",
-        a: "विवाह में देरी को अक्सर सप्तम भाव पर शनि के प्रभाव, कमजोर या अस्त शुक्र, या प्रतिकूल महादशा से देखा जाता है।",
+        q: "अगर मेरे सप्तम भाव में कोई ग्रह नहीं है तो?",
+        a: "खाली सप्तम भाव आम बात है। तब ज्योतिषी सप्तम भाव की राशि और सप्तमेश को देखते हैं। परिणाम में दोनों और सप्तमेश का भाव दिखता है।",
+      },
+      {
+        q: "क्या यह कैलकुलेटर बताता है कि मेरी शादी कब होगी?",
+        a: "नहीं। यह दशाओं या नवमांश (D9) कुंडली का विश्लेषण नहीं करता, जिनसे समय देखा जाता है। विवाह के समय की मार्गदर्शिका बताती है कि समय कैसे पढ़ा जाता है।",
+      },
+      {
+        q: "क्या यह मेरे साथी के साथ अनुकूलता जाँच सकता है?",
+        a: "नहीं। यह एक कुंडली पढ़ता है। फ्री कुंडली मिलान 36 गुण मिलान और मंगल दोष के साथ दोनों साथियों की कुंडलियों की तुलना करता है।",
+      },
+      {
+        q: "यहाँ उच्च या नीच के शुक्र या गुरु का क्या अर्थ है?",
+        a: "उच्च का शुक्र या गुरु परंपरा में विवाह के लिए सहायक माना जाता है। नीच का शुक्र या गुरु परंपरा में ऐसे क्षेत्र के रूप में देखा जाता है जिसे अधिक सजग देखभाल चाहिए। दोनों में से कोई तय परिणाम नहीं है।",
+      },
+      {
+        q: "कैलकुलेटर को मेरा जन्म समय क्यों चाहिए?",
+        a: "आपका लग्न लगभग हर दो घंटे में बदलता है, और उसी से तय होता है कि आपके सप्तम भाव में कौन-सी राशि है। जन्म स्थान से वे निर्देशांक मिलते हैं जिनसे लग्न की गणना होती है।",
       },
     ],
   },

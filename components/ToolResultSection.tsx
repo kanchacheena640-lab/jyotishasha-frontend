@@ -6,15 +6,12 @@ import ToolSuggestions from '@/components/ToolSuggestions';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { replaceIsoDates } from '@/utils/dateReplacer';
-import Link from 'next/link';
-import { reportsData } from '@/app/data/reportsData';
 import YogaReportCta from '@/components/YogaReportCta';
 import MangalDoshResult from '@/components/tools/mangal-dosh/MangalDoshResult';
 import RashiResult from '@/components/tools/rashi-finder/RashiResult';
+import MarriagePathResult from '@/components/tools/marriage-path/MarriagePathResult';
 import { signName } from '@/lib/rashi';
 
-// Marriage Path result -> paid continuation: the existing Marriage Report (route + price from the catalogue).
-const MARRIAGE_PATH_REPORT = reportsData.find((r) => r.slug === 'marriage_report');
 
 
 
@@ -202,7 +199,7 @@ export default function ToolResult({ result, kundaliData }: Props) {
   const localePrefix = routeParams?.locale === 'hi' ? '/hi' : '';
   // Report CTA copy follows the route locale, like the Marriage Path CTA below.
   const ctaLocale: 'en' | 'hi' = localePrefix === '/hi' ? 'hi' : 'en';
-  const editorialLayout = result.toolId === 'mangal-dosh' || result.toolId === 'rashi-finder';
+  const editorialLayout = result.toolId === 'mangal-dosh' || result.toolId === 'rashi-finder' || result.toolId === 'marriage-path';
 
   function pickText(v?: string | { en: string; hi: string }): string {
   if (!v) return '';
@@ -264,7 +261,7 @@ type PhaseKey = typeof keys[number];
 
       {/* 🧩 Result Main Grid */}
       {/* The chart is 320px wide, so its column must be at least that wide: the editorial pages (Mangal Dosh,
-          Rashi Finder) sit in a narrower page container and get a fixed chart column from lg up; other tools use
+          Rashi Finder, Marriage Path) sit in a narrower page container and get a fixed chart column from lg up; other tools use
           thirds from xl up (a third is under 320px below that). Narrower screens stack the chart above the analysis. */}
       <div className={`grid grid-cols-1 ${editorialLayout ? 'lg:grid-cols-[340px_minmax(0,1fr)]' : 'xl:grid-cols-3'} gap-6 bg-white rounded-lg shadow-md p-6 md:p-8`}>
 
@@ -1312,57 +1309,9 @@ type PhaseKey = typeof keys[number];
           )}
           {/* Career Path End */}
         {/* Marriage Path Start */}
+          {/* Structured 7th-house card: facts, key influence, non-empty point lists, one ₹99 Marriage Report CTA. */}
           {result.toolId === 'marriage-path' && kundaliData.marriage_path && (
-            <div className="p-4 bg-white border rounded-lg space-y-4 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-800">💖 Marriage Life Report</h2>
-
-              {/* Heading */}
-              <p className="text-gray-700">{kundaliData.marriage_path.heading}</p>
-
-              {/* Positive Points */}
-              <div>
-                <h3 className="text-green-700 font-semibold">Positive Points:</h3>
-                <ul className="list-disc list-inside text-gray-700">
-                  {kundaliData.marriage_path.positive_points.map((point: string, index: number) => (
-                    <li key={index}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Negative Points */}
-              <div>
-                <h3 className="text-red-700 font-semibold">Negative Points:</h3>
-                <ul className="list-disc list-inside text-gray-700">
-                  {kundaliData.marriage_path.negative_points.map((point: string, index: number) => (
-                    <li key={index}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Dominant Influence */}
-              {kundaliData.marriage_path.dominant_influence && (
-                <p className="text-gray-800 font-medium italic">
-                  {kundaliData.marriage_path.dominant_influence}
-                </p>
-              )}
-
-              {/* CTA */}
-              {kundaliData.marriage_path.cta && (
-                <div className="mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded">
-                  <p className="text-gray-800">{kundaliData.marriage_path.cta}</p>
-                  {MARRIAGE_PATH_REPORT && (
-                    <Link
-                      href={`/reports/${MARRIAGE_PATH_REPORT.slug}`}
-                      className="mt-2 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-                    >
-                      {localePrefix === '/hi'
-                        ? `विस्तृत विवाह रिपोर्ट पाएं – ₹${MARRIAGE_PATH_REPORT.price}`
-                        : `Get Detailed Marriage Report – ₹${MARRIAGE_PATH_REPORT.price}`}
-                    </Link>
-                  )}
-                </div>
-              )}
-            </div>
+            <MarriagePathResult data={kundaliData.marriage_path} locale={ctaLocale} />
           )}
           {/* Marriage Path End */}
           {/* Foreign Travel Start */}

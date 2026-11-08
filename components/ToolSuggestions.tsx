@@ -11,6 +11,13 @@ import { X } from 'lucide-react';
 const suggestionsMap: Record<string, { title: string; title_hi?: string; href: string; type: 'tool' | 'report'; emoji?: string }[]> = {
   // Mangal Dosh: marriage-related free next steps only -- its single paid next step is the Marriage Report card
   // in the result (components/tools/mangal-dosh/MangalDoshReportCta.tsx), so no unrelated report here.
+  // Marriage Path: marriage-related free next steps; its single paid step is the Marriage Report card in the result.
+  'marriage-path': [
+    { title: 'Kundli Matching', title_hi: 'कुंडली मिलान', href: '/kundli-matching', type: 'tool', emoji: '💍' },
+    { title: 'Mangal Dosh', title_hi: 'मंगल दोष', href: '/tools/mangal-dosh', type: 'tool', emoji: '🔴' },
+    { title: 'Marriage Astrology', title_hi: 'विवाह ज्योतिष', href: '/marriage-astrology', type: 'tool', emoji: '📖' },
+    { title: 'Full Kundali', title_hi: 'पूरी कुंडली', href: '/free-kundali', type: 'tool', emoji: '🌠' },
+  ],
   'mangal-dosh': [
     { title: 'Kundli Matching', title_hi: 'कुंडली मिलान', href: '/kundli-matching', type: 'tool', emoji: '💍' },
     { title: 'Marriage Path', title_hi: 'विवाह मार्ग', href: '/tools/marriage-path', type: 'tool', emoji: '💞' },

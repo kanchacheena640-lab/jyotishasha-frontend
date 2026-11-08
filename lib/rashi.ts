@@ -77,6 +77,25 @@ export const nakshatraHref = (name: unknown, isHi: boolean): string | null => {
   return slug ? `${isHi ? "/hi" : ""}/nakshatra/${slug}` : null;
 };
 
+/** Backend planet name -> Hindi name (display only). */
+const PLANETS_HI: Record<string, string> = {
+  Sun: "सूर्य", Moon: "चंद्र", Mars: "मंगल", Mercury: "बुध", Jupiter: "गुरु",
+  Venus: "शुक्र", Saturn: "शनि", Rahu: "राहु", Ketu: "केतु",
+};
+export const ALL_PLANET_NAMES = Object.keys(PLANETS_HI);
+export const planetName = (planet: unknown, isHi: boolean): string => {
+  const p = String(planet ?? "");
+  return (isHi && PLANETS_HI[p]) || p;
+};
+
+const EN_ORDINAL = ["", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+/** Existing planet-in-house guide, e.g. /planet-in-house/venus-in-5th-house; null for an unknown planet or house. */
+export const planetInHouseHref = (planet: unknown, house: unknown, isHi: boolean): string | null => {
+  const p = String(planet ?? "");
+  if (!PLANETS_HI[p] || typeof house !== "number" || !Number.isInteger(house) || house < 1 || house > 12) return null;
+  return `${isHi ? "/hi" : ""}/planet-in-house/${p.toLowerCase()}-in-${EN_ORDINAL[house]}-house`;
+};
+
 /** Moon within this many degrees of a sign's edge: about two hours of the Moon's motion. */
 export const SIGN_BOUNDARY_DEGREES = 1;
 

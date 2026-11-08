@@ -255,8 +255,8 @@ export const toolsData = [
     emoji: "💍",
     title: { en: "Marriage Path", hi: "विवाह मार्ग" },
     description: {
-      en: "Explore marriage timing, spouse nature, and relationship stability markers through authentic Vedic analysis.",
-      hi: "विवाह का समय, जीवनसाथी का स्वभाव और वैवाहिक स्थिरता के संकेतों का विश्लेषण करें।"
+      en: "Check your 7th house: its sign and lord, the planets placed there, and the Venus and Jupiter checks read for marriage.",
+      hi: "अपना सप्तम भाव जाँचें: राशि, सप्तमेश, उसमें स्थित ग्रह और विवाह के लिए देखी जाने वाली शुक्र व गुरु की जाँच।"
     },
     badge: { en: "🆕 New", hi: "🆕 नया" }
   },
