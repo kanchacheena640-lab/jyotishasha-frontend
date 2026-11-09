@@ -5,6 +5,7 @@ import ToolDynamicPage from "./ToolDynamicPage";
 import MangalDoshLanding from "@/components/tools/mangal-dosh/MangalDoshLanding";
 import RashiFinderLanding from "@/components/tools/rashi-finder/RashiFinderLanding";
 import MarriagePathLanding from "@/components/tools/marriage-path/MarriagePathLanding";
+import LoveLifeLanding from "@/components/tools/love-life/LoveLifeLanding";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 
 // Every tool page is known at build time (the content map), so it is prerendered per locale instead of being
@@ -117,6 +118,9 @@ export function generateMetadata(
   }
   if (params.toolId === "marriage-path") {
     return <MarriagePathLanding locale={lang} />;
+  }
+  if (params.toolId === "love-life") {
+    return <LoveLifeLanding locale={lang} />;
   }
 
   // Breadcrumb name: the tool's own name, without the title tag's tagline and brand.

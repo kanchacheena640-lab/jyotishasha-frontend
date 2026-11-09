@@ -214,8 +214,8 @@ export async function parseToolResponse(data: any, toolId: string, lang: string 
 
     case 'love-life':
       return {
-        title: isHi ? "प्रेम जीवन और अनुकूलता" : "Love Life & Compatibility",
-        subtitle: isHi ? "शुक्र, मंगल, 7वें भाव और भावनात्मक ग्रहों पर आधारित" : "Based on Venus, Mars, 7th house and emotional planets",
+        title: isHi ? "प्रेम जीवन: पंचम और सप्तम भाव" : "Love Life: 5th & 7th House Analysis",
+        subtitle: isHi ? "आपके पंचम और सप्तम भाव और उनमें स्थित ग्रहों पर आधारित" : "Based on your 5th and 7th houses and the planets placed there",
         summary: data.love_life?.heading || '',
         toolId,
       };

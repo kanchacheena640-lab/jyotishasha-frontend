@@ -299,8 +299,8 @@ export const toolsData = [
     emoji: "💖",
     title: { en: "Love Life", hi: "प्रेम जीवन" },
     description: {
-      en: "Understand your romantic nature, emotional bonding style, and the timing of significant relationship developments.",
-      hi: "अपने रोमांटिक स्वभाव, भावनात्मक जुड़ाव और प्रेम जीवन के महत्वपूर्ण पड़ावों को समझें।"
+      en: "Check your 5th and 7th houses: their signs, the planets placed there, and how Venus, the Moon and other placements are read for love.",
+      hi: "अपने पंचम और सप्तम भाव जाँचें: उनकी राशियाँ, उनमें स्थित ग्रह और प्रेम के लिए शुक्र, चंद्र व अन्य स्थितियों का अर्थ।"
     },
     badge: null
   }

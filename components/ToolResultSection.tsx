@@ -10,6 +10,7 @@ import YogaReportCta from '@/components/YogaReportCta';
 import MangalDoshResult from '@/components/tools/mangal-dosh/MangalDoshResult';
 import RashiResult from '@/components/tools/rashi-finder/RashiResult';
 import MarriagePathResult from '@/components/tools/marriage-path/MarriagePathResult';
+import LoveLifeResult from '@/components/tools/love-life/LoveLifeResult';
 import { signName } from '@/lib/rashi';
 
 
@@ -199,7 +200,7 @@ export default function ToolResult({ result, kundaliData }: Props) {
   const localePrefix = routeParams?.locale === 'hi' ? '/hi' : '';
   // Report CTA copy follows the route locale, like the Marriage Path CTA below.
   const ctaLocale: 'en' | 'hi' = localePrefix === '/hi' ? 'hi' : 'en';
-  const editorialLayout = result.toolId === 'mangal-dosh' || result.toolId === 'rashi-finder' || result.toolId === 'marriage-path';
+  const editorialLayout = result.toolId === 'mangal-dosh' || result.toolId === 'rashi-finder' || result.toolId === 'marriage-path' || result.toolId === 'love-life';
 
   function pickText(v?: string | { en: string; hi: string }): string {
   if (!v) return '';
@@ -1456,49 +1457,9 @@ type PhaseKey = typeof keys[number];
               )}
               {/* Government Job End */}
               {/* Love Life Start */}
-               {result.toolId === 'love-life' && kundaliData.love_life && (
-                <div className="p-4 bg-white border rounded-lg space-y-4 shadow-sm">
-                  <h2 className="text-xl font-bold text-gray-800">💖 Love Life Insight</h2>
-
-                  {/* Heading */}
-                  <p className="text-gray-700">{kundaliData.love_life.heading}</p>
-
-                  {/* Positive Points */}
-                  {kundaliData.love_life.positive_points?.length > 0 && (
-                    <div>
-                      <h3 className="text-green-700 font-semibold">Positive Points:</h3>
-                      <ul className="list-disc list-inside text-gray-700">
-                        {kundaliData.love_life.positive_points.map((point: any, index: number) => (
-                          <li key={index}>{typeof point === 'string' ? point : point.en}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Negative Points */}
-                  {kundaliData.love_life.negative_points?.length > 0 && (
-                    <div>
-                      <h3 className="text-red-700 font-semibold">Negative Points:</h3>
-                      <ul className="list-disc list-inside text-gray-700">
-                        {kundaliData.love_life.negative_points.map((point: any, index: number) => (
-                          <li key={index}>{typeof point === 'string' ? point : point.en}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Verdict */}
-                  {kundaliData.love_life.verdict && (
-                    <p className="text-gray-800 font-medium italic">{kundaliData.love_life.verdict}</p>
-                  )}
-
-                  {/* CTA */}
-                  {kundaliData.love_life.cta && (
-                    <div className="mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded">
-                      <p className="text-gray-900 font-semibold">{kundaliData.love_life.cta}</p>
-                    </div>
-                  )}
-                </div>
+              {/* Structured 5th/7th-house card: facts, non-empty point lists in the page language, one Love & Relationship Report CTA. */}
+              {result.toolId === 'love-life' && kundaliData.love_life && (
+                <LoveLifeResult data={kundaliData.love_life} locale={ctaLocale} />
               )}
               {/* Love Life End */}
       </div>

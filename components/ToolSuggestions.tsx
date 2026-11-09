@@ -18,6 +18,13 @@ const suggestionsMap: Record<string, { title: string; title_hi?: string; href: s
     { title: 'Marriage Astrology', title_hi: 'विवाह ज्योतिष', href: '/marriage-astrology', type: 'tool', emoji: '📖' },
     { title: 'Full Kundali', title_hi: 'पूरी कुंडली', href: '/free-kundali', type: 'tool', emoji: '🌠' },
   ],
+  // Love Life: relationship-related free next steps; its single paid step is the Love & Relationship Report card.
+  'love-life': [
+    { title: 'Kundli Matching', title_hi: 'कुंडली मिलान', href: '/kundli-matching', type: 'tool', emoji: '💍' },
+    { title: 'Marriage Path', title_hi: 'विवाह मार्ग', href: '/tools/marriage-path', type: 'tool', emoji: '💞' },
+    { title: 'Mangal Dosh', title_hi: 'मंगल दोष', href: '/tools/mangal-dosh', type: 'tool', emoji: '🔴' },
+    { title: 'Full Kundali', title_hi: 'पूरी कुंडली', href: '/free-kundali', type: 'tool', emoji: '🌠' },
+  ],
   'mangal-dosh': [
     { title: 'Kundli Matching', title_hi: 'कुंडली मिलान', href: '/kundli-matching', type: 'tool', emoji: '💍' },
     { title: 'Marriage Path', title_hi: 'विवाह मार्ग', href: '/tools/marriage-path', type: 'tool', emoji: '💞' },
