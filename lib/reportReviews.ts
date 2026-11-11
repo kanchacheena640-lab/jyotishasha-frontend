@@ -31,23 +31,34 @@ export interface ReviewSummary {
   reviews: PublicReview[];
 }
 
-async function getJson<T>(path: string, tags?: string[]): Promise<T | null> {
-  try {
-    // `next` is Next.js's fetch extension (ISR); cast keeps plain-tsc test builds happy.
-    const res = await fetch(`${BACKEND_URL}${path}`, {
-      next: { revalidate: REVALIDATE_SECONDS, ...(tags ? { tags } : {}) },
-      signal: AbortSignal.timeout(4000),
-    } as RequestInit);
-    if (!res.ok) return null;
-    return (await res.json()) as T;
-  } catch {
-    return null;
+/** One attempt per entry of `timeoutsMs` (ms); the default is the original single 4s attempt. */
+async function getJson<T>(path: string, tags?: string[], timeoutsMs: readonly number[] = [4000]): Promise<T | null> {
+  for (const timeoutMs of timeoutsMs) {
+    try {
+      // `next` is Next.js's fetch extension (ISR); cast keeps plain-tsc test builds happy.
+      const res = await fetch(`${BACKEND_URL}${path}`, {
+        next: { revalidate: REVALIDATE_SECONDS, ...(tags ? { tags } : {}) },
+        signal: AbortSignal.timeout(timeoutMs),
+      } as RequestInit);
+      if (res.ok) return (await res.json()) as T;
+    } catch {
+      // timeout / network error: try again if attempts remain
+    }
   }
+  return null;
 }
 
+/** Availability attempts: 3s, then a 1s retry (4s worst case, same as the original single attempt). */
+export const AVAILABILITY_TIMEOUTS_MS = [3000, 1000] as const;
+
 /** true = active/purchasable, false = disabled, null = unknown (make no claim). */
+// GSC "offers.availability missing": a single 4s attempt sometimes timed out on a page's first render, and that
+// render was then cached without availability (reproduced locally: 2 of 153 product pages on a cold server).
+// One shared, small response: a 3s first attempt (fresh-connection latency measured 0.4-1.8s) and a 1s retry for fast
+// failures. Worst case stays at the previous 4s total, so a hanging backend never holds a render longer than before.
+// Still null (no claim) when both attempts fail.
 export async function fetchProductActive(slug: string): Promise<boolean | null> {
-  const data = await getJson<{ products?: Record<string, unknown> }>("/api/report-products/availability");
+  const data = await getJson<{ products?: Record<string, unknown> }>("/api/report-products/availability", undefined, AVAILABILITY_TIMEOUTS_MS);
   const value = data?.products?.[slug];
   return typeof value === "boolean" ? value : null;
 }
@@ -58,9 +69,10 @@ export async function fetchReviewSummary(slug: string): Promise<ReviewSummary | 
   return data;
 }
 
-/** schema.org availability only from a known registry state. */
+/** schema.org availability only from a known registry state. An active report is a personalised PDF that can only
+ * be bought online (emailed, nothing shipped), so OnlineOnly is the accurate value; inactive -> OutOfStock. */
 export function offerAvailability(active: boolean | null): string | undefined {
-  if (active === true) return "https://schema.org/InStock";
+  if (active === true) return "https://schema.org/OnlineOnly";
   if (active === false) return "https://schema.org/OutOfStock";
   return undefined;
 }

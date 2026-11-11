@@ -161,6 +161,7 @@ const rel = reportsData.find((r) => r.slug === RELATIONSHIP_REPORT_SLUG)!;
 const loveModule = load("app/[locale]/love/report/relationship_future_report/page.tsx", {
   ...runtime,
   "./RelationshipFutureReportForm": { default: "RelationshipFutureReportForm" },
+  "next/image": { default: "Image" },
   "@/components/reports/ProductBreadcrumb": { default: "ProductBreadcrumb" },
   "@/components/reports/PurchasePolicyLinks": { default: "PurchasePolicyLinks" },
   "@/components/reports/ProductReviews": { default: "ProductReviews" },
@@ -237,7 +238,7 @@ const SAMPLE: realReviews.ReviewSummary = {
   ],
 };
 const career = standard.find((r) => r.slug === "career_report")!;
-for (const [active, expected] of [[true, "https://schema.org/InStock"], [false, "https://schema.org/OutOfStock"], [null, undefined]] as const) {
+for (const [active, expected] of [[true, "https://schema.org/OnlineOnly"], [false, "https://schema.org/OutOfStock"], [null, undefined]] as const) {
   check(`registry active=${active} -> offers.availability ${expected ?? "(omitted)"} on standard, focused and ₹199 pages`, async () => {
     reviewState.active = active; reviewState.summary = null;
     const std = jsonLdScripts(ReportSeoSchema({ report: career, seoContent: (reportSeoContent as any).career_report, active }))[0];
@@ -248,6 +249,45 @@ for (const [active, expected] of [[true, "https://schema.org/InStock"], [false, 
     reviewState.active = null;
   });
 }
+check("GSC availability fix: fetchProductActive retries once (3s then 1s, 4s worst case) and still makes no claim when both attempts fail", async () => {
+  type FetchInit = { next?: { revalidate?: number } };
+  const g = globalThis as unknown as { fetch: unknown };
+  const realFetch = g.fetch;
+  try {
+    const calls: Array<{ url: string; init: FetchInit }> = [];
+    const respond = (outcomes: Array<"throw" | "500" | object>) => async (url: string, init: FetchInit) => {
+      calls.push({ url, init });
+      const o = outcomes[calls.length - 1];
+      if (o === "throw") throw new Error("timeout");
+      if (o === "500") return { ok: false, json: async () => ({}) };
+      return { ok: true, json: async () => o };
+    };
+    g.fetch = respond(["throw", { products: { career_report: true } }]);
+    assert.equal(await realReviews.fetchProductActive("career_report"), true, "second attempt recovers");
+    assert.equal(calls.length, 2);
+    assert.ok(calls.every((c) => c.url.endsWith("/api/report-products/availability") && c.init.next?.revalidate === 300));
+    calls.length = 0;
+    g.fetch = respond(["500", "throw"]);
+    assert.equal(await realReviews.fetchProductActive("career_report"), null, "both fail -> unknown, no claim");
+    assert.equal(calls.length, 2);
+    calls.length = 0;
+    g.fetch = respond([{ products: { career_report: false } }]);
+    assert.equal(await realReviews.fetchProductActive("career_report"), false);
+    assert.equal(calls.length, 1, "no retry after a good answer");
+    calls.length = 0;
+    g.fetch = respond(["throw", { products: {} }]);
+    assert.equal(await realReviews.fetchProductActive("unknown_slug"), null, "slug not in the registry -> no claim");
+    calls.length = 0;
+    g.fetch = respond(["throw", "throw"]);
+    assert.equal(await realReviews.fetchReviewSummary("career_report"), null);
+    assert.equal(calls.length, 1, "reviews keep their single attempt");
+    assert.equal(realReviews.offerAvailability(true), "https://schema.org/OnlineOnly");
+    assert.deepEqual([...realReviews.AVAILABILITY_TIMEOUTS_MS], [3000, 1000], "3s + 1s");
+    assert.equal(realReviews.AVAILABILITY_TIMEOUTS_MS.reduce((a, b) => a + b, 0), 4000, "worst case capped at 4s");
+  } finally {
+    g.fetch = realFetch;
+  }
+});
 check("no reviews / reviews service down -> no aggregateRating or review markup", async () => {
   for (const summary of [null, { ...SAMPLE, review_count: 0, average_rating: null, reviews: [] }]) {
     const p = jsonLdScripts(ReportSeoSchema({ report: career, seoContent: (reportSeoContent as any).career_report, reviews: summary as any }))[0];
@@ -327,6 +367,8 @@ for (const locale of ["en", "hi"] as const) {
     assert.ok(text.includes(p.name), "H1 shows the Product name");
     assert.ok(/"\s*₹",199/.test(text), "₹199 visible in the server-rendered markup");
     assert.ok(text.includes("RelationshipFutureReportForm"), "checkout form still rendered");
+    const img = findType(tree, "Image");
+    assert.ok(img && `${SITE}${img.props.src}` === p.image[0], "the Product image is shown on the page");
   });
 }
 }

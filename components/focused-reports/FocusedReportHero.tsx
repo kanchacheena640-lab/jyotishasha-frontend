@@ -4,9 +4,11 @@
 // island is FocusedSampleViewer (the View Sample modal); locale comes from the
 // route (params.locale), never re-detected.
 
+import Image from "next/image";
 import Link from "next/link";
 import { getFocusedReportSampleOrPreviewHref, type FocusedReportConfig } from "@/app/data/focusedReportsConfig";
 import FocusedSampleViewer from "@/components/focused-reports/FocusedSampleViewer";
+import { FOCUSED_CATEGORY_IMAGE } from "@/components/focused-reports/FocusedReportSeoSchema";
 import type { Locale } from "@/lib/authority-engine/types";
 
 interface Props {
@@ -34,6 +36,19 @@ export default function FocusedReportHero({ config, title, question, locale }: P
       <p className="text-sm font-semibold tracking-wide uppercase text-purple-400 mb-3">
         {locale === "hi" ? "व्यक्तिगत ज्योतिष रिपोर्ट" : "Personalized Astrology Report"}
       </p>
+
+      {/* The topic illustration the Product JSON-LD names as this product's image (FOCUSED_CATEGORY_IMAGE), shown
+          on the page so the markup describes visible content. Same treatment as the standard report pages
+          (components/reports/ReportContent.tsx): fixed box, no layout shift, decorative alt (the H1 names it). */}
+      <Image
+        src={FOCUSED_CATEGORY_IMAGE[config.category]}
+        alt=""
+        width={192}
+        height={192}
+        sizes="(min-width: 768px) 192px, 160px"
+        priority
+        className="mx-auto mb-6 h-40 w-40 md:h-48 md:w-48 rounded-2xl object-contain shadow-lg"
+      />
 
       <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
         {title}

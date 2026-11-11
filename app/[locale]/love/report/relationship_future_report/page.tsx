@@ -1,5 +1,6 @@
 import RelationshipFutureReportForm from "./RelationshipFutureReportForm";
 import { Metadata } from "next";
+import Image from "next/image";
 import { reportsData } from "@/app/data/reportsData";
 import { SITE_URL } from "@/lib/seo/articleSchema";
 import { RELATIONSHIP_REPORT_PATH, RELATIONSHIP_REPORT_SLUG, serializeJsonLd } from "@/lib/reportProductSeo";
@@ -101,6 +102,16 @@ export default async function ReportPage({ params }: { params: { locale: string 
             { name: isHi ? "कुंडली मिलान" : "Kundli Matching", path: `${prefix}/kundli-matching` },
             { name, path: `${prefix}${RELATIONSHIP_REPORT_PATH}` },
           ]}
+        />
+        {/* The catalog image the Product JSON-LD names, shown on the page (same treatment as /reports/[slug]). */}
+        <Image
+          src={catalogEntry.image}
+          alt=""
+          width={192}
+          height={192}
+          sizes="(min-width: 768px) 192px, 160px"
+          priority
+          className="mx-auto mb-6 h-40 w-40 md:h-48 md:w-48 rounded-2xl object-contain shadow-lg"
         />
         <h1 className="text-3xl md:text-5xl font-black leading-tight text-white">
           💞 {name}

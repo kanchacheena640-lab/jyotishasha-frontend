@@ -332,12 +332,14 @@ function renderFocusedHero(questionKey: string, locale: "en" | "hi") {
   const { default: FocusedReportHero } = load(FOCUSED_HERO, {
     "react/jsx-runtime": jsxRuntime,
     "next/link": { default: "Link" },
+    "next/image": { default: "Image" },
     // The REAL implementation (not a duplicate/re-guessed one) -- see the
     // top-level import above.
     "@/app/data/focusedReportsConfig": { getFocusedReportSampleOrPreviewHref },
     "@/components/focused-reports/FocusedSampleViewer": { default: loadSampleViewer() },
+    "@/components/focused-reports/FocusedReportSeoSchema": { FOCUSED_CATEGORY_IMAGE: { career: "/reports/career-report.webp" } },
   });
-  const config = { questionKey, priceRupees: 51, benefits: { en: ["b1"], hi: ["b1"] } };
+  const config = { questionKey, category: "career", priceRupees: 51, benefits: { en: ["b1"], hi: ["b1"] } };
   return expand(FocusedReportHero({ config, title: "T", question: "Q", locale }));
 }
 function elementsOfType(tree: any, type: string): any[] {
@@ -376,6 +378,17 @@ const codeOnly = (source: string) => source
   .split("\n")
   .filter((line) => !/^\s*\/\//.test(line))
   .join("\n");
+check("FocusedReportHero shows the Product schema's image visibly (same FOCUSED_CATEGORY_IMAGE entry), one image, above the H1", () => {
+  for (const locale of ["en", "hi"] as const) {
+    const tree = renderFocusedHero("promotion_timing", locale);
+    const imgs = elementsOfType(tree, "Image");
+    assert.equal(imgs.length, 1);
+    assert.equal(imgs[0].props.src, "/reports/career-report.webp");
+    assert.equal(imgs[0].props.width, 192);
+    const src = read(FOCUSED_HERO);
+    assert.ok(src.includes("src={FOCUSED_CATEGORY_IMAGE[config.category]}") && src.indexOf("<Image") < src.indexOf("<h1"));
+  }
+});
 check("FocusedReportHero source: driven by config.questionKey (never humanSlug/title), sample UI delegated to FocusedSampleViewer, no download, no carousel", () => {
   const source = read(FOCUSED_HERO);
   assert.ok(source.includes("getFocusedReportSampleOrPreviewHref(config.questionKey, locale)"));
