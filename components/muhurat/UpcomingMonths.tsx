@@ -1,31 +1,11 @@
 import Link from "next/link";
+import { istToday, localizedMonthName } from "@/lib/muhuratSeo";
 
-const currentMonthSlug =
-  new Date()
-    .toLocaleString("en-US", {
-      month: "long",
-    })
-    .toLowerCase();
-    
 const allMonths = [
   "january","february","march","april",
   "may","june","july","august",
   "september","october","november","december"
 ];
-
-const currentIndex =
-  allMonths.indexOf(currentMonthSlug);
-
-const months = [
-  ...allMonths.slice(currentIndex),
-  ...allMonths.slice(0, currentIndex),
-];
-
-const currentYear =
-  new Date().getFullYear();
-
-const nextYear =
-  currentYear + 1;
 
 export default function UpcomingMonths({
   locale,
@@ -36,6 +16,18 @@ export default function UpcomingMonths({
   slug:string;
   title:string;
 }) {
+
+  // Computed per render (Asia/Kolkata), not at module load, so a long-lived server
+  // instance never keeps highlighting a previous month.
+  const today = istToday();
+  const currentMonthSlug = allMonths[today.month - 1];
+  const currentIndex = today.month - 1;
+  const months = [
+    ...allMonths.slice(currentIndex),
+    ...allMonths.slice(0, currentIndex),
+  ];
+  const currentYear = today.year;
+  const nextYear = currentYear + 1;
 
   return (
     <>
@@ -73,7 +65,7 @@ export default function UpcomingMonths({
           }`}
         >
           <div className="font-medium">
-            {month.charAt(0).toUpperCase() + month.slice(1)}
+            {localizedMonthName(allMonths.indexOf(month) + 1, locale === "hi")}
           </div>
 
           {isCurrent && (

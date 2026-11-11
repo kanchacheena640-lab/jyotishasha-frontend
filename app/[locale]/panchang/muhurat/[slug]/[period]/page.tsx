@@ -19,6 +19,13 @@ import {
 } from "@/lib/months";
 import AnnualMuhuratPage from "@/components/muhurat/AnnualMuhuratPage";
 import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
+import {
+  datesInMonth,
+  istToday,
+  localizedMonthName,
+  muhuratMetaDescription,
+  topicShortName,
+} from "@/lib/muhuratSeo";
 
 
 export const revalidate = 86400;
@@ -136,15 +143,21 @@ export async function generateMetadata({
   const year =
     getTargetYear(monthNumber);
 
-  const month = params.period;
+  // Localized month name ("नवंबर" / "November"), never the raw URL segment.
+  const month = localizedMonthName(monthNumber, isHi);
 
   const title = isHi
     ? `${topic.title_hi || topic.title} – ${month} ${year}`
     : `${topic.title} – ${month} ${year}`;
 
-  const description = isHi
-    ? (topic.description_hi || topic.description)
-    : topic.description;
+  // Concise, month-aware description, unique per topic and month.
+  const description = muhuratMetaDescription({
+    shortName: topicShortName(isHi ? (topic.title_hi || topic.title) : topic.title),
+    monthLabel: month,
+    year,
+    isHi,
+    scope: "month",
+  });
 
   const canonical =
     `https://www.jyotishasha.com${
@@ -274,19 +287,24 @@ export default async function MuhuratPage({
     notFound();
     }
 
-    const dates = await getMonthMuhurth(
-    topic.activity,
-    monthNumber,
-    locale
-    );
-
-
-  const monthName =
-    period.charAt(0).toUpperCase() +
-    period.slice(1);
-
   const year =
     getTargetYear(monthNumber);
+
+  // Restricted to the page's own month, whatever the API returns.
+  const dates = datesInMonth(
+    await getMonthMuhurth(
+      topic.activity,
+      monthNumber,
+      locale
+    ),
+    year,
+    monthNumber
+  );
+
+  const today = istToday();
+
+  const monthName =
+    localizedMonthName(monthNumber, isHi);
 
   const currentCanonical =
     `https://www.jyotishasha.com${
@@ -355,19 +373,21 @@ export default async function MuhuratPage({
           }/panchang`,
       },
 
+      // Parent is the topic page: "/panchang/muhurat" has no Muhurat page (it falls through
+      // to /panchang/[date] and renders today's Panchang).
       {
         "@type": "ListItem",
 
         position: 2,
 
         name: isHi
-          ? "मुहूर्त"
-          : "Muhurat",
+          ? topic.title_hi
+          : topic.title,
 
         item:
           `https://www.jyotishasha.com${
             isHi ? "/hi" : ""
-          }/panchang/muhurat`,
+          }/panchang/muhurat/${slug}`,
       },
 
       {
@@ -375,9 +395,7 @@ export default async function MuhuratPage({
 
         position: 3,
 
-        name: isHi
-          ? topic.title_hi
-          : topic.title,
+        name: `${topicShortName(isHi ? (topic.title_hi || topic.title) : topic.title)} – ${monthName} ${year}`,
 
         item: currentCanonical,
       },
@@ -431,6 +449,7 @@ export default async function MuhuratPage({
             isHi={isHi} 
             monthName={monthName} 
             getSummary={getSummary} 
+            todayIso={today.iso}
           />
         </div>
 

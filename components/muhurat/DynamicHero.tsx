@@ -1,5 +1,6 @@
 import Link from "next/link"; // ✅ Fix: Link hamesha next/link se aayega
 import React from "react";
+import { hindiHeroSubject } from "@/lib/muhuratSeo";
 
 interface HeroProps {
   title: string;
@@ -25,7 +26,7 @@ export const DynamicHero = ({ title, month, year, isHi, locale }: HeroProps) => 
           {isHi ? (
             <>
               ज्योतिष और <strong>शुद्ध हिंदू पंचांग</strong> के अनुसार {month} {year} के सबसे सटीक 
-              <span className="text-purple-300"> शुभ {cleanTitle} मुहूर्त </span> 
+              <span className="text-purple-300"> {hindiHeroSubject(cleanTitle)} </span>
               यहाँ दिए गए हैं। हमने नक्षत्रों की स्थिति और ग्रहों के गोचर का बारीकी से विश्लेषण किया है 
               ताकि आप अपने विशेष कार्यों की शुरुआत सही समय पर कर सकें।
             </>

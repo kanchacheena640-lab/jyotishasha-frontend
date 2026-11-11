@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { hindiMuhuratSubject } from "@/lib/muhuratSeo";
 
 interface FAQItem {
   q: string;
@@ -46,7 +47,7 @@ export const MuhurthArtFaq = ({ faqs, isHi, activityName }: MuhurthArtFaqProps) 
       />
 
       <h2 className="text-xl font-bold text-purple-200 mb-6 flex items-center gap-2">
-        ❓ {isHi ? `${activityName} मुहूर्त: अक्सर पूछे जाने वाले प्रश्न` : `${activityName} FAQ: Common Questions`}
+        ❓ {isHi ? `${hindiMuhuratSubject(activityName)}: अक्सर पूछे जाने वाले प्रश्न` : `${activityName} FAQ: Common Questions`}
       </h2>
 
       <div className="space-y-3">

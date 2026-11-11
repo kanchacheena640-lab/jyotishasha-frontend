@@ -35,19 +35,21 @@ export default function AnnualMuhuratSchemas({
             locale === "hi" ? "/hi" : ""
           }/panchang`,
       },
+      // Parent is the topic page: "/panchang/muhurat" has no Muhurat page (it falls through
+      // to /panchang/[date] and renders today's Panchang).
       {
         "@type": "ListItem",
         position: 2,
-        name: "Muhurat",
+        name: title,
         item:
           `${SITE_URL}${
             locale === "hi" ? "/hi" : ""
-          }/panchang/muhurat`,
+          }/panchang/muhurat/${slug}`,
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: title,
+        name: `${title} ${year}`,
         item: baseUrl,
       },
     ],

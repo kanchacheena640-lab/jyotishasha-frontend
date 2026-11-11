@@ -7,9 +7,11 @@ interface ExpandableDatesProps {
   isHi: boolean;
   monthName: string;
   year: number;
+  // Rolling topic page (next upcoming dates across months) rather than a single-month page.
+  rolling?: boolean;
 }
 
-export const ExpandableDates = ({ dates, isHi, monthName }: ExpandableDatesProps) => {
+export const ExpandableDates = ({ dates, isHi, monthName, rolling = false }: ExpandableDatesProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // ✅ Client-side par hi summary logic handle kar rahe hain (Error Fix)
@@ -39,7 +41,9 @@ export const ExpandableDates = ({ dates, isHi, monthName }: ExpandableDatesProps
       <div className="bg-white/10 rounded-3xl border border-purple-400/20 overflow-hidden shadow-xl">
         <div className="p-6">
           <h2 className="text-xl font-bold text-purple-200 mb-6 flex items-center gap-2">
-            📅 {isHi ? `${monthName} की सभी शुभ तिथियां` : `All Auspicious Dates: ${monthName}`}
+            📅 {rolling
+              ? (isHi ? "आने वाली सभी शुभ तिथियां" : "All Upcoming Auspicious Dates")
+              : (isHi ? `${monthName} की सभी शुभ तिथियां` : `All Auspicious Dates: ${monthName}`)}
           </h2>
 
           <div className="space-y-0">

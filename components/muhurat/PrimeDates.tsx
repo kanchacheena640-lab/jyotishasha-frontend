@@ -1,26 +1,35 @@
 import Link from "next/link";
 import React from "react";
+import { localizedMonthName, upcomingDates } from "@/lib/muhuratSeo";
 
 interface PrimeDatesProps {
   dates: any[];
   isHi: boolean;
   monthName: string;
   getSummary: (score: number) => string;
+  // Today in Asia/Kolkata (YYYY-MM-DD); dates before it never appear in the Top 3.
+  todayIso: string;
+  // Rolling topic page (next upcoming dates across months) rather than a single-month page.
+  rolling?: boolean;
 }
 
-export const PrimeDates = ({ dates, isHi, monthName, getSummary }: PrimeDatesProps) => {
+export const PrimeDates = ({ dates, isHi, monthName, getSummary, todayIso, rolling = false }: PrimeDatesProps) => {
   // Agar dates nahi hain toh kuch mat dikhao
   if (!dates || dates.length === 0) return null;
 
-  // Sirf pehli 3 dates uthayenge ranking ke liye
-  const topDates = dates.slice(0, 3);
+  // Top 3 in the backend's ranking order, excluding dates that have already passed (IST)
+  const topDates = upcomingDates(dates, todayIso).slice(0, 3);
+  if (topDates.length === 0) return null;
+  const remaining = dates.length - topDates.length;
 
   return (
     <section className="bg-gradient-to-b from-white/10 to-transparent rounded-3xl border border-white/10 overflow-hidden mb-8 shadow-2xl">
       {/* Header Label */}
       <div className="bg-purple-600/20 p-4 border-b border-white/10 flex justify-between items-center">
         <h2 className="text-[11px] font-black text-purple-200 uppercase tracking-[0.2em]">
-          {isHi ? `⭐ मुख्य मुहूर्त: ${monthName}` : `⭐ PRIME DATES: ${monthName}`}
+          {rolling
+            ? (isHi ? "⭐ आगामी मुख्य मुहूर्त" : "⭐ UPCOMING PRIME DATES")
+            : (isHi ? `⭐ मुख्य मुहूर्त: ${monthName}` : `⭐ PRIME DATES: ${monthName}`)}
         </h2>
         <div className="flex items-center gap-1">
           <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -48,6 +57,11 @@ export const PrimeDates = ({ dates, isHi, monthName, getSummary }: PrimeDatesPro
               <span className="block text-xl font-black text-white leading-none">
                 {new Date(d.date).getDate()}
               </span>
+              {rolling && (
+                <span className="block text-[9px] font-bold text-purple-100 mt-1">
+                  {localizedMonthName(Number(String(d.date).slice(5, 7)), isHi)}
+                </span>
+              )}
             </div>
 
             {/* Content Area */}
@@ -76,12 +90,14 @@ export const PrimeDates = ({ dates, isHi, monthName, getSummary }: PrimeDatesPro
       </div>
 
       {/* View More Button */}
+      {remaining > 0 && (
       <Link 
         href="#all-dates" 
         className="block w-full py-4 bg-white/5 text-center text-xs font-black text-purple-300 uppercase tracking-widest hover:bg-purple-600/10 transition-colors border-t border-white/10"
       >
-        {isHi ? `बाकी ${dates.length - 3} तिथियां नीचे देखें ↓` : `View Remaining ${dates.length - 3} Dates ↓`}
+        {isHi ? `बाकी ${remaining} तिथियां नीचे देखें ↓` : `View Remaining ${remaining} Dates ↓`}
       </Link>
+      )}
     </section>
   );
 };

@@ -1,3 +1,5 @@
+import { istToday } from "./muhuratSeo";
+
 export const MONTH_MAP: Record<string, number> = {
   january: 1,
   february: 2,
@@ -21,16 +23,20 @@ export function getMonthNumber(
   ] ?? null;
 }
 
+// Same semantics as before (the current or a later month -> this year, an earlier month -> next year),
+// but "current" is the calendar month in Asia/Kolkata, not the server's UTC clock, so the year flips
+// exactly at the Indian month/year boundary.
 export function getTargetYear(
-  monthNumber: number
+  monthNumber: number,
+  now: Date = new Date()
 ) {
-  const now = new Date();
+  const today = istToday(now);
 
   const currentMonth =
-    now.getMonth() + 1;
+    today.month;
 
   const currentYear =
-    now.getFullYear();
+    today.year;
 
   return monthNumber >= currentMonth
     ? currentYear

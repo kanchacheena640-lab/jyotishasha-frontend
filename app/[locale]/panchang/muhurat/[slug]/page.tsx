@@ -13,6 +13,7 @@ import { ZodiacVibeScroll } from "@/components/muhurat/ZodiacVibeScroll";
 import { ExpandableDates } from "@/components/muhurat/ExpandableDates";
 import { MuhurthArtFaq } from "@/components/muhurat/MuhurthArtFaq";
 import UpcomingMonths from "@/components/muhurat/UpcomingMonths";
+import { istToday, localizedMonthName, muhuratMetaDescription, topicShortName, upcomingDates } from "@/lib/muhuratSeo";
 
 export const revalidate = 86400;
 
@@ -27,16 +28,12 @@ export async function generateMetadata({
 
   const topic = muhurthTopics[params.slug];
 
-  const now = new Date();
+  // Current month/year in Asia/Kolkata, same source as the page body.
+  const today = istToday();
 
-  const month = now.toLocaleString(
-    isHi ? "hi-IN" : "en-US",
-    {
-      month: "long",
-    }
-  );
+  const month = localizedMonthName(today.month, isHi);
 
-  const year = now.getFullYear();
+  const year = today.year;
 
   if (!topic) {
     return {
@@ -48,9 +45,14 @@ export async function generateMetadata({
     ? `${topic.title_hi} – ${month} ${year}`
     : `${topic.title} – ${month} ${year}`;
 
-  const description = isHi
-    ? topic.description_hi
-    : topic.description;
+  // Concise, month-aware description (this page lists the next upcoming dates).
+  const description = muhuratMetaDescription({
+    shortName: topicShortName(isHi ? topic.title_hi : topic.title),
+    monthLabel: month,
+    year,
+    isHi,
+    scope: "upcoming",
+  });
 
   const canonical =
     `https://www.jyotishasha.com${
@@ -121,10 +123,11 @@ export default async function MuhuratPage({ params }: { params: { locale: string
   
   if (!topic) return null;
 
-  const dates = await getMuhurth(topic.activity, locale);
-  const now = new Date();
-  const monthName = now.toLocaleString(isHi ? "hi-IN" : "en-US", { month: "long" });
-  const year = now.getFullYear();
+  const today = istToday();
+  // Rolling page: only dates from today (Asia/Kolkata) onward, matching its "upcoming" labels.
+  const dates = upcomingDates(await getMuhurth(topic.activity, locale), today.iso);
+  const monthName = localizedMonthName(today.month, isHi);
+  const year = today.year;
   const currentCanonical =
     `https://www.jyotishasha.com${
       isHi ? "/hi" : ""
@@ -192,25 +195,12 @@ export default async function MuhuratPage({ params }: { params: { locale: string
           }/panchang`,
       },
 
+      // No "/panchang/muhurat" level: that URL has no Muhurat page (it falls through to
+      // /panchang/[date] and renders today's Panchang), so the topic page follows Panchang.
       {
         "@type": "ListItem",
 
         position: 2,
-
-        name: isHi
-          ? "मुहूर्त"
-          : "Muhurat",
-
-        item:
-          `https://www.jyotishasha.com${
-            isHi ? "/hi" : ""
-          }/panchang/muhurat`,
-      },
-
-      {
-        "@type": "ListItem",
-
-        position: 3,
 
         name: isHi
           ? topic.title_hi
@@ -269,6 +259,8 @@ export default async function MuhuratPage({ params }: { params: { locale: string
             isHi={isHi} 
             monthName={monthName} 
             getSummary={getSummary} 
+            todayIso={today.iso}
+            rolling
           />
         </div>
 
@@ -304,6 +296,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         isHi={isHi} 
         monthName={monthName} 
         year={year} 
+        rolling
       />
 
       {/* 📝 Ranking Content (SEO Insight) */}
