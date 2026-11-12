@@ -13,6 +13,8 @@ import { ZodiacVibeScroll } from "@/components/muhurat/ZodiacVibeScroll";
 import { ExpandableDates } from "@/components/muhurat/ExpandableDates";
 import { MuhurthArtFaq } from "@/components/muhurat/MuhurthArtFaq";
 import UpcomingMonths from "@/components/muhurat/UpcomingMonths";
+import MuhuratDatesUnavailable from "@/components/muhurat/MuhuratDatesUnavailable";
+import TrackedLink from "@/components/muhurat/TrackedLink";
 import {
   getMonthNumber,
   getTargetYear,
@@ -23,8 +25,10 @@ import {
   datesInMonth,
   istToday,
   localizedMonthName,
+  muhuratCtaIds,
   muhuratMetaDescription,
   topicShortName,
+  type MuhuratDateItem,
 } from "@/lib/muhuratSeo";
 
 
@@ -209,16 +213,19 @@ export async function generateMetadata({
 }
 
 // 📡 Data Fetching from Backend
+// `failed` distinguishes "the service did not answer" from "no date qualifies", so the page
+// can show the right localized message instead of blank date sections.
 async function getMonthMuhurth(
   activity: string,
   month: number,
   lang: string
-) {
+): Promise<{ results: MuhuratDateItem[]; failed: boolean }> {
 
   if (activity === "grahpravesh-muhurat") {
     activity = "grahpravesh";
   }
 
+  try {
   const res = await fetch(
     "https://jyotishasha-backend.onrender.com/api/muhurth/month",
     {
@@ -243,9 +250,13 @@ async function getMonthMuhurth(
     }
   );
 
+  if (!res.ok) return { results: [], failed: true };
   const data = await res.json();
-
-  return data.results || [];
+  if (!Array.isArray(data?.results)) return { results: [], failed: true };
+  return { results: data.results, failed: false };
+  } catch {
+    return { results: [], failed: true };
+  }
 }
 
 export default async function MuhuratPage({
@@ -290,13 +301,15 @@ export default async function MuhuratPage({
   const year =
     getTargetYear(monthNumber);
 
+  const fetched = await getMonthMuhurth(
+    topic.activity,
+    monthNumber,
+    locale
+  );
+
   // Restricted to the page's own month, whatever the API returns.
   const dates = datesInMonth(
-    await getMonthMuhurth(
-      topic.activity,
-      monthNumber,
-      locale
-    ),
+    fetched.results,
     year,
     monthNumber
   );
@@ -402,13 +415,6 @@ export default async function MuhuratPage({
     ],
   };
 
-  // Helper for PrimeDates Summary
-  const getSummary = (score: number) => {
-    const s = Math.round(score);
-    if (isHi) return s >= 6 ? "बेहद शुभ दिन" : "अनुकूल समय";
-    return s >= 6 ? "Highly Auspicious" : "Favorable Time";
-  };
-
   return (
     <>
   <Script
@@ -444,13 +450,22 @@ export default async function MuhuratPage({
         
         {/* Left: Top 3 Dates (7 cols on Desktop) */}
         <div className="lg:col-span-7">
-          <PrimeDates 
-            dates={dates} 
-            isHi={isHi} 
-            monthName={monthName} 
-            getSummary={getSummary} 
-            todayIso={today.iso}
-          />
+          {dates.length > 0 ? (
+            <PrimeDates
+              dates={dates}
+              isHi={isHi}
+              monthName={monthName}
+              todayIso={today.iso}
+            />
+          ) : (
+            <MuhuratDatesUnavailable
+              isHi={isHi}
+              reason={fetched.failed ? "error" : "none"}
+              rolling={false}
+              monthName={monthName}
+              year={year}
+            />
+          )}
         </div>
 
         {/* Right: Personal Intent CTA (5 cols on Desktop) */}
@@ -497,9 +512,21 @@ export default async function MuhuratPage({
             ? (topic.description_hi || topic.description)
             : topic.description}
         </div>
+        {topic.relatedLink && (
+          <p className="mt-6 text-sm md:text-base">
+            <TrackedLink
+              href={`${isHi ? "/hi" : ""}${topic.relatedLink.href}`}
+              ctaId={muhuratCtaIds(slug).relatedGuide}
+              screenName={muhuratCtaIds(slug).screenName}
+              className="text-purple-300 hover:text-white underline underline-offset-4"
+            >
+              {isHi ? topic.relatedLink.label_hi : topic.relatedLink.label} →
+            </TrackedLink>
+          </p>
+        )}
       </section>
 
-      <CtaKundali />
+      <CtaKundali slug={slug} isHi={isHi} />
 
       {/* 5️⃣ FAQ Section (Rich Snippets) */}
       <div className="mt-16">
@@ -512,8 +539,8 @@ export default async function MuhuratPage({
 
       {/* Standard Bottom CTAs */}
       <div className="space-y-6 mt-12">
-        <CtaMuhurth slug={slug} isHi={isHi} />
-        <CtaReport />
+        <CtaMuhurth slug={slug} isHi={isHi} topicName={isHi ? (topic.title_hi || topic.title) : topic.title} />
+        <CtaReport slug={slug} isHi={isHi} />
       </div>
 
       {/* 🔗 Related Guides Footer */}

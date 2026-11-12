@@ -13,7 +13,17 @@ import { ZodiacVibeScroll } from "@/components/muhurat/ZodiacVibeScroll";
 import { ExpandableDates } from "@/components/muhurat/ExpandableDates";
 import { MuhurthArtFaq } from "@/components/muhurat/MuhurthArtFaq";
 import UpcomingMonths from "@/components/muhurat/UpcomingMonths";
-import { istToday, localizedMonthName, muhuratMetaDescription, topicShortName, upcomingDates } from "@/lib/muhuratSeo";
+import MuhuratDatesUnavailable from "@/components/muhurat/MuhuratDatesUnavailable";
+import TrackedLink from "@/components/muhurat/TrackedLink";
+import {
+  istToday,
+  localizedMonthName,
+  muhuratCtaIds,
+  muhuratMetaDescription,
+  topicShortName,
+  upcomingDates,
+  type MuhuratDateItem,
+} from "@/lib/muhuratSeo";
 
 export const revalidate = 86400;
 
@@ -104,16 +114,27 @@ export async function generateMetadata({
 }
 
 // 📡 Data Fetching from Backend
-async function getMuhurth(activity: string, lang: string) {
+// `failed` distinguishes "the service did not answer" from "no date qualifies", so the page
+// can show the right localized message instead of blank date sections.
+async function getMuhurth(
+  activity: string,
+  lang: string
+): Promise<{ results: MuhuratDateItem[]; failed: boolean }> {
   if (activity === "grahpravesh-muhurat") activity = "grahpravesh";
-  const res = await fetch("https://jyotishasha-backend.onrender.com/api/muhurth/list", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ activity, latitude: 26.8467, longitude: 80.9462, days: 60, lang }),
-    next: { revalidate: 86400 },
-  });
-  const data = await res.json();
-  return data.results?.slice(0, 30) || [];
+  try {
+    const res = await fetch("https://jyotishasha-backend.onrender.com/api/muhurth/list", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ activity, latitude: 26.8467, longitude: 80.9462, days: 60, lang }),
+      next: { revalidate: 86400 },
+    });
+    if (!res.ok) return { results: [], failed: true };
+    const data = await res.json();
+    if (!Array.isArray(data?.results)) return { results: [], failed: true };
+    return { results: data.results.slice(0, 30), failed: false };
+  } catch {
+    return { results: [], failed: true };
+  }
 }
 
 export default async function MuhuratPage({ params }: { params: { locale: string; slug: string } }) {
@@ -125,7 +146,8 @@ export default async function MuhuratPage({ params }: { params: { locale: string
 
   const today = istToday();
   // Rolling page: only dates from today (Asia/Kolkata) onward, matching its "upcoming" labels.
-  const dates = upcomingDates(await getMuhurth(topic.activity, locale), today.iso);
+  const fetched = await getMuhurth(topic.activity, locale);
+  const dates = upcomingDates(fetched.results, today.iso);
   const monthName = localizedMonthName(today.month, isHi);
   const year = today.year;
   const currentCanonical =
@@ -211,13 +233,6 @@ export default async function MuhuratPage({ params }: { params: { locale: string
     ],
   };
 
-  // Helper for PrimeDates Summary
-  const getSummary = (score: number) => {
-    const s = Math.round(score);
-    if (isHi) return s >= 6 ? "बेहद शुभ दिन" : "अनुकूल समय";
-    return s >= 6 ? "Highly Auspicious" : "Favorable Time";
-  };
-
   return (
     <>
   <Script
@@ -254,14 +269,23 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         
         {/* Left: Top 3 Dates (7 cols on Desktop) */}
         <div className="lg:col-span-7">
-          <PrimeDates 
-            dates={dates} 
-            isHi={isHi} 
-            monthName={monthName} 
-            getSummary={getSummary} 
-            todayIso={today.iso}
-            rolling
-          />
+          {dates.length > 0 ? (
+            <PrimeDates
+              dates={dates}
+              isHi={isHi}
+              monthName={monthName}
+              todayIso={today.iso}
+              rolling
+            />
+          ) : (
+            <MuhuratDatesUnavailable
+              isHi={isHi}
+              reason={fetched.failed ? "error" : "none"}
+              rolling
+              monthName={monthName}
+              year={year}
+            />
+          )}
         </div>
 
         {/* Right: Personal Intent CTA (5 cols on Desktop) */}
@@ -309,17 +333,19 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         </div>
         {topic.relatedLink && (
           <p className="mt-6 text-sm md:text-base">
-            <Link
+            <TrackedLink
               href={`${isHi ? "/hi" : ""}${topic.relatedLink.href}`}
+              ctaId={muhuratCtaIds(slug).relatedGuide}
+              screenName={muhuratCtaIds(slug).screenName}
               className="text-purple-300 hover:text-white underline underline-offset-4"
             >
               {isHi ? topic.relatedLink.label_hi : topic.relatedLink.label} →
-            </Link>
+            </TrackedLink>
           </p>
         )}
       </section>
 
-      <CtaKundali />
+      <CtaKundali slug={slug} isHi={isHi} />
 
       {/* 5️⃣ FAQ Section (Rich Snippets) */}
       <div className="mt-16">
@@ -332,8 +358,8 @@ export default async function MuhuratPage({ params }: { params: { locale: string
 
       {/* Standard Bottom CTAs */}
       <div className="space-y-6 mt-12">
-        <CtaMuhurth slug={slug} isHi={isHi} />
-        <CtaReport />
+        <CtaMuhurth slug={slug} isHi={isHi} topicName={isHi ? (topic.title_hi || topic.title) : topic.title} />
+        <CtaReport slug={slug} isHi={isHi} />
       </div>
 
       {/* 🔗 Related Guides Footer */}

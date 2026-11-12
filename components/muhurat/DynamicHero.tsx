@@ -25,16 +25,16 @@ export const DynamicHero = ({ title, month, year, isHi, locale }: HeroProps) => 
         <p className="text-gray-300 text-sm md:text-base leading-relaxed">
           {isHi ? (
             <>
-              ज्योतिष और <strong>शुद्ध हिंदू पंचांग</strong> के अनुसार {month} {year} के सबसे सटीक 
+              ज्योतिष और <strong>शुद्ध हिंदू पंचांग</strong> के अनुसार {month} {year} के
               <span className="text-purple-300"> {hindiHeroSubject(cleanTitle)} </span>
-              यहाँ दिए गए हैं। हमने नक्षत्रों की स्थिति और ग्रहों के गोचर का बारीकी से विश्लेषण किया है 
-              ताकि आप अपने विशेष कार्यों की शुरुआत सही समय पर कर सकें।
+              यहाँ दिए गए हैं। हर तिथि को सूर्योदय के समय की तिथि, नक्षत्र, वार, योग और करण के आधार पर
+              जांचा गया है; संदर्भ स्थान लखनऊ है।
             </>
           ) : (
             <>
-              Get the most accurate <strong>{cleanTitle} auspicious dates</strong> for {month} {year} based on 
+              Find <strong>{cleanTitle} auspicious dates</strong> for {month} {year} based on the
               authentic <Link href={`${isHi ? "/hi" : ""}/panchang`} className="text-purple-300 underline underline-offset-4">Vedic Panchang</Link>.
-              Our experts have analyzed Nakshatra alignments and Tithis for your success.
+              Each date is checked for Tithi, Nakshatra, weekday, Yoga and Karana at sunrise, with Lucknow as the reference location.
             </>
           )}
         </p>

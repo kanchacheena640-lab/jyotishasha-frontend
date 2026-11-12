@@ -113,7 +113,8 @@ check("month page title/H1 use the localized month, not the raw URL segment",
 check("month page restricts dates to its own month", /datesInMonth\(/.test(month));
 check("rolling page passes rolling labels and IST today to PrimeDates and ExpandableDates",
   (hub.match(/\brolling\b/g) || []).length >= 2 && /todayIso=\{today\.iso\}/.test(hub) && /todayIso=\{today\.iso\}/.test(month));
-check("rolling page lists only upcoming dates (IST)", /upcomingDates\(await getMuhurth\(topic\.activity, locale\), today\.iso\)/.test(hub));
+check("rolling page lists only upcoming dates (IST)",
+  /const fetched = await getMuhurth\(topic\.activity, locale\);/.test(hub) && /upcomingDates\(fetched\.results, today\.iso\)/.test(hub));
 check("PrimeDates Top 3 excludes past dates",/upcomingDates\(dates, todayIso\)\.slice\(0, 3\)/.test(prime));
 check("UpcomingMonths computes the current month per render (no module-level date)",
   !/^const currentMonthSlug|^const currentYear/m.test(upcoming) && /const today = istToday\(\);/.test(upcoming));

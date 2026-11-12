@@ -1,19 +1,18 @@
 import Link from "next/link";
 import React from "react";
-import { localizedMonthName, upcomingDates } from "@/lib/muhuratSeo";
+import { localizedMonthName, muhuratScoreLabel, upcomingDates } from "@/lib/muhuratSeo";
 
 interface PrimeDatesProps {
   dates: any[];
   isHi: boolean;
   monthName: string;
-  getSummary: (score: number) => string;
   // Today in Asia/Kolkata (YYYY-MM-DD); dates before it never appear in the Top 3.
   todayIso: string;
   // Rolling topic page (next upcoming dates across months) rather than a single-month page.
   rolling?: boolean;
 }
 
-export const PrimeDates = ({ dates, isHi, monthName, getSummary, todayIso, rolling = false }: PrimeDatesProps) => {
+export const PrimeDates = ({ dates, isHi, monthName, todayIso, rolling = false }: PrimeDatesProps) => {
   // Agar dates nahi hain toh kuch mat dikhao
   if (!dates || dates.length === 0) return null;
 
@@ -75,7 +74,7 @@ export const PrimeDates = ({ dates, isHi, monthName, getSummary, todayIso, rolli
                 </p>
               )}
               <p className="text-[11px] text-purple-300 italic truncate opacity-90">
-                {getSummary(d.score)}
+                {muhuratScoreLabel(d.score, isHi).short}
               </p>
             </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { muhuratScoreLabel, muhuratScoreText } from "@/lib/muhuratSeo";
 
 interface ExpandableDatesProps {
   dates: any[];
@@ -14,18 +15,8 @@ interface ExpandableDatesProps {
 export const ExpandableDates = ({ dates, isHi, monthName, rolling = false }: ExpandableDatesProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // ✅ Client-side par hi summary logic handle kar rahe hain (Error Fix)
-  const getSummaryInternal = (score: number) => {
-    const s = Math.round(score);
-    if (isHi) {
-        if (s >= 7) return "✨ यह अत्यंत श्रेष्ठ मुहूर्त है—बड़े कार्यों के लिए उत्तम।";
-        if (s >= 5) return "⭐ यह एक अनुकूल दिन है जो सकारात्मक परिणाम देता है।";
-        return "⚖️ सामान्य शुभ ऊर्जा वाला दिन, नियमित कार्यों के लिए उपयुक्त।";
-    }
-    if (s >= 7) return "✨ Exceptionally auspicious — blessed with strong harmony.";
-    if (s >= 5) return "⭐ Highly favorable alignment that encourages success.";
-    return "⚖️ Neutral planetary influence — proceed with steady focus.";
-  };
+  // Same score bands as the Top 3 (lib/muhuratSeo.ts), so a date never gets two labels.
+  const getSummaryInternal = (score: number) => muhuratScoreLabel(score, isHi).long;
 
   if (!dates || dates.length === 0) return null;
 
@@ -66,7 +57,7 @@ export const ExpandableDates = ({ dates, isHi, monthName, rolling = false }: Exp
                       </p>
                     </div>
                     <div className="bg-purple-500/10 px-2 py-1 rounded-md border border-purple-500/20">
-                       <span className="text-[10px] font-bold text-purple-300">Score: {Math.round(d.score)}/10</span>
+                       <span className="text-[10px] font-bold text-purple-300">{muhuratScoreText(d.score, isHi)}</span>
                     </div>
                   </div>
                   <p className="text-gray-300 text-[12px] mt-2 italic leading-relaxed opacity-90">

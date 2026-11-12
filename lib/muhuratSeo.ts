@@ -34,6 +34,17 @@ export function istToday(now: Date = new Date()): { iso: string; year: number; m
 
 type Dated = { date?: string };
 
+/** One date row as returned by /api/muhurth/list and /api/muhurth/month. */
+export type MuhuratDateItem = {
+  date: string;
+  weekday: string;
+  nakshatra: string;
+  tithi: string;
+  score: number;
+  reasons?: string[];
+  language?: string;
+};
+
 /** Dates on or after todayIso (YYYY-MM-DD); original order is kept. */
 export function upcomingDates<T extends Dated>(dates: T[], todayIso: string): T[] {
   return (dates || []).filter((d) => typeof d?.date === "string" && d.date.slice(0, 10) >= todayIso);
@@ -71,6 +82,59 @@ export function muhuratMetaDescription(opts: {
   return scope === "month"
     ? `${shortName} ${monthLabel} ${year}: auspicious dates this month with Nakshatra and Tithi details, as per the Hindu Panchang.`
     : `${shortName} ${monthLabel} ${year}: upcoming auspicious dates with Nakshatra and Tithi details, as per the Hindu Panchang.`;
+}
+
+/**
+ * Highest score the backend Muhurat engine can give (services/muhurth_engine.py):
+ * allowed Tithi +2, allowed weekday +2, allowed Nakshatra +3. Penalties only lower it.
+ */
+export const MUHURAT_MAX_SCORE = 7;
+
+export type MuhuratScoreLabel = { short: string; long: string };
+
+/**
+ * One display label per score band, shared by the Top 3 and the full date list so the
+ * same date never gets two different labels. Display only: which dates are listed is
+ * decided by the backend and is not changed here.
+ */
+export function muhuratScoreLabel(score: number, isHi: boolean): MuhuratScoreLabel {
+  const s = Math.round(score);
+  if (s >= MUHURAT_MAX_SCORE) {
+    return isHi
+      ? { short: "अत्यंत शुभ", long: "✨ अत्यंत शुभ — तिथि, वार और नक्षत्र तीनों अनुकूल हैं।" }
+      : { short: "Most auspicious", long: "✨ Most auspicious — Tithi, weekday and Nakshatra are all favourable." };
+  }
+  if (s >= 5) {
+    return isHi
+      ? { short: "बहुत अनुकूल", long: "⭐ बहुत अनुकूल दिन।" }
+      : { short: "Highly favourable", long: "⭐ Highly favourable day." };
+  }
+  if (s >= 4) {
+    return isHi
+      ? { short: "अनुकूल", long: "⭐ अनुकूल दिन।" }
+      : { short: "Favourable", long: "⭐ Favourable day." };
+  }
+  return isHi
+    ? { short: "सामान्य", long: "⚖️ सामान्य दिन।" }
+    : { short: "Neutral", long: "⚖️ Neutral day." };
+}
+
+/** "Score: 5/7" / "स्कोर: 5/7" */
+export function muhuratScoreText(score: number, isHi: boolean): string {
+  return `${isHi ? "स्कोर" : "Score"}: ${Math.round(score)}/${MUHURAT_MAX_SCORE}`;
+}
+
+/** Analytics ids for Muhurat page CTAs (WebsiteEvents.ctaClick). */
+export function muhuratCtaIds(slug: string) {
+  const key = slug.replace(/-/g, "_");
+  return {
+    screenName: `muhurat_${key}`,
+    kundali: `muhurat_${key}_free_kundali`,
+    report: `muhurat_${key}_report`,
+    tool: `muhurat_${key}_panchang_tool`,
+    monthNav: `muhurat_${key}_month_nav`,
+    relatedGuide: `muhurat_${key}_related_guide`,
+  };
 }
 
 /** Hindi FAQ heading subject without a doubled "मुहूर्त" ("वाहन मुहूर्त" stays as is). */

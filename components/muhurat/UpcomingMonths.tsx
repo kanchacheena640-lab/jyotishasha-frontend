@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { istToday, localizedMonthName } from "@/lib/muhuratSeo";
+import TrackedLink from "@/components/muhurat/TrackedLink";
+import { istToday, localizedMonthName, muhuratCtaIds } from "@/lib/muhuratSeo";
 
 const allMonths = [
   "january","february","march","april",
@@ -28,6 +28,7 @@ export default function UpcomingMonths({
   ];
   const currentYear = today.year;
   const nextYear = currentYear + 1;
+  const ids = muhuratCtaIds(slug);
 
   return (
     <>
@@ -54,9 +55,11 @@ export default function UpcomingMonths({
         month === currentMonthSlug;
 
       return (
-        <Link
+        <TrackedLink
           key={month}
           href={`${locale === "hi" ? "/hi" : ""}/panchang/muhurat/${slug}/${month}`}
+          ctaId={ids.monthNav}
+          screenName={ids.screenName}
           className={`rounded-xl p-3 hover:bg-white/5 transition-all
           ${
             isCurrent
@@ -75,7 +78,7 @@ export default function UpcomingMonths({
                 : "Current Month"}
             </div>
           )}
-        </Link>
+        </TrackedLink>
       );
     })}
 
