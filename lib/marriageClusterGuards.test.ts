@@ -321,8 +321,12 @@ for (const file of engineFiles) {
   check(`${file} never reads dormant robots / isIndexable / status / visibility / publishing fields`, !DORMANT.test(src(file)));
 }
 const route = src("app/[locale]/marriage-astrology/[slug]/page.tsx");
-check("topic route metadata is exactly generateAuthorityTopicMetadata(domain, topic, locale) (no robots override)",
-  route.includes("return generateAuthorityTopicMetadata(domain, topic, locale)") && !/\brobots\b/.test(route));
+// Marriage Astrology SEO P0: a landing may opt in to `seoTitle`, which replaces only title + og:title on
+// top of the generator's metadata (canonical, hreflang, description and keywords still come from it).
+check("topic route metadata is generateAuthorityTopicMetadata(domain, topic, locale), with only an opt-in seoTitle title override (no robots override)",
+  route.includes("if (!seoTitle) return generateAuthorityTopicMetadata(domain, topic, locale)") &&
+  route.includes("return { ...metadata, title: seoTitle, openGraph: { ...metadata.openGraph, title: seoTitle } }") &&
+  !/\brobots\b/.test(route));
 check("topic route only 404s unknown slugs (no draft/status gate)", !/status|draft|isIndexable|publishing/.test(route));
 const sitemap = src("app/sitemap.ts");
 const sitemapMarriage = sitemap.slice(sitemap.indexOf("MARRIAGE ASTROLOGY (authority cluster)"), sitemap.indexOf("MISC TOOL / UTILITY PAGES"));

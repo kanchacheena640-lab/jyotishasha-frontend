@@ -25,8 +25,8 @@ export const marriagePrediction: DomainTopic = {
 
   seo: {
     metaTitle:       'Marriage Prediction in Vedic Astrology: Houses & Dasha',
-    metaDescription: 'Seeking marriage prediction? Explore how Vedic astrology analyzes the 7th house, Venus, Jupiter, and Navamsa to provide insights into marriage timing and compatibility.',
-    metaDescription_hi: 'कुंडली से विवाह की भविष्यवाणी कैसे की जाती है — सप्तम भाव, सप्तमेश, शुक्र, गुरु, विवाह योग, दशा और नवांश। जानें विवाह की संभावना के पारंपरिक संकेत, और क्यों कोई योग विवाह की सटीक तारीख तय नहीं करता।',
+    metaDescription: 'Marriage prediction by date of birth: see how your kundli\'s 7th house, Venus, Jupiter, Dasha and Navamsa shape marriage timing. Free tool + ₹99 report.',
+    metaDescription_hi: 'जन्म तिथि से विवाह भविष्यवाणी: जानें कुंडली के सप्तम भाव, शुक्र, गुरु, दशा और नवांश से विवाह का समय कैसे देखा जाता है। फ्री टूल + ₹99 रिपोर्ट।',
     robots:          'index,follow',
   },
 
@@ -58,8 +58,8 @@ export const marriagePrediction: DomainTopic = {
             id:       'intro-overview',
             label:    'A Karmic, Probability-Based Guide',
             label_hi: 'एक कार्मिक, संभावना-आधारित मार्गदर्शिका',
-            body:     'Marriage in Vedic astrology is not viewed merely as a legal arrangement or a romantic spark; it is seen as a significant karmic partnership, deeply influenced by the planetary configurations present at the time of birth. Grounded in the Sidereal zodiac and the Lahiri Ayanamsha, this sophisticated framework does not dictate a frozen future but rather highlights the energetic trends and karmic themes an individual is likely to encounter — allowing one to move forward with greater consciousness, preparation, and spiritual alignment.',
-            body_hi:  'वैदिक ज्योतिष में विवाह को केवल कानूनी व्यवस्था या रोमांटिक आकर्षण के रूप में नहीं देखा जाता; इसे जन्म के समय की ग्रह स्थितियों से गहराई से प्रभावित एक महत्वपूर्ण कार्मिक साझेदारी माना जाता है। यह पद्धति भविष्य को तय नहीं करती, बल्कि उन प्रवृत्तियों और कार्मिक विषयों को उजागर करती है जिनसे व्यक्ति के गुज़रने की संभावना है — ताकि वह अधिक जागरूकता, तैयारी और आत्मिक संतुलन के साथ आगे बढ़ सके।',
+            body:     'A marriage prediction starts from your date of birth, time of birth and place of birth, which together fix the birth chart (kundli) that an astrologer reads. Marriage in Vedic astrology is not viewed merely as a legal arrangement or a romantic spark; it is seen as a significant karmic partnership, deeply influenced by the planetary configurations present at the time of birth. Grounded in the Sidereal zodiac and the Lahiri Ayanamsha, this sophisticated framework does not dictate a frozen future but rather highlights the energetic trends and karmic themes an individual is likely to encounter — allowing one to move forward with greater consciousness, preparation, and spiritual alignment.',
+            body_hi:  'विवाह भविष्यवाणी आपकी जन्म तिथि, जन्म समय और जन्म स्थान से शुरू होती है, जिनसे वह जन्मकुंडली बनती है जिसे ज्योतिषी पढ़ते हैं। वैदिक ज्योतिष में विवाह को केवल कानूनी व्यवस्था या रोमांटिक आकर्षण के रूप में नहीं देखा जाता; इसे जन्म के समय की ग्रह स्थितियों से गहराई से प्रभावित एक महत्वपूर्ण कार्मिक साझेदारी माना जाता है। यह पद्धति भविष्य को तय नहीं करती, बल्कि उन प्रवृत्तियों और कार्मिक विषयों को उजागर करती है जिनसे व्यक्ति के गुज़रने की संभावना है — ताकि वह अधिक जागरूकता, तैयारी और आत्मिक संतुलन के साथ आगे बढ़ सके।',
           },
           {
             id:       'intro-karmic-lessons',

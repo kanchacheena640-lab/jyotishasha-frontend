@@ -5,6 +5,7 @@
 // its own -- no video slot, no sample hook, no play tracking. All text is
 // server-rendered; only the video facade and the CTA/sample actions hydrate.
 
+import type { ReactNode } from 'react'
 import type { Locale } from '@/lib/authority-engine/types'
 import type { AnyTopicLandingConfig, TopicLandingOffer } from '@/lib/authority-engine/landing-types'
 import { reportsData } from '@/app/data/reportsData'
@@ -19,7 +20,10 @@ interface Props {
   locale: Locale
 }
 
-export default function TopicLandingLead({ config, locale }: Props) {
+export default function TopicLandingLead({ config, locale, afterAnswer }: Props & {
+  /** Optional unit shown right after the direct answer (e.g. the topic's free-tool card, moved up). */
+  afterAnswer?: ReactNode
+}) {
   return (
     <>
       <section aria-label={config.directAnswerLabel[locale]} className="mb-8">
@@ -30,6 +34,7 @@ export default function TopicLandingLead({ config, locale }: Props) {
           <p className="mt-2.5 text-base leading-7 text-gray-100">{config.directAnswer[locale]}</p>
         </div>
       </section>
+      {afterAnswer}
       {config.primaryAction && <LeadPrimaryAction action={config.primaryAction} locale={locale} />}
       {config.offer && <LeadOfferUnit config={config} offer={config.offer} locale={locale} />}
     </>

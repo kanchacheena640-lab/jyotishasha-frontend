@@ -93,14 +93,18 @@ check("ssrFaq + longForm on, no video", landing.ssrFaq === true && landing.longF
 console.log("\n=== E. Identity / shared text protected ===");
 check("title / H1 unchanged (EN + HI)",
   topic.includes("title:      'Marriage Prediction in Vedic Astrology',") && topic.includes("title_hi:   'वैदिक ज्योतिष में विवाह भविष्यवाणी',"));
-check("canonical + EN meta unchanged",
+// Marriage Astrology SEO P0 (CTO-approved): the EN meta now targets "marriage prediction by date of birth".
+check("canonical unchanged; EN meta is the approved P0 text (<=155 chars)",
   topic.includes("canonicalPath: '/marriage-astrology/marriage-prediction',") &&
-  topic.includes("metaDescription: 'Seeking marriage prediction? Explore how Vedic astrology analyzes the 7th house, Venus, Jupiter, and Navamsa to provide insights into marriage timing and compatibility.',"));
+  topic.includes("metaDescription: 'Marriage prediction by date of birth: see how your kundli\\'s 7th house, Venus, Jupiter, Dasha and Navamsa shape marriage timing. Free tool + ₹99 report.',"));
 check("hero subtext (EN + HI) unchanged — it is shown on other pages' related-topic cards",
   topic.includes("subtext:     'Discover insights into your potential marriage timing, compatibility, and life partner characteristics through the timeless wisdom of Vedic astrology.',") &&
   topic.includes("subtext_hi:  'वैदिक ज्योतिष के कालातीत ज्ञान के माध्यम से अपने संभावित विवाह समय, अनुकूलता और जीवनसाथी की विशेषताओं के बारे में अंतर्दृष्टि प्राप्त करें।',"));
 const hiMeta = (topic.match(/metaDescription_hi: '([^']+)'/) || [, ""])[1] as string;
-check("Hindi meta present and informational", hiMeta.length >= 80 && /विवाह की भविष्यवाणी/.test(hiMeta) && /सप्तमेश/.test(hiMeta) && !/रिपोर्ट|₹/.test(hiMeta));
+// Marriage Astrology SEO P0: the Hindi meta mirrors the approved EN one (date of birth + kundli factors + free tool + ₹99 report).
+check("Hindi meta is the P0 equivalent: date of birth, kundli factors, free tool and ₹99 report, <=155 chars",
+  hiMeta.length >= 80 && hiMeta.length <= 155 && /जन्म तिथि से विवाह भविष्यवाणी/.test(hiMeta) && /सप्तम भाव/.test(hiMeta) &&
+  /दशा/.test(hiMeta) && /नवांश/.test(hiMeta) && /फ्री टूल \+ ₹99 रिपोर्ट/.test(hiMeta));
 const blocks = topic.slice(topic.indexOf("contentBlocks:"), topic.indexOf("\n    ctas: ["));
 const ids = [...blocks.matchAll(/\n {8}id: {7}'([a-z0-9-]+)',/g)].map((m) => m[1]);
 check("sections unchanged in number and order",

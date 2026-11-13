@@ -138,7 +138,8 @@ check("lead slot (direct answer + report/tool unit + after-lead Short) renders b
   renderer.split("{lead}").slice(1).every((after) => after.indexOf("{sections}") >= 0) &&
   renderer.split("{sections}").slice(0, -1).every((before) => before.lastIndexOf("{lead}") > before.lastIndexOf("return (")));
 check("page renders the after-lead Short card inside the lead slot, right after TopicLandingLead",
-  /<TopicLandingLead config=\{landing\} locale=\{locale\} \/>\s*\{shortCard && landing\.inlineVideo\?\.placement === 'after-lead' && shortCard\}/.test(page));
+  // Marriage Astrology SEO P0: the lead may carry an optional moved tool card (afterAnswer={leadToolNode}).
+  /<TopicLandingLead config=\{landing\} locale=\{locale\}(?: afterAnswer=\{leadToolNode\})? \/>\s*\{shortCard && landing\.inlineVideo\?\.placement === 'after-lead' && shortCard\}/.test(page));
 check("page builds the Short card from inlineVideo with MarriageYouTubeShort",
   /const shortCard = landing\?\.inlineVideo && \(\s*<MarriageYouTubeShort\s+video=\{landing\.inlineVideo\}\s+locale=\{locale\}/.test(page));
 check("in-article placement only for placement 'after-section' (no page uses it now)",

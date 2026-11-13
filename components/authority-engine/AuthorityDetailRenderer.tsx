@@ -40,11 +40,13 @@ interface LandingSlots {
   related?: ReactNode
   /** Breadcrumb Home override (the final, non-redirecting URL); default unchanged. */
   breadcrumbHomeHref?: string
+  /** Slugs of topic CTA blocks already shown elsewhere (e.g. moved into `lead`), so they are not repeated at the bottom. */
+  omitCtaSlugs?: string[]
 }
 
 export default function AuthorityDetailRenderer({
   domain, topic, locale, lead, beforeFaq, ssrFaq, longForm, afterSection, afterSections,
-  theme, related: relatedSlot, breadcrumbHomeHref,
+  theme, related: relatedSlot, breadcrumbHomeHref, omitCtaSlugs,
 }: AuthorityDetailProps & LandingSlots) {
   const related = getRelatedTopics(domain, topic)
   const hasFaq = topic.sections.some(section => section.layout === 'faq')
@@ -92,6 +94,8 @@ export default function AuthorityDetailRenderer({
         {!hasFaq && beforeFaq}
 
         {topic.ctas.map((cta, i) => (
+          // A moved CTA is skipped here; the others keep their original index (and so their styling).
+          omitCtaSlugs?.includes(cta.slug) ? null : (
           <CtaBlock
             key={`${cta.type}-${cta.slug}`}
             cta={cta}
@@ -99,6 +103,7 @@ export default function AuthorityDetailRenderer({
             isPrimary={i === 0}
             accentColor={domain.accentColor}
           />
+          )
         ))}
 
         <RelatedTopics

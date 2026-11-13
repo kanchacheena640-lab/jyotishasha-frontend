@@ -650,6 +650,9 @@ export const intercasteMarriageLanding: ToolLedLandingConfig = {
   // Text-heavy page: section dividers + sub-heading labels (landing.module.css `.longform`).
   longForm: true,
 
+  // P0 (Marriage Astrology SEO audit): the report card moves from after 'love-vs-intercaste' (screen ~12
+  // on phones) to right after the short answer. Same card, product, price and ctaId; shown once.
+  inlineToolPlacement: 'after-answer',
   inlineTool: {
     kind: 'contextual-report',
     afterSectionId: 'love-vs-intercaste',
@@ -906,6 +909,13 @@ export const divorcePossibilityLanding: TopicLandingConfig = {
 // The free Marriage Path tool stays a secondary, honestly-worded bottom action. Detailed timing is handed
 // to Marriage Timing; the context links route readers to the specialised cluster pages.
 export const marriagePredictionLanding: TopicLandingConfig = {
+  // P0 (Marriage Astrology SEO audit): search-result title only; the H1 stays the topic title.
+  seoTitle: {
+    en: 'Marriage Prediction by Date of Birth & Kundli – Vedic Guide',
+    hi: 'जन्म तिथि और कुंडली से विवाह भविष्यवाणी – वैदिक मार्गदर्शिका',
+  },
+  // P0: the existing free Marriage Path card moves from the bottom to right after the short answer.
+  leadToolCtaSlug: 'marriage-path',
   directAnswerLabel: { en: 'Short answer', hi: 'संक्षिप्त उत्तर' },
   directAnswer: {
     en: 'Vedic astrology does not predict marriage from one placement. Astrologers read marriage prospects from several factors together: the 7th house and its lord, Venus and Jupiter as marriage significators, the Darakaraka, supportive combinations and challenging influences such as Saturn, Mars and Rahu, and the Navamsa (D9) as a supporting layer — with the Dasha periods showing when marriage themes are more active. No single placement guarantees marriage or fixes an exact date; Dasha windows are read as potentially supportive periods, not certain wedding dates.',

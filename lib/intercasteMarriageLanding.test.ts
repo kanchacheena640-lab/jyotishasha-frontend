@@ -99,8 +99,12 @@ check("tool-led editorial hero: the tracked primaryAction card (light variant), 
   !landing.offer &&
   editorialSrc.includes("{offer && <EditorialReportCard offer={offer} locale={locale} />}") &&
   /landing\?\.theme === 'editorial' && \(landing\.offer \|\| landing\.primaryAction\)/.test(pageSrc));
-check("contextual report card rendered in the article with the light variant",
-  pageSrc.includes('node: <LandingInlineTool tool={articleTool} locale={locale} variant="editorial" />') &&
+// Marriage Astrology SEO P0 (CTO-approved): the card moved from the article to right after the short
+// answer (inlineToolPlacement 'after-answer'); same light variant, product and ctaId, shown once.
+check("contextual report card rendered right after the short answer with the light variant, not repeated in the article",
+  landing.inlineToolPlacement === "after-answer" &&
+  pageSrc.includes('afterAnswer: <LandingInlineTool tool={answerTool} locale={locale} variant="editorial" />') &&
+  pageSrc.includes("const articleUnit = answerTool ? undefined : articleTool") &&
   src("components/authority-engine/landing/LandingInlineTool.tsx").includes("priceRupees={product.price} variant={variant} />"));
 
 console.log("\n=== E. Page identity and structure ===");

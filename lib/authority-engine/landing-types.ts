@@ -165,6 +165,21 @@ interface TopicLandingBase {
   inlineTool?: TopicLandingInlineTool
   /** Optional click-to-load YouTube Short placed inside the article after one content section. */
   inlineVideo?: TopicLandingInlineVideo
+  /**
+   * Optional search-result title (`<title>` and og:title) for this topic. The visible H1 still comes
+   * from the topic's own title and is unchanged. Absent = the topic title, as before.
+   */
+  seoTitle?: LocalizedString
+  /**
+   * Optional: slug of one of the topic's own `tool` CTA blocks to show right after the direct answer
+   * instead of at the bottom of the page (moved, never duplicated; same card, link and copy).
+   */
+  leadToolCtaSlug?: string
+  /**
+   * Optional: 'after-answer' shows `inlineTool` right after the direct answer instead of inside the
+   * article after `afterSectionId` (moved, never duplicated; same card, link and click tracking).
+   */
+  inlineToolPlacement?: 'after-answer'
 }
 
 /** Report-led landing (the original shape): a paid report card is the conversion unit. */

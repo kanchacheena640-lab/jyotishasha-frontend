@@ -20,6 +20,7 @@ import {
   EditorialLead, EditorialRelatedGuides, EditorialVideo,
 } from '@/components/authority-engine/editorial/EditorialArticle'
 import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDetailRenderer'
+import CtaBlock from '@/components/authority-engine/CtaBlock'
 import TopicLandingLead from '@/components/authority-engine/landing/TopicLandingLead'
 import TopicLandingContextLinks from '@/components/authority-engine/landing/TopicLandingContextLinks'
 import LandingInlineTool from '@/components/authority-engine/landing/LandingInlineTool'
@@ -70,7 +71,11 @@ export async function generateMetadata({
   const domain = getAuthorityDomain(DOMAIN_SLUG)
   const topic  = getTopicBySlug(domain, params.slug)
   if (!topic) return {}
-  return generateAuthorityTopicMetadata(domain, topic, locale)
+  // Opt-in search-result title for a topic (landing `seoTitle`); the H1, canonical and hreflang are unchanged.
+  const seoTitle = marriageTopicLandings[params.slug]?.seoTitle?.[locale]
+  if (!seoTitle) return generateAuthorityTopicMetadata(domain, topic, locale)
+  const metadata = generateAuthorityTopicMetadata(domain, topic, locale)
+  return { ...metadata, title: seoTitle, openGraph: { ...metadata.openGraph, title: seoTitle } }
 }
 
 export default function MarriageAstrologyTopic({
@@ -112,6 +117,24 @@ export default function MarriageAstrologyTopic({
   const editorialTool = editorial?.inlineTool
   const heroTool = editorialTool?.kind === 'spouse-lagna' && editorialTool.editorialHero ? editorialTool : undefined
   const articleTool = heroTool ? undefined : editorialTool
+  // Editorial: an inline unit with placement 'after-answer' moves from the article to right after the
+  // direct answer (same card, link and tracking); it then no longer occupies an article row.
+  const answerTool = editorial?.inlineToolPlacement === 'after-answer' ? articleTool : undefined
+  const articleUnit = answerTool ? undefined : articleTool
+  // Default layout: one of the topic's own tool CTA blocks shown right after the direct answer
+  // instead of at the bottom (moved, not duplicated). Same CtaBlock, copy and link as at the bottom;
+  // isPrimary matches its original first position.
+  const leadToolCta = landing?.leadToolCtaSlug
+    ? topic!.ctas.find(cta => cta.type === 'tool' && cta.slug === landing.leadToolCtaSlug)
+    : undefined
+  const leadToolNode = leadToolCta && (
+    <CtaBlock
+      cta={leadToolCta}
+      locale={locale}
+      isPrimary={topic!.ctas.indexOf(leadToolCta) === 0}
+      accentColor={domain.accentColor}
+    />
+  )
 
   return (
     <>
@@ -143,13 +166,14 @@ export default function MarriageAstrologyTopic({
               topic={topic!}
               locale={locale}
               {...(heroTool && { heroTool: <LandingInlineTool tool={heroTool} locale={locale} variant="editorial" /> })}
+              {...(answerTool && { afterAnswer: <LandingInlineTool tool={answerTool} locale={locale} variant="editorial" /> })}
             />
           )}
           related={<EditorialRelatedGuides config={editorial} domain={domain} topic={topic!} locale={locale} />}
-          {...(articleTool && {
+          {...(articleUnit && {
             afterSection: {
-              sectionId: articleTool.afterSectionId,
-              node: <LandingInlineTool tool={articleTool} locale={locale} variant="editorial" />,
+              sectionId: articleUnit.afterSectionId,
+              node: <LandingInlineTool tool={articleUnit} locale={locale} variant="editorial" />,
             },
           })}
           {...(editorial.video?.articleSectionId && {
@@ -159,7 +183,7 @@ export default function MarriageAstrologyTopic({
                 <EditorialVideo
                   video={editorial.video}
                   locale={locale}
-                  gridRows={editorialVideoRows(topic!.sections, editorial.video.articleSectionId, articleTool?.afterSectionId)}
+                  gridRows={editorialVideoRows(topic!.sections, editorial.video.articleSectionId, articleUnit?.afterSectionId)}
                 />
               ),
             }],
@@ -174,12 +198,13 @@ export default function MarriageAstrologyTopic({
         // MC-05: every Marriage topic renders FAQ answers and accordion bodies in server HTML
         // (native <details>, collapsed by default). A landing config can still set its own ssrFaq.
         ssrFaq={landing?.ssrFaq ?? true}
+        {...(leadToolCta && { omitCtaSlugs: [leadToolCta.slug] })}
         {...(landing && {
           // A Short with placement 'after-lead' (free-tool pages) sits right after the top lead unit,
           // before the first article section; report-led pages carry their Short inside the lead card.
           lead: (
             <>
-              <TopicLandingLead config={landing} locale={locale} />
+              <TopicLandingLead config={landing} locale={locale} afterAnswer={leadToolNode} />
               {shortCard && landing.inlineVideo?.placement === 'after-lead' && shortCard}
             </>
           ),

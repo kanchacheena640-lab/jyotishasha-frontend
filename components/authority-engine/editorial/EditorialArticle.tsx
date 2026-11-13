@@ -35,8 +35,10 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
  * `primaryAction` card also replaces that link card: alone on tool-led pages (no report offer),
  * or before the report card on report-led pages.
  */
-export function EditorialLead({ config, topic, locale, heroTool }: {
+export function EditorialLead({ config, topic, locale, heroTool, afterAnswer }: {
   config: AnyTopicLandingConfig; topic: AuthorityTopic; locale: Locale; heroTool?: ReactNode
+  /** Optional unit shown right after the direct answer, in the answer column (e.g. a contextual report card). */
+  afterAnswer?: ReactNode
 }) {
   const { offer, primaryAction } = config
   const localePath = locale === 'hi' ? '/hi' : ''
@@ -47,10 +49,16 @@ export function EditorialLead({ config, topic, locale, heroTool }: {
 
   return (
     <div className="mb-14 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,46rem)_minmax(0,1fr)] lg:items-start lg:gap-x-12">
-      <section aria-label={config.directAnswerLabel[locale]} className="rounded-2xl border border-[#E8DDC9] border-l-4 border-l-[#A8461F] bg-white px-5 py-5 shadow-[0_1px_2px_rgba(27,42,74,0.06)] sm:px-7">
-        <p className="text-[13px] font-semibold uppercase tracking-wider text-[#A8461F]">{config.directAnswerLabel[locale]}</p>
-        <p className="mt-2.5 text-[17px] leading-[1.8] text-[#1B2A4A]">{config.directAnswer[locale]}</p>
-      </section>
+      {(() => {
+        const answer = (
+          <section aria-label={config.directAnswerLabel[locale]} className="rounded-2xl border border-[#E8DDC9] border-l-4 border-l-[#A8461F] bg-white px-5 py-5 shadow-[0_1px_2px_rgba(27,42,74,0.06)] sm:px-7">
+            <p className="text-[13px] font-semibold uppercase tracking-wider text-[#A8461F]">{config.directAnswerLabel[locale]}</p>
+            <p className="mt-2.5 text-[17px] leading-[1.8] text-[#1B2A4A]">{config.directAnswer[locale]}</p>
+          </section>
+        )
+        // Without `afterAnswer` the markup is exactly as before.
+        return afterAnswer ? <div className="grid grid-cols-1 gap-4">{answer}{afterAnswer}</div> : answer
+      })()}
 
       <div className="grid grid-cols-1 gap-4">
         {heroTool ?? freeToolAction ?? (tool && (
