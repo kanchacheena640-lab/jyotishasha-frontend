@@ -151,3 +151,32 @@ export function hindiHeroSubject(topicName: string): string {
   const subject = hindiMuhuratSubject(topicName);
   return subject.includes("शुभ") ? subject : `शुभ ${subject}`;
 }
+
+/**
+ * Muhurat topics whose Article and BreadcrumbList JSON-LD are rendered as plain
+ * <script type="application/ld+json"> in the server HTML. next/script only injects them on the
+ * client, so they were missing from the HTML crawlers fetch. Child Birth first; every other topic
+ * keeps its previous rendering until approved.
+ */
+export const SSR_JSONLD_MUHURAT_SLUGS: ReadonlySet<string> = new Set(["child-birth-muhurat"]);
+
+/**
+ * Evergreen (rolling "upcoming dates") page Title and H1, distinct from the current month's page,
+ * which otherwise produce the identical "<topic> – <Month> <Year>" Title and H1. Only topics listed
+ * here are affected; every other topic gets null and keeps its existing Title/H1. Deliberately no
+ * month and no year: this page lists the next upcoming dates, and each month has its own page.
+ */
+const EVERGREEN_HEADINGS: Record<string, { title: string; title_hi: string; h1: string; h1_hi: string }> = {
+  "child-birth-muhurat": {
+    title: "Child Birth Muhurat: Upcoming Shubh Dates for Delivery",
+    title_hi: "बच्चे के जन्म का शुभ मुहूर्त: आने वाली शुभ तिथियां",
+    h1: "Upcoming Child Birth Muhurat Dates",
+    h1_hi: "बच्चे के जन्म के आने वाले शुभ मुहूर्त",
+  },
+};
+
+export function evergreenHeadings(slug: string, isHi: boolean): { title: string; h1: string } | null {
+  const h = EVERGREEN_HEADINGS[slug];
+  if (!h) return null;
+  return isHi ? { title: h.title_hi, h1: h.h1_hi } : { title: h.title, h1: h.h1 };
+}

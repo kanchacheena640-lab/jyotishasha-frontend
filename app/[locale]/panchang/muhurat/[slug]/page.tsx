@@ -22,6 +22,8 @@ import {
   muhuratMetaDescription,
   topicShortName,
   upcomingDates,
+  evergreenHeadings,
+  SSR_JSONLD_MUHURAT_SLUGS,
   type MuhuratDateItem,
 } from "@/lib/muhuratSeo";
 
@@ -51,7 +53,12 @@ export async function generateMetadata({
     };
   }
 
-  const title = isHi
+  // Evergreen Title distinct from the current month's page for topics in lib/muhuratSeo.ts
+  // EVERGREEN_HEADINGS (Child Birth); every other topic keeps "<topic> – <Month> <Year>".
+  const evergreen = evergreenHeadings(params.slug, isHi);
+  const title = evergreen
+    ? evergreen.title
+    : isHi
     ? `${topic.title_hi} – ${month} ${year}`
     : `${topic.title} – ${month} ${year}`;
 
@@ -235,6 +242,28 @@ export default async function MuhuratPage({ params }: { params: { locale: string
 
   return (
     <>
+  {/* Article + BreadcrumbList: plain <script> in server HTML for the topics in SSR_JSONLD_MUHURAT_SLUGS;
+      every other topic keeps next/script, unchanged. Same ids, same JSON. */}
+  {SSR_JSONLD_MUHURAT_SLUGS.has(slug) ? (
+    <>
+      <script
+        id="muhurat-article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
+
+      <script
+        id="muhurat-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbLd),
+        }}
+      />
+    </>
+  ) : (
+    <>
   <Script
     id="muhurat-article-schema"
     type="application/ld+json"
@@ -250,6 +279,8 @@ export default async function MuhuratPage({ params }: { params: { locale: string
       __html: JSON.stringify(breadcrumbLd),
     }}
   />
+    </>
+  )}
 
     <article className="max-w-6xl mx-auto px-4 py-10 text-white leading-relaxed">
       
@@ -260,6 +291,7 @@ export default async function MuhuratPage({ params }: { params: { locale: string
         year={year} 
         isHi={isHi} 
         locale={locale} 
+        heading={evergreenHeadings(slug, isHi)?.h1}
       />
 
       

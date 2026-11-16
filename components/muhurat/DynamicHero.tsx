@@ -8,16 +8,18 @@ interface HeroProps {
   year: number;
   isHi: boolean;
   locale: string;
+  /** Optional H1 text replacing the default "<topic> Dates: <Month> <Year>" (evergreen pages only). */
+  heading?: string;
 }
 
-export const DynamicHero = ({ title, month, year, isHi, locale }: HeroProps) => {
+export const DynamicHero = ({ title, month, year, isHi, locale, heading }: HeroProps) => {
   const cleanTitle = isHi ? title.split(" – ")[0] : title.split(" – ")[0];
 
   return (
     <header className="mb-8">
       {/* 🚀 SEO H1: Main Keyword targeting */}
       <h1 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-100 to-purple-400 mb-4 leading-tight">
-        {isHi ? `${cleanTitle} – ${month} ${year}` : `${cleanTitle} Dates: ${month} ${year}`}
+        {heading ?? (isHi ? `${cleanTitle} – ${month} ${year}` : `${cleanTitle} Dates: ${month} ${year}`)}
       </h1>
 
       {/* 📝 LSI Intro: Keywords like 'Panchang', 'Shubh Dates' embedded */}
