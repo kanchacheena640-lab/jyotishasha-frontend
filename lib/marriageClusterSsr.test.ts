@@ -4,8 +4,9 @@
  * MC-05 -- every registered Marriage Astrology topic puts its FAQ answers and accordion bodies in
  * the initial server HTML, exactly once, as native <details> (collapsed by default, keyboard
  * accessible without JS). Rendered IN-PROCESS through the real routes with react-dom/server (same
- * test-only loader as the MC-02 snapshot). Also proves the change is scoped to the marriage route:
- * the financial-astrology route still renders its accordions with the client component.
+ * test-only loader as the MC-02 snapshot). Also checks the marriage route's own opt-in and that the
+ * shared renderer keeps ssrFaq optional. (Financial Astrology's SSR FAQ is tested in
+ * lib/financialGuideSsr.test.ts.)
  *
  * Run (repo convention):
  *   npx tsc --module commonjs --target es2020 --strict --skipLibCheck \
@@ -24,7 +25,12 @@ const ts = require("typescript");
 const NodeModule: any = require("module");
 const originalResolve = NodeModule._resolveFilename;
 NodeModule._resolveFilename = function (request: string, parent: any, ...rest: any[]) {
-  return originalResolve.call(this, request.startsWith("@/") ? path.join(root, request.slice(2)) : request, parent, ...rest);
+  let mapped = request.startsWith("@/") ? path.join(root, request.slice(2)) : request;
+  // Like the Next bundler, a .ts module wins over a same-named .json sibling
+  // (app/data/intentCatalog.ts vs intentCatalog.json); Node alone would pick the JSON.
+  const abs = mapped.startsWith(".") && parent?.filename ? path.resolve(path.dirname(parent.filename), mapped) : mapped;
+  if (path.isAbsolute(abs) && !path.extname(abs) && fs.existsSync(`${abs}.ts`) && fs.existsSync(`${abs}.json`)) mapped = `${abs}.ts`;
+  return originalResolve.call(this, mapped, parent, ...rest);
 };
 for (const ext of [".ts", ".tsx"]) {
   NodeModule._extensions[ext] = (m: any, filename: string) => {
@@ -47,7 +53,6 @@ function check(label: string, ok: boolean): void {
 
 const resolver = load("lib/authority-engine/resolver");
 const marriageRoute = load("app/[locale]/marriage-astrology/[slug]/page.tsx").default;
-const financialRoute = load("app/[locale]/financial-astrology/[slug]/page.tsx").default;
 const { marriageTopicLandings } = load("lib/domains/marriage-astrology/_landing");
 const domain = resolver.getAuthorityDomain("marriage-astrology");
 const slugs: string[] = resolver.getAllTopicSlugs(domain);
@@ -111,14 +116,6 @@ check("marriage route turns ssrFaq on for every topic (a landing config may stil
 check("shared renderer unchanged: ssrFaq stays optional and only swaps faq/accordion to StaticFaqSection",
   /ssrFaq\?: boolean/.test(src("components/authority-engine/AuthorityDetailRenderer.tsx")) &&
   src("components/authority-engine/AuthorityDetailRenderer.tsx").includes("ssrFaq && (section.layout === 'faq' || section.layout === 'accordion')"));
-check("financial route does not opt in", !/ssrFaq/.test(src("app/[locale]/financial-astrology/[slug]/page.tsx")));
-const fin = resolver.getAuthorityDomain("financial-astrology");
-const finSlug = resolver.getAllTopicSlugs(fin).find((s: string) => fin.topics[s].sections.some((x: any) => x.layout === "accordion" || x.layout === "faq"));
-if (finSlug) {
-  const finMain = mainOf(renderToStaticMarkup(React.createElement(financialRoute, { params: { locale: "en", slug: finSlug } })));
-  check(`financial topic '${finSlug}' still renders its collapsed sections with the client accordion (no <details>)`,
-    !/<details\b/.test(finMain) && /aria-expanded=/.test(finMain));
-}
 
 console.log(`\nRESULT: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

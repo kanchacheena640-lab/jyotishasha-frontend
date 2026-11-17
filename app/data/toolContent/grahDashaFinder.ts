@@ -3,8 +3,8 @@ export const grahDashaFinderContent = {
 
   en: {
     seo: {
-      title: "Grah Dasha Finder – Check Your Current Mahadasha & Antardasha | Vedic Astrology",
-      description: "Discover your current Mahadasha and Antardasha using your date, time, and place of birth. Get an accurate Vimshottari Dasha report based on authentic Vedic astrology.",
+      title: "Grah Dasha Finder – Current Mahadasha & Antardasha",
+      description: "Find your current Mahadasha and Antardasha with their start and end dates, from your date, time and place of birth (Vimshottari Dasha).",
       keywords: [
         "grah dasha finder online",
         "current mahadasha antardasha",
@@ -21,7 +21,7 @@ export const grahDashaFinderContent = {
       intro: "In the profound system of Vedic astrology, 'Grah Dasha' is the master key that defines the precise timing of every major event in your life. While your birth chart shows your potential, the Dasha system reveals *when* that potential will manifest. If you are experiencing sudden shifts in your career, relationships, or health, our Grah Dasha Finder identifies the specific planetary periods currently influencing your journey.",
       whatIsRashi: "Grah Dasha refers to the planetary time cycles that operate according to the ancient 'Vimshottari Dasha' system—a 120-year cycle mapped to nine planets. Each 'Mahadasha' (Major Period) is ruled by a specific planet and is further refined into 'Antardashas' (Sub-periods). These cycles dictate the themes, challenges, and opportunities you encounter during different phases of life.",
       whyMoonRashiImportant: "The exact position of the Moon at the moment of your birth (Nakshatra) determines your starting point in the Vimshottari Dasha cycle. This is why accurate Grah Dasha calculation depends entirely on precise birth details—specifically your date, time, and city of birth. Even a few minutes' difference can significantly shift your Antardasha timings.",
-      howToolWorks: "The Jyotishasha Grah Dasha Finder uses high-precision algorithms to calculate your unique Vimshottari Dasha sequence. By analyzing your birth data, it identifies your current Mahadasha, Antardasha, and even 'Pratyantar Dasha' (Micro-period), providing a clear timeline of planetary influences as per classical Vedic astrology rules.",
+      howToolWorks: "The Jyotishasha Grah Dasha Finder uses high-precision algorithms to calculate your unique Vimshottari Dasha sequence. By analyzing your birth data, it identifies your current Mahadasha and Antardasha along with their start and end dates, giving you a clear view of the planetary periods active in your life as per classical Vedic astrology rules.",
       benefits: [
         "Instant identification of your current Mahadasha and Antardasha",
         "Understand the cosmic reason behind active life themes and transitions",
@@ -55,8 +55,8 @@ export const grahDashaFinderContent = {
 
   hi: {
     seo: {
-      title: "ग्रह दशा कैलकुलेटर – अपनी वर्तमान महादशा और अंतर्दशा की जाँच करें | ज्‍योतिष आशा",
-      description: "जन्म तिथि, समय और स्थान का उपयोग करके अपनी वर्तमान महादशा और अंतर्दशा का पता लगाएं। प्रामाणिक वैदिक ज्योतिष पर आधारित सटीक ग्रह दशा विवरण प्राप्त करें।",
+      title: "ग्रह दशा कैलकुलेटर – वर्तमान महादशा और अंतर्दशा",
+      description: "जन्म तिथि, समय और स्थान से अपनी वर्तमान महादशा और अंतर्दशा, उनकी शुरुआत और समाप्ति तिथियों के साथ जानें (विंशोत्तरी दशा)।",
       keywords: [
         "ग्रह दशा कैलकुलेटर",
         "वर्तमान महादशा और अंतर्दशा",

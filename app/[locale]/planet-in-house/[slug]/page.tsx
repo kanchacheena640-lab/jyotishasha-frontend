@@ -7,6 +7,7 @@ import {
   type PlanetInHouseData,
 } from "@/lib/planetInHouse";
 import { resolvePlanetInHouseCta } from "@/lib/planetInHouse/ctaDestinations";
+import { resolvePlanetInHouseFinancialLinks } from "@/lib/planetInHouse/financialLinks";
 import {
   DEFAULT_OG_IMAGE,
   SITE_URL,
@@ -146,6 +147,18 @@ export default function PlanetInHousePage({
 
   /* ---------- CTA (destination + copy from the central mapping) ---------- */
   const cta = resolvePlanetInHouseCta(data, isHi ? "hi" : "en");
+  // 2nd, 10th and 11th house pages only; null (nothing rendered) everywhere else.
+  const financialLinks = resolvePlanetInHouseFinancialLinks(data, isHi ? "hi" : "en");
+  const careerHeading = (
+    <h2 className="text-xl font-bold mb-4 text-indigo-900">
+      {t("Career & Finance", "करियर और वित्त")}
+    </h2>
+  );
+  const careerText = (
+    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+      {t(data.career, data.career_hi)}
+    </p>
+  );
 
   return (
     <div className="bg-gradient-to-b from-indigo-950 to-slate-900 py-6 md:py-16 min-h-screen">
@@ -235,15 +248,35 @@ export default function PlanetInHousePage({
           </p>
         </section>
 
-        {/* Career */}
-        <section className="mb-10">
-          <h2 className="text-xl font-bold mb-4 text-indigo-900">
-            {t("Career & Finance", "करियर और वित्त")}
-          </h2>
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-            {t(data.career, data.career_hi)}
-          </p>
-        </section>
+        {/* Career -- a ternary (not `&&`) so pages without Financial links render exactly the original section */}
+        {financialLinks ? (
+          <section className="mb-10">
+            {careerHeading}
+            {careerText}
+            <div className="mt-4">
+              <p className="text-sm font-bold text-indigo-900 mb-2">{financialLinks.lead}</p>
+              <div className="flex flex-wrap gap-2">
+                {financialLinks.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-xs font-bold px-3 py-2 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 hover:bg-indigo-100 transition"
+                  >
+                    {link.label} →
+                  </Link>
+                ))}
+              </div>
+              {financialLinks.notice && (
+                <p className="mt-2 text-xs text-gray-500">{financialLinks.notice}</p>
+              )}
+            </div>
+          </section>
+        ) : (
+          <section className="mb-10">
+            {careerHeading}
+            {careerText}
+          </section>
+        )}
 
         {/* Relationships */}
         <section className="mb-10">

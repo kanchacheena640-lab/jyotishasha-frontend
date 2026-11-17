@@ -71,6 +71,7 @@ export const financialPressureEasing: FocusedReportSeoContent = {
   },
   internalLinks: [
     { path: "/reports/focused/debt-pressure-easing", localized: true, label: { en: "Debt Pressure report (₹51)", hi: "कर्ज़ के दबाव रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/financial-improvement-timing", localized: true, label: { en: "Financial Improvement report (₹51)", hi: "आर्थिक स्थिति में सुधार रिपोर्ट (₹51)" } },
     { path: "/reports/financial_stability_report", localized: false, label: { en: "Full Financial Stability Report", hi: "पूरी आर्थिक स्थिरता रिपोर्ट (अंग्रेज़ी)" } },
   ],

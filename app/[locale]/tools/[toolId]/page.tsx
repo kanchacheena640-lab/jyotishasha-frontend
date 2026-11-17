@@ -7,6 +7,8 @@ import RashiFinderLanding from "@/components/tools/rashi-finder/RashiFinderLandi
 import MarriagePathLanding from "@/components/tools/marriage-path/MarriagePathLanding";
 import LoveLifeLanding from "@/components/tools/love-life/LoveLifeLanding";
 import { SITE_URL } from "@/lib/seo/articleSchema";
+import { financialToolLinks } from "@/lib/domains/financial-astrology/_tools";
+import { FinancialToolBreadcrumb, FinancialToolLinks } from "@/components/tools/FinancialToolSeo";
 
 // Every tool page is known at build time (the content map), so it is prerendered per locale instead of being
 // rendered on every request. The page HTML holds no personal data: the calculation runs in the browser.
@@ -130,6 +132,10 @@ export function generateMetadata(
     lang
   );
 
+  // Financial tools only (lib/domains/financial-astrology/_tools.ts): a visible breadcrumb rendered from
+  // breadcrumbSchema, plus hub/guide/report links. null for every other tool, which renders as before.
+  const financialLinks = financialToolLinks(params.toolId, lang);
+
   const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -154,7 +160,9 @@ export function generateMetadata(
     },
   };
 
-  return (
+  // The page body is built once. Non-Financial tools return it unchanged (same React tree, so the same
+  // generated ids); Financial tools wrap it with the visible breadcrumb rendered from breadcrumbSchema.
+  const body = (
     <>
       {/* 🔹 TOOL INTERACTION UI (Calculators/Charts) */}
       <ToolDynamicPage />
@@ -216,6 +224,8 @@ export function generateMetadata(
           </div>
         )}
 
+        {financialLinks && <FinancialToolLinks links={financialLinks} locale={lang} />}
+
         {/* Visible FAQ: the same questions as the FAQPage schema below. */}
         {tool.faq && tool.faq.length > 0 && (
           <section aria-labelledby="tool-faq-heading" className="pt-4">
@@ -262,4 +272,13 @@ export function generateMetadata(
             </>
           );
 
+  if (financialLinks) {
+    return (
+      <>
+        <FinancialToolBreadcrumb schema={breadcrumbSchema} locale={lang} />
+        {body}
+      </>
+    );
+  }
+  return body;
 }

@@ -71,6 +71,7 @@ export const financialImprovementTiming: FocusedReportSeoContent = {
   },
   internalLinks: [
     { path: "/reports/focused/income-increase-timing", localized: true, label: { en: "Income Increase report (₹51)", hi: "आमदनी में बढ़ोतरी रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/financial-pressure-easing", localized: true, label: { en: "Financial Pressure report (₹51)", hi: "आर्थिक दबाव में राहत रिपोर्ट (₹51)" } },
     { path: "/tools/dhan-yog", localized: true, label: { en: "Free Dhan Yog calculator", hi: "मुफ़्त धन योग कैलकुलेटर" } },
     { path: "/reports/financial_report", localized: false, label: { en: "Full Finance Report", hi: "पूरी वित्त रिपोर्ट (अंग्रेज़ी)" } },

@@ -72,6 +72,7 @@ export const newVenturePartnershipTiming: FocusedReportSeoContent = {
   },
   internalLinks: [
     { path: "/reports/focused/business-start-timing", localized: true, label: { en: "Business Start Timing report (₹51)", hi: "बिज़नेस शुरू करने का समय रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/best-business-periods", localized: true, label: { en: "Business Opportunity Windows report (₹51)", hi: "बिज़नेस के अच्छे समय रिपोर्ट (₹51)" } },
     { path: "/financial-astrology/job-vs-business", localized: true, label: { en: "Job vs business in astrology (free guide)", hi: "ज्योतिष में नौकरी बनाम बिज़नेस (मुफ़्त गाइड)" } },
     { path: "/reports/startup_suggestion_report", localized: false, label: { en: "Full Startup Suggestion Report", hi: "पूरी स्टार्टअप सुझाव रिपोर्ट (अंग्रेज़ी)" } },

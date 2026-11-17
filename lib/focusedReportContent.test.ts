@@ -384,7 +384,10 @@ check("every internal link points to a real page (and its /hi version exists whe
       if (link.path.startsWith("/reports/focused/")) assert.ok(getFocusedReportConfigBySlug(slug), link.path);
       else if (section === "reports") { assert.ok(reportSlugs.has(slug), link.path); assert.equal(link.localized, false, `${link.path} has no /hi page`); }
       else if (section === "tools") assert.ok(toolSlugs.has(slug), link.path);
-      else if (section === "marriage-astrology" || section === "financial-astrology") assert.ok(fs.existsSync(path.join(repo, "lib", "domains", section, "topics", `${slug}.ts`)), link.path);
+      // A bare hub path (/financial-astrology, /marriage-astrology) is the domain hub itself; a guide path needs its topic file.
+      else if (section === "marriage-astrology" || section === "financial-astrology") assert.ok(slug
+        ? fs.existsSync(path.join(repo, "lib", "domains", section, "topics", `${slug}.ts`))
+        : fs.existsSync(path.join(repo, "lib", "domains", section, "_meta.ts")), link.path);
       else assert.fail(`unrecognised link target ${link.path}`);
       assert.notEqual(slug, questionKeyToHumanSlug(c.questionKey), `${c.questionKey} links to itself`);
     }
