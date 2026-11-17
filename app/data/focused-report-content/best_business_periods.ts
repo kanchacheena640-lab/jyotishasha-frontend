@@ -72,6 +72,7 @@ export const bestBusinessPeriods: FocusedReportSeoContent = {
   },
   internalLinks: [
     { path: "/reports/focused/business-growth-timing", localized: true, label: { en: "Business Growth report (₹51)", hi: "बिज़नेस की बढ़ोतरी रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/business-expansion-timing", localized: true, label: { en: "Business Expansion report (₹51)", hi: "बिज़नेस बढ़ाने का समय रिपोर्ट (₹51)" } },
     { path: "/tools/business-path", localized: true, label: { en: "Free business path calculator", hi: "मुफ़्त बिज़नेस पथ कैलकुलेटर" } },
     { path: "/reports/business_report", localized: false, label: { en: "Full Business Report", hi: "पूरी बिज़नेस रिपोर्ट (अंग्रेज़ी)" } },

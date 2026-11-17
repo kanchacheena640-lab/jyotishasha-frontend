@@ -7,6 +7,14 @@
  * (dasha_window_summary -> 12-month horizon).
  */
 import type { FocusedReportSeoContent } from "./types";
+import { reportsData } from "../reportsData";
+
+// Standard-report prices are read from the catalog (app/data/reportsData.ts), never retyped here.
+const reportPrice = (slug: string): number => {
+  const report = reportsData.find((r) => r.slug === slug);
+  if (!report) throw new Error(`focused-report content: unknown standard report "${slug}"`);
+  return report.price;
+};
 
 export const promotionTiming: FocusedReportSeoContent = {
   questionKey: "promotion_timing",
@@ -73,7 +81,7 @@ export const promotionTiming: FocusedReportSeoContent = {
     { path: "/financial-astrology/promotion-chances", localized: true, label: { en: "Promotion chances in astrology (free guide)", hi: "ज्योतिष में प्रमोशन के योग (मुफ़्त गाइड)" } },
     { path: "/reports/focused/career-growth-delay-reason", localized: true, label: { en: "Career Growth Delays report (₹51)", hi: "करियर की देरी रिपोर्ट (₹51)" } },
     { path: "/tools/career-path", localized: true, label: { en: "Career path tool (free)", hi: "करियर पथ टूल (मुफ़्त)" } },
-    { path: "/reports/career_report", localized: false, label: { en: "Career Report (₹51)", hi: "करियर रिपोर्ट (₹51, अंग्रेज़ी पेज)" } },
+    { path: "/reports/career_report", localized: false, label: { en: `Career Report (₹${reportPrice("career_report")})`, hi: `करियर रिपोर्ट (₹${reportPrice("career_report")}, अंग्रेज़ी पेज)` } },
   ],
   benefits: {
     en: [

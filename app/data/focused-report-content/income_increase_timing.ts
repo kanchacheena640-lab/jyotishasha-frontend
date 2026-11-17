@@ -7,6 +7,14 @@
  * money_business_evidence.py (not a multi-year key -> 12 months).
  */
 import type { FocusedReportSeoContent } from "./types";
+import { reportsData } from "../reportsData";
+
+// Standard-report prices are read from the catalog (app/data/reportsData.ts), never retyped here.
+const reportPrice = (slug: string): number => {
+  const report = reportsData.find((r) => r.slug === slug);
+  if (!report) throw new Error(`focused-report content: unknown standard report "${slug}"`);
+  return report.price;
+};
 
 export const incomeIncreaseTiming: FocusedReportSeoContent = {
   questionKey: "income_increase_timing",
@@ -66,14 +74,15 @@ export const incomeIncreaseTiming: FocusedReportSeoContent = {
     },
   },
   differentiation: {
-    en: "Salary Growth reads pay within a job, and the ₹51 Financial Report covers financial growth more broadly. Debt Pressure focuses on the weight of repayments. This report asks only when your total earned income may start to rise over the next 12 months.",
-    hi: "'सैलरी में बढ़ोतरी' नौकरी के वेतन को पढ़ती है, और ₹51 'Financial Report' आर्थिक प्रगति को व्यापक रूप से देखती है। 'कर्ज़ के दबाव में राहत' कर्ज़ चुकाने के बोझ पर केंद्रित है। यह रिपोर्ट सिर्फ़ यह पूछती है कि अगले 12 महीनों में आपकी कुल कमाई कब बढ़नी शुरू हो सकती है।",
+    en: `Salary Growth reads pay within a job, and the ₹${reportPrice("financial_report")} Financial Report covers financial growth more broadly. Debt Pressure focuses on the weight of repayments. This report asks only when your total earned income may start to rise over the next 12 months.`,
+    hi: `'सैलरी में बढ़ोतरी' नौकरी के वेतन को पढ़ती है, और ₹${reportPrice("financial_report")} 'Financial Report' आर्थिक प्रगति को व्यापक रूप से देखती है। 'कर्ज़ के दबाव में राहत' कर्ज़ चुकाने के बोझ पर केंद्रित है। यह रिपोर्ट सिर्फ़ यह पूछती है कि अगले 12 महीनों में आपकी कुल कमाई कब बढ़नी शुरू हो सकती है।`,
   },
   internalLinks: [
     { path: "/reports/focused/salary-growth-timing", localized: true, label: { en: "Salary Growth report (₹51)", hi: "सैलरी में बढ़ोतरी रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/debt-pressure-easing", localized: true, label: { en: "Debt Pressure report (₹51)", hi: "कर्ज़ के दबाव में राहत रिपोर्ट (₹51)" } },
     { path: "/tools/dhan-yog", localized: true, label: { en: "Dhan yog tool (free)", hi: "धन योग टूल (मुफ़्त)" } },
-    { path: "/reports/financial_report", localized: false, label: { en: "Financial Report (₹51)", hi: "Financial रिपोर्ट (₹51, अंग्रेज़ी पेज)" } },
+    { path: "/reports/financial_report", localized: false, label: { en: `Financial Report (₹${reportPrice("financial_report")})`, hi: `Financial रिपोर्ट (₹${reportPrice("financial_report")}, अंग्रेज़ी पेज)` } },
   ],
   benefits: {
     en: [

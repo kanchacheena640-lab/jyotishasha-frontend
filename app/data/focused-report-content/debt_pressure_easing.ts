@@ -8,6 +8,14 @@
  * -> 12 months).
  */
 import type { FocusedReportSeoContent } from "./types";
+import { reportsData } from "../reportsData";
+
+// Standard-report prices are read from the catalog (app/data/reportsData.ts), never retyped here.
+const reportPrice = (slug: string): number => {
+  const report = reportsData.find((r) => r.slug === slug);
+  if (!report) throw new Error(`focused-report content: unknown standard report "${slug}"`);
+  return report.price;
+};
 
 export const debtPressureEasing: FocusedReportSeoContent = {
   questionKey: "debt_pressure_easing",
@@ -67,14 +75,15 @@ export const debtPressureEasing: FocusedReportSeoContent = {
     },
   },
   differentiation: {
-    en: "The Financial Pressure report looks at money strain in general, and Income Growth at when earnings may rise. The broader ₹51 Financial Stability Report covers long-term financial potential. This report is specifically about the weight of debt: whether it is persistent, mixed or easing in the next 12 months.",
-    hi: "'आर्थिक दबाव में राहत' रिपोर्ट सामान्य रूप से पैसों की तंगी देखती है, और 'आमदनी में बढ़ोतरी' यह कि कमाई कब बढ़ सकती है। व्यापक ₹51 'Financial Stability' रिपोर्ट लंबे समय की आर्थिक संभावना देखती है। यह रिपोर्ट खास तौर पर कर्ज़ के बोझ के बारे में है: अगले 12 महीनों में यह लगातार, मिला-जुला या कम होता हुआ है।",
+    en: `The Financial Pressure report looks at money strain in general, and Income Growth at when earnings may rise. The broader ₹${reportPrice("financial_stability_report")} Financial Stability Report covers long-term financial potential. This report is specifically about the weight of debt: whether it is persistent, mixed or easing in the next 12 months.`,
+    hi: `'आर्थिक दबाव में राहत' रिपोर्ट सामान्य रूप से पैसों की तंगी देखती है, और 'आमदनी में बढ़ोतरी' यह कि कमाई कब बढ़ सकती है। व्यापक ₹${reportPrice("financial_stability_report")} 'Financial Stability' रिपोर्ट लंबे समय की आर्थिक संभावना देखती है। यह रिपोर्ट खास तौर पर कर्ज़ के बोझ के बारे में है: अगले 12 महीनों में यह लगातार, मिला-जुला या कम होता हुआ है।`,
   },
   internalLinks: [
     { path: "/reports/focused/financial-pressure-easing", localized: true, label: { en: "Financial Pressure report (₹51)", hi: "आर्थिक दबाव में राहत रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/income-increase-timing", localized: true, label: { en: "Income Growth report (₹51)", hi: "आमदनी में बढ़ोतरी रिपोर्ट (₹51)" } },
     { path: "/tools/dhan-yog", localized: true, label: { en: "Dhan yog tool (free)", hi: "धन योग टूल (मुफ़्त)" } },
-    { path: "/reports/financial_stability_report", localized: false, label: { en: "Financial Stability Report (₹51)", hi: "Financial Stability रिपोर्ट (₹51, अंग्रेज़ी पेज)" } },
+    { path: "/reports/financial_stability_report", localized: false, label: { en: `Financial Stability Report (₹${reportPrice("financial_stability_report")})`, hi: `Financial Stability रिपोर्ट (₹${reportPrice("financial_stability_report")}, अंग्रेज़ी पेज)` } },
   ],
   benefits: {
     en: [
