@@ -42,11 +42,16 @@ interface LandingSlots {
   breadcrumbHomeHref?: string
   /** Slugs of topic CTA blocks already shown elsewhere (e.g. moved into `lead`), so they are not repeated at the bottom. */
   omitCtaSlugs?: string[]
+  /**
+   * Default theme: mark Hindi pages' <main> with lang="hi" (the shared root <html> is always "en"), as the
+   * editorial theme always does. Opt-in, so routes that do not pass it render exactly as before.
+   */
+  markContentLang?: boolean
 }
 
 export default function AuthorityDetailRenderer({
   domain, topic, locale, lead, beforeFaq, ssrFaq, longForm, afterSection, afterSections,
-  theme, related: relatedSlot, breadcrumbHomeHref, omitCtaSlugs,
+  theme, related: relatedSlot, breadcrumbHomeHref, omitCtaSlugs, markContentLang,
 }: AuthorityDetailProps & LandingSlots) {
   const related = getRelatedTopics(domain, topic)
   const hasFaq = topic.sections.some(section => section.layout === 'faq')
@@ -84,7 +89,8 @@ export default function AuthorityDetailRenderer({
   }
 
   return (
-    <main className={`min-h-screen bg-[#0b1120] text-white ${lead ? 'pt-2' : 'pt-12'}`}>
+    // Spread, not lang={undefined}: without the opt-in the element's props are exactly the original ones.
+    <main {...(markContentLang && locale === 'hi' ? { lang: 'hi' } : {})} className={`min-h-screen bg-[#0b1120] text-white ${lead ? 'pt-2' : 'pt-12'}`}>
       <div className={`max-w-4xl mx-auto px-4 md:px-6 ${lead ? `pt-4 pb-10 md:py-10 ${landingStyles.landing}${longForm ? ` ${landingStyles.longform}` : ''}` : 'py-10'}`}>
         <AuthorityBreadcrumb domain={domain} topic={topic} locale={locale} homeHref={breadcrumbHomeHref} />
         <TopicHero domain={domain} topic={topic} locale={locale} />

@@ -5,8 +5,8 @@
  * registry), EN + HI, is rendered IN-PROCESS through the real route; every application/ld+json block
  * is JSON.parse'd. The FAQPage must match, item for item and in order, the FAQ that the SAME render
  * shows in server HTML (parsed from the FAQ section's <details>), and equal the topic source data.
- * Article / BreadcrumbList must be unchanged versus the committed MC-02 baseline; the hub and the
- * financial-astrology domain must emit no FAQPage.
+ * Article / BreadcrumbList must be unchanged versus the committed MC-02 baseline; the hub must emit no
+ * FAQPage. (Financial Astrology's own FAQPage is tested in lib/financialGuideSchema.test.ts.)
  *
  * Run (repo convention):
  *   npx tsc --module commonjs --target es2020 --strict --skipLibCheck \
@@ -55,7 +55,6 @@ const resolver = load("lib/authority-engine/resolver");
 const { loc } = load("lib/authority-engine/i18n");
 const marriageRoute = load("app/[locale]/marriage-astrology/[slug]/page.tsx").default;
 const hubRoute = load("app/[locale]/marriage-astrology/page.tsx").default;
-const financialRoute = load("app/[locale]/financial-astrology/[slug]/page.tsx").default;
 const domain = resolver.getAuthorityDomain("marriage-astrology");
 const slugs: string[] = resolver.getAllTopicSlugs(domain);
 const baseline = JSON.parse(src("lib/fixtures/marriage-cluster-baseline.json"));
@@ -121,18 +120,12 @@ for (const locale of ["en", "hi"]) {
   const hub = ldBlocks(renderToStaticMarkup(React.createElement(hubRoute, { params: { locale } })));
   check(`hub [${locale}] emits no FAQPage (unchanged: ${hub.length} JSON-LD blocks)`, !hub.some((b) => b["@type"] === "FAQPage") && hub.length === (baseline.pages[`hub|${locale}`]?.schema?.types?.length ?? 0));
 }
-const fin = resolver.getAuthorityDomain("financial-astrology");
-for (const finSlug of resolver.getAllTopicSlugs(fin)) {
-  const types = ldBlocks(renderToStaticMarkup(React.createElement(financialRoute, { params: { locale: "en", slug: finSlug } }))).map((b) => b["@type"]);
-  check(`financial-astrology '${finSlug}' still emits only BreadcrumbList + Article`, JSON.stringify(types) === '["BreadcrumbList","Article"]');
-}
 check("helper reuses the shared buildFAQPageSchema unchanged and the same loc() as the visible FAQ",
   src("lib/domains/marriage-astrology/faqSchema.ts").includes("buildFAQPageSchema(items)") &&
   src("lib/domains/marriage-astrology/faqSchema.ts").includes("loc(item, 'label', locale)") &&
   src("components/authority-engine/sections/StaticFaqSection.tsx").includes("loc(item, 'label', locale)"));
 check("shared seo.ts / articleSchema.ts untouched by MC-06 (no FAQ logic added there)",
   !/FAQPage|buildMarriageFaq/.test(src("lib/authority-engine/seo.ts")));
-check("financial route does not use the marriage FAQ helper", !/buildMarriageFaqPageSchema|FAQPage/.test(src("app/[locale]/financial-astrology/[slug]/page.tsx")));
 
 console.log(`\nRESULT: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);
