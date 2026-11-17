@@ -6,6 +6,14 @@
  * career_evidence.py (dasha_window_summary, not dasha_sequence -> 12 months).
  */
 import type { FocusedReportSeoContent } from "./types";
+import { reportsData } from "../reportsData";
+
+// Standard-report prices are read from the catalog (app/data/reportsData.ts), never retyped here.
+const reportPrice = (slug: string): number => {
+  const report = reportsData.find((r) => r.slug === slug);
+  if (!report) throw new Error(`focused-report content: unknown standard report "${slug}"`);
+  return report.price;
+};
 
 export const newJobTiming: FocusedReportSeoContent = {
   questionKey: "new_job_timing",
@@ -65,13 +73,13 @@ export const newJobTiming: FocusedReportSeoContent = {
     },
   },
   differentiation: {
-    en: "Jyotishasha also has a free guide to new job chances, which explains the general astrology, and a broader ₹51 Career Report about your overall career path. This focused report answers one question only: the timing of a new job over the next 12 months, from your own chart.",
-    hi: "Jyotishasha पर नई नौकरी के योग पर एक मुफ़्त गाइड भी है, जो सामान्य ज्योतिष समझाती है, और आपके पूरे करियर पथ पर एक व्यापक ₹51 करियर रिपोर्ट भी। यह फोकस्ड रिपोर्ट सिर्फ एक सवाल का जवाब देती है: आपकी अपनी कुंडली से अगले 12 महीनों में नई नौकरी का समय।",
+    en: `Jyotishasha also has a free guide to new job chances, which explains the general astrology, and a broader ₹${reportPrice("career_report")} Career Report about your overall career path. This focused report answers one question only: the timing of a new job over the next 12 months, from your own chart.`,
+    hi: `Jyotishasha पर नई नौकरी के योग पर एक मुफ़्त गाइड भी है, जो सामान्य ज्योतिष समझाती है, और आपके पूरे करियर पथ पर एक व्यापक ₹${reportPrice("career_report")} करियर रिपोर्ट भी। यह फोकस्ड रिपोर्ट सिर्फ एक सवाल का जवाब देती है: आपकी अपनी कुंडली से अगले 12 महीनों में नई नौकरी का समय।`,
   },
   internalLinks: [
     { path: "/financial-astrology/new-job-chances", localized: true, label: { en: "New job chances in astrology (free guide)", hi: "ज्योतिष में नई नौकरी के योग (मुफ़्त गाइड)" } },
     { path: "/tools/career-path", localized: true, label: { en: "Career path tool (free)", hi: "करियर पथ टूल (मुफ़्त)" } },
-    { path: "/reports/career_report", localized: false, label: { en: "Career Report (₹51)", hi: "करियर रिपोर्ट (₹51, अंग्रेज़ी पेज)" } },
+    { path: "/reports/career_report", localized: false, label: { en: `Career Report (₹${reportPrice("career_report")})`, hi: `करियर रिपोर्ट (₹${reportPrice("career_report")}, अंग्रेज़ी पेज)` } },
   ],
   benefits: {
     en: [

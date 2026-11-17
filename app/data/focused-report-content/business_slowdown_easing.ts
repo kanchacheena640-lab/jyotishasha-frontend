@@ -72,6 +72,7 @@ export const businessSlowdownEasing: FocusedReportSeoContent = {
   },
   internalLinks: [
     { path: "/reports/focused/business-growth-timing", localized: true, label: { en: "Business Growth report (₹51)", hi: "बिज़नेस की बढ़ोतरी रिपोर्ट (₹51)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/reports/focused/financial-pressure-easing", localized: true, label: { en: "Financial Pressure report (₹51)", hi: "आर्थिक दबाव में राहत रिपोर्ट (₹51)" } },
     { path: "/financial-astrology/job-vs-business", localized: true, label: { en: "Job vs business in astrology (free guide)", hi: "ज्योतिष में नौकरी बनाम बिज़नेस (मुफ़्त गाइड)" } },
     { path: "/reports/business_report", localized: false, label: { en: "Full Business Report", hi: "पूरी बिज़नेस रिपोर्ट (अंग्रेज़ी)" } },

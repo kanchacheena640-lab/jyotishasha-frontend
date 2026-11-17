@@ -8,6 +8,14 @@
  * 12 months).
  */
 import type { FocusedReportSeoContent } from "./types";
+import { reportsData } from "../reportsData";
+
+// Standard-report prices are read from the catalog (app/data/reportsData.ts), never retyped here.
+const reportPrice = (slug: string): number => {
+  const report = reportsData.find((r) => r.slug === slug);
+  if (!report) throw new Error(`focused-report content: unknown standard report "${slug}"`);
+  return report.price;
+};
 
 export const businessStartTiming: FocusedReportSeoContent = {
   questionKey: "business_start_timing",
@@ -67,14 +75,15 @@ export const businessStartTiming: FocusedReportSeoContent = {
     },
   },
   differentiation: {
-    en: "If you are still deciding between a job and a business, start with the free job versus business guide. The ₹51 Startup Suggestion Report looks at what kind of venture suits you, and the Business Report at your overall business potential. This report is only about when: the stronger windows to begin in the next 12 months.",
-    hi: "अगर आप अभी नौकरी और बिज़नेस के बीच तय कर रहे हैं, तो नौकरी बनाम बिज़नेस पर मुफ़्त गाइड से शुरू करें। ₹51 'Startup Suggestion' रिपोर्ट देखती है कि कैसा उद्यम आपके लिए उपयुक्त है, और 'Business Report' आपकी कुल व्यावसायिक संभावना। यह रिपोर्ट सिर्फ़ 'कब' के बारे में है: अगले 12 महीनों में शुरुआत के मजबूत समय।",
+    en: `If you are still deciding between a job and a business, start with the free job versus business guide. The ₹${reportPrice("startup_suggestion_report")} Startup Suggestion Report looks at what kind of venture suits you, and the Business Report at your overall business potential. This report is only about when: the stronger windows to begin in the next 12 months.`,
+    hi: `अगर आप अभी नौकरी और बिज़नेस के बीच तय कर रहे हैं, तो नौकरी बनाम बिज़नेस पर मुफ़्त गाइड से शुरू करें। ₹${reportPrice("startup_suggestion_report")} 'Startup Suggestion' रिपोर्ट देखती है कि कैसा उद्यम आपके लिए उपयुक्त है, और 'Business Report' आपकी कुल व्यावसायिक संभावना। यह रिपोर्ट सिर्फ़ 'कब' के बारे में है: अगले 12 महीनों में शुरुआत के मजबूत समय।`,
   },
   internalLinks: [
     { path: "/financial-astrology/job-vs-business", localized: true, label: { en: "Job vs business in astrology (free guide)", hi: "ज्योतिष में नौकरी बनाम बिज़नेस (मुफ़्त गाइड)" } },
+    { path: "/financial-astrology", localized: true, label: { en: "Financial astrology guides (free)", hi: "वित्त ज्योतिष गाइड (मुफ़्त)" } },
     { path: "/tools/business-path", localized: true, label: { en: "Business path tool (free)", hi: "बिज़नेस पथ टूल (मुफ़्त)" } },
-    { path: "/reports/startup_suggestion_report", localized: false, label: { en: "Startup Suggestion Report (₹51)", hi: "Startup Suggestion रिपोर्ट (₹51, अंग्रेज़ी पेज)" } },
-    { path: "/reports/business_report", localized: false, label: { en: "Business Report (₹51)", hi: "Business रिपोर्ट (₹51, अंग्रेज़ी पेज)" } },
+    { path: "/reports/startup_suggestion_report", localized: false, label: { en: `Startup Suggestion Report (₹${reportPrice("startup_suggestion_report")})`, hi: `Startup Suggestion रिपोर्ट (₹${reportPrice("startup_suggestion_report")}, अंग्रेज़ी पेज)` } },
+    { path: "/reports/business_report", localized: false, label: { en: `Business Report (₹${reportPrice("business_report")})`, hi: `Business रिपोर्ट (₹${reportPrice("business_report")}, अंग्रेज़ी पेज)` } },
   ],
   benefits: {
     en: [
