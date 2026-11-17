@@ -328,6 +328,26 @@ export default async function sitemap() {
     ),
   ];
 
+  // ---------------- FINANCIAL ASTROLOGY (authority cluster) ----------------
+  // Hub + every topic registered in the authority engine (the same registry
+  // app/[locale]/financial-astrology/[slug] renders from), EN + HI.
+  const financialDomain = getAuthorityDomain("financial-astrology");
+  const financialTopicSlugs = getAllTopicSlugs(financialDomain);
+
+  const financialAstrologyUrls = [
+    createUrl(`${baseUrl}${financialDomain.basePath}`, 0.75, "monthly"),
+    ...financialTopicSlugs.map((slug) =>
+      createUrl(`${baseUrl}${financialDomain.basePath}/${slug}`, 0.7, "monthly")
+    ),
+  ];
+
+  const financialAstrologyUrlsHi = [
+    createUrl(`${baseUrl}/hi${financialDomain.basePath}`, 0.7, "monthly"),
+    ...financialTopicSlugs.map((slug) =>
+      createUrl(`${baseUrl}/hi${financialDomain.basePath}/${slug}`, 0.65, "monthly")
+    ),
+  ];
+
   // ---------------- MISC TOOL / UTILITY PAGES ----------------
   const miscUrls = [
     createUrl(`${baseUrl}/gemstone-consult`, 0.6, "monthly"),
@@ -452,6 +472,8 @@ export default async function sitemap() {
     ...loveUrlsHi,
     ...marriageAstrologyUrls,
     ...marriageAstrologyUrlsHi,
+    ...financialAstrologyUrls,
+    ...financialAstrologyUrlsHi,
     ...miscUrls,
     ...navratriUrls,
     ...chhathUrls,
