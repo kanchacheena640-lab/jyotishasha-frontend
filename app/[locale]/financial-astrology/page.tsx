@@ -5,8 +5,10 @@
 import type { Metadata } from 'next'
 import type { Locale } from '@/lib/authority-engine/types'
 import { getAuthorityDomain } from '@/lib/authority-engine/resolver'
-import { generateAuthorityHubMetadata } from '@/lib/authority-engine/seo'
-import AuthorityHubRenderer from '@/components/authority-engine/AuthorityHubRenderer'
+import { authorityHomeUrl, buildAuthorityBreadcrumbSchema, generateAuthorityHubMetadata } from '@/lib/authority-engine/seo'
+import { loc } from '@/lib/authority-engine/i18n'
+import IntentHubRenderer from '@/components/authority-engine/IntentHubRenderer'
+import { financialAstrologyHub } from '@/lib/domains/financial-astrology/_hub'
 
 const DOMAIN_SLUG = 'financial-astrology'
 
@@ -18,7 +20,11 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const locale = (params.locale === 'hi' ? 'hi' : 'en') as Locale
-  return generateAuthorityHubMetadata(getAuthorityDomain(DOMAIN_SLUG), locale)
+  const base = generateAuthorityHubMetadata(getAuthorityDomain(DOMAIN_SLUG), locale)
+  // Hub-specific title/description; canonical, hreflang and the rest stay the engine's.
+  const title = loc(financialAstrologyHub, 'seoTitle', locale) || base.title
+  const description = loc(financialAstrologyHub, 'metaDescription', locale) || base.description
+  return { ...base, title, description, openGraph: { ...base.openGraph, title: title ?? undefined, description: description ?? undefined } }
 }
 
 export default function FinancialAstrologyHub({
@@ -27,5 +33,20 @@ export default function FinancialAstrologyHub({
   params: { locale: string }
 }) {
   const locale = (params.locale === 'hi' ? 'hi' : 'en') as Locale
-  return <AuthorityHubRenderer domain={getAuthorityDomain(DOMAIN_SLUG)} locale={locale} />
+  const domain = getAuthorityDomain(DOMAIN_SLUG)
+  // Home -> Financial Astrology; matches the visible breadcrumb in IntentHubRenderer.
+  const breadcrumbSchema = buildAuthorityBreadcrumbSchema(domain, null, locale, authorityHomeUrl(locale))
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <IntentHubRenderer
+        domain={domain}
+        hub={financialAstrologyHub}
+        locale={locale}
+      />
+    </>
+  )
 }

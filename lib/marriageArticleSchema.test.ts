@@ -8,8 +8,8 @@
  *     authority.lastUpdated), otherwise absent -- never invented;
  *   * author = the existing canonical Jyotishasha Organization, identical to the publisher;
  *   * headline / description / url / publisher / @context unchanged versus the committed baseline;
- *   * BreadcrumbList and FAQPage unchanged; hub unchanged; the shared builder (financial-astrology)
- *     untouched.
+ *   * BreadcrumbList and FAQPage unchanged; hub unchanged; the shared builder untouched.
+ *     (Financial Astrology's own Article is tested in lib/financialGuideSchema.test.ts.)
  *
  * Run (repo convention):
  *   npx tsc --module commonjs --target es2020 --strict --skipLibCheck \
@@ -55,12 +55,10 @@ function check(label: string, ok: boolean): void {
 }
 
 const resolver = load("lib/authority-engine/resolver");
-const seo = load("lib/authority-engine/seo");
 const { loc } = load("lib/authority-engine/i18n");
 const { SITE_URL } = load("lib/seo/articleSchema");
 const marriageRoute = load("app/[locale]/marriage-astrology/[slug]/page.tsx").default;
 const hubRoute = load("app/[locale]/marriage-astrology/page.tsx").default;
-const financialRoute = load("app/[locale]/financial-astrology/[slug]/page.tsx").default;
 const domain = resolver.getAuthorityDomain("marriage-astrology");
 const slugs: string[] = resolver.getAllTopicSlugs(domain);
 const baseline = JSON.parse(src("lib/fixtures/marriage-cluster-baseline.json"));
@@ -139,21 +137,14 @@ for (const locale of ["en", "hi"]) {
   const hub = ldBlocks(renderToStaticMarkup(React.createElement(hubRoute, { params: { locale } })));
   check(`hub [${locale}] JSON-LD unchanged (${hub.length} blocks, as in baseline)`, JSON.stringify(hub) === JSON.stringify(baseline.pages[`hub|${locale}`]?.schema?.objects ?? []));
 }
-const fin = resolver.getAuthorityDomain("financial-astrology");
-for (const finSlug of resolver.getAllTopicSlugs(fin)) {
-  const art = ldBlocks(renderToStaticMarkup(React.createElement(financialRoute, { params: { locale: "en", slug: finSlug } }))).find((b) => b["@type"] === "Article");
-  check(`financial-astrology '${finSlug}' Article is exactly the unchanged shared builder output (no author, dates as before)`,
-    JSON.stringify(art) === JSON.stringify(seo.buildAuthorityArticleSchema(fin, fin.topics[finSlug], "en")) && !("author" in (art ?? {})));
-}
 const wrapper = src("lib/domains/marriage-astrology/articleSchema.ts");
 const code = wrapper.replace(/\/\/.*$/gm, "");
 check("wrapper uses no clock, filesystem or git as a date source", !/Date\.now|new Date|statSync|mtime|birthtime|execSync|child_process|git /.test(code) && !/from ['"]fs['"]/.test(code));
 check("wrapper starts from the shared builder unchanged", code.includes("buildAuthorityArticleSchema(domain, topic, locale)"));
 check("shared seo.ts builder has no author property / date fallback added", !/\bauthor\s*:|Date\.now|new Date/.test(src("lib/authority-engine/seo.ts")));
-check("marriage route uses the wrapper; financial route still uses the shared builder",
+check("marriage route uses the wrapper",
   src("app/[locale]/marriage-astrology/[slug]/page.tsx").includes("buildMarriageArticleSchema(domain, topic!, locale)") &&
-  !src("app/[locale]/marriage-astrology/[slug]/page.tsx").includes("buildAuthorityArticleSchema") &&
-  src("app/[locale]/financial-astrology/[slug]/page.tsx").includes("buildAuthorityArticleSchema"));
+  !src("app/[locale]/marriage-astrology/[slug]/page.tsx").includes("buildAuthorityArticleSchema"));
 
 console.log(`\nRESULT: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

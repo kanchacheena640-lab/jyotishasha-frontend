@@ -1,5 +1,5 @@
 // components/authority-engine/IntentHubRenderer.tsx
-// Mobile-first subject hub (currently Marriage only): breadcrumb -> compact
+// Mobile-first subject hub (Marriage, Financial): breadcrumb -> compact
 // hero -> question cards -> free tools + muhurat -> personalised reports
 // (standard, relationship, focused question cards) -> topic groups -> the
 // subject basics. AuthorityHubRenderer and TopicCard are untouched.
@@ -13,7 +13,7 @@ import { loc } from '@/lib/authority-engine/i18n'
 import { UI_LABELS } from '@/lib/authority-engine/constants'
 import { reportsData } from '@/app/data/reportsData'
 import {
-  getFocusedReportCatalogEntry, getFocusedReportConfigBySlug, questionKeyToHumanSlug,
+  getFocusedReportCatalogEntry, getFocusedReportConfigBySlug, listFocusedReportHumanSlugs, questionKeyToHumanSlug,
 } from '@/app/data/focusedReportsConfig'
 import { getReportProductPath } from '@/lib/reportProductSeo'
 
@@ -52,6 +52,9 @@ export interface IntentHubReports {
   intro: string
   intro_hi: string
   featured: IntentHubReportRef
+  /** Optional badge above the featured report; absent = the original (Marriage) wording. */
+  featuredLabel?: string
+  featuredLabel_hi?: string
   more: IntentHubReportRef[]
   focusedHeading: string
   focusedHeading_hi: string
@@ -155,7 +158,9 @@ const T = {
     hi: '“सभी रिपोर्ट” वाला पेज अंग्रेज़ी में है।',
   },
   allReports: { en: 'See all reports', hi: 'सभी रिपोर्ट देखें' },
-  allFocused: { en: 'See all ₹51 focused reports', hi: 'सभी ₹51 फोकस्ड रिपोर्ट देखें' },
+  allFocused: (price?: number) => price !== undefined
+    ? { en: `See all ₹${price} focused reports`, hi: `सभी ₹${price} फोकस्ड रिपोर्ट देखें` }
+    : { en: 'See all focused reports', hi: 'सभी फोकस्ड रिपोर्ट देखें' },
 }
 
 // Shared design tokens (warm ivory page, navy text, terracotta/gold accents).
@@ -189,6 +194,8 @@ export default function IntentHubRenderer({ domain, hub, locale }: Props) {
     return config ? [{ config, question: getFocusedReportCatalogEntry(config).question }] : []
   })
   const isEnglishOnly = (slug: string) => getReportProductPath(slug, locale) === `/reports/${slug}`
+  // The focused-report price shown on the "see all" link, read from the catalog (one price for all focused reports).
+  const focusedPrice = getFocusedReportConfigBySlug(listFocusedReportHumanSlugs()[0])?.priceRupees
 
   return (
     // lang marks the Hindi content's language (the shared root <html> is always "en").
@@ -297,7 +304,7 @@ export default function IntentHubRenderer({ domain, hub, locale }: Props) {
                   className={`${cardBase} flex flex-col border-2 border-[#C9A227] p-5 md:p-6 lg:col-span-3 lg:flex-row lg:items-center lg:gap-8`}
                 >
                   <span className="flex-1">
-                    <span className="inline-block rounded-full bg-[#F7EED6] px-3 py-1 text-[13px] font-semibold text-[#7A5A00]">{T.featured[locale]}</span>
+                    <span className="inline-block rounded-full bg-[#F7EED6] px-3 py-1 text-[13px] font-semibold text-[#7A5A00]">{reports.featuredLabel ? loc(reports, 'featuredLabel', locale) : T.featured[locale]}</span>
                     <span className="mt-3 block text-[22px] md:text-[26px] font-bold leading-snug text-[#1B2A4A]">{featured.title[locale]}</span>
                     <span className="mt-2 block text-[16px] leading-7">{loc(reports.featured, 'description', locale)}</span>
                     {isEnglishOnly(featured.slug) && T.enOnlyPage[locale] && (
@@ -365,7 +372,7 @@ export default function IntentHubRenderer({ domain, hub, locale }: Props) {
                 {T.allReports[locale]} <span aria-hidden="true" className="ml-1">→</span>
               </Link>
               <Link href={`${localePath}/reports/focused`} className="inline-flex min-h-[48px] items-center rounded-xl border border-[#1B2A4A]/25 bg-white px-5 text-[15px] font-semibold text-[#1B2A4A] transition hover:border-[#1B2A4A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FBF8F2]">
-                {T.allFocused[locale]} <span aria-hidden="true" className="ml-1">→</span>
+                {T.allFocused(focusedPrice)[locale]} <span aria-hidden="true" className="ml-1">→</span>
               </Link>
             </div>
             {T.enOnlyCatalog[locale] && (

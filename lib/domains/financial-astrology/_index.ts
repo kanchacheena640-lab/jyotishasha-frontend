@@ -18,6 +18,9 @@ import { governmentJob }        from './topics/government-job'
 import { salaryGrowth }         from './topics/salary-growth'
 import { careerAfter40 }        from './topics/career-after-40'
 import { careerAfterMarriage }  from './topics/career-after-marriage'
+import { dhanYoga }             from './topics/dhan-yoga'
+import { financialStability }   from './topics/financial-stability'
+import { businessAstrology }    from './topics/business-astrology'
 
 export const financialAstrologyDomain: AuthorityDomain = {
   ...financialAstrologyMeta,
@@ -33,5 +36,8 @@ export const financialAstrologyDomain: AuthorityDomain = {
     'salary-growth':         mapDomainTopicToEngine(salaryGrowth),
     'career-after-40':       mapDomainTopicToEngine(careerAfter40),
     'career-after-marriage': mapDomainTopicToEngine(careerAfterMarriage),
+    'dhan-yoga':             mapDomainTopicToEngine(dhanYoga),
+    'financial-stability':   mapDomainTopicToEngine(financialStability),
+    'business-astrology':    mapDomainTopicToEngine(businessAstrology),
   },
 }
