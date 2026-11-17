@@ -3,8 +3,8 @@ export const businessPathContent = {
 
   en: {
     seo: {
-      title: "Business Path Astrology – Success in Business by Kundali | Vedic Astrology",
-      description: "Analyze your business and entrepreneurship potential using authentic Vedic astrology. Discover the planets, houses, yogas, and dashas that indicate success, stability, and global growth in business.",
+      title: "Business Path Calculator – Job or Business by Kundli",
+      description: "Free check of your 7th and 11th house lords, the planets placed there and Rahu, showing whether your chart leans to business, a job or a mix.",
       keywords: [
         "business astrology online",
         "business path by kundali",
@@ -20,12 +20,12 @@ export const businessPathContent = {
       intro: "Not everyone is naturally suited for business. Authentic Vedic astrology helps identify whether a person has the required entrepreneurial mindset, risk capacity, and strong planetary support needed for independent global ventures and business success.",
       whatIsRashi: "Business potential is primarily analyzed through the 7th house (trade and partnerships), 10th house (profession and karma), 2nd house (wealth management), and 11th house (profits and networking). A strong Mercury, supported by Mars and Rahu, often creates highly successful business-oriented birth charts.",
       whyMoonRashiImportant: "Your Moon Rashi (Sign) reflects your decision-making ability, emotional control, and risk tolerance. A stable and well-placed Moon supports consistency, mental clarity, and resilience, which are absolutely essential to navigate the ups and downs of long-term business ventures.",
-      howToolWorks: "The Jyotishasha Business Path calculator analyzes business-related houses, their lords, planetary strengths, specific wealth yogas, and your current dasha (planetary periods) using classical Parashari rules. It evaluates whether independent business, a partnership, or a traditional job suits your astrological profile better.",
+      howToolWorks: "The Jyotishasha Business Path calculator analyzes your 7th house (partnerships and trade) and 11th house (gains) using classical Parashari rules, checking the strength of each house lord, the planets placed in these houses, and Rahu's influence. It then indicates whether your chart leans towards business, a job, or a mix of both.",
       benefits: [
         "Helps determine your true suitability for business or entrepreneurship",
         "Analyzes your natural risk-taking ability and decision-making strength",
         "Highly useful for choosing between starting a business, entering a partnership, or sticking to a job",
-        "Explains potential growth phases and financial challenges in your career",
+        "Lists the supportive and challenging chart factors behind your business, job, or mixed reading",
         "Based strictly on classical and authentic Vedic astrology principles",
       ],
       sunVsMoonRashi: "Business success depends heavily on the timing of planetary dashas. Even the strongest business yogas in a chart give their maximum results mainly during favorable dashas involving Mercury, Mars, Rahu, or the lords of key business houses.",
@@ -54,8 +54,8 @@ export const businessPathContent = {
 
   hi: {
     seo: {
-      title: "व्यापार योग कैलकुलेटर – कुंडली द्वारा बिजनेस में सफलता | ज्‍योतिष आशा",
-      description: "प्रामाणिक वैदिक ज्योतिष का उपयोग करके अपनी व्यावसायिक क्षमता का विश्लेषण करें। उन ग्रहों, भावों, योगों और दशाओं को जानें जो व्यापार में सफलता, स्थिरता और वृद्धि का संकेत देते हैं।",
+      title: "व्यापार मार्ग कैलकुलेटर – कुंडली से नौकरी या व्यापार",
+      description: "मुफ़्त जाँच: सातवें और ग्यारहवें भाव के स्वामी, वहाँ के ग्रह और राहु से जानें कि कुंडली व्यापार, नौकरी या दोनों की ओर झुकती है।",
       keywords: [
         "व्यापार ज्योतिष",
         "कुंडली से बिजनेस योग",
@@ -70,12 +70,12 @@ export const businessPathContent = {
       intro: "हर कोई स्वाभाविक रूप से व्यापार (Business) के लिए नहीं बना होता है। वैदिक ज्योतिष यह पहचानने में मदद करता है कि क्या किसी व्यक्ति में स्वतंत्र उद्यम और व्यवसाय के लिए आवश्यक मानसिकता, जोखिम लेने की क्षमता और ग्रहों का मजबूत समर्थन मौजूद है।",
       whatIsRashi: "व्यापार की संभावना मुख्य रूप से 7वें भाव (व्यापार और साझेदारी), 10वें भाव (कर्म/पेशा), 2रे भाव (धन प्रबंधन) और 11वें भाव (लाभ) से देखी जाती है। एक मजबूत बुध, मंगल और राहु अक्सर व्यापार-उन्मुख कुंडलियों का दृढ़ता से समर्थन करते हैं।",
       whyMoonRashiImportant: "आपकी चंद्र राशि (Moon Rashi) आपकी निर्णय लेने की क्षमता, भावनात्मक नियंत्रण और जोखिम सहनशीलता को दर्शाती है। एक स्थिर चंद्रमा निरंतरता और स्पष्टता का समर्थन करता है, जो दीर्घकालिक व्यावसायिक सफलता और तनाव प्रबंधन के लिए अत्यंत आवश्यक हैं।",
-      howToolWorks: "ज्‍योतिष आशा का 'बिजनेस पाथ' टूल महर्षि पाराशर के नियमों का उपयोग करके व्यापार से संबंधित भावों, उनके स्वामियों, ग्रहों के बल, धन योगों और वर्तमान दशा अवधियों का गहन विश्लेषण करता है। यह मूल्यांकन करता है कि नौकरी की तुलना में आपके लिए व्यापार, साझेदारी या स्वतंत्र कार्य अधिक उपयुक्त है या नहीं।",
+      howToolWorks: "ज्‍योतिष आशा का 'बिजनेस पाथ' टूल शास्त्रीय पाराशरी नियमों के आधार पर आपके सातवें भाव (साझेदारी और व्यापार) और ग्यारहवें भाव (लाभ) का विश्लेषण करता है — इन भावों के स्वामियों की शक्ति, इनमें स्थित ग्रह और राहु का प्रभाव। इसके बाद यह बताता है कि आपकी कुंडली व्यापार, नौकरी या दोनों के मिश्रण की ओर अधिक झुकाव दिखाती है।",
       benefits: [
         "व्यापार या उद्यमिता (Entrepreneurship) के लिए आपकी उपयुक्तता निर्धारित करने में मदद करता है",
         "आपकी जोखिम लेने की क्षमता और निर्णय लेने की शक्ति का सटीक विश्लेषण करता है",
         "व्यापार, साझेदारी या नौकरी के बीच सही चुनाव करने के लिए अत्यंत उपयोगी",
-        "आपके करियर में विकास के चरणों और संभावित आर्थिक चुनौतियों की व्याख्या करता है",
+        "आपकी कुंडली के वे सहायक और चुनौतीपूर्ण कारक बताता है जिनसे व्यापार, नौकरी या मिश्रित झुकाव तय होता है",
         "पूरी तरह से शास्त्रीय वैदिक ज्योतिष के प्रामाणिक सिद्धांतों पर आधारित",
       ],
       sunVsMoonRashi: "व्यापार में सफलता काफी हद तक ग्रहों की दशाओं (समय चक्र) पर निर्भर करती है। कुंडली में सबसे मजबूत व्यापार योग भी मुख्य रूप से बुध, मंगल, राहु या प्रमुख व्यापारिक भावों के स्वामियों से जुड़ी अनुकूल दशाओं के दौरान ही अपने सर्वोत्तम परिणाम देते हैं।",

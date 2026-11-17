@@ -3,8 +3,8 @@ export const careerPathContent = {
 
   en: {
     seo: {
-      title: "Career Path Astrology – Find Your Ideal Profession by Kundali | Vedic Astrology",
-      description: "Discover your ideal career path using authentic Vedic astrology. Analyze your birth chart's houses, planets, and yogas to choose the right profession and professional growth direction.",
+      title: "Career Path Calculator – 10th House Career Reading",
+      description: "Free career reading from your 10th house: its lord and placement, the planets in it, and the planet with the strongest influence on your career.",
       keywords: [
         "career astrology online",
         "career path by kundali",
@@ -20,7 +20,7 @@ export const careerPathContent = {
       intro: "Choosing the right career is one of the most defining decisions in life. Authentic Vedic astrology provides deep, personalized insights into your professional strengths, the nature of your work, and long-term financial growth by analyzing specific planetary positions in your birth chart (Kundali).",
       whatIsRashi: "In professional analysis, the 10th house (Karma Bhava) represents your profession, authority, and primary work direction. The 6th house reflects service, competitive ability, and your daily work environment, while the Ascendant (Lagna) indicates your natural talents and the power of self-effort.",
       whyMoonRashiImportant: "Your Moon Rashi (Sign) reflects your mental inclination, adaptability, and ultimate job satisfaction. Even a strong career combination in the chart may not feel emotionally fulfilling if the Moon is weak or unsupported, often leading to frequent job changes or burnout.",
-      howToolWorks: "The Jyotishasha Career Path tool meticulously analyzes the 10th house, its ruling planet, planetary aspects, key professional yogas, and current dasha (time periods) using classical Parashari principles. It suggests career fields that are perfectly aligned with your cosmic strengths and growth potential.",
+      howToolWorks: "The Jyotishasha Career Path tool analyzes your 10th house (the house of career), its lord and where that lord is placed, the planets placed in the 10th house, the planets aspecting the 10th house when it is occupied, and the planets conjoined with its lord, using classical Parashari principles. It highlights the planet with the strongest influence on your career and the professional traits it brings.",
       benefits: [
         "Identifies the most suitable career fields using in-depth Kundali analysis",
         "Helps you choose between a stable job, a scalable business, or an independent profession",
@@ -54,8 +54,8 @@ export const careerPathContent = {
 
   hi: {
     seo: {
-      title: "करियर पाथ ज्योतिष – कुंडली से जानें अपने लिए सही पेशा | ज्‍योतिष आशा",
-      description: "प्रामाणिक वैदिक ज्योतिष का उपयोग करके अपने आदर्श करियर पथ की खोज करें। सही पेशे और विकास की दिशा चुनने के लिए अपनी कुंडली के भावों, ग्रहों और योगों का विश्लेषण करें।",
+      title: "करियर पथ कैलकुलेटर – दशम भाव से करियर विश्लेषण",
+      description: "दशम भाव से मुफ़्त करियर विश्लेषण: दशमेश और उसकी स्थिति, दशम भाव के ग्रह, और आपके करियर पर सबसे अधिक प्रभाव डालने वाला ग्रह।",
       keywords: [
         "करियर ज्योतिष",
         "कुंडली से करियर",
@@ -70,7 +70,7 @@ export const careerPathContent = {
       intro: "सही करियर का चुनाव जीवन के सबसे महत्वपूर्ण निर्णयों में से एक है। वैदिक ज्योतिष जन्म कुंडली में ग्रहों की स्थिति का विश्लेषण करके आपके पेशेवर कौशल, कार्य की प्रकृति और दीर्घकालिक विकास के बारे में गहरी और सटीक जानकारी प्रदान करता है।",
       whatIsRashi: "करियर विश्लेषण में, दशम भाव (10th House) आपके पेशे, अधिकार और कार्य की दिशा का प्रतिनिधित्व करता है। छठा भाव नौकरी, प्रतिस्पर्धा और दैनिक कार्य वातावरण को दर्शाता है, जबकि लग्न और उसका स्वामी आपके प्राकृतिक कौशल और आत्म-प्रयास की शक्ति को इंगित करते हैं।",
       whyMoonRashiImportant: "आपकी चंद्र राशि आपके मानसिक झुकाव, अनुकूलन क्षमता और कार्य संतुष्टि को दर्शाती है। यदि चंद्रमा कमजोर या पीड़ित है, तो कुंडली में करियर के मजबूत योग होने के बावजूद आप मानसिक रूप से असंतुष्ट महसूस कर सकते हैं, जिससे करियर में अस्थिरता आ सकती है।",
-      howToolWorks: "ज्‍योतिष आशा का 'करियर पाथ' टूल दशम भाव, उसके स्वामी, ग्रहों की दृष्टि, महत्वपूर्ण पेशेवर योगों और वर्तमान दशा अवधियों का सूक्ष्म विश्लेषण करता है। यह उन करियर क्षेत्रों का सुझाव देता है जो आपकी क्षमताओं और भविष्य की विकास संभावनाओं के साथ पूरी तरह मेल खाते हैं।",
+      howToolWorks: "ज्‍योतिष आशा का 'करियर पाथ' टूल शास्त्रीय पाराशरी सिद्धांतों के आधार पर आपके दशम भाव (कर्म भाव), उसके स्वामी और उसकी स्थिति, दशम भाव में स्थित ग्रहों, दशम भाव में ग्रह होने पर उस पर दृष्टि डालने वाले ग्रहों, तथा दशमेश के साथ युति करने वाले ग्रहों का विश्लेषण करता है। यह बताता है कि कौन सा ग्रह आपके करियर पर सबसे अधिक प्रभाव डालता है और उससे कौन से पेशेवर गुण मिलते हैं।",
       benefits: [
         "कुंडली विश्लेषण के माध्यम से आपके लिए सबसे उपयुक्त करियर क्षेत्रों की पहचान करता है",
         "नौकरी, व्यवसाय या स्वतंत्र पेशे के बीच सही चुनाव करने में मदद करता है",

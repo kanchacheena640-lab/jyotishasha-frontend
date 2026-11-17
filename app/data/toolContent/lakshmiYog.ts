@@ -3,8 +3,8 @@ export const lakshmiYogContent = {
 
   en: {
     seo: {
-      title: "Lakshmi Yog Calculator – Wealth, Prosperity & Abundance | Vedic Astrology",
-      description: "Check Lakshmi Yog in your birth chart using authentic Vedic astrology. Discover your potential for wealth, financial stability, luxury, and divine prosperity.",
+      title: "Lakshmi Yog Calculator – Check Prosperity Yoga in Kundli",
+      description: "Free Lakshmi Yog check: whether your 9th lord sits in its own sign in a kendra or trikona, with a strong Ascendant lord.",
       keywords: [
         "lakshmi yog calculator",
         "lakshmi yog in kundali",
@@ -54,8 +54,8 @@ export const lakshmiYogContent = {
 
   hi: {
     seo: {
-      title: "लक्ष्मी योग कैलकुलेटर – कुंडली में सुख, समृद्धि और धन का योग | ज्‍योतिष आशा",
-      description: "प्रामाणिक वैदिक ज्योतिष का उपयोग करके अपनी कुंडली में लक्ष्मी योग की जाँच करें। धन की क्षमता, वित्तीय स्थिरता, ऐश्वर्य और समृद्धि के संकेतों को जानें।",
+      title: "लक्ष्मी योग कैलकुलेटर – कुंडली में लक्ष्मी योग जाँचें",
+      description: "मुफ़्त लक्ष्मी योग जाँच: नवमेश स्वराशि में होकर केंद्र या त्रिकोण में है या नहीं, और लग्नेश बलवान है या नहीं।",
       keywords: [
         "लक्ष्मी योग",
         "लक्ष्मी योग कैलकुलेटर",

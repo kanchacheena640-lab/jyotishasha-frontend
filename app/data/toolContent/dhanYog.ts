@@ -3,8 +3,8 @@ export const dhanYogContent = {
 
   en: {
     seo: {
-      title: "Dhan Yog Calculator – Wealth & Financial Prosperity in Kundali | Vedic Astrology",
-      description: "Discover your wealth potential with our authentic Dhan Yog Calculator. Analyze income sources, financial stability, and prosperity markers in your birth chart using classical Vedic astrology principles.",
+      title: "Dhan Yog Calculator – Check Wealth Yoga in Your Kundli",
+      description: "Free Dhan Yog check: whether your 2nd, 5th, 9th and 11th house lords are linked by conjunction, mutual aspect or sign exchange.",
       keywords: [
         "dhan yog calculator",
         "check dhan yog in kundali",
@@ -55,8 +55,8 @@ export const dhanYogContent = {
 
   hi: {
     seo: {
-      title: "धन योग कैलकुलेटर – कुंडली में धन और समृद्धि की जाँच करें | ज्‍योतिष आशा",
-      description: "हमारे प्रामाणिक धन योग कैलकुलेटर के साथ अपनी वित्तीय क्षमता की खोज करें। शास्त्रीय वैदिक ज्योतिष सिद्धांतों का उपयोग करके अपनी कुंडली में आय के स्रोतों और समृद्धि के संकेतों का विश्लेषण करें।",
+      title: "धन योग कैलकुलेटर – कुंडली में धन योग जाँचें",
+      description: "मुफ़्त धन योग जाँच: आपके दूसरे, पाँचवें, नौवें और ग्यारहवें भाव के स्वामी युति, परस्पर दृष्टि या राशि परिवर्तन से जुड़े हैं या नहीं।",
       keywords: [
         "धन योग कैलकुलेटर",
         "कुंडली में धन योग",
