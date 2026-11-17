@@ -3,8 +3,8 @@ export const kuberRajyogContent = {
 
   en: {
     seo: {
-      title: "Kuber Rajyog Calculator – Wealth Accumulation & Savings Yoga | Vedic Astrology",
-      description: "Check Kuber Rajyog in your birth chart using authentic Vedic astrology. Discover your potential for wealth accumulation, long-term savings, and financial stability.",
+      title: "Kuber Rajyog Calculator – Check Wealth Yoga in Kundli",
+      description: "Free Kuber Rajyog check: whether a strong Jupiter, Venus, Mercury or Moon sits in your 2nd, 5th, 9th or 11th house.",
       keywords: [
         "kuber rajyog calculator",
         "kuber raj yoga in kundali",
@@ -54,8 +54,8 @@ export const kuberRajyogContent = {
 
   hi: {
     seo: {
-      title: "कुबेर राजयोग कैलकुलेटर – कुंडली में धन संचय और बचत का योग | ज्‍योतिष आशा",
-      description: "प्रामाणिक वैदिक ज्योतिष का उपयोग करके अपनी कुंडली में कुबेर राजयोग की जाँच करें। धन संचय, बचत की शक्ति और दीर्घकालिक वित्तीय स्थिरता के योगों को जानें।",
+      title: "कुबेर राजयोग कैलकुलेटर – कुंडली में कुबेर योग जाँचें",
+      description: "मुफ़्त कुबेर राजयोग जाँच: आपके दूसरे, पाँचवें, नौवें या ग्यारहवें भाव में बलवान गुरु, शुक्र, बुध या चंद्र है या नहीं।",
       keywords: [
         "कुबेर राजयोग",
         "कुबेर राजयोग कैलकुलेटर",
