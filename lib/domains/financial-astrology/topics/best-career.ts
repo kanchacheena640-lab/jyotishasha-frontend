@@ -5,7 +5,7 @@ export const bestCareer: DomainTopic = {
   identity: {
     id:        'astrology:best-career',
     slug:      'best-career',
-    title:     'Best Career According to Your Birth Chart',
+    title:     'Which Career Is Best for Me According to My Birth Chart?',
     title_hi:  'जन्मकुंडली के अनुसार सर्वश्रेष्ठ करियर',
     domain:    'astrology',
     subdomain: 'financial-astrology',
@@ -24,8 +24,8 @@ export const bestCareer: DomainTopic = {
   },
 
   seo: {
-    metaTitle:          'Best Career for Your Birth Chart: Vedic Astrology Guide',
-    metaDescription:    'Use your 10th house, 10th lord nakshatra, and Atmakaraka to find the career domain where your chart is strongest — the most precise method in Vedic astrology.',
+    metaTitle:          'Which Career Is Best for Me According to My Birth Chart?',
+    metaDescription:    'Find career direction in your birth chart with Vedic astrology. Learn how the 10th house, its lord, nakshatra, Atmakaraka and Dasha are read together.',
     metaDescription_hi: 'आपका दशम भाव करियर क्षेत्र बताता है। दशमेश की नक्षत्र स्थिति उस क्षेत्र के भीतर विशिष्ट कार्य प्रकार बताती है।',
     robots: 'index,follow',
   },
@@ -39,7 +39,8 @@ export const bestCareer: DomainTopic = {
 
   taxonomy: {
     tags:        ['career-selection', '10th-house', 'nakshatra-career', 'career-choice', 'dharma', 'vocational-astrology'],
-    keywords:    ['best career astrology', 'career choice vedic astrology', '10th house career', 'nakshatra career prediction', 'which career suits my horoscope'],
+    // Working primary phrase and supporting phrases (provisional; GSC Aug 15-Nov 15 2026, no volume data).
+    keywords:    ['which career is best for me according to my birth chart', 'career prediction by birth chart', 'career astrology by birth chart', 'how to find 10th house lord nakshatra', 'best career astrology', 'career choice vedic astrology', '10th house career', 'nakshatra career prediction', 'which career suits my horoscope'],
     keywords_hi: ['सर्वश्रेष्ठ करियर ज्योतिष', 'कुंडली से करियर', 'दशम भाव और पेशा', 'नक्षत्र और करियर', 'कौन सा करियर सही है'],
     hubPriority: 'featured',
   },

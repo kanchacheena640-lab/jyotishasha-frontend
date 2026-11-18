@@ -19,6 +19,8 @@ import AuthorityDetailRenderer from '@/components/authority-engine/AuthorityDeta
 import FinancialCtaPanel from '@/components/authority-engine/financial/FinancialCtaPanel'
 import FinancialContextLink from '@/components/authority-engine/financial/FinancialContextLink'
 import { resolveFinancialContextLinks } from '@/lib/domains/financial-astrology/_contextLinks'
+import { FinancialShortAnswer, FinancialRelatedGuides } from '@/components/authority-engine/financial/FinancialLanding'
+import { resolveFinancialLanding } from '@/lib/domains/financial-astrology/_landing'
 import { resolveFinancialCtas } from '@/lib/domains/financial-astrology/_ctas'
 import { buildFinancialArticleSchema, buildFinancialFaqPageSchema } from '@/lib/domains/financial-astrology/_schema'
 
@@ -68,6 +70,9 @@ export default function FinancialAstrologyTopic({
   // Contextual links to other Financial guides (only guides listed in _contextLinks.ts get any).
   const contextSlots = resolveFinancialContextLinks(domain, topic!, locale)
     .map(link => ({ sectionId: link.afterSectionId, node: <FinancialContextLink link={link} /> }))
+  // Opt-in landing (Marriage guide pattern): "Short answer" under the hero, related guides before the FAQ.
+  // Only guides listed in _landing.ts get it; every other guide passes nothing, exactly as before.
+  const landing = resolveFinancialLanding(domain, topic!, locale)
 
   return (
     <>
@@ -92,6 +97,8 @@ export default function FinancialAstrologyTopic({
         omitCtaSlugs={topic!.ctas.map(cta => cta.slug)}
         afterSection={{ sectionId: lastSectionId, node: ctaPanel }}
         afterSections={contextSlots.length > 0 ? contextSlots : undefined}
+        lead={landing ? <FinancialShortAnswer landing={landing} /> : undefined}
+        beforeFaq={landing?.related ? <FinancialRelatedGuides related={landing.related} /> : undefined}
         breadcrumbHomeHref={breadcrumbHomeHref}
         // FAQ answers and accordion bodies in server HTML (native <details>, collapsed by default).
         ssrFaq
