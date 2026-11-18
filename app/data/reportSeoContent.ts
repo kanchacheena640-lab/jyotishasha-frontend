@@ -47,12 +47,12 @@ export interface ReportSeoContent {
 export const reportSeoContent: Record<string, ReportSeoContent> = {
     government_job_report: {
   seoTitle: {
-    en: "Government Job Prediction Report | Will I Get a Government Job?",
+    en: "Government Job Prediction Report | Birth Chart Reading",
     hi: "सरकारी नौकरी भविष्यवाणी रिपोर्ट | क्या मुझे सरकारी नौकरी मिलेगी?"
   },
 
   seoDescription: {
-    en: "Personalized Government Job Astrology Report to analyze your chances of securing a government job, suitable departments, success periods, challenges, and remedies based on your birth chart.",
+    en: "Personalised PDF reading of government career potential from the 6th, 9th, 10th and 11th houses and Sun, Saturn, Jupiter and Mars, with current dasha.",
     hi: "व्यक्तिगत सरकारी नौकरी ज्योतिष रिपोर्ट जो आपकी कुंडली के आधार पर सरकारी नौकरी की संभावना, उपयुक्त विभाग, सफलता का समय, चुनौतियाँ और उपायों का विश्लेषण करती है।"
   },
 
@@ -318,12 +318,12 @@ marriage_report: {
 
 career_report: {
   seoTitle: {
-    en: "Career Astrology Report | Best Career Path & Success Timing",
+    en: "Career Report | Career Astrology Reading by Birth Chart",
     hi: "करियर ज्योतिष रिपोर्ट | आपके लिए सबसे अच्छा करियर और सफलता का समय"
   },
 
   seoDescription: {
-    en: "Personalized Career Astrology Report to identify the best career path, job opportunities, professional strengths, growth potential, career challenges, and favorable success periods based on your birth chart.",
+    en: "Personalised PDF reading of your 10th house and lord, career yogas, professional strengths and challenges, with practical guidance and current dasha.",
     hi: "व्यक्तिगत करियर ज्योतिष रिपोर्ट जो आपकी कुंडली के आधार पर सर्वश्रेष्ठ करियर विकल्प, नौकरी के अवसर, पेशेवर ताकत, उन्नति की संभावना, चुनौतियाँ और सफलता के अनुकूल समय का विश्लेषण करती है।"
   },
 
@@ -732,12 +732,12 @@ love_relationship_report: {
 
 financial_report: {
   seoTitle: {
-    en: "Financial Astrology Report | Wealth, Income & Financial Stability Analysis",
+    en: "Financial Report | Wealth & Income Astrology by Birth Chart",
     hi: "फाइनेंशियल एस्ट्रोलॉजी रिपोर्ट | धन, आय और आर्थिक स्थिरता विश्लेषण",
   },
 
   seoDescription: {
-    en: "Discover your wealth potential, income patterns, savings habits, investment opportunities, financial strengths, challenges, and long-term prosperity through Vedic astrology.",
+    en: "Personalised PDF reading of your 2nd, 5th, 8th and 11th houses, wealth yogas such as Dhan Yog, wealth strengths and constraints, with your current dasha.",
     hi: "वैदिक ज्योतिष के माध्यम से अपनी धन क्षमता, आय के स्रोत, बचत की प्रवृत्ति, निवेश के अवसर, आर्थिक चुनौतियाँ और दीर्घकालिक वित्तीय स्थिरता को समझें।",
   },
 
@@ -870,12 +870,12 @@ financial_report: {
 
 business_report: {
   seoTitle: {
-    en: "Business Astrology Report | Business Success, Growth & Profitability Analysis",
+    en: "Business Report | Business Suitability by Birth Chart",
     hi: "बिजनेस एस्ट्रोलॉजी रिपोर्ट | व्यवसाय सफलता, विकास और लाभ विश्लेषण",
   },
 
   seoDescription: {
-    en: "Discover your business potential, entrepreneurial strengths, profit opportunities, growth periods, partnership suitability, and long-term business success through Vedic astrology.",
+    en: "Personalised PDF reading of your business suitability and entrepreneurial capacity from the 2nd, 7th, 10th and 11th houses and yogas, with current dasha.",
     hi: "वैदिक ज्योतिष के माध्यम से अपनी व्यवसायिक क्षमता, उद्यमिता योग, लाभ के अवसर, विकास के समय, साझेदारी की उपयुक्तता और दीर्घकालिक व्यापारिक सफलता को समझें।",
   },
 
@@ -1146,12 +1146,12 @@ property_report: {
 
 financial_stability_report: {
   seoTitle: {
-    en: "Financial Stability Report | Long-Term Wealth Security & Money Management Analysis",
+    en: "Financial Stability Report | Savings & Money Astrology",
     hi: "फाइनेंशियल स्टेबिलिटी रिपोर्ट | दीर्घकालिक आर्थिक सुरक्षा और धन प्रबंधन विश्लेषण",
   },
 
   seoDescription: {
-    en: "Understand your long-term financial stability, money management habits, wealth retention ability, savings potential, financial risks, and future security through Vedic astrology.",
+    en: "Personalised PDF reading of your 2nd, 8th and 12th houses for money retention, pressure factors and steadiness, with discipline guidance and current dasha.",
     hi: "वैदिक ज्योतिष के माध्यम से अपनी दीर्घकालिक आर्थिक स्थिरता, धन प्रबंधन क्षमता, बचत योग, वित्तीय जोखिम और भविष्य की आर्थिक सुरक्षा को समझें।",
   },
 
