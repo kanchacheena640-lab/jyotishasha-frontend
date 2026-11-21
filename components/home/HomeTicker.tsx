@@ -1,3 +1,5 @@
+import { choghadiyaTickerMessage, isShubhSlot } from "@/lib/homeTicker";
+
 type Props = {
   data: any;
   dict: any; // 👈 Ab hum dictionary pass karenge
@@ -37,13 +39,19 @@ export default function HomeTicker({ data, dict, lang }: Props) {
   }
   if (!activeSlot && slots.length > 0) activeSlot = slots[0];
 
-  const isGood = activeSlot?.nature_en?.toLowerCase() === "shubh" || activeSlot?.nature_hi === "शुभ";
-  const name = lang === "hi" ? activeSlot?.name_hi : activeSlot?.name_en;
+  // The panchang API's slots carry `name` (localized to `lang`) and `name_en`
+  // -- never `name_hi` -- so the old Hindi lookup rendered "undefined". The
+  // helper reads the real fields and returns "" if anything is missing, in
+  // which case the item is hidden below.
+  const isGood = isShubhSlot(activeSlot);
 
   // ✅ Dictionary se text uthaya
-  const chaughadiyaMessage = activeSlot
-    ? `${isGood ? "🟢" : "🔴"} ${name} (${activeSlot.start}–${activeSlot.end}) – ${isGood ? dict.ticker.chaughadiyaGood : dict.ticker.chaughadiyaBad}`
-    : "";
+  const chaughadiyaMessage = choghadiyaTickerMessage(
+    activeSlot,
+    lang,
+    dict.ticker?.chaughadiyaGood,
+    dict.ticker?.chaughadiyaBad,
+  );
 
   const panchakMessage = p?.panchak?.active ? dict.ticker.panchakTrue : dict.ticker.panchakFalse;
   const sunriseMessage = `🌅 ${dict.ticker.sunrise} ${p?.sunrise ?? "--:--"}`;
@@ -51,7 +59,9 @@ export default function HomeTicker({ data, dict, lang }: Props) {
 
   const tickerItems = (
     <>
-      <span className={`${isGood ? "text-green-400" : "text-red-400"} mr-16`}>{chaughadiyaMessage}</span>
+      {chaughadiyaMessage && (
+        <span className={`${isGood ? "text-green-400" : "text-red-400"} mr-16`}>{chaughadiyaMessage}</span>
+      )}
       <span className={`${p?.panchak?.active ? "text-yellow-400" : "text-green-400"} mr-16`}>{panchakMessage}</span>
       <span className="text-blue-300 mr-16">{sunriseMessage}</span>
       <span className="text-orange-300 mr-16">{sunsetMessage}</span>
