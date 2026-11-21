@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "isolatedModules": false,
+    "incremental": false,
+    "outDir": "../.ts-test-out",
+    "rootDir": "..",
+    "target": "es2020",
+    "types": ["node"],
+    "plugins": []
+  },
+  "include": [],
+  "files": [
+    "../node_modules/next/types/global.d.ts",
+    "../node_modules/@types/react/experimental.d.ts",
+    "./dailyHoroscopeDateTicker.test.ts"
+  ]
+}

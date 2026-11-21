@@ -6,10 +6,21 @@ import Link from "next/link";
 import AppDownloadLink from "@/components/AppDownloadLink";
 import { DEFAULT_OG_IMAGE, SITE_URL, toISTDatePublished } from "@/lib/seo/articleSchema";
 import { getDailyHoroscope } from "@/lib/getDailyHoroscope";
+import { formatIstLongDate } from "@/lib/istDate";
+import { getRequestNow } from "@/lib/requestNow";
 
 interface Props {
   params: { locale: string; sign: string };
 }
+
+// Render per request: the page date, <title> and Article schema all carry
+// "today" (IST), so a cached HTML copy would go stale at IST midnight -- ISR
+// serves stale-while-revalidate, so the first visitor (or crawler) after
+// midnight on a low-traffic sign would get yesterday's page. Backend data is
+// still cached per IST day by lib/getDailyHoroscope.ts (an explicit
+// `next.revalidate` is honoured under force-dynamic in Next 14.2), so this does
+// not add backend load. Same choice as app/[locale]/panchang/page.tsx.
+export const dynamic = "force-dynamic";
 
 // 🌐 Metadata logic for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -23,10 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Use Hindi Name if available in your zodiacData, else fallback
   const signName = isHi ? (data.name_hi || data.name) : data.name;
-  
-  const today = new Date().toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
-    weekday: "long", day: "numeric", month: "long", year: "numeric",
-  });
+
+  // IST, never the server clock (UTC on Vercel), from the SAME per-request
+  // snapshot as the page body (lib/requestNow.ts) -- title and body can never
+  // show different days, even across IST midnight.
+  const today = formatIstLongDate(params.locale, getRequestNow());
 
   const title = isHi
     ? `${signName} दैनिक राशिफल – ${today} | स्वभाव, प्रेम और करियर`
@@ -66,11 +78,15 @@ export default async function DailyHoroscopePage({ params }: Props) {
   // instead of only appearing after DailyHoroscopeBlock's old client fetch
   // resolved. Graceful null on any failure -- DailyHoroscopeBlock already
   // renders its existing "not available" fallback for that case.
-  const horoscope = await getDailyHoroscope(sign, locale).catch(() => null);
-  
-  const today = new Date().toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
-    weekday: "long", day: "numeric", month: "long", year: "numeric",
-  });
+  // ONE snapshot for this request (shared with generateMetadata via
+  // lib/requestNow.ts), taken before the fetch: the displayed date and the
+  // horoscope fetch (cache key + accepted `date`) use the same IST day, so a
+  // slow fetch that completes after IST midnight cannot pair one day's date
+  // with another day's heading.
+  const now = getRequestNow();
+  const horoscope = await getDailyHoroscope(sign, locale, now).catch(() => null);
+
+  const today = formatIstLongDate(locale, now);
 
   const signName = isHi ? (data.name_hi || data.name) : data.name;
   const canonicalUrl = `https://www.jyotishasha.com${langPath}/daily-horoscope/${sign}`;
@@ -154,7 +170,7 @@ export default async function DailyHoroscopePage({ params }: Props) {
         {/* Horoscope Content Block */}
         <div className="md:col-span-2 space-y-8">
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 md:p-8">
-            <DailyHoroscopeBlock data={horoscope} />
+            <DailyHoroscopeBlock data={horoscope} lang={locale} />
           </div>
           
           <p className="text-xs text-gray-400 italic px-2">
